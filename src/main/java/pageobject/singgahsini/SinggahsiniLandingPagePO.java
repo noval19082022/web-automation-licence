@@ -269,7 +269,7 @@ public class SinggahsiniLandingPagePO {
         } else if (menu.equalsIgnoreCase("ig")) {
             footerMenuButton = page.getByText("@singgahsini_idn").nth(1);
         }else {
-            footerMenuButton = page.getByTestId("footerTopSection").getByText(menu);
+            footerMenuButton = page.getByText("Singgahsini Official ");
         }
 
         playwright.clickOn(footerMenuButton);

@@ -4,6 +4,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.LoadState;
+import com.microsoft.playwright.options.WaitForSelectorState;
 import config.global.GlobalConfig;
 import data.mamikos.Mamikos;
 import utilities.LocatorHelpers;
@@ -36,6 +37,9 @@ public class MamifotoPO {
     Locator faqFirstList;
     Locator headerFAQ;
     Locator contentFAQfirstList;
+    // Enhanced FAQ locators for better reliability
+    Locator faqContainer;
+    Locator faqExpandedContent;
     Locator riwayatPaketButton;
     Locator panduanAreaClick;
     Locator detailTitle;
@@ -167,6 +171,10 @@ public class MamifotoPO {
         this.packageNameMamifoto = page.locator(".mamifoto-history-card__title-card > .bg-c-text").first();
         this.waitingPayment = page.locator(".bg-c-label").first();
         this.mamiFotoContentPackage = page.getByTestId("mamifotoPackagesDesktop");
+
+        // Enhanced FAQ locators for better reliability
+        this.faqContainer = page.locator("[data-testid='mamifotoDesktop'] .tanya-jawab-section, [data-testid='mamifotoDesktop'] section:has-text('Tanya Jawab')");
+        this.faqExpandedContent = page.locator("group[role='group'] p");
 
     }
 
@@ -351,6 +359,77 @@ public class MamifotoPO {
      */
     public boolean contentFirstFAQisAppear() {
         return contentFAQfirstList.isVisible();
+    }
+
+    /**
+     * Enhanced method: Wait for MamiFoto page to fully load
+     */
+    public void waitForMamiFotoPageLoad() {
+        page.waitForLoadState(LoadState.NETWORKIDLE);
+        playwright.waitFor(mamiFotoLandingPageContent);
+        playwright.waitFor(headerMamifoto);
+    }
+
+    /**
+     * Enhanced method: Wait for FAQ section to be available
+     */
+    public void waitForFAQSection() {
+        try {
+            page.waitForSelector("text=Tanya Jawab", new Page.WaitForSelectorOptions().setTimeout(10000));
+        } catch (Exception e) {
+            // Fallback: try to scroll and wait again
+            scrollToFAQ();
+            page.waitForSelector("text=Tanya Jawab", new Page.WaitForSelectorOptions().setTimeout(5000));
+        }
+    }
+
+    /**
+     * Enhanced method: Scroll to FAQ section with lazy loading handling
+     */
+    public void scrollToFAQ() {
+        page.evaluate("window.scrollTo(0, document.body.scrollHeight)");
+        page.waitForTimeout(1000); // Allow time for lazy loading
+    }
+
+    /**
+     * Enhanced method: Click first FAQ with better reliability
+     */
+    public void clickFirstFAQEnhanced() {
+        // Ensure page is fully loaded first
+        waitForMamiFotoPageLoad();
+        
+        // Scroll to FAQ section
+        scrollToFAQ();
+        
+        // Wait for FAQ section to be available
+        waitForFAQSection();
+        
+        // Click the first FAQ
+        playwright.waitFor(faqFirstList);
+        playwright.clickOn(faqFirstList);
+    }
+
+    /**
+     * Enhanced method: Get FAQ by index for better testability
+     */
+    public Locator getFAQByIndex(int index) {
+        return page.locator("group[role='group']").nth(index);
+    }
+
+    /**
+     * Enhanced method: Click Lihat Paket with better reliability
+     */
+    public void clickLihatPaketEnhanced() {
+        // Ensure page is fully loaded
+        waitForMamiFotoPageLoad();
+        
+        // Wait for button to be interactive
+        lihatPaketButton.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
+        
+        playwright.clickOn(lihatPaketButton);
+        
+        // Verify navigation succeeded
+        page.waitForURL("**/mamifoto/packages");
     }
 
     /**

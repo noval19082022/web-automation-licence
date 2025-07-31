@@ -30,11 +30,18 @@ public class MamifotoSteps {
 
     @Then("owner can see mamifoto page")
     public void owner_can_see_mamifoto_page() {
-        playwright.hardWait(2000);
-        if (!mamifoto.isMamitFotoLandingPageVisible()) {
-            playwright.reloadPage();
+        // Use enhanced wait method for better reliability
+        try {
+            mamifoto.waitForMamiFotoPageLoad();
+            Assert.assertTrue(mamifoto.mamifotoHeaderLandingPageisAppear(),"Mamifoto Landing Page Doesnt Appear!");
+        } catch (Exception e) {
+            // Fallback to original method
+            playwright.hardWait(2000);
+            if (!mamifoto.isMamitFotoLandingPageVisible()) {
+                playwright.reloadPage();
+            }
+            Assert.assertTrue(mamifoto.mamifotoHeaderLandingPageisAppear(),"Mamifoto Landing Page Doesnt Appear!");
         }
-        Assert.assertTrue(mamifoto.mamifotoHeaderLandingPageisAppear(),"Mamifoto Landing Page Doesnt Appear!");
     }
 
 
@@ -61,9 +68,15 @@ public class MamifotoSteps {
 
     @When("owner click Lihat Paket button")
     public void owner_click_lihat_paket_button() {
-        mamifoto.clickOnLihatPaket();
-        if (!mamifoto.isMamiFotoContentPackageVisible()) {
-            playwright.reloadPage();
+        // Use enhanced method for better reliability
+        try {
+            mamifoto.clickLihatPaketEnhanced();
+        } catch (Exception e) {
+            // Fallback to original method with reload if needed
+            mamifoto.clickOnLihatPaket();
+            if (!mamifoto.isMamiFotoContentPackageVisible()) {
+                playwright.reloadPage();
+            }
         }
     }
 
@@ -102,7 +115,8 @@ public class MamifotoSteps {
 
     @When("owner click any faq button")
     public void owner_click_any_faq_button() {
-        mamifoto.clickOnFirstListFAQ();
+        // Use enhanced method for better reliability
+        mamifoto.clickFirstFAQEnhanced();
     }
 
     @Then("owner see detail FAQ")
@@ -260,7 +274,13 @@ public class MamifotoSteps {
 
     @When("owner click button lihat paket")
     public void owner_click_button_lihat_paket() {
-        mamifoto.clickOnLihatPaket();
+        // Use enhanced method for better reliability
+        try {
+            mamifoto.clickLihatPaketEnhanced();
+        } catch (Exception e) {
+            // Fallback to original method
+            mamifoto.clickOnLihatPaket();
+        }
     }
 
     @Then("owner paid transaction unpaid")

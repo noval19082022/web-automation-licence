@@ -94,6 +94,7 @@ public class OwnerDashboardPO {
     private Locator perpanjangBtnReccuringGpPopUp;
     private Locator dialogPopUp;
     private Locator widgetInfoUntukAndaParagraph;
+    private Locator generalCloseButton;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -115,7 +116,7 @@ public class OwnerDashboardPO {
         pengajuanSewaSection = page.locator("div.booking-confirmation-section__content");
         gpWidgetButton = page.locator(".membership-card__title");
         seeAllNotification = page.locator("//div[@class='c-notification__see-more']");
-        gpStatus = page.locator(".membership-card__label");
+        gpStatus = page.locator(".mamiads-card__status");
         ftueChatListOwner = page.locator("[data-testid='ftueTooltipComponent']");
         icnCloseBcTooltip = page.locator("//button[contains(@class, 'bg-c-button')]/following::div[@id='tooltipContent']");
         gpLabelChatList = page.locator(".mc-goldplus-entrypoint-card");
@@ -130,7 +131,7 @@ public class OwnerDashboardPO {
         ownerPageButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Halaman Pemilik"));
         ownerLogoutButton = page.getByTestId("exitButton");
         chatCSButton = page.getByTestId("chat-cs-btn");
-        contactUsPopUp = page.locator("//iframe[@title='Jendela pesan']");
+        contactUsPopUp = page.locator("//iframe[@title='Messaging window']");
         greetingUserLabel = page.locator(".greeting-section__name");
         accountSettingsButton = page.getByText("Setelan Akun");
         logoutOwnerPageButton = page.getByText("Logout");
@@ -174,6 +175,7 @@ public class OwnerDashboardPO {
         perpanjangBtnReccuringGpPopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Perpanjang"));
         dialogPopUp = page.locator("//*[@role='dialog' and @aria-modal='true']//button[@class='bg-c-modal__action-closable']");
         widgetInfoUntukAndaParagraph = page.locator("//*[contains(text(),'Info untuk Anda')]/following-sibling::*[@class='widget-card__content']//p");
+        generalCloseButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
     }
 
     /**
@@ -481,6 +483,7 @@ public class OwnerDashboardPO {
      * @return true if appear
      */
     public boolean isContactUsPresent() {
+        playwright.waitFor(contactUsPopUp);
         return playwright.waitTillLocatorIsVisible(contactUsPopUp);
     }
 
@@ -834,16 +837,70 @@ public class OwnerDashboardPO {
 
     /**
      * Click daftar GP on owner dashboard
-     *
+     * This method handles the popup that appears after clicking the daftar GP button
      *
      */
     public void clickOnDaftarGP() {
+        // Handle popup with multiple strategies
+        boolean popupClosed = handlePopupWithMultipleStrategies();
+        
+        // Handle specific GoldPlus popups
         if (playwright.isTextDisplayed("Sudah cek fitur-fitur GoldPlus ini?") || playwright.isTextDisplayed("Selamat bergabung di GoldPlus 2!")) {
             playwright.clickOnText("Nanti Saja", 5000.0);
         }
+        
+        // Try popup handling again if needed
+        if (!popupClosed) {
+            System.out.println("Trying popup handling again before clicking daftar GP...");
+            handlePopupWithMultipleStrategies();
+        }
+        
         playwright.waitTillPageLoaded();
         playwright.waitFor(daftarGpButton);
         playwright.clickOn(daftarGpButton);
+        
+        // Handle the period selection popup that appears after clicking daftar GP
+        // This is specifically for @TEST_LIMO-1393 scenario where a popup should appear
+        handleDaftarGPPeriodSelectionPopup();
+    }
+    
+    /**
+     * Handle the GoldPlus period selection popup that appears after clicking daftar GP button
+     * This popup appears in the @TEST_LIMO-1393 scenario
+     */
+    private void handleDaftarGPPeriodSelectionPopup() {
+        playwright.waitTillPageLoaded();
+        
+        // Check if we're redirected to the GoldPlus period selection page
+        if (page.url().contains("goldplus/submission/periode")) {
+            System.out.println("GoldPlus period selection popup detected after clicking daftar GP button");
+            
+            // Wait for the page to load and elements to be visible
+            playwright.hardWait(2000.0);
+            
+            // Look for the favorite option (4 Bulan option which is marked as "Favorit")
+            Locator favoriteOption = page.locator("//div[contains(@class, 'goldplus-periode-select__option') and contains(., '4 Bulan')]");
+            if (playwright.waitTillLocatorIsVisible(favoriteOption, 5000.0)) {
+                playwright.clickOn(favoriteOption);
+                System.out.println("Selected 4 Bulan (Favorit) option in GoldPlus period selection popup");
+            } else {
+                // If favorite option not found, select the first available option
+                Locator firstOption = page.locator("//div[contains(@class, 'goldplus-periode-select__option')]").first();
+                if (playwright.waitTillLocatorIsVisible(firstOption, 3000.0)) {
+                    playwright.clickOn(firstOption);
+                    System.out.println("Selected first available period option in GoldPlus period selection popup");
+                }
+            }
+            
+            // Click the "Pilih Periode" button if it exists
+            Locator pilihPeriodeButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Periode"));
+            if (playwright.waitTillLocatorIsVisible(pilihPeriodeButton, 3000.0)) {
+                playwright.clickOn(pilihPeriodeButton);
+                System.out.println("Clicked 'Pilih Periode' button in GoldPlus period selection popup");
+            }
+        } else {
+            System.out.println("No GoldPlus period selection popup detected. Current URL: " + page.url());
+        }
     }
 
     /**
@@ -933,5 +990,69 @@ public class OwnerDashboardPO {
     public void clicksOnInfoUntukAnda(String targetTextToClick) {
         Locator infoUntukAndaLocatorToClick = page.locator("a").filter(new Locator.FilterOptions().setHasText(targetTextToClick));
         playwright.clickOn(infoUntukAndaLocatorToClick);
+    }
+
+    /**
+     * Handle general popup by checking and closing it if it appears
+     * @param timeout Maximum time to wait for popup in milliseconds
+     * @return true if popup was found and closed, false if no popup appeared
+     */
+    public boolean handleGeneralPopup(double timeout) {
+        if (playwright.waitTillLocatorIsVisible(generalCloseButton, timeout)) {
+            System.out.println("Popup detected - attempting to close...");
+            playwright.clickOn(generalCloseButton);
+            playwright.hardWait(1000.0); // Wait for popup to close
+            System.out.println("Popup close attempted");
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Handle general popup with default timeout (3 seconds)
+     * @return true if popup was found and closed, false if no popup appeared
+     */
+    public boolean handleGeneralPopup() {
+        return handleGeneralPopup(3000.0);
+    }
+
+    /**
+     * Handle popup with multiple strategies - try different close button locators
+     * @return true if popup was found and closed, false if no popup appeared
+     */
+    public boolean handlePopupWithMultipleStrategies() {
+        // Strategy 1: Try the general close button
+        if (playwright.waitTillLocatorIsVisible(generalCloseButton, 2000.0)) {
+            System.out.println("Strategy 1: Using general close button");
+            playwright.clickOn(generalCloseButton);
+            playwright.hardWait(1000.0);
+            return true;
+        }
+        
+        // Strategy 2: Try existing close popup icon
+        if (playwright.waitTillLocatorIsVisible(closePopUpIcon, 2000.0)) {
+            System.out.println("Strategy 2: Using existing close popup icon");
+            playwright.clickOn(closePopUpIcon);
+            playwright.hardWait(1000.0);
+            return true;
+        }
+        
+        // Strategy 3: Try dialog popup close
+        if (playwright.waitTillLocatorIsVisible(dialogPopUp, 2000.0)) {
+            System.out.println("Strategy 3: Using dialog popup close");
+            playwright.clickOn(dialogPopUp);
+            playwright.hardWait(1000.0);
+            return true;
+        }
+        
+        // Strategy 4: Try clicking outside the popup (ESC key)
+        if (playwright.isTextDisplayed("close", 1000.0)) {
+            System.out.println("Strategy 4: Pressing ESC key to close popup");
+            page.keyboard().press("Escape");
+            playwright.hardWait(1000.0);
+            return true;
+        }
+        
+        return false;
     }
 }

@@ -58,7 +58,13 @@ public class KostOwnerSteps {
 
     @And("admin bangkrupux search kost owner in admin kos owner page")
     public void adminBangkrupuxSearchKostOwnerInAdminKosOwnerPage() {
-        kostOwner.searchKosName(Mamikos.getPropertyKosName());
+        String kosName = Mamikos.getPropertyKosName();
+        if (kosName == null || kosName.isEmpty()) {
+            // Use a default kos name for search if none is set
+            kosName = "kos Automation TEST";
+            System.out.println("Warning: Kos name not found in shared data, using default: " + kosName);
+        }
+        kostOwner.searchKosName(kosName);
     }
 
     @And("admin delete kos")

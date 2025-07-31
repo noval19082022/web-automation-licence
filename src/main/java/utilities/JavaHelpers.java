@@ -453,6 +453,18 @@ public class JavaHelpers {
     public static String removeExtraNewLine(String removeLineString) {
         return removeLineString.replaceAll("[\\r\\n\\t]+", " ").replaceAll("\\s+", " ").trim();
     }
+
+    /**
+     * Normalize aria snapshot by removing extra whitespace and standardizing format
+     * @param snapshot The aria snapshot string to normalize
+     * @return Normalized string
+     */
+    public static String normalizeAriaSnapshot(String snapshot) {
+        return snapshot.trim()
+                .replaceAll("\\s+", " ")
+                .replaceAll("\\n", "")
+                .replaceAll("\\r", "");
+    }
     //--- String Manipulator ---//
 
     /**

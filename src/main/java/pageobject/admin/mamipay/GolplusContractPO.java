@@ -39,14 +39,14 @@ public class GolplusContractPO {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         keywordSearch = page.getByPlaceholder("Keyword");
-        btnSearchContract = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Search"));
+        btnSearchContract = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Search"));
         btnResetContract = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Reset"));
         searchOwnerName =  page.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Search by"));
         periodePackageGP = page.getByPlaceholder("Packages");
         gpPackage = page.locator("//tbody[1]/tr[1]/td[3] ");
         showOrder =  page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Show Orders"));
         headerContractOrder = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Contract's Orders"));
-        createNewContractButton =  page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Create New Contract"));
+        createNewContractButton =  page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Create New Contract"));
         phoneNumberOwner = page.getByPlaceholder("Phone Number");
         contractInvoiceButton =   page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Create Contract and Invoice"));
         confirmContractButton =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Yes, Create contract and invoice!"));
@@ -261,4 +261,3 @@ public class GolplusContractPO {
                 "}", packageGP);
     }
 }
-

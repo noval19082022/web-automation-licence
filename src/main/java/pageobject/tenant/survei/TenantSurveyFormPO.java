@@ -181,6 +181,7 @@ public class TenantSurveyFormPO {
      * Click on detail survei
      */
     public void userClickOnChevronDetailSurvei() {
+        playwright.waitTillLocatorIsVisible(chevronDetailSurvei);
         playwright.clickOn(chevronDetailSurvei);
     }
 

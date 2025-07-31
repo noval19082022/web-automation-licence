@@ -46,7 +46,7 @@ public class JoinSinggahsiniPO {
         this.page = page;
         playwright = new PlaywrightHelpers(page);
 
-        daftarSekarangButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Daftar Sekarang").setExact(true)).first();
+        daftarSekarangButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Daftar Sekarang").setExact(true));
         daftarPageTitleText = page.locator("h1.title");
         daftarPageSubtitleText = page.locator("p.subtitle");
         daftarButton = page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Daftar").setExact(true));
