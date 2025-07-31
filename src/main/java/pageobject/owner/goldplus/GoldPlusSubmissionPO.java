@@ -18,6 +18,7 @@ public class GoldPlusSubmissionPO {
     private Locator selectedFavoritGpPackage;
     private Locator selectedGpPeriode;
     private Locator mamiadsBalanceListContainer;
+    private Locator periodOptionsList;
 
     public GoldPlusSubmissionPO(Page page) {
         this.page = page;
@@ -29,6 +30,7 @@ public class GoldPlusSubmissionPO {
         selectedFavoritGpPackage = page.locator(".bg-c-radio--checked + .goldplus-periode-select__option .bg-c-label--pill-red");
         selectedGpPeriode = page.locator(".goldplus-periode__package-content .bg-c-radio--checked");
         mamiadsBalanceListContainer = page.locator(".goldplus-mamiads-detail");
+        periodOptionsList = page.locator("//div[@class='goldplus-periode-select']");
     }
 
 //    /**
@@ -83,5 +85,20 @@ public class GoldPlusSubmissionPO {
     public boolean isGpPeriodeSelected() {
         return playwright.waitTillLocatorIsVisible(selectedGpPeriode.first());
     }
+    /**
+     * Get all period options displayed on the page
+     * @return List of period option texts
+     */
+    public List<String> getAllPeriodOptions() {
+        List<String> periodTexts = new ArrayList<>();
+        playwright.waitFor(periodOptionsList.first(), 5000.0);
 
+        int count = periodOptionsList.count();
+        for (int i = 0; i < count; i++) {
+            String periodText = periodOptionsList.nth(i).textContent().trim();
+            periodTexts.add(periodText);
+        }
+
+        return periodTexts;
+    }
 }
