@@ -87,6 +87,15 @@ public class InvoicePO {
     Locator amountBNILabel;
     Locator IndomaretLabel;
     Locator invoiceBillingDetail;
+    Locator pilihButton;
+    Locator sembunyikanText;
+    Locator januariText;
+    Locator bayarDanaButton;
+    Locator bayarLinkAjaButton;
+    Locator proceedToPayButton;
+    Locator goldplusBillingDetailSection;
+    Locator invoiceContentSection;
+    Locator totalPembayaranParentSection;
 
     public InvoicePO(Page page) {
         this.page = page;
@@ -160,7 +169,16 @@ public class InvoicePO {
         sudahBayarBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sudah Bayar").setExact(true));
         amountBNILabel = page.locator("div:nth-child(6) > div > .columns > .second-column");
         IndomaretLabel = page.locator("#invoicePayment").getByText("Indomaret");
-        invoiceBillingDetail = page.getByTestId("invoiceBillingDetails-payment");
+        invoiceBillingDetail = page.getByTestId("goldplusDetailBillDesktop").first();
+        pilihButton = page.getByText("Pilih", new Page.GetByTextOptions().setExact(true));
+        sembunyikanText = page.getByText("Sembunyikan");
+        januariText = page.getByText("Januari");
+        bayarDanaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar langsung via DANA"));
+        bayarLinkAjaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar langsung via LinkAja"));
+        proceedToPayButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Proceed to Pay"));
+        goldplusBillingDetailSection = page.locator(".goldplus-billing-detail");
+        invoiceContentSection = page.locator("#invoiceContent");
+        totalPembayaranParentSection = page.locator("text=Total Pembayaran").locator("..");
     }
 
     /**
@@ -315,16 +333,7 @@ public class InvoicePO {
      * Click on pilih pembayaran to choose what method to the payment.
      */
     public void clickOnPilihPembayaran() {
-        playwright.pageScrollInView(page.getByTestId("invoiceBillingDetails-payment").getByText("Total Pembayaran"));
-        if (playwright.waitTillLocatorIsVisible(pilihUbahMetodePembayaranButton)) {
-            playwright.forceClickOn(pilihUbahMetodePembayaranButton);
-            playwright.clickOn(ubahButton);
-            playwright.hardWait(2000.0);
-        } else if (playwright.waitTillLocatorIsVisible(ubahLink)) {
-            playwright.clickOn(ubahLink);
-        } else {
-            playwright.forceClickOn(pilihPembayaranButton);
-        }
+        playwright.clickOn(pilihButton);
     }
 
     /**
@@ -378,7 +387,7 @@ public class InvoicePO {
      * Click on bayar sekarang button
      */
     public void clickOnBayarSekarang() {
-        playwright.pageScrollInView(page.getByText("Sembunyikan"));
+        playwright.pageScrollInView(sembunyikanText);
         playwright.clickOn(bayarSekarangButton);
         playwright.hardWait(2000.0);
     }
@@ -539,7 +548,7 @@ public class InvoicePO {
         TenantBillManagement.clickOnFilterMonth();
         if (monthNumber.equals("12")) {
             playwright.clickOn(nextButton);
-            playwright.clickOn(page.getByText("Januari"));
+            playwright.clickOn(januariText);
         } else {
             checkMonth = page.locator("//*[@class='date-wrapper']//*[@class='cell month'][" + monthNumber + "]");
             playwright.clickOn(checkMonth);
@@ -554,7 +563,7 @@ public class InvoicePO {
     public void selectManageNextBillsMonthFilterOctober(String monthNumber) {
         TenantBillManagementPO TenantBillManagement = new TenantBillManagementPO(page);
         TenantBillManagement.clickOnFilterMonth();
-        playwright.clickOn(page.getByText("Januari"));
+        playwright.clickOn(januariText);
         playwright.hardWait(3000);
     }
 
@@ -664,9 +673,9 @@ public class InvoicePO {
         dana.click();
         clickOnBayarSekarang();
         page = page.waitForPopup(() -> {
-            page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar langsung via DANA")).click();
+            bayarDanaButton.click();
         });
-        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Proceed to Pay")).click();
+        proceedToPayButton.click();
         return new PaymentPO(page);
     }
 
@@ -681,9 +690,9 @@ public class InvoicePO {
         linkAja.click();
         clickOnBayarSekarang();
         page = page.waitForPopup(() -> {
-            page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Bayar langsung via LinkAja")).click();
+            bayarLinkAjaButton.click();
         });
-        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Proceed to Pay")).click();
+        proceedToPayButton.click();
         return new PaymentPO(page);
     }
 
