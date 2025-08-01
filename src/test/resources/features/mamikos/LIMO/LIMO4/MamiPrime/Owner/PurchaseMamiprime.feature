@@ -135,8 +135,9 @@ Feature: Purchase Mamiprime
     And owner navigate to pendaftaran mamiprime page
     And owner select option mamiprime "Halaman Pencarian Kos" from mamiprime landing
     And owner click "Lihat kata kunci lainnya"
-    And owner click on Hubungi Kami
-    And owner set active page to 1
-    And user click text "Hubungi customer service lewat WhatsApp Anda (chat only)."
-    And owner set active page to 2
-    Then user should redirect to link that contains "https://api.whatsapp.com/send/?phone=6281325111171&text&type=phone_number&app_absent=0"
+  ## currently its comment due to brwser security issue (https://mamikos-squad.slack.com/archives/CKPEQGK45/p1753772548384249)
+#    And owner click on Hubungi Kami
+#    And owner set active page to 1
+#    And user click text "Hubungi customer service lewat WhatsApp Anda (chat only)."
+#    And owner set active page to 2
+#    Then user should redirect to link that contains "https://api.whatsapp.com/send/?phone=6281325111171&text&type=phone_number&app_absent=0"

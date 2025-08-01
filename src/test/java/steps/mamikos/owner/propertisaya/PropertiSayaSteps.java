@@ -486,10 +486,13 @@ public class PropertiSayaSteps {
         int length = 8;
         boolean useLetters = true;
         boolean useNumbers = true;
-        String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
-        kosNamePrefix = table.get(0).get("kos name") + " " + generatedString.toUpperCase();
-        propertySaya.inputKosName(kosNamePrefix);
-        Mamikos.setPropertyKosName(kosNamePrefix);
+        var kostNameInput = table.get(0).get("kos name");
+        if (kostNameInput != null && !kostNameInput.isEmpty()) {
+            String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
+            kosNamePrefix = kostNameInput + " " + generatedString.toUpperCase();
+            propertySaya.inputKosName(kosNamePrefix);
+            Mamikos.setPropertyKosName(kosNamePrefix);
+        }
         propertySaya.checkRoomType(table.get(0).get("room type check"));
         propertySaya.inputRoomTypeName(table.get(0).get("room type name"));
         propertySaya.selectKostType(table.get(0).get("kos type"));
@@ -1121,8 +1124,7 @@ public class PropertiSayaSteps {
 
     @And("user/owner clicks button move photo on {string}")
     public void userClicksButtonMovePhoto(String photoLocation) {
-        propertySaya.hoverPhoto(photoLocation);
-        propertySaya.clickOnMovePhotoHover(photoLocation);
+        propertySaya.hoverAndClickMovePhoto(photoLocation);
         this.movePhotoSteps();
     }
 
