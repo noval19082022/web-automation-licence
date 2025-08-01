@@ -1,4 +1,4 @@
-@LIMO2 @GPSPOWNER
+@LIMO2 @GPSPOWNER @sakti-check
 Feature: Owner GPSP
 
   Background: reset gp owner
@@ -32,7 +32,7 @@ Feature: Owner GPSP
     And user wants to subscribe Goldplus 1
     And tenant make bill payments using "ovo"
     Then owner see billing details invoice
-      | GoldPlus 1 (reg#1m) (1 Bulan) |
+      | GoldPlus 1 (3 Bulan) |
       | Rp79.000                      |
       | Total Pembayaran Rp82.500     |
     And owner navigates to owner dashboard
