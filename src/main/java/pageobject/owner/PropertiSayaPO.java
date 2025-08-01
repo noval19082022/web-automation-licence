@@ -2459,14 +2459,44 @@ public class PropertiSayaPO {
     }
 
     /**
-     * Hover photo (Lihat Foto, Ubah Foto, Hapus Foto, Pindahkan Foto)
+     * Hover on photo and click move photo button - combined function
+     * This method combines hovering on a photo and clicking the move photo option
      *
-     * @param photoLocation
+     * @param photoLocation - the location/section of the photo (e.g., "Foto dalam kamar")
      */
-    public void hoverPhoto(String photoLocation) {
-        Locator backgroundImage = page
-                .locator("//h4[.='" + photoLocation + "']/following-sibling::*//div[@class='image-uploader__preview']");
-        backgroundImage.hover();
+    public void hoverAndClickMovePhoto(String photoLocation) {
+        // Based on the codegen example, directly look for the "sorting Pindahkan Foto" text
+        // within the specific photo section
+        
+        try {
+            // Filter to get the one in the correct section
+            Locator sectionContainer = page.locator("//h4[contains(text(),'" + photoLocation + "')]/parent::div");
+            Locator moveButtonInSection = sectionContainer.locator("text=Pindahkan Foto").first();
+            
+            if (moveButtonInSection.isVisible()) {
+                playwright.clickOn(moveButtonInSection);
+                return;
+            }
+            
+            // Second approach: If not visible, hover on the preview area
+            Locator previewArea = sectionContainer.locator(".image-uploader__preview").first();
+            if (previewArea.isVisible()) {
+                // Move mouse to center of preview area
+                previewArea.hover(new Locator.HoverOptions().setPosition(0.5, 0.5));
+                page.waitForTimeout(300);
+                
+                // Now try to click the move button
+                moveButtonInSection = sectionContainer.locator("text=Pindahkan Foto").first();
+                playwright.clickOn(moveButtonInSection);
+            }
+            
+        } catch (Exception e) {
+            // Fallback: Use the original XPath approach
+            Locator moveButton = page
+                    .locator("//h4[contains(text(),'" + photoLocation + "')]/following-sibling::*//div[@class='image-uploader__preview']//*[contains(text(),'Pindahkan Foto')]")
+                    .first();
+            playwright.clickOn(moveButton);
+        }
     }
 
     /**
@@ -2491,17 +2521,6 @@ public class PropertiSayaPO {
      */
     public void clickOnMovePhotoHover() {
         playwright.clickOn(movePhotoHover);
-    }
-
-    /**
-     * Click pindahkan photo from hover
-     *
-     * @param destination
-     */
-    public void clickOnMovePhotoHover(String destination) {
-        var destinationLocator = page
-                .locator("//h4[.='" + destination + "']/following-sibling::*//div[@class='image-uploader__preview']//*[contains(text(),'Pindahkan Foto')]");
-        playwright.clickOn(destinationLocator);
     }
 
     /**
