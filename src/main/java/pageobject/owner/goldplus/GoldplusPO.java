@@ -104,6 +104,7 @@ public class GoldplusPO {
     private Locator pilihPeriodeButton;
     private Locator periodeBerlanggananContainer;
     private Locator paketJangkaPanjangContainer;
+    private Locator pilihPaketGoldplus;
 
 
     public GoldplusPO(Page page) {
@@ -185,6 +186,7 @@ public class GoldplusPO {
         goldplusPeriodSelectionPopup = page.locator("//div[contains(@class, 'goldplus-periode-select')]");
         goldplusPeriodOptions = page.locator("//div[contains(@class, 'goldplus-periode-select__option')]");
         pilihPeriodeButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Periode"));
+
     }
 
     /**
@@ -531,6 +533,7 @@ public class GoldplusPO {
      * @throws InterruptedException
      */
     public void clickOnUbahGoldPlus() throws InterruptedException {
+        // Check if close button is visible and click it if present
         playwright.pageScrollUntilElementIsVisible(changeGPButton);
         playwright.clickOn(changeGPButton);
         playwright.pageScrollUntilElementIsVisible(listGPPage);
