@@ -1,4 +1,4 @@
-@DOM4 @essentialTest @CHAT_SEARCH_MIGRATE
+@DOM4 @essentialTest
 Feature: Chat and Chat Optimization
 
         @TEST_SS-3290
