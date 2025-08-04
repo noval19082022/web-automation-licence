@@ -35,7 +35,7 @@ Feature: Area Boundaries
 #  Scenario: User Can See Lihat Lebih Banyak And Back To Top Button
 #    Then user can see Lihat Lebih Banyak And Back To Top Button
 
-  @areaboundaries @continue @TEST_SS-3272
+  @areaboundaries @TEST_SS-3272
   Scenario: User Can See Use Lihat Lebih Banyak
     Given user click on Lihat Lebih Banyak button
     Then user can see kos lists are expanded
@@ -52,10 +52,10 @@ Feature: Area Boundaries
       | search keyword | Sleman |
       | area result    | Sleman |
     Then user can see kos list result area are the list below:
-      | Sleman  |
-      | Pakem   |
-      | Sleman  |
-      | Ngaglik |
+      | Ngaglik  |
+      | Kecamatan Ngaglik |
+      | Kecamatan Ngaglik |
+      | Pakem |
 
   @areaboundaries @TEST_SS-3235
   Scenario: User Can See Zero Result After Use Singgah Sini Filter
