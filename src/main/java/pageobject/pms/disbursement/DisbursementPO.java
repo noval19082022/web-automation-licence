@@ -5,7 +5,9 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import config.global.GlobalConfig;
 import utilities.PlaywrightHelpers;
+import utilities.JavaHelpers;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +15,7 @@ import java.util.List;
 public class DisbursementPO {
     private Page page;
     private PlaywrightHelpers playwright;
+    private JavaHelpers java = new JavaHelpers();
 
     //---Disbursement Page---//
     Locator actionBtn;
@@ -650,8 +653,18 @@ public class DisbursementPO {
      * Select filter transfer period in Disbursement page
      * @param transferPeriod String data type
      */
-    public void selectFilterTransferPeriod(String transferPeriod) {
+    public void selectFilterTransferPeriod(String transferPeriod) throws ParseException {
         filterTransferPeriodValue = page.locator("a").filter(new Locator.FilterOptions().setHasText(transferPeriod));
+        String today = java.updateTime("yyyy MMM dd", java.getTimeStamp("yyy MMM dd"), "d", 0, 0, 0, 0);
+
+        if (transferPeriod.equalsIgnoreCase("Periode 1 (Tanggal 1)") && Integer.parseInt(today) >= 16) {
+            filterTransferPeriodValue = page.locator("a")
+                    .filter(new Locator.FilterOptions().setHasText("Periode 1 (Tanggal 1)"));
+        } else if (transferPeriod.equalsIgnoreCase("Periode 2 (Tanggal 16)") && Integer.parseInt(today) < 16) {
+            filterTransferPeriodValue = page.locator("a")
+                    .filter(new Locator.FilterOptions().setHasText("Periode 2 (Tanggal 16)"));
+        }
+
         playwright.clickOn(filterTransferPeriod);
         playwright.clickOn(filterTransferPeriodValue);
     }
