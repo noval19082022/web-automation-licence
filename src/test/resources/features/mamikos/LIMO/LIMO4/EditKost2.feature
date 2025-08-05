@@ -55,6 +55,7 @@ Feature: Edit Kost 2
     And user clicks on edit data kos button
     And user click button edit "Foto Kamar" kos
     And user clicks button move photo on "Foto dalam kamar"
+    Then user performs move photo validation steps
     And user select destination move photo room on "Foto depan kamar"
     Then user will see that the text "Anda harus melengkapi foto ini" is displayed
 
@@ -71,6 +72,7 @@ Feature: Edit Kost 2
     And user clicks on edit data kos button
     And user click button edit "Foto Kos" kos
     And user clicks button move photo on "Foto bangunan tampak depan"
+    Then user performs move photo validation steps
     And user select destination move photo room on "Foto tampilan dalam bangunan"
     Then user will see that the text "Anda harus melengkapi foto ini" is displayed
 
