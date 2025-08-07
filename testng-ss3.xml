@@ -5,7 +5,7 @@
     <parameter name="squadName" value="BBM1"/>
     <test name="BBM1TestRunner">
         <classes>
-            <class name="runners.BBM1TestRunner"/>
+            <class name="runners.SS3TestRunner"/>
         </classes>
     </test>
 
