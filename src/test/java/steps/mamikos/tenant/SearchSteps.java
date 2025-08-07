@@ -478,6 +478,10 @@ public class SearchSteps {
     public void userClickOnLihatLebihBanyakButton() {
         kostListBefore = kostLanding.getKostListLocator().size();
         kostLanding.clickOnLihatLebihBanyakButton();
+        
+        // Wait for content to load after clicking the button
+        playwright.hardWait(5000);
+        
         kostListAfter = kostLanding.getKostListLocator().size();
     }
 
@@ -519,7 +523,9 @@ public class SearchSteps {
     public void userValidateTheSuggestionResultContains(String suggestion) {
         search = new SearchPO(ActiveContext.getActivePage());
         List<String> suggestionInnerText = search.getSuggestionText();
-        Assert.assertTrue(suggestionInnerText.get(0).contains(suggestion));
+        Assert.assertNotNull(suggestionInnerText, "Suggestion list should not be null");
+        Assert.assertFalse(suggestionInnerText.isEmpty(), "Suggestion list should not be empty");
+        Assert.assertTrue(suggestionInnerText.get(0).contains(suggestion), "First suggestion should contain: " + suggestion);
     }
 
     @And("user select first kost on the search result to burn saldo {int} times")

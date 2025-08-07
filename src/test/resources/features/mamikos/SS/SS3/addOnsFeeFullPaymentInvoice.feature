@@ -1,9 +1,9 @@
-@COOP1
-Feature: addOns Disbursement
+@SS3
+Feature: addOns Fee Full Payment Invoice
 
 
-  @@SS-4877
-  Scenario: [Add Ons - Disbursement] Admin Batalkan Contract
+  @SS-4890
+  Scenario: [Add Ons - Fee Full Payment Invoice] Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
@@ -14,16 +14,16 @@ Feature: addOns Disbursement
     And admin akhiri contract
     Then admin should success terminate contract
 
-  @SSCOOP-3785 @continue
-  Scenario: [Add Ons - Disbursement] Admin cancel contract
+  @SS-4891 @continue
+  Scenario: [Add Ons - Fee Full Payment Invoice] Admin cancel contract
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
       | 0891111020198 | 0891111020198 | mamikosqa123 |
     And user cancel booking
 
-  @SSCOOP-3786
-  Scenario: [Add Ons - Disbursement] Tenant booking kos
+  @SS-4892
+  Scenario: [Add Ons - Fee Full Payment Invoice] Tenant booking kos
     When user go to mamikos homepage
     And tenant redirect to kost details:
       | kost path stag                                                                   | kost path prod        |
@@ -31,8 +31,8 @@ Feature: addOns Disbursement
     And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
 
-  @SSCOOP-3787
-  Scenario: [Add Ons - Disbursement] Owner accept booking
+  @SS-4894
+  Scenario: [Add Ons - Fee Full Payment Invoice] Owner accept booking
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |
@@ -42,19 +42,8 @@ Feature: addOns Disbursement
       | Irvi Tenant Add Ons | Irvi Tenant Add Ons |
     Then owner should redirect back to pengajuan booking page
 
-  @SSCOOP-3789
-  Scenario: [Add Ons - Disbursement] Tenant Pay 1st Month Booking
-    Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag    | phone prod    | password     |
-      | 0891111020198 | 0891111020198 | mamikosqa123 |
-    And tenant navigate to riwayat and draf booking
-    And tenant pay kost from riwayat booking using ovo "081280003230" without close the page
-    And tenant set active page to 0
-    And tenant navigate to riwayat and draf booking
-
-  @SSCOOP-3789
-  Scenario: [Add Ons - Disbursement] Admin Master Add, Add Ons Fee To Full Payment Invoice
+  @SS-4895 @continue
+  Scenario: [Add Ons - Fee Full Payment Invoice] Admin Master Add, Add Ons Fee To Full Payment Invoice & Edit Add Ons Free Amount With Char Through Detail Fee
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
@@ -64,7 +53,12 @@ Feature: addOns Disbursement
       | search value           | 0891111020198       |
       | invoice number         | default             |
       | additional price type  | Add On              |
-      | additional price title | Laundry             |
+      | additional price title | adiautomation       |
       | addtional price value  | 100000              |
     Then admin can sees total cost is basic amount + add ons fee + admin fee
+
+  @SS-4896
+  Scenario: Edit Add Ons Free Amount With Char Through Detail Fee
+    When admin edit additional fee price amount to "20011rrr"
+    Then admins can sees error message
 		

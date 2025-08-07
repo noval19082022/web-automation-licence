@@ -7,3 +7,6 @@ target
 **.DS_Store
 
 .claude
+
+# Ignore GitHub copilot instruction files
+.github/

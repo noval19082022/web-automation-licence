@@ -235,11 +235,7 @@ public class DisbursementSteps {
     }
     @When("admin select filter transfer period {string}")
     public void admin_select_filter_transfer_period(String transferPeriod) throws ParseException {
-        String today = java.updateTime("yyyy MMM dd", java.getTimeStamp("yyy MMM dd"), "d", 0, 0, 0, 0);
-
-        if (Integer.parseInt(today) >= 16) {
-            disbursement.selectFilterTransferPeriod(transferPeriod);
-            disbursement.applyFilter();
-        }
+        disbursement.selectFilterTransferPeriod(transferPeriod);
+        disbursement.applyFilter();
     }
 }

@@ -20,6 +20,12 @@ public class KostOwnerSteps {
     public void adminBangkrupuxSearchKostOwnerInAdminKosOwnerPage(String kostName) {
         kostOwner.searchKosName(kostName);
     }
+
+    @And("admin bangkrupux search kost owner {string} with phone number {string} in admin kos owner page")
+    public void adminBangkrupuxSearchKostOwnerInAdminKosOwnerPage(String kostName, String phone) {
+        kostOwner.searchKosNameAndPhoneNumber(kostName, phone);
+    }
+
     @And("admin bangkrupux search booking owner request {string} in admin booking owner request page")
     public void adminBangkrupuxSearchBookingOwnerRequestInAdminKosOwnerPage(String kostName) {
         kostOwner.searchKosNameBookingOwnerRequest(kostName);

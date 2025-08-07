@@ -486,10 +486,13 @@ public class PropertiSayaSteps {
         int length = 8;
         boolean useLetters = true;
         boolean useNumbers = true;
-        String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
-        kosNamePrefix = table.get(0).get("kos name") + " " + generatedString.toUpperCase();
-        propertySaya.inputKosName(kosNamePrefix);
-        Mamikos.setPropertyKosName(kosNamePrefix);
+        var kostNameInput = table.get(0).get("kos name");
+        if (kostNameInput != null && !kostNameInput.isEmpty()) {
+            String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
+            kosNamePrefix = kostNameInput + " " + generatedString.toUpperCase();
+            propertySaya.inputKosName(kosNamePrefix);
+            Mamikos.setPropertyKosName(kosNamePrefix);
+        }
         propertySaya.checkRoomType(table.get(0).get("room type check"));
         propertySaya.inputRoomTypeName(table.get(0).get("room type name"));
         propertySaya.selectKostType(table.get(0).get("kos type"));
@@ -1116,14 +1119,11 @@ public class PropertiSayaSteps {
     public void ownerClicksButtonMovePhoto() {
         propertySaya.hoverPhoto();
         propertySaya.clickOnMovePhotoHover();
-        this.movePhotoSteps();
     }
 
     @And("user/owner clicks button move photo on {string}")
     public void userClicksButtonMovePhoto(String photoLocation) {
-        propertySaya.hoverPhoto(photoLocation);
-        propertySaya.clickOnMovePhotoHover(photoLocation);
-        this.movePhotoSteps();
+        propertySaya.hoverAndClickMovePhoto(photoLocation);
     }
 
     @And("owner select destination move photo kos")
@@ -1149,7 +1149,8 @@ public class PropertiSayaSteps {
         Assert.assertTrue(propertySaya.isFavoritedSectionVisible(), "button not visible");
     }
 
-    private void movePhotoSteps() {
+    @Then("user performs move photo validation steps")
+    public void userPerformsMovePhotoValidationSteps() {
         propertySaya.clickOnLanjutkanMovePhoto();
         Assert.assertTrue(propertySaya.getToastNotSelectedPhoto(), "Toast message doesnt match!");
 

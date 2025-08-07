@@ -69,6 +69,18 @@ public class KostOwnerPO {
      * Search kos name then hit enter
      * @param kosName of Kos Name
      */
+    public void searchKosNameAndPhoneNumber(String kosName, String phoneNumber) {
+        playwright.waitTillLocatorIsVisible(kosNameSearch);
+        playwright.clickLocatorAndTypeKeyboard(kosNameSearch, kosName);
+        playwright.clickLocatorAndTypeKeyboard(phoneOwnerSearch, phoneNumber);
+        playwright.pressKeyboardKey("Enter");
+        playwright.waitTillPageLoaded(GlobalConfig.LONG_TIMEOUT);
+    }
+
+    /**
+     * Search kos name then hit enter
+     * @param kosName of Kos Name
+     */
     public void searchKosNameBookingOwnerRequest(String kosName) {
         playwright.clickLocatorAndTypeKeyboard(kosNameSearchBookingOwnerRequest, kosName);
         playwright.pressKeyboardKey("Enter");

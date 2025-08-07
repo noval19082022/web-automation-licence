@@ -223,6 +223,24 @@ public class PropertiSayaPO {
     Locator filterRoomBox;
     Locator tambahkanData;
 
+    // Photo section locators - following best practices with no nested locators
+    Locator fotoDalamKamarSection;
+    Locator fotoDepanKamarSection;
+    Locator fotoBangunanTampakDepanSection;
+    Locator fotoTampilanDalamBangunanSection;
+
+    // Move buttons for specific sections
+    Locator moveButtonFotoDalamKamar;
+    Locator moveButtonFotoDepanKamar;
+    Locator moveButtonFotoBangunanTampakDepan;
+    Locator moveButtonFotoTampilanDalamBangunan;
+
+    // Preview areas for specific sections
+    Locator previewFotoDalamKamar;
+    Locator previewFotoDepanKamar;
+    Locator previewFotoBangunanTampakDepan;
+    Locator previewFotoTampilanDalamBangunan;
+
     public PropertiSayaPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -395,6 +413,24 @@ public class PropertiSayaPO {
         loadingSpinner = page.locator(".c-loader").first();
         filterRoomBox = page.locator("#ownerKosContainer");
         tambahkanData = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambahkan Data").setExact(true));
+
+        // Initialize photo section locators
+        fotoDalamKamarSection = page.locator("//h4[contains(text(),'Foto dalam kamar')]/parent::div");
+        fotoDepanKamarSection = page.locator("//h4[contains(text(),'Foto depan kamar')]/parent::div");
+        fotoBangunanTampakDepanSection = page.locator("//h4[contains(text(),'Foto bangunan tampak depan')]/parent::div");
+        fotoTampilanDalamBangunanSection = page.locator("//h4[contains(text(),'Foto tampilan dalam bangunan')]/parent::div");
+
+        // Initialize move buttons for specific sections
+        moveButtonFotoDalamKamar = fotoDalamKamarSection.getByText("Pindahkan Foto").first();
+        moveButtonFotoDepanKamar = fotoDepanKamarSection.getByText("Pindahkan Foto").first();
+        moveButtonFotoBangunanTampakDepan = fotoBangunanTampakDepanSection.getByText("Pindahkan Foto").first();
+        moveButtonFotoTampilanDalamBangunan = fotoTampilanDalamBangunanSection.getByText("Pindahkan Foto").first();
+
+        // Initialize preview areas for specific sections
+        previewFotoDalamKamar = fotoDalamKamarSection.locator(".image-uploader__preview").first();
+        previewFotoDepanKamar = fotoDepanKamarSection.locator(".image-uploader__preview").first();
+        previewFotoBangunanTampakDepan = fotoBangunanTampakDepanSection.locator(".image-uploader__preview").first();
+        previewFotoTampilanDalamBangunan = fotoTampilanDalamBangunanSection.locator(".image-uploader__preview").first();
     }
 
     /**
@@ -1308,6 +1344,10 @@ public class PropertiSayaPO {
      * @param kosName (include random text from property saya steps)
      */
     public void inputKosName(String kosName) {
+        if (kosName.contains("null ") || kosName.isEmpty()) {
+            return; // returning input kost name when empty
+        }
+
         playwright.waitTillLocatorIsVisible(kostNameField, 3000.0);
         if (playwright.waitTillLocatorIsVisible(kostNameField2)) {
             playwright.clickOn(kostNameField2);
@@ -2455,14 +2495,71 @@ public class PropertiSayaPO {
     }
 
     /**
-     * Hover photo (Lihat Foto, Ubah Foto, Hapus Foto, Pindahkan Foto)
+     * Hover on photo and click move photo button - NO nested locators
+     * This method uses predefined locators following Playwright best practices
      *
-     * @param photoLocation
+     * @param photoLocation - the location/section of the photo (e.g., "Foto dalam kamar")
      */
-    public void hoverPhoto(String photoLocation) {
-        Locator backgroundImage = page
-                .locator("//h4[.='" + photoLocation + "']/following-sibling::*//div[@class='image-uploader__preview']");
-        backgroundImage.hover();
+    public void hoverAndClickMovePhoto(String photoLocation) {
+        Locator targetMoveButton = getMoveButtonByLocation(photoLocation);
+        Locator targetPreview = getPreviewByLocation(photoLocation);
+        
+        try {
+            if (playwright.waitTillLocatorIsVisible(targetMoveButton)) {
+                playwright.clickOn(targetMoveButton);
+                return;
+            }
+            
+            if (playwright.waitTillLocatorIsVisible(targetPreview)) {
+                playwright.hoverAtPosition(targetPreview, 0.5, 0.5);
+                page.waitForTimeout(300);
+                playwright.clickOn(targetMoveButton);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to click move photo button for: " + photoLocation, e);
+        }
+    }
+
+    /**
+     * Get predefined move button locator - NO nested locators created
+     *
+     * @param photoLocation - the photo section location
+     * @return Locator for the move button
+     */
+    private Locator getMoveButtonByLocation(String photoLocation) {
+        switch (photoLocation) {
+            case "Foto dalam kamar":
+                return moveButtonFotoDalamKamar;
+            case "Foto depan kamar":
+                return moveButtonFotoDepanKamar;
+            case "Foto bangunan tampak depan":
+                return moveButtonFotoBangunanTampakDepan;
+            case "Foto tampilan dalam bangunan":
+                return moveButtonFotoTampilanDalamBangunan;
+            default:
+                throw new IllegalArgumentException("Unknown photo location: " + photoLocation);
+        }
+    }
+
+    /**
+     * Get predefined preview locator - NO nested locators created
+     *
+     * @param photoLocation - the photo section location
+     * @return Locator for the preview area
+     */
+    private Locator getPreviewByLocation(String photoLocation) {
+        switch (photoLocation) {
+            case "Foto dalam kamar":
+                return previewFotoDalamKamar;
+            case "Foto depan kamar":
+                return previewFotoDepanKamar;
+            case "Foto bangunan tampak depan":
+                return previewFotoBangunanTampakDepan;
+            case "Foto tampilan dalam bangunan":
+                return previewFotoTampilanDalamBangunan;
+            default:
+                throw new IllegalArgumentException("Unknown photo location: " + photoLocation);
+        }
     }
 
     /**
@@ -2487,17 +2584,6 @@ public class PropertiSayaPO {
      */
     public void clickOnMovePhotoHover() {
         playwright.clickOn(movePhotoHover);
-    }
-
-    /**
-     * Click pindahkan photo from hover
-     *
-     * @param destination
-     */
-    public void clickOnMovePhotoHover(String destination) {
-        var destinationLocator = page
-                .locator("//h4[.='" + destination + "']/following-sibling::*//div[@class='image-uploader__preview']//*[contains(text(),'Pindahkan Foto')]");
-        playwright.clickOn(destinationLocator);
     }
 
     /**

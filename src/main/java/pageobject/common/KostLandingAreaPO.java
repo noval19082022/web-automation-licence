@@ -65,7 +65,7 @@ public class KostLandingAreaPO {
         headingNoKosInAreaText = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Belum Ada Kos di Area Ini"));
         subtitleNoKosInAreaText = page.getByText("Cari di Area lain untuk meningkatkan hasil pencarian kos.");
         nominatimEmptyList = page.locator("div.nominatim-list__empty");
-        lihatLebihBanyakButton = page.locator("button.bg-c-button.nominatim-list__see-more.bg-c-button--secondary.bg-c-button--md");
+        lihatLebihBanyakButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat lebih banyak lagi"));
         backToTopButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("back-top"));
         areaText = page.locator("span.rc-info__location");
         cariBerdasarkanPetaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari berdasarkan Peta"));
