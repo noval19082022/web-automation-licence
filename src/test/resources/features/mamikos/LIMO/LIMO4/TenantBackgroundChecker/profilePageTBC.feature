@@ -39,6 +39,75 @@ Feature: Profile Tenant Background Checker
     And owner doesn't have GP open TBC Lihat Profil at chatroom "Tenant No Profile"
     Then owner will see that the text "Untuk saat ini, fitur Profil Penyewa hanya dapat digunakan di aplikasi Mamikos di Android dan iOS." is displayed
 
+  @TEST_LIMO-4319
+  Scenario:  Privacy setting wording "lokasi, asal daerah" change to "asal daerah"
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
+    And user navigate to kost saya page
+    And user click "Pengaturan"
+    And user click "Privasi"
+    Then user will see that the text "Berisi informasi lanjutan seperti asal daerah dan no. Hp yang disensor." is displayed
+
+  @TEST_LIMO-4320
+  Scenario: Privacy data preview profil penyewa section
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
+    And user navigate to kost saya page
+    And user click "Pengaturan"
+    And user click "Privasi"
+    And user click "Lihat Preview Profilmu"
+    Then user will see data profile:
+    | Zoro1998    |
+    | Kawin Memiliki Anak |
+    | Mahasiswa    |
+
+  @TEST_LIMO-4321
+  Scenario: Privacy data preview informasi umum section
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod  | password  |
+      | 089220221220 | 08100000622 | qwerty123 |
+    And user navigate to kost saya page
+    And user click "Pengaturan"
+    And user click "Privasi"
+    And user click "Lihat Preview Profilmu"
+    Then user will see data profile:
+      | Belum upload kartu identitas |
+      | Laki-laki |
+      | Belum transaksi di Mamikos |
+      | Bergabung sejak 20 Des 2022 |
+
+  @TEST_LIMO-4322
+  Scenario: Disable Privacy data preview Privasi Riwayat pencarian Kos
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag | phone prod  | password  |
+      | 0892202506 | 08100000622 | qwerty123 |
+    And user navigate to kost saya page
+    And user click "Pengaturan"
+    And user click "Privasi"
+    And user click "Lihat Preview Profilmu"
+    Then user will see data profile:
+      | Kriteria properti yang dicari akan tampil di sini setelah penyewa mengizinkan datanya untuk diperlihatkan. |
+
+  @TEST_LIMO-4323
+  Scenario: Disable Privacy data preview Aktivitas di Mamikos
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag | phone prod  | password  |
+      | 0892202507 | 08100000622 | qwerty123 |
+    And user navigate to kost saya page
+    And user click "Pengaturan"
+    And user click "Privasi"
+    And user click "Lihat Preview Profilmu"
+    Then user will see data profile:
+      | Belum Dapat Ditampilkan |
+
+
 #  @TEST_LIMO-325
 #  Scenario: [Web][Tenant Background Checker][Profil Tenant] Check Section at page profil tenant
 #    Given user go to mamikos homepage

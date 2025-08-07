@@ -673,4 +673,9 @@ public class SearchSteps {
             Assert.assertEquals(a, filter);
         }
     }
+
+    @And("user sets top kos Rooms Available filter")
+    public void userSetsTopKosRoomAvailableFilter() {
+        search.kosRoomAvailableFilter();
+    }
 }
