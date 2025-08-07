@@ -40,7 +40,7 @@ Feature: Profile Tenant Background Checker
     Then owner will see that the text "Untuk saat ini, fitur Profil Penyewa hanya dapat digunakan di aplikasi Mamikos di Android dan iOS." is displayed
 
   @TEST_LIMO-4319
-  Scenario:  Privacy setting wording "lokasi, asal daerah" change to "asal daerah"
+  Scenario: Privacy setting wording "lokasi, asal daerah" change to "asal daerah"
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod  | password  |
