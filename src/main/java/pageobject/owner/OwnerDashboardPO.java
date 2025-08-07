@@ -95,6 +95,7 @@ public class OwnerDashboardPO {
     private Locator dialogPopUp;
     private Locator widgetInfoUntukAndaParagraph;
     private Locator generalCloseButton;
+    private Locator pilihPaketGoldplus;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -176,6 +177,7 @@ public class OwnerDashboardPO {
         dialogPopUp = page.locator("//*[@role='dialog' and @aria-modal='true']//button[@class='bg-c-modal__action-closable']");
         widgetInfoUntukAndaParagraph = page.locator("//*[contains(text(),'Info untuk Anda')]/following-sibling::*[@class='widget-card__content']//p");
         generalCloseButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
+        pilihPaketGoldplus = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Paket GoldPlus"));
     }
 
     /**
@@ -897,6 +899,10 @@ public class OwnerDashboardPO {
             if (playwright.waitTillLocatorIsVisible(pilihPeriodeButton, 3000.0)) {
                 playwright.clickOn(pilihPeriodeButton);
                 System.out.println("Clicked 'Pilih Periode' button in GoldPlus period selection popup");
+            }
+
+            if (playwright.waitTillLocatorIsVisible(pilihPaketGoldplus, 3000.0)) {
+                playwright.clickOn(pilihPeriodeButton);
             }
         } else {
             System.out.println("No GoldPlus period selection popup detected. Current URL: " + page.url());

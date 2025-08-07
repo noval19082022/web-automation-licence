@@ -1,9 +1,9 @@
-@COOP1
-Feature: addOns Fee Full Payment Invoice
+@SS3
+Feature: addOns Deleted By Admin
 
 
-  @SS-4890
-  Scenario: [Add Ons - Fee Full Payment Invoice] Admin Batalkan Contract
+  @SSCOOP-3784
+  Scenario: [Add Ons - Deleted by Admin] Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
@@ -14,25 +14,28 @@ Feature: addOns Fee Full Payment Invoice
     And admin akhiri contract
     Then admin should success terminate contract
 
-  @SS-4891 @continue
-  Scenario: [Add Ons - Fee Full Payment Invoice] Admin cancel contract
+  @SSCOOP-3785
+  Scenario: [Add Ons - Deleted by Admin] Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
       | 0891111020198 | 0891111020198 | mamikosqa123 |
     And user cancel booking
 
-  @SS-4892
-  Scenario: [Add Ons - Fee Full Payment Invoice] Tenant booking kos
-    When user go to mamikos homepage
+  @SSCOOP-3786
+  Scenario: [Add Ons - Deleted by Admin] Tenant Booking Kost
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod    | password     |
+      | 0891111020198 | 0891111020198 | mamikosqa123 |
     And tenant redirect to kost details:
       | kost path stag                                                                   | kost path prod        |
       | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-adi-automation-add-ons | Kost Adi Auto Add Ons |
     And tenant booking kost for "today" and input rent duration equals to 2
     Then tenant should success booking kost
 
-  @SS-4894
-  Scenario: [Add Ons - Fee Full Payment Invoice] Owner accept booking
+  @SSCOOP-3787
+  Scenario: [Add Ons - Deleted by Admin] Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |
@@ -42,8 +45,8 @@ Feature: addOns Fee Full Payment Invoice
       | Irvi Tenant Add Ons | Irvi Tenant Add Ons |
     Then owner should redirect back to pengajuan booking page
 
-  @SS-4895 @continue
-  Scenario: [Add Ons - Fee Full Payment Invoice] Admin Master Add, Add Ons Fee To Full Payment Invoice & Edit Add Ons Free Amount With Char Through Detail Fee
+  @SSCOOP-3788
+  Scenario: [Add Ons - Deleted by Admin] Check Add Ons Delete By Admin Master
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
@@ -56,9 +59,8 @@ Feature: addOns Fee Full Payment Invoice
       | additional price title | adiautomation       |
       | addtional price value  | 100000              |
     Then admin can sees total cost is basic amount + add ons fee + admin fee
-
-  @SS-4896
-  Scenario: Edit Add Ons Free Amount With Char Through Detail Fee
-    When admin edit additional fee price amount to "20011rrr"
-    Then admins can sees error message
+    When admin deletes additional other price with name below :
+      | adiautomation |
+    Then user can not see additional price with name below :
+      | adiautomation |
 		

@@ -1,4 +1,4 @@
-@COOP1
+@SS3
 Feature: addOns Created On Invoice Search Contract Flow Extended Contract
 
 

@@ -1,4 +1,4 @@
-@COOP1
+@SS3
 Feature: addOns Fee Recurring Invoice Negative
 
 
