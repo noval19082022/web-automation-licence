@@ -1,4 +1,4 @@
-@COOP3 @a
+@COOP3
 Feature: Chat Rajawali On PMS Tenant Tracker
 
  @TEST_SS-8866 @continue
@@ -39,5 +39,6 @@ Feature: Chat Rajawali On PMS Tenant Tracker
      And admin go to pms singgahsini
      And admin go to tenant communication menu
      And admin click on rajawali chat
+     Then admin can see rajawali chat
 
 
