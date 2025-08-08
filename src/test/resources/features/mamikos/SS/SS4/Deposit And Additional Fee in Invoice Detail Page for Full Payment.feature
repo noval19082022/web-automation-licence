@@ -1,4 +1,4 @@
-@COOP2
+@SS4
 Feature: Deposit And Additional Fee in Invoice Detail Page for Full Payment
 
 

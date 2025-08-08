@@ -9,4 +9,4 @@ target
 .claude
 
 # Ignore GitHub copilot instruction files
-.github/
+.ai
