@@ -48,6 +48,7 @@ public class SearchPO {
     Locator sortingButton;
     Locator firstPriceListing;
     Locator lastPriceListing;
+    Locator kostRoomAvailableFilter;
     private Locator suggestionResult;
     private Locator kostCard;
 
@@ -99,6 +100,7 @@ public class SearchPO {
         this.kostCard = page.getByTestId("kostRoomCard");
         this.zoomInButton = page.locator("a.leaflet-control-zoom-in");
         this.zoomOutButton = page.locator("a.leaflet-control-zoom-out");
+        this.kostRoomAvailableFilter = page.locator("//span[normalize-space()='Kamar Tersedia']");
 
     }
 
@@ -837,4 +839,10 @@ public class SearchPO {
         return filterList;
     }
 
+    /**
+     * Select filter by kos room available
+     */
+    public void kosRoomAvailableFilter() {
+        playwright.clickOn(kostRoomAvailableFilter);
+    }
 }

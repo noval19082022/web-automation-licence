@@ -1119,13 +1119,11 @@ public class PropertiSayaSteps {
     public void ownerClicksButtonMovePhoto() {
         propertySaya.hoverPhoto();
         propertySaya.clickOnMovePhotoHover();
-        this.movePhotoSteps();
     }
 
     @And("user/owner clicks button move photo on {string}")
     public void userClicksButtonMovePhoto(String photoLocation) {
         propertySaya.hoverAndClickMovePhoto(photoLocation);
-        this.movePhotoSteps();
     }
 
     @And("owner select destination move photo kos")
@@ -1151,7 +1149,8 @@ public class PropertiSayaSteps {
         Assert.assertTrue(propertySaya.isFavoritedSectionVisible(), "button not visible");
     }
 
-    private void movePhotoSteps() {
+    @Then("user performs move photo validation steps")
+    public void userPerformsMovePhotoValidationSteps() {
         propertySaya.clickOnLanjutkanMovePhoto();
         Assert.assertTrue(propertySaya.getToastNotSelectedPhoto(), "Toast message doesnt match!");
 

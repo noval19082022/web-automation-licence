@@ -16,6 +16,7 @@ public class ChatTenantPO {
     private PlaywrightHelpers playwright;
     String date;
     Locator questionsOption;
+    Locator questionTextLabels;
     Locator sendQuestionButton;
     Locator ajukanSewaButton;
     Locator latestChat;
@@ -44,7 +45,8 @@ public class ChatTenantPO {
     public ChatTenantPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
-        questionsOption = page.locator("//*[@class='wrapper-question']/child::div");
+        questionsOption = page.locator("[data-testid='wrapper-question'] .question-option");
+        questionTextLabels = page.locator("[data-testid='wrapper-question'] .question-option p.bg-c-radio__label");
         ajukanSewaButton = page.locator("#modalChat").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Ajukan Sewa"));
         sendQuestionButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim"));
         latestChat = page.locator("(//div[@class='mc-balloon-chat__content']//div)[last()]");
@@ -78,9 +80,11 @@ public class ChatTenantPO {
      */
     public List<String> listQuestions() {
         List<String> questionsListing = new ArrayList<>();
-        List<Locator> questionsList = questionsOption.all();
-        for (Locator i : questionsList) {
-            questionsListing.add(playwright.getText(i));
+        List<Locator> questionsList = questionTextLabels.all();
+        for (Locator questionText : questionsList) {
+            if (questionText.isVisible()) {
+                questionsListing.add(playwright.getText(questionText).trim());
+            }
         }
         return questionsListing;
     }
