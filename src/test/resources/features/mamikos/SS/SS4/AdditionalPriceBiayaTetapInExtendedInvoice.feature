@@ -1,9 +1,9 @@
-@COOP2
-Feature: Additional Price Biaya Lainnya Settlement Invoice
+@SS4
+Feature: Additional Price Biaya Tetap In Extended Invoice
 
 
   @SS-4992
-  Scenario: [Add Ons - Additional Price Biaya Lainnya On Settlement Invoice] Admin Batalkan Contract
+  Scenario: [Add Ons - Additional Price Biaya Tetap On Extended Invoice] Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
@@ -13,27 +13,27 @@ Feature: Additional Price Biaya Lainnya Settlement Invoice
       | 087708777615 | 0890867321212 |
 
   @SS-4993
-  Scenario: [Add Ons - Additional Price Biaya Lainnya On Settlement Invoice] Cancel Booking if Tenant Have Booking
+  Scenario: [Add Ons - Additional Price Biaya Tetap On Extended Invoice] Cancel Booking if Tenant Have Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod    | password     |
       | 087708777615 | 0890867321212 | mamikosqa123 |
     And user cancel booking
 
-  @SS-5003
-  Scenario: [Add Ons - Additional Price Biaya Lainnya On Settlement Invoice] Tenant Booking Kost
+  @SS-4994
+  Scenario: [Add Ons - Additional Price Biaya Tetap On Extended Invoice] Tenant Booking Kost
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod    | password     |
       | 087708777615 | 0890867321212 | mamikosqa123 |
     And tenant redirect to kost details:
-      | kost path stag                                                                                            | kost path prod            |
-      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-bagas-dp-only-automation-tobelo-halmahera-utara | Kost Adi Auto SinggahSini |
+      | kost path stag                                                                                             | kost path prod            |
+      | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-bagas-automation-hahahehe-tobelo-halmahera-utara | Kost Adi Auto SinggahSini |
     And tenant booking kost
     Then tenant should success booking kost
 
   @SS-4995
-  Scenario: [Add Ons - Additional Price Biaya Lainnya On Settlement Invoice] Owner Accept Booking
+  Scenario: [Add Ons - Additional Price Biaya Tetap On Extended Invoice] Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag  | phone prod  | password  |
@@ -43,52 +43,53 @@ Feature: Additional Price Biaya Lainnya Settlement Invoice
       | Hagaromo Otsutsuki | Adi Auto Addons Satu |
     Then owner should redirect back to pengajuan booking page
 
-  @SS-5004
-  Scenario: [Add Ons - Additional Price Biaya Lainnya On Settlement Invoice] Tenant Pay DP Invoice
+  @SS-5000
+  Scenario: [Add Ons - Additional Price Biaya Tetap On Extended Invoice] Tenant Pay 1st Month Booking
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password     |
       | 087708777615 | 087708777615 | mamikosqa123 |
     And tenant navigate to riwayat and draf booking
-    And tenant pay kost from riwayat booking using ovo "08126000444"
+    And tenant pay kost from riwayat booking using ovo "0890867321212"
     And tenant set active page to 0
     And tenant navigate to riwayat and draf booking
-    And tenant go to invoice DP from riwayat booking
-    And tenant set active page to 1
+    And tenant checkin kost from riwayat booking
+    And tenant navigate to tagihan kost saya
+    And tenant go to invoice page
     And tenant get invoice number
 
   @SS-4997
-  Scenario: [Add Ons - Additional Price Biaya Lainnya On Settlement Invoice] Admin Add Additional Price Biaya Lainnya
+  Scenario: [Add Ons - Additional Price Biaya Tetap On Extended Invoice] Admin Add Additional Price Biaya Tetap
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin add additional price:
-      | search by              | renter_phone_number      |
-      | search value           | 087708777615             |
-      | invoice number         | default                  |
-      | additional price type  | default                  |
-      | additional price title | Automation Biaya Lainnya |
-      | addtional price value  | 200000                   |
+      | search by              | renter_phone_number    |
+      | search value           | 087708777615           |
+      | invoice number         | default                |
+      | additional price type  | fixed                  |
+      | additional price title | Automation Biaya Tetap |
+      | addtional price value  | 200000                 |
 
-  @SS-5005
-  Scenario: [Add Ons - Additional Price Biaya Lainnya On Settlement Invoice] Tenant Check Additional Price Biaya Lainnya Added By Admin On First Invoice
+  @SS-5007
+  Scenario: [Add Ons - Additional Price Biaya Tetap On Extended Invoice] Tenant Check Additional Price Biaya Tetap Added By Admin On Invoice
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password     |
       | 087708777615 | 087708777615 | mamikosqa123 |
     And tenant navigate to tagihan kost saya
-    And tenant go to invoice page after pay DP
-    And tenant set active page to 0
-    Then tenant can see additional price "Automation Biaya Lainnya" with price "Rp200.000"
+    And tenant go to invoice page
+    And tenant set active page to 1
+    Then tenant can see additional price "Automation Biaya Tetap" with price "Rp200.000"
 
-  @SS-5006
-  Scenario: [Add Ons - Additional Price Biaya Lainnya On Settlement Invoice] Owner Check Additional Price Biaya Lainnya Added By Admin On Manage Bills
+  @SS-5008
+  Scenario: [Add Ons - Additional Price Biaya Tetap On Extended Invoice] Owner Check Additional Price Biaya Tetap Added By Admin On Manage Bills
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag  | phone prod  | password  |
       | 08916727111 | 08916727111 | qwerty123 |
-    And owner go to bill page of kost "Test Automation Kost Bagas Dp Only Automation Tobelo Halmahera" on month of "current"
-    And owner go to detail tagihan with jatuh tempo is "Belum bayar - Jatuh tempo sekarang"
-    Then owner can see additional price "Automation Biaya Lainnya" with price "Rp200.000"
+    And owner go to bill page of kost "Test Automation Kost Bagas Automation HahaHehe Tobelo Halmahera Utara" on month of "next"
+    And owner go to detail tagihan
+    Then owner can see additional price "Automation Biaya Tetap" with price "Rp200.000"
 		

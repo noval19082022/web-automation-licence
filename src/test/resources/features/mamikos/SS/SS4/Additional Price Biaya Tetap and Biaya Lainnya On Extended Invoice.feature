@@ -1,4 +1,4 @@
-@COOP2
+@SS4
 Feature: Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice
 
 
