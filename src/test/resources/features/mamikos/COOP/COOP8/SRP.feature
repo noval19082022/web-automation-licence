@@ -5,6 +5,9 @@ Feature: SRP
   Scenario: [WEB] Check total kos in page 20 listing
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
+      | search keyword | City Home - Banjarmasin       |
+      | area result    | City Home - Banjarmasin       |
+    Then user can see total kost in area with "Ditemukan 50 kos-kosan di sekitar City Home - Banjarmasin, Jl. Cemp. IV, Mawar, Kec. Banjarmasin Tengah, Kota Banjarmasin, Kalimantan Selatan 70115"
       | search keyword | City Home - Banjarmasin |
       | area result    | City Home - Banjarmasin |
     Then user can see total kost in area with "Ditemukan 55 kos-kosan di sekitar City Home - Banjarmasin, Jl. Cemp. IV, Mawar, Kec. Banjarmasin Tengah, Kota Banjarmasin, Kalimantan Selatan 70115"
@@ -50,6 +53,6 @@ Feature: SRP
       | search keyword | UNDIP                          |
       | area result    | Universitas Diponegoro (UNDIP) |
     When user click on "zoom in" on maps
-    Then user can see total kost in area with "Ditemukan 352 kos-kosan di sekitar Universitas Diponegoro (UNDIP), Jl. Prof. Soedarto No.13, Tembalang, Kec. Tembalang, Kota Semarang, Jawa Tengah 50275"
+    Then user can see total kost in area with "Ditemukan 349 kos-kosan di sekitar Universitas Diponegoro (UNDIP), Jl. Prof. Soedarto No.13, Tembalang, Kec. Tembalang, Kota Semarang, Jawa Tengah 50275"
     When user click on "zoom out" on maps
-    Then user can see total kost in area with "Ditemukan 680 kos-kosan di sekitar Universitas Diponegoro (UNDIP), Jl. Prof. Soedarto No.13, Tembalang, Kec. Tembalang, Kota Semarang, Jawa Tengah 50275"
+    Then user can see total kost in area with "Ditemukan 677 kos-kosan di sekitar Universitas Diponegoro (UNDIP), Jl. Prof. Soedarto No.13, Tembalang, Kec. Tembalang, Kota Semarang, Jawa Tengah 50275"

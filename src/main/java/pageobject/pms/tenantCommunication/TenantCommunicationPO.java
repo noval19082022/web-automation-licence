@@ -43,6 +43,7 @@ public class TenantCommunicationPO {
     Locator getStatusWA;
     Locator trackChatWAButton;
     Locator searchKostName;
+    Locator rajawaliChatText;
 
     public TenantCommunicationPO(Page page) {
         this.page = page;
@@ -72,6 +73,7 @@ public class TenantCommunicationPO {
         getStatusWA = page.locator("tbody > tr:nth-of-type(1) .table-body__label");
         trackChatWAButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("add-plusTrack Status Chat WA"));
         searchKostName = page.locator("//input[@data-testid=\"search-field\"]");
+        rajawaliChatText = page.locator("//a[contains(.,'Chat Rajawali')]").first();
     }
 
     /**
@@ -372,4 +374,18 @@ public class TenantCommunicationPO {
         playwright.fill(searchKostName, kostName);
     }
 
+    /**
+     *verify Chat rajawali button
+     * @return
+     */
+    public Boolean RajawaliChatTextIsVisible(){
+        return playwright.waitTillLocatorIsVisible(rajawaliChatText);
+    }
+
+    /**
+     * click chat rajawali button
+     */
+    public void clickRajawaliChat(){
+        playwright.clickOn(rajawaliChatText);
+    }
 }
