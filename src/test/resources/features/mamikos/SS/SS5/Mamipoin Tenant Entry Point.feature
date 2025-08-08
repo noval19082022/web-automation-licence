@@ -1,4 +1,4 @@
-@COOP-5027 @COOP3
+@COOP-5027 @SS5
 Feature: Mamipoin Tenant Entry Point
 
   @SS-5054

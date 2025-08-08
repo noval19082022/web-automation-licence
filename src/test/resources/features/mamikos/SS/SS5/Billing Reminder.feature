@@ -1,4 +1,4 @@
-@COOP3
+@SS5
 Feature: Billing Reminder
 
   @SS-5044 @TESTSET_COOP-4944 @Automated @web
