@@ -1,8 +1,8 @@
-@BBM6 @COOP6
+@SS8 @SS8
 Feature: check contract status on all filter and download biodata fakedoor
 
 
-  @deleteContractOtherPrice @COOP60
+  @deleteContractOtherPrice @SS80
   Scenario: Delete contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:

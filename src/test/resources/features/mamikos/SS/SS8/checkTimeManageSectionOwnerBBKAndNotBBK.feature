@@ -1,4 +1,4 @@
-@BBM6 @COOP6
+@SS8 @SS8
 Feature: Time manage owner
 
   @checkContentOnWaktuMengelolaKos @TEST_SS-3466

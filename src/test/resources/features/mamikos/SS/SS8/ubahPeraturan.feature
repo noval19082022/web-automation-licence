@@ -1,4 +1,4 @@
-@BBM6 @ubahPeraturan @COOP6
+@SS8 @ubahPeraturan @SS8
 Feature: Owner - Ubah Peraturan
 
   @TEST_SS-3458 @automated @booking-stay-setting @continue

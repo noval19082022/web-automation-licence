@@ -1,4 +1,4 @@
-@BBM6 @COOP6
+@SS8 @SS8
 Feature: UX improvment booking
 
   @TEST_SS-2668 @uxImprovement

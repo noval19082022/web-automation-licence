@@ -1,4 +1,4 @@
-@BBM6 @COOP6
+@SS8 @SS8
 Feature: Owner - Penyewa Feature
 
   @waitingTerminateConfirmation

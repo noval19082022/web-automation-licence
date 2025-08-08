@@ -1,4 +1,4 @@
-@COOP6 @BBM6
+@SS8 @SS8
 Feature: Additional price for kos owner
 
   @activatedDenda @TEST_SS-3478
