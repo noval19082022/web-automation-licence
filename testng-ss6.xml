@@ -2,10 +2,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
 
-    <parameter name="squadName" value="BBM4"/>
-    <test name="BBM4TestRunner">
+    <parameter name="squadName" value="SS"/>
+    <test name="SS6 Test Runner">
         <classes>
-            <class name="runners.BBM4TestRunner"/>
+            <class name="runners.SS6TestRunner"/>
         </classes>
     </test>
 

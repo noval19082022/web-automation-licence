@@ -1,4 +1,4 @@
-@COOP4
+@SS6
 Feature: Apply Voucher Annually For Contract Duration
 
   Scenario: Admin Batalkan Contract
