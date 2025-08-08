@@ -1,4 +1,4 @@
-@BBM5
+@SS7
 Feature: BnB feature with background create booking twice
 
   Scenario: Tenant Booking Kost Twice

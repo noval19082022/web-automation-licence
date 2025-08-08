@@ -1,4 +1,4 @@
-@BBM5 @tikiTaka
+@SS7 @tikiTaka
 Feature: Tiki Taka - Bank Account
 
   Background: Terminated contract
