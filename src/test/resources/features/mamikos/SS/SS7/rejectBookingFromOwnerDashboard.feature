@@ -1,4 +1,4 @@
-@BBM5
+@SS7
 Feature: Reject Booking From Owner Dashboard
 
   Scenario Outline: Cancel and create booking

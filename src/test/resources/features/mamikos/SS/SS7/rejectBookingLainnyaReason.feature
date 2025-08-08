@@ -1,4 +1,4 @@
-@BBM5
+@SS7
 Feature: OB Reject Booking With Lainnya Reason
 
   Scenario: Admin Batalkan Contract

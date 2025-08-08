@@ -1,4 +1,4 @@
-@BBM5
+@SS7
 Feature: BnB feature with background go to kos saya page
 
   @TEST_SS-3523

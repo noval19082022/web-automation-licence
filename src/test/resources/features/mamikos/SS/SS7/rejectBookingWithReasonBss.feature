@@ -1,4 +1,4 @@
-@BBM5
+@SS7
 Feature: Check reject booking reason Tanggal masuk/check-in kos terlalu dekat and have BSS varian
 
   Scenario: Admin Batalkan Contract
