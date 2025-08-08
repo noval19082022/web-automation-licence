@@ -1,4 +1,4 @@
-@BBM6 @regression @refundPolishTenantSide
+@SS8 @regression @refundPolishTenantSide
 Feature: Update Refund Policy kost pilar 1 and reguler
 
   @TEST_SS-3419

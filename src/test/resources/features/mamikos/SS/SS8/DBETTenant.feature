@@ -1,4 +1,4 @@
-@COOP6 @DbetTenant
+@SS8 @DbetTenant
 Feature: DBET request from Tenant
 
   @TEST_COOP-3042

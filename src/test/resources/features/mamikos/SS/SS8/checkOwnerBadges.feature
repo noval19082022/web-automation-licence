@@ -1,4 +1,4 @@
-@COOP6 @BBM6
+@SS8 @SS8
 Feature: Check Owner Badges
 
 

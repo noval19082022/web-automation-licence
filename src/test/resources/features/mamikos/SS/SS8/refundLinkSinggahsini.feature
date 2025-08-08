@@ -1,4 +1,4 @@
-@BBM6
+@SS8
 Feature: Check TnC Refund for kost Singgah sini, apik and ELite
 
   @TEST_SS-3421 @TEST_SS-3365

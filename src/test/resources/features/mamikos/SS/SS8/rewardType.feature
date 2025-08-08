@@ -1,4 +1,4 @@
-@BBM6 @rewardType
+@SS8 @rewardType
 Feature: Reward Type
 
   @createRewardType @continue @TEST_SS-4250 @TEST_SS-3549
