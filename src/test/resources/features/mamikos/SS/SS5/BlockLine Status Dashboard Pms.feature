@@ -1,4 +1,4 @@
-@COOP3
+@SS5
 Feature: BlockLine Status Dashboard Pms
 
   Scenario: Admin Batalkan Contract

@@ -1,4 +1,4 @@
-@COOP3
+@SS5
 Feature: Mamipoin Tenant Landing Page
 
   @SS-5060
