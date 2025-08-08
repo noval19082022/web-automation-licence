@@ -11,6 +11,8 @@ import pageobject.owner.chat.ChatOwnerPO;
 import pageobject.owner.fiturpromosi.BroadcastChatPO;
 import utilities.PlaywrightHelpers;
 
+import java.util.List;
+
 
 public class TenantBackgroundCheckerSteps {
     Page page = ActiveContext.getActivePage();
@@ -115,5 +117,15 @@ public class TenantBackgroundCheckerSteps {
     @Then("owner see popup text {string}")
     public void owner_see_popup_text(String textPopup) {
         Assert.assertTrue(tenantBackgroundCheckerPO.isTextPopupDisplayed(textPopup), "Information doesn't show");
+    }
+
+    @Then("user will see data profile:")
+    public void user_will_see_data_profile(List<String> wording) {
+        playwright.hardWait(2_000);
+        wording.forEach(word -> {
+            String errorMsg = String.format("'%s' is not present in", word);
+            Assert.assertTrue(tenantBackgroundCheckerPO.isDataProfile(word),
+                    errorMsg + " profile fields");
+        });
     }
 }

@@ -665,6 +665,17 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * Hover on specific locator with position options
+     *
+     * @param locator target locator to hover
+     * @param x horizontal position (0.0 to 1.0, where 0.5 is center)
+     * @param y vertical position (0.0 to 1.0, where 0.5 is center)
+     */
+    public void hoverAtPosition(Locator locator, double x, double y) {
+        locator.hover(new Locator.HoverOptions().setPosition(x, y));
+    }
+
+    /**
      * Filter html tag locator that contains target text
      *
      * @param locator Locator data type

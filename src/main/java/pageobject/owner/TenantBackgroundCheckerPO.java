@@ -46,8 +46,6 @@ public class TenantBackgroundCheckerPO {
         tooltipRataNominalSewa = page.locator(".tenant-background-checker-activity > div:nth-of-type(3) > div:nth-of-type(2) .tenant-background-checker-item__icon");
         tooltipRataDurasiSewa = page.locator(".tenant-background-checker-activity > div:nth-of-type(3) > div:nth-of-type(1) .tenant-background-checker-item__icon");
         tooltipPengajuanSewa = page.locator(".tenant-background-checker-activity > div:nth-of-type(1) > div:nth-of-type(2) .tenant-background-checker-item__icon");
-
-
     }
 
     /**
@@ -182,4 +180,29 @@ public class TenantBackgroundCheckerPO {
                 break;
         }
     }
+
+
+    /**
+     * Check if data profile contains text
+     */
+    public Boolean isDataProfile(String text) {
+        // Use more specific locator to avoid multiple element matches
+        // First try to find the text, then check if at least one is visible
+        Locator elements = page.getByText(text);
+        
+        // If multiple elements found, use first() to get the first visible one
+        if (elements.count() > 1) {
+            // Check if any of the elements with this text is visible
+            for (int i = 0; i < elements.count(); i++) {
+                if (elements.nth(i).isVisible()) {
+                    return true;
+                }
+            }
+            return false;
+        } else {
+            // Single element or no element found
+            return playwright.waitTillLocatorIsVisible(elements);
+        }
+    }
+
 }

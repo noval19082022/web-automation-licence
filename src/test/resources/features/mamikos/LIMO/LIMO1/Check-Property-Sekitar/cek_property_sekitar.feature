@@ -11,3 +11,9 @@ Feature: Cek Properti Sekitar
     And redirected to cek properti sekitar page
     Then user will see that the text "Buka Cek Properti Sekitar di Aplikasi" is displayed
     Then user will see that the text "Untuk saat ini, fitur Cek Properti Sekitar hanya dapat digunakan di aplikasi Mamikos di Android dan iOS." is displayed
+
+  @TEST_LIMO-9250
+  Scenario: Check filter kamar tersedia
+    Given user navigates to ugm kost listing
+    When user sets top kos Rooms Available filter
+    And user can see total kost in area with "Ditemukan 572 kos-kosan di sekitar UGM"
