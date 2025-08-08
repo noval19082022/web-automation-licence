@@ -1,4 +1,4 @@
-@BBM7 @voucher
+@SS9 @voucher
 
 Feature: Voucher Saya Page
 

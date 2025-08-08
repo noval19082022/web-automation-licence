@@ -1,4 +1,4 @@
-@regression @BBM7 @voucher
+@regression @SS9 @voucher
 
 @TEST_SS-3784 @TEST_SS-3898
 Feature: Apply Voucher For Kost Type BBK

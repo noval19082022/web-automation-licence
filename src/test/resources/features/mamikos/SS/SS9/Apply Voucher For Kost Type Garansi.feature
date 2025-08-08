@@ -1,4 +1,4 @@
-@regression @BBM7 @voucher
+@regression @SS9 @voucher
 
 @TEST_SS-3729 @TEST_SS-3731 @TEST_SS-4001 @TEST_SS-4003
 Feature: Apply Voucher For Kost Type Garansi

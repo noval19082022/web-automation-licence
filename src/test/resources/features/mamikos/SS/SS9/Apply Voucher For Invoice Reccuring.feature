@@ -1,4 +1,4 @@
-@regression @voucher @BBM7
+@regression @voucher @SS9
 
 
 Feature: Apply Voucher For Invoice Reccuring

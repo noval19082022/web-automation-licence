@@ -1,33 +1,33 @@
-@regression @BBM7 @voucher
+@regression @SS9 @voucher
 
-@TEST_SS-3883 @TEST_SS-3757 @TEST_SS-3964 @TEST_SS-3759
-Feature: Apply Voucher For Contract Created From Owner
+@TEST_SS-3691 @TEST_SS-3701
+Feature: Apply Voucher For Contract Created By Consultant
 
-#  BBM-686
-  @continue
+#  COOP-2535
+  @continue @TEST_SS-3951
   Scenario: Tenant Apply Voucher with Contract Rules from from Consultant
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
-      | 0890867321226 | 0890867321226 | mamikosqa123 |
+      | 0890867321225 | 0890867321225 | mamikosqa123 |
     And tenant navigate to tagihan kost saya
     And tenant go to invoice page
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | AUTOOWNER         | AUTOOWNER         |
+      | AUTOKOSTINV2      | AUTOKOSTINV2      |
     Then tenant can see voucher is applied
 
-#  BBM-684
-  @continue
+#  COOP-2534
+  @continue @TEST_SS-3881
   Scenario: Tenant Apply Voucher with Contract Rules from Owner
     When tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | AUTOCONSULTANT    | AUTOCONSULTANT    |
+      | AUTOOWNER         | AUTOOWNER         |
     Then Voucher code has been used
 
 #  COOP-2532
-  @continue
+  @continue @TEST_SS-3607
   Scenario: Tenant Apply Voucher with Contract Rules from Booking Funnel
     When tenant set active page to 1
     And tenant apply voucher:
@@ -40,7 +40,7 @@ Feature: Apply Voucher For Contract Created From Owner
     When tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | AUTOFUNNELCONS    | AUTOFUNNELCONS    |
+      | AUTOTENANT        | AUTOTENANT        |
     Then Voucher code has been used
 
   @continue
@@ -48,7 +48,7 @@ Feature: Apply Voucher For Contract Created From Owner
     When tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | AUTOFUNNELOWNER   | AUTOFUNNELOWNER   |
+      | AUTOFUNNELCONS    | AUTOFUNNELCONS    |
     Then tenant can see voucher is applied
 
   @continue
@@ -56,8 +56,8 @@ Feature: Apply Voucher For Contract Created From Owner
     When tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | AUTOCONSOWNER     | AUTOCONSOWNER     |
-    Then tenant can see voucher is applied
+      | AUTOFUNNELOWNER   | AUTOFUNNELOWNER   |
+    Then Voucher code has been used
 
 #  COOP-2531
   Scenario: Tenant Apply Voucher with Contract Rules from Booking Funnel, Owner, and Consultant
