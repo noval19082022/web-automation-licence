@@ -1,4 +1,4 @@
-@COOP4
+@SS6
 Feature: Apply Voucher For Booking Rule, Invoice With DP
 
   Scenario: Admin Batalkan Contract

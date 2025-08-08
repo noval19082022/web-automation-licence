@@ -1,4 +1,4 @@
-@COOP4
+@SS6
 Feature: Apply Voucher For Kost City
 
   @TEST_SS-4260

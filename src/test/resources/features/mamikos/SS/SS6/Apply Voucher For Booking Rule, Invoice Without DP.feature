@@ -1,4 +1,4 @@
-@COOP4
+@SS6
 Feature: Apply Voucher For Booking Rule, Invoice Without DP
 
   @Automated @COOP @Web

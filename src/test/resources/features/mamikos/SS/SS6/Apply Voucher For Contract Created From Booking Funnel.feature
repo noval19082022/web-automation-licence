@@ -1,4 +1,4 @@
-@COOP4
+@SS6
 Feature: Apply Voucher For Contract Created From Booking Funnel
 
   Scenario: Admin Batalkan Contract

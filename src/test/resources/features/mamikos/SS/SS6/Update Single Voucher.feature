@@ -1,4 +1,4 @@
-@COOP4
+@SS6
 Feature: Admin - Update Single Voucher
 
   @continue
