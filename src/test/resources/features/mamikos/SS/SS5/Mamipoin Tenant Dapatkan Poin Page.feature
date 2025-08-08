@@ -1,4 +1,4 @@
-@COOP3
+@SS5
 Feature: Mamipoin Tenant Dapatkan Poin Page
 
 

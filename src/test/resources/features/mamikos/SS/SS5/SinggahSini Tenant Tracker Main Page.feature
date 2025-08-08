@@ -1,4 +1,4 @@
-@COOP3 @tenantTracker
+@SS5 @tenantTracker
 Feature: SinggahSini Tenant Tracker Main Page
 
 
