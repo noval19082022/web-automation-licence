@@ -196,7 +196,7 @@ public class GoldplusPO {
      */
     public void clickOnGoldplusPackageButton(int goldplus){
         playwright.waitTillPageLoaded();
-        playwright.clickOn(page.getByTestId("beliGP"+goldplus+"_btn"));
+        playwright.clickOn(page.locator("(//span[@class='bg-c-button__label'][normalize-space()='Pilih Paket'])["+goldplus+"]"));
 
     }
 

@@ -130,13 +130,14 @@ Feature: GP Cross-Selling
       - paragraph: Rp155.000
       """
 
-  @mamiads  @gpCrossSelling @continue @TEST_LIMO-3354
+  @mamiads @gpCrossSelling @continue @TEST_LIMO-3354
   Scenario: Cancel select saldo mamiads
     Given user go to mamikos homepage
     And user login as owner:
       | phone stag   | phone prod | password  |
       | 085720962105 | 0          | qwerty123 |
     And user click daftar GP button
+    And user click "Pilih Paket GoldPlus" button
     And owner choose Goldplus package 1
 
   @mamiads  @gpCrossSelling @continue @TEST_LIMO-3357
@@ -164,6 +165,14 @@ Feature: GP Cross-Selling
     And user unchoose saldo on GoldPlus section
     Then user verify the "Saldo MamiAds 30.000" and the price is "Rp27.000" already "removed" on Rincian Pembayaran
 
+  @terminate @gpCrossPaid @TEST_LIMO-3352
+  Scenario: Terminate GP
+    Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+    And user wants to terminate Goldplus for owner with phone number "089966331122"
+
   @continue @gpCrossPaid @TEST_LIMO-1393
   Scenario: [Owner dashboard][Crosseling GP and MamiAds]To make sure saldo mamiads DIDN'T appear on Riwayat Saldo Mamiads while status GP = menunggu pembayaran
     Given user go to mamikos homepage
@@ -172,8 +181,9 @@ Feature: GP Cross-Selling
       | 089966331122 | 0          | 12345678 |
     #seharusnya tidak click tombol yang ini
     And user click daftar GP button
+    And user click "Pilih Paket GoldPlus" button
     And owner choose Goldplus package 1
-    And user choose saldo "Rp27.000" on GoldPlus section
+    And user choose saldo "30 ribu" on GoldPlus section
     Then user verify saldo MamiAds is choosen on Rincian Pembayaran
       """
       - paragraph: Rincian Pembayaran
@@ -201,12 +211,4 @@ Feature: GP Cross-Selling
     Then payment owner success using ovo as payment method
     And user navigate to mamiads history page
     And user click "Selesai"
-    And validate status transaction mamiads is "Lunas" with price "Rp109.500" saldo "Saldo MamiAds 30 ribu + GoldPlus 1 (1 Bulan)"
-
-  @terminate @gpCrossPaid @TEST_LIMO-3352
-  Scenario: Terminate GP
-    Given admin go to mamikos mamipay admin
-    When admin login to mamipay:
-      | email stag                   | email prod                   | password  |
-      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    And user wants to terminate Goldplus for owner with phone number "089966331122"
+    And validate status transaction mamiads is "Lunas" with price "Rp0" saldo "Saldo 30 ribu"

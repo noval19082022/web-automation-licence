@@ -35,7 +35,7 @@ public class NaikkanIklanSteps {
 
     @Then("user verify the toggle iklan {string} is {string}")
     public void user_verify_the_toggle_iklan_is(String adsName, String toggleStatus) throws InterruptedException {
-        playwright.waitTillPageLoaded(10000.0);
+        playwright.waitTillPageLoaded(3000.0);
         Assert.assertTrue(naikkanIklanPO.getToggleStatus(adsName, toggleStatus), "toggle doesn't match!");
     }
 
