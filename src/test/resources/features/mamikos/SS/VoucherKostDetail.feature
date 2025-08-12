@@ -1,4 +1,4 @@
-@ss @DOM1 @a
+@SS10 @DOM1
 Feature: Voucher Kost Detail
 
   @TEST_SS-8407 @continue
@@ -46,7 +46,7 @@ Feature: Voucher Kost Detail
     When tenant click on "Voucher Khusus Singgahsini" section
     Then tenant can see voucher list
     And tenant click on lihat detail button
-    Then tenant can see voucher detail with "Rini voucher weekly"
+    Then tenant can see voucher detail with "Regress Weekly"
 
   @TEST_SS-8418
   Scenario: [Web][Voucher list][Voucher List ]Salin voucher code
@@ -57,6 +57,6 @@ Feature: Voucher Kost Detail
     And tenant click on "Salin" button
     Then tenant can see toast message "Kode voucher berhasil disalin."
     And tenant click on lihat detail button
-    Then tenant can see voucher detail with "Rini voucher weekly"
+    Then tenant can see voucher detail with "Regress Weekly"
     And tenant click on "Salin Detail" button
     Then tenant can see toast message "Kode voucher berhasil disalin."

@@ -89,7 +89,7 @@ public class TenantBillManagementPO {
         disclaimerCheckinTenant = page.locator("//div[contains(@class,'tenant-header__alert')]");
         filterDropdown = page.locator("//div[@class='bg-c-select']//div[@class='bg-c-dropdown']");
         downloadBiodataPenyewaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Download biodata penyewa"));
-        checkbox = page.getByTestId("modalDownload").locator("span");
+        checkbox = page.locator("//div[@class=\"modal-download__download-alert bg-c-checkbox\"]//span[@class=\"bg-c-checkbox__icon\"]");
         informationAboutUpcomingFeature = page.locator("//div[@class='modal-download__download-alert bg-c-alert bg-c-alert--info']//div[@class='bg-c-alert__content']");
         kostDropdownInBillingManagement = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Icon arrow down"));
         arrowNextMonthFilterButton = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("arrow-right"));
