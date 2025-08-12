@@ -14,7 +14,7 @@ Feature: Apply Voucher For Kost City
       | voucher name stag | voucher name prod |
       | AUTOCITY          | AUTOCITY          |
 
-  @BBM-628
+  @SS-628
   Scenario: Tenant Input Voucher AUTOCITY
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -40,7 +40,7 @@ Feature: Apply Voucher For Kost City
       | voucher name stag | voucher name prod |
       | AUTOCITY          | AUTOCITY          |
 
-  @BBM-652 @BBM-757
+  @SS-652 @SS-757
   Scenario: Tenant can't input Voucher AUTOCITY
     Given user go to mamikos homepage
     When user login as tenant via phone number:

@@ -1,4 +1,4 @@
-@BBM @riwayatHadiah
+@SS @riwayatHadiah
 Feature: Owner - Riwayat Hadiah [Dropped - revamp]
 
   @TEST_SS-3880

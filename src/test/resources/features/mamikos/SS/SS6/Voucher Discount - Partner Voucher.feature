@@ -1,7 +1,7 @@
 @SS15
 Feature: Voucher Discount - Partner Voucher
 
-  @TEST_SS-4274 @Automated @COOP @Web @continue
+  @TEST_SS-4274 @Automated @SS @Web @continue
   Scenario: Delete existing voucher code
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:

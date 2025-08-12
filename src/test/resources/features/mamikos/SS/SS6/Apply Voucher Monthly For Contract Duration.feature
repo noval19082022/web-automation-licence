@@ -1,7 +1,7 @@
 @SS6
 Feature: Apply Voucher Monthly For Contract Duration
 
-  @Automated @COOP @Web
+  @Automated @SS @Web
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
