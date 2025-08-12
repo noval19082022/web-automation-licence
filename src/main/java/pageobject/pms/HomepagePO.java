@@ -223,7 +223,7 @@ public class HomepagePO {
         relocationButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("Relocation"));
 
         //---Filter---//
-        filterBtn = page.locator("//span[contains(., 'Filter')]");
+        filterBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Filter"));
         totalFilter = page.locator(".bg-c-badge-counter");
         tglLiveMulai = page.locator("#homeFilterModalDate-datePickerStart");
         terapkanBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terapkan"));

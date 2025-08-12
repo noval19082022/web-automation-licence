@@ -184,4 +184,14 @@ public class TenantCommunicationSteps {
     public void user_search_kost_name_with(String kostName) {
         tenantCommunication.searchKostName(kostName);
     }
+
+    @Then("admin can see rajawali chat")
+    public void admin_can_see_rajawali_chat(){
+        Assert.assertTrue(tenantCommunication.RajawaliChatTextIsVisible(), "Rajawali chat not appears");
+    }
+
+    @And("admin click on rajawali chat")
+    public void admin_click_on_rajawali_chat(){
+        tenantCommunication.clickRajawaliChat();
+    }
 }
