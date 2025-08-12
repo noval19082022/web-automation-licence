@@ -1,4 +1,4 @@
-@DOM1 @essentialTest2
+@SS11 @essentialTest2
 Feature: Owner - Login
 
   @TEST_SS-2756 @Automated @DOM @web-covered @TEST_COOP-5183

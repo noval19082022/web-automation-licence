@@ -1,4 +1,4 @@
-@regression @mamipoinTenant @SS10 @BBM4
+@regression @mamipoinTenant @SS10
 
 Feature: Tenant Apply MamiPoin on Invoice
 

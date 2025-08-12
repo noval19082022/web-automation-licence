@@ -1,4 +1,4 @@
-@COOP-5027 @SS5
+@SS-5027 @SS5
 Feature: MamiPoin Tenant Informasi Poin Page
 
 

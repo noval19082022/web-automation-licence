@@ -1,7 +1,7 @@
 @SS6
 Feature: Apply Voucher For Invoice Settlement
 
-  @TEST_SS-4259 @Automated @COOP @Web
+  @TEST_SS-4259 @Automated @SS @Web
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:

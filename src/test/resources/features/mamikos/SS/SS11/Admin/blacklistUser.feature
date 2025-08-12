@@ -1,4 +1,4 @@
-@DOM1
+@SS11
 Feature: Blacklist User
 
   @continue

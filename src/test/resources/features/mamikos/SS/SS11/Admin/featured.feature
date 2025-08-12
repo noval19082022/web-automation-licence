@@ -1,4 +1,4 @@
-@DOM1
+@SS11
 Feature: Listing Featured
 
   @TEST_SS-7285 @continue
