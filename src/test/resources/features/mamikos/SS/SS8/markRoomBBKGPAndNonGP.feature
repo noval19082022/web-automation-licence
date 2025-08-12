@@ -129,7 +129,7 @@ Feature: Owner - Penyewa Feature
     And search chat in chatlist "Chat Butuh Respon Pengajuan Sewa Label"
     Then owner can see label with "Butuh respon pengajuan sewa"
 
-  @addAndMarkRoomKosGP @COOP-1918 @continue
+  @addAndMarkRoomKosGP @SS-1918 @continue
   #addRoom.feature
   Scenario: check when owner add mark room at kos GP
     Given user go to mamikos homepage

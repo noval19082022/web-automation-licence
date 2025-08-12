@@ -1,4 +1,4 @@
-@regression @manageBooking @hubungiKostDetail @OB @booking @BBM2 @noval5
+@regression @manageBooking @hubungiKostDetail @OB @booking @SS7 @noval5
 Feature: OB Booking From Hubungi Kost
 
   Scenario: Admin Batalkan Contract
