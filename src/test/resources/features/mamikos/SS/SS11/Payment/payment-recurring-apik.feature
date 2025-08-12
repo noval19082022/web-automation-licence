@@ -1,4 +1,4 @@
-@DOM1
+@SS11
 Feature: Payment Recurring kost APIK
 
   @TEST_SS-2741

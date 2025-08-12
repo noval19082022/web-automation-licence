@@ -1,4 +1,4 @@
-@DOM1 @MARS_SEARCH_MIGRATE
+@SS11 @MARS_SEARCH_MIGRATE
 Feature: Mars Project
 
   @TEST_SS-2808 @Automated @MARS-DOM @Web @discovery-platform

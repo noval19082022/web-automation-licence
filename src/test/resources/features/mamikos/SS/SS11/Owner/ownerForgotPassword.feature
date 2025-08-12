@@ -1,4 +1,4 @@
-@DOM1
+@SS11
 Feature: Owner - Forgot Password
 
 #  @TEST_COOP-5180 @Automated @DOM @web-covered
