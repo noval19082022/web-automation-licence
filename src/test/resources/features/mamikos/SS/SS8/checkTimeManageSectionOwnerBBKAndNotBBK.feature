@@ -61,4 +61,4 @@ Feature: Time manage owner
     When user clicks on Owner Settings button
     And owner back to owner dashboard
     And user click menu Pusat Bantuan on feature waktunya mengelola property
-    Then user should redirect to link "https://help.mamikos.com/pemilik"
+    Then user should redirect to link "https://help-waras.kerupux.com/pemilik"

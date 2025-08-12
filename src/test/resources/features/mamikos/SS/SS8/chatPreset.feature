@@ -20,7 +20,7 @@ Feature: Chat Preset
     And user click "Kost Singgahsini Griya Warungboto Tipe A Yogyakarta"
     Then user can see chat preset question "Ada diskon untuk kos ini?"
     And user select chat preset question "Ada diskon untuk kos ini?"
-    Then chat room appear with latest message "Ada dong. Diskon yang tersedia: Promo listrik. Potongan listrik Rp20.000 dibulan pertaman. Periode promo 20 Oct 2024 s/d 31 Jul 2025."
+    Then chat room appear with latest message "Ada dong. Diskon yang tersedia: Promo listrik. Potongan listrik Rp20.000 dibulan pertaman. Periode promo 20 Oct 2024 s/d 31 Jul 2028."
 
   @TEST_SS-6050 @continue
   Scenario: [Chat preset][Auto reply][Chat Room] Check question Boleh Pasutri on chat preset and check the answer for kost P1 and have pasutri
