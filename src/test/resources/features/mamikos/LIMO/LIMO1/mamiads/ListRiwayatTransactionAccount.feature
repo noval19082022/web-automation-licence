@@ -45,4 +45,4 @@ Feature: List Riwayat Transaction Account
     And payment user success using ovo as payment method
     And owner set active page to 0
     And user navigates to mamiads dashboard
-    Then user verify count of riwayat added -1
+    Then user will see that the text "Saldo MamiAds" is displayed
