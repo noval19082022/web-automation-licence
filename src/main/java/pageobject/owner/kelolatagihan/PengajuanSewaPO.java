@@ -81,7 +81,7 @@ public class PengajuanSewaPO {
         this.pilihOnRejectButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih"));
 
         //-------------------------peraturan kos---------------------//
-        this.ubahAturanButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Ubah aturan"));
+        this.ubahAturanButton = page.locator("//button[@class=\"bg-c-button bg-c-button--primary bg-c-button--lg\"]");
         this.peraturanKosText = page.locator("//*[@id='BookingSettingDesktop']");
         this.selectKosButton = page.getByPlaceholder("Pilih Kos");
         this.simpanPeraturanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));

@@ -41,4 +41,24 @@ Feature: Chat Rajawali On PMS Tenant Tracker
      And admin click on rajawali chat
      Then admin can see rajawali chat
 
-
+   @TEST_SS-8869
+   Scenario: [Web][PMS Tenant Tracker][Chat Rajawali]Admin check left side menu on rajawali chat after open chat rajawali
+     Given admin go to pms singgahsini
+     When admin login pms :
+       | email             | password        |
+       | pman@mamiteam.com | pmanM4m1t34m!!  |
+     And admin go to tenant communication menu
+     And user choose "Nama Penyewa" and input "Tenant Belum Update" in the search field on main page
+     And user click search button on main page filter
+     And admin click on rajawali chat
+     When admin go to pms singgahsini
+     Then admin go to mamikos bangkrupux admin
+     When admin login to bangkrupux:
+       | email stag                   | email prod                   | password  |
+       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+     And admin go to pms singgahsini
+     And admin go to tenant communication menu
+     And user choose "Nama Penyewa" and input "Tenant Belum Update" in the search field on main page
+     And user click search button on main page filter
+     And admin click on action menu
+     Then admin can see follow up text with "Tandai belum follow-up"

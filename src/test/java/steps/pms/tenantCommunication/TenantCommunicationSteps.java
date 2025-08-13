@@ -194,4 +194,14 @@ public class TenantCommunicationSteps {
     public void admin_click_on_rajawali_chat(){
         tenantCommunication.clickRajawaliChat();
     }
+
+    @And("admin click on action menu")
+    public void admin_click_on_action_menu(){
+        tenantCommunication.clickActionMenuButton();
+    }
+
+    @Then("admin can see follow up text with {string}")
+    public void admin_can_see_follow_up_text_with(String text){
+        Assert.assertEquals(tenantCommunication.getActionMenuText(text), text, "miss follow up text");
+    }
 }

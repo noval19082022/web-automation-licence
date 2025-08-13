@@ -44,6 +44,7 @@ public class TenantCommunicationPO {
     Locator trackChatWAButton;
     Locator searchKostName;
     Locator rajawaliChatText;
+    Locator actionMenuButton;
 
     public TenantCommunicationPO(Page page) {
         this.page = page;
@@ -74,6 +75,7 @@ public class TenantCommunicationPO {
         trackChatWAButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("add-plusTrack Status Chat WA"));
         searchKostName = page.locator("//input[@data-testid=\"search-field\"]");
         rajawaliChatText = page.locator("//a[contains(.,'Chat Rajawali')]").first();
+        actionMenuButton = page.locator("//*[@data-testid=\"row-action-icon\"]").first();
     }
 
     /**
@@ -387,5 +389,22 @@ public class TenantCommunicationPO {
      */
     public void clickRajawaliChat(){
         playwright.clickOn(rajawaliChatText);
+    }
+
+    /**
+     * click on action menu button
+     */
+    public void clickActionMenuButton(){
+        playwright.clickOn(actionMenuButton);
+    }
+
+    /**
+     * get tandai follow up text
+     * @param text
+     * @return text
+     */
+    public String getActionMenuText(String text){
+        Locator followupText = page.locator("//p[contains(.,'"+text+"')]");
+        return playwright.getText(followupText);
     }
 }

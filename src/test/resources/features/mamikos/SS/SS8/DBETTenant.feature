@@ -174,9 +174,9 @@ Feature: DBET request from Tenant
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod   | password  |
-      | 085697344170 | 081362464341 | qwerty123 |
+      | 089604239091 | 081362464341 | qwerty123 |
     And owner open notification icon
-    And owner will see that the text "Konfirmasikan data penyewa ini Kost Mars September Rajeg Tangerang" is displayed
+    And owner will see that the text "Konfirmasikan data penyewa ini Kost Rini Featured Maret Kartasura Sukoharjo" is displayed
     And user click on "Kontrak Sewa Menunggu" button
     And user click on "Tolak" button
     And user click on "Ya" button
@@ -195,12 +195,12 @@ Feature: DBET request from Tenant
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod   | password  |
-      | 085697344170 | 081362464341 | qwerty123 |
+      | 089604239091 | 081362464341 | qwerty123 |
     And user navigate to add contract tenant page
     And user click on "Minta penyewa untuk mengisi" button
-    And user click on "Kost Mars September Rajeg Tangerang" button
+    And user click on "Rini punya tipe C" button
     And user click on toggle foto kartu identitas
     And user click on toggle jatuh tempo
     And user click on "Selanjutnya" button
     And user click on "Selesai" button
-    Then user see user's name "Halo, Owner" in owner dashboard
+    Then user see user's name "Halo, Rini" in owner dashboard
