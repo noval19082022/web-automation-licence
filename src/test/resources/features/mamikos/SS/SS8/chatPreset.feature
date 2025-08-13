@@ -149,10 +149,29 @@ Feature: Chat Preset
     And user select chat preset question "Boleh tanya-tanya dulu?"
     Then chat room appear with latest message "Boleh dong. Silakan tanya apapun. Chat ini dibaca langsung oleh pemilik kos."
 
-  @TEST_SS-5950
+  @TEST_SS-5950 @continue
   Scenario: [Chat Menu][Chat Room] Redirection back button to chat page
     When user go to mamikos homepage
     And user click on chat button in top bar tenant home page
     And user click "Kost Singgahsini Cemara Pinus Tipe A Bantul"
     And user click back button chatroom
     Then user can see Chat list title
+
+  @TEST_SS-5951 @continue
+  Scenario: [Tanya Pemilik][Chat Room] Redirection back button to detail listing page
+    When tenant redirect to kost details:
+      | kost path stag                                                | kost path prod                              |
+      | kost-sleman-kost-campur-murah-kost-apik-desta-tipe-a-tamvan-2 | Kost Singgahsini Cemara Pinus Tipe A Bantul |
+    And user dismiss promo ngebut pop up
+    And user click chat in kos detail
+    And user click back button chatroom
+    Then user can see apik badge kos
+
+  @TEST_SS-5952
+  Scenario: [Tanya Pemilik][Chat Room] Redirection to existing chat
+    When tenant redirect to kost details:
+      | kost path stag                                                | kost path prod                              |
+      | kost-sleman-kost-campur-murah-kost-apik-desta-tipe-a-tamvan-2 | Kost Singgahsini Cemara Pinus Tipe A Bantul |
+    And user dismiss promo ngebut pop up
+    And user click chat in kos detail
+    Then user can see chat preset question "Halo, ada kos yang masih kosong?"
