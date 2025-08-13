@@ -1,4 +1,4 @@
-@DOM2
+@SS12
 Feature: Inquiry and Create Manual Payout
 
   @TEST_SS-2945 @Automated @web-covered @createAndChangeManualPayout @continue
