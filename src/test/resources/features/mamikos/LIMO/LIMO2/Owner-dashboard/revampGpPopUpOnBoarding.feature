@@ -32,7 +32,7 @@ Feature: Revamp GP Onboarding
     Then owner will see that the text "Manfaat GoldPlus 1" is displayed
     Then owner will see that the text "Manfaat GoldPlus 2" is displayed
 
-  @TEST_LIMO-9186
+  @TEST_LIMO-9186 @continue
   Scenario: [Revamp Pilih Paket GP] Verify Backend Content Handling for Package Copies
     Then owner verify list of Pilih Gp Package is appear
        """
@@ -95,6 +95,33 @@ Feature: Revamp GP Onboarding
       - img "book"
       - paragraph: Baca tentang GoldPlus di sini
       - img "chevron-right"
+       """
+
+  @TEST_LIMO-9187
+  Scenario: [Revamp Pilih Paket GP] Verify GP1 Benefits List Content
+    Then owner verify list of Pilih Gp Package is contains
+       """
+      - img "back"
+      - paragraph: Paket GoldPlus
+      - img
+      - paragraph: Paket Simpel
+      - separator
+      - paragraph: Chat tanpa batas
+      - paragraph: Iklan lebih prioritas dari non-GoldPlus
+      - paragraph: Lihat profil penyewa dasar
+      - paragraph: Daftar Tunggu 10 penyewa
+      - text: Baru
+      - paragraph: Terima Survei Kos fitur dasar
+      - paragraph: Cek Properti Sekitar
+      - paragraph: Buat Promo Iklan
+      - paragraph: Cashback MamiAds mulai dari 7.500
+      - separator
+      - paragraph: Mulai dari
+      - paragraph: Rp54.000/Bulan
+      - text: "-10%"
+      - paragraph: Rp60.000
+      - button "Pilih Paket"
+      - paragraph: Manfaat GoldPlus 1
        """
 
   @TEST_LIMO-9181
