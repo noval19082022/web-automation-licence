@@ -124,7 +124,8 @@ Feature: Revamp GP Onboarding
       - paragraph: Manfaat GoldPlus 1
        """
 
-  @TEST_LIMO-9181
+
+  @TEST_LIMO-9181 @continue
   Scenario: [Revamp GP Onboarding] Non Target Audience Verification - Owner has previously owned GP 1/2
     Given user go to mamikos homepage
     When user login as owner:
@@ -132,3 +133,7 @@ Feature: Revamp GP Onboarding
       | 08119787890 | 0          | qwerty123 |
     And Owner visit Goldplus package without action close the on boarding pop up
     Then Owner see gp onboarding pop up is not exist
+
+  @TEST_LIMO-9188
+  Scenario: [Revamp Pilih Paket GP] Verify MamiAds Copy for GPMA Segment Users
+    Then owner will see that the text "Termasuk MamiAds 150 ribu" is displayed
