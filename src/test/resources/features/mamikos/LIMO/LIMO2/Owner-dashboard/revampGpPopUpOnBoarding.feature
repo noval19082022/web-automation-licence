@@ -18,12 +18,16 @@ Feature: Revamp GP Onboarding
     And Owner visit Goldplus package without action close the on boarding pop up
     Then Owner see gp onboarding pop up is exist
 
-  @TEST_LIMO-9183
+  @TEST_LIMO-9183 @continue
   Scenario: [Revamp GP Onboarding] Verify Swipeable Content Functionality
     And Owner swap the gp pop up onboarding
 
+  @TEST_LIMO-9183
+  Scenario: [Revamp GP Onboarding] Verify 3 Dots Indicator Display and Behavior
+    And Owner swap the gp pop up onboarding 3 times
+
   @TEST_LIMO-9181
-  Scenario: [Revamp GP Onboarding ] Non Target Audience Verification - Owner has previously owned GP 1/2
+  Scenario: [Revamp GP Onboarding] Non Target Audience Verification - Owner has previously owned GP 1/2
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag  | phone prod | password  |

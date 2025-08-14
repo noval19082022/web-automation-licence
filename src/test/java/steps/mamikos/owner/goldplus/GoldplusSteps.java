@@ -802,4 +802,15 @@ public class GoldplusSteps {
         goldplus.tapOnSwapNextGpOnboarding();
         goldplus.tapOnSwapPreviousGpOnboarding();
     }
+
+    @And("Owner swap the gp pop up onboarding {int} times")
+    public void ownerSwapTheGpPopUpOnboardingTimes(int swpCount) {
+        for (int i = 0; i < swpCount; i++) {
+            goldplus.tapOnSwapNextGpOnboarding();
+        }
+
+        for (int i = 0; i < swpCount; i++) {
+            goldplus.tapOnSwapPreviousGpOnboarding();
+        }
+    }
 }
