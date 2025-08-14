@@ -108,7 +108,7 @@ public class GoldplusPO {
     private Locator pilihPeriodeButton;
     private Locator periodeBerlanggananContainer;
     private Locator paketJangkaPanjangContainer;
-    private Locator pilihPaketGoldplus;
+    private Locator pilihPaketGoldplusContainer;
 
 
     public GoldplusPO(Page page) {
@@ -190,6 +190,7 @@ public class GoldplusPO {
         mamiadsBalanceListContainer = page.locator(".goldplus-mamiads-detail");
         rincianPembayaranSection = page.locator(".goldplus-billing-detail").locator("div").filter(new Locator.FilterOptions().setHasText("Rincian Pembayaran"));
         totalPembayaranSection = page.locator(".goldplus-billing-detail__billing-total");
+        pilihPaketGoldplusContainer = page.getByTestId("goldplusPackages");
 
         // GoldPlus Period Selection Popup locators
         goldplusPeriodSelectionPopup = page.locator("//div[contains(@class, 'goldplus-periode-select')]");
@@ -1105,6 +1106,18 @@ public class GoldplusPO {
     public void handleDaftarGPPopup() {
         handleDaftarGPPopup(null);
     }
+
+    /**
+     * Get aria snapshot of the pilih gp package container
+     * This captures the accessibility tree representation of all subscription packages
+     * @return String representation of the accessibility tree
+     */
+    public String getPilihGpPackageAriaSnapshot() {
+        // Use the pre-initialized container locator
+        playwright.waitFor(pilihPaketGoldplusContainer);
+        return playwright.getAriaSnapshot(pilihPaketGoldplusContainer);
+    }
+
 
     /**
      * Get aria snapshot of the Periode Berlangganan package container

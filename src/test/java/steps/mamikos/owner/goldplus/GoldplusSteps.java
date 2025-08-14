@@ -818,4 +818,17 @@ public class GoldplusSteps {
     public void ownerTapOnPilihPaketGoldplusFromGpOnboardingPopUp() {
         goldplus.tapOnPilihPaketGoldplusBtnFromGpOnboardingPopUp();
     }
+
+    @Then("owner verify list of Pilih Gp Package is appear")
+    public void ownerVerifyListOfPilihGpPackageIsAppear(String expectedAriaSnapshot) {
+        playwright.waitTillPageLoaded();
+        loading.waitForLoadingIconDisappear();
+
+        // Get the actual aria snapshot from the current page
+        String actualAriaSnapshot = goldplus.getPilihGpPackageAriaSnapshot();
+
+        // Compare the snapshots directly without normalization for better visualization
+        Assert.assertEquals(actualAriaSnapshot, expectedAriaSnapshot,
+                "Pilih Gp package structure does not match expected layout");
+    }
 }

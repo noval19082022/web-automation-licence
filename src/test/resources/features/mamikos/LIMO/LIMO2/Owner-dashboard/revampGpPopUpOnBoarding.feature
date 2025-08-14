@@ -26,18 +26,82 @@ Feature: Revamp GP Onboarding
   Scenario: [Revamp GP Onboarding] Verify 3 Dots Indicator Display and Behavior
     And Owner swap the gp pop up onboarding 3 times
 
-  @TEST_LIMO-9185
+  @TEST_LIMO-9185 @continue
   Scenario: [Revamp Pilih Paket GP] Verify package GP Display Side by Side
     And Owner tap on pilih paket goldplus from gp onboarding pop up
     Then owner will see that the text "Manfaat GoldPlus 1" is displayed
     Then owner will see that the text "Manfaat GoldPlus 2" is displayed
 
+  @TEST_LIMO-9186
+  Scenario: [Revamp Pilih Paket GP] Verify Backend Content Handling for Package Copies
+    Then owner verify list of Pilih Gp Package is appear
+       """
+      - img "back"
+      - paragraph: Paket GoldPlus
+      - img
+      - paragraph: Paket Simpel
+      - separator
+      - paragraph: Chat tanpa batas
+      - paragraph: Iklan lebih prioritas dari non-GoldPlus
+      - paragraph: Lihat profil penyewa dasar
+      - paragraph: Daftar Tunggu 10 penyewa
+      - text: Baru
+      - paragraph: Terima Survei Kos fitur dasar
+      - paragraph: Cek Properti Sekitar
+      - paragraph: Buat Promo Iklan
+      - paragraph: Cashback MamiAds mulai dari 7.500
+      - separator
+      - paragraph: Mulai dari
+      - paragraph: Rp54.000/Bulan
+      - text: "-10%"
+      - paragraph: Rp60.000
+      - button "Pilih Paket"
+      - paragraph: Manfaat GoldPlus 1
+      - dialog
+      - img
+      - paragraph: Paket Lengkap
+      - text: Favorit
+      - separator
+      - img
+      - paragraph: Chat tanpa batas
+      - img
+      - paragraph: Iklan lebih prioritas dari GoldPlus 1
+      - img
+      - paragraph: Lihat profil penyewa lengkap
+      - img
+      - paragraph: Daftar Tunggu tanpa batas
+      - text: Baru
+      - img
+      - paragraph: Terima Survei Kos fitur penuh
+      - img
+      - paragraph: Cek Properti Sekitar
+      - img
+      - paragraph: Buat Promo Iklan
+      - img
+      - paragraph: Broadcast Chat
+      - img
+      - paragraph: Cashback MamiAds mulai dari 35.000
+      - separator
+      - paragraph: Mulai dari
+      - paragraph: Rp145.000/Bulan
+      - text: "-3%"
+      - paragraph: Rp150.000
+      - button "Pilih Paket"
+      - text: Yuk coba, lagi promo
+      - paragraph: Manfaat GoldPlus 2
+      - dialog
+      - paragraph: Masih bingung?
+      - paragraph: Cari tahu lebih banyak di bawah
+      - img "book"
+      - paragraph: Baca tentang GoldPlus di sini
+      - img "chevron-right"
+       """
+
   @TEST_LIMO-9181
   Scenario: [Revamp GP Onboarding] Non Target Audience Verification - Owner has previously owned GP 1/2
     Given user go to mamikos homepage
     When user login as owner:
-  | phone stag  | phone prod | password  |
-  | 08119787890 | 0          | qwerty123 |
+      | phone stag  | phone prod | password  |
+      | 08119787890 | 0          | qwerty123 |
     And Owner visit Goldplus package without action close the on boarding pop up
     Then Owner see gp onboarding pop up is not exist
-
