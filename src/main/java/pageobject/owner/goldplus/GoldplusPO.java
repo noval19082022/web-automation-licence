@@ -57,6 +57,7 @@ public class GoldplusPO {
     Locator gpOnboardingPopUp;
     Locator gpOnboardingNextPopUpBtn;
     Locator gpOnboardingPreviousPopUpBtn;
+    Locator pilihPaketBtn;
 
     //==== Popup Recurring ===//
     Locator imagePopupRecurring;
@@ -181,6 +182,7 @@ public class GoldplusPO {
         gpOnboardingPopUp = page.getByTestId("goldplus-onboarding-feature");
         gpOnboardingNextPopUpBtn = page.getByTestId("goldplus-onboarding-feature").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Next slide"));
         gpOnboardingPreviousPopUpBtn = page.getByTestId("goldplus-onboarding-feature").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Previous slide"));
+        pilihPaketBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Paket GoldPlus"));
 
         mamikosActionCard = page.locator(".mk-action-card__main");
         periodeBerlanggananContainer = page.locator("div.goldplus-subscribe-periode-desktop");
@@ -1149,5 +1151,9 @@ public class GoldplusPO {
 
     public void tapOnSwapPreviousGpOnboarding() {
         playwright.clickOn(gpOnboardingPreviousPopUpBtn);
+    }
+
+    public void tapOnPilihPaketGoldplusBtnFromGpOnboardingPopUp() {
+        playwright.clickOn(pilihPaketBtn);
     }
 }

@@ -813,4 +813,9 @@ public class GoldplusSteps {
             goldplus.tapOnSwapPreviousGpOnboarding();
         }
     }
+
+    @And("Owner tap on pilih paket goldplus from gp onboarding pop up")
+    public void ownerTapOnPilihPaketGoldplusFromGpOnboardingPopUp() {
+        goldplus.tapOnPilihPaketGoldplusBtnFromGpOnboardingPopUp();
+    }
 }
