@@ -781,4 +781,14 @@ public class GoldplusSteps {
     public void ownerClickOnUpgradePackage() {
         goldplus.clickOnUpgradePackage();
     }
+
+    @And("Owner visit Goldplus package without action close the on boarding pop up")
+    public void ownerVisitGoldplusPackage() {
+        owner.clickOnDaftarGP();
+    }
+
+    @Then("Owner see gp onboarding pop up is exist")
+    public void ownerSeeGpOnboardingPopUpIsExist() {
+        Assert.assertTrue(goldplus.isOnBoardingPopExist(), "Gp Onboarding not exist");
+    }
 }
