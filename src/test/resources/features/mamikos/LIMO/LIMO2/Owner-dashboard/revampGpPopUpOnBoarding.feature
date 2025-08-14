@@ -17,3 +17,12 @@ Feature: Revamp GP Onboarding
       | 08159787775 | 0          | qwerty123 |
     And Owner visit Goldplus package without action close the on boarding pop up
     Then Owner see gp onboarding pop up is exist
+
+  @TEST_LIMO-9181
+  Scenario: [Revamp GP Onboarding ] Non Target Audience Verification - Owner has previously owned GP 1/2
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag  | phone prod | password  |
+      | 08119787890 | 0          | qwerty123 |
+    And Owner visit Goldplus package without action close the on boarding pop up
+    Then Owner see gp onboarding pop up is not exist

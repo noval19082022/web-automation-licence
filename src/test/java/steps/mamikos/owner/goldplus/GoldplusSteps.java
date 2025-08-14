@@ -791,4 +791,9 @@ public class GoldplusSteps {
     public void ownerSeeGpOnboardingPopUpIsExist() {
         Assert.assertTrue(goldplus.isOnBoardingPopExist(), "Gp Onboarding not exist");
     }
+
+    @Then("Owner see gp onboarding pop up is not exist")
+    public void ownerSeeGpOnboardingPopUpIsNotExist() {
+        Assert.assertFalse(goldplus.isOnBoardingPopExist(), "Gp Onboarding is exist");
+    }
 }
