@@ -796,4 +796,10 @@ public class GoldplusSteps {
     public void ownerSeeGpOnboardingPopUpIsNotExist() {
         Assert.assertFalse(goldplus.isOnBoardingPopExist(), "Gp Onboarding is exist");
     }
+
+    @And("Owner swap the gp pop up onboarding")
+    public void ownerSwapTheGpPopUpOnboarding() {
+        goldplus.tapOnSwapNextGpOnboarding();
+        goldplus.tapOnSwapPreviousGpOnboarding();
+    }
 }

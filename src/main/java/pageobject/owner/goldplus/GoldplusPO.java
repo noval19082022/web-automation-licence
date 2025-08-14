@@ -55,6 +55,8 @@ public class GoldplusPO {
     Locator closeBtn;
     Locator perpanjangButton;
     Locator gpOnboardingPopUp;
+    Locator gpOnboardingNextPopUpBtn;
+    Locator gpOnboardingPreviousPopUpBtn;
 
     //==== Popup Recurring ===//
     Locator imagePopupRecurring;
@@ -177,6 +179,8 @@ public class GoldplusPO {
         upgradePaketBtnPopUpOnTbc = page.getByTestId("tenant-background-checker-modal-upgrade-gp").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Upgrade Paket"));
         perpanjangButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Perpanjang"));
         gpOnboardingPopUp = page.getByTestId("goldplus-onboarding-feature");
+        gpOnboardingNextPopUpBtn = page.getByTestId("goldplus-onboarding-feature").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Next slide"));
+        gpOnboardingPreviousPopUpBtn = page.getByTestId("goldplus-onboarding-feature").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Previous slide"));
 
         mamikosActionCard = page.locator(".mk-action-card__main");
         periodeBerlanggananContainer = page.locator("div.goldplus-subscribe-periode-desktop");
@@ -1137,5 +1141,13 @@ public class GoldplusPO {
         playwright.waitTillLocatorIsVisible(gpOnboardingPopUp);
 
         return playwright.isLocatorVisibleAfterLoad(gpOnboardingPopUp, 3000.0);
+    }
+
+    public void tapOnSwapNextGpOnboarding() {
+        playwright.clickOn(gpOnboardingNextPopUpBtn);
+    }
+
+    public void tapOnSwapPreviousGpOnboarding() {
+        playwright.clickOn(gpOnboardingPreviousPopUpBtn);
     }
 }
