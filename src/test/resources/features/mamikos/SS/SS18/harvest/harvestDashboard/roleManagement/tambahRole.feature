@@ -1,4 +1,4 @@
-@regression @pman3 @ss @harvest @roleManagement
+@regression @SS18 @ss @harvest @roleManagement
 
 Feature: Tambah Role Harvest
 

@@ -1,4 +1,4 @@
-@regression @pman3 @harvest
+@regression @SS18 @harvest
 
 Feature: Harvest Menu
 
