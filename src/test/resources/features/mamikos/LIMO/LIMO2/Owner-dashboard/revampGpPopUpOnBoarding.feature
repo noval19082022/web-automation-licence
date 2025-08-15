@@ -172,7 +172,7 @@ Feature: Revamp GP Onboarding
       - paragraph: Manfaat GoldPlus 1
       """
 
-  @TEST_LIMO-9190
+  @TEST_LIMO-9190 @continue
   Scenario: [Revamp Pilih Paket GP] GPSP Flagging "Paket lengkap murah" on GP2 for Medium 3
     Given user go to mamikos homepage
     When user login as owner:
@@ -180,3 +180,13 @@ Feature: Revamp GP Onboarding
       | 0815978777123 | 0          | qwerty123 |
     And Owner visit Goldplus package without action close the on boarding pop up
     Then owner will see that the text "Paket lengkap murah" is displayed
+
+  @TEST_LIMO-9191
+  Scenario: [Revamp Pilih Paket GP] Verify GP1/GP2 Benefits Detail Navigation
+    Then owner will see that the text "Manfaat GoldPlus 1" is displayed
+    Then owner will see that the text "Manfaat GoldPlus 2" is displayed
+    When owner wants to see Lihat Detail Manfaat Goldplus Satu
+    And user clicks on the close button
+    When owner wants to see Lihat Detail Manfaat Goldplus Dua
+    And user clicks on the close button
+

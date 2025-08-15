@@ -149,8 +149,8 @@ public class GoldplusPO {
         rincianFee = page.getByText("Biaya Transaksi");
         searchPhoneNumber = page.getByPlaceholder("Keyword");
         buttonSearchContract = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Search"));
-        detailManfaatGP1 = page.getByText("Lihat Detail Manfaatchevron-right").nth(1);
-        detailManfaatGP2 = page.getByText("Lihat Detail Manfaatchevron-right").first();
+        detailManfaatGP1 = page.locator("a").filter(new Locator.FilterOptions().setHasText("Manfaat GoldPlus 1"));
+        detailManfaatGP2 = page.locator("a").filter(new Locator.FilterOptions().setHasText("Manfaat GoldPlus 2"));
         closeBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
         imagePopupRecurring = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("business-with-goldplus"));
         textTitlePopupRecurring = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Masa aktif GoldPlus akan habis."));
