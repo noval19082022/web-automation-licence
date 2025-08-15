@@ -190,7 +190,7 @@ Feature: Revamp GP Onboarding
     When owner wants to see Lihat Detail Manfaat Goldplus Dua
     And user clicks on the close button
 
-    @TEST_LIMO-9192
+    @TEST_LIMO-9217
     Scenario: [Revamp Pilih Paket GP] GPSP Flagging "Yuk coba lagi promo" on GP2 for Medium 3
     Given user go to mamikos homepage
     When user login as owner:
