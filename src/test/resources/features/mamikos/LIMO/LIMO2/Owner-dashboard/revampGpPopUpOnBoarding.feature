@@ -137,3 +137,37 @@ Feature: Revamp GP Onboarding
   @TEST_LIMO-9188
   Scenario: [Revamp Pilih Paket GP] Verify MamiAds Copy for GPMA Segment Users
     Then owner will see that the text "Termasuk MamiAds 150 ribu" is displayed
+
+  @TEST_LIMO-9189
+  Scenario: [Revamp Pilih Paket GP] Verify "Tawaran Terbatas" Display for GPSP Segment
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag    | phone prod | password  |
+      | 0815978777129 | 0          | qwerty123 |
+    And Owner visit Goldplus package without action close the on boarding pop up
+    Then owner will see that the text "Tawaran terbatas!" is displayed
+    Then owner verify list of Pilih Gp Package is contains
+      """
+      - img "back"
+      - paragraph: Paket GoldPlus
+      - img
+      - paragraph: Paket Simpel
+      - separator
+      - paragraph: Chat tanpa batas
+      - paragraph: Iklan lebih prioritas dari non-GoldPlus
+      - paragraph: Lihat profil penyewa dasar
+      - paragraph: Daftar Tunggu 10 penyewa
+      - text: Baru
+      - paragraph: Terima Survei Kos fitur dasar
+      - paragraph: Cek Properti Sekitar
+      - paragraph: Buat Promo Iklan
+      - paragraph: Cashback MamiAds mulai dari 7.500
+      - separator
+      - paragraph: Mulai dari
+      - paragraph: Rp99.000/Bulan
+      - text: "-18%"
+      - paragraph: Rp120.000
+      - button "Pilih Paket"
+      - text: Tawaran terbatas!
+      - paragraph: Manfaat GoldPlus 1
+      """
