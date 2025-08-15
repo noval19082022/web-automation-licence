@@ -190,8 +190,8 @@ Feature: Revamp GP Onboarding
     When owner wants to see Lihat Detail Manfaat Goldplus Dua
     And user clicks on the close button
 
-    @TEST_LIMO-9217
-    Scenario: [Revamp Pilih Paket GP] GPSP Flagging "Yuk coba lagi promo" on GP2 for Medium 3
+  @TEST_LIMO-9217
+  Scenario: [Revamp Pilih Paket GP] GPSP Flagging "Yuk coba lagi promo" on GP2 for Medium 3
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag    | phone prod | password  |
@@ -199,3 +199,23 @@ Feature: Revamp GP Onboarding
     And Owner visit Goldplus package without action close the on boarding pop up
     And Owner tap on pilih paket goldplus from gp onboarding pop up
     Then owner will see that the text "Yuk coba, lagi promo" is displayed
+    Then owner verify list of Pilih Gp Package is contains
+      """
+      - text: Yuk coba, lagi promo
+      - paragraph: Manfaat GoldPlus 2
+      """
+
+  @TEST_LIMO-9218
+  Scenario: [Revamp Pilih Paket GP] GPSP Flagging "Yuk coba lagi promo" on GP1 for low1/2/3/4 or medium 1/2
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag    | phone prod | password  |
+      | 0815978777125 | 0          | qwerty123 |
+    And Owner visit Goldplus package without action close the on boarding pop up
+    And Owner tap on pilih paket goldplus from gp onboarding pop up
+    Then owner will see that the text "Yuk coba, lagi promo" is displayed
+    Then owner verify list of Pilih Gp Package is contains
+      """
+      - text: Yuk coba, lagi promo
+      - paragraph: Manfaat GoldPlus 1
+      """
