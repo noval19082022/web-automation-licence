@@ -1,4 +1,4 @@
-@regression @pman3 @pman-prod @harvest @essentialTest2
+@regression @pman3 @SS1-prod @harvest @essentialTest2
 
 Feature: Login Harvest
 

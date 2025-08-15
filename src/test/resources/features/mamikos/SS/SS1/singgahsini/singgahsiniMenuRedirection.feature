@@ -1,4 +1,4 @@
-@regression @pman @singgahsini
+@regression @SS1 @singgahsini
 
 Feature: Singgahsini Menu Redirection
 

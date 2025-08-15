@@ -1,4 +1,4 @@
-@transfer-diproses @mamipay @cp-disbursement @regression @pman
+@transfer-diproses @mamipay @cp-disbursement @regression @SS1
 
 Feature: CP Disbursement - Search Transfer Diproses Disbursement
 

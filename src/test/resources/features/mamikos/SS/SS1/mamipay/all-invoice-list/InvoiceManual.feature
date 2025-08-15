@@ -2,7 +2,7 @@
 
 Feature: All Invoice List
 
-  @TEST_SS-584 @pman @continue @pman-prod
+  @TEST_SS-584 @SS1 @continue @SS1-prod
   Scenario: Invoice manual in All Invoice List Menu
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -11,7 +11,7 @@ Feature: All Invoice List
     When admin open menu all invoice list
     Then list contains invoice manual
 
-  @TEST_SS-711 @pman @pman-prod
+  @TEST_SS-711 @SS1 @SS1-prod
   Scenario: Filter Invoice Manual
     And admin filter by order type "Invoice Manual"
     Then system should display only invoice with type "Invoice Manual"

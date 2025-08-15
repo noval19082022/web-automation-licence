@@ -2,7 +2,7 @@
 
 Feature: Profile Navbar
 
-  @TEST_SS-762 @pman-prod @continue
+  @TEST_SS-762 @SS1-prod @continue
   Scenario: Check Redirection to Owner Pillar 2
     Given user go to mamikos homepage
     When user login as owner:
@@ -11,7 +11,7 @@ Feature: Profile Navbar
     And owner clicks Kembali ke Mamikos on top right corner Profil
     Then owner redirect to Owner Dashboard Pillar 2
 
-  @TEST_SS-750 @pman-prod @continue
+  @TEST_SS-750 @SS1-prod @continue
   Scenario: Check Profil Page
     When owner clicks Dashboard Singgahsini on top right corner Profil
     Then owner redirect to Owner Dashboard Pillar 1

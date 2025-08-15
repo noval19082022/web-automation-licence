@@ -1,4 +1,4 @@
-@ss @mamipay @terminationOption @checkoutReason @pman
+@ss @mamipay @terminationOption @checkoutReason @SS1
 
 Feature: Checkout Reason
 

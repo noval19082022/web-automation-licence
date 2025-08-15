@@ -1,4 +1,4 @@
-@mamipay @invoice-manual @pman
+@mamipay @invoice-manual @SS1
 
 Feature: Invoice Manual
 

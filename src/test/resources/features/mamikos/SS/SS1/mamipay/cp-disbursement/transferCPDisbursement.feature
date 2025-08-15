@@ -1,4 +1,4 @@
-@regression @pman @mamipay @cp-disbursement @transfer-cp-disbursement
+@regression @SS1 @mamipay @cp-disbursement @transfer-cp-disbursement
 
 Feature: CP Disbursement - Transfer CP Disbursement
 

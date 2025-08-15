@@ -1,4 +1,4 @@
-@regression @pman3 @pman-prod @ownersini @logout-redirection
+@regression @pman3 @SS1-prod @ownersini @logout-redirection
 
 Feature: Ownersini - Logout Redirection
 
