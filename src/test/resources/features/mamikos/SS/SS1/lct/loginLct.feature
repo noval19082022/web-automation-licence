@@ -1,4 +1,4 @@
-@regression @essentialTest2 @pman3 @pman-prod @lct
+@regression @essentialTest2 @SS13 @SS1-prod @lct
 
 Feature: Login LCT
 

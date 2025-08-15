@@ -1,8 +1,8 @@
-@regression @pman @agentApp
+@regression @SS1 @agentApp
 
 Feature: Agent App
 
-  @TEST_SS-639 @pman-prod @continue
+  @TEST_SS-639 @SS1-prod @continue
   Scenario: Table Agent Contains Role Column
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:

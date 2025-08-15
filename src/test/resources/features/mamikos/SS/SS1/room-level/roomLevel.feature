@@ -1,4 +1,4 @@
-@regression @pman @pman-prod @roomLevel
+@regression @SS1 @SS1-prod @roomLevel
 
 Feature: Add and Edit Room Level
 

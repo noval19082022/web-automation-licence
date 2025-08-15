@@ -1,4 +1,4 @@
-@regression @essentialTest2 @pman3 @mantool
+@regression @essentialTest2 @SS13 @mantool
 
 Feature: Forgot password mantool
 

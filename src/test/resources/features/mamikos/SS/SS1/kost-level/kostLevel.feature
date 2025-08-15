@@ -1,4 +1,4 @@
-@pman @regression @admin @kost-level
+@SS1 @regression @admin @kost-level
 
 Feature: Kost Level
 

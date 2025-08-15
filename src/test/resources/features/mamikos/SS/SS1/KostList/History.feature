@@ -1,4 +1,4 @@
-@singgahsini @regression @pman @pman-prod
+@singgahsini @regression @SS1 @SS1-prod
 
 Feature: Kost List History
 

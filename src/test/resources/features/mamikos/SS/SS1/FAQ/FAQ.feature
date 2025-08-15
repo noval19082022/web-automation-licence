@@ -1,4 +1,4 @@
-@regression @pman @pman-prod @faq
+@regression @SS1 @SS1-prod @faq
 
 Feature: FAQ
 
