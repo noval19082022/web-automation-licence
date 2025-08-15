@@ -781,4 +781,69 @@ public class GoldplusSteps {
     public void ownerClickOnUpgradePackage() {
         goldplus.clickOnUpgradePackage();
     }
+
+    @And("Owner visit Goldplus package without action close the on boarding pop up")
+    public void ownerVisitGoldplusPackage() {
+        owner.clickOnDaftarGP();
+    }
+
+    @Then("Owner see gp onboarding pop up is exist")
+    public void ownerSeeGpOnboardingPopUpIsExist() {
+        Assert.assertTrue(goldplus.isOnBoardingPopExist(), "Gp Onboarding not exist");
+    }
+
+    @Then("Owner see gp onboarding pop up is not exist")
+    public void ownerSeeGpOnboardingPopUpIsNotExist() {
+        Assert.assertFalse(goldplus.isOnBoardingPopExist(), "Gp Onboarding is exist");
+    }
+
+    @And("Owner swap the gp pop up onboarding")
+    public void ownerSwapTheGpPopUpOnboarding() {
+        goldplus.tapOnSwapNextGpOnboarding();
+        goldplus.tapOnSwapPreviousGpOnboarding();
+    }
+
+    @And("Owner swap the gp pop up onboarding {int} times")
+    public void ownerSwapTheGpPopUpOnboardingTimes(int swpCount) {
+        for (int i = 0; i < swpCount; i++) {
+            goldplus.tapOnSwapNextGpOnboarding();
+        }
+
+        for (int i = 0; i < swpCount; i++) {
+            goldplus.tapOnSwapPreviousGpOnboarding();
+        }
+    }
+
+    @And("Owner tap on pilih paket goldplus from gp onboarding pop up")
+    public void ownerTapOnPilihPaketGoldplusFromGpOnboardingPopUp() {
+        goldplus.tapOnPilihPaketGoldplusBtnFromGpOnboardingPopUp();
+    }
+
+    @Then("owner verify list of Pilih Gp Package is appear")
+    public void ownerVerifyListOfPilihGpPackageIsAppear(String expectedAriaSnapshot) {
+        playwright.waitTillPageLoaded();
+        loading.waitForLoadingIconDisappear();
+
+        // Get the actual aria snapshot from the current page
+        String actualAriaSnapshot = goldplus.getPilihGpPackageAriaSnapshot();
+
+        System.out.println(actualAriaSnapshot);
+
+        // Compare the snapshots directly without normalization for better visualization
+        Assert.assertEquals(actualAriaSnapshot, expectedAriaSnapshot,
+                String.format("Pilih Gp package structure does not match expected layout, with actual %s", actualAriaSnapshot));
+    }
+
+    @Then("owner verify list of Pilih Gp Package is contains")
+    public void ownerVerifyListOfPilihGpPackageIsContais(String expectedAriaSnapshot) {
+        playwright.waitTillPageLoaded();
+        loading.waitForLoadingIconDisappear();
+
+        // Get the actual aria snapshot from the current page
+        String actualAriaSnapshot = goldplus.getPilihGpPackageAriaSnapshot();
+
+        // Compare the snapshots directly without normalization for better visualization
+        Assert.assertTrue(actualAriaSnapshot.contains(expectedAriaSnapshot),
+                String.format("Pilih Gp package structure does not contains expected layout with actual: %s", actualAriaSnapshot));
+    }
 }

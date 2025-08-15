@@ -54,6 +54,10 @@ public class GoldplusPO {
     Locator filterPaketGoldplusAnda;
     Locator closeBtn;
     Locator perpanjangButton;
+    Locator gpOnboardingPopUp;
+    Locator gpOnboardingNextPopUpBtn;
+    Locator gpOnboardingPreviousPopUpBtn;
+    Locator pilihPaketBtn;
 
     //==== Popup Recurring ===//
     Locator imagePopupRecurring;
@@ -104,7 +108,7 @@ public class GoldplusPO {
     private Locator pilihPeriodeButton;
     private Locator periodeBerlanggananContainer;
     private Locator paketJangkaPanjangContainer;
-    private Locator pilihPaketGoldplus;
+    private Locator pilihPaketGoldplusContainer;
 
 
     public GoldplusPO(Page page) {
@@ -145,8 +149,8 @@ public class GoldplusPO {
         rincianFee = page.getByText("Biaya Transaksi");
         searchPhoneNumber = page.getByPlaceholder("Keyword");
         buttonSearchContract = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Search"));
-        detailManfaatGP1 = page.getByText("Lihat Detail Manfaatchevron-right").nth(1);
-        detailManfaatGP2 = page.getByText("Lihat Detail Manfaatchevron-right").first();
+        detailManfaatGP1 = page.locator("a").filter(new Locator.FilterOptions().setHasText("Manfaat GoldPlus 1"));
+        detailManfaatGP2 = page.locator("a").filter(new Locator.FilterOptions().setHasText("Manfaat GoldPlus 2"));
         closeBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
         imagePopupRecurring = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("business-with-goldplus"));
         textTitlePopupRecurring = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Masa aktif GoldPlus akan habis."));
@@ -175,12 +179,18 @@ public class GoldplusPO {
         upgradePaketBtnOnTbc = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Upgrade Paket"));
         upgradePaketBtnPopUpOnTbc = page.getByTestId("tenant-background-checker-modal-upgrade-gp").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Upgrade Paket"));
         perpanjangButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Perpanjang"));
+        gpOnboardingPopUp = page.getByTestId("goldplus-onboarding-feature");
+        gpOnboardingNextPopUpBtn = page.getByTestId("goldplus-onboarding-feature").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Next slide"));
+        gpOnboardingPreviousPopUpBtn = page.getByTestId("goldplus-onboarding-feature").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Previous slide"));
+        pilihPaketBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Paket GoldPlus"));
+
         mamikosActionCard = page.locator(".mk-action-card__main");
         periodeBerlanggananContainer = page.locator("div.goldplus-subscribe-periode-desktop");
         paketJangkaPanjangContainer = page.locator("div.goldplus-periode-select__list").nth(1);
         mamiadsBalanceListContainer = page.locator(".goldplus-mamiads-detail");
         rincianPembayaranSection = page.locator(".goldplus-billing-detail").locator("div").filter(new Locator.FilterOptions().setHasText("Rincian Pembayaran"));
         totalPembayaranSection = page.locator(".goldplus-billing-detail__billing-total");
+        pilihPaketGoldplusContainer = page.getByTestId("goldplusPackages");
 
         // GoldPlus Period Selection Popup locators
         goldplusPeriodSelectionPopup = page.locator("//div[contains(@class, 'goldplus-periode-select')]");
@@ -1098,6 +1108,18 @@ public class GoldplusPO {
     }
 
     /**
+     * Get aria snapshot of the pilih gp package container
+     * This captures the accessibility tree representation of all subscription packages
+     * @return String representation of the accessibility tree
+     */
+    public String getPilihGpPackageAriaSnapshot() {
+        // Use the pre-initialized container locator
+        playwright.waitFor(pilihPaketGoldplusContainer);
+        return playwright.getAriaSnapshot(pilihPaketGoldplusContainer);
+    }
+
+
+    /**
      * Get aria snapshot of the Periode Berlangganan package container
      * This captures the accessibility tree representation of all subscription packages
      * @return String representation of the accessibility tree
@@ -1128,5 +1150,23 @@ public class GoldplusPO {
         // Use the pre-initialized container locator
         playwright.waitFor(paketJangkaPanjangContainer);
         return playwright.getAriaSnapshot(paketJangkaPanjangContainer);
+    }
+
+    public boolean isOnBoardingPopExist() {
+        playwright.waitTillLocatorIsVisible(gpOnboardingPopUp);
+
+        return playwright.isLocatorVisibleAfterLoad(gpOnboardingPopUp, 3000.0);
+    }
+
+    public void tapOnSwapNextGpOnboarding() {
+        playwright.clickOn(gpOnboardingNextPopUpBtn);
+    }
+
+    public void tapOnSwapPreviousGpOnboarding() {
+        playwright.clickOn(gpOnboardingPreviousPopUpBtn);
+    }
+
+    public void tapOnPilihPaketGoldplusBtnFromGpOnboardingPopUp() {
+        playwright.clickOn(pilihPaketBtn);
     }
 }
