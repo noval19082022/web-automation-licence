@@ -1,4 +1,4 @@
-@essentialTest2 @SS2
+@essentialTest2
 
 Feature: [PMAN] Essential Test PMS
 
