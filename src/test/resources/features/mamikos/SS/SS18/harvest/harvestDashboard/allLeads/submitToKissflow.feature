@@ -1,4 +1,4 @@
-@regression @pman3 @harvest @harvestDashboard
+@regression @SS18 @harvest @harvestDashboard
 
 Feature: Submit to Kissflow in All Leads Menu
 
