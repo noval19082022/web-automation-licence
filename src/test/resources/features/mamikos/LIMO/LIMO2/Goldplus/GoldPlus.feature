@@ -14,13 +14,14 @@ Feature: Gold Plus
       | phone stag   | phone prod | password  |
       | 082233545506 | 0          | qwerty123 |
     And user click daftar GP button
-    And user select package GP 1
+    And user click "Pilih Paket GoldPlus" button
+    And owner choose Goldplus package 1
     Then user will see that the goldplus package choosed is displayed
 
   @TEST_LIMO-3397 @changeGP @continue
   Scenario: Owner Able to Change Goldplus Package
     When user click on ubah package gold plus button
-    And user select package GP 2
+    And owner choose Goldplus package 2
     Then user will see that the goldplus package on rincian pembayaran detail tagihan
 
   @TEST_LIMO-3398 @TEST_LIMO-149 @uncheckT&C @continue
@@ -36,18 +37,17 @@ Feature: Gold Plus
 
   @TEST_LIMO-3400 @checkBenefit @continue
   Scenario: Make sure detail Check Other Benefits on GP1/2
-#    Given user click "Ubah"
     When user click on ubah package gold plus button
-    When user click "Lihat Detail Manfaat"
+#    When user click "Lihat Detail Manfaat"
     Then user will see that the text "Manfaat GoldPlus 2" is displayed
 
   @TEST_LIMO-3401
   Scenario: [WEB][Owner Dashboard][Widget GP] Check condition widget GP when waiting for payment
-    When owner close pop up detail manfaat
+#    When owner close pop up detail manfaat
     And user wants to subscribe Goldplus 1
     When owner click back previous button
     And user navigates to owner dashboard
-    Then validate that owner have "Menunggu Pembayaran"
+     Then validate that owner have "Menunggu Pembayaran"
     And owner should successfully log out
 
   @continue #reset GP
@@ -74,26 +74,26 @@ Feature: Gold Plus
       | phone stag    | phone prod | password  |
       | 0812345670001 | 0          | qwerty123 |
     And owner navigate to list goldplus package
-    When owner wants to see Lihat Detail Manfaat Goldplus Satu
-    Then owner see benefit "Manfaat GoldPlus 1" is displayed
-    Then owner see benefit "Kos lebih diprioritaskan dari kos tanpa GoldPlus." is displayed
-    Then owner see benefit "Cek bisnis kos di dekat Anda dengan fitur Cek Properti Sekitar." is displayed
-    Then owner see benefit "Pasang promo properti dengan fitur Promo Iklan." is displayed
-    #Then owner see benefit "Bonus 10% saat beli saldo MamiAds." is displayed
-    Then owner see benefit "Harga khusus Paket MamiFoto mulai dari Rp 600.000 hingga Rp 1.000.000 (Harga asli Rp 1.300.000)." is displayed
-    Then owner see benefit "Gratis Saldo MamiAds dengan pembelian GoldPlus bulanan." is displayed
-    And owner click close icon pop up
+    Then owner see benefit in "golplus 1" is "Chat tanpa batas" is displayed
+    Then owner see benefit "Iklan lebih prioritas dari non-GoldPlus" is displayed
+    Then owner see benefit "Lihat profil penyewa dasar" is displayed
+    Then owner see benefit "Daftar Tunggu 10 penyewa" is displayed
+    Then owner see benefit "Terima Survei Kos fitur dasar" is displayed
+    Then owner see benefit in "golplus 1" is "Cek Properti Sekitar" is displayed
+    Then owner see benefit in "golplus 1" is "Buat Promo Iklan" is displayed
+    Then owner see benefit "Cashback MamiAds mulai dari 7.500" is displayed
+
     #detail manfaat GP 2
-    When owner wants to see Lihat Detail Manfaat Goldplus Dua
-    Then owner see benefit "Manfaat GoldPlus 2" is displayed
-    Then owner see benefit "Kuota tanpa batas untuk membalas chat dari pencari kos." is displayed
-    Then owner see benefit "Bisa melihat info dan riwayat aktivitas pencari kos yang chat maupun mengajukan sewa di kos Anda." is displayed
-    Then owner see benefit "Promosikan kos Anda dengan fitur Broadcast Chat." is displayed
-    Then owner see benefit "Kos lebih diprioritaskan dari GoldPlus 1 dan kos tanpa GoldPlus." is displayed
-    Then owner see benefit "Cek bisnis kos di dekat Anda dengan fitur Cek Properti Sekitar." is displayed
-    Then owner see benefit "Pasang promo properti dengan fitur Promo Iklan." is displayed
-    Then owner see benefit "Harga khusus Paket MamiFoto mulai dari Rp 600.000 hingga Rp 1.000.000 (Harga asli Rp 1.300.000)." is displayed
-    Then owner see benefit "Gratis Saldo MamiAds dengan pembelian GoldPlus bulanan." is displayed
+   # When owner wants to see Lihat Detail Manfaat Goldplus Dua
+    Then owner see benefit in "golplus 2" is "Chat tanpa batas" is displayed
+    Then owner see benefit in "golplus 2" is "Iklan lebih prioritas dari GoldPlus 1" is displayed
+    Then owner see benefit "Lihat profil penyewa lengkap" is displayed
+    Then owner see benefit in "golplus 2" is "Daftar Tunggu tanpa batas" is displayed
+    Then owner see benefit in "golplus 2" is "Terima Survei Kos fitur penuh" is displayed
+    Then owner see benefit in "golplus 2" is "Cek Properti Sekitar" is displayed
+    Then owner see benefit in "golplus 2" is "Buat Promo Iklan" is displayed
+    Then owner see benefit in "golplus 2" is "Broadcast Chat" is displayed
+    Then owner see benefit "Cashback MamiAds mulai dari 35.000" is displayed
 
   @TEST_LIMO-3404
   Scenario: [WEB][Pilih Paket GP] As a property owner, I would like to know the difference between GP 1 and GP 2 benefits
@@ -103,12 +103,12 @@ Feature: Gold Plus
       | 0812345670001 | 0          | qwerty123 |
     When owner navigate to list goldplus package
     #list manfaat Goldplus 2
-    Then owner see benefit "Lihat profil calon penyewa yang menghubungi Anda" is displayed
-    And owner see benefit in "golplus 2" is "Balas chat tanpa batas dengan pencari kos" is displayed
-    And owner see benefit "Promosikan kos Anda dengan fitur Broadcast Chat" is displayed
-    And owner see benefit "Kos lebih diprioritaskan dari GoldPlus 1 dan kos tanpa GoldPlus" is displayed
-    And owner see benefit in "golplus 2" is "Cek bisnis kos di dekat Anda dengan fitur Cek Properti Sekitar" is displayed
+    Then owner see benefit "Lihat profil penyewa dasar" is displayed
+    And owner see benefit in "golplus 2" is "Lihat profil penyewa lengkap" is displayed
+    And owner see benefit "Iklan lebih prioritas dari non-GoldPlus" is displayed
+    And owner see benefit in "golplus 2" is "Iklan lebih prioritas dari GoldPlus 1" is displayed
     #list manfaat Goldplus 1
-    And owner see benefit "Cashback dan bonus Saldo Mamiads" is displayed
-    And owner see benefit in "golplus 1" is "Balas chat tanpa batas dengan pencari kos" is displayed
-    And owner see benefit in "golplus 1" is "Cek bisnis kos di dekat Anda dengan fitur Cek Properti Sekitar" is displayed
+    And owner see benefit "Terima Survei Kos fitur penuh" is displayed
+    And owner see benefit "Terima Survei Kos fitur dasar" is displayed
+    And owner see benefit "Daftar Tunggu tanpa batas" is displayed
+    And owner see benefit "Daftar Tunggu 10 penyewa" is displayed

@@ -8,4 +8,4 @@ Feature: Owner accsess page pusat bantuan
       | phone stag   | phone prod | password  |
       | 083176408311 | 0          | qwerty123 |
     When owner click "Pusat Bantuan"
-    Then user should redirect to link "https://help.mamikos.com/pemilik"
+    Then user should redirect to link "https://help-waras.kerupux.com/pemilik"

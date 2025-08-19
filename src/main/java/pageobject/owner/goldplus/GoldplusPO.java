@@ -120,7 +120,7 @@ public class GoldplusPO {
         selectRadioButtonNo = page.locator("[value='0'][name='is_recommended']");
         selectRadioButtonYes = page.locator("[value='1'][name='is_recommended']");
         messageText = page.locator(".bg-c-empty-state__description");
-        lihatTagihanTable = page.locator("//div[@id='goldplusPaymentUnpaid']//tr[@class='goldplus-payment-list-table__row']");
+        lihatTagihanTable = page.locator("//tr[@class='goldplus-payment-list-table__row']");
         widgetGP = page.locator(".membership-card__label");
         snkGoldplusCheckbox =  page.locator("label");
         weeklyPeriode = page.locator(".bg-c-radio__icon").first();
@@ -163,7 +163,7 @@ public class GoldplusPO {
         selectTranscationPaid =  page.locator("td").filter(new Locator.FilterOptions().setHasText("Lunas"));
         selectTransactionExpired = page.locator("td").filter(new Locator.FilterOptions().setHasText("Dibatalkan"));
         tabSelesaiRiwayatGP = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Selesai"));
-        titleStatusPaid = page.locator(".bg-c-label");
+        titleStatusPaid = page.locator("//div[@class='bg-c-label bg-c-label--rainbow bg-c-label--rainbow-green']");
         imageGPWeeklyPopup = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("gp illustration"));
         titlePopUpGpWeekly = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Selamat bergabung di GoldPlus 1!"));
         buttonNantiWeekly = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nanti Saja"));
@@ -310,7 +310,7 @@ public class GoldplusPO {
      * @return int, count of unpaid invoice GP
      */
     public int getCountInvoiceUnpaid() {
-        playwright.hardWait(7000);
+        playwright.hardWait(4000);
         playwright.waitTillPageLoaded();
         return playwright.getLocators(lihatTagihanTable).size();
     }
@@ -554,7 +554,7 @@ public class GoldplusPO {
             return playwright.getText(page.locator(".invoice-total-amount"));
 
         } else {
-            return playwright.getText(page.locator("//*[contains(text(),'"+text+"')]/../../following-sibling::div"));
+            return playwright.getText(page.locator("//p[normalize-space()='"+text+"']/../../following-sibling::div"));
         }
     }
 

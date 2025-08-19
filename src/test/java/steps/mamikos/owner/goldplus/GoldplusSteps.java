@@ -613,7 +613,7 @@ public class GoldplusSteps {
         goldplus.searchPhoneNumberGP(phoneNumber);
         
         // Check if there are any active contracts to terminate for this specific phone number
-        String terminateXpath = "//td[contains(text(), '" + phoneNumber + "')]/parent::tr//button[text()='Terminate']";
+        String terminateXpath = "//td[contains(text(), '')]/parent::tr//button[text()='Terminate']";
         var terminateButton = page.locator(terminateXpath);
         
         if (playwright.waitTillLocatorIsVisible(terminateButton, 3000.0)) {

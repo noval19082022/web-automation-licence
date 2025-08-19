@@ -66,7 +66,7 @@ public class OwnerDashboardSteps {
 
     @Then("validate that owner have {string}")
     public void validate_that_owner_have(String gpStatus) {
-        Assert.assertEquals(ownerDashboardPO.getTextGPStatus(), gpStatus, "GP Level is not equal to " + gpStatus);
+        Assert.assertEquals(ownerDashboardPO.getTextGPStatus(), gpStatus, "GP Level is not equal to ");
 
     }
 

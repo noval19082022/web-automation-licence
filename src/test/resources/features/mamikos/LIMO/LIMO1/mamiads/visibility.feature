@@ -21,9 +21,9 @@ Feature: Visibility
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod   | password  |
-      | 083843666858 | 083843666858 | qwerty123 |
+      | 0891202415   | 083843666858 | qwerty123 |
     Then user will see that the text "Saldo iklan" is displayed
-    Then user will see that the text "Isi saldo 500rb, lebih hemat 75,000!" is displayed
+    Then user will see that the text "Anggarkan saldo agar posisi iklan naik" is displayed
     When user click on Saldo MamiAds at owner dashboard
     Then user redirected to mamiads page
 

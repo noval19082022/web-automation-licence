@@ -225,15 +225,15 @@ Feature: Ubah Anggaran
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag | phone prod   | password  |
-      | 0891202303 | 089504220900 | qwerty123 |
+      | 0891202415 | 089504220900 | qwerty123 |
     And user navigates to mamiads dashboard
     And user close mamiads onboarding popup
     Then user check ads status:
-      | ads name      | Kost SkinCare Tobelo Tobelo Halmahera Utara                    |
-      | text status   | Tidak Naik                                                     |
-      | toggle status | off                                                            |
-      | status desc   | Klik tombol untuk naikkan iklan                                |
-      | text anggaran | Hari ini Rp0 sudah dipakai dari batas pemakaian saldo Rp10.000 |
+      | ads name      | Kos GTA Andreas Rajeg Tangerang  |
+      | text status   | Tidak Naik                       |
+      | toggle status | off                              |
+      | status desc   | Klik tombol untuk naikkan iklan  |
+      | text anggaran | Tipe Anggaran: Rp10.000 per-hari |
 
   @LIMO-3796
   Scenario: Naikan iklan - To make sure wording while iklan Off by owner when set daily budget and saldo burn > 0

@@ -169,7 +169,7 @@ public class MamifotoPO {
         this.ownerPhoneNumber = page.locator("//tbody[1]/tr[1]/td[1]");
         this.statusInvoice = page.locator("//tbody[1]/tr[1]/td[contains(.,'unpaid')]");
         this.packageNameMamifoto = page.locator(".mamifoto-history-card__title-card > .bg-c-text").first();
-        this.waitingPayment = page.locator(".bg-c-label").first();
+        this.waitingPayment = page.locator(".mamifoto-history-card__title-card > .bg-c-label").first();
         this.mamiFotoContentPackage = page.getByTestId("mamifotoPackagesDesktop");
 
         // Enhanced FAQ locators for better reliability

@@ -165,13 +165,13 @@ Feature: GP Cross-Selling
     And user unchoose saldo on GoldPlus section
     Then user verify the "Saldo MamiAds 30.000" and the price is "Rp27.000" already "removed" on Rincian Pembayaran
 
-  @terminate @gpCrossPaid @TEST_LIMO-3352
-  Scenario: Terminate GP
+  @resetGP
+  Scenario: delete or reset data GP
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    And user wants to terminate Goldplus for owner with phone number "089966331122"
+    Then user wants to reset Goldplus for owner with phone number "089966331122"
 
   @continue @gpCrossPaid @TEST_LIMO-1393
   Scenario: [Owner dashboard][Crosseling GP and MamiAds]To make sure saldo mamiads DIDN'T appear on Riwayat Saldo Mamiads while status GP = menunggu pembayaran
@@ -199,9 +199,9 @@ Feature: GP Cross-Selling
       - paragraph: Rp106.000
       """
     And owner click bayar sekarang on detail tagihan page goldplus
-    Then owner validate payment for goldplus package have "Saldo MamiAds 30 ribu + GoldPlus 1" and have "Biaya Transaksi" before choose payment method
+    Then owner validate payment for goldplus package have "Saldo MamiAds 30 ribu + GoldPlus 1 (1 Bulan)" and have "Biaya Transaksi" before choose payment method
     And user navigate to mamiads history page
-    And user will see that the text "Saldo MamiAds 30 ribu + GoldPlus 1" is displayed
+    And user will see that the text "Saldo MamiAds 30 ribu + GoldPlus 1 (1 Bulan)" is displayed
 
   @continue @gpCrossPaid @TEST_LIMO-3353
   Scenario: [Goldplus ][Crosseling GP and MamiAds]Success buy cross-selling GP and mamiads

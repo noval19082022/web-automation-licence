@@ -27,14 +27,12 @@ Feature: Owner GPSP
       | phone stag | phone prod | password  |
       | 0898761238 | 0          | qwerty123 |
     And owner navigates to owner dashboard
-    And owner waiting the page reload
     And user click daftar GP button
     And user wants to subscribe Goldplus 1
-    And tenant make bill payments using "ovo"
     Then owner see billing details invoice
-      | GoldPlus 1 (3 Bulan) |
-      | Rp79.000                      |
-      | Total Pembayaran Rp82.500     |
+      | GoldPlus 1 (3 Bulan)       |
+      | Rp232.260                  |
+      | Total Pembayaran Rp235.760 |
     And owner navigates to owner dashboard
     Then owner will see that the text "Menunggu Pembayaran" is displayed
     And owner try to logout from mamikos
@@ -60,19 +58,17 @@ Feature: Owner GPSP
     And user navigates to owner dashboard
     And user click widget GP "Menunggu Pembayaran"
     And user click "Ganti Paket" on pop up "Anda masih memiliki tagihan aktif"
-    And user wants to subscribe Goldplus 2
-    And owner navigates to "/goldplus/payment"
-    Then verify unpaid invoice more than 1
-    When user click Lihat Tagihan on riwayat
-    Then payment owner success using ovo as payment method
-    ## on comment due to still waiting development for new GPSP, it impacted with it https://mamikos.atlassian.net/browse/LIMO-9049
-#    Then owner see billing details invoice
-#      | GP High Segment periode 1 Bulan |
-#      | Rp130.000                       |
-#      | Total Pembayaran Rp133.500      |
+    And user wants to subscribe Goldplus 1
+    And payment owner success using ovo as payment method
+    Then owner see billing details invoice
+      | GoldPlus 1 (2 Bulan)            |
+      | Rp244.400                       |
+      | Total Pembayaran Rp247.900      |
+    And owner navigates to owner dashboard
+    And owner click close icon pop up
     And owner try to logout from mamikos
 
-    # deleted assignment from admin
+  # deleted assignment from admin
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
       | email stag                 | email prod                 | password  |
@@ -82,21 +78,23 @@ Feature: Owner GPSP
     Then admin click on delete btn on whitelist menu for order "1"
     Then admin will see that the text "Success! User id `99454617` in feature `gp_special_pricing_medium_5` has been deleted" is displayed
 
-#  @TEST_LIMO-1641
-#  Scenario: [Improve GPSP][Upgrade GP] Owner GP 1 wants to upgrade GP with new special price, but removed from assign special price
-#    # login admin
-#    Given admin go to mamikos bangkrupux admin
-#    When admin login to bangkrupux:
-#      | email stag                 | email prod                 | password  |
-#      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
-#    And admin accsess menu whitelist feature
-#    And admin wants to add whitelist feature
-#    And admin input owner id with "99454618"
-#    And admin select feature with "gp_special_pricing_medium_5"
-#    And admin click submit button
-#    Then admin will see that the text "Success! User `99454618` successfully whitelisted for feature `gp_special_pricing_medium_5" is displayed
-#    And admin try to logout from mamikos
-#
+
+  @TEST_LIMO-1641
+  Scenario: [Improve GPSP][Upgrade GP] Owner GP 1 wants to upgrade GP with new special price, but removed from assign special price
+    # login admin
+    Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
+    And admin accsess menu whitelist feature
+    And admin wants to add whitelist feature
+    And admin input owner id with "99454618"
+    And admin select feature with "gp_special_pricing_medium_5"
+    And admin click submit button
+    Then admin will see that the text "Success! User `99454618` successfully whitelisted for feature `gp_special_pricing_medium_5" is displayed
+    And admin try to logout from mamikos
+
+
 #    # login owner 0898761239 (99454618)
 #    Given user go to mamikos homepage
 #    When user login as owner:
@@ -144,7 +142,7 @@ Feature: Owner GPSP
 #      | Total Pembayaran Rp22.834 |
 #    And owner navigates to owner dashboard
 #    Then owner will see that the text "GoldPlus 2" is displayed
-
+#
 #  @TEST_LIMO-1640 @TEST_LIMO-1639
 #  Scenario: [Improve GPSP][Upgrade GP] Owner GP 1 wants to upgrade GP with new/old special price
 #    #login admin
@@ -227,13 +225,12 @@ Feature: Owner GPSP
     And owner waiting the page reload
     And user click daftar GP button
     And user wants to subscribe Goldplus 1
-   # And owner select payment using alfamart xendit as payment method from invoice detail
     Then payment owner success using ovo as payment method
     Then owner will see that the text "Pembayaran Berhasil" is displayed
     Then owner see billing details invoice
-      | GP High Segment (1 Bulan)  |
-      | Rp130.000                  |
-      | Total Pembayaran Rp133.500 |
+      | GoldPlus 1 (2 Bulan) |
+      | Rp244.400                       |
+      | Total Pembayaran Rp247.900      |
     And owner navigates to owner dashboard
     Then owner will see that the text "GoldPlus 1" is displayed
     And owner try to logout from mamikos
@@ -284,13 +281,12 @@ Feature: Owner GPSP
     And owner waiting the page reload
     And user click daftar GP button
     And user wants to subscribe Goldplus 1
-    #And owner select payment using alfamart xendit as payment method from invoice detail
     Then payment owner success using ovo as payment method
     Then owner will see that the text "Pembayaran Berhasil" is displayed
     Then owner see billing details invoice
-      | GP High Segment (1 Bulan)  |
-      | Rp130.000                  |
-      | Total Pembayaran Rp133.500 |
+      | GoldPlus 1 (2 Bulan) |
+      | Rp244.400                       |
+      | Total Pembayaran Rp247.900      |
     And owner navigates to owner dashboard
     Then owner will see that the text "GoldPlus 1" is displayed
     And owner try to logout from mamikos
@@ -310,9 +306,9 @@ Feature: Owner GPSP
       | Ayo, segera perpanjang paket GoldPlus Anda sekarang. |
     And owner wants to paid invoice recurring from recurring pop up
     Then owner will see that the text is displayed
-      | GP High Segment (1 Bulan)  |
-      | Rp130.000                  |
-      | Total Pembayaran Rp133.500 |
+      | GoldPlus 1 (2 Bulan)  |
+      | Rp247.900                  |
+      | Total Pembayaran Rp247.900 |
 #    And owner select payment using alfamart xendit as payment method from invoice detail
     And payment owner success using ovo as payment method
     And owner navigates to owner dashboard
@@ -343,9 +339,9 @@ Feature: Owner GPSP
     And user click daftar GP button
     And user wants to subscribe Goldplus 1
     Then owner see billing details invoice
-      | Rincian Pembayaran GP High Segment (1 Bulan) |
-      | Rp130.000                                    |
-      | Total Pembayaran Rp133.500                   |
+      | GoldPlus 1 (2 Bulan) |
+      | Rp247.900                   |
+      | Total Pembayaran Rp247.900  |
     And owner navigates to owner dashboard
     Then owner will see that the text "Menunggu Pembayaran" is displayed
     And owner try to logout from mamikos
@@ -371,8 +367,8 @@ Feature: Owner GPSP
     And user click "Lihat Tagihan" on pop up "Anda masih memiliki tagihan aktif"
     And payment owner success using ovo as payment method
     Then owner see billing details invoice
-      | GP High Segment            |
-      | Rp130.000                  |
-      | Total Pembayaran Rp133.500 |
+      | GoldPlus 1 (2 Bulan) |
+      | Rp247.900                   |
+      | Total Pembayaran Rp247.900  |
     And owner navigates to owner dashboard
     Then owner will see that the text "GoldPlus 1" is displayed
