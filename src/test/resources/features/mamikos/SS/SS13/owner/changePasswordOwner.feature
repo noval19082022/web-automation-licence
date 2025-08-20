@@ -11,6 +11,7 @@ Feature: Change password owner
     And owner click on Ubah "Password"
     And owner fills old password "qwerty1234"
     And owner fills new password "asdf1234"
+    And owner fills ketik ulang password "asdf1234"
     And user clicks on simpan password button
     Then user get error message "Password Lama Anda tidak valid."
 
@@ -20,6 +21,7 @@ Feature: Change password owner
     And owner click on Ubah "Password"
     And owner fills old password "qwerty123"
     And owner fills new password "qwerty12345678901234567890123"
+    And owner fills ketik ulang password "qwerty12345678901234567890123"
     Then user get error message "Password lebih dari 25 karakter."
 
   @TEST_SS-3041 @continue
@@ -28,6 +30,7 @@ Feature: Change password owner
     And owner click on Ubah "Password"
     And owner fills old password "qwerty123"
     And owner fills new password "qwe123"
+    And owner fills ketik ulang password "qwe123"
     Then user get error message "Password harus berisi min. 8 karakter, kombinasi angka (0-9) dan huruf alfabet (A-Z)."
 
   @TEST_SS-3042 @continue
@@ -36,6 +39,7 @@ Feature: Change password owner
     And owner click on Ubah "Password"
     And owner fills old password "qwerty123"
     And owner fills new password "qwertyuiop"
+    And owner fills ketik ulang password "qwertyuiop"
     Then user get error message "Password harus berisi min. 8 karakter, kombinasi angka (0-9) dan huruf alfabet (A-Z)."
 
   @TEST_SS-3043 @continue
@@ -44,6 +48,7 @@ Feature: Change password owner
     And owner click on Ubah "Password"
     And owner fills old password "qwerty123"
     And owner fills new password "1234567891"
+    And owner fills ketik ulang password "1234567891"
     Then user get error message "Password harus berisi min. 8 karakter, kombinasi angka (0-9) dan huruf alfabet (A-Z)."
 
   @TEST_SS-3044 @continue
@@ -52,6 +57,7 @@ Feature: Change password owner
     And owner click on Ubah "Password"
     And owner fills old password "qwerty123"
     And owner fills new password "!@#$%^&*()"
+    And owner fills ketik ulang password "!@#$%^&*()"
     Then user get error message "Password harus berisi min. 8 karakter, kombinasi angka (0-9) dan huruf alfabet (A-Z)."
 
   @TEST_SS-3045
@@ -60,6 +66,7 @@ Feature: Change password owner
     And owner click on Ubah "Password"
     And owner fills old password "qwerty123"
     And owner fills new password "asdf1234"
+    And owner fills ketik ulang password "asdf1234"
     And owner empty old password field
     Then user get error message "Masukkan password."
 
@@ -73,8 +80,10 @@ Feature: Change password owner
     And owner click on Ubah "Password"
     And owner fills old password "qwerty123"
     And owner fills new password "asdf1234"
+    And owner fills ketik ulang password "asdf1234"
     And user clicks on simpan password button
     And owner click on Ubah "Password"
     And owner fills old password "asdf1234"
     And owner fills new password "qwerty123"
+    And owner fills ketik ulang password "qwerty123"
     Then user clicks on simpan password button
