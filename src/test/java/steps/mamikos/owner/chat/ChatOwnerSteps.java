@@ -90,6 +90,18 @@ public class ChatOwnerSteps {
         chat.dismissFTUEJemputBolaIfExist();
     }
 
+    @And("user dismiss FTUE MARS and FTUE Broadcast trigger from info untuk anda")
+    public void userDismissFTUEMARSAndFTUEBroadcastTriggerFromInfoUntukAnda() {
+        chat.dismissFTUEMars();
+        chat.dismissFTUEMarsKuotaNol();
+        chat.dismissFTUEJemputBolaIfExist();
+    }
+
+    @And("user dismiss FTUE survey kost")
+    public void AndUserDismissFTUESurveyKost() {
+        chat.dismissFTUESurvey();
+    }
+
     @And("user open chatroom from {string}")
     public void userOpenChatroomFrom(String inputText) {
         chat.searchChatTenant(inputText);
