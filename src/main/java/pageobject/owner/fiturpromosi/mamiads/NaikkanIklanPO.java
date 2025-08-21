@@ -28,7 +28,8 @@ public class NaikkanIklanPO {
     Locator saldoMamiAdsValue;
     Locator actionButtonLocator;
     Locator currentStatusSaldo;
-
+    Locator mamiadsRightConfirmButton;
+    Locator mamiadsLeftConfirmButton;
 
     public NaikkanIklanPO(Page page) {
         this.page = page;
@@ -44,7 +45,8 @@ public class NaikkanIklanPO {
         titlePopUp = page.locator(".bg-c-modal__body-title");
         nonAktifkanAdsButton = page.locator("//*[contains(text(),'Ya, Nonaktifkan')]");
         saldoMamiAdsValue = page.locator(".amount");
-
+        mamiadsRightConfirmButton = page.locator("#button-right-modal-toggle-confirm-toggle");
+        mamiadsLeftConfirmButton = page.locator("#button-left-modal-toggle-confirm-toggle");
     }
 
 
@@ -276,7 +278,7 @@ public class NaikkanIklanPO {
      */
     public void clickActionButtonInPopUp(String actionButton) {
         playwright.hardWait(3000.0);
-        actionButtonLocator = page.locator("//button[contains(text(), '" + actionButton + "')]");
+        actionButtonLocator = actionButton.equals("Aktifkan") ? mamiadsRightConfirmButton : mamiadsLeftConfirmButton;
         playwright.clickOn(actionButtonLocator);
     }
 
