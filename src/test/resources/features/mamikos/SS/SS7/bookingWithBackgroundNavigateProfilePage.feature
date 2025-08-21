@@ -110,6 +110,6 @@ Feature: [Web][Profile page] feature with background navigate profile page
     When admin login to bangkrupux:
       | email stag                   | email prod                   | password  |
       | automationpman01@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    And admin navigates to "/review"
+    And admin navigates to "/admin/review"
     And admin reject request review kos "Kost Singgahsini Noval Tipe A Tobelo Utara Halmahera Utara"
 		
