@@ -410,7 +410,7 @@ public class BookingFormPO {
      * Click on Lihat pengajuan sewa and chat button on first booking
      */
     public void clickChatPemilikButton(){
-        Locator viewPengajuanStatus = page.locator("//button[contains(text(), 'Lihat status pengajuan')]");
+        Locator viewPengajuanStatus = page.locator("//span[contains(text(), 'Lihat status pengajuan')]");
         if (viewPengajuanStatus.isVisible()){
             playwright.clickOn(viewPengajuanStatus);
         }
