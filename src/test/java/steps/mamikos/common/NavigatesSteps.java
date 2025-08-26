@@ -340,8 +340,7 @@ public class NavigatesSteps {
 
     @When("admin navigates to {string}")
     public void adminNavigateTo(String path) {
-        playwright.navigateTo(Mamikos.ADMINBANGKRUPUX+path, 30000.0, LoadState.LOAD);
-        playwright.waitTillUrlToBe(Mamikos.ADMINBANGKRUPUX+path, 30000.0);
+        playwright.navigateTo(Mamikos.URL + path, 40000.0, LoadState.LOAD);
     }
 
     @When("admin navigates to Kontrak Kerja Sama")

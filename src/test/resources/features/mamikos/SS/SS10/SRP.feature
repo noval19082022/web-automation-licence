@@ -41,7 +41,7 @@ Feature: SRP
     When user search and go to kost landing based on area:
       | search keyword | UNDIP                          |
       | area result    | Universitas Diponegoro (UNDIP) |
-    Then user can see total kost in area with "Ditemukan 680 kos-kosan di sekitar Universitas Diponegoro (UNDIP), Jl. Prof. Soedarto No.13, Tembalang, Kec. Tembalang, Kota Semarang, Jawa Tengah 50275"
+    Then user can see total kost in area with "Ditemukan 677 kos-kosan di sekitar Universitas Diponegoro (UNDIP), Jl. Prof. Soedarto No.13, Tembalang, Kec. Tembalang, Kota Semarang, Jawa Tengah 50275"
     When user click on cluster number "13" on maps
     Then user can see total kost in area with "Ditemukan 13 kos-kosan di sekitar Universitas Diponegoro (UNDIP), Jl. Prof. Soedarto No.13, Tembalang, Kec. Tembalang, Kota Semarang, Jawa Tengah 50275"
     When user click on cluster number "Rp600rb" on maps

@@ -12,12 +12,12 @@ Feature: BnB feature with background create booking twice
     And tenant redirect to kost details:
       | kost path stag                                                                                                         | kost path prod               |
       | kost-kabupaten-halmahera-utara-kost-campur-murah-kost-purwokerto-reject-n-waiting-feature-tobelo-utara-halmahera-utara | Kos DC BAR Automation Tipe A |
-    And tenant booking kost for "today"
+    And tenant booking kost "Tomorrow" "Per Bulan"
     And user go to mamikos homepage
     And tenant redirect to kost details:
-      | kost path stag                                        | kost path prod               |
-      | kost-halmahera-utara-kost-campur-murah-kost-reykjavik | Kos DC BAR Automation Tipe A |
-    And tenant booking kost for "Tomorrow"
+      | kost path stag                                                                                                      | kost path prod               |
+      | kost-kabupaten-halmahera-utara-kost-campur-murah-kost-surabaya-cancel-booking-homepage-tobelo-utara-halmahera-utara | Kos DC BAR Automation Tipe A |
+    And tenant booking kost "Tomorrow" "Per Bulan"
     And user go to mamikos homepage
     And user logs out as a Tenant user
 
@@ -38,7 +38,8 @@ Feature: BnB feature with background create booking twice
     And user login as tenant via phone number:
       | phone stag  | phone prod  | password  |
       | 08100000618 | 08100000618 | qwerty123 |
-    Then user can see shortcut homepage with "Yah, pengajuan sewamu ditolak"
     When tenant navigate to riwayat and draf booking
     And user cancel booking
     Then user redirected to "/user/booking"
+    And user go to mamikos homepage
+    Then user can see shortcut homepage with "Yah, pengajuan sewamu ditolak"

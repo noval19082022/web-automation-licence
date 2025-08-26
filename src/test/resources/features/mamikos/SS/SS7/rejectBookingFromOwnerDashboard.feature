@@ -21,8 +21,8 @@ Feature: Reject Booking From Owner Dashboard
     #Scenario: create booking
     And user go to mamikos homepage
     And tenant redirect to kost details:
-      | kost path stag                                        | kost path prod               |
-      | kost-halmahera-utara-kost-campur-murah-kost-reykjavik | Kos DC BAR Automation Tipe A |
+      | kost path stag                                                                                                      | kost path prod               |
+      | kost-kabupaten-halmahera-utara-kost-campur-murah-kost-surabaya-cancel-booking-homepage-tobelo-utara-halmahera-utara | Kos DC BAR Automation Tipe A |
     And tenant booking kost
     Then tenant should success booking kost
 
