@@ -285,7 +285,7 @@ public class MamifotoSteps {
 
     @Then("owner paid transaction unpaid")
     public void owner_paid_transaction_unpaid() {
-        playwright.hardWait(5000.0);
+        playwright.hardWait(2000.0);
         while (mamifoto.checkUnpaidInvoiceMamifoto()){
             mamifoto.clickOnSeeFirstDetailTransaction();
             invoice.paymentOVO("081280003230");

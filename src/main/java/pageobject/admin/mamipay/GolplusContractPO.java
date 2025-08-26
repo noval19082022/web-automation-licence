@@ -121,7 +121,7 @@ public class GolplusContractPO {
      */
     public void searchContractByPeriode(String periode) {
         playwright.fill(periodePackageGP,periode);
-        periodeSelect = page.getByRole(AriaRole.OPTION, new Page.GetByRoleOptions().setName(periode));
+        periodeSelect = page.getByRole(AriaRole.OPTION, new Page.GetByRoleOptions().setName(periode)).first();
         playwright.clickOn(periodeSelect);
 
     }

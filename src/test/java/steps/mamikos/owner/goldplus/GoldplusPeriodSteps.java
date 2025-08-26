@@ -59,7 +59,7 @@ public class GoldplusPeriodSteps {
         int i=0;
         for (Map<String, String> content : table) {
             Assert.assertEquals(goldplus.listPeriod("periodGP",i).replaceAll("\\s", ""),content.get("periodGP").replaceAll("\\s", ""));
-            Assert.assertEquals(goldplus.listPeriod("actualPrice",i),content.get("price"));
+            Assert.assertEquals(goldplus.listPeriod("actualPrice",i + 1),content.get("price"));
             i++;
         }
     }

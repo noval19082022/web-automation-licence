@@ -117,7 +117,7 @@ public class OwnerDashboardPO {
         pengajuanSewaSection = page.locator("div.booking-confirmation-section__content");
         gpWidgetButton = page.locator(".membership-card__title");
         seeAllNotification = page.locator("//div[@class='c-notification__see-more']");
-        gpStatus = page.locator(".mamiads-card__status");
+        gpStatus = page.locator("//img[@alt='Goldplus Logo']/following::div[3]");
         ftueChatListOwner = page.locator("[data-testid='ftueTooltipComponent']");
         icnCloseBcTooltip = page.locator("//button[contains(@class, 'bg-c-button')]/following::div[@id='tooltipContent']");
         gpLabelChatList = page.locator(".mc-goldplus-entrypoint-card");
@@ -994,7 +994,7 @@ public class OwnerDashboardPO {
      * @param targetTextToClick String
      */
     public void clicksOnInfoUntukAnda(String targetTextToClick) {
-        Locator infoUntukAndaLocatorToClick = page.locator("a").filter(new Locator.FilterOptions().setHasText(targetTextToClick));
+        Locator infoUntukAndaLocatorToClick = page.locator("//p[contains(text(),'"+targetTextToClick+"')]");
         playwright.clickOn(infoUntukAndaLocatorToClick);
     }
 

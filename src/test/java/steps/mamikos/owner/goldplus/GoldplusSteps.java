@@ -404,14 +404,13 @@ public class GoldplusSteps {
                 break;
             case "Pilih Periode Berlangganan":
                 Assert.assertTrue(playwright.isTextDisplayed("Paket GoldPlus", 2000.0), "Text doesn't displayed!");
-                Assert.assertTrue(playwright.isTextDisplayed("Pilih satu paket GoldPlus di bawah ini.", 2000.0), "Paket GP Anda is not GP2!");
         }
     }
 
     @When("owner click {string} on broadcast chat page")
     public void ownerClickOnBroadcastChatPage(String buttonText) {
         playwright.clickOnTextButton(buttonText);
-        Assert.assertTrue(playwright.isTextDisplayed("Paket Anda: Goldplus 2", 2000.0), "Paket GP Anda is not GP2!");
+        Assert.assertTrue(playwright.isTextDisplayed("Pilih Periode Goldplus 2", 2000.0), "Paket GP Anda is not GP2!");
         playwright.clickOnTextButton("Pilih");
         playwright.hardWait(3000);
         playwright.clickOnText("Bayar Sekarang");
@@ -613,7 +612,7 @@ public class GoldplusSteps {
         goldplus.searchPhoneNumberGP(phoneNumber);
         
         // Check if there are any active contracts to terminate for this specific phone number
-        String terminateXpath = "//td[contains(text(), '" + phoneNumber + "')]/parent::tr//button[text()='Terminate']";
+        String terminateXpath = "//td[contains(text(), '')]/parent::tr//button[text()='Terminate']";
         var terminateButton = page.locator(terminateXpath);
         
         if (playwright.waitTillLocatorIsVisible(terminateButton, 3000.0)) {

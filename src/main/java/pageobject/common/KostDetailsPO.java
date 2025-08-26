@@ -71,6 +71,7 @@ public class KostDetailsPO {
     Locator yesCancelBookingBtn;
     Locator nextSlideFtue;
     Locator uploadImage;
+    Locator inputSearch;
 
     private Locator kostTitle;
     private Locator propertyGender;
@@ -333,6 +334,8 @@ public class KostDetailsPO {
         this.chatOwnerTittle = page.getByText("Chat pemilik");
         this.forumTittle = page.getByText("Forum");
         this.kategoriBantuanTittle = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Kategori Bantuan"));
+        this.inputSearch = page.locator("input[title]");
+
 
         //---------login popup---------------
         this.loginPopUp = page.locator("p[class='login-title']");
@@ -2566,4 +2569,5 @@ public class KostDetailsPO {
     public void clickOnSalinDetailButton(){
         playwright.clickOn(salinDetailButton);
     }
+
 }

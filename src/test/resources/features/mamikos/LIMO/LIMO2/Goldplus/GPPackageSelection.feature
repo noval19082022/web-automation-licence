@@ -21,6 +21,7 @@ Feature: Revamp GP Package Options
       | 0891202303 | 0891202303 | qwerty123 |
     And owner navigates to owner dashboard
     And user click daftar GP button
+    And user click "Pilih Paket GoldPlus" button
     And user select package GP 1
     Then long-term packages displayed first sorted from longest to shortest period
     And basic packages GP 1 month displayed after long-term packages
@@ -33,7 +34,7 @@ Feature: Revamp GP Package Options
       | 2 Bulan      | Rp50.000           | 0        |               | false   | 0            |
       | Paket Dasar  | Rp99.000 per bulan | 18       | Rp120.000     | true    | 0            |
 
-  @TEST_LIMO-8950 @Automated @LIMO2
+  @TEST_LIMO-8949 @Automated @LIMO2
   Scenario:  [Revamp GP] Package Display for Low Segment User
     Given admin go to mamikos bangkrupux admin
     And admin login to bangkrupux:
@@ -53,6 +54,7 @@ Feature: Revamp GP Package Options
       | 0891202302 | 0891202303 | qwerty123 |
     And owner navigates to owner dashboard
     And user click daftar GP button
+    And user click "Pilih Paket GoldPlus" button
     And user select package GP 1
     And Basic packages GP 1 month displayed before long-term packages
     Then Long-term packages displayed second sorted from longest to shortest period
@@ -73,6 +75,7 @@ Feature: Revamp GP Package Options
       | 0891202202 | 0891202303 | qwerty123 |
     And owner navigates to owner dashboard
     And user click daftar GP button
+    And user click "Pilih Paket GoldPlus" button
     And user select package GP 1
     Then GP packages are displayed with following data:
       | duration     | price              | discount | original_price| favorit | free_mamiads |

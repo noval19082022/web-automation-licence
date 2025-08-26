@@ -6,7 +6,7 @@ Feature: Check Mamifoto Landing Page
     Given user go to mamikos homepage
     And user login as owner:
       | phone stag | phone prod | password  |
-      | 0891202202 | 0          | qwerty123 |
+      | 0891202415 | 0          | qwerty123 |
     And owner dismiss active pop-ups
     When owner click menu sidebar Mamifoto
     Then owner can see mamifoto page

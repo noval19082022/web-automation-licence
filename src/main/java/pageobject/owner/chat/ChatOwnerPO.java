@@ -256,6 +256,14 @@ public class ChatOwnerPO {
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti")).click();
     }
 
+    /**
+     * Dismiss FTUE Survey
+     */
+    public void dismissFTUESurvey(){
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Berikutnya")).click();
+    }
+
+
     public void dismissFTUETBC() {
         playwright.waitFor(sayaMengertiChatRoom);
         playwright.clickOn(sayaMengertiChatRoom);

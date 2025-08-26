@@ -169,7 +169,7 @@ public class InvoicePO {
         sudahBayarBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sudah Bayar").setExact(true));
         amountBNILabel = page.locator("div:nth-child(6) > div > .columns > .second-column");
         IndomaretLabel = page.locator("#invoicePayment").getByText("Indomaret");
-        invoiceBillingDetail = page.getByTestId("goldplusDetailBillDesktop").first();
+        invoiceBillingDetail = page.getByTestId("invoiceBillingDetails-payment");
         pilihButton = page.getByText("Pilih", new Page.GetByTextOptions().setExact(true));
         sembunyikanText = page.getByText("Sembunyikan");
         januariText = page.getByText("Januari");
@@ -567,7 +567,6 @@ public class InvoicePO {
         playwright.hardWait(3000);
     }
 
-
     /**
      * payment using ovo as payment method
      *
@@ -578,6 +577,25 @@ public class InvoicePO {
         clickOnPilihPembayaran();
         playwright.waitFor(txtOVO);
         playwright.clickOn(txtOVO);
+        noOvoTextBox.fill(number);
+        clickOnBayarSekarang();
+        playwright.clickOnText("Saya Sudah Bayar");
+        do {
+            page.reload();
+            maxReload++;
+            if (maxReload == 5) {
+                break;
+            }
+        } while (!playwright.waitTillLocatorIsVisible(pembayaranBerhasilText));
+    }
+
+    /**
+     * auto select payment using ovo as payment method
+     *
+     * @param number phone number ovo
+     */
+    public void paymentOVOAutoSelect(String number) {
+        var maxReload = 0;
         noOvoTextBox.fill(number);
         clickOnBayarSekarang();
         playwright.clickOnText("Saya Sudah Bayar");
@@ -846,6 +864,7 @@ public class InvoicePO {
      * @return
      */
     public String getInvoiceBillingDetail() {
+        playwright.hardWait(5000);
         var billingDetails = playwright.getListInnerTextFromListLocator(invoiceBillingDetail);
         var billingDeyailText = new StringBuilder();
         billingDetails.forEach(

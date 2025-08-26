@@ -6,7 +6,7 @@ Feature: Entry Point Mamifoto when does not have property active
     Given user go to mamikos homepage
     And user login as owner:
       | phone stag | phone prod   | password  |
-      | 0891202202 | 082144865601 | qwerty123 |
+      | 0891202415 | 082144865601 | qwerty123 |
     And owner dismiss active pop-ups
     When owner click menu sidebar Mamifoto
     Then owner can see mamifoto page

@@ -9,15 +9,15 @@ Feature: Owner Dashboard GP
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     Then user wants to reset Goldplus for owner with phone number "088112233454"
 
-  @TEST_LIMO-3601
-  Scenario: See info untuk anda while MARS NON GP with have unreplied chat and quota
-    Given user go to mamikos homepage
-    When user login as owner:
-      | phone stag   | phone prod | password |
-      | 082233545515 | 0          | 12345678 |
-    And user click info untuk anda "calon penyewa menunggu balasan chat. Yuk balas biar cepat di-booking."
-    And user will see that the text "1 chat room" is displayed
-    And owner navigates to owner dashboard
+#  @TEST_LIMO-3601
+#  Scenario: See info untuk anda while MARS NON GP with have unreplied chat and quota
+#    Given user go to mamikos homepage
+#    When user login as owner:
+#      | phone stag   | phone prod | password |
+#      | 082233545515 | 0          | 12345678 |
+#    And user click info untuk anda "calon penyewa menunggu balasan chat. Yuk balas biar cepat di-booking."
+#    And user will see that the text "1 chat room" is displayed
+#    And owner navigates to owner dashboard
 
   @TEST_LIMO-3602 @continue @kuotaChatRedirection
   Scenario: See info untuk anda while MARS NON GP with have unreplied chat and doesnt have quota

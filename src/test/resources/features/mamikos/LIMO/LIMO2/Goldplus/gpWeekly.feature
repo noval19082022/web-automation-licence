@@ -24,13 +24,13 @@ Feature: GP Weekly
     When owner navigate to list package goldplus 2
     Then user verify list of Goldplus Weekly is appear
       | periodGP | price    |
-      | 1 Minggu | Rp44.000 |
+      | 3 Minggu | Rp100.000|
       | 2 Minggu | Rp17.500 |
 
   @TEST_LIMO-3491 @continue
   Scenario: Select GP Weekly
-    Given owner choose periode goldplus "1 Minggu"
-    Then owner see that the text "GoldPlus 2 periode 1 Minggu" is displayed on goldplus page
+    Given owner choose periode goldplus "3 Minggu"
+    Then owner see that the text "GoldPlus 2 periode 3 Minggu" is displayed on goldplus page
 
 
   @TEST_LIMO-3492 @continue
@@ -99,7 +99,7 @@ Feature: GP Weekly
       | phone stag   | password  |
       | 082233545519 | qwerty123 |
     When owner navigate to list package goldplus 2
-    * owner choose periode goldplus "1 Minggu"
+    * owner choose periode goldplus "Rp44.000 per minggu"
     * owner click bayar sekarang on detail tagihan page goldplus
     * owner navigates to owner dashboard
     * user click widget GP "Menunggu Pembayaran"

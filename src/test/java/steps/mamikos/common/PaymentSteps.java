@@ -313,6 +313,11 @@ public class PaymentSteps {
         invoice.paymentOVO("0812999000");
     }
 
+    @When("auto select payment owner/tenant/user success using ovo as payment method")
+    public void auto_select_payment_owner_success_using_ovo_as_payment_method() {
+        invoice.paymentOVOAutoSelect("0812999000");
+    }
+
     @When("tenant make bill payments using {string}")
     public void tenantMakeBillPaymentsUsingOvo(String method) {
         invoice.choosePaymentUsing(method);

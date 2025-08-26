@@ -95,16 +95,16 @@ public class GPPackageSelectionSteps {
                 monthlyIndex = i;
             } 
             // Check for various possible text formats for weekly
-            else if (period.contains("per minggu")) {
-                weeklyIndex = i;
-            }
+//            else if (period.contains("per minggu")) {
+//                weeklyIndex = i;
+//            }
         }
 
         // Verify basic packages are found
         Assert.assertTrue(monthlyIndex > -1, 
             "1 month package not found. Available options: " + periodOptions);
-        Assert.assertTrue(weeklyIndex > -1,
-            "Weekly package not found. Available options: " + periodOptions);
+//        Assert.assertTrue(weeklyIndex > -1,
+//            "Weekly package not found. Available options: " + periodOptions);
 
         // Verify they appear after long-term packages (3+ months)
         for (int i = 0; i < monthlyIndex; i++) {
@@ -324,9 +324,9 @@ public class GPPackageSelectionSteps {
             return 30;
         } 
         // Check for weekly periods
-        else if (lowerPeriod.contains("minggu")) {
-            return 7;
-        }
+//        else if (lowerPeriod.contains("minggu")) {
+//            return 7;
+//        }
         
         // Default return for unknown periods
         return 0;

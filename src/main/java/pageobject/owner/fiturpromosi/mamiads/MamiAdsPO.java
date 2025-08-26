@@ -697,7 +697,7 @@ public class MamiAdsPO {
      * @return ads position text
      */
     public String getPosisiIklan(String adsName, String adsPosition) {
-        String textPosisiIklan = "//*[.='" + adsName + "']/../..//following-sibling::*//div[@id='ads-position-" + adsPosition + "']";
+        String textPosisiIklan = "//p[normalize-space()='"+adsName+"']/../..//following-sibling::*//div[@id='ads-position-" + adsPosition + "']";
         playwright.waitTillLocatorIsVisible(page.locator(textPosisiIklan));
         return playwright.getText(page.locator(textPosisiIklan));
     }
