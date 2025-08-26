@@ -77,4 +77,11 @@ public class ubahPasswordStep {
     public void ownerEmptyNewPasswordField() {
         ubahPasswordPO.ownerEmptyNewPassword();
     }
+
+    @And("owner fills ketik ulang password {string}")
+    public void ownerFillsKetikUlangPassword(String password) {
+        ubahPasswordPO.userFillsKetikUlangPassword(password);
+    }
+
+
 }

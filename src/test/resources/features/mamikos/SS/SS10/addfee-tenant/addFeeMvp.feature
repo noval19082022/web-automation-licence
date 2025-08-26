@@ -18,8 +18,8 @@ Feature: Add fee Mvp - Tenant
       | 08100000213 | qwerty123 |
     And tenant redirect to kost details:
       | kost path stag                                                                               | kost path prod               |
-      | kost-kota-yogyakarta-kost-putri-murah-kosan-geng-keju-swiss-cheese-gondokusuman-yogyakarta-1 | Kos DC BAR Automation Tipe A |
-    And tenant dismiss promo ngebut pop up
+      | kost-kabupaten-sleman-kost-campur-eksklusif-automation-limo-limo-2727-depok-sleman | Kos DC BAR Automation Tipe A |
+    And tenant dismiss FTUE booking benefit
     And tenant booking kost for "Tomorrow"
     Then tenant cant see "Tambahan barang dan fasilitas" on booking form
     When tenant can see "catatan tambahan" on booking form
