@@ -363,7 +363,6 @@ public class SearchSteps {
 
     @When("user want to search kost list by place on {string} from homepage")
     public void user_search_for_keyword(String city) {
-        search = homePO.clickOnSearchButton();
         search.enterTextToSearchAndSelectResultCity(city);
     }
 

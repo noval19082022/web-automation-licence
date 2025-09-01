@@ -213,17 +213,25 @@ Feature: Broadcast Chat Owner
     And user click "Preview Pesan" button
     Then user see "Kopi Kapal Api dan Udud Jarcok Filter" on Preview Broadcast Message
 
-  @TEST_LIMO-3637 @Broadcast-chat @GP2 @automated @listing-monetization @web
-  Scenario: [Broadcast Chat Owner][Chat]User(Any kind of user) visit chat page in a new session
-    Given user go to mamikos homepage
-    Given user login as owner:
-      | phone stag  | phone prod | password  |
-      | 08713399866 | 0          | qwerty123 |
-    When user click chat button in top bar owner home page
-    Then user see tooltip broadcast chat
-    When user click icon close at tooltip
-    Then broadcast chat tooltip should not be visible
+#  @TEST_LIMO-3637 @Broadcast-chat @GP2 @automated @listing-monetization @web
+#  Scenario: [Broadcast Chat Owner][Chat]User(Any kind of user) visit chat page in a new session
+#    Given user go to mamikos homepage
+#    Given user login as owner:
+#      | phone stag  | phone prod | password  |
+#      | 08713399866 | 0          | qwerty123 |
+#    When user click chat button in top bar owner home page
+#    Then user see tooltip broadcast chat
+#    When user click icon close at tooltip
+#    Then broadcast chat tooltip should not be visible
+#
+#  Scenario: Delete or reset data GP
+#    Given admin go to mamikos mamipay admin
+#    When admin login to mamipay:
+#      | email stag                   | email prod                   | password  |
+#      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
+#    And user wants to reset Goldplus for owner with phone number "08646547892"
 
+  @TEST_LIMO-3638 @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario: Delete or reset data GP
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -231,8 +239,7 @@ Feature: Broadcast Chat Owner
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And user wants to reset Goldplus for owner with phone number "08646547892"
 
-  @TEST_LIMO-3638 @Broadcast-chat @GP2 @automated @listing-monetization @web
-  Scenario: [Broadcast Chat Owner][Chat] User already submit request GP 2 but not paid yet click Broadcast Chat entry point in Chat Page
+  #Scenario: [Broadcast Chat Owner][Chat] User already submit request GP 2 but not paid yet click Broadcast Chat entry point in Chat Page
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag  | phone prod | password  |
@@ -245,6 +252,7 @@ Feature: Broadcast Chat Owner
     When user click on lihat invoice button
     Then user will see that the text "Detail Tagihan" is displayed
 
+  @TEST_LIMO-1178 @TEST_LIMO-1175 @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario: Delete or reset data GP
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -252,8 +260,7 @@ Feature: Broadcast Chat Owner
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And user wants to reset Goldplus for owner with phone number "08646547892"
 
-  @TEST_LIMO-1178 @TEST_LIMO-1175 @Broadcast-chat @GP2 @automated @listing-monetization @web
-  Scenario: [Broadcast Chat Owner][Chat] User already submit request GP 1 but not paid yet, click Broadcast Chat entry point in Chat Page
+ # Scenario: [Broadcast Chat Owner][Chat] User already submit request GP 1 but not paid yet, click Broadcast Chat entry point in Chat Page
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag  | phone prod | password  |

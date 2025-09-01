@@ -84,7 +84,7 @@ Feature: Laporan Statistik
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin bangkrupux navigate to kost owner menu
-    And admin bangkrupux search phone owner "0823333333330" in admin kos owner page
+    And admin bangkrupux search phone owner "0891202303" in admin kos owner page
     And admin accept kos
     Then verify "Success! Room has been successfully updated" displayed
 

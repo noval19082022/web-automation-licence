@@ -249,6 +249,7 @@ public class BroadcastChatPO {
      * @return tooltip broadcast chat is present
      */
     public boolean isTooltipBroadcastDisplayed() {
+        playwright.clickOn(broadcastChatIcon);
         return playwright.waitTillLocatorIsVisible(tooltipBroadcast, 2000.0);
     }
 

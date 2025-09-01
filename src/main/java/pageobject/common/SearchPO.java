@@ -760,6 +760,8 @@ public class SearchPO {
     }
 
     public void selectFirstKostOnSearchResult() {
+        // Wait for kostCard to be available with longer timeout
+        playwright.waitTillLocatorIsVisible(kostCard.first(), 5000.0);
         playwright.clickOn(kostCard.first());
     }
 

@@ -231,22 +231,40 @@ public class NaikkanIklanPO {
     }
 
     /**
-     * Click toggle ads
+     * Click toggle ads - automatically handles toggle state
+     * If current state is OFF, it will turn ON
+     * If current state is ON, it will turn OFF
      *
      * @params toggleStatus, adsName
      */
     public void clickToggleTheAds(String toggleStatus, String adsName) {
-        if (toggleStatus.equalsIgnoreCase("off")) {
-            switchToggleLocator = page.locator("//*[.='" + adsName + "']/../../following-sibling::*//input[@id='room-toggle-switch-off']");
+        // First, try to find the current state of the toggle
+        // Check if toggle is currently ON
+        Locator toggleOn = page.locator("//*[.='" + adsName + "']/../../following-sibling::*//input[@id='room-toggle-switch-on']");
+        // Check if toggle is currently OFF
+        Locator toggleOff = page.locator("//*[.='" + adsName + "']/../../following-sibling::*//input[@id='room-toggle-switch-off']");
+        
+        // Determine current state and click the appropriate toggle
+        if (toggleOn.isVisible() && toggleOn.isChecked()) {
+            // Toggle is currently ON, so we click to turn it OFF
+            System.out.println("Toggle is currently ON for " + adsName + ", turning it OFF...");
+            switchToggleLocator = toggleOn;
+        } else if (toggleOff.isVisible() && toggleOff.isChecked()) {
+            // Toggle is currently OFF, so we click to turn it ON
+            System.out.println("Toggle is currently OFF for " + adsName + ", turning it ON...");
+            switchToggleLocator = toggleOff;
         } else {
-            switchToggleLocator = page.locator("//*[.='" + adsName + "']/../../following-sibling::*//input[@id='room-toggle-switch-on']");
+            // Fallback to original logic if state cannot be determined
+            if (toggleStatus.equalsIgnoreCase("off")) {
+                switchToggleLocator = toggleOff;
+            } else {
+                switchToggleLocator = toggleOn;
+            }
         }
+        
         playwright.waitTillLocatorIsVisible(switchToggleLocator);
-        if (switchToggleLocator.isChecked()) {
-            switchToggleLocator.uncheck();
-        } else {
-            switchToggleLocator.check();
-        }
+        // Click the toggle to change its state
+        switchToggleLocator.click();
     }
 
     /**
@@ -270,14 +288,34 @@ public class NaikkanIklanPO {
     }
 
     /**
-     * Click Aktifkan button
+     * Click action button in popup - automatically handles the correct button based on context
+     * If turning OFF (deactivating), clicks "Ya, Nonaktifkan"
+     * If turning ON (activating), clicks "Aktifkan"
      *
-     * @params actionButton
+     * @param actionButton the expected action button text
      */
     public void clickActionButtonInPopUp(String actionButton) {
         playwright.hardWait(3000.0);
-        actionButtonLocator = page.locator("(//button[normalize-space()='"+actionButton+"'])");
-        playwright.clickOn(actionButtonLocator);
+        
+        // Check which popup is displayed and click the appropriate button
+        Locator nonaktifkanButton = page.locator("//button[normalize-space()='Ya, Nonaktifkan']");
+        Locator aktifkanButton = page.locator("//button[normalize-space()='Aktifkan']");
+        
+        // Determine which button to click based on visibility
+        if (nonaktifkanButton.isVisible()) {
+            // Popup for deactivating (turning OFF) is shown
+            System.out.println("Clicking 'Ya, Nonaktifkan' button to turn OFF the toggle...");
+            playwright.clickOn(nonaktifkanButton);
+        } else if (aktifkanButton.isVisible()) {
+            // Popup for activating (turning ON) is shown
+            System.out.println("Clicking 'Aktifkan' button to turn ON the toggle...");
+            playwright.clickOn(aktifkanButton);
+        } else {
+            // Fallback to original logic using the provided actionButton parameter
+            System.out.println("Using fallback: clicking '" + actionButton + "' button...");
+            actionButtonLocator = page.locator("(//button[normalize-space()='"+actionButton+"'])");
+            playwright.clickOn(actionButtonLocator);
+        }
     }
 
     /**

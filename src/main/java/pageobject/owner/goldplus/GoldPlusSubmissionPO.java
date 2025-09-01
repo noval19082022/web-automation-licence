@@ -42,7 +42,7 @@ public class GoldPlusSubmissionPO {
      * Click on bayar sekarang button and wait until page loaded
      */
     public void clicksOnBayarSekarangButton() {
-        playwright.waitFor(bayarSekarangButton, 30000.0);
+        playwright.waitFor(bayarSekarangButton, 3000.0);
         playwright.clickOn(bayarSekarangButton);
         playwright.waitTillPageLoaded();
     }
@@ -55,10 +55,6 @@ public class GoldPlusSubmissionPO {
         var carList = playwright.getLocators(gpSectionCardList);
 
         playwright.clickOn(carList.get(carList.size() -1));
-
-        if (tapPilihPeriode) {
-            playwright.clickOn(pilihPeriode);
-        }
     }
 
     /**
