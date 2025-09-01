@@ -95,7 +95,7 @@ public class SearchPO {
         this.firstPriceListing = page.locator("(//span[contains(@class, 'rc-price__text')])[1]");
         this.lastPriceListing = page.locator("(//span[contains(@class, 'rc-price__text')])[20]");
         this.mapLegendButton = page.locator("#app div.container-fluid.map-container.map-container--tall.default-content-map.default-content-map--hide > button");
-        this.mapLegendClosedStatus = page.locator("div[style='display: none;']");
+        this.mapLegendClosedStatus = page.locator(".map-style__legend");
         this.suggestionResult = page.locator("//*[@data-testid='suggestionsBox-areaList']/descendant::label");
         this.kostCard = page.getByTestId("kostRoomCard");
         this.zoomInButton = page.locator("a.leaflet-control-zoom-in");
@@ -737,7 +737,7 @@ public class SearchPO {
      * @return map legend pop up present / not
      */
     public boolean isMapLegendPresent() {
-        return playwright.waitTillLocatorIsVisible(mapLegendClosedStatus);
+        return mapLegendClosedStatus.isVisible();
     }
 
     /**

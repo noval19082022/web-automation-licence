@@ -53,7 +53,7 @@ public class ApartmentLandingPO {
         this.filteringFurniture = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^PerabotanSemuaFurnishedSemi FurnishedNot furnished$"))).getByRole(AriaRole.COMBOBOX);
         this.filteringPrice = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^UrutkanAcakHarga terendahHarga tertinggiKosong ke Penuh$"))).getByRole(AriaRole.COMBOBOX);
         this.filteringUnitType = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Tipe UnitSemua1-Room Studio1 BR2 BR3 BR4 BRLainnya$"))).getByRole(AriaRole.COMBOBOX);
-        this.filteringAreaDropDown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("dropdown-down"));
+        this.filteringAreaDropDown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Semua Kota dropdown-down"));
         this.filteringArea = page.locator("a");
         this.listTimePeriod = page.locator("//span[@class='rc-price__type bg-c-text bg-c-text--body-2']");
         this.listUnitAndFurniture = page.locator("//div[@class='rc-price__additional-data']");
