@@ -103,7 +103,7 @@ Feature: Tenant Form Survey Kost P2
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod   | password  |
-      | 0811978788412 | 087708777612 | qwerty123 |
+      | 0811978788417 | 087708777612 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag              | kost name prod              |
       | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
@@ -169,7 +169,7 @@ Feature: Tenant Form Survey Kost P2
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod   | password  |
-      | 0811978788412 | 087708777612 | qwerty123 |
+      | 0811978788417 | 087708777612 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag              | kost name prod              |
       | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
@@ -200,7 +200,7 @@ Feature: Tenant Form Survey Kost P2
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod   | password  |
-      | 0811978788412 | 087708777612 | qwerty123 |
+      | 0811978788417 | 087708777612 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag              | kost name prod              |
       | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
@@ -216,7 +216,7 @@ Feature: Tenant Form Survey Kost P2
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod   | password  |
-      | 0811978788412 | 087708777612 | qwerty123 |
+      | 0811978788417 | 087708777612 | qwerty123 |
     And tenant search kost then go to kost details:
       | kost name stag              | kost name prod              |
       | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
