@@ -56,8 +56,8 @@ Feature: Chat and Chat Optimization
 
         @TEST_SS-3292
         Scenario: [Dweb][Kost Detail][Chat] Redirect to booking form page when contact kos with instant booking
-             When send button become "Ajukan Sewa"
               And user select question "Saya butuh cepat nih. Bisa booking sekarang?"
+              Then send button become "Ajukan Sewa"
               And tenant click button ajukan sewa from chat popup
              Then it will redirect to Booking page
 
@@ -99,7 +99,7 @@ Feature: Chat and Chat Optimization
                   | kost-kabupaten-cilacap-kost-putri-eksklusif-kos-bx-automation-bbk-non-available-cilacap-tengah-cilacap | Kos BX Automation BBK Non Available Tobelo Halmahera Utara |
               And user click chat in kos detail
              Then user sees the Booking button disable
-
+#
         @TEST_SS-3269
         Scenario: [Dweb][Kost Detail][Chat] Check functionality of booking button active
             Given user go to mamikos homepage
@@ -143,4 +143,4 @@ Feature: Chat and Chat Optimization
               And user go to apartment details from apartment landing list number 1
               And tenant set active page to 1
               And user click on hubungi pengelola button
-             Then chat room appear with latest message "Hai, terima kasih sudah berminat pada apartemen ini. Alamat lengkapnya adalah"
+             Then chat room appear with latest message "Apartmen Dahlia Anastasia masih kosong seharga Rp Rp 500 rb/hr,"
