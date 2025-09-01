@@ -2,8 +2,8 @@ package pageobject.owner.goldplus;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import pageobject.admin.testingtools.GoldPlusPO;
 import utilities.PlaywrightHelpers;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,34 +11,25 @@ public class GoldPlusSubmissionPO {
     private Page page;
     private PlaywrightHelpers playwright;
 
-    private Locator pilihPaketButton;
     private Locator pilihPeriode;
     private Locator bayarSekarangButton;
     private Locator gpSectionCardList;
     private Locator selectedFavoritGpPackage;
     private Locator selectedGpPeriode;
-    private Locator mamiadsBalanceListContainer;
     private Locator periodOptionsList;
 
     public GoldPlusSubmissionPO(Page page) {
         this.page = page;
+        GoldPlusPO GoldPlusPO = new GoldPlusPO(page);
         playwright = new PlaywrightHelpers(this.page);
-        pilihPaketButton = playwright.getButtonBySetName("Pilih");
         pilihPeriode = playwright.getButtonBySetName("Pilih Periode");
         bayarSekarangButton = playwright.getButtonBySetName("Bayar Sekarang Rp");
         gpSectionCardList = page.getByTestId("periode-card-gp");
         selectedFavoritGpPackage = page.locator(".bg-c-radio--checked + .goldplus-periode-select__option .bg-c-label--pill-red");
         selectedGpPeriode = page.locator(".goldplus-periode__package-content .bg-c-radio--checked");
-        mamiadsBalanceListContainer = page.locator(".goldplus-mamiads-detail");
         periodOptionsList = page.locator("//div[@class='goldplus-periode-select']");
     }
 
-//    /**
-//     * Clicks on pilih periode button
-//     */
-//    public void clicksOnPilihPeriodeButton() {
-//        playwright.clickOn(pilihPeriode);
-//    }
 
     /**
      * Clicks on pilih paket button

@@ -148,7 +148,7 @@ public class MamiAdsPO {
 
         //--- Jemput Bola Entry Point ---//
         this.entryPointJBSection = page.locator("(//div[@class='mami-ads-statistic-main'])[1]");
-        this.labelNewJemputBola = page.getByText("Baru");
+        this.labelNewJemputBola = page.getByTestId("mamiadsStatistic").getByText("Baru");
 
         //--- GP Onboarding Pop - Up ---//
         gpOnboardingPopUpActiveCounter = page.locator(".swiper-slide-active .gp-swiper__slide-counter");

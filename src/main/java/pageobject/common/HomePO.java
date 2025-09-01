@@ -99,7 +99,7 @@ public class HomePO {
         this.locatorHelpers = new LocatorHelpers(page);
         this.cariApaDropDownMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari Apa? dropdown-down"));
         this.btnMasuk = page.getByTestId("entryButton");
-        this.cariButton = page.locator("//div[@class='btn-cta-span']");
+        this.cariButton = page.locator("page.getByText(\"Masukan nama lokasi/area/\")");
         mamikosLogo = page.getByTestId("bg-l-footer-general").getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Mamikos Logo"));
         userProfile = page.locator("div.user-profile-dropdown");
         promoNgebutHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Promo Ngebut"));

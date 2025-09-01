@@ -1,11 +1,7 @@
 @listing-monetization @regression @LIMO5 @broadcastChat
 Feature: Broadcast Chat Owner
 
-    #Pre-condition: *
-	#
-	#* User login with owner already activated list
-	#* User already finish onboarding slide Broadcast Chat
-	#{{ User GP2 click Broadcast Chat Entry Point From Fitur Promosi Page}}
+
   @TEST_LIMO-3614 @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario Outline: [Broadcast Chat Owner][Chat][Fitur Promosi Page][User GP 2]click Broadcast Chat entry point in Kelola Page
     Given user go to mamikos homepage
@@ -102,7 +98,7 @@ Feature: Broadcast Chat Owner
   @TEST_LIMO-3622 @Broadcast-chat @GP2 @automated @listing-monetization @web @continue
   Scenario: [Broadcast Chat][Rincian Pesan]user want to click button baca selengkapnya && user can see alert kost don't have recipient
     Given user go to mamikos homepage
-    Given user login as owner:
+    When user login as owner:
       | phone stag  | phone prod | password  |
       | 08713399866 | 0          | qwerty123 |
     When owner navigates to broadcast chat page
@@ -217,35 +213,17 @@ Feature: Broadcast Chat Owner
     And user click "Preview Pesan" button
     Then user see "Kopi Kapal Api dan Udud Jarcok Filter" on Preview Broadcast Message
 
-    #Pre-condition: *
-	#
-	#* User login with owner total chat = 0
-#  @TEST_LIMO-3637 @Broadcast-chat @GP2 @automated @listing-monetization @web
-#  Scenario: [Broadcast Chat Owner][Chat]User(Any kind of user) visit chat page in a new session
-#    Given user go to mamikos homepage
-#    Given user login as owner:
-#      | phone stag  | phone prod | password  |
-#      | 08713399866 | 0          | qwerty123 |
-#    When user click chat button in top bar owner home page
-#    Then user see tooltip broadcast chat
-#    When user click icon close at tooltip
-#    Then broadcast chat tooltip should not be visible
-
-  @TEST_LIMO-3638 @Broadcast-chat @GP2 @automated @listing-monetization @web @continue
-  Scenario: [Broadcast Chat Owner][Chat] User already submit request GP 2 but not paid yet click Broadcast Chat entry point in Chat Page
+  @TEST_LIMO-3637 @Broadcast-chat @GP2 @automated @listing-monetization @web
+  Scenario: [Broadcast Chat Owner][Chat]User(Any kind of user) visit chat page in a new session
     Given user go to mamikos homepage
     Given user login as owner:
       | phone stag  | phone prod | password  |
-      | 08646547892 | 0          | fathul123 |
-    When user wants to subscribe Goldplus 2
-    And owner navigates to owner dashboard
-    And user click chat button in top bar owner home page
-    And user click on the broadcast message icon in the chat page
-    Then user will see that the text "Anda bisa menggunakan Fitur Broadcast Chat setelah proses pembelian paket selesai." is displayed
-    When user click on lihat invoice button
-    Then user will see that the text "Detail Tagihan" is displayed
+      | 08713399866 | 0          | qwerty123 |
+    When user click chat button in top bar owner home page
+    Then user see tooltip broadcast chat
+    When user click icon close at tooltip
+    Then broadcast chat tooltip should not be visible
 
-  @continue
   Scenario: Delete or reset data GP
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -253,22 +231,34 @@ Feature: Broadcast Chat Owner
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And user wants to reset Goldplus for owner with phone number "08646547892"
 
-  @TEST_LIMO-1180 @Broadcast-chat @GP2 @automated @listing-monetization @web @continue
-  Scenario: [Broadcast Chat Owner][Chat] User already submit request GP 2 but not paid yet;click Broadcast Chat entry point in Kelola Page
-    When user wants to subscribe Goldplus 2
-    When owner navigates to broadcast chat page
+  @TEST_LIMO-3638 @Broadcast-chat @GP2 @automated @listing-monetization @web
+  Scenario: [Broadcast Chat Owner][Chat] User already submit request GP 2 but not paid yet click Broadcast Chat entry point in Chat Page
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag  | phone prod | password  |
+      | 08646547892 | 0          | fathul123 |
+    And user wants to subscribe Goldplus 2
+    And owner navigates to owner dashboard
+    And user click chat button in top bar owner home page
+    And user click on the broadcast message icon in the chat page
     Then user will see that the text "Anda bisa menggunakan Fitur Broadcast Chat setelah proses pembelian paket selesai." is displayed
-    When user click "Lihat Invoice"
+    When user click on lihat invoice button
     Then user will see that the text "Detail Tagihan" is displayed
 
-  @continue
   Scenario: Delete or reset data GP
     Given admin go to mamikos mamipay admin
+    When admin login to mamipay:
+      | email stag                   | email prod                   | password  |
+      | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And user wants to reset Goldplus for owner with phone number "08646547892"
 
-  @TEST_LIMO-1178 @TEST_LIMO-1175 @Broadcast-chat @GP2 @automated @listing-monetization @web @continue
+  @TEST_LIMO-1178 @TEST_LIMO-1175 @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario: [Broadcast Chat Owner][Chat] User already submit request GP 1 but not paid yet, click Broadcast Chat entry point in Chat Page
-    When user wants to subscribe Goldplus 1
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag  | phone prod | password  |
+      | 08646547892 | 0          | fathul123 |
+    And user wants to subscribe Goldplus 1
     And owner navigates to owner dashboard
     And user click chat button in top bar owner home page
     And user click on the broadcast message icon in the chat page
@@ -276,14 +266,14 @@ Feature: Broadcast Chat Owner
     Then user will see that the text "Detail Paket" is displayed
     Then owner can sees button "Lihat Detail Paket" and button "Ajukan Ganti Paket" is visible
 
-  @TEST_LIMO-1175 @continue
+  @TEST_LIMO-1175
   Scenario: [Broadcast Chat Owner][Chat] User already submit request GP 1 but not paid yet, click Broadcast Chat entry point in Kelola Page
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag  | phone prod | password  |
+      | 08646547892 | 0          | fathul123 |
     When owner navigates to broadcast chat page
     Then owner can sees button "Lihat Detail Paket" and button "Ajukan Ganti Paket" is visible
-
-  Scenario: Delete or reset data GP
-    Given admin go to mamikos mamipay admin
-    And user wants to reset Goldplus for owner with phone number "08646547892"
 
   @TEST_LIMO-1158 @Broadcast-chat @GP2 @automated @listing-monetization @web
   Scenario: [Broadcast Chat][View Receiver]user want to see receiver

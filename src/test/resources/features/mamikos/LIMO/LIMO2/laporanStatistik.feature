@@ -10,14 +10,14 @@ Feature: Laporan Statistik
     And owner accsess statistic page
     Then auto select kost listing that are in the top order
       | KosName                                |
-      | Kost Bandicoot Tobelo Tobelo Halmahera |
+      | Kost SkinCare Tobelo TIPE A Tobelo Utara Halmahera Utara |
 
   @TEST_LIMO-277
   Scenario: [Form add New Kost][Kos]Create new room type from "Tipe A" && edit data kos && mamipay not active
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag    | password  |
-      | 0823333333330 | qwerty123 |
+      | phone stag | password  |
+      | 0891202303 | qwerty123 |
     And owner navigates to property saya kos
     When owner close pop up BBK at kos list page
     And owner click tambah data iklan "Kost"
