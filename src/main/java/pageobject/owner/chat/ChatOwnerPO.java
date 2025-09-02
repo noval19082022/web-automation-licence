@@ -154,6 +154,7 @@ public class ChatOwnerPO {
      * Click on "Chat" in kos Detail
      */
     public void clickChatKos() {
+        playwright.waitTillLocatorIsVisible(chatKosButton, 20000.0);
         playwright.clickOn(chatKosButton);
     }
 

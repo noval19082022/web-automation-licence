@@ -53,7 +53,7 @@ public class ChatTenantPO {
         chatTextBox = page.getByTestId("popperReference").getByRole(AriaRole.TEXTBOX);
         sendButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("send"));
         disabledRoomCardBookingButton = page.locator(".track_request_booking");
-        seeAdsButton = page.getByTestId("chatRoomHeaderWrapper");
+        seeAdsButton = page.locator("#chatRoomHeaderWrapper");
         ownerLastSeen = page.locator(".mc-chat-room__header-content > p");
         ajukanSewaChatRoomButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Sewa"));
         ajukanSewaPopUpChatRoomButton = page.locator("//button[@class='bg-c-button booking-input-checkin-modal__footer-action bg-c-button--primary bg-c-button--lg bg-c-button--block']");
@@ -95,6 +95,11 @@ public class ChatTenantPO {
      * @return String text button Send
      */
     public String verifySendLabel() {
+        // Wait for modal to be visible first
+        playwright.waitTillLocatorIsVisible(page.locator("#modalChat"), 10000.0);
+        
+        // Wait for the button to appear with the expected text after question selection
+        playwright.waitTillLocatorIsVisible(ajukanSewaButton, 20000.0);
         return playwright.getText(ajukanSewaButton);
     }
 
@@ -104,12 +109,18 @@ public class ChatTenantPO {
      * @param text is position from top
      */
     public void clickQuestion(String text) {
-        Locator questionOption = page.getByText("" + text + "");
-        playwright.clickOn(questionOption);
-        playwright.hardWait(5000);
-        KostDetailsPO ChatTenantPO = new KostDetailsPO(page);
-        if (playwright.waitTillLocatorIsVisible(ftueSlider, 5000.0)) {
-            ChatTenantPO.dismissFTUE();
+        // Wait for question options to be visible
+        playwright.waitTillLocatorIsVisible(questionsOption.first(), 10000.0);
+        
+        // Find the question radio button option and click it
+        Locator questionRadio = page.locator("[data-testid='wrapper-question'] .question-option").filter(new Locator.FilterOptions().setHasText(text));
+        playwright.waitTillLocatorIsVisible(questionRadio, 5000.0);
+        playwright.clickOn(questionRadio);
+        
+        // Check and dismiss FTUE if present
+        KostDetailsPO kostDetailsPO = new KostDetailsPO(page);
+        if (playwright.waitTillLocatorIsVisible(ftueSlider, 2000.0)) {
+            kostDetailsPO.dismissFTUE();
         }
     }
 
@@ -139,6 +150,7 @@ public class ChatTenantPO {
      * Click ajukan sewa button in question pop up
      */
     public void clickAjukanSewaButton() {
+        playwright.waitTillLocatorIsVisible(ajukanSewaButton, 50000.0);
         playwright.clickOn(ajukanSewaButton);
     }
 
@@ -190,6 +202,13 @@ public class ChatTenantPO {
      * Click Lihat Iklan button
      */
     public void clickLihatIklanButton() {
+        // Dismiss FTUE if present before clicking header
+        KostDetailsPO kostDetailsPO = new KostDetailsPO(page);
+        if (playwright.waitTillLocatorIsVisible(ftueSlider, 3000.0)) {
+            kostDetailsPO.dismissFTUE();
+        }
+        
+        playwright.waitTillLocatorIsVisible(seeAdsButton, 10000.0);
         playwright.clickOn(seeAdsButton);
     }
 
