@@ -15,8 +15,8 @@ Feature: Broadcast Chat Owner 2
   Scenario: [Broadcast Chat][Create Broadcast chat]User want to change kost after input message chat
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | phone prod | password  |
-      | 081328787342 | 0          | Perempuan |
+      | phone stag   | phone prod | password     |
+      | 081328787342 | 0          | Perempuan123 |
     And owner navigates to broadcast chat page
     And owner dismiss FTUE Broadcast
     And owner add broadcast chat for kost "kost automation DOM boleh refund Patikraja Banyumas"
@@ -31,8 +31,8 @@ Feature: Broadcast Chat Owner 2
   Scenario: [Broadcast Chat][Select Kost]User Search kost with condition full room not yet have a chat
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | phone prod | password  |
-      | 081328787342 | 0          | Perempuan |
+      | phone stag   | phone prod | password     |
+      | 081328787342 | 0          | Perempuan123 |
     And owner navigates to broadcast chat page
     And owner dismiss FTUE Broadcast
     And owner add broadcast chat for kost "kost lpl staging Patikraja Kabupatn Banyumas"
@@ -46,8 +46,8 @@ Feature: Broadcast Chat Owner 2
   Scenario: [Broadcast Chat][Select Kost]User validate list kost is showed all
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | phone prod | password  |
-      | 081328787342 | 0          | Perempuan |
+      | phone stag   | phone prod | password     |
+      | 081328787342 | 0          | Perempuan123 |
     And owner navigates to broadcast chat page
     And owner dismiss FTUE Broadcast
     And owner tap on add broadcast chat
@@ -59,8 +59,8 @@ Feature: Broadcast Chat Owner 2
   Scenario: [Broadcast Chat][Select Message]User back from Select Message Page
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | phone prod | password  |
-      | 081328787342 | 0          | Perempuan |
+      | phone stag   | phone prod | password     |
+      | 081328787342 | 0          | Perempuan123 |
     And owner navigates to broadcast chat page
     And owner dismiss FTUE Broadcast
     And owner add broadcast chat for kost "kost automation DOM boleh refund Patikraja Banyumas"
@@ -80,8 +80,8 @@ Feature: Broadcast Chat Owner 2
   Scenario: [Broadcast Chat][Update GP]user update status GP
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | phone prod | password  |
-      | 081328787342 | 0          | Perempuan |
+      | phone stag   | phone prod | password     |
+      | 081328787342 | 0          | Perempuan123 |
     And owner navigates to broadcast chat page
     And owner dismiss FTUE Broadcast
     Then owner will see that the text "Broadcast Chat" is displayed

@@ -31,7 +31,7 @@ Feature: [Test-Execution][DOM] Web - Platform
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | password  |
-      | 081328787342 | Perempuan |
+      | 081328787342 | Perempuan123 |
     And owner navigates to owner dashboard
     And owner dismiss FTUE goldplus
     And owner open notification icon

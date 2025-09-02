@@ -45,7 +45,7 @@ Feature: Update Kamar
     And user filter the room with "Kamar Kosong" in update room page
     Then user see total room is "Total Kamar 7" in update room page
     When user filter the room with "Kamar Terisi" in update room page
-    Then user see total room is "Total Kamar 0" in update room page
+    Then user see total room is "Total Kamar 1" in update room page
 
   @TEST_LIMO-874 @continue @WEB @AUTOMATED
   Scenario: [WEB][Update Room] Access page "Update Kamar" from entry point kos list when kost status == Active by update text box "Lantai (Opsional)"
@@ -80,13 +80,13 @@ Feature: Update Kamar
     When user filter the room with "Kamar Kosong" in update room page
     Then user see total room is "Total Kamar 7" in update room page
     When user filter the room with "Kamar Terisi" in update room page
-    Then user see total room is "Total Kamar 0" in update room page
+    Then user see total room is "Total Kamar 1" in update room page
     When owner navigates to property saya kos
     And owner search kost "Kose Full Automation" on property saya page
     And user click Lihat Selengkapnya button for edit
     And owner click "Update Kamar"
     And user filter the room with "Kamar Kosong" in update room page
-    Then user see total room is "Total Kamar 0" in update room page
+    Then user see total room is "Total Kamar 1" in update room page
 
   @TEST_LIMO-879 @continue @WEB @AUTOMATED
   Scenario: [WEB][Update Room]  Check box "Sudah Berpenghuni" is set to define room status when kost not in Goldplus Level

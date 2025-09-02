@@ -166,7 +166,7 @@ Feature: Search Contract
     When user logs out as a Tenant user
     And user login as owner:
       | phone stag   | phone prod   | password  |
-      | 081328787342 | 081328787342 | Perempuan |
+      | 081328787342 | 081328787342 | Perempuan123 |
     And owner accept booking from tenant:
       | tenant stag | tenant prod |
       | Coba Daftar | Desta       |

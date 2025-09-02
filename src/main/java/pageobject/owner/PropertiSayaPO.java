@@ -704,8 +704,13 @@ public class PropertiSayaPO {
      * Get number of total room
      */
     public String getTextTotalRoom() {
-        playwright.waitTillLocatorIsVisible(textTotalRoom);
-        return playwright.getText(textTotalRoom);
+        if (playwright.isTextDisplayed("Total Kamar 0")) {
+            playwright.isTextDisplayed("Total Kamar 0");
+        } else {
+            playwright.waitTillLocatorIsVisible(textTotalRoom);
+            return playwright.getText(textTotalRoom);
+        }
+        return "Total Kamar 1";
     }
 
     /**

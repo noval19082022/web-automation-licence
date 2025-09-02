@@ -127,7 +127,7 @@ Feature: Payment Backoffice Staging 2 - Refund
     ## owner accept
     When user login as owner:
       | phone stag   | phone prod   | password  |
-      | 081328787342 | 081328787342 | Perempuan |
+      | 081328787342 | 081328787342 | Perempuan123 |
     And owner accept booking and select the room
     Then owner should redirect back to pengajuan booking page
     And owner logs out
