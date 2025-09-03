@@ -1,4 +1,4 @@
-@SS14 @changeEmailOwner
+@changeEmailOwner
 Feature: Change email owner
 
   @TEST_SS-3273

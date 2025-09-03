@@ -18,9 +18,9 @@ public class SurveyTrackerPO {
     public SurveyTrackerPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
-        penyewaFilterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("filter Filter"));
-        pilihPlatformFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih platform survei dropdown-down"));
-        pilihStatusPlatformFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih status survei dropdown-down"));
+        penyewaFilterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("filterFilter"));
+        pilihPlatformFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih platform survei"));
+        pilihStatusPlatformFilter = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih status survei dropdown-"));
         dataCounterText = page.locator(".secondary-bar__result-text");
     }
 
