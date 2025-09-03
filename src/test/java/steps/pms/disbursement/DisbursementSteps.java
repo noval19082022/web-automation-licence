@@ -9,6 +9,7 @@ import org.testng.Assert;
 import pageobject.common.HomePO;
 import pageobject.pms.disbursement.DisbursementPO;
 import utilities.JavaHelpers;
+import utilities.PlaywrightHelpers;
 
 import java.text.ParseException;
 import java.util.List;
@@ -18,6 +19,7 @@ public class DisbursementSteps {
     Page page = ActiveContext.getActivePage();
     DisbursementPO disbursement = new DisbursementPO(page);
     HomePO home = new HomePO(page);
+    PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     private JavaHelpers java = new JavaHelpers();
 
     private static final String MAMIKOS = "src/main/resources/mamikos.properties";
@@ -55,7 +57,8 @@ public class DisbursementSteps {
         String addOnJP = modelKerjaSama.get(0).get("Add On JP");
         String addOnADP = modelKerjaSama.get(0).get("Add On ADP");
 
-        disbursement.clicksRefreshHalamanIniBtn();
+        playwright.reloadPage();
+        playwright.waitTillPageLoaded();
 
         Assert.assertEquals(disbursement.getModelKerjaSamaBooking(), modelKerjaSamaBooking);
         Assert.assertEquals(disbursement.getModelKerjaSamaDBET(), modelKerjaSamaDBET);
