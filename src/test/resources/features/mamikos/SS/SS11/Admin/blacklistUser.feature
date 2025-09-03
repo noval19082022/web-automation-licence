@@ -10,7 +10,6 @@ Feature: Blacklist User
 
   @continue @TEST_SS-2827 @TEST_SS-2828
   Scenario Outline: [WEB][Blacklist][Filter] Admin search filter by <dropDown>
-    Given admin go to mamikos bangkrupux admin
     When user access menu blacklist user
     Then user choose dropdown "<dropDown>" enter value "<value>" and validate filter result "<value>"
     Examples:
