@@ -10,14 +10,14 @@ Feature: Laporan Statistik
     And owner accsess statistic page
     Then auto select kost listing that are in the top order
       | KosName                                |
-      | Kost Bandicoot Tobelo Tobelo Halmahera |
+      | Kost SkinCare Tobelo TIPE A Tobelo Utara Halmahera Utara |
 
   @TEST_LIMO-277
   Scenario: [Form add New Kost][Kos]Create new room type from "Tipe A" && edit data kos && mamipay not active
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag    | password  |
-      | 0823333333330 | qwerty123 |
+      | phone stag | password  |
+      | 0891202303 | qwerty123 |
     And owner navigates to property saya kos
     When owner close pop up BBK at kos list page
     And owner click tambah data iklan "Kost"
@@ -84,15 +84,15 @@ Feature: Laporan Statistik
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin bangkrupux navigate to kost owner menu
-    And admin bangkrupux search phone owner "0823333333330" in admin kos owner page
+    And admin bangkrupux search phone owner "0891202303" in admin kos owner page
     And admin accept kos
     Then verify "Success! Room has been successfully updated" displayed
 
   Scenario: [WEB][Statistic Page] Statistic section when owner have 1 propety just activated by today
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag    | phone prod | password  |
-      | 0823333333330 | 0          | qwerty123 |
+      | phone stag | phone prod | password  |
+      | 0891202303 | 0          | qwerty123 |
     And owner accsess statistic page
    # Then owner can see display empty state "Properti Belum Memiliki Performa"
 
@@ -102,7 +102,7 @@ Feature: Laporan Statistik
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin bangkrupux navigate to kost owner menu
-    And admin bangkrupux search phone owner "0823333333330" in admin kos owner page
+    And admin bangkrupux search phone owner "0891202303" in admin kos owner page
     And admin delete kos
     Then verify "Success! Room has been succesfully deleted" displayed
 

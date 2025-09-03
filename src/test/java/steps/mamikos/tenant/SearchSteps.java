@@ -1,5 +1,6 @@
 package steps.mamikos.tenant;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
@@ -16,6 +17,7 @@ import pageobject.common.KostLandingAreaPO;
 import pageobject.common.SearchPO;
 import utilities.PlaywrightHelpers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -363,7 +365,6 @@ public class SearchSteps {
 
     @When("user want to search kost list by place on {string} from homepage")
     public void user_search_for_keyword(String city) {
-        search = homePO.clickOnSearchButton();
         search.enterTextToSearchAndSelectResultCity(city);
     }
 
@@ -683,5 +684,45 @@ public class SearchSteps {
     @And("user sets top kos Rooms Available filter")
     public void userSetsTopKosRoomAvailableFilter() {
         search.kosRoomAvailableFilter();
+    }
+
+    @When("user click on search kos")
+    public void userClickOnSearchKos() {
+        search.clickOnSearchKos();
+    }
+
+    @And("user input area {string}")
+    public void userInputArea(String area) {
+        search.inputArea(area);
+    }
+
+    @Then("user no longer see text {string}")
+    public void userNoLongerSeeText(String text) {
+        // Wait a moment for any text changes to occur
+        playwright.hardWait(1000);
+
+        // Check that the specified text is no longer visible
+        boolean textNotVisible = !page.getByText(text).isVisible();
+
+        Assert.assertTrue(textNotVisible,
+                "Expected text '" + text + "' to no longer be visible, but it is still displayed");
+
+        System.out.println("Verified that text '" + text + "' is no longer visible");
+    }
+
+    @When("user click on {string}")
+    public void userClickOnAreaTerkaitLink(String linkText) {
+        search.clickOnLink(linkText);
+        System.out.println("Clicked on link: " + linkText);
+    }
+
+    @Then("user see display {int} suggestion kos")
+    public void userSeeDisplayNumberOfSuggestionKos(int expectedCount) {
+        boolean hasSuggestions = search.verifyAdditionalSuggestions(expectedCount);
+
+        Assert.assertTrue(hasSuggestions,
+                "Expected to see " + expectedCount + " additional kos suggestions, but they were not displayed");
+
+        System.out.println("Successfully verified that " + expectedCount + " additional kos suggestions are displayed");
     }
 }

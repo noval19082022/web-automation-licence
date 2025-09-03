@@ -274,10 +274,9 @@ public class DisbursementPO {
      * @return String model kerja sama booking
      */
     public String getModelKerjaSamaBooking() {
-        modelKerjaSamaBooking = page.locator("//div[@class='bg-c-list-item__description']//li").nth(0);
+        modelKerjaSamaBooking = page.locator("//div[@class='bg-c-list-item__description']//li/p").nth(0);
         String full = playwright.getText(modelKerjaSamaBooking);
-        String result = full.substring(9);
-        return result;
+        return full;
     }
 
     /**

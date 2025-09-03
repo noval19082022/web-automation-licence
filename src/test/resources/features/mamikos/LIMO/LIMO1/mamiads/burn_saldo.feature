@@ -2,7 +2,6 @@
 Feature: Mamiads Burn Saldo
 
   Scenario: Inject To Set Saldo Mamiads on admin page
-  # set saldo 5000 on admin (https://jambu.kerupux.com/admin/request/kost/99454727)
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
       | email stag                 | email prod                 | password  |
@@ -30,7 +29,8 @@ Feature: Mamiads Burn Saldo
 
   Scenario: Burn Saldo more than 3 times (Expected will count 3 times)
     Given user go to mamikos homepage
-    When user want to search kost list by place on "Purwokerto" from homepage
+    When user click on search kos
+    And user want to search kost list by place on "Purwokerto" from homepage
     And user select first kost on the search result to burn saldo 5 times
 
   @TEST_LIMO-1508

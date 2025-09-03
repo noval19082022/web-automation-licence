@@ -31,7 +31,7 @@ public class LandingPageOwnerPO {
         entryPointLPOwner = page.locator("//*[@class='landing-owner-entry-point__content']");
         titleEntryPointLPOwner = page.getByText("Daftarkan Kos Anda di Mamikos");
         entryPointLPOwnerbutton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pelajari Lebih Lanjut"));
-        imageHeaderLandingPageOwner = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Mamikos Logo"));
+        imageHeaderLandingPageOwner =       page.getByRole(AriaRole.BANNER).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Mamikos Logo"));
         daftarkanKosbutton = page.locator("//*[@class='bg-c-button header-section__cta bg-c-button--primary bg-c-button--lg']");
         USPsection = page.locator(".benefit-section-desktop");
         mblmSection = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Maju Bersama Layanan Mamikos"));

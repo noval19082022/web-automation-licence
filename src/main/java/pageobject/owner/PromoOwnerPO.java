@@ -55,7 +55,7 @@ public class PromoOwnerPO {
         searchPromoBox = page.locator("//*[@class = 'form-control input-sm']");
         searchButton = page.locator("//button[@id='buttonSearch']");
         verifiedPromoButton = page.locator("//a[@class='btn btn-xs btn-primary']");
-        verificationAdminStatus = page.locator("//label[@class='label label-danger']");
+        verificationAdminStatus = page.locator("//label[@class='label label-danger']").first();
         alertSuccessAdmin = page.locator("//div[@class='alert alert-success alert-dismissable']");
         unverificationPromoButton = page.locator("td:nth-of-type(7) .fa-times");
         deletePromoButton = page.locator("//i[@class='fa fa-trash-o']").first();
