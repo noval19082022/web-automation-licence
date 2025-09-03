@@ -909,7 +909,7 @@ public class HomepagePO {
      */
     public void ticksBD(String pilihBD) {
         playwright.clickOn(pilihBDDropdown);
-        BDValue = page.getByText(pilihBD);
+        BDValue = page.getByRole(AriaRole.LIST).getByText(pilihBD);
         playwright.clickOn(BDValue);
     }
 
