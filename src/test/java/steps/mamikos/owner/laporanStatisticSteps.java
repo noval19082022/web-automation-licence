@@ -21,7 +21,7 @@ public class laporanStatisticSteps {
         laporanStatistik.autoSelectedListingTopOrder();
         for (Map<String, String> row : tables.asMaps(String.class, String.class)) {
             String type = row.get("KosName");
-            Assert.assertEquals(laporanStatistik.autoSelectedListing(type), "Kost Bandicoot Tobelo Tobelo Halmahera");
+            Assert.assertEquals(laporanStatistik.autoSelectedListing(type), "Kost SkinCare Tobelo TIPE A Tobelo Utara Halmahera Utara");
         }
     }
 

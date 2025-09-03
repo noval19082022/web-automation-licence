@@ -24,7 +24,7 @@ Feature: Broadcast Chat Owner Tenant Booking Required 3
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod | password  |
-      | 081328787342 | 0          | Perempuan |
+      | 081328787342 | 0          | Perempuan123 |
     And owner navigates to broadcast chat page
     And owner dismiss FTUE Broadcast
     And owner add broadcast chat for kost "kost automation DOM boleh refund Patikraja Banyumas"

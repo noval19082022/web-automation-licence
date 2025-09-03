@@ -38,7 +38,7 @@ Feature: Booking with upload docs
     Given user go to mamikos homepage
     And user login as owner:
       | phone stag   | phone prod   | password  |
-      | 081328787342 | 081328787342 | Perempuan |
+      | 081328787342 | 081328787342 | Perempuan123 |
 #    And user check on booking detail at Pengajuan booking
 #    Then user will see Jumlah penyewa 4 at Jumlah Penyewa section
 #    And user will see Membawa suami/istri and Membawa anak at Jumlah Penyewa

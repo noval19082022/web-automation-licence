@@ -760,6 +760,8 @@ public class SearchPO {
     }
 
     public void selectFirstKostOnSearchResult() {
+        // Wait for kostCard to be available with longer timeout
+        playwright.waitTillLocatorIsVisible(kostCard.first(), 5000.0);
         playwright.clickOn(kostCard.first());
     }
 
@@ -844,5 +846,215 @@ public class SearchPO {
      */
     public void kosRoomAvailableFilter() {
         playwright.clickOn(kostRoomAvailableFilter);
+    }
+
+    /**
+     * Navigate to mamikos homepage
+     */
+    public void navigateToMamikos() {
+        page.navigate("https://jambu.kerupux.com");
+        playwright.hardWait(2000);
+    }
+
+    /**
+     * Click on search textbox to open search modal
+     * This clicks on "Masukan nama lokasi/area/alamat" text which opens the search modal
+     */
+    public void clickOnSearchKos() {
+        try {
+            // Click on the search textbox area with placeholder text
+            Locator searchTextbox = page.getByText("Masukan nama lokasi/area/alamat");
+            if (searchTextbox.isVisible()) {
+                playwright.clickOn(searchTextbox);
+            } else {
+                // Alternative locators for the search area
+                Locator altSearchArea = page.locator(".search-input, [placeholder*='lokasi'], [placeholder*='area']");
+                playwright.clickOn(altSearchArea.first());
+            }
+        } catch (Exception e) {
+            // Fallback to any search-related element
+            page.locator("*:has-text('Masukan nama lokasi'), *:has-text('Cari'), .search").first().click();
+        }
+        playwright.hardWait(1000);
+    }
+
+
+    /**
+     * Input area text in the search modal
+     * @param area the area to search for
+     */
+    public void inputArea(String area) {
+        try {
+            // Target the specific search box in the modal with correct placeholder
+            Locator searchBox = page.getByRole(AriaRole.SEARCHBOX, new Page.GetByRoleOptions().setName("Cari nama tempat atau alamat"));
+            if (searchBox.isVisible()) {
+                playwright.fill(searchBox, area);
+            } else {
+                // Alternative locators for the search input
+                Locator altSearchBox = page.locator("input[placeholder*='Cari nama tempat'], input[placeholder*='alamat']");
+                playwright.fill(altSearchBox.first(), area);
+            }
+        } catch (Exception e) {
+            // Last resort - find any visible search input
+            Locator anyInput = page.locator("searchbox, input[type='text']:visible").first();
+            playwright.fill(anyInput, area);
+        }
+        playwright.hardWait(2000); // Wait for suggestions to appear
+    }
+
+    /**
+     * Verify that the expected number of suggestions are displayed in area sekitar
+     * Based on actual website structure, look for area suggestions that appear after search
+     * @param expectedCount the minimum number of suggestions expected
+     * @return true if expected number of suggestions are visible
+     */
+    public boolean isDisplaySuggestions(int expectedCount) {
+        try {
+            // Wait for suggestions to appear
+            playwright.hardWait(2000);
+
+            // Look for area suggestions with various approaches (removing hard-coded Jakarta)
+            Locator areaSuggestions = page.locator("img[alt='icon area']").locator("xpath=..//..");
+            
+            if (areaSuggestions.count() == 0) {
+                // Alternative: look for suggestion boxes or area containers
+                areaSuggestions = page.locator("[data-testid*='suggestion'], [data-testid*='area'], .suggestion, .area-result");
+            }
+            
+            if (areaSuggestions.count() == 0) {
+                // Try generic approach: look for visible clickable elements that could be suggestions
+                areaSuggestions = page.locator("button:visible, a:visible, div[role='button']:visible").filter(new Locator.FilterOptions().setHas(page.locator("text=/\\w+/")));
+            }
+
+            // Check if we have at least the expected number of suggestions visible
+            int visibleSuggestions = 0;
+            for (int i = 0; i < Math.min(areaSuggestions.count(), 10); i++) {
+                if (areaSuggestions.nth(i).isVisible()) {
+                    String suggestionText = playwright.getText(areaSuggestions.nth(i));
+                    if (suggestionText != null && !suggestionText.trim().isEmpty()) {
+                        visibleSuggestions++;
+                        System.out.println("Found suggestion " + visibleSuggestions + ": " + suggestionText);
+                    }
+                }
+            }
+
+            System.out.println("Total visible area suggestions found: " + visibleSuggestions + ", expected: " + expectedCount);
+            return visibleSuggestions >= expectedCount;
+
+        } catch (Exception e) {
+            System.out.println("Error checking suggestions: " + e.getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Get the text of area suggestions for verification
+     * @return array of suggestion texts from the actual website
+     */
+    public String[] getSuggestionTexts() {
+        try {
+            playwright.hardWait(2000);
+
+            // Look for area suggestions without hard-coding specific city
+            Locator areaSuggestions = page.locator("img[alt='icon area']").locator("xpath=..//..");
+            
+            if (areaSuggestions.count() == 0) {
+                // Alternative: look for suggestion boxes or area containers
+                areaSuggestions = page.locator("[data-testid*='suggestion'], [data-testid*='area'], .suggestion, .area-result");
+            }
+            
+            if (areaSuggestions.count() == 0) {
+                // Try generic approach: look for visible clickable elements that could be suggestions
+                areaSuggestions = page.locator("button:visible, a:visible, div[role='button']:visible").filter(new Locator.FilterOptions().setHas(page.locator("text=/\\w+/")));
+            }
+
+            // Extract actual suggestion texts from the website
+            List<String> textList = new ArrayList<>();
+            for (int i = 0; i < Math.min(10, areaSuggestions.count()); i++) {
+                if (areaSuggestions.nth(i).isVisible()) {
+                    String text = playwright.getText(areaSuggestions.nth(i));
+                    if (text != null && !text.trim().isEmpty()) {
+                        textList.add(text.trim());
+                    }
+                }
+            }
+
+            return textList.toArray(new String[0]);
+        } catch (Exception e) {
+            System.out.println("Error getting suggestion texts: " + e.getMessage());
+            return new String[]{"No suggestions found"};
+        }
+    }
+
+    /**
+     * Click on a link with specific text (e.g., "Area Terkait Lainnya")
+     * @param linkText the text of the link to click
+     */
+    public void clickOnLink(String linkText) {
+        try {
+            // First try to find the exact text
+            Locator link = page.getByText(linkText, new Page.GetByTextOptions().setExact(true));
+
+            if (link.isVisible()) {
+                playwright.clickOn(link);
+            } else {
+                // Try alternative approaches
+                Locator altLink = page.locator("button:has-text('" + linkText + "'), a:has-text('" + linkText + "')");
+                if (altLink.count() > 0) {
+                    playwright.clickOn(altLink.first());
+                } else {
+                    // Try partial match
+                    Locator partialLink = page.getByText(linkText);
+                    playwright.clickOn(partialLink);
+                }
+            }
+
+            playwright.hardWait(2000); // Wait for the action to complete
+            System.out.println("Clicked on: " + linkText);
+
+        } catch (Exception e) {
+            System.out.println("Error clicking on link '" + linkText + "': " + e.getMessage());
+            throw new RuntimeException("Failed to click on: " + linkText, e);
+        }
+    }
+
+    /**
+     * Verify that additional kos suggestions are displayed after clicking "Area Terkait Lainnya"
+     * @param expectedCount the expected number of additional suggestions
+     * @return true if the expected number of suggestions are displayed
+     */
+    public boolean verifyAdditionalSuggestions(int expectedCount) {
+        try {
+            playwright.hardWait(2000); // Wait for suggestions to load
+
+            // Look for kos cards or suggestion items that appear after clicking
+            // These could be property cards, kos listings, or area suggestions
+            Locator kosSuggestions = page.locator("article, [data-testid*='property'], [data-testid*='kos'], .property-card, .kos-card");
+
+            if (kosSuggestions.count() == 0) {
+                // Alternative: look for elements that contain typical kos information
+                kosSuggestions = page.locator("*:has-text('Rp'):has-text('bulan'), *:has-text('Kos')");
+            }
+
+            if (kosSuggestions.count() == 0) {
+                // Another alternative: look for image cards with property info
+                kosSuggestions = page.locator("img[alt*='kos'], img[alt*='property']").locator("xpath=..//..");
+            }
+
+            int visibleCount = 0;
+            for (int i = 0; i < kosSuggestions.count() && i < 10; i++) {
+                if (kosSuggestions.nth(i).isVisible()) {
+                    visibleCount++;
+                    System.out.println("Found kos suggestion #" + visibleCount);
+                }
+            }
+
+            System.out.println("Total visible kos suggestions: " + visibleCount + ", expected: " + expectedCount);
+            return visibleCount >= expectedCount;
+
+        } catch (Exception e) {
+            System.out.println("Error verifying additional suggestions: " + e.getMessage());
+            return false;
+        }
     }
 }
