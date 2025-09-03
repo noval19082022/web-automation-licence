@@ -168,4 +168,17 @@ Feature: Profile Tenant Background Checker
 #    And owner click on upgrade package at tbc profile tenant
 #    Then owner see popup text "Paket akan diganti ke Goldplus 2"
 
-
+  @turnOffInformasiDataDiri
+  Scenario: Tenant turns off privacy setting and verifies profile preview
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | password  |
+      | 081280003230  | qwerty123 |
+    And tenant click on icon profil
+    And tenant click on profile
+    And tenant click on pengaturan
+    And user click "Privasi"
+    And tenant click on toggle on to off
+    And tenant click on lihat preview profil
+    Then tenant should not be able to see the text "Asal Kabupaten Aceh Selatan 0812-8000-xxxx"
+    Then tenant should not be able to see the text "0812-8000-xxxx"

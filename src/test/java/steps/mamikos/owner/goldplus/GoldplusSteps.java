@@ -60,6 +60,7 @@ public class GoldplusSteps {
             playwright.reloadPage();
             gpSubmission.clickOnGpSatuFirstRadioButton(true);
         }
+        gpSubmission.clicksOnPilihPeriodeButton();
         gpSubmission.clicksOnBayarSekarangButton();
     }
 

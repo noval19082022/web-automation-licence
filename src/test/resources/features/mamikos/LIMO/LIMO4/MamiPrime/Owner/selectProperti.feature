@@ -53,7 +53,7 @@ Feature: Select property section
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod | password  |
-      | 081328787342 | 0          | Perempuan |
+      | 081328787342 | 0          | Perempuan123 |
     And owner navigate to pendaftaran mamiprime page
     Then owner select option mamiprime "Halaman Hasil Pencarian" from mamiprime landing
     And Owner purchase mamiprime periode "7 Hari"

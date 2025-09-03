@@ -6,7 +6,7 @@ Feature: [Test-Execution][DOM] Web - Event Banner
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | password  |
-      | 081328787342 | Perempuan |
+      | 081328787342 | Perempuan123 |
     And owner go to event banner section
     And owner click on banner on dari mamikos section
     Then user redirected to "https://docs.google.com/forms/d/e/1FAIpQLSdGrn3lbLwSWxdb4tJ1hVJI7qi0nYW77sVXB0YsMXaA4tORKA/viewform"
@@ -16,7 +16,7 @@ Feature: [Test-Execution][DOM] Web - Event Banner
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | password  |
-      | 081328787342 | Perempuan |
+      | 081328787342 | Perempuan123 |
     And owner go to event banner section
     Then user will see that the text "Dari Mamikos" is displayed
 

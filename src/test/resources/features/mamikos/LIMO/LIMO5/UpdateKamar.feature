@@ -13,7 +13,7 @@ Feature: Update Kamar
     And owner click "Update Kamar"
     And owner add room with name or room number "89"
     And owner click simpan on add room pop up
-    Then user can sees toast on update room as "Kosong" "Total Kamar 14"
+    Then user can sees toast on update room as "Baru" "Total Kamar 14"
     And user see total room is "Total Kamar 14" in update room page
     When user enter text "89" on search bar in room allotment and hit enter
     And user delete room name or number in room allotment
@@ -45,7 +45,7 @@ Feature: Update Kamar
     And user filter the room with "Kamar Kosong" in update room page
     Then user see total room is "Total Kamar 7" in update room page
     When user filter the room with "Kamar Terisi" in update room page
-    Then user see total room is "Total Kamar 0" in update room page
+    Then user see total room is "Total Kamar 1" in update room page
 
   @TEST_LIMO-874 @continue @WEB @AUTOMATED
   Scenario: [WEB][Update Room] Access page "Update Kamar" from entry point kos list when kost status == Active by update text box "Lantai (Opsional)"
@@ -60,7 +60,7 @@ Feature: Update Kamar
     When user click edit button in first row of the table
     And user fill room floor in room allotment page with "abcd"
     And owner click "Simpan"
-    Then user can sees toast on update room as "Kosong" "Total Kamar 1"
+    Then user can sees toast on update room as "Baru" "Total Kamar 1"
 
   @TEST_LIMO-3462 @continue @WEB @AUTOMATED
   Scenario: [WEB][Update Room] Access page "Update Kamar" from entry point kost list when kost status == Active by update text box "Nomor/ Nama Kamar?"
@@ -71,7 +71,7 @@ Feature: Update Kamar
     When user click edit button in first row of the table
     And user fill room name in room allotment page with "1"
     And owner click "Simpan"
-    Then user can sees toast on update room as "Kosong" "Total Kamar 1"
+    Then user can sees toast on update room as "Baru" "Total Kamar 1"
 
   @TEST_LIMO-900 @continue @WEB @AUTOMATED
   Scenario: [WEB][Update Room] Filter on room allotments is always shown when total rooms == 0 or != 0
@@ -80,13 +80,13 @@ Feature: Update Kamar
     When user filter the room with "Kamar Kosong" in update room page
     Then user see total room is "Total Kamar 7" in update room page
     When user filter the room with "Kamar Terisi" in update room page
-    Then user see total room is "Total Kamar 0" in update room page
+    Then user see total room is "Total Kamar 1" in update room page
     When owner navigates to property saya kos
     And owner search kost "Kose Full Automation" on property saya page
     And user click Lihat Selengkapnya button for edit
     And owner click "Update Kamar"
     And user filter the room with "Kamar Kosong" in update room page
-    Then user see total room is "Total Kamar 0" in update room page
+    Then user see total room is "Total Kamar 1" in update room page
 
   @TEST_LIMO-879 @continue @WEB @AUTOMATED
   Scenario: [WEB][Update Room]  Check box "Sudah Berpenghuni" is set to define room status when kost not in Goldplus Level

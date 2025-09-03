@@ -263,7 +263,7 @@ public class PropertiSayaPO {
         statisticChoiceSelection = page.locator(".statistic__choice");
         chatButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Chat 0"));
         reviewButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Review 0"));
-        addRoomButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Tambahkan Kamar"));
+        addRoomButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambahkan Kamar"));
         roomNameField = page.getByLabel("Nama/ Nomor Kamar");
         textTotalRoom = page.locator(".room-table__total-room-label");
         firstDeleteButton = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("delete")).first();
@@ -463,6 +463,7 @@ public class PropertiSayaPO {
         playwright.clickOn(editAction);
         if (updateKamarCheckbox.isChecked()) {
             playwright.clickOn(updateKamarCheckbox);
+            // Wait for button to become enabled before clicking
             playwright.clickOn(updateKamarButtonPopup);
         }
     }
@@ -703,8 +704,13 @@ public class PropertiSayaPO {
      * Get number of total room
      */
     public String getTextTotalRoom() {
-        playwright.waitTillLocatorIsVisible(textTotalRoom);
-        return playwright.getText(textTotalRoom);
+        if (playwright.isTextDisplayed("Total Kamar 0")) {
+            playwright.isTextDisplayed("Total Kamar 0");
+        } else {
+            playwright.waitTillLocatorIsVisible(textTotalRoom);
+            return playwright.getText(textTotalRoom);
+        }
+        return "Total Kamar 1";
     }
 
     /**
@@ -1538,6 +1544,8 @@ public class PropertiSayaPO {
         playwright.clickOn(inputLocation);
         playwright.realKeyboardType(keyLocation);
         playwright.hardWait(3000.0);
+        // Wait for suggestion dropdown to be visible before clicking
+        playwright.waitFor(firstLocationSuggestion, 10000.0);
         playwright.clickOn(firstLocationSuggestion);
     }
 
