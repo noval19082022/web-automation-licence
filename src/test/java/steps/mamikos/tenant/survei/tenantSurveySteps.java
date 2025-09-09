@@ -193,7 +193,7 @@ public class tenantSurveySteps {
 
     @Then("user verify available time is higher than current time")
     public void userVerifyAvailableTimeIsHigherThanCurrentTime() {
-        var currentTime = JavaHelpers.getCurrentTimeGMT7();
+        var currentTime = JavaHelpers.getCurrentTimeServer();
 
         var timeAvailable = tenantSurveyFormPO.getCurrentAvailableTime();
 
