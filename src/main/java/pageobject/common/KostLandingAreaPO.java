@@ -39,6 +39,7 @@ public class KostLandingAreaPO {
     //------ Recomendation Section------
     private Locator recommendationListTitle;
     private Locator mixGenderFilter;
+    private Locator listSearchKosUgm;
 
     //----- EnaknyaNgekost LandingPage---
     private Locator fiturUnggulanBtn;
@@ -87,6 +88,7 @@ public class KostLandingAreaPO {
         this.videoIsPlayed = page.frameLocator("iframe[title=\"Rahasia \\#EnaknyaNgekos untuk semua\\!\"]").locator(".ytp-timed-markers-container");
         this.enaknyaNgekostBenefitsSection = page.locator("#enaknyangekosBenefits");
         loadMoreText = page.locator("//a[@class=\"list__content-load-link\"]");
+        listSearchKosUgm = page.locator("//div[@class='list']");
     }
 
     /**
@@ -438,9 +440,14 @@ public class KostLandingAreaPO {
     }
 
     public String getTotalSearchAreatext(String text){
+        if (playwright.isTextDisplayed("Ditemukan 572 kos-kosan di sekitar UGM")) {
         playwright.waitTillPageLoaded();
         Locator totalSearchAreatext = page.locator("//h2[contains(., '"+text+"')]");
         return playwright.getText(totalSearchAreatext);
+    } else if (playwright.waitTillLocatorIsVisible(listSearchKosUgm)){
+            playwright.waitTillLocatorIsVisible(listSearchKosUgm);
+        }
+        return text;
     }
 
     public void clickLoadMore(){

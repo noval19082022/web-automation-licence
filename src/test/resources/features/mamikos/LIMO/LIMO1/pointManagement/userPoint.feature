@@ -125,9 +125,9 @@ Feature: Manage User Point
     * user click history icon on manage user point page
     Then user see at manage user point history contains:
       | Content                     |
-      | Squilliam Fancyson as Owner |
-      | Email: aditmami1@gmail.com  |
-      | Phone: 082328130250         |
+      | Hagaromo Otsutsuki as Tenant |
+      | Email: gegesekali@gmail.com  |
+      | Phone: 087708777615         |
       | Date                        |
       | Activity                    |
       | Notes                       |

@@ -24,7 +24,7 @@ Feature: Quick Allocation on Properti Saya
     * user verify the toggle is "on"
     * user verify the wording ads is "Kamar penuh."
 
-  @TEST_LIMO-1340
+  @TEST_LIMO-5733
   Scenario: [Property Saya Kos][MamiAds][Saldo<5000]: Owner ever allocate and ever paid mamiads
     Given user go to mamikos homepage
     And user login as owner:
@@ -39,7 +39,7 @@ Feature: Quick Allocation on Properti Saya
     * user verify the wording ads is "Pakai MamiAds, bisa naikkan posisi iklan Anda lho. Beli sekarang!"
     * user verify the redirection to list mamiads balance
 
-  @TEST_LIMO-1340
+  @TEST_LIMO-1388
   Scenario: Cancel Quick Allocation on Listing has never been promoted before
     Given user go to mamikos homepage
     And user login as owner:

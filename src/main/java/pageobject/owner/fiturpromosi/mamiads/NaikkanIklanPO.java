@@ -22,12 +22,15 @@ public class NaikkanIklanPO {
     Locator nonAktifkanAdsButton;
     Locator posisiIklanLocator;
     Locator toggleLocator;
+    Locator toggleLocatorOff;
+    Locator toggleLocatorOn;
     Locator adsStatusLocator;
     Locator anggaranDescLocator;
     Locator switchToggleLocator;
     Locator saldoMamiAdsValue;
     Locator actionButtonLocator;
     Locator currentStatusSaldo;
+    Locator activeButton;
 
 
     public NaikkanIklanPO(Page page) {
@@ -44,7 +47,9 @@ public class NaikkanIklanPO {
         titlePopUp = page.locator(".bg-c-modal__body-title");
         nonAktifkanAdsButton = page.locator("//*[contains(text(),'Ya, Nonaktifkan')]");
         saldoMamiAdsValue = page.locator(".amount");
-
+        toggleLocatorOn = page.locator("//*[@id='room-toggle-switch-on']");
+        toggleLocatorOff = page.locator("//*[@id='room-toggle-switch-off']").first();
+        activeButton = page.locator("//button[normalize-space()='Aktifkan']");
     }
 
 
@@ -80,9 +85,26 @@ public class NaikkanIklanPO {
      * @params toggleStatus
      */
     public boolean getToggleStatus(String adsName, String toggleStatus) {
+            toggleLocator = page.locator("//*[.='" + adsName + "']/../../following-sibling::*//input[@id='room-toggle-switch-" + toggleStatus + "']");
+            return playwright.waitTillLocatorIsVisible(toggleLocator);
+    }
+
+    /**
+     * Verify the status toggle iklan two
+     *
+     * @return toggleStatus
+     * @params toggleStatus
+     */
+    public boolean getToggleStatus2(String adsName, String toggleStatus) {
         playwright.waitTillPageLoaded();
-        toggleLocator = page.locator("//*[.='" + adsName + "']/../../following-sibling::*//input[@id='room-toggle-switch-" + toggleStatus + "']");
-        return playwright.waitTillLocatorIsVisible(toggleLocator);
+        if (playwright.waitTillLocatorIsVisible(toggleLocatorOff)) {
+            playwright.clickOn(toggleLocatorOff);
+            playwright.clickOn(activeButton);
+        } else {
+            toggleLocator = page.locator("//*[.='" + adsName + "']/../../following-sibling::*//input[@id='room-toggle-switch-" + toggleStatus + "']");
+            return playwright.waitTillLocatorIsVisible(toggleLocator);
+        }
+        return true;
     }
 
     /**
