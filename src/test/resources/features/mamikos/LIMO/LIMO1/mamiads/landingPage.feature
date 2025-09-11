@@ -4,11 +4,11 @@ Feature: MamiAds Landing Page
   @TEST_LIMO-1377
   Scenario: [Web][MamiAds][Landing Page] Check landing page mamiAds
     Given user go to mamikos homepage
-    And user login as owner:
+    When user login as owner:
       | phone stag | phone prod | password  |
       | 0891202531 | 0          | qwerty123 |
     And user go to mamikos homepage
-    And user click "Promosikan Iklan Anda"
+    And user click on Promosikan Iklan Anda
     And owner will see that the text "Tempatkan iklan properti Anda di posisi yang lebih tinggi dari iklan lainnya." is displayed
     And owner see button coba sekarang at header
     And owner will see that the text "Keuntungan Menggunakan MamiAds" is displayed
