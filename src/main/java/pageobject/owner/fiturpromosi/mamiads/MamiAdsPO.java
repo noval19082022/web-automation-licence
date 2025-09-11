@@ -47,6 +47,7 @@ public class MamiAdsPO {
     private Locator continuePaymentBuySaldoMamiads;
     private Locator balanceListContainer;
     private Locator robustBalanceListContainer;
+    private Locator promosikanIklanAnda;
 
     //--- Mamiads popup ubah anggaran  ---//
     private Locator saldoMaksimalRadioButton;
@@ -121,6 +122,7 @@ public class MamiAdsPO {
         this.continuePaymentBuySaldoMamiads = page.locator("(//a[@class='clickable-history-list'])[1]");
         this.balanceListContainer = page.locator(".balance-list__container");
         this.robustBalanceListContainer = page.locator("div:has-text('Saldo Iklan'):has-text('Harga')");
+        this.promosikanIklanAnda = page.locator("//img[@alt='Icon Promote']");
         //--- Mamiads popup ubah anggaran  ---//
         this.ubahAnggaranInputText = page.getByTestId("mamiadsDashboard-inputDailyBudget");
         this.saldoMaksimalRadioButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Saldo Maksimal")).locator("span").nth(1);
@@ -931,6 +933,14 @@ public class MamiAdsPO {
         
         // Ensure "Favorit" text is visible (indicates 150k option loaded)
         playwright.isTextDisplayed("Favorit", 5000.0);
+    }
+
+    /**
+     * Click on Promosikan Iklan Anda on homepage
+     */
+    public void clickOnPromosikanIklanAnda() {
+        playwright.waitTillLocatorIsVisible(promosikanIklanAnda);
+        playwright.clickOn(promosikanIklanAnda);
     }
 }
 

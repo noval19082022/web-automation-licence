@@ -406,4 +406,8 @@ public class MamiAdsSteps {
         // Convert the integer to a string
         return Integer.toString(randomInt);
     }
+    @When("user click on Promosikan Iklan Anda")
+    public void user_click_on_promosikan_iklan_anda() {
+        mamiAdsPO.clickOnPromosikanIklanAnda();
+    }
 }

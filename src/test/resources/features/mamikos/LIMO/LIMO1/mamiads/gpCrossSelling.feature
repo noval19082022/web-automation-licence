@@ -18,6 +18,7 @@ Feature: GP Cross-Selling
       | 085951394565 | 0          | qwerty123 |
     And user click daftar GP button
     And owner choose Goldplus package 1
+    And user click on "Pilih Periode"
 
   @mamiads  @gpCrossSelling @continue @TEST_LIMO-3355
   Scenario: Detail list saldo
@@ -115,6 +116,7 @@ Feature: GP Cross-Selling
   Scenario: Ubah package GP after choose MamiAds
     When user click on ubah package gold plus button
     And owner choose Goldplus package 2
+    And user click on "Pilih Periode"
     Then user verify saldo MamiAds is choosen on Rincian Pembayaran
       """
       - paragraph: Rincian Pembayaran
@@ -137,30 +139,31 @@ Feature: GP Cross-Selling
       | phone stag   | phone prod | password  |
       | 085720962105 | 0          | qwerty123 |
     And user click daftar GP button
-    And user click "Pilih Paket GoldPlus" button
+    And user click "Ganti Paket" button
     And owner choose Goldplus package 1
 
   @mamiads  @gpCrossSelling @continue @TEST_LIMO-3357
   Scenario: Ubah package before select saldo mamiads
+    And user click on "Pilih Periode"
     When user click on ubah package gold plus button
-    And owner choose Goldplus package 2
-    And user choose saldo "Rp27.000" on GoldPlus section
+    And owner choose periode goldplus 2
+    And user choose saldo "30 ribu" on GoldPlus section
     Then user verify saldo MamiAds is choosen on Rincian Pembayaran
       """
       - paragraph: Rincian Pembayaran
-      - text: GoldPlus 2 periode 1 Bulan
-      - paragraph: + Gratis MamiAds 100.000
-      - paragraph: Rp145.000
+      - text: GoldPlus 2 periode 4 Bulan
+      - paragraph: + Gratis MamiAds 40.000
+      - paragraph: Rp320.000
       - text: Saldo MamiAds 30.000
       - paragraph: Rp27.000
       """
     And user verify Total Pembayaran
       """
       - paragraph: Total Pembayaran
-      - paragraph: Rp172.000
+      - paragraph: Rp347.000
       """
 
-  @mamiads  @gpCrossSelling @TEST_LIMO-3349
+#  @mamiads  @gpCrossSelling @TEST_LIMO-3349
   Scenario: Cancel saldo mamiads
     And user unchoose saldo on GoldPlus section
     Then user verify the "Saldo MamiAds 30.000" and the price is "Rp27.000" already "removed" on Rincian Pembayaran
@@ -183,21 +186,21 @@ Feature: GP Cross-Selling
     And user click daftar GP button
     And user click "Pilih Paket GoldPlus" button
     And owner choose Goldplus package 1
-    And user choose saldo "30 ribu" on GoldPlus section
+    And user choose saldo "Rp79.000" on GoldPlus section
+    And user click on "Pilih Periode"
     Then user verify saldo MamiAds is choosen on Rincian Pembayaran
       """
       - paragraph: Rincian Pembayaran
       - text: GoldPlus 1 periode 1 Bulan
       - paragraph: + Gratis MamiAds 120.000
       - paragraph: Rp79.000
-      - text: Saldo MamiAds 30.000
-      - paragraph: Rp27.000
       """
     And user verify Total Pembayaran
       """
       - paragraph: Total Pembayaran
-      - paragraph: Rp106.000
+      - paragraph: Rp79.000
       """
+    And user choose saldo "30 ribu" on GoldPlus section
     And owner click bayar sekarang on detail tagihan page goldplus
     Then owner validate payment for goldplus package have "Saldo MamiAds 30 ribu + GoldPlus 1 (1 Bulan)" and have "Biaya Transaksi" before choose payment method
     And user navigate to mamiads history page

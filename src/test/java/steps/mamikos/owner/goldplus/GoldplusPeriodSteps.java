@@ -2,13 +2,16 @@ package steps.mamikos.owner.goldplus;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.common.HomePO;
 import pageobject.common.LoadingPO;
 import pageobject.owner.goldplus.GoldPlusSubmissionPO;
 import pageobject.owner.goldplus.GoldplusPO;
+import steps.mamikos.common.NavigatesSteps;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -21,7 +24,8 @@ public class GoldplusPeriodSteps {
     GoldplusPO goldplus = new GoldplusPO(page);
     GoldPlusSubmissionPO gpSubmission = new GoldPlusSubmissionPO(page);
     LoadingPO loading = new LoadingPO(page);
-
+    HomePO home = new HomePO(page);
+    NavigatesSteps navigate = new NavigatesSteps();
 
     @Then("user verify list of Periode Berlangganan is appear")
     public void user_verify_list_of_period_berlangganan_is_appear(String expectedAriaSnapshot) {
@@ -64,9 +68,25 @@ public class GoldplusPeriodSteps {
         }
     }
 
-    @When("owner choose periode goldplus {string}")
-    public void owner_choose_periode_goldplus(String period){
-        goldplus.clickOnPeriodGoldPlus(period);
+    @When("owner choose periode goldplus {int}")
+    public void owner_choose_periode_goldplus(int paket){
+//        goldplus.clickOnPeriodGoldPlus(period);
+//        gpSubmission.clicksOnPilihPeriodeButton();
+        loading.waitForLoadingIconDisappear();
+        playwright.waitTillPageLoaded();
+        if (home.getURL().equals(Mamikos.URL + "/goldplus/submission/packages")) {
+            goldplus.clickOnGPPackage(paket);
+        } else {
+            navigate.userNavigateTo("/goldplus/submission/periode/gp" + paket);
+        }
+
+        if (playwright.isTextDisplayed("1 Minggu")) {
+            goldplus.clickOnPeriodeWeekly();
+        }
+        if (playwright.getPageUrl().contains("/goldplus/submission/periode/gp1") && !gpSubmission.isFavoritGpRadioSelected()) {
+            playwright.reloadPage();
+            gpSubmission.clickOnGpSatuFirstRadioButton(true);
+        }
         gpSubmission.clicksOnPilihPeriodeButton();
     }
 

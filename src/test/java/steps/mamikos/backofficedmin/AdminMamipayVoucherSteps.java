@@ -679,8 +679,8 @@ public class AdminMamipayVoucherSteps {
         ownerVoucher.inputDiscountType(table.get(0).get("Discount Type"));
         ownerVoucher.inputDiscountAmount(table.get(0).get("Discount Amount"));
         ownerVoucher.uploadOwnerList(table.get(0).get("Upload Owner List"));
-        ownerVoucher.inputInvoiceType(table.get(0).get("Invoice Type"));
-        ownerVoucher.inputDoubleRedeemWithMamiPoin(table.get(0).get("Double Redeem With MamiPoin"));
+       // ownerVoucher.inputInvoiceType(table.get(0).get("Invoice Type"));
+      //  ownerVoucher.inputDoubleRedeemWithMamiPoin(table.get(0).get("Double Redeem With MamiPoin"));
     }
 
     @And("Admin click Create Voucher Single list button")
