@@ -62,7 +62,7 @@ public class SearchPO {
     public SearchPO(Page page) {
         this.playwright = new PlaywrightHelpers(page);
         this.page = page;
-        this.inputSearch = page.locator("input[title]");
+        this.inputSearch = page.locator("input[type='search']").or(page.locator("input.form-control")).or(page.locator("input[title]"));
         this.searchKost = page.getByText("Masukan nama lokasi/area/alamat");
         this.suggetionKostOnTheSearchList = page.getByTestId("suggestionBox-roomList").nth(0);
         this.suggestionAreaOnTheSearchList = page.locator("(//div[@class='results-box'])[1]");
@@ -630,11 +630,18 @@ public class SearchPO {
      * @param searchText is text we want to search
      */
     public void enterTextToSearchAndSelectResultCity(String searchText) {
-        inputSearch.click();
-        inputSearch.type(searchText);
-        inputSearch.press("Enter");
+        // Click search button to open modal first
+        playwright.clickOn(searchKost);
+        
+        // Wait for input to be visible and fill it
+        playwright.waitTillLocatorIsVisible(inputSearch);
+        playwright.fill(inputSearch, searchText);
+        playwright.pressKeyboardKey("Enter");
+        
+        // Wait for suggestions to appear and click the matching result
         Locator resultLocator = page.getByText(searchText);
-        resultLocator.first().click();
+        playwright.waitTillLocatorIsVisible(resultLocator.first());
+        playwright.clickOn(resultLocator.first());
     }
 
 
