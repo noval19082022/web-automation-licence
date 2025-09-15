@@ -162,4 +162,4 @@ Feature: Kost detail page
     Then user want to reached map section and see tanya alamat lengkap button
     #user want to see map more detail
     When user want to ask kost address
-    Then chat room appear with latest message "beralamat di "
+    Then chat room appear with latest message "beralamat di:"

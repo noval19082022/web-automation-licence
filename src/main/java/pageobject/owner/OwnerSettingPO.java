@@ -25,6 +25,7 @@ public class OwnerSettingPO {
     Locator accountSettingsButton;
     Locator emailTextBox;
     Locator simpanButton;
+    Locator ubahPasswordButton;
 
     public OwnerSettingPO(Page page) {
         this.page = page;
@@ -42,6 +43,7 @@ public class OwnerSettingPO {
         accountSettingsButton = page.getByText("Setelan Akun");
         emailTextBox = page.getByPlaceholder("Masukkan email baru");
         simpanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
+        ubahPasswordButton = page.locator("//div[@id='ownerPersonalInfoWrapper']/div[3]//a[.='Ubah']");
     }
 
     /**
@@ -213,5 +215,13 @@ public class OwnerSettingPO {
     public void ownerChangeEmail(String email){
         playwright.fill(emailTextBox, email);
         playwright.clickOn(simpanButton);
+    }
+
+    /**
+     * Verify ubah password button is not displayed
+     * @return boolean true if not displayed, false if displayed
+     */
+    public boolean isUbahPasswordButtonNotDisplayed() {
+        return !playwright.isLocatorVisibleAfterLoad(ubahPasswordButton, 3000.0);
     }
 }
