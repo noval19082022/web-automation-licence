@@ -631,17 +631,17 @@ public class SearchPO {
      */
     public void enterTextToSearchAndSelectResultCity(String searchText) {
         // Click search button to open modal first
-        searchKost.click();
+        playwright.clickOn(searchKost);
         
         // Wait for input to be visible and fill it
         playwright.waitTillLocatorIsVisible(inputSearch);
-        inputSearch.fill(searchText);
-        inputSearch.press("Enter");
+        playwright.fill(inputSearch, searchText);
+        playwright.pressKeyboardKey("Enter");
         
         // Wait for suggestions to appear and click the matching result
         Locator resultLocator = page.getByText(searchText);
         playwright.waitTillLocatorIsVisible(resultLocator.first());
-        resultLocator.first().click();
+        playwright.clickOn(resultLocator.first());
     }
 
 
