@@ -98,4 +98,12 @@ public class OwnerSettingSteps {
     public void ownerChangeEmailTo(String email) {
         ownerSettingPO.ownerChangeEmail(email);
     }
+
+    @Then("owner verify that Ubah {string} button is not displayed")
+    public void ownerVerifyThatUbahButtonIsNotDisplayed(String buttonType) {
+        if (buttonType.equals("Password")) {
+            Assert.assertTrue(ownerSettingPO.isUbahPasswordButtonNotDisplayed(), 
+                "Ubah Password button is still displayed, but it should not be!");
+        }
+    }
 }
