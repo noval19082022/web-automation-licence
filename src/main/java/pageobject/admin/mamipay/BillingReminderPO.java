@@ -11,6 +11,12 @@ public class BillingReminderPO {
     private static final double DROPDOWN_LOAD_WAIT = 1500;
     private static final double PERIOD_DROPDOWN_WAIT = 500;
     private static final double MENU_RELOAD_WAIT = 2000;
+    
+    // Common role option variables
+    private static final String DELETE_BUTTON_NAME = "Delete";
+    private static final String EDIT_BUTTON_NAME = "Edit";
+    private static final String CREATE_BUTTON_NAME = "Create";
+    private static final String SAVE_BUTTON_NAME = "Save";
 
     private Page page;
     private PlaywrightHelpers playwright;
@@ -42,13 +48,12 @@ public class BillingReminderPO {
         titleTextField = page.locator("input[name=\"title\"]");
         SMSTextField = page.getByRole(AriaRole.TEXTBOX);
         contentTextField = page.locator("textarea[name=\"content\"]");
-        createTemplateButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Create"));
+        createTemplateButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(CREATE_BUTTON_NAME));
         templateCreatedText = page.getByText("Template created.");
         templateSubjectText = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName("-1").setExact(true));
         WATemplateSubjectText = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName("recurringbooking_voucher_d_plus_1_update"));
         cannotCreateTemplateText = page.getByText("Cannot create template.");
-        saveTemplateButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Save"));
-
+        saveTemplateButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(SAVE_BUTTON_NAME));
     }
 
     /**
@@ -73,7 +78,7 @@ public class BillingReminderPO {
      */
     public void deleteBillingReminderPeriod(String period){
         Locator periodRow = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(period));
-        playwright.clickOn(periodRow.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Delete")));
+        playwright.clickOn(periodRow.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(DELETE_BUTTON_NAME)));
     }
 
     /**
@@ -81,7 +86,7 @@ public class BillingReminderPO {
      */
     public void editBillingReminderPeriod(String day){
         Locator dayRow = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(day));
-        playwright.clickOn(dayRow.getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Edit")));
+        playwright.clickOn(dayRow.getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName(EDIT_BUTTON_NAME)));
     }
 
     /**
@@ -91,7 +96,7 @@ public class BillingReminderPO {
      */
     public boolean isTableContentTemplateDisplayed(String content){
         Locator contentRow = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(content));
-        return playwright.waitTillLocatorIsVisible(contentRow.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Delete")));
+        return playwright.waitTillLocatorIsVisible(contentRow.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(DELETE_BUTTON_NAME)));
     }
 
     /**
