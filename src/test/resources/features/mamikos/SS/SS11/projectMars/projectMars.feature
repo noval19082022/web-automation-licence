@@ -8,8 +8,9 @@ Feature: Mars Project
       | phone stag | phone prod | password     |
       | 0888881241 | 0888881241 | qamamikos123 |
     * owner wants to accsess chatroom
+    And owner dismiss active pop-ups
     Then owner will see card box contains "Sisa Kuota"
-    * owner will see card box contains "Daftar GoldPlus"
+    * owner will see card box contains "Daftar"
     * verify title ftue is "Apa itu fitur Chat" and description "Di fitur chat Anda dapat mengobrol dengan calon penghuni kos Anda"
     When user click "Lanjutkan" on ftue
     Then verify title ftue is "Anda dapat kuota chat room" and description "Kini berlaku sistem kuota chat. Kuota bisa dipakai untuk saling berbalas chat dengan penyewa di chat room."
@@ -19,7 +20,7 @@ Feature: Mars Project
     Then verify title ftue is "Mau chat bebas kuota?" and description "Jika tidak ingin menunggu, Anda bisa daftar GoldPlus untuk chat bebas kuota."
     When user click "Saya Mengerti" on ftue
     And user dismiss Laporan klik FTUE
-    And search chat in chatlist "Gagami"
+    And search chat in chatlist "Itenant"
     Then user see the appearence of Mars chatroom
 
   @TEST_SS-2809 @Automated @MARS-DOM @Web @discovery-platform
@@ -30,7 +31,7 @@ Feature: Mars Project
       | 0888881241 | 0888881243 | qamamikos123 |
     And user dismiss FTUE MARS and FTUE Broadcast
     And user dismiss Laporan klik FTUE
-    And search chat in chatlist "Gagami"
+    And search chat in chatlist "Itenant"
     Then user see attachment button is disabled
 
   @TEST_SS-2810 @Automated @MARS-DOM @Web @discovery-platform
@@ -59,7 +60,7 @@ Feature: Mars Project
     And user dismiss FTUE MARS and FTUE Broadcast
     And user dismiss Laporan klik FTUE
     And user see the appearence of Mars chatlist
-    And search chat in chatlist "Gagami"
+    And search chat in chatlist "Itenant"
     Then user see the appearence of Mars chatroom
 
   @TEST_SS-2812 @Automated @MARS-DOM @Web @discovery-platform

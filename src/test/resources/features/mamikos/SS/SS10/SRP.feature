@@ -5,12 +5,9 @@ Feature: SRP
   Scenario: [WEB] Check total kos in page 20 listing
     Given user go to mamikos homepage
     When user search and go to kost landing based on area:
-      | search keyword | City Home - Banjarmasin       |
-      | area result    | City Home - Banjarmasin       |
-    Then user can see total kost in area with "Ditemukan 50 kos-kosan di sekitar City Home - Banjarmasin, Jl. Cemp. IV, Mawar, Kec. Banjarmasin Tengah, Kota Banjarmasin, Kalimantan Selatan 70115"
-      | search keyword | City Home - Banjarmasin |
-      | area result    | City Home - Banjarmasin |
-    Then user can see total kost in area with "Ditemukan 55 kos-kosan di sekitar City Home - Banjarmasin, Jl. Cemp. IV, Mawar, Kec. Banjarmasin Tengah, Kota Banjarmasin, Kalimantan Selatan 70115"
+      | search keyword | Pandaan Arta Jaya       |
+      | area result    | Pandaan Arta Jaya       |
+    Then user can see total kost in area with "Ditemukan 382 kos-kosan di sekitar Pandaan Arta Jaya, Keputran, Kota Surabaya, Jawa Timur, Indonesia"
     When tenant can click on load more button
 
   @SS-4389
