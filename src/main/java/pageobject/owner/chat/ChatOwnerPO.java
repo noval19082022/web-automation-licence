@@ -32,6 +32,7 @@ public class ChatOwnerPO {
     Locator attachmentButton;
     Locator weeklyQuotaChatlistHeader;
     Locator registerGoldplusButton;
+    Locator registerGoldplusButtonOnChatRoom;
     Locator weeklyQuotaChatroomHeader;
     Locator broadcastChatBtn;
     Locator gpPacakgeText;
@@ -75,8 +76,9 @@ public class ChatOwnerPO {
         ownerRunsOutQuotaWording = page.locator("//button[@class='bg-c-button mc-file-picker__dropdown-trigger bg-c-button--tertiary-naked bg-c-button--md bg-c-button--icon-only-md'][@disabled]");
         attachmentButton = page.locator("//button[@class='bg-c-button mc-file-picker__dropdown-trigger bg-c-button--tertiary-naked bg-c-button--md bg-c-button--icon-only-md']");
         weeklyQuotaChatlistHeader = page.getByText("Sisa Kuota: information-round");
-        weeklyQuotaChatroomHeader = page.locator("//div[@class='mc-chat-room-quota-info__detail']");
-        registerGoldplusButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Daftar GoldPlus"));
+        weeklyQuotaChatroomHeader = page.getByText("Kuota belum terpakai di chat");
+        registerGoldplusButton = page.locator(".mc-non-gp-entrypoint-card__entrypoint-button > span:nth-child(1)");
+        registerGoldplusButtonOnChatRoom = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Daftar GoldPlus"));
         broadcastChatBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("broadcast-message"));
         gpPacakgeText = page.getByTestId("popperReference");
         lastFTUEMars = page.locator(".mc-ftue-tooltip__standard-content-text");
@@ -369,8 +371,8 @@ public class ChatOwnerPO {
      * @return true if appear
      */
     public boolean isRegisterGPButtonChatroomPresent() {
-        playwright.waitTillLocatorIsVisible(registerGoldplusButton, 10000.0);
-        return registerGoldplusButton.isVisible();
+        playwright.waitTillLocatorIsVisible(registerGoldplusButtonOnChatRoom, 10000.0);
+        return registerGoldplusButtonOnChatRoom.isVisible();
     }
 
     /**
