@@ -218,7 +218,7 @@ Feature: Main Search
       | Sleman    | Sleman    |
     Then title listing that appear have location campus in "Sleman"
 
-  @continue @TEST_SS-3200
+  @TEST_SS-3200
   Scenario: [DWeb][Kost listing][Sorting] User Can Use Price Sorting From Lower To Greater
     Given user go to mamikos homepage
     When user clicks Search

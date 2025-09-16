@@ -1,7 +1,7 @@
 @SS15
 Feature: Kost Review
 
-  @TEST_SS-4271 @continue
+  @TEST_SS-4271
   Scenario: Cancel create review
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
@@ -27,9 +27,11 @@ Feature: Kost Review
     And user click cancel on Create Review section
     Then user redirected to "/admin/review"
 
-  @continue
   Scenario: Create review without contract
     Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | qaeautomation3@mamikos.com | qaeautomation3@mamikos.com | qwerty123 |
     And user Create Review without contract data:
       | annonymous         | 0                                                |
       | review type        | Without Contract                                 |
@@ -53,6 +55,9 @@ Feature: Kost Review
   @continue
   Scenario: Edit review without contract
     Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | qaeautomation3@mamikos.com | qaeautomation3@mamikos.com | qwerty123 |
     And user Edit Review without contract data on "Just a test content that will match 25 characters of input":
       | annonymous         | 0                                                |
       | OTA                | Tiket                                            |
@@ -75,24 +80,35 @@ Feature: Kost Review
   @continue
   Scenario: Update kost review to Live
     Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | qaeautomation3@mamikos.com | qaeautomation3@mamikos.com | qwerty123 |
     And user click Live button on "Just a test content that will match 25 characters of input edit"
     Then user receive success alert for kost review updated to live with text "Success! Review Updated to live"
 
   @continue
   Scenario: Update kost review to Reject
     Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | qaeautomation3@mamikos.com | qaeautomation3@mamikos.com | qwerty123 |
     And user click Reject button on "Just a test content that will match 25 characters of input edit"
     Then user receive success alert for kost review updated to reject with text "Success! Berhasil menolak review"
 
   @continue
   Scenario: Delete kost review
     Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | qaeautomation3@mamikos.com | qaeautomation3@mamikos.com | qwerty123 |
     And user click Delete button on "Just a test content that will match 25 characters of input edit"
     Then user receive success alert for deleted kost review with text "Success! Success, Review Deleted"
 
-  @continue
   Scenario: Create review with contract
     Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | qaeautomation3@mamikos.com | qaeautomation3@mamikos.com | qwerty123 |
     And user Create Review with contract data:
       | annonymous  | 0             |
       | review type | with_contract |
@@ -108,8 +124,12 @@ Feature: Kost Review
     And user click Save on Create Review section
     Then user verify success alert with "Success! Review added successfully."
 
+  @continue
   Scenario: Edit review with contract
     Given admin go to mamikos bangkrupux admin
+    When admin login to bangkrupux:
+      | email stag                 | email prod                 | password  |
+      | qaeautomation3@mamikos.com | qaeautomation3@mamikos.com | qwerty123 |
     And user Edit Review wit contract data on "Just a test content that will match 25 characters of input":
       | annonymous  | 0     |
       | contract id | 29265 |
@@ -124,6 +144,7 @@ Feature: Kost Review
     And user click Save on Create Review section
     Then user verify success edit alert with "Success! Review Updated"
 
+  @continue
   Scenario: Delete kost review
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
