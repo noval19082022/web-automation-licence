@@ -65,7 +65,7 @@ public class JoinSinggahsiniPO {
         kecamatanDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih kecamatan kos Anda"));
         kelurahanDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih kelurahan kos Anda"));
         cariField = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Cari"));
-        searchKotaErrorMessage = page.locator("//input[@placeholder='Cari']/following::span");
+        searchKotaErrorMessage = page.getByText("Kota tidak ditemukan");
         kembaliButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kembali"));
         keluarButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Keluar"));
         lanjutIsiButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lanjut Isi"));
