@@ -1,4 +1,4 @@
-@SS-5027 @SS5 @saktichecklagi
+@SS-5027 @SS5
 Feature: Mamipoin Tenant Entry Point
 
   @SS-5054
