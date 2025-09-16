@@ -7,23 +7,34 @@ import utilities.PlaywrightHelpers;
 
 public class BillingReminderPO {
 
+    private static final String AUTOMATION_TEXT = "untuk automation";
+    private static final double DROPDOWN_LOAD_WAIT = 1500;
+    private static final double PERIOD_DROPDOWN_WAIT = 500;
+    private static final double MENU_RELOAD_WAIT = 2000;
+    
+    // Common role option variables
+    private static final String DELETE_BUTTON_NAME = "Delete";
+    private static final String EDIT_BUTTON_NAME = "Edit";
+    private static final String CREATE_BUTTON_NAME = "Create";
+    private static final String SAVE_BUTTON_NAME = "Save";
+
     private Page page;
     private PlaywrightHelpers playwright;
-    Locator billingReminderMenu;
-    Locator addTemplateButton;
-    Locator selectPeriodDropdown;
-    Locator subjectTextField;
-    Locator titleTextField;
-    Locator contentTextField;
-    Locator createTemplateButton;
-    Locator templateCreatedText;
-    Locator templateSubjectText;
-    Locator cannotCreateTemplateText;
-    Locator saveTemplateButton;
-    Locator SMSTextField;
-    Locator selectWATemplateDropdown;
-    Locator WATemplateSubjectText;
-    Locator selectWAPeriodDropdown;
+    private Locator billingReminderMenu;
+    private Locator addTemplateButton;
+    private Locator selectPeriodDropdown;
+    private Locator subjectTextField;
+    private Locator titleTextField;
+    private Locator contentTextField;
+    private Locator createTemplateButton;
+    private Locator templateCreatedText;
+    private Locator templateSubjectText;
+    private Locator cannotCreateTemplateText;
+    private Locator saveTemplateButton;
+    private Locator SMSTextField;
+    private Locator selectWATemplateDropdown;
+    private Locator WATemplateSubjectText;
+    private Locator selectWAPeriodDropdown;
 
     public BillingReminderPO(Page page) {
         this.page = page;
@@ -37,13 +48,12 @@ public class BillingReminderPO {
         titleTextField = page.locator("input[name=\"title\"]");
         SMSTextField = page.getByRole(AriaRole.TEXTBOX);
         contentTextField = page.locator("textarea[name=\"content\"]");
-        createTemplateButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Create"));
+        createTemplateButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(CREATE_BUTTON_NAME));
         templateCreatedText = page.getByText("Template created.");
         templateSubjectText = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName("-1").setExact(true));
         WATemplateSubjectText = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName("recurringbooking_voucher_d_plus_1_update"));
         cannotCreateTemplateText = page.getByText("Cannot create template.");
-        saveTemplateButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Save"));
-
+        saveTemplateButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(SAVE_BUTTON_NAME));
     }
 
     /**
@@ -51,7 +61,7 @@ public class BillingReminderPO {
      */
     public void clickOnBillingReminderMenu() {
         page.reload();
-        playwright.hardWait(2);
+        playwright.hardWait(MENU_RELOAD_WAIT);
         playwright.forceClickOn(billingReminderMenu);
     }
 
@@ -60,30 +70,33 @@ public class BillingReminderPO {
      *
      */
     public void clickOnBillingTemplateMenu(String menu) {
-        page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(menu)).click();
+        playwright.clickOn(page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(menu)));
     }
 
     /**
      *  Delete billing reminder period
      */
     public void deleteBillingReminderPeriod(String period){
-        page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(period)).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Delete")).click();
+        Locator periodRow = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(period));
+        playwright.clickOn(periodRow.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(DELETE_BUTTON_NAME)));
     }
 
     /**
      *  Edit billing reminder period
      */
     public void editBillingReminderPeriod(String day){
-        page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(day)).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Edit")).click();
+        Locator dayRow = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(day));
+        playwright.clickOn(dayRow.getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName(EDIT_BUTTON_NAME)));
     }
 
     /**
-     * Is Table Content Template Appeared?
+     * Check if table content template is displayed
      * @param content input string that will search element text
-     * @return true or false
+     * @return true if template is displayed, false otherwise
      */
-    public Boolean isTableContentTemplateAppeared(String content){
-        return page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(content)).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Delete")).isVisible();
+    public boolean isTableContentTemplateDisplayed(String content){
+        Locator contentRow = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(content));
+        return playwright.waitTillLocatorIsVisible(contentRow.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(DELETE_BUTTON_NAME)));
     }
 
     /**
@@ -91,8 +104,8 @@ public class BillingReminderPO {
      * @return true / false
      */
     public boolean isBillingTemplateDisplayed() {
-        templateSubjectText.waitFor();
-        return templateSubjectText.isVisible();
+        playwright.waitFor(templateSubjectText);
+        return playwright.waitTillLocatorIsVisible(templateSubjectText);
     }
 
     /**
@@ -100,19 +113,19 @@ public class BillingReminderPO {
      */
     public void setBillingTemplate(String day) {
         if (!isBillingTemplateDisplayed()){
-            addTemplateButton.click();
-            selectPeriodDropdown.selectOption(day);
-            if (subjectTextField.isVisible())
-                subjectTextField.fill("untuk automation");
-            else if (titleTextField.isVisible()){
-                titleTextField.fill("untuk automation");
+            playwright.clickOn(addTemplateButton);
+            playwright.selectDropdownByValue(selectPeriodDropdown, day);
+            if (playwright.waitTillLocatorIsVisible(subjectTextField))
+                playwright.fill(subjectTextField, AUTOMATION_TEXT);
+            else if (playwright.waitTillLocatorIsVisible(titleTextField)){
+                playwright.fill(titleTextField, AUTOMATION_TEXT);
             }
-            else if (SMSTextField.isVisible()){
-                SMSTextField.fill("untuk automation");
+            else if (playwright.waitTillLocatorIsVisible(SMSTextField)){
+                playwright.fill(SMSTextField, AUTOMATION_TEXT);
             }
-            contentTextField.fill("untuk automation");
-            createTemplateButton.click();
-            templateCreatedText.waitFor();
+            playwright.fill(contentTextField, AUTOMATION_TEXT);
+            playwright.clickOn(createTemplateButton);
+            playwright.waitFor(templateCreatedText);
         }
 
     }
@@ -122,7 +135,7 @@ public class BillingReminderPO {
      * @return true / false
      */
     public boolean isWABillingTemplateDisplayed(){
-        return WATemplateSubjectText.isVisible();
+        return playwright.waitTillLocatorIsVisible(WATemplateSubjectText);
     }
 
     /**
@@ -130,11 +143,11 @@ public class BillingReminderPO {
      */
     public void setWABillingTemplate(String day, String WATemplate) {
         if (!isWABillingTemplateDisplayed()){
-            addTemplateButton.click();
-            selectWAPeriodDropdown.selectOption(day);
-            selectWATemplateDropdown.selectOption(WATemplate);
-            createTemplateButton.click();
-            templateCreatedText.waitFor();
+            playwright.clickOn(addTemplateButton);
+            playwright.selectDropdownByValue(selectWAPeriodDropdown, day);
+            fillWATemplate(WATemplate);
+            playwright.clickOn(createTemplateButton);
+            playwright.waitFor(templateCreatedText);
         }
 
     }
@@ -143,77 +156,87 @@ public class BillingReminderPO {
      * click on Add Template Button
      */
     public void clickOnAddTemplateButton() {
-        addTemplateButton.click();
+        playwright.clickOn(addTemplateButton);
     }
 
     /**
      * click on Create Template Button
      */
     public void clickOnCreateTemplateButton() {
-        createTemplateButton.click();
+        playwright.clickOn(createTemplateButton);
     }
 
     /**
      * click on Save Template Button
      */
     public void clickOnSaveTemplateButton() {
-        saveTemplateButton.click();
+        playwright.clickOn(saveTemplateButton);
     }
 
     /**
-     * Fill Title Template Subject
-     * @param title input string that will be used to fill Email Template Subject
+     * Fill template title field
+     * @param title input string that will be used to fill template title
      */
     public void fillTemplateTitle(String title) {
-        titleTextField.fill(title);
+        playwright.fill(titleTextField, title);
     }
 
     /**
-     * Fill Subject Template Subject
-     * @param subject input string that will be used to fill Email Template Subject
+     * Fill template subject field
+     * @param subject input string that will be used to fill template subject
      */
     public void fillTemplateSubject(String subject) {
-        subjectTextField.fill(subject);
+        playwright.fill(subjectTextField, subject);
     }
 
     /**
-     * Fill Content Template Content
-     * @param content input string that will be used to fill Email Template Subject
+     * Fill template content field
+     * @param content input string that will be used to fill template content
      */
     public void fillTemplateContent(String content) {
-        contentTextField.fill(content);
+        playwright.fill(contentTextField, content);
     }
 
     /**
-     * Fill Content Template Content
-     * @param text input string that will be used to fill Email Template Subject
+     * Fill SMS text box field
+     * @param text input string that will be used to fill SMS text content
      */
     public void fillSMSTextBox(String text) {
-        SMSTextField.fill(text);
+        playwright.fill(SMSTextField, text);
     }
 
     /**
-     * Fill Period Template period
-     * @param day input string that will be used to fill Email Template Subject
+     * Fill template period dropdown
+     * @param day input string that will be used to select template period
      */
     public void fillTemplatePeriod(String day) {
-        selectPeriodDropdown.selectOption(day);
+        playwright.selectDropdownByValue(selectPeriodDropdown, day);
     }
 
     /**
-     * Fill WA Period Template period
-     * @param day input string that will be used to fill Email Template Subject
+     * Fill WhatsApp template period dropdown
+     * @param day input string that will be used to select WhatsApp template period
      */
     public void fillWATemplatePeriod(String day) {
-        selectWAPeriodDropdown.selectOption(day);
+        // Wait for dropdown to be visible and enabled before selecting option
+        playwright.waitFor(selectWAPeriodDropdown);
+        playwright.hardWait(PERIOD_DROPDOWN_WAIT);
+        playwright.selectDropdownByValue(selectWAPeriodDropdown, day);
     }
 
     /**
-     * Fill Period Template period
-     * @param WATemplate input string that will be used to fill Email Template Subject
+     * Fill WhatsApp template dropdown with specified template
+     * @param WATemplate input string for the WhatsApp template to select
      */
     public void fillWATemplate(String WATemplate) {
-        selectWATemplateDropdown.selectOption(WATemplate);
+        // Wait for dropdown to be visible and enabled before selecting option
+        playwright.waitFor(selectWATemplateDropdown);
+        
+        // Wait for dropdown options to be loaded
+        playwright.hardWait(DROPDOWN_LOAD_WAIT);
+        
+        // Directly select the option by value using PlaywrightHelpers
+        playwright.selectDropdownByValue(selectWATemplateDropdown, WATemplate);
     }
 
     /**
@@ -228,10 +251,10 @@ public class BillingReminderPO {
     /**
      * Wait until cannot create template text visible
      *
-     * @return
+     * @return true if error text is visible, false otherwise
      */
     public boolean waitTemplateErrorVisible() {
-        return cannotCreateTemplateText.isVisible();
+        return playwright.waitTillLocatorIsVisible(cannotCreateTemplateText);
     }
 
     /**
@@ -240,8 +263,10 @@ public class BillingReminderPO {
      * @return string
      */
     public String getTableSubjectTemplate(String subject){
-        playwright.hardWait(5000);
-        return playwright.getText(page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(subject).setExact(true)));
+        Locator subjectCell = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(subject).setExact(true));
+        // Wait for table to be loaded before getting text
+        playwright.waitFor(subjectCell);
+        return playwright.getText(subjectCell);
     }
 
     /**
@@ -250,7 +275,8 @@ public class BillingReminderPO {
      * @return string
      */
     public String getTableContentTemplate(String content){
-        return playwright.getText(page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(content).setExact(true)));
+        Locator contentCell = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(content).setExact(true));
+        return playwright.getText(contentCell);
     }
 
 }

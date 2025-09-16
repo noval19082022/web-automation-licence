@@ -143,9 +143,9 @@ Feature: Billing Reminder
 		#  Scenario: Add Template
 
     Given user create new WhatsApp template:
-      | day | WATemplate                 |
-      | -7  | recurringbooking_d_minus_7 |
-    Then user verify Template subject with "recurringbooking_d_minus_7"
+      | day | WATemplate                |
+      | -7  | recurringbooking_day_min_7 |
+    Then user verify Template subject with "recurringbooking_day_min_7"
 
 		#  Scenario: Edit Template
     Given user edit WhatsApp template:
