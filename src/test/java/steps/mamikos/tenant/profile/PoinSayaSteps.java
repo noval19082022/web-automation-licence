@@ -79,8 +79,16 @@ public class PoinSayaSteps {
     }
 
     @And("user verify the amount of poin owned by the tenant is {string}")
-    public void userVerifyTheAmountOfPoinOwnedByTheTenantIs(String mamipoinTenant) {
-        Assert.assertEquals(poinSaya.verifyAmountOfPoinOwnedByTenant(mamipoinTenant), mamipoinTenant, "Amount of poin text not equals!");
+    public void userVerifyTheAmountOfPoinOwnedByTheTenantIs(String expectedPoints) {
+        Integer actualPoints = poinSaya.verifyAmountOfPoinOwnedByTenant();
+        Assert.assertEquals(actualPoints, Integer.parseInt(expectedPoints), "Amount of poin text not equals!");
+    }
+
+    @And("user verify mamipoin entry point is accessible")
+    public void userVerifyMamipoinEntryPointIsAccessible() {
+        Integer actualPoints = poinSaya.verifyAmountOfPoinOwnedByTenant();
+        Assert.assertTrue(actualPoints >= 0,
+            "MamiPoin entry point should be accessible with points >= 0, but was " + actualPoints);
     }
 
     @And("user clicks on mamipoin tenant entry point button")
