@@ -304,7 +304,8 @@ public class PoinSayaPO {
      * @param filterText refer to table contents
      */
     public void isFilterVisible(String filterText) {
-        filterButton = page.getByText(filterText);
+        // Use more specific locator to target only the filter tab buttons, not list items
+        filterButton = page.locator(".b-tab__box-button").filter(new Locator.FilterOptions().setHasText(filterText));
         assertThat(filterButton).isVisible();
     }
 
@@ -324,7 +325,8 @@ public class PoinSayaPO {
      * @return
      */
     public String getFilterText(String filter) {
-        filterButton = page.getByText(filter);
+        // Use more specific locator to target only the filter tab buttons, not list items
+        filterButton = page.locator(".b-tab__box-button").filter(new Locator.FilterOptions().setHasText(filter));
         return playwright.getText(filterButton);
     }
 
@@ -342,7 +344,8 @@ public class PoinSayaPO {
      * @param filter input string that define filter value
      */
     public void clickOnFilters(String filter) {
-        filterButton = page.getByText(filter);
+        // Use more specific locator to target only the filter tab buttons, not list items
+        filterButton = page.locator(".b-tab__box-button").filter(new Locator.FilterOptions().setHasText(filter));
         playwright.clickOn(filterButton);
     }
 

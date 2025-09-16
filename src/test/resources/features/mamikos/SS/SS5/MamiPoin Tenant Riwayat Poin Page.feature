@@ -1,7 +1,6 @@
 @SS-5027 @SS5
 Feature: MamiPoin Tenant Riwayat Poin Page
 
-
   @SS-5063 @continue
   Scenario: Tenant already on Riwayat Poin page
     Given user go to mamikos homepage
