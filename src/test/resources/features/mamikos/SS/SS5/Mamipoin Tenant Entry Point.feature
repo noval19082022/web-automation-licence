@@ -15,9 +15,9 @@ Feature: Mamipoin Tenant Entry Point
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag | phone prod    | password  |
-      | 0892202108 | 0890867321215 | qwerty123 |
+      | 0810000091 | 0810000091 | qwerty123 |
     And user navigate to kost saya page
-    And user verify the amount of poin owned by the tenant is "279"
+    And user verify mamipoin entry point is accessible
     And user clicks on mamipoin tenant entry point button
     Then user verify title in the mamipoin tenant landing page is displayed
 

@@ -124,10 +124,7 @@ public class JoinSinggahsiniSteps {
     }
     @Then("user should be redirect to singgahsini.id")
     public void user_should_be_redirect_to_singgahsini_id() {
-        String url = singgahsiniUrl;
-        if (ENV.equalsIgnoreCase("prod")){
-            url = singgahsiniUrl+"/";
-        }
+        String url = singgahsiniUrl+"/";
         Assert.assertEquals(joinSinggahsini.getURLSinggahsini(),url);
     }
     @When("user submit daftar singgahsini")

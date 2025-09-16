@@ -171,12 +171,13 @@ public class PoinSayaPO {
 
     /**
      * Verify the amount of poin owned by the tenant
-     * @param poin
-     * @return amount of poin
+     * @return actual poin amount from the page
      */
-    public String verifyAmountOfPoinOwnedByTenant(String poin) {
-        getMamipoinTenant = page.locator("//*[@href='/user/mamipoin']//span[contains(text(),'" + poin + "')]");
-        return playwright.getText(getMamipoinTenant);
+    public Integer verifyAmountOfPoinOwnedByTenant() {
+        // Look for the mamipoin link and get the points number from the last span element
+        getMamipoinTenant = page.locator("a[href='/user/mamipoin'] span").last();
+        var stringPoint = playwright.getText(getMamipoinTenant).replace(".", "");
+        return Integer.parseInt(stringPoint);
     }
 
     /**
@@ -322,7 +323,7 @@ public class PoinSayaPO {
     /**
      *  Get selected filter text
      * @param filter input string that define filter value
-     * @return
+     * @return filter text
      */
     public String getFilterText(String filter) {
         // Use more specific locator to target only the filter tab buttons, not list items
