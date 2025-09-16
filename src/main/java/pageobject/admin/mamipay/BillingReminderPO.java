@@ -72,14 +72,16 @@ public class BillingReminderPO {
      *  Delete billing reminder period
      */
     public void deleteBillingReminderPeriod(String period){
-        playwright.clickOn(page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(period)).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Delete")));
+        Locator periodRow = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(period));
+        playwright.clickOn(periodRow.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Delete")));
     }
 
     /**
      *  Edit billing reminder period
      */
     public void editBillingReminderPeriod(String day){
-        playwright.clickOn(page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(day)).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Edit")));
+        Locator dayRow = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(day));
+        playwright.clickOn(dayRow.getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Edit")));
     }
 
     /**
@@ -88,7 +90,8 @@ public class BillingReminderPO {
      * @return true if template is displayed, false otherwise
      */
     public boolean isTableContentTemplateDisplayed(String content){
-        return playwright.waitTillLocatorIsVisible(page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(content)).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Delete")));
+        Locator contentRow = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(content));
+        return playwright.waitTillLocatorIsVisible(contentRow.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Delete")));
     }
 
     /**
@@ -243,7 +246,7 @@ public class BillingReminderPO {
     /**
      * Wait until cannot create template text visible
      *
-     * @return
+     * @return true if error text is visible, false otherwise
      */
     public boolean waitTemplateErrorVisible() {
         return playwright.waitTillLocatorIsVisible(cannotCreateTemplateText);
@@ -255,9 +258,10 @@ public class BillingReminderPO {
      * @return string
      */
     public String getTableSubjectTemplate(String subject){
+        Locator subjectCell = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(subject).setExact(true));
         // Wait for table to be loaded before getting text
-        playwright.waitFor(page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(subject).setExact(true)));
-        return playwright.getText(page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(subject).setExact(true)));
+        playwright.waitFor(subjectCell);
+        return playwright.getText(subjectCell);
     }
 
     /**
@@ -266,7 +270,8 @@ public class BillingReminderPO {
      * @return string
      */
     public String getTableContentTemplate(String content){
-        return playwright.getText(page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(content).setExact(true)));
+        Locator contentCell = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(content).setExact(true));
+        return playwright.getText(contentCell);
     }
 
 }
