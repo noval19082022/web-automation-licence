@@ -12,33 +12,33 @@ import pageobject.admin.mamipay.BillingReminderPO;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Step definitions for Billing Reminder Template functionality
+ */
 public class BillingReminderTemplateSteps {
-    Page page = ActiveContext.getActivePage();
-    private BillingReminderPO BillingReminderPO = new BillingReminderPO(page);
+    private final Page page = ActiveContext.getActivePage();
+    private final BillingReminderPO billingReminderPO = new BillingReminderPO(page);
     private List<Map<String, String>> inputBillingReminderData;
-
 
     @Then("user open {string} submenu of Billing Reminder Template")
     public void userOpenSubmenuOfBillingReminderTemplate(String menu) {
-        BillingReminderPO.clickOnBillingReminderMenu();
-        BillingReminderPO.clickOnBillingTemplateMenu(menu);
-
+        billingReminderPO.clickOnBillingReminderMenu();
+        billingReminderPO.clickOnBillingTemplateMenu(menu);
     }
 
     @When("user set the initial state to display Billing template Day {string}")
-    public void user_set_the_initial_state_to_display_billing_template(String day) {
-        BillingReminderPO.setBillingTemplate(day);
-
+    public void userSetTheInitialStateToDisplayBillingTemplate(String day) {
+        billingReminderPO.setBillingTemplate(day);
     }
 
     @When("user delete billing Template with content {string}")
     public void userDeleteBillingTemplateWithContent(String period) {
-        BillingReminderPO.deleteBillingReminderPeriod(period);
+        billingReminderPO.deleteBillingReminderPeriod(period);
     }
 
     @Then("user verify delete billing Template with content {string}")
     public void userVerifyDeleteBillingTemplateWithContent(String content) {
-        Assert.assertFalse(BillingReminderPO.isTableContentTemplateAppeared(content), "Template table content " + content + " is still appeared");
+        Assert.assertFalse(billingReminderPO.isTableContentTemplateDisplayed(content), "Template table content " + content + " is still appeared");
     }
 
     @Given("user create new template:")
@@ -47,29 +47,28 @@ public class BillingReminderTemplateSteps {
         var day = inputBillingReminderData.get(0).get("day");
         var subject = inputBillingReminderData.get(0).get("subject");
         var content = inputBillingReminderData.get(0).get("content");
-        BillingReminderPO.clickOnAddTemplateButton();
-        BillingReminderPO.fillTemplatePeriod(day);
-        BillingReminderPO.fillTemplateSubject(subject);
-        BillingReminderPO.fillTemplateContent(content);
-        BillingReminderPO.clickOnCreateTemplateButton();
+        billingReminderPO.clickOnAddTemplateButton();
+        billingReminderPO.fillTemplatePeriod(day);
+        billingReminderPO.fillTemplateSubject(subject);
+        billingReminderPO.fillTemplateContent(content);
+        billingReminderPO.clickOnCreateTemplateButton();
     }
 
     @Then("user verify cannot create billing reminder template")
-    public void user_verify_cannot_create_billing_reminder_template() {
-        if (BillingReminderPO.waitTemplateErrorVisible()) {
-            Assert.assertEquals(BillingReminderPO.getTemplateErrorText().trim(), "Cannot create template.");
+    public void userVerifyCannotCreateBillingReminderTemplate() {
+        if (billingReminderPO.waitTemplateErrorVisible()) {
+            Assert.assertEquals(billingReminderPO.getTemplateErrorText().trim(), "Cannot create template.");
         }
-
     }
 
     @Then("user verify Template subject with {string}")
     public void userVerifyTemplateSubjectWith(String subject) {
-        Assert.assertEquals(BillingReminderPO.getTableSubjectTemplate(subject), subject, "Template table content is not equal to " + subject);
+        Assert.assertEquals(billingReminderPO.getTableSubjectTemplate(subject), subject, "Template table content is not equal to " + subject);
     }
 
     @Then("user verify Template content with {string}")
     public void userVerifyTemplateContentWith(String content) {
-        Assert.assertEquals(BillingReminderPO.getTableContentTemplate(content), content, "Template table content is not equal to " + content);
+        Assert.assertEquals(billingReminderPO.getTableContentTemplate(content), content, "Template table content is not equal to " + content);
     }
 
     @Given("user edit template:")
@@ -78,10 +77,10 @@ public class BillingReminderTemplateSteps {
         var day = inputBillingReminderData.get(0).get("day");
         var subject = inputBillingReminderData.get(0).get("subject");
         var content = inputBillingReminderData.get(0).get("content");
-        BillingReminderPO.editBillingReminderPeriod(day);
-        BillingReminderPO.fillTemplateSubject(subject);
-        BillingReminderPO.fillTemplateContent(content);
-        BillingReminderPO.clickOnSaveTemplateButton();
+        billingReminderPO.editBillingReminderPeriod(day);
+        billingReminderPO.fillTemplateSubject(subject);
+        billingReminderPO.fillTemplateContent(content);
+        billingReminderPO.clickOnSaveTemplateButton();
     }
 
     @Given("user create new PN template:")
@@ -90,11 +89,11 @@ public class BillingReminderTemplateSteps {
         var day = inputBillingReminderData.get(0).get("day");
         var title = inputBillingReminderData.get(0).get("title");
         var content = inputBillingReminderData.get(0).get("content");
-        BillingReminderPO.clickOnAddTemplateButton();
-        BillingReminderPO.fillTemplatePeriod(day);
-        BillingReminderPO.fillTemplateTitle(title);
-        BillingReminderPO.fillTemplateContent(content);
-        BillingReminderPO.clickOnCreateTemplateButton();
+        billingReminderPO.clickOnAddTemplateButton();
+        billingReminderPO.fillTemplatePeriod(day);
+        billingReminderPO.fillTemplateTitle(title);
+        billingReminderPO.fillTemplateContent(content);
+        billingReminderPO.clickOnCreateTemplateButton();
     }
 
     @Given("user edit PN template:")
@@ -103,10 +102,10 @@ public class BillingReminderTemplateSteps {
         var day = inputBillingReminderData.get(0).get("day");
         var title = inputBillingReminderData.get(0).get("title");
         var content = inputBillingReminderData.get(0).get("content");
-        BillingReminderPO.editBillingReminderPeriod(day);
-        BillingReminderPO.fillTemplateTitle(title);
-        BillingReminderPO.fillTemplateContent(content);
-        BillingReminderPO.clickOnSaveTemplateButton();
+        billingReminderPO.editBillingReminderPeriod(day);
+        billingReminderPO.fillTemplateTitle(title);
+        billingReminderPO.fillTemplateContent(content);
+        billingReminderPO.clickOnSaveTemplateButton();
     }
 
     @Given("user create new SMS template:")
@@ -114,10 +113,10 @@ public class BillingReminderTemplateSteps {
         inputBillingReminderData = table.asMaps(String.class, String.class);
         var day = inputBillingReminderData.get(0).get("day");
         var text = inputBillingReminderData.get(0).get("text");
-        BillingReminderPO.clickOnAddTemplateButton();
-        BillingReminderPO.fillTemplatePeriod(day);
-        BillingReminderPO.fillSMSTextBox(text);
-        BillingReminderPO.clickOnCreateTemplateButton();
+        billingReminderPO.clickOnAddTemplateButton();
+        billingReminderPO.fillTemplatePeriod(day);
+        billingReminderPO.fillSMSTextBox(text);
+        billingReminderPO.clickOnCreateTemplateButton();
     }
 
     @Given("user edit SMS template:")
@@ -125,9 +124,9 @@ public class BillingReminderTemplateSteps {
         inputBillingReminderData = table.asMaps(String.class, String.class);
         var day = inputBillingReminderData.get(0).get("day");
         var text = inputBillingReminderData.get(0).get("text");
-        BillingReminderPO.editBillingReminderPeriod(day);
-        BillingReminderPO.fillSMSTextBox(text);
-        BillingReminderPO.clickOnSaveTemplateButton();
+        billingReminderPO.editBillingReminderPeriod(day);
+        billingReminderPO.fillSMSTextBox(text);
+        billingReminderPO.clickOnSaveTemplateButton();
     }
 
     @Given("user create new WhatsApp template:")
@@ -135,10 +134,10 @@ public class BillingReminderTemplateSteps {
         inputBillingReminderData = table.asMaps(String.class, String.class);
         var day = inputBillingReminderData.get(0).get("day");
         var WATemplate = inputBillingReminderData.get(0).get("WATemplate");
-        BillingReminderPO.clickOnAddTemplateButton();
-        BillingReminderPO.fillWATemplatePeriod(day);
-        BillingReminderPO.fillWATemplate(WATemplate);
-        BillingReminderPO.clickOnCreateTemplateButton();
+        billingReminderPO.clickOnAddTemplateButton();
+        billingReminderPO.fillWATemplatePeriod(day);
+        billingReminderPO.fillWATemplate(WATemplate);
+        billingReminderPO.clickOnCreateTemplateButton();
     }
 
     @Given("user edit WhatsApp template:")
@@ -146,14 +145,14 @@ public class BillingReminderTemplateSteps {
         inputBillingReminderData = table.asMaps(String.class, String.class);
         var day = inputBillingReminderData.get(0).get("day");
         var WATemplate = inputBillingReminderData.get(0).get("WATemplate");
-        BillingReminderPO.editBillingReminderPeriod(day);
-        BillingReminderPO.fillWATemplate(WATemplate);
-        BillingReminderPO.clickOnSaveTemplateButton();
+        billingReminderPO.editBillingReminderPeriod(day);
+        billingReminderPO.fillWATemplate(WATemplate);
+        billingReminderPO.clickOnSaveTemplateButton();
     }
 
     @When("user set the initial state to display Billing template Day {string} {string}")
-    public void userSetTheInitialStateToDisplayBillingTemplateDay(String day, String Template) {
-        BillingReminderPO.setWABillingTemplate(day, Template);
+    public void userSetTheInitialStateToDisplayBillingTemplateDay(String day, String template) {
+        billingReminderPO.setWABillingTemplate(day, template);
     }
 
 }
