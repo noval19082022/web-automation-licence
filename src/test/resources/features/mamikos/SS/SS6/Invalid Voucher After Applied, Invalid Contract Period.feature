@@ -9,6 +9,7 @@ Feature: Invalid Voucher After Applied, Invalid Contract Period
     And admin navigate to mamikos voucher menu
     And admin input voucher with value "ATCHANGEPERIOD" and click search button:
     And admin master clicks on edit pencil icon
+    And admin unselect all contract periods
     And admin select minimum type of contract period "Monthly"
     And admin master clicks on edit mass voucher button in voucher form
     Then System display alert message on mamipay web
@@ -68,6 +69,7 @@ Feature: Invalid Voucher After Applied, Invalid Contract Period
     And admin navigate to mamikos voucher menu
     And admin input voucher with value "ATCHANGEPERIOD" and click search button:
     And admin master clicks on edit pencil icon
+    And admin unselect all contract periods
     And admin select minimum type of contract period "Annually"
     And admin master clicks on edit mass voucher button in voucher form
     Then System display alert message on mamipay web
