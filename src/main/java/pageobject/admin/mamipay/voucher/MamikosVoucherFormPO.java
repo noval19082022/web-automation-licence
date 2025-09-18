@@ -764,7 +764,7 @@ public class MamikosVoucherFormPO {
     public void unselectContractPeriod(String contractPeriod) {
         String actualValue = mapContractPeriodValue(contractPeriod);
         Locator targetCheckbox = page.locator("input[name='min_contract_duration[]'][value='" + actualValue + "']");
-        if (targetCheckbox.isChecked()) {
+        if (playwright.isRadioButtonChecked(targetCheckbox)) {
             playwright.clickOn(targetCheckbox);
         }
     }
@@ -777,7 +777,7 @@ public class MamikosVoucherFormPO {
     public boolean isContractPeriodSelected(String contractPeriod) {
         String actualValue = mapContractPeriodValue(contractPeriod);
         Locator targetCheckbox = page.locator("input[name='min_contract_duration[]'][value='" + actualValue + "']");
-        return targetCheckbox.isChecked();
+        return playwright.isRadioButtonChecked(targetCheckbox);
     }
 
     /**
