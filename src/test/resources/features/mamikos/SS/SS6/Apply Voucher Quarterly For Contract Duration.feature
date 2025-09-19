@@ -17,7 +17,7 @@ Feature: Apply Voucher Quarterly For Contract Duration
       | 0890867321205 | 0890867321205 | mamikosqa123 |
     And user cancel booking
 
-  Scenario: Tenant Booking Kost
+  Scenario: Tenant Booking Kos For 1 Quarter Duration
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
@@ -28,7 +28,7 @@ Feature: Apply Voucher Quarterly For Contract Duration
     And tenant booking kost "tomorrow" "Per 3 Bulan"
     Then tenant should success booking kost
 
-  Scenario: Owner Accept Booking
+  Scenario: Owner Accept 1 Quarter Booking Duration
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |
@@ -39,7 +39,7 @@ Feature: Apply Voucher Quarterly For Contract Duration
     Then owner should redirect back to pengajuan booking page
 
   @TEST_SS-4266
-  Scenario: Tenant Apply Voucher AUTOQUARTERLY
+  Scenario: Tenant Apply Voucher Quarter Voucher For 1 Quarter Contract Duration
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
@@ -67,7 +67,7 @@ Feature: Apply Voucher Quarterly For Contract Duration
       | 0890867321205 | 0890867321205 | mamikosqa123 |
     And user cancel booking
 
-  Scenario: Tenant Booking Kost
+  Scenario: Tenant Booking Kost With 1 Year Duration
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
@@ -78,7 +78,7 @@ Feature: Apply Voucher Quarterly For Contract Duration
     And tenant booking kost "tomorrow" "Per Tahun"
     Then tenant should success booking kost
 
-  Scenario: Owner Accept Booking
+  Scenario: Owner Accept 1 Year Booking Duration
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod     | password     |
@@ -89,7 +89,7 @@ Feature: Apply Voucher Quarterly For Contract Duration
     Then owner should redirect back to pengajuan booking page
 
   @TEST_SS-4266
-  Scenario: Tenant Apply Voucher AUTOQUARTERLY
+  Scenario: Tenant Apply Voucher Quarter Voucher For 1 Year Contract Duration
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
@@ -99,4 +99,4 @@ Feature: Apply Voucher Quarterly For Contract Duration
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
       | AUTOQUARTERLY     | AUTOQUARTERLY     |
-    Then tenant can see voucher is applied
+    Then tenant should see voucher error message "Kode voucher tidak bisa digunakan."
