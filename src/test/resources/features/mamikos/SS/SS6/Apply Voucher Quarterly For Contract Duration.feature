@@ -1,4 +1,4 @@
-@SS15 @sakticheckmaintenance
+@SS15
 Feature: Apply Voucher Quarterly For Contract Duration
 
   Scenario: Admin Batalkan Contract
