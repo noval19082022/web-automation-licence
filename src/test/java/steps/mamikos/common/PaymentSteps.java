@@ -98,6 +98,13 @@ public class PaymentSteps {
         Assert.assertTrue(invoice.isInvalidVoucherIconVisible(), "Voucher is valid, invalid voucher must have 'x' icon.");
     }
 
+    @Then("tenant should see voucher error message {string}")
+    public void tenantShouldSeeVoucherErrorMessage(String expectedErrorMessage) {
+        String actualWarningText = invoice.voucherInputPopUpWarningText();
+        Assert.assertEquals(actualWarningText, expectedErrorMessage, 
+            "Expected voucher error message: '" + expectedErrorMessage + "' but got: '" + actualWarningText + "'");
+    }
+
     @When("tenant remove voucher by toast message")
     public void tenantRemoveVoucherByToastMessage() {
         invoice = new InvoicePO(page);
