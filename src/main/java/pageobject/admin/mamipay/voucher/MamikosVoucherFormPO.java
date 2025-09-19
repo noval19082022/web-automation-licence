@@ -78,6 +78,7 @@ public class MamikosVoucherFormPO {
     Locator addPartnerVoucher;
     Locator fieldRequiredValidationMessage;
     private Locator removeCityButton;
+    Locator contractPeriodCheckbox;
 
     public MamikosVoucherFormPO(Page page) {
         this.page = page;
@@ -139,6 +140,7 @@ public class MamikosVoucherFormPO {
         addPartnerVoucher = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Add Voucher"));
         fieldRequiredValidationMessage = page.locator("//*[@class='callout callout-danger']//li");
         removeCityButton = page.getByTitle("Remove item");
+        contractPeriodCheckbox = page.locator("input[name='min_contract_duration[]']");
     }
 
     /**
@@ -720,5 +722,82 @@ public class MamikosVoucherFormPO {
      */
     public String getMessageValidationFieldRequired(String index) {
         return playwright.getText(fieldRequiredValidationMessage.getByText(index));
+    }
+
+    /**
+     * Map user-friendly contract period names to actual values
+     * @param contractPeriod user-friendly name (weekly, monthly, quarterly, semi-annually, annually)
+     * @return actual value for the checkbox
+     */
+    private String mapContractPeriodValue(String contractPeriod) {
+        switch (contractPeriod.toLowerCase()) {
+            case "weekly":
+                return "week";
+            case "monthly":
+                return "month";
+            case "quarterly":
+                return "3_month";
+            case "semi-annually":
+            case "semi_annually":
+                return "6_month";
+            case "annually":
+                return "year";
+            default:
+                return contractPeriod; // Return as-is if already correct format
+        }
+    }
+
+    /**
+     * Select contract period checkbox by value
+     * @param contractPeriod contract period value (week/weekly, month/monthly, 3_month/quarterly, 6_month/semi-annually, year/annually)
+     */
+    public void selectContractPeriod(String contractPeriod) {
+        String actualValue = mapContractPeriodValue(contractPeriod);
+        Locator targetCheckbox = page.locator("input[name='min_contract_duration[]'][value='" + actualValue + "']");
+        playwright.clickOn(targetCheckbox);
+    }
+
+    /**
+     * Unselect contract period checkbox by value
+     * @param contractPeriod contract period value (week/weekly, month/monthly, 3_month/quarterly, 6_month/semi-annually, year/annually)
+     */
+    public void unselectContractPeriod(String contractPeriod) {
+        String actualValue = mapContractPeriodValue(contractPeriod);
+        Locator targetCheckbox = page.locator("input[name='min_contract_duration[]'][value='" + actualValue + "']");
+        if (playwright.isRadioButtonChecked(targetCheckbox)) {
+            playwright.clickOn(targetCheckbox);
+        }
+    }
+
+    /**
+     * Check if contract period is selected
+     * @param contractPeriod contract period value (week/weekly, month/monthly, 3_month/quarterly, 6_month/semi-annually, year/annually)
+     * @return boolean true if selected, false if not
+     */
+    public boolean isContractPeriodSelected(String contractPeriod) {
+        String actualValue = mapContractPeriodValue(contractPeriod);
+        Locator targetCheckbox = page.locator("input[name='min_contract_duration[]'][value='" + actualValue + "']");
+        return playwright.isRadioButtonChecked(targetCheckbox);
+    }
+
+    /**
+     * Select multiple contract periods
+     * @param contractPeriods comma-separated contract period values (weekly, monthly, quarterly, semi-annually, annually)
+     */
+    public void selectMultipleContractPeriods(String contractPeriods) {
+        String[] periods = contractPeriods.split(",");
+        for (String period : periods) {
+            selectContractPeriod(period.trim());
+        }
+    }
+
+    /**
+     * Unselect all contract periods
+     */
+    public void unselectAllContractPeriods() {
+        String[] allPeriods = {"week", "month", "3_month", "6_month", "year"};
+        for (String period : allPeriods) {
+            unselectContractPeriod(period);
+        }
     }
 }

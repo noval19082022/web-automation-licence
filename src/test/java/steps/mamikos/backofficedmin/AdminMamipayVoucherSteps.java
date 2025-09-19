@@ -432,8 +432,34 @@ public class AdminMamipayVoucherSteps {
 
     @When("admin select minimum type of contract period {string}")
     public void admin_select_minimum_contract_periode(String contractPeriod) throws InterruptedException {
-        massVoucherForm.clickOnDropdownContractPeriod();
-        massVoucherForm.chooseContractPeriode(contractPeriod);
+        massVoucherForm.selectContractPeriod(contractPeriod);
+    }
+
+    @When("admin unselect minimum type of contract period {string}")
+    public void admin_unselect_minimum_contract_periode(String contractPeriod) throws InterruptedException {
+        massVoucherForm.unselectContractPeriod(contractPeriod);
+    }
+
+    @When("admin select multiple contract periods {string}")
+    public void admin_select_multiple_contract_periods(String contractPeriods) throws InterruptedException {
+        massVoucherForm.selectMultipleContractPeriods(contractPeriods);
+    }
+
+    @When("admin unselect all contract periods")
+    public void admin_unselect_all_contract_periods() throws InterruptedException {
+        massVoucherForm.unselectAllContractPeriods();
+    }
+
+    @Then("admin can see contract period {string} is selected")
+    public void admin_can_see_contract_period_is_selected(String contractPeriod) {
+        Assert.assertTrue(massVoucherForm.isContractPeriodSelected(contractPeriod), 
+            "Contract period " + contractPeriod + " should be selected but it's not");
+    }
+
+    @Then("admin can see contract period {string} is not selected")
+    public void admin_can_see_contract_period_is_not_selected(String contractPeriod) {
+        Assert.assertFalse(massVoucherForm.isContractPeriodSelected(contractPeriod), 
+            "Contract period " + contractPeriod + " should not be selected but it is");
     }
 
     @And("admin master clicks on edit pencil icon")
