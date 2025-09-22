@@ -323,7 +323,7 @@ Feature: Broadcast Chat Owner
       | phone stag | phone prod | password  |
       | 0891202413 | 0          | qwerty123 |
     When owner navigates to broadcast chat page
-    And owner dismiss FTUE Broadcast
+  #  And owner dismiss FTUE Broadcast
     And owner add broadcast chat for kost "Kos Insto Cool Rajeg Tangerang"
     And owner clicks Kos "Kos Insto Cool Rajeg Tangerang" and Pilih Kos button
     And owner Masukan Pesan and choose row number 1 from the broadcast chat dashboard
@@ -367,7 +367,7 @@ Feature: Broadcast Chat Owner
       | phone stag | phone prod | password  |
       | 0891202413 | 0          | qwerty123 |
     When owner navigates to broadcast chat page
-    And owner dismiss FTUE Broadcast
+   # And owner dismiss FTUE Broadcast
     And owner add broadcast chat for kost "Kos Insto Cool Rajeg Tangerang"
     And owner clicks Kos "Kos Insto Cool Rajeg Tangerang" and Pilih Kos button
     And owner Masukan Pesan and choose row number 1 from the broadcast chat dashboard

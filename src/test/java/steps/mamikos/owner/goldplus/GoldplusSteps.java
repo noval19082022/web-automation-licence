@@ -253,9 +253,11 @@ public class GoldplusSteps {
     public void ownerClickButtonOnChatlist(String buttonTxt) {
         loading.waitForLoadingIconDisappear();
         chat.clickChatOwner();
-        chat.dismissFTUEMars();
-        chat.dismissFTUESurvey();
-        chat.dismissFTUEJemputBola();
+        if (chat.isFTUEMarsPresent()) {
+            chat.dismissFTUEMars();
+            chat.dismissFTUESurvey();
+            chat.dismissFTUEJemputBola();
+        }
         chat.clickButtonOnChatRoomList(buttonTxt);
     }
 

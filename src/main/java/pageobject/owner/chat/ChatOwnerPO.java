@@ -50,6 +50,7 @@ public class ChatOwnerPO {
     Locator lihatProfilPenyewaLabelOnChatroom;
     Locator nextFtueButton;
     Locator surveyKostBtn;
+    Locator FTUEMarsPresent;
 
     public ChatOwnerPO(Page page) {
         this.page = page;
@@ -94,6 +95,7 @@ public class ChatOwnerPO {
         lihatProfilPenyewaLabelOnChatroom = page.getByLabel("Baru: Lihat profil calon penyewa!").getByRole(AriaRole.BANNER);
         nextFtueButton = page.locator("[class*='next-button']");
         surveyKostBtn = page.getByText("Survei Kos").first();
+        FTUEMarsPresent = page.getByText("Apa itu fitur Chat");
     }
 
     /**
@@ -300,6 +302,15 @@ public class ChatOwnerPO {
     }
 
     /**
+     * Check FTUE before send chat is present
+     *
+     * @return true if appear
+     */
+    public boolean isFTUEMarsPresent() {
+        return FTUEMarsPresent.isVisible();
+    }
+
+    /**
      * Click back on FTUE Before chat FTUE Mars
      */
     public void clickBackOnFTUEBeforeChat() {
@@ -434,7 +445,7 @@ public class ChatOwnerPO {
      * Click on button on chat list or chat room owner
      */
     public void clickButtonOnChatRoomList(String buttonText) {
-        buttonOnChatRoomList = page.getByTestId("popperReference").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(buttonText));
+        buttonOnChatRoomList = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(buttonText));
         playwright.waitFor(buttonOnChatRoomList);
         playwright.clickOn(buttonOnChatRoomList);
     }

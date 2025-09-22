@@ -170,8 +170,10 @@ public class PengajuanSewaPO {
      * @param kostName that want to search
      */
     public  BillAndBookingManagementPO searchKostOnKostFilter(String kostName) {
-        searchKost.click();
+        playwright.waitTillLocatorIsVisible(searchKost);
+        playwright.clickOn(searchKost);
         searchKostInputText.fill(kostName);
+        playwright.waitTillLocatorIsVisible(searchKostFirstOption);
         searchKostFirstOption.click();
         return new BillAndBookingManagementPO(page);
     }
