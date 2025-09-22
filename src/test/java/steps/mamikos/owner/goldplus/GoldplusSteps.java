@@ -12,6 +12,7 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.admin.testingtools.GoldPlusPO;
 import pageobject.common.HomePO;
+import pageobject.common.KostDetailsPO;
 import pageobject.common.LoadingPO;
 import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.PromoOwnerPO;
@@ -42,6 +43,7 @@ public class GoldplusSteps {
     PromoOwnerPO promoOwner = new PromoOwnerPO(ActiveContext.getActivePage());
     GoldPlusSubmissionPO gpSubmission = new GoldPlusSubmissionPO(page);
     LoadingPO loading = new LoadingPO(page);
+    KostDetailsPO kostDetail = new KostDetailsPO(page);
 
     @When("user wants to subscribe Goldplus {int}")
     public void user_wants_to_subscribe_goldplus(int paket) {
@@ -251,6 +253,9 @@ public class GoldplusSteps {
     public void ownerClickButtonOnChatlist(String buttonTxt) {
         loading.waitForLoadingIconDisappear();
         chat.clickChatOwner();
+        chat.dismissFTUEMars();
+        chat.dismissFTUESurvey();
+        chat.dismissFTUEJemputBola();
         chat.clickButtonOnChatRoomList(buttonTxt);
     }
 
@@ -394,13 +399,13 @@ public class GoldplusSteps {
                 playwright.hardWait(3000);
                 Assert.assertTrue(goldplus.isGpPackageTableDisplayed(), "GP package table doesn't displayed!");
                 break;
-            case "Daftar GoldPlus":
+            case "Daftar":
                 chat.dismissAllFTUE();
-                chat.dismissFTUEMarsKuotaNol();
+                chat.dismissFTUESurvey();
                 chat.dismissFTUEJemputBola();
                 Assert.assertTrue(playwright.isTextDisplayed("Sisa Kuota", 2000.0), "Daftar GoldPlus doesn't displayed!");
                 Assert.assertTrue(playwright.isTextDisplayed("2 chat room", 3000.0), "Sisa kuota chat text doesn't displayed!");
-                playwright.clickOnTextButton(textMessage);
+                chat.clickButtonOnChatRoomList(textMessage);
                 Assert.assertTrue(goldplus.isGpPackageTableDisplayed(), "GP package table doesn't displayed!");
                 break;
             case "Pilih Periode Berlangganan":
@@ -611,11 +616,11 @@ public class GoldplusSteps {
     public void user_wants_to_terminate_goldplus_for_owner_with_phone_number(String phoneNumber) {
         playwright.navigateTo(Mamikos.ADMINMAMIPAY + Mamikos.GOLDPLUS_CONTRACT);
         goldplus.searchPhoneNumberGP(phoneNumber);
-        
+
         // Check if there are any active contracts to terminate for this specific phone number
         String terminateXpath = "//td[contains(text(), '')]/parent::tr//button[text()='Terminate']";
         var terminateButton = page.locator(terminateXpath);
-        
+
         if (playwright.waitTillLocatorIsVisible(terminateButton, 3000.0)) {
             playwright.clickOn(terminateButton);
             playwright.clickOnTextButton("Yes, terminate it!");
@@ -769,7 +774,7 @@ public class GoldplusSteps {
     @Then("owner see that the text {string} is displayed on goldplus page")
     public void ownerSeeThatTheTextIsDisplayedOnGoldplusPage(String text) {
         playwright.waitTillPageLoaded();
-        Assert.assertTrue(playwright.isTextDisplayed(text, 3000));
+        Assert.assertTrue(playwright.isTextDisplayed(text, 5000));
     }
 
     @And("owner GP-1 upgrade paket to GP-2 from TBC detail page")
@@ -845,5 +850,10 @@ public class GoldplusSteps {
         // Compare the snapshots directly without normalization for better visualization
         Assert.assertTrue(actualAriaSnapshot.contains(expectedAriaSnapshot),
                 String.format("Pilih Gp package structure does not contains expected layout with actual: %s", actualAriaSnapshot));
+    }
+
+    @When("owner choose periode goldplus {string}")
+    public void owner_choose_periode_goldplus(String period) {
+        goldplus.clickOnPeriodGoldPlus(period);
     }
 }

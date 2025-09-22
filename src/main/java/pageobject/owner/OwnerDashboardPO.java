@@ -82,6 +82,7 @@ public class OwnerDashboardPO {
     Locator dariMamikosSection;
     Locator dariMamikosBanner;
     Locator daftarGpButton;
+    Locator entryPointCardGP;
 
     private Locator fiturPromosiExpand;
     private Locator nantiSajaButton;
@@ -178,6 +179,7 @@ public class OwnerDashboardPO {
         widgetInfoUntukAndaParagraph = page.locator("//*[contains(text(),'Info untuk Anda')]/following-sibling::*[@class='widget-card__content']//p");
         generalCloseButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
         pilihPaketGoldplus = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Paket GoldPlus"));
+        entryPointCardGP = page.locator(".membership-card__section").first();
     }
 
     /**
@@ -845,27 +847,27 @@ public class OwnerDashboardPO {
     public void clickOnDaftarGP() {
         // Handle popup with multiple strategies
         boolean popupClosed = handlePopupWithMultipleStrategies();
-        
+
         // Handle specific GoldPlus popups
         if (playwright.isTextDisplayed("Sudah cek fitur-fitur GoldPlus ini?") || playwright.isTextDisplayed("Selamat bergabung di GoldPlus 2!")) {
             playwright.clickOnText("Nanti Saja", 5000.0);
         }
-        
+
         // Try popup handling again if needed
         if (!popupClosed) {
             System.out.println("Trying popup handling again before clicking daftar GP...");
             handlePopupWithMultipleStrategies();
         }
-        
+
         playwright.waitTillPageLoaded();
-        playwright.waitFor(daftarGpButton);
-        playwright.clickOn(daftarGpButton);
-        
-        // Handle the period selection popup that appears after clicking daftar GP
-        // This is specifically for @TEST_LIMO-1393 scenario where a popup should appear
-        handleDaftarGPPeriodSelectionPopup();
+        if (playwright.waitTillLocatorIsVisible(daftarGpButton)) {
+            playwright.clickOn(daftarGpButton);
+            handleDaftarGPPeriodSelectionPopup();
+        } else {
+            playwright.clickOn(entryPointCardGP);
+        }
     }
-    
+
     /**
      * Handle the GoldPlus period selection popup that appears after clicking daftar GP button
      * This popup appears in the @TEST_LIMO-1393 scenario

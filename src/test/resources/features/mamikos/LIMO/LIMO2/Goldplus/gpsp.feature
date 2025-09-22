@@ -305,11 +305,10 @@ Feature: Owner GPSP
       | Masa aktif GoldPlus akan habis.                      |
       | Ayo, segera perpanjang paket GoldPlus Anda sekarang. |
     And owner wants to paid invoice recurring from recurring pop up
-    Then owner will see that the text is displayed
+    Then owner see billing details invoice
       | GoldPlus 1 (2 Bulan)  |
       | Rp247.900                  |
       | Total Pembayaran Rp247.900 |
-#    And owner select payment using alfamart xendit as payment method from invoice detail
     And payment owner success using ovo as payment method
     And owner navigates to owner dashboard
     Then owner will see that the text "GoldPlus 1" is displayed

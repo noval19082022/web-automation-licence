@@ -125,7 +125,7 @@ public class GoldplusPO {
         selectRadioButtonYes = page.locator("[value='1'][name='is_recommended']");
         messageText = page.locator(".bg-c-empty-state__description");
         lihatTagihanTable = page.locator("//tr[@class='goldplus-payment-list-table__row']");
-        widgetGP = page.locator(".membership-card__label");
+        widgetGP = page.locator("img[alt*='Goldplus Logo']").locator("..");
         snkGoldplusCheckbox =  page.locator("label");
         weeklyPeriode = page.locator(".bg-c-radio__icon").first();
         pelajariCaranyaButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Pelajari caranya"));

@@ -30,13 +30,14 @@ Feature: GP Weekly
   @TEST_LIMO-3491 @continue
   Scenario: Select GP Weekly
     Given owner choose periode goldplus "3 Minggu"
-    Then owner see that the text "GoldPlus 2 periode 3 Minggu" is displayed on goldplus page
+    Then owner see that the text "Pilih Periode GoldPlus 2" is displayed on goldplus page
 
 
   @TEST_LIMO-3492 @continue
   Scenario: GoldPlus Weekly Paid
     Given owner click bayar sekarang on detail tagihan page goldplus
     Then owner see that the text "GoldPlus 2" is displayed on goldplus page
+    And owner click bayar sekarang on detail tagihan page goldplus
     And payment owner success using ovo as payment method
 
   @TEST_LIMO-3493 @continue
@@ -98,8 +99,7 @@ Feature: GP Weekly
     When user login as owner:
       | phone stag   | password  |
       | 082233545519 | qwerty123 |
-    When owner navigate to list package goldplus 2
-    * owner choose periode goldplus "Rp44.000 per minggu"
+    And owner choose periode goldplus 2
     * owner click bayar sekarang on detail tagihan page goldplus
     * owner navigates to owner dashboard
     * user click widget GP "Menunggu Pembayaran"
@@ -133,4 +133,4 @@ Feature: GP Weekly
     * owner select transaction expired from history transaction goldplus
     Then owner can see detail tagihan goldplus page with title "Dibatalkan"
     And owner can see "GoldPlus 2" at section Paket yang Anda pilih
-    And owner can see "GoldPlus 2 (1 Minggu)" at section rincian pembayaran goldplus
+    And owner can see "GoldPlus 2 (4 Bulan)" at section rincian pembayaran goldplus

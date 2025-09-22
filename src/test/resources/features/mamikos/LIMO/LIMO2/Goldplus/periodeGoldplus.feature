@@ -19,6 +19,7 @@ Feature: Check Period Goldplus Page
       - paragraph: Rp150.000
       - separator
       - paragraph: + Gratis MamiAds 100.000
+      - text: Favorit
       - paragraph: Paket Jangka Panjang
       - paragraph: Bisa chat dengan penyewa kapanpun
       - paragraph: Rp1.740.000
