@@ -79,8 +79,8 @@ public class JavaHelpers {
      *
      * @return String representation of the rounded time in "HH:mm" format.
      */
-    public static String getCurrentTimeServer() {
-        // Get current time in GMT+7
+    public static String getCurrentTimeServerForSurvey() {
+        // Get current time in Server Time
         LocalTime now = LocalTime.now();
 
         // Round to the nearest 30-minute interval
@@ -105,7 +105,7 @@ public class JavaHelpers {
      *
      * @return String representation of the rounded time in "HH:mm" format.
      */
-    public static String getCurrentTimeGMT7() {
+    public static String getCurrentTimeGMT7ForSurvey() {
         // Get current time in GMT+7
         LocalTime now = LocalTime.now(ZoneId.of("Asia/Bangkok"));
 
