@@ -1,4 +1,4 @@
-@SS11 @essentialTest
+@SS11 @essentialTest @paymentAllBooking
 Feature: Payment All
 
   Scenario: Delete and create contract
@@ -24,13 +24,13 @@ Feature: Payment All
     And tenant redirect to kost details:
       | kost path stag                                                                             | kost path prod       |
       | kost-kabupaten-halmahera-utara-kost-campur-murah-desta-automation-tobelo-halmahera-utara-2 | kost payment desta 2 |
-    And tenant booking kost for "today"
+    And tenant booking kost for "today" with duration 12
     And tenant logs out
 
     ## owner accept
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | phone prod   | password  |
+      | phone stag   | phone prod   | password     |
       | 081328787342 | 081328787342 | Perempuan123 |
     And owner accept booking and select the room
     And owner logs out

@@ -72,7 +72,7 @@ public class XenditApiPO extends InvoicePO {
         Map<String, Object> requestBody = new HashMap<>();
         requestBody.put("retail_outlet_name", retailOutletName);
         requestBody.put("payment_code", paymentCode);
-        requestBody.put("transfer_amount", amount);
+        requestBody.put("transfer_amount", Float.parseFloat(amount));
         return requestBody;
     }
 

@@ -2,6 +2,7 @@ package pageobject.tenant;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.TimeoutError;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
@@ -333,7 +334,13 @@ public class InvoicePO {
      * Click on pilih pembayaran to choose what method to the payment.
      */
     public void clickOnPilihPembayaran() {
-        playwright.clickOn(pilihButton);
+        try {
+            playwright.clickOn(pilihButton);
+        } catch (TimeoutError e) {
+            // when the button is not exist it will timeout and clickon ubah methode pembayaran
+            ubahMetodePembayaran();
+            playwright.clickOn(ubahButton);
+        }
     }
 
     /**
@@ -693,7 +700,10 @@ public class InvoicePO {
         page = page.waitForPopup(() -> {
             bayarDanaButton.click();
         });
-        proceedToPayButton.click();
+
+        var lastTab = ActiveContext.getActiveBrowserContext().pages().size() -1;
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(lastTab));
+        ActiveContext.getActivePage().getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Proceed to Pay")).click();
         return new PaymentPO(page);
     }
 
@@ -710,7 +720,10 @@ public class InvoicePO {
         page = page.waitForPopup(() -> {
             bayarLinkAjaButton.click();
         });
-        proceedToPayButton.click();
+
+        var lastTab = ActiveContext.getActiveBrowserContext().pages().size() -1;
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(lastTab));
+        ActiveContext.getActivePage().getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Proceed to Pay")).click();
         return new PaymentPO(page);
     }
 

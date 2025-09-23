@@ -52,13 +52,11 @@ public class PaymentSteps {
         invoicePO = riwayatBookingPO.clickOnBayarSekarangButton();
         ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
         paymentPO = invoicePO.paymentUsingDANA();
-        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(2));
     }
 
     @And("tenant/owner/user select payment from invoice detail with DANA")
     public void tenantSelectPaymentMamiadsWithDANA() {
         paymentPO = invoicePO.paymentUsingDANA();
-        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
     }
 
     @And("tenant select payment method using LinkAja")
@@ -66,7 +64,6 @@ public class PaymentSteps {
         invoicePO = riwayatBookingPO.clickOnBayarSekarangButton();
         ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
         paymentPO = invoicePO.paymentUsingLinkAja();
-        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(2));
     }
 
     @And("tenant/owner/user select payment from invoice detail using LinkAja")
