@@ -809,7 +809,10 @@ public class OwnerDashboardPO {
     }
 
     public void clickOnBannerDariMamikosSection() {
-        playwright.clickOn(dariMamikosBanner);
+        // Wait for the banner to be visible first
+        playwright.waitTillLocatorIsVisible(dariMamikosBanner);
+        // Force click to bypass intercepting elements
+        dariMamikosBanner.click(new Locator.ClickOptions().setForce(true));
     }
 
     /**
