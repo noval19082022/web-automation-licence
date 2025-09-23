@@ -48,8 +48,15 @@ Feature: Multiple Invoice
 
   @TEST_LIMO-3518 @checkChatlistMultipleInvoice @continue  @multiple-invoice
   Scenario: Check Lanjut bayar button on chatlist
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | password  |
+      | 081905128517 | qwerty123 |
     Given owner navigates to owner dashboard
-    When owner click "Lanjut Bayar" button on chatlist
+    And user dismiss FTUE MARS and FTUE Broadcast
+    And user dismiss FTUE survey kost
+    And user dismiss Laporan klik FTUE
+    And owner click "Bayar" button on chatlist
     Then user verify pop up message "Anda masih memiliki tagihan aktif" is appear
 
 ##  Let's comment it out for now since the data keeps changing.

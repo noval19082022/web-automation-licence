@@ -32,7 +32,7 @@ Feature: Revamp GP Package Options
       | 4 Bulan      | Rp224.200          | 25       | Rp300.000     | false   | 236000       |
       | 3 Bulan      | Rp70.000           | 1        | Rp71.000      | false   | 0            |
       | 2 Bulan      | Rp50.000           | 0        |               | false   | 0            |
-      | Paket Dasar  | Rp99.000 per bulan | 18       | Rp120.000     | true    | 0            |
+      | Paket Dasar  | 149.000 per bulan  | 25       | Rp199.000     | true    | 0            |
 
   @TEST_LIMO-8949 @Automated @LIMO2
   Scenario:  [Revamp GP] Package Display for Low Segment User

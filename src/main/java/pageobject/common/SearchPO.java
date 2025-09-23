@@ -630,9 +630,6 @@ public class SearchPO {
      * @param searchText is text we want to search
      */
     public void enterTextToSearchAndSelectResultCity(String searchText) {
-        // Click search button to open modal first
-        playwright.clickOn(searchKost);
-        
         // Wait for input to be visible and fill it
         playwright.waitTillLocatorIsVisible(inputSearch);
         playwright.fill(inputSearch, searchText);

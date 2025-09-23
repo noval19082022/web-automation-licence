@@ -385,10 +385,10 @@ public class MamikosListInvoicePO {
      * @throws InterruptedException
      */
     public void chooseSchedule(String From, String To) throws InterruptedException {
-        inputScheduleFrom.click();
-        page.keyboard().type(From);
         inputScheduleTo.click();
         page.keyboard().type(To);
+        inputScheduleFrom.click();
+        page.keyboard().type(From);
         playwright.clickOn(cariInvoice);
     }
 
