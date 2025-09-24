@@ -870,7 +870,7 @@ public class GoldplusSteps {
     @Then("user observe GP entry point display")
     public void userObserveGpEntryPointDisplay() {
         chat.clickChatOwner();
-        Assert.assertTrue(goldplus.isGpEntryPointDisplayed(), "GP entry point is not displayed in chat list");
+        Assert.assertTrue(goldplus.isGpEntryPointDisplayed(), "Paket murah untuk interaksi lancar dengan calon penyewa! Coba sekarang");
     }
 
     @And("Countdown timer appears")
@@ -906,7 +906,7 @@ public class GoldplusSteps {
         // Get countdown value after waiting
         String updatedCountdown = goldplus.getCountdownTimerValue();
         System.out.println("Updated countdown value: " + updatedCountdown);
-        
+
         String updatedNumbers = updatedCountdown.replaceAll("[^0-9]", "");
         System.out.println("Updated numbers extracted: " + updatedNumbers);
 
