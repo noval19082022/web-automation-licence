@@ -858,4 +858,70 @@ public class GoldplusSteps {
     public void owner_choose_periode_goldplus(String period) {
         goldplus.clickOnPeriodGoldPlus(period);
     }
+
+    @And("user Navigasi ke Chat List")
+    public void userNavigasiKeChatList() {
+        chat.clickChatOwner();
+        chat.dismissAllFTUE();
+        chat.dismissFTUEMarsGPAndSurveyIfExist();
+        chat.dismissFTUEJemputBolaIfExist();
+    }
+
+    @Then("user observe GP entry point display")
+    public void userObserveGpEntryPointDisplay() {
+        chat.clickChatOwner();
+        Assert.assertTrue(goldplus.isGpEntryPointDisplayed(), "GP entry point is not displayed in chat list");
+    }
+
+    @And("Countdown timer appears")
+    public void countdownTimerAppears() {
+        chat.clickChatOwner();
+        Assert.assertTrue(goldplus.isCountdownTimerDisplayed(), "Countdown timer is not displayed");
+    }
+
+    @And("Price displayed: {string}")
+    public void priceDisplayed(String expectedPrice) {
+        Assert.assertTrue(goldplus.getDisplayedPrice(expectedPrice));
+    }
+
+    @And("Copy text {string}")
+    public void copyText(String expectedCopyText) {
+        String actualCopyText = goldplus.getEntryPointCopyText();
+        Assert.assertEquals(actualCopyText, expectedCopyText, "Copy text doesn't match. Expected: " + expectedCopyText + " but found: " + actualCopyText);
+    }
+
+    @Then("user check countdown value running")
+    public void userCheckCountdownValueRunning() throws InterruptedException {
+        // Get initial countdown value
+        String initialCountdown = goldplus.getCountdownTimerValue();
+        System.out.println("Initial countdown value: " + initialCountdown);
+
+        // Extract only the numeric parts from the countdown
+        String initialNumbers = initialCountdown.replaceAll("[^0-9]", "");
+        System.out.println("Initial numbers extracted: " + initialNumbers);
+
+        // Wait for 3 seconds to ensure timer updates
+        Thread.sleep(3000);
+
+        // Get countdown value after waiting
+        String updatedCountdown = goldplus.getCountdownTimerValue();
+        System.out.println("Updated countdown value: " + updatedCountdown);
+        
+        String updatedNumbers = updatedCountdown.replaceAll("[^0-9]", "");
+        System.out.println("Updated numbers extracted: " + updatedNumbers);
+
+        Assert.assertNotEquals(initialNumbers, updatedNumbers,
+                "Countdown timer is not running. Numbers remained the same: " + initialNumbers);
+
+        Assert.assertFalse(updatedNumbers.isEmpty(),
+                "Countdown timer should contain at least some numbers, but found: " + updatedCountdown);
+
+        System.out.println("Countdown timer is running correctly!");
+    }
+
+    @Then("user check no countdown value running")
+    public void userCheckNoCountdownValueRunning() {
+        Assert.assertFalse(goldplus.isCountdownTimerDisplayed(), "Countdown timer should not be displayed, but it is visible on the page");
+        System.out.println("Confirmed: No countdown timer is running on the page");
+    }
 }
