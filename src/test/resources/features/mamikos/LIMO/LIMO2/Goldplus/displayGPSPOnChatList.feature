@@ -1,3 +1,4 @@
+@LIMO2 @regression
 Feature: Display GPSP on Chat List
 
   @TEST_LIMO-9265 @GP-entry-point @chat-list @goldplus
