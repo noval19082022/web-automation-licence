@@ -414,4 +414,30 @@ public class PaymentSteps {
     public void tenantClickOnUbahMetodePembayaran() {
         invoice.ubahMetodePembayaran();
     }
+
+    @Then("tenant can verify voucher discount calculation:")
+    public void tenantCanVerifyVoucherDiscountCalculation(DataTable table) {
+        List<Map<String, String>> voucherData = table.asMaps(String.class, String.class);
+        var voucherInfo = voucherData.get(0);
+
+        var voucherCode = voucherInfo.get("voucher code");
+        var discountPercentage = Integer.parseInt(voucherInfo.get("discount percentage"));
+        var maximalDiscountAmount = Integer.parseInt(voucherInfo.get("maximal discount amount"));
+
+        var subTotal = invoice.getSubTotal();
+        var actualDiscountAmount = invoice.getVoucherReductionPrice(voucherCode);
+
+        var calculatedDiscount = (subTotal * discountPercentage) / 100;
+        var expectedDiscount = Math.min(calculatedDiscount, maximalDiscountAmount);
+
+        Assert.assertEquals(actualDiscountAmount, expectedDiscount,
+                String.format("Voucher discount calculation incorrect. SubTotal: %d, Discount: %d%%, Calculated: %d, Max Cap: %d, Expected: %d, Actual: %d",
+                        subTotal, discountPercentage, calculatedDiscount, maximalDiscountAmount, expectedDiscount, actualDiscountAmount));
+
+        var totalPayment = invoice.getTotalPembayaran();
+        var expectedTotal = subTotal - expectedDiscount;
+        Assert.assertEquals(totalPayment, expectedTotal,
+                String.format("Total payment calculation incorrect. SubTotal: %d, Voucher Discount: %d, Expected Total: %d, Actual Total: %d",
+                        subTotal, expectedDiscount, expectedTotal, totalPayment));
+    }
 }
