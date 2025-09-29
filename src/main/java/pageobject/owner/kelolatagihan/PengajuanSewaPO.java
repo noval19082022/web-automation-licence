@@ -121,7 +121,7 @@ public class PengajuanSewaPO {
         terimaButtonWithName = page.getByTestId("bookingRequestList-list")
                 .locator("div").filter(new Locator.FilterOptions()
                         .setHasText(tenantName)).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Terima"));
-        playwright.waitTillLocatorIsVisible(terimaButtonWithName);
+        playwright.waitTillLocatorIsVisible(terimaButtonWithName, 30000.0);
         playwright.clickOn(terimaButtonWithName);
         playwright.clickOn(yaTerimaButton);
         return new BillAndBookingManagementPO(page);
