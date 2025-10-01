@@ -136,7 +136,7 @@ public class InvoicePO {
         kodePerusahaanText = page.locator("//*[.='Kode Perusahaan']/following-sibling::*");
         virtualAccountText = page.locator("//*[.='No. Virtual Account']/following-sibling::*");
         kodePembayaranPermata = page.locator(".column > .columns > .second-column").first();
-        invoiceNumber = page.locator("//*[.='No. Invoice']/following-sibling::*");
+        invoiceNumber = page.locator(".invoice-content-left-col div:has-text('No. Invoice') + div");
         additionalPriceDiv = page.getByTestId("invoiceBillingRoomContent-additionalCost");
         txtRentPerPeriod = page.locator("//p[contains(text(),'Harga Sewa')]/../following-sibling::p");
         txtAdminCost = page.locator("[data-testid='invoiceBillingRoomContent-admin'] > .bg-c-text--body-1");
@@ -199,7 +199,7 @@ public class InvoicePO {
      * Click on the "masukkan voucher" button
      */
     public void clickOnMasukkanVoucher() {
-        masukkanVoucher.waitFor();
+        playwright.waitTillLocatorIsVisible(masukkanVoucher, 30000.0);
         playwright.clickOn(masukkanVoucher);
     }
 
