@@ -12,17 +12,23 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice
     When tenant login trough api
 
   @continue
-  Scenario Outline: Get Active Contract And Active Booking
+  Scenario: Get Active Contract And Active Booking
     When playwright get tenant booking status with parameter:
       | page   |           |
       | sort   |           |
-      | status | <booking> |
-    Examples:
-      | booking    |
-      | booked     |
-      | confirmed  |
-      | verified   |
-      | checked_in |
+      | status | booked  |
+    When playwright get tenant booking status with parameter:
+      | page   |           |
+      | sort   |           |
+      | status | confirmed |
+    When playwright get tenant booking status with parameter:
+      | page   |           |
+      | sort   |           |
+      | status | verified  |
+    When playwright get tenant booking status with parameter:
+      | page   |           |
+      | sort   |           |
+      | status | checked_in |
 
   @continue
   Scenario: Verify Active Contract And Active Booking
