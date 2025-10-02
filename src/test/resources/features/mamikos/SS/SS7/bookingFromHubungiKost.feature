@@ -1,6 +1,7 @@
-@regression @manageBooking @hubungiKostDetail @OB @booking @SS7 @noval5
+@regression @manageBooking @hubungiKostDetail @OB @booking @SS7
 Feature: OB Booking From Hubungi Kost
 
+  @continue
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -26,6 +27,7 @@ Feature: OB Booking From Hubungi Kost
     And tenant redirect to kost details:
       | kost path stag                                                                                                                     | kost path prod               |
       | kost-kabupaten-halmahera-utara-kost-campur-murah-kost-bima-booking-dp-biaya-lain-dan-denda-automation-tobelo-utara-halmahera-utara | Kos DC BAR Automation Tipe A |
+    And tenant dismiss FTUE booking benefit
     And user click chat in kos detail
     And user select question "Saya butuh cepat nih. Bisa booking sekarang?"
     And tenant click button ajukan sewa from chat popup

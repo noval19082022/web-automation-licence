@@ -5,6 +5,7 @@ import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.KostDetailsPO;
 import pageobject.owner.chat.ChatOwnerPO;
@@ -40,8 +41,17 @@ public class ChatTenantSteps {
         Assert.assertEquals(chat.verifySendLabel(),textButton, "Button text is wrong");
     }
 
-    @And("user select question {string}")
+    @When("user select question {string}")
     public void userSelectQuestion(String questionOption) {
+        // Get aria snapshot before clicking the question
+        String ariaSnapshotBefore = chat.getModalChatAriaSnapshot();
+        System.out.println("Aria snapshot before clicking question: " + ariaSnapshotBefore);
+
+        // Verify that the question option exists in the aria snapshot
+        Assert.assertTrue(ariaSnapshotBefore.contains(questionOption),
+            "Question option '" + questionOption + "' not found in modal chat aria snapshot");
+
+        // Click the question after verification
         chat.clickQuestion(questionOption);
     }
 
