@@ -55,4 +55,13 @@ public class ContractManagementSteps {
         Assert.assertTrue(contractManagement.isLampiranOpenedInNewTab(), "Lampiran should be opened in new tab");
     }
 
+    @And("admin click on previous month")
+    public void adminClickOnPreviousMonth(){
+        contractManagement.clickPreviousButton();
+    }
+
+    @Then("admin can see disable ubah button")
+    public void adminCanSeeDisableUbahButton(){
+        Assert.assertTrue(contractManagement.isUbahButtonDisable(), "Ubah button is enable");
+    }
 }

@@ -20,6 +20,7 @@ public class ContractManagementPO {
     Locator notFoundtext;
     Locator updatedText;
     Locator lampiranText;
+    Locator previouseButton;
     
     // Tenant Information Form
     Locator inputNameField;
@@ -42,6 +43,7 @@ public class ContractManagementPO {
         contractDetailButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat detail kontrak chevron-"));
         penyewaSection = page.locator("//p[contains(text(),'Penyewa')]");
         lampiranText = page.locator("//*[@data-testid=\"bg-image\"]");
+        previouseButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("chevron-left"));
     }
 
     /**
@@ -73,6 +75,19 @@ public class ContractManagementPO {
     public void clickEditButton(String text) {
         ubahButton = page.locator("//span[contains(text(),'"+text+"')]");
         playwright.clickOn(ubahButton);
+    }
+
+    /**
+     * click previous button
+     * @return
+     */
+    public void clickPreviousButton(){
+        playwright.clickOn(previouseButton);
+    }
+
+    public boolean isUbahButtonDisable(){
+        ubahButton = page.locator("//span[contains(text(),'Ubah')]");
+        return ubahButton.isDisabled();
     }
 
     /**
