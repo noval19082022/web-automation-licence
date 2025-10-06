@@ -1043,6 +1043,7 @@ public class PropertiSayaSteps {
 
     @Then("owner can sees room is on {string} status")
     public void ownerCanSeesRoomIsOnStatus(String statusRoom) {
+        playwright.hardWait(3000); //Need hardwait to wait for room status to be visually updated.
         Assert.assertEquals(propertySaya.getRoomStatus(), statusRoom, "Status room doesn't macth!");
     }
 
@@ -1191,5 +1192,24 @@ public class PropertiSayaSteps {
     @And("owner click on leftlet marker")
     public void ownerClickOnLeftletMarker() {
         propertySaya.leftletMarker();
+    }
+
+    @Then("owner redirected to input Renter's Information with kos name below:")
+    public void ownerRedirectedToInputRentersInformationWithKosNameBelow(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
+        String kosName = Mamikos.ENV.equals("stag") ? table.get(0).get("kos name stag") : table.get(0).get("kos name prod");
+
+        // Verify form title
+        Assert.assertTrue(addTenantPO.getFormTitle("Masukkan Informasi Penyewa"), "Form title doesn't match!");
+
+        // Get aria snapshot of the form
+        String ariaSnapshot = addTenantPO.takeInformasiPenyewaFormAriaSnapshots();
+
+        // Verify kos name is in the aria snapshot
+        Assert.assertTrue(ariaSnapshot.contains(kosName),
+            "Kos name '" + kosName + "' not found in Informasi Penyewa form aria snapshot");
+
+        // Verify room number placeholder contains "kamar"
+        Assert.assertTrue(addTenantPO.getFullRoomName().contains("kamar"), "Room placeholder doesn't contain 'kamar'");
     }
 }

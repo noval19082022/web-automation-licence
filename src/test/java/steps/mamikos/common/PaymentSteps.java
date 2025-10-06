@@ -12,6 +12,7 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.midtrans.MidtransPaymentPO;
 import pageobject.owner.OwnerDashboardPO;
+import pageobject.owner.kelolatagihan.TenantBillManagementPO;
 import pageobject.tenant.InvoicePO;
 import pageobject.tenant.profile.KostSayaBillingPO;
 import pageobject.tenant.profile.RiwayatBookingPO;
@@ -36,6 +37,7 @@ public class PaymentSteps {
     private List<Map<String, String>> filterKost;
     private JavaHelpers java = new JavaHelpers();
     OwnerDashboardPO ownerDashboard = new OwnerDashboardPO(page);
+    TenantBillManagementPO tenantBillManagement = new TenantBillManagementPO(page);
 
     @When("tenant go to invoice page")
     public void tenantGoToInvoicePage() {
@@ -257,8 +259,11 @@ public class PaymentSteps {
             monthNumber = java.updateTimeLocal("yyyy MMM dd", java.getTimeStamp("yyyy MMM dd"), "M", "en", 0, 1, 0, 0, 0);
             invoice.selectManageNextBillsMonthFilter(monthNumber);
         } else if (monthNumber.equalsIgnoreCase("Januari")) {
-        monthNumber = java.updateTimeLocal("yyyy MMM dd", java.getTimeStamp("yyyy MMM dd"), "M", "en", 0, 0, 0, 0, 0);
-        invoice.selectManageNextBillsMonthFilterOctober(monthNumber);
+            monthNumber = java.updateTimeLocal("yyyy MMM dd", java.getTimeStamp("yyyy MMM dd"), "M", "en", 0, 0, 0, 0, 0);
+            invoice.selectManageNextBillsMonthFilterOctober(monthNumber);
+        } else {
+            // Handle all other month names (Februari, Maret, April, etc.)
+            tenantBillManagement.selectMonthFilter(monthNumber);
         }
     }
 
