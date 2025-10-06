@@ -115,7 +115,6 @@ public class AllLeadsPO {
      * @return All Leads Table Page
      */
     public boolean isAllLeadsTableVisible() {
-        playwright.waitTillLocatorIsVisible(allLeadsTitlePage);
         return playwright.isLocatorVisibleAfterLoad(allLeadsTitlePage, 30000.0);
     }
 
