@@ -59,6 +59,7 @@ public class LoginSteps {
             .fillPassword(password)
             .clickOnLoginButton()
             .waitTillLogoIsVisible();
+        home.waitForProfileMenuToBeVisible();
         home.clickOnSayaSetujuButton();
     }
 

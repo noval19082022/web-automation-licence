@@ -91,8 +91,6 @@ public class HomePO {
     private Locator kebijakanPrivasiPopup;
     private Locator sayaSetujuButton;
 
-
-
     public HomePO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -537,6 +535,13 @@ public class HomePO {
      */
     public boolean isProfileMenuDisplayed() {
         return profileMenu.isVisible();
+    }
+
+    /**
+     * Wait for profile menu to be visible
+     */
+    public void waitForProfileMenuToBeVisible() {
+        playwright.waitTillLocatorIsVisible(profileMenu, 30000.0);
     }
 
     /**
