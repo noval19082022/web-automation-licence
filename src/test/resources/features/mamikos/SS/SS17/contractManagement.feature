@@ -34,7 +34,7 @@ Feature: PMS Contract Management - Ubah Phone Number
     When admin can see updated text with "Tenant Complementary Tiga Kosing"
     Then admin can see updated text with "Tenant Complementary Tiga Kosong Satu"
 
-  @TEST_SS-8789
+  @TEST_SS-8789 @continue
   Scenario: [Web][Ubah Data Penyewa][Riwayat Perubahan]Check view lampiran on riwayat perubahan
     When admin go to pms singgahsini
     And admin go to room allotment page "Kost Singgahsini Taman Anggur Bantul"
@@ -43,3 +43,14 @@ Feature: PMS Contract Management - Ubah Phone Number
     And admin clicks "Riwayat perubahan data penyewa" button on penyewa section
     And admin click on lampiran
     Then lampiran image opened in new tab
+
+  @TEST_SS-8751 @a
+  Scenario: [Web][Ubah Phone Number][PMS - Detail Kontrak]Check Ubah button when contract status as Terminated, Booked, Cancelled and Finished
+    When admin go to pms singgahsini
+    And admin go to room allotment page "Kost Singgahsini Taman Anggur Bantul"
+    And admin click on previous month
+    And admin clicks on contract "Tenant Dua Lima"
+    And admin clicks on view contract detail button
+    Then admin can see disable ubah button
+
+    
