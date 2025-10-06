@@ -50,8 +50,8 @@ Feature: All Leads Table
       | email                        | password  |
       | automationpman01@mamikos.com | qwerty123 |
     And admin should redirect to Harvest Dashboard
-    And admin search by "No HP Pemilik" with "087655762276"
-    Then admin validate data in table with "087655762276"
+    And admin search by "No HP Pemilik" with "089133118781"
+    Then admin validate data in table with "089133118781"
 
   @TEST_SS-7490
   Scenario: [Web][Harverst][Search]Admin search by Leads ID
@@ -60,8 +60,8 @@ Feature: All Leads Table
       | email                        | password  |
       | automationpman01@mamikos.com | qwerty123 |
     And admin should redirect to Harvest Dashboard
-    And admin search by "Lead ID" with "AO35517"
-    Then admin validate data in table with "AO35517"
+    And admin search by "Lead ID" with "AO325"
+    Then admin validate data in table with "AO325"
 
   @TEST_SS-7491
   Scenario: [Web][Harverst][Search]Admin search Nama Kos
@@ -70,8 +70,8 @@ Feature: All Leads Table
       | email                        | password  |
       | automationpman01@mamikos.com | qwerty123 |
     And admin should redirect to Harvest Dashboard
-    And admin search by "Nama Kos" with "Kost Zahroni"
-    Then admin validate data in table with "Kost Zahroni"
+    And admin search by "Nama Kos" with "Kost Siput Emas Testing"
+    Then admin validate data in table with "Kost Siput Emas Testing"
 
   @TEST_SS-7492
   Scenario: [Web][Harverst][Search]Admin search by Nama Pemilik
@@ -80,8 +80,8 @@ Feature: All Leads Table
       | email                        | password  |
       | automationpman01@mamikos.com | qwerty123 |
     And admin should redirect to Harvest Dashboard
-    And admin search by "Nama Pemilik" with "Imam Zahroni"
-    Then admin validate data in table with "Imam Zahroni"
+    And admin search by "Nama Pemilik" with "Gery Yan"
+    Then admin validate data in table with "Gery Yan"
 
   @TEST_SS-7493
   Scenario: [Web][Harverst][Filter]Admin filter by Kota
@@ -91,9 +91,9 @@ Feature: All Leads Table
       | automationpman01@mamikos.com | qwerty123 |
     And admin should redirect to Harvest Dashboard
     And admin clicks Filter in Harvest Dashboard
-    And admin selects "Kota" and "Kota Jakarta Barat" from dropdown
+    And admin selects "Kota" and "Kabupaten Bantul" from dropdown
     And admin click on terapkan button
-    Then admin validate kota name with "Kota Jakarta Barat"
+    Then admin validate kota name with "Kabupaten Bantul"
 
   @TEST_SS-7494
   Scenario: [Web][Harverst][Filter]Admin filter by Kecamatan
@@ -103,10 +103,10 @@ Feature: All Leads Table
       | automationpman01@mamikos.com | qwerty123 |
     And admin should redirect to Harvest Dashboard
     And admin clicks Filter in Harvest Dashboard
-    And admin selects "Kota" and "Kota Jakarta Barat" from dropdown
-    And admin selects "Kecamatan" and "Palmerah" from dropdown
+    And admin selects "Kota" and "Kabupaten Bantul" from dropdown
+    And admin selects "Kecamatan" and "Sewon" from dropdown
     And admin click on terapkan button
-    Then admin validate kota name with "Palmerah"
+    Then admin validate kota name with "Sewon"
 
   @TEST_SS-7495
   Scenario: [Web][Harverst][Filter]Admin filter by Kelurahan
@@ -116,8 +116,8 @@ Feature: All Leads Table
       | automationpman01@mamikos.com | qwerty123 |
     And admin should redirect to Harvest Dashboard
     And admin clicks Filter in Harvest Dashboard
-    And admin selects "Kota" and "Kota Jakarta Barat" from dropdown
-    And admin selects "Kecamatan" and "Palmerah" from dropdown
-    And admin selects "Kelurahan" and "Kemanggisan" from dropdown
+    And admin selects "Kota" and "Kabupaten Bantul" from dropdown
+    And admin selects "Kecamatan" and "Kasihan" from dropdown
+    And admin selects "Kelurahan" and "Tamantirto" from dropdown
     And admin click on terapkan button
-    Then admin validate kota name with "Kemanggisan"
+    Then admin validate kota name with "Tamantirto"
