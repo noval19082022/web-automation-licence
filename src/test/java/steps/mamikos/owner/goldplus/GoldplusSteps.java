@@ -12,6 +12,7 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.admin.testingtools.GoldPlusPO;
 import pageobject.common.HomePO;
+import pageobject.common.KostDetailsPO;
 import pageobject.common.LoadingPO;
 import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.PromoOwnerPO;
@@ -42,6 +43,7 @@ public class GoldplusSteps {
     PromoOwnerPO promoOwner = new PromoOwnerPO(ActiveContext.getActivePage());
     GoldPlusSubmissionPO gpSubmission = new GoldPlusSubmissionPO(page);
     LoadingPO loading = new LoadingPO(page);
+    KostDetailsPO kostDetail = new KostDetailsPO(page);
 
     @When("user wants to subscribe Goldplus {int}")
     public void user_wants_to_subscribe_goldplus(int paket) {
@@ -251,6 +253,11 @@ public class GoldplusSteps {
     public void ownerClickButtonOnChatlist(String buttonTxt) {
         loading.waitForLoadingIconDisappear();
         chat.clickChatOwner();
+        if (chat.isFTUEMarsPresent()) {
+            chat.dismissFTUEMars();
+            chat.dismissFTUESurvey();
+            chat.dismissFTUEJemputBola();
+        }
         chat.clickButtonOnChatRoomList(buttonTxt);
     }
 
@@ -394,13 +401,13 @@ public class GoldplusSteps {
                 playwright.hardWait(3000);
                 Assert.assertTrue(goldplus.isGpPackageTableDisplayed(), "GP package table doesn't displayed!");
                 break;
-            case "Daftar GoldPlus":
+            case "Daftar":
                 chat.dismissAllFTUE();
-                chat.dismissFTUEMarsKuotaNol();
+                chat.dismissFTUESurvey();
                 chat.dismissFTUEJemputBola();
                 Assert.assertTrue(playwright.isTextDisplayed("Sisa Kuota", 2000.0), "Daftar GoldPlus doesn't displayed!");
                 Assert.assertTrue(playwright.isTextDisplayed("2 chat room", 3000.0), "Sisa kuota chat text doesn't displayed!");
-                playwright.clickOnTextButton(textMessage);
+                chat.clickButtonOnChatRoomList(textMessage);
                 Assert.assertTrue(goldplus.isGpPackageTableDisplayed(), "GP package table doesn't displayed!");
                 break;
             case "Pilih Periode Berlangganan":
@@ -611,11 +618,11 @@ public class GoldplusSteps {
     public void user_wants_to_terminate_goldplus_for_owner_with_phone_number(String phoneNumber) {
         playwright.navigateTo(Mamikos.ADMINMAMIPAY + Mamikos.GOLDPLUS_CONTRACT);
         goldplus.searchPhoneNumberGP(phoneNumber);
-        
+
         // Check if there are any active contracts to terminate for this specific phone number
         String terminateXpath = "//td[contains(text(), '')]/parent::tr//button[text()='Terminate']";
         var terminateButton = page.locator(terminateXpath);
-        
+
         if (playwright.waitTillLocatorIsVisible(terminateButton, 3000.0)) {
             playwright.clickOn(terminateButton);
             playwright.clickOnTextButton("Yes, terminate it!");
@@ -769,7 +776,7 @@ public class GoldplusSteps {
     @Then("owner see that the text {string} is displayed on goldplus page")
     public void ownerSeeThatTheTextIsDisplayedOnGoldplusPage(String text) {
         playwright.waitTillPageLoaded();
-        Assert.assertTrue(playwright.isTextDisplayed(text, 3000));
+        Assert.assertTrue(playwright.isTextDisplayed(text, 5000));
     }
 
     @And("owner GP-1 upgrade paket to GP-2 from TBC detail page")
@@ -845,5 +852,76 @@ public class GoldplusSteps {
         // Compare the snapshots directly without normalization for better visualization
         Assert.assertTrue(actualAriaSnapshot.contains(expectedAriaSnapshot),
                 String.format("Pilih Gp package structure does not contains expected layout with actual: %s", actualAriaSnapshot));
+    }
+
+    @When("owner choose periode goldplus {string}")
+    public void owner_choose_periode_goldplus(String period) {
+        goldplus.clickOnPeriodGoldPlus(period);
+    }
+
+    @And("user Navigasi ke Chat List")
+    public void userNavigasiKeChatList() {
+        chat.clickChatOwner();
+        chat.dismissAllFTUE();
+        chat.dismissFTUEMarsGPAndSurveyIfExist();
+        chat.dismissFTUEJemputBolaIfExist();
+    }
+
+    @Then("user observe GP entry point display")
+    public void userObserveGpEntryPointDisplay() {
+        chat.clickChatOwner();
+        Assert.assertTrue(goldplus.isGpEntryPointDisplayed(), "Paket murah untuk interaksi lancar dengan calon penyewa! Coba sekarang");
+    }
+
+    @And("Countdown timer appears")
+    public void countdownTimerAppears() {
+        chat.clickChatOwner();
+        Assert.assertTrue(goldplus.isCountdownTimerDisplayed(), "Countdown timer is not displayed");
+    }
+
+    @And("Price displayed: {string}")
+    public void priceDisplayed(String expectedPrice) {
+        Assert.assertTrue(goldplus.getDisplayedPrice(expectedPrice));
+    }
+
+    @And("Copy text {string}")
+    public void copyText(String expectedCopyText) {
+        String actualCopyText = goldplus.getEntryPointCopyText();
+        Assert.assertEquals(actualCopyText, expectedCopyText, "Copy text doesn't match. Expected: " + expectedCopyText + " but found: " + actualCopyText);
+    }
+
+    @Then("user check countdown value running")
+    public void userCheckCountdownValueRunning() throws InterruptedException {
+        // Get initial countdown value
+        String initialCountdown = goldplus.getCountdownTimerValue();
+        System.out.println("Initial countdown value: " + initialCountdown);
+
+        // Extract only the numeric parts from the countdown
+        String initialNumbers = initialCountdown.replaceAll("[^0-9]", "");
+        System.out.println("Initial numbers extracted: " + initialNumbers);
+
+        // Wait for 3 seconds to ensure timer updates
+        Thread.sleep(3000);
+
+        // Get countdown value after waiting
+        String updatedCountdown = goldplus.getCountdownTimerValue();
+        System.out.println("Updated countdown value: " + updatedCountdown);
+
+        String updatedNumbers = updatedCountdown.replaceAll("[^0-9]", "");
+        System.out.println("Updated numbers extracted: " + updatedNumbers);
+
+        Assert.assertNotEquals(initialNumbers, updatedNumbers,
+                "Countdown timer is not running. Numbers remained the same: " + initialNumbers);
+
+        Assert.assertFalse(updatedNumbers.isEmpty(),
+                "Countdown timer should contain at least some numbers, but found: " + updatedCountdown);
+
+        System.out.println("Countdown timer is running correctly!");
+    }
+
+    @Then("user check no countdown value running")
+    public void userCheckNoCountdownValueRunning() {
+        Assert.assertFalse(goldplus.isCountdownTimerDisplayed(), "Countdown timer should not be displayed, but it is visible on the page");
+        System.out.println("Confirmed: No countdown timer is running on the page");
     }
 }

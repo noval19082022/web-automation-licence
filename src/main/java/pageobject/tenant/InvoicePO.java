@@ -2,6 +2,7 @@ package pageobject.tenant;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.TimeoutError;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
@@ -24,7 +25,7 @@ public class InvoicePO {
     Locator totalPembayaran;
     Locator subTotal;
     Locator biayaLayanan;
-    String appliedVoucher;
+    String  appliedVoucher;
     Locator toast;
     Locator invoiceSection;
     Locator invalidVoucherIcon;
@@ -135,7 +136,7 @@ public class InvoicePO {
         kodePerusahaanText = page.locator("//*[.='Kode Perusahaan']/following-sibling::*");
         virtualAccountText = page.locator("//*[.='No. Virtual Account']/following-sibling::*");
         kodePembayaranPermata = page.locator(".column > .columns > .second-column").first();
-        invoiceNumber = page.locator("//*[.='No. Invoice']/following-sibling::*");
+        invoiceNumber = page.locator(".invoice-content-left-col div:has-text('No. Invoice') + div");
         additionalPriceDiv = page.getByTestId("invoiceBillingRoomContent-additionalCost");
         txtRentPerPeriod = page.locator("//p[contains(text(),'Harga Sewa')]/../following-sibling::p");
         txtAdminCost = page.locator("[data-testid='invoiceBillingRoomContent-admin'] > .bg-c-text--body-1");
@@ -161,7 +162,7 @@ public class InvoicePO {
         mamipoinToggleButton = page.getByRole(AriaRole.CHECKBOX);
         tenantPointEstimate = page.locator(".mamipoin-estimated-text");
         discountMamipoinText = page.locator("xpath = //p[text()='Potongan MamiPoin']/following-sibling::p");
-        pembayaranBerhasilText = page.getByText("Pembayaran Berhasil");
+        pembayaranBerhasilText = page.locator("h3").filter(new Locator.FilterOptions().setHasText("Pembayaran Berhasil!"));
         sayaSudahBayarBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Sudah Bayar"));
         pilihUbahMetodePembayaranButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah Metode Pembayaran"));
         ubahButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah").setExact(true));
@@ -198,7 +199,7 @@ public class InvoicePO {
      * Click on the "masukkan voucher" button
      */
     public void clickOnMasukkanVoucher() {
-        masukkanVoucher.waitFor();
+        playwright.waitTillLocatorIsVisible(masukkanVoucher, 30000.0);
         playwright.clickOn(masukkanVoucher);
     }
 
@@ -333,7 +334,13 @@ public class InvoicePO {
      * Click on pilih pembayaran to choose what method to the payment.
      */
     public void clickOnPilihPembayaran() {
-        playwright.clickOn(pilihButton);
+        try {
+            playwright.clickOn(pilihButton);
+        } catch (TimeoutError e) {
+            // when the button is not exist it will timeout and clickon ubah methode pembayaran
+            ubahMetodePembayaran();
+            playwright.clickOn(ubahButton);
+        }
     }
 
     /**
@@ -693,7 +700,10 @@ public class InvoicePO {
         page = page.waitForPopup(() -> {
             bayarDanaButton.click();
         });
-        proceedToPayButton.click();
+
+        var lastTab = ActiveContext.getActiveBrowserContext().pages().size() -1;
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(lastTab));
+        ActiveContext.getActivePage().getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Proceed to Pay")).click();
         return new PaymentPO(page);
     }
 
@@ -710,7 +720,10 @@ public class InvoicePO {
         page = page.waitForPopup(() -> {
             bayarLinkAjaButton.click();
         });
-        proceedToPayButton.click();
+
+        var lastTab = ActiveContext.getActiveBrowserContext().pages().size() -1;
+        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(lastTab));
+        ActiveContext.getActivePage().getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Proceed to Pay")).click();
         return new PaymentPO(page);
     }
 

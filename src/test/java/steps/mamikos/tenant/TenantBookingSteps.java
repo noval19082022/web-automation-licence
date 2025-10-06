@@ -156,6 +156,30 @@ public class TenantBookingSteps {
         }
     }
 
+    @When("tenant booking kost for {string} with duration {int}")
+    public void tenantBookingKostFor(String bookingTime, int duration) {
+        if (kostDetail.isFTUEBookingBenefitVisible()) {
+            kostDetail.dismissFTUE();
+        }
+        if (bookingTime.equalsIgnoreCase("today")) {
+            kostDetail.selectBookingDate(bookingTime);
+            kostDetail.selectBookingPeriod("Per Bulan");
+            bookingForm = kostDetail.clickOnAjukanSewaButton();
+            if (duration > 1) {
+                for (int i = 0; i < (duration - 1); i++) {
+                    bookingForm.increaseRateDuration();
+                }
+            }
+            bookingForm.clickOnAjukanSewaButton();
+            bookingForm.clickOnBookingConfirmationCheckmark();
+            successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
+        } else if (bookingTime.equalsIgnoreCase("Tomorrow")) {
+            kostDetail.selectBookingDate(bookingTime);
+            kostDetail.selectBookingPeriod("Per Bulan");
+            bookingForm = kostDetail.clickOnAjukanSewaButton();
+        }
+    }
+
     @When("tenant checkin kost from riwayat booking")
     public void tenantCheckinKostFromRiwayatBooking() {
         try {

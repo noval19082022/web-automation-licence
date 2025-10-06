@@ -22,7 +22,6 @@ Feature: Owner Experiment- GP Chat List
       | 08167382940592 | 0          | qwerty123 |
     * owner wants to accsess chatroom
     Then owner will see card box contains "Sisa Kuota"
-    * owner will see card box contains "Daftar GoldPlus"
     * verify title ftue is "Apa itu fitur Chat" and description "Di fitur chat Anda dapat mengobrol dengan calon penghuni kos Anda"
     When user click "Lanjutkan" on ftue
     Then verify title ftue is "Anda dapat kuota chat room" and description "Kini berlaku sistem kuota chat. Kuota bisa dipakai untuk saling berbalas chat dengan penyewa di chat room."

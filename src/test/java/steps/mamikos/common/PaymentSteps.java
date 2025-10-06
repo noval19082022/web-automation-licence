@@ -12,6 +12,7 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.midtrans.MidtransPaymentPO;
 import pageobject.owner.OwnerDashboardPO;
+import pageobject.owner.kelolatagihan.TenantBillManagementPO;
 import pageobject.tenant.InvoicePO;
 import pageobject.tenant.profile.KostSayaBillingPO;
 import pageobject.tenant.profile.RiwayatBookingPO;
@@ -36,6 +37,7 @@ public class PaymentSteps {
     private List<Map<String, String>> filterKost;
     private JavaHelpers java = new JavaHelpers();
     OwnerDashboardPO ownerDashboard = new OwnerDashboardPO(page);
+    TenantBillManagementPO tenantBillManagement = new TenantBillManagementPO(page);
 
     @When("tenant go to invoice page")
     public void tenantGoToInvoicePage() {
@@ -96,6 +98,13 @@ public class PaymentSteps {
         String toastRemoveExtraSpace = toastStringRemoveLineSeparator.replaceAll("\\s+", " ");
         Assert.assertEquals(toastRemoveExtraSpace, voucherInvalidWording);
         Assert.assertTrue(invoice.isInvalidVoucherIconVisible(), "Voucher is valid, invalid voucher must have 'x' icon.");
+    }
+
+    @Then("tenant should see voucher error message {string}")
+    public void tenantShouldSeeVoucherErrorMessage(String expectedErrorMessage) {
+        String actualWarningText = invoice.voucherInputPopUpWarningText();
+        Assert.assertEquals(actualWarningText, expectedErrorMessage, 
+            "Expected voucher error message: '" + expectedErrorMessage + "' but got: '" + actualWarningText + "'");
     }
 
     @When("tenant remove voucher by toast message")
@@ -250,8 +259,11 @@ public class PaymentSteps {
             monthNumber = java.updateTimeLocal("yyyy MMM dd", java.getTimeStamp("yyyy MMM dd"), "M", "en", 0, 1, 0, 0, 0);
             invoice.selectManageNextBillsMonthFilter(monthNumber);
         } else if (monthNumber.equalsIgnoreCase("Januari")) {
-        monthNumber = java.updateTimeLocal("yyyy MMM dd", java.getTimeStamp("yyyy MMM dd"), "M", "en", 0, 0, 0, 0, 0);
-        invoice.selectManageNextBillsMonthFilterOctober(monthNumber);
+            monthNumber = java.updateTimeLocal("yyyy MMM dd", java.getTimeStamp("yyyy MMM dd"), "M", "en", 0, 0, 0, 0, 0);
+            invoice.selectManageNextBillsMonthFilterOctober(monthNumber);
+        } else {
+            // Handle all other month names (Februari, Maret, April, etc.)
+            tenantBillManagement.selectMonthFilter(monthNumber);
         }
     }
 
@@ -406,5 +418,31 @@ public class PaymentSteps {
     @And("tenant click on ubah metode pembayaran")
     public void tenantClickOnUbahMetodePembayaran() {
         invoice.ubahMetodePembayaran();
+    }
+
+    @Then("tenant can verify voucher discount calculation:")
+    public void tenantCanVerifyVoucherDiscountCalculation(DataTable table) {
+        List<Map<String, String>> voucherData = table.asMaps(String.class, String.class);
+        var voucherInfo = voucherData.get(0);
+
+        var voucherCode = voucherInfo.get("voucher code");
+        var discountPercentage = Integer.parseInt(voucherInfo.get("discount percentage"));
+        var maximalDiscountAmount = Integer.parseInt(voucherInfo.get("maximal discount amount"));
+
+        var subTotal = invoice.getSubTotal();
+        var actualDiscountAmount = invoice.getVoucherReductionPrice(voucherCode);
+
+        var calculatedDiscount = (subTotal * discountPercentage) / 100;
+        var expectedDiscount = Math.min(calculatedDiscount, maximalDiscountAmount);
+
+        Assert.assertEquals(actualDiscountAmount, expectedDiscount,
+                String.format("Voucher discount calculation incorrect. SubTotal: %d, Discount: %d%%, Calculated: %d, Max Cap: %d, Expected: %d, Actual: %d",
+                        subTotal, discountPercentage, calculatedDiscount, maximalDiscountAmount, expectedDiscount, actualDiscountAmount));
+
+        var totalPayment = invoice.getTotalPembayaran();
+        var expectedTotal = subTotal - expectedDiscount;
+        Assert.assertEquals(totalPayment, expectedTotal,
+                String.format("Total payment calculation incorrect. SubTotal: %d, Voucher Discount: %d, Expected Total: %d, Actual Total: %d",
+                        subTotal, expectedDiscount, expectedTotal, totalPayment));
     }
 }

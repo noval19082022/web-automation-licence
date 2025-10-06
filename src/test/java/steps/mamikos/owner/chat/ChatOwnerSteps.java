@@ -68,6 +68,7 @@ public class ChatOwnerSteps {
 
     @Then("system display title {string} after accept booking from chat room")
     public void ownerCanSeeAdditionalPriceWithPrice(String notPaidFirstRent) {
+        chat.waitForChatRoomVisible();
         Assert.assertEquals(chat.getNotPaidFirstRentText(), notPaidFirstRent, "Belum bayar sewa pertama");
     }
 

@@ -565,7 +565,6 @@ public class TenantBillManagementPO {
     public void userClickOnDIsbursementLink() {
         playwright.waitTillLocatorIsVisible(disbursementLink,2000.0);
         playwright.clickOn(disbursementLink);
-        //playwright.clickOn(page.locator("//a[contains(.,'Kapan uang masuk ke rekening saya?')]"));
     }
     /**
      * Get text financial report

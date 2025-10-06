@@ -9,6 +9,7 @@ import utilities.PlaywrightHelpers;
 public class ChatOwnerPO {
     private Page page;
     private PlaywrightHelpers playwright;
+    Locator chatRoomContainer;
     Locator ownerChatButton;
     Locator emptyChatImage;
     Locator emptyChatDesc;
@@ -50,10 +51,12 @@ public class ChatOwnerPO {
     Locator lihatProfilPenyewaLabelOnChatroom;
     Locator nextFtueButton;
     Locator surveyKostBtn;
+    Locator FTUEMarsPresent;
 
     public ChatOwnerPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
+        chatRoomContainer = page.locator("div.mc-chat-room");
         ownerChatButton = page.getByText("Chat").nth(0);
         emptyChatImage = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("chat kosong"));
         emptyChatDesc = page.getByText("Tidak ada percakapan saat ini.");
@@ -94,6 +97,14 @@ public class ChatOwnerPO {
         lihatProfilPenyewaLabelOnChatroom = page.getByLabel("Baru: Lihat profil calon penyewa!").getByRole(AriaRole.BANNER);
         nextFtueButton = page.locator("[class*='next-button']");
         surveyKostBtn = page.getByText("Survei Kos").first();
+        FTUEMarsPresent = page.getByText("Apa itu fitur Chat");
+    }
+
+    /**
+     * Wait for chat room to be visible.
+     */
+    public void waitForChatRoomVisible() {
+        playwright.waitTillLocatorIsVisible(chatRoomContainer, 30000.0);
     }
 
     /**
@@ -214,16 +225,19 @@ public class ChatOwnerPO {
         playwright.clickOn(chatOnList);
         return playwright.getText(notPaidFirstRent);
     }
+
     /**
      * Get Tenant Name from Booking Details Page
+     *
      * @return Tenant Name
      */
-    public  String getTenantName(){
+    public String getTenantName() {
         return playwright.getText(tenantName);
     }
 
     /**
      * Check if kost name is displayed
+     *
      * @return true if kost name otherwise false
      */
     public boolean isKostNameDisplayed() {
@@ -232,6 +246,7 @@ public class ChatOwnerPO {
 
     /**
      * Check if price kost is displayed
+     *
      * @return true if price kost otherwise false
      */
     public boolean isPriceKostDisplayed() {
@@ -240,6 +255,7 @@ public class ChatOwnerPO {
 
     /**
      * Check if sisa kamar is displayed
+     *
      * @return true if sisa kamar otherwise false
      */
     public boolean isSisaKamarDisplayed() {
@@ -262,7 +278,7 @@ public class ChatOwnerPO {
     /**
      * Dismiss FTUE Survey
      */
-    public void dismissFTUESurvey(){
+    public void dismissFTUESurvey() {
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Berikutnya")).click();
     }
 
@@ -287,10 +303,20 @@ public class ChatOwnerPO {
 
     /**
      * Check FTUE before send chat is present
+     *
      * @return true if appear
      */
     public boolean isFTUEBeforeChatPresent() {
         return FTUEBeforeChat.isVisible();
+    }
+
+    /**
+     * Check FTUE before send chat is present
+     *
+     * @return true if appear
+     */
+    public boolean isFTUEMarsPresent() {
+        return FTUEMarsPresent.isVisible();
     }
 
     /**
@@ -309,6 +335,7 @@ public class ChatOwnerPO {
 
     /**
      * Check is attachment button disabled
+     *
      * @return true if appear
      */
     public boolean isAttachmentButtonDisabled() {
@@ -319,6 +346,7 @@ public class ChatOwnerPO {
 
     /**
      * Check is attachment button enabled
+     *
      * @return true if appear
      */
     public boolean isAttachmentButtonEnabled() {
@@ -335,6 +363,7 @@ public class ChatOwnerPO {
 
     /**
      * Check Weekly Quota Header in chatlist is present
+     *
      * @return true if appear
      */
     public boolean isWeeklyQuotaChatlistPresent() {
@@ -343,6 +372,7 @@ public class ChatOwnerPO {
 
     /**
      * Check Register goldplus button in chatlist is present
+     *
      * @return true if appear
      */
     public boolean isRegisterGPButtonChatlistPresent() {
@@ -358,6 +388,7 @@ public class ChatOwnerPO {
 
     /**
      * Check Weekly Quota Header in chatroom is present
+     *
      * @return true if appear
      */
     public boolean isWeeklyQuotaChatroomPresent() {
@@ -368,6 +399,7 @@ public class ChatOwnerPO {
 
     /**
      * Check Register goldplus button in chatroom is present
+     *
      * @return true if appear
      */
     public boolean isRegisterGPButtonChatroomPresent() {
@@ -384,8 +416,6 @@ public class ChatOwnerPO {
 
     /**
      * Click close FTUE on chatlist when kuota mars is 0
-     *
-     *
      */
     public void dismissFTUEMarsKuotaNol() {
         if (playwright.waitTillLocatorIsVisible(closeIcon)) {
@@ -396,6 +426,7 @@ public class ChatOwnerPO {
 
     /**
      * Get Gp Package text on chat menu
+     *
      * @return String text "Kini, Anda bisa balas chat sepuasnya, bebas batas kuota"
      */
     public String gpPacakgeText() {
@@ -404,6 +435,7 @@ public class ChatOwnerPO {
 
     /**
      * Get Ftue last text on chat menu
+     *
      * @return String text "Anda hanya bisa balas 1 chat room per minggu. Kuota tidak berlaku akumulasi(tidak dapat dikumpul)."
      */
     public String lastFTUEnonGoldplusText() {
@@ -415,7 +447,7 @@ public class ChatOwnerPO {
      * return boolean true or false
      */
     public boolean isChatListEmptyStatePresent() {
-        return playwright.waitTillLocatorIsVisible(chatListEmptyState,2000.0);
+        return playwright.waitTillLocatorIsVisible(chatListEmptyState, 2000.0);
     }
 
     /**
@@ -429,6 +461,7 @@ public class ChatOwnerPO {
 
     /**
      * Get booking status label
+     *
      * @return booking status
      */
     public String getBookingStatusLabel() {
@@ -473,9 +506,8 @@ public class ChatOwnerPO {
             }
             maxLoop++;
         } while (playwright.waitTillLocatorIsVisible(nextFtueButton, 7_000.0));
-    }
-
-    public void clickOnSurveyKostBtn() {
-        playwright.clickOn(surveyKostBtn);
+        if (playwright.waitTillLocatorIsVisible(sayaMengertiChatRoom, 3_000.0)) {
+            playwright.clickOn(sayaMengertiChatRoom);
+        }
     }
 }

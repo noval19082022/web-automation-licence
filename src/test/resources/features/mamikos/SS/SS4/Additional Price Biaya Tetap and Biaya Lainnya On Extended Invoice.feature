@@ -1,6 +1,42 @@
 @SS4
 Feature: Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice
 
+  @continue
+  Scenario: Login Tenant Trough API
+    When playwright create register device id for tenant with parameters:
+      | device_identifier | Mamitest0891111020198     |
+      | device_uuid       | Mamitest0891111020198uuid |
+      | device_platform   | Mamitest                  |
+      | phone_number      | 0890867321212             |
+      | password          | mamikosqa123              |
+    When tenant login trough api
+
+  @continue
+  Scenario: Get Active Contract And Active Booking
+    When playwright get tenant booking status with parameter:
+      | page   |           |
+      | sort   |           |
+      | status | booked  |
+    When playwright get tenant booking status with parameter:
+      | page   |           |
+      | sort   |           |
+      | status | confirmed |
+    When playwright get tenant booking status with parameter:
+      | page   |           |
+      | sort   |           |
+      | status | verified  |
+    When playwright get tenant booking status with parameter:
+      | page   |           |
+      | sort   |           |
+      | status | checked_in |
+
+  @continue
+  Scenario: Verify Active Contract And Active Booking
+    When playwright check for active contract and active booking
+
+  @continue
+  Scenario: Tenant Batalkan Pengajuan Sewa For Add Ons - Extended Contract
+    And playwright batalkan pengajuan sewa for tenant
 
   @SS-4973
   Scenario: Admin Batalkan Contract
@@ -12,17 +48,12 @@ Feature: Additional Price Biaya Tetap and Biaya Lainnya On Extended Invoice
       | phone stag    | phone prod    |
       | 0890867321212 | 0890867321212 |
 
-  @SS-4974 @continue
-  Scenario: Cancel Booking if Tenant Have Booking
+  @SS-4975
+  Scenario: Tenant Booking Kost
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag    | phone prod    | password     |
       | 0890867321212 | 0890867321212 | mamikosqa123 |
-    And user cancel booking
-
-  @SS-4975
-  Scenario: Tenant Booking Kost
-    Given user go to mamikos homepage
     And tenant redirect to kost details:
       | kost path stag                                                                                             | kost path prod                                        |
       | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-bagas-automation-hahahehe-tobelo-halmahera-utara | Kost Bagas Automation HahaHehe Tobelo Halmahera Utara |

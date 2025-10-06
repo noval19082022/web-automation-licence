@@ -125,7 +125,7 @@ public class GoldplusPO {
         selectRadioButtonYes = page.locator("[value='1'][name='is_recommended']");
         messageText = page.locator(".bg-c-empty-state__description");
         lihatTagihanTable = page.locator("//tr[@class='goldplus-payment-list-table__row']");
-        widgetGP = page.locator(".membership-card__label");
+        widgetGP = page.locator("img[alt*='Goldplus Logo']").locator("..");
         snkGoldplusCheckbox =  page.locator("label");
         weeklyPeriode = page.locator(".bg-c-radio__icon").first();
         pelajariCaranyaButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Pelajari caranya"));
@@ -1168,5 +1168,53 @@ public class GoldplusPO {
 
     public void tapOnPilihPaketGoldplusBtnFromGpOnboardingPopUp() {
         playwright.clickOn(pilihPaketBtn);
+    }
+
+    /**
+     * Check if GP entry point is displayed in chat list
+     * @return boolean
+     */
+    public boolean isGpEntryPointDisplayed() {
+        Locator gpEntryPoint = page.locator("a").filter(new Locator.FilterOptions().setHasText("Paket murah untuk interaksi"));
+        return playwright.waitTillLocatorIsVisible(gpEntryPoint);
+    }
+
+    /**
+     * Check if countdown timer is displayed
+     * @return boolean
+     */
+    public boolean isCountdownTimerDisplayed() {
+        Locator countdownTimer = page.getByTestId("popperReference").getByTestId("countdown-container");
+        return playwright.waitTillLocatorIsVisible(countdownTimer);
+    }
+
+    /**
+     * Get displayed price in GP entry point
+     * @return String price
+     */
+    public boolean getDisplayedPrice(String expectedPrice) {
+        Locator priceElement = page.getByText(expectedPrice);
+        playwright.waitTillLocatorIsVisible(priceElement);
+        return true;
+    }
+
+    /**
+     * Get entry point copy text
+     * @return String copy text
+     */
+    public String getEntryPointCopyText() {
+        Locator copyTextElement =  page.getByTestId("popperReference").getByText("Paket murah untuk interaksi");
+        playwright.waitFor(copyTextElement);
+        return playwright.getText(copyTextElement);
+    }
+
+    /**
+     * Get countdown timer value
+     * @return String countdown value (e.g., "23:59:59")
+     */
+    public String getCountdownTimerValue() {
+        Locator countdownValue = page.getByTestId("popperReference").getByTestId("countdown-container");
+        playwright.waitFor(countdownValue);
+        return playwright.getText(countdownValue);
     }
 }

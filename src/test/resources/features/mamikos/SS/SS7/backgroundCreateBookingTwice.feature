@@ -1,6 +1,43 @@
 @SS7
 Feature: BnB feature with background create booking twice
 
+  @continue
+  Scenario: Login Tenant Trough API
+    When playwright create register device id for tenant with parameters:
+      | device_identifier | Mamitest0891111020198     |
+      | device_uuid       | Mamitest0891111020198uuid |
+      | device_platform   | Mamitest                  |
+      | phone_number      | 08100000618               |
+      | password          | qwerty123                 |
+    When tenant login trough api
+
+  @continue
+  Scenario: Get Active Contract And Active Booking
+    When playwright get tenant booking status with parameter:
+      | page   |        |
+      | sort   |        |
+      | status | booked |
+    When playwright get tenant booking status with parameter:
+      | page   |           |
+      | sort   |           |
+      | status | confirmed |
+    When playwright get tenant booking status with parameter:
+      | page   |          |
+      | sort   |          |
+      | status | verified |
+    When playwright get tenant booking status with parameter:
+      | page   |            |
+      | sort   |            |
+      | status | checked_in |
+
+  @continue
+  Scenario: Verify Active Contract And Active Booking
+    When playwright check for active contract and active booking
+
+  @continue
+  Scenario: Tenant Batalkan Pengajuan Sewa For Add Ons - Extended Contract
+    And playwright batalkan pengajuan sewa for tenant
+
   Scenario: Tenant Booking Kost Twice
     Given user go to mamikos homepage
     When user login as tenant via phone number:

@@ -71,6 +71,32 @@ public class JavaHelpers {
     }
 
     /**
+     * Get the current time in server and round it to the nearest 30-minute interval.
+     * The rounding follows this rule:
+     * - Minutes < 15 → Round down to "HH:00"
+     * - Minutes between 15-44 → Round to "HH:30"
+     * - Minutes ≥ 45 → Round up to the next hour "HH:00"
+     *
+     * @return String representation of the rounded time in "HH:mm" format.
+     */
+    public static String getCurrentTimeServerForSurvey() {
+        // Get current time in Server Time
+        LocalTime now = LocalTime.now();
+
+        // Round to the nearest 30-minute interval
+        int minutes = now.getMinute();
+        int roundedMinutes = (minutes < 15) ? 0 : (minutes < 45) ? 30 : 0;
+        LocalTime roundedTime = now.withMinute(roundedMinutes).withSecond(0);
+        if (minutes >= 45) {
+            roundedTime = roundedTime.plusHours(1); // Move to the next hour if minutes >= 45
+        }
+
+        // Format the time as HH:mm
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        return roundedTime.format(formatter);
+    }
+
+    /**
      * Get the current time in GMT+7 and round it to the nearest 30-minute interval.
      * The rounding follows this rule:
      * - Minutes < 15 → Round down to "HH:00"
@@ -79,7 +105,7 @@ public class JavaHelpers {
      *
      * @return String representation of the rounded time in "HH:mm" format.
      */
-    public static String getCurrentTimeGMT7() {
+    public static String getCurrentTimeGMT7ForSurvey() {
         // Get current time in GMT+7
         LocalTime now = LocalTime.now(ZoneId.of("Asia/Bangkok"));
 

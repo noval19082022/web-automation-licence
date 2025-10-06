@@ -16,12 +16,14 @@ Feature: Gold Plus
     And user click daftar GP button
     And user click "Pilih Paket GoldPlus" button
     And owner choose Goldplus package 1
+    And owner click bayar sekarang on detail tagihan page goldplus
     Then user will see that the goldplus package choosed is displayed
 
   @TEST_LIMO-3397 @changeGP @continue
   Scenario: Owner Able to Change Goldplus Package
     When user click on ubah package gold plus button
     And owner choose Goldplus package 2
+    And owner click bayar sekarang on detail tagihan page goldplus
     Then user will see that the goldplus package on rincian pembayaran detail tagihan
 
   @TEST_LIMO-3398 @TEST_LIMO-149 @uncheckT&C @continue

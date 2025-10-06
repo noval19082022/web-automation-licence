@@ -42,9 +42,15 @@ public class GoldPlusSubmissionPO {
      * Click on bayar sekarang button and wait until page loaded
      */
     public void clicksOnBayarSekarangButton() {
-        playwright.waitFor(bayarSekarangButton, 3000.0);
-        playwright.clickOn(bayarSekarangButton);
-        playwright.waitTillPageLoaded();
+        if (playwright.waitTillLocatorIsVisible(bayarSekarangButton)) {
+            playwright.waitFor(bayarSekarangButton, 3000.0);
+            playwright.clickOn(bayarSekarangButton);
+            playwright.hardWait(5000);
+        } else {
+            playwright.waitFor(pilihPeriode, 3000.0);
+            playwright.clickOn(pilihPeriode);
+            playwright.waitTillPageLoaded();
+        }
     }
 
     /**

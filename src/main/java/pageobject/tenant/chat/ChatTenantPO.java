@@ -111,12 +111,13 @@ public class ChatTenantPO {
     public void clickQuestion(String text) {
         // Wait for question options to be visible
         playwright.waitTillLocatorIsVisible(questionsOption.first(), 10000.0);
-        
-        // Find the question radio button option and click it
-        Locator questionRadio = page.locator("[data-testid='wrapper-question'] .question-option").filter(new Locator.FilterOptions().setHasText(text));
-        playwright.waitTillLocatorIsVisible(questionRadio, 5000.0);
-        playwright.clickOn(questionRadio);
-        
+
+        // Find the clickable question label that contains the text
+        Locator questionLabel = page.locator("[data-testid='wrapper-question'] .wrapper-question__label")
+            .filter(new Locator.FilterOptions().setHasText(text));
+        playwright.waitTillLocatorIsVisible(questionLabel, 5000.0);
+        playwright.clickOn(questionLabel);
+
         // Check and dismiss FTUE if present
         KostDetailsPO kostDetailsPO = new KostDetailsPO(page);
         if (playwright.waitTillLocatorIsVisible(ftueSlider, 2000.0)) {
@@ -364,5 +365,16 @@ public class ChatTenantPO {
 
     public void backToChatroomFromSurveyDetail() {
         playwright.clickOn(backBtnToChatroomFromSurveyDetail);
+    }
+
+    /**
+     * Get aria snapshot of the modal chat form
+     * Useful for accessibility testing and debugging modal chat interactions
+     * @return String representation of the modal chat accessibility tree
+     */
+    public String getModalChatAriaSnapshot() {
+        Locator modalChat = page.locator("#modalChat form");
+        playwright.waitTillLocatorIsVisible(modalChat, 10000.0);
+        return playwright.getAriaSnapshot(modalChat);
     }
 }

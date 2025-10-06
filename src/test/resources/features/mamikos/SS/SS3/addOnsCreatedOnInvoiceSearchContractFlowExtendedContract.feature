@@ -1,7 +1,6 @@
 @SS3
 Feature: addOns Created On Invoice Search Contract Flow Extended Contract
 
-
   @SS-3772
   Scenario: [Add Ons - Extended Contract] Get And Create Tenant Data Add Ons
     When playwright create register device id for tenant with parameters:
