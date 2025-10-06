@@ -13,6 +13,8 @@ public class AddTenantPO {
     Locator phoneTenantField;
     Locator roomNumberDropdown;
     Locator firstRoomNumber;
+    Locator mamiFieldDropdown;
+    Locator checkPhoneForm;
 
     public AddTenantPO(Page page){
         this.page = page;
@@ -24,6 +26,8 @@ public class AddTenantPO {
        phoneTenantField = page.locator("//input[@id='phoneNumberField']");
        roomNumberDropdown = page.getByPlaceholder("Pilih nomor kamar kos");
        firstRoomNumber = page.locator(".room-option > .mami-radio > .mami-radio-icon").first();
+       mamiFieldDropdown = page.locator(".mami-field-dropdown");
+       checkPhoneForm = page.locator(".check-phone-form");
     }
 
     /**
@@ -158,5 +162,25 @@ public class AddTenantPO {
      */
     public boolean getDifferentGenderPopUpText(String text) {
         return playwright.isTextDisplayed(text, 3000.0);
+    }
+
+    /**
+     * Get aria snapshot of the mami-field-dropdown element
+     * Useful for accessibility testing and debugging dropdown interactions
+     * @return String representation of the dropdown accessibility tree
+     */
+    public String getMamiFieldDropdownAriaSnapshot() {
+        playwright.waitTillLocatorIsVisible(mamiFieldDropdown, 10000.0);
+        return playwright.getAriaSnapshot(mamiFieldDropdown);
+    }
+
+    /**
+     * Get aria snapshot of the Informasi Penyewa form
+     * Useful for accessibility testing and debugging form interactions
+     * @return String representation of the form accessibility tree
+     */
+    public String takeInformasiPenyewaFormAriaSnapshots() {
+        playwright.waitTillLocatorIsVisible(checkPhoneForm, 10000.0);
+        return playwright.getAriaSnapshot(checkPhoneForm);
     }
 }

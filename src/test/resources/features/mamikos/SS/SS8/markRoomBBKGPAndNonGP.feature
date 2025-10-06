@@ -1,4 +1,4 @@
-@SS8 @SS8
+@SS8 @SS8 @flaky
 Feature: Owner - Penyewa Feature
 
   @waitingTerminateConfirmation
@@ -155,7 +155,9 @@ Feature: Owner - Penyewa Feature
     And owner click simpan on add room pop up
     Then owner can sees Pop-Up owner not add renter's data
     When owner click on Add Renter button
-    Then owner redirected to Input Renter's Information form with valid kost name
+    Then owner redirected to input Renter's Information with kos name below:
+      | kos name stag                                        | kos name prod                    |
+      | Kos Automation BnB Tipe A Tobelo Halmahera Utara | Kos Automation BnB Tipe A |
 
   @occupancyAndBilling @markRoom @TEST_SS-3462 @continue
   #markRoom.feature

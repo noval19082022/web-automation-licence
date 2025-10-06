@@ -324,7 +324,7 @@ public class PropertiSayaPO {
         searchInput = page.getByPlaceholder("Masukkan nama atau nomor kamar");
         firstEditButton = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("edit")).first();
         alreadyInhabitedCheckbox = page.locator("span").filter(new Locator.FilterOptions().setHasText("checkmark"));
-        statusRoom = page.locator(".bg-c-label").first();
+        statusRoom = page.getByTestId("roomEditOccupancyCol").nth(0);
         roomFilterDropdown = page.locator(".availability-option__button");
         floorFieldInput = page.locator("#modalAddFloorInput_txt");
         errorMessageRoomName = page.locator(".bg-c-field__message");
