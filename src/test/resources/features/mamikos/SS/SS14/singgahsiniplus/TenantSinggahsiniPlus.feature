@@ -15,7 +15,7 @@ Feature: Singgahsini Plus
     When tenant clicks on Singgahsini text
     Then tenant can see tier message description on singgahsini page is visible
 
-  @TEST_SS-9191 @continue @a
+  @TEST_SS-9191 @continue
   Scenario: [Web][Singgahsini+] Entry Point Singgahsini for tenant P1 user Active
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -25,14 +25,14 @@ Feature: Singgahsini Plus
     And tenant click on profile
     Then tenant can see "Starter" label
 
-  @TEST_SS-9194 @a
+  @TEST_SS-9194
   Scenario: [Web][Singgahsini+] Singgahsini+ Page Tab Layout Active
     When tenant clicks on Singgahsini text
     Then tenant can see tier active with "Level kamu saat ini"
     When tenant can see tier active with "Level 1: Starter"
     Then tenant can see tier active with "Lanjut ngekos sampai 27 hari untuk naik ke level dan dapat"
 
-  @TEST_SS-9192 @a
+  @TEST_SS-9192
   Scenario: [Web][Singgahsini+] Entry Point Singgahsini for tenant P1 user Paused
     Given user go to mamikos homepage
     When user login as tenant via phone number:
