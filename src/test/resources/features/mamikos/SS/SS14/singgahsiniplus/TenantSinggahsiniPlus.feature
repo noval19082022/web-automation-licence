@@ -15,7 +15,7 @@ Feature: Singgahsini Plus
     When tenant clicks on Singgahsini text
     Then tenant can see tier message description on singgahsini page is visible
 
-  @TEST_SS-9191 @continue
+  @TEST_SS-9191 @continue @a
   Scenario: [Web][Singgahsini+] Entry Point Singgahsini for tenant P1 user Active
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -25,14 +25,21 @@ Feature: Singgahsini Plus
     And tenant click on profile
     Then tenant can see "Starter" label
 
-  @TEST_SS-9194
+  @TEST_SS-9194 @continue @a
   Scenario: [Web][Singgahsini+] Singgahsini+ Page Tab Layout Active
     When tenant clicks on Singgahsini text
     Then tenant can see tier active with "Level kamu saat ini"
     When tenant can see tier active with "Level 1: Starter"
     Then tenant can see tier active with "Lanjut ngekos sampai 27 hari untuk naik ke level dan dapat"
 
-  @TEST_SS-9192
+  @TEST_SS-9517 @a
+  Scenario: [Web][Reward & Poin][Mamipoin Tab] Poin Kamu section for Active Tenant Singgahsini+
+    When tenant clicks on MamiPoin link in Singgahsini Plus card
+    Then tenant should see Singgahsini Plus summary card
+    And tenant should see mamipoin card tier bar title
+    And tenant should see tier description text with "Ngekos lama, levelnya naik, poinnya nambah!"
+
+  @TEST_SS-9192 @continue @a
   Scenario: [Web][Singgahsini+] Entry Point Singgahsini for tenant P1 user Paused
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -46,3 +53,9 @@ Feature: Singgahsini Plus
     When tenant clicks on Singgahsini text
     Then tenant can see paused allert with "Level Singgahsini+ dijeda karena kamu check-out dari Singgahsini/APIK. Balik ngekos untuk aktifkan lagi."
 
+  @TEST_SS-9518 @a
+  Scenario: [Web][Reward & Poin][Mamipoin Tab] Poin Kamu section for Pause Tenant Singgahsini+
+    When tenant clicks on MamiPoin link in Singgahsini Plus card
+    Then tenant should see Singgahsini Plus summary card
+    And tenant should see mamipoin card tier bar title
+    And tenant should see tier description text with "Ngekos lama, levelnya naik, poinnya nambah!"

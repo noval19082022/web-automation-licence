@@ -20,6 +20,10 @@ public class SinggahsiniPlusPO {
     private Locator labelActiveTier;
     private Locator allertPausedText;
     private Locator tierActiveText;
+    private Locator starterLevelText;
+    private Locator mamiPoinLink;
+    private Locator mamipoinCardTierBarTitle;
+    private Locator tierDescriptionText;
 
     public SinggahsiniPlusPO(Page page) {
         this.page = page;
@@ -31,6 +35,10 @@ public class SinggahsiniPlusPO {
         this.rewardPoinText = singgahsiniPlusSummaryCard.getByText("Reward & Poin");
         this.mamiPoinText = singgahsiniPlusSummaryCard.getByText("MamiPoin");
         this.introductionTierText = page.getByTestId("singgahsiniPlusMainDescription");
+        this.starterLevelText = page.getByText("Singgahsini+ Level: Starter");
+        this.mamiPoinLink = page.locator("a").filter(new Locator.FilterOptions().setHasText("MamiPoin"));
+        this.mamipoinCardTierBarTitle = page.getByTestId("ssPlusMamipoinCardTierBarTitle");
+        this.tierDescriptionText = page.getByText("Ngekos lama, levelnya naik,");
     }
 
     /**
@@ -125,5 +133,43 @@ public class SinggahsiniPlusPO {
      */
     public boolean isMamiPoinTextVisible() {
         return playwright.waitTillLocatorIsVisible(mamiPoinText);
+    }
+
+    /**
+     * click on Singgahsini+ Level: Starter text
+     */
+    public void clickStarterLevelText() {
+        playwright.clickOn(starterLevelText);
+    }
+
+    /**
+     * click on MamiPoin link
+     */
+    public void clickMamiPoinLink() {
+        playwright.clickOn(mamiPoinLink);
+    }
+
+    /**
+     * click on mamipoin card tier bar title
+     */
+    public void clickMamipoinCardTierBarTitle() {
+        playwright.clickOn(mamipoinCardTierBarTitle);
+    }
+
+    /**
+     * verify mamipoin card tier bar title is visible
+     * @return is visible
+     */
+    public boolean isMamipoinCardTierBarTitleVisible() {
+        return playwright.waitTillLocatorIsVisible(mamipoinCardTierBarTitle);
+    }
+
+    /**
+     * verify tier description text is visible
+     * @return is visible
+     */
+    public boolean isTierDescriptionTextVisible(String text) {
+        tierDescriptionText = page.locator("//em[contains(text(),'"+text+"')]");
+        return playwright.waitTillLocatorIsVisible(tierDescriptionText);
     }
 }

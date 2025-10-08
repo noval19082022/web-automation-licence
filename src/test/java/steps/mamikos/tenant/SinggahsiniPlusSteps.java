@@ -76,6 +76,38 @@ public class SinggahsiniPlusSteps {
             "MamiPoin option is not visible");
     }
 
+    @When("tenant clicks on Singgahsini Plus Level Starter text")
+    public void tenantClicksOnSinggahsiniPlusLevelStarterText() {
+        singgahsiniPlus.clickStarterLevelText();
+    }
+
+    @When("tenant clicks on MamiPoin link")
+    public void tenantClicksOnMamiPoinLink() {
+        singgahsiniPlus.clickMamiPoinLink();
+    }
+
+    @When("tenant clicks on MamiPoin link in Singgahsini Plus card")
+    public void tenantClicksOnMamiPoinLinkInSinggahsiniPlusCard() {
+        singgahsiniPlus.clickMamiPoinLink();
+    }
+
+    @When("tenant clicks on mamipoin card tier bar title")
+    public void tenantClicksOnMamipoinCardTierBarTitle() {
+        singgahsiniPlus.clickMamipoinCardTierBarTitle();
+    }
+
+    @Then("tenant should see mamipoin card tier bar title")
+    public void tenantShouldSeeMamipoinCardTierBarTitle() {
+        Assert.assertTrue(singgahsiniPlus.isMamipoinCardTierBarTitleVisible(),
+            "Mamipoin card tier bar title is not visible");
+    }
+
+    @Then("tenant should see tier description text with {string}")
+    public void tenantShouldSeeTierDescriptionText(String text) {
+        Assert.assertTrue(singgahsiniPlus.isTierDescriptionTextVisible(text),
+            "Tier description text is not visible");
+    }
+
 //    @Then("tenant should see tier message {string}")
 //    public void tenantShouldSeeTierMessage(String expectedMessage) {
 //        String actualMessage = singgahsiniPlus.getTierMessageText();
