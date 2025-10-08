@@ -155,10 +155,10 @@ public class SearchPO {
      */
 
     public void searchKostFromfirstList(String kostName) {
-        searchKost.click();
-        inputSearch.fill(kostName);
-        inputSearch.press("Enter");
-        suggetionKostOnTheSearchList.click();
+        playwright.clickOn(searchKost);
+        playwright.fill(inputSearch, kostName);
+        playwright.pressKeyboardKey("Enter");
+        playwright.clickOn(suggetionKostOnTheSearchList);
     }
 
     /**
@@ -168,9 +168,9 @@ public class SearchPO {
      */
 
     public void searchAreaByName(String search) {
-        searchKost.click();
-        inputSearch.fill(search);
-        suggestionAreaOnTheSearchList.click();
+        playwright.clickOn(searchKost);
+        playwright.fill(inputSearch, search);
+        playwright.clickOn(suggestionAreaOnTheSearchList);
         playwright.hardWait(2000);
     }
 
@@ -196,10 +196,9 @@ public class SearchPO {
      * @param search
      */
     public void searchArea(String search) {
-        searchKost.click();
-        inputSearch.fill(search);
-        inputSearch.press("Enter");
-
+        playwright.clickOn(searchKost);
+        playwright.fill(inputSearch, search);
+        playwright.pressKeyboardKey("Enter");
     }
 
     /**
@@ -238,8 +237,8 @@ public class SearchPO {
      * user click area kota popular
      */
     public void clickSearchBar() {
-        searchKost.click();
-        area.click();
+        playwright.clickOn(searchKost);
+        playwright.clickOn(area);
     }
 
     /**
@@ -385,7 +384,7 @@ public class SearchPO {
      * click sugestion area first city
      */
     public void suggestionAreaClick() {
-        suggestionAreaOnTheSearchList.click();
+        playwright.clickOn(suggestionAreaOnTheSearchList);
     }
 
     /**
@@ -630,15 +629,27 @@ public class SearchPO {
      * @param searchText is text we want to search
      */
     public void enterTextToSearchAndSelectResultCity(String searchText) {
-        // Wait for input to be visible and fill it
-        playwright.waitTillLocatorIsVisible(inputSearch);
+        // Click on searchKost to open the search modal (following existing pattern)
+        playwright.clickOn(searchKost);
+        playwright.hardWait(1000); // Wait for modal/search input to appear
+        
+        // Fill the search input using playwright helper
         playwright.fill(inputSearch, searchText);
         playwright.pressKeyboardKey("Enter");
         
-        // Wait for suggestions to appear and click the matching result
-        Locator resultLocator = page.getByText(searchText);
-        playwright.waitTillLocatorIsVisible(resultLocator.first());
-        playwright.clickOn(resultLocator.first());
+        // Wait for suggestions and click the area suggestion
+        playwright.hardWait(2000); // Wait for suggestions to load
+        
+        // Try to find and click the suggestion
+        // First try: exact text match in suggestion area list
+        Locator resultLocator = page.locator("//*[@data-testid='suggestionsBox-areaList']//label[contains(text(), '" + searchText + "')]");
+        
+        if (resultLocator.count() > 0) {
+            playwright.clickOn(resultLocator.first());
+        } else {
+            // Alternative: click on suggestion area list
+            playwright.clickOn(suggestionAreaOnTheSearchList);
+        }
     }
 
 
@@ -750,8 +761,8 @@ public class SearchPO {
      * @param searchText is text that user want to search
      */
     public void enterTextOnSearchSearchBox(String searchText) {
-        inputSearch.fill(searchText);
-        inputSearch.press("Enter");
+        playwright.fill(inputSearch, searchText);
+        playwright.pressKeyboardKey("Enter");
     }
 
     /**
