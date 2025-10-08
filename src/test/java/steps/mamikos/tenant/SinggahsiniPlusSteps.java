@@ -37,6 +37,16 @@ public class SinggahsiniPlusSteps {
         Assert.assertTrue(singgahsiniPlus.isTierDescriptionVisible(), "introduction new singgahsini plus not visible");
     }
 
+    @Then("tenant can see paused allert with {string}")
+    public void tenantCanSeePausedAllert(String text){
+        Assert.assertTrue(singgahsiniPlus.isAllertPausedVisible(text), "allert is not visisble");
+    }
+
+    @Then("tenant can see tier active with {string}")
+    public void tenantCanSeeTierActive(String text){
+        Assert.assertTrue(singgahsiniPlus.isTierActiveVisible(text), "tier active is not visible");
+    }
+
     @And("tenant clicks on Reward & Poin in Singgahsini Plus card")
     public void tenantClicksOnRewardPoinInSinggahsiniPlusCard() {
         singgahsiniPlus.clickRewardPoin();

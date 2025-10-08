@@ -18,6 +18,8 @@ public class SinggahsiniPlusPO {
     private Locator introductionTierText;
     private Locator newLabelText;
     private Locator labelActiveTier;
+    private Locator allertPausedText;
+    private Locator tierActiveText;
 
     public SinggahsiniPlusPO(Page page) {
         this.page = page;
@@ -65,6 +67,26 @@ public class SinggahsiniPlusPO {
      */
     public boolean isTierDescriptionVisible(){
         return playwright.waitTillLocatorIsVisible(introductionTierText);
+    }
+
+    /**
+     * verify allert paused is visible
+     * @param text
+     * @return text
+     */
+    public boolean isAllertPausedVisible(String text){
+        allertPausedText = page.locator("//*[@class=\"bg-c-text bg-c-text--body-4\"][contains(text(),'"+text+"')]");
+        return playwright.waitTillLocatorIsVisible(allertPausedText);
+    }
+
+    /**
+     * verify active tier on profile page is visible
+     * @param text
+     * @return text
+     */
+    public boolean isTierActiveVisible(String text){
+        tierActiveText = page.locator("//*[@data-testid='singgahsiniPlusCard']//*[contains(text(),'"+text+"')]");
+        return playwright.waitTillLocatorIsVisible(tierActiveText);
     }
 
     /**

@@ -1,4 +1,4 @@
-@SS14 @a
+@SS14
 Feature: Singgahsini Plus
 
   @TEST_SS-9190
@@ -15,7 +15,7 @@ Feature: Singgahsini Plus
     When tenant clicks on Singgahsini text
     Then tenant can see tier message description on singgahsini page is visible
 
-  @TEST_SS-9191
+  @TEST_SS-9191 @continue @a
   Scenario: [Web][Singgahsini+] Entry Point Singgahsini for tenant P1 user Active
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -24,7 +24,25 @@ Feature: Singgahsini Plus
     And tenant click on icon profil
     And tenant click on profile
     Then tenant can see "Starter" label
+
+  @TEST_SS-9194 @a
+  Scenario: [Web][Singgahsini+] Singgahsini+ Page Tab Layout Active
     When tenant clicks on Singgahsini text
+    Then tenant can see tier active with "Level kamu saat ini"
+    When tenant can see tier active with "Level 1: Starter"
+    Then tenant can see tier active with "Lanjut ngekos sampai 27 hari untuk naik ke level dan dapat"
 
-
+  @TEST_SS-9192 @a
+  Scenario: [Web][Singgahsini+] Entry Point Singgahsini for tenant P1 user Paused
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag | password  |
+      | 08100000705 | qwerty123 |
+    And tenant click on icon profil
+    And tenant click on profile
+    Then tenant can see "Baru" label
+    When tenant can see "Basic" label
+    Then tenant should see tier message in Singgahsini plus with "Level & rewards dijeda"
+    When tenant clicks on Singgahsini text
+    Then tenant can see paused allert with "Level Singgahsini+ dijeda karena kamu check-out dari Singgahsini/APIK. Balik ngekos untuk aktifkan lagi."
 

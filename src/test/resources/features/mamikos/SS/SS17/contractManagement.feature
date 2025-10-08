@@ -44,7 +44,7 @@ Feature: PMS Contract Management - Ubah Phone Number
     And admin click on lampiran
     Then lampiran image opened in new tab
 
-  @TEST_SS-8751 @a
+  @TEST_SS-8751
   Scenario: [Web][Ubah Phone Number][PMS - Detail Kontrak]Check Ubah button when contract status as Terminated, Booked, Cancelled and Finished
     When admin go to pms singgahsini
     And admin go to room allotment page "Kost Singgahsini Taman Anggur Bantul"
