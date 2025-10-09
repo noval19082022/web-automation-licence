@@ -24,6 +24,7 @@ public class SinggahsiniPlusPO {
     private Locator mamiPoinLink;
     private Locator mamipoinCardTierBarTitle;
     private Locator tierDescriptionText;
+    private Locator mamipoinMenuText;
 
     public SinggahsiniPlusPO(Page page) {
         this.page = page;
@@ -171,5 +172,14 @@ public class SinggahsiniPlusPO {
     public boolean isTierDescriptionTextVisible(String text) {
         tierDescriptionText = page.locator("//em[contains(text(),'"+text+"')]");
         return playwright.waitTillLocatorIsVisible(tierDescriptionText);
+    }
+
+    /**
+     * verify poin menu on mamipoin page
+     * @return text is visible
+     */
+    public boolean isMamipoinMenutextVisible(String text){
+        mamipoinMenuText = page.locator("//p[contains(text(),'"+text+"')]");
+        return playwright.waitTillLocatorIsVisible(mamipoinMenuText);
     }
 }

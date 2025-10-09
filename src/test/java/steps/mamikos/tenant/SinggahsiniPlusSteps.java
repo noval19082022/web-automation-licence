@@ -62,8 +62,6 @@ public class SinggahsiniPlusSteps {
         Assert.assertTrue(singgahsiniPlus.isSinggahsiniPlusSummaryCardVisible(), "Singgahsini is not visible");
     }
 
-
-
     @Then("tenant should see Reward & Poin option")
     public void tenantShouldSeeRewardPoinOption() {
         Assert.assertTrue(singgahsiniPlus.isRewardPoinTextVisible(),
@@ -108,10 +106,14 @@ public class SinggahsiniPlusSteps {
             "Tier description text is not visible");
     }
 
-//    @Then("tenant should see tier message {string}")
-//    public void tenantShouldSeeTierMessage(String expectedMessage) {
-//        String actualMessage = singgahsiniPlus.getTierMessageText();
-//        Assert.assertTrue(actualMessage.contains(expectedMessage),
-//            "Expected tier message not found. Actual: " + actualMessage);
-//    }
+    @Then("tenant can see mamipoin menu with {string}")
+    public void tenantCanSeeMamipoinMenuWith(String text){
+        Assert.assertTrue(singgahsiniPlus.isMamipoinMenutextVisible(text), "mamipoin menu is not visible");
+    }
+
+    @Then("tenant can not see Singgahsini Plus summary card")
+    public void tenantCanNotSeeSinggahsiniPlusSummarycard(){
+        Assert.assertFalse(singgahsiniPlus.isMamipoinCardTierBarTitleVisible(), "singgahsini plus summary card is visible");
+    }
+
 }
