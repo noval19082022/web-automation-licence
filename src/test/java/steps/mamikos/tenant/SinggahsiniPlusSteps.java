@@ -62,8 +62,6 @@ public class SinggahsiniPlusSteps {
         Assert.assertTrue(singgahsiniPlus.isSinggahsiniPlusSummaryCardVisible(), "Singgahsini is not visible");
     }
 
-
-
     @Then("tenant should see Reward & Poin option")
     public void tenantShouldSeeRewardPoinOption() {
         Assert.assertTrue(singgahsiniPlus.isRewardPoinTextVisible(),
@@ -76,10 +74,46 @@ public class SinggahsiniPlusSteps {
             "MamiPoin option is not visible");
     }
 
-//    @Then("tenant should see tier message {string}")
-//    public void tenantShouldSeeTierMessage(String expectedMessage) {
-//        String actualMessage = singgahsiniPlus.getTierMessageText();
-//        Assert.assertTrue(actualMessage.contains(expectedMessage),
-//            "Expected tier message not found. Actual: " + actualMessage);
-//    }
+    @When("tenant clicks on Singgahsini Plus Level Starter text")
+    public void tenantClicksOnSinggahsiniPlusLevelStarterText() {
+        singgahsiniPlus.clickStarterLevelText();
+    }
+
+    @When("tenant clicks on MamiPoin link")
+    public void tenantClicksOnMamiPoinLink() {
+        singgahsiniPlus.clickMamiPoinLink();
+    }
+
+    @When("tenant clicks on MamiPoin link in Singgahsini Plus card")
+    public void tenantClicksOnMamiPoinLinkInSinggahsiniPlusCard() {
+        singgahsiniPlus.clickMamiPoinLink();
+    }
+
+    @When("tenant clicks on mamipoin card tier bar title")
+    public void tenantClicksOnMamipoinCardTierBarTitle() {
+        singgahsiniPlus.clickMamipoinCardTierBarTitle();
+    }
+
+    @Then("tenant should see mamipoin card tier bar title")
+    public void tenantShouldSeeMamipoinCardTierBarTitle() {
+        Assert.assertTrue(singgahsiniPlus.isMamipoinCardTierBarTitleVisible(),
+            "Mamipoin card tier bar title is not visible");
+    }
+
+    @Then("tenant should see tier description text with {string}")
+    public void tenantShouldSeeTierDescriptionText(String text) {
+        Assert.assertTrue(singgahsiniPlus.isTierDescriptionTextVisible(text),
+            "Tier description text is not visible");
+    }
+
+    @Then("tenant can see mamipoin menu with {string}")
+    public void tenantCanSeeMamipoinMenuWith(String text){
+        Assert.assertTrue(singgahsiniPlus.isMamipoinMenutextVisible(text), "mamipoin menu is not visible");
+    }
+
+    @Then("tenant can not see Singgahsini Plus summary card")
+    public void tenantCanNotSeeSinggahsiniPlusSummarycard(){
+        Assert.assertFalse(singgahsiniPlus.isMamipoinCardTierBarTitleVisible(), "singgahsini plus summary card is visible");
+    }
+
 }
