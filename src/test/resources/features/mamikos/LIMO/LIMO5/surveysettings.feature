@@ -1,4 +1,4 @@
-@regression @ownerSurveySettings
+@regression @ownerSurveySettings @LIMO5
 
 Feature: Owner Survey Settings
 
