@@ -97,7 +97,7 @@ public class ChatTenantPO {
         if (!questionsList.isEmpty()) {
             for (Locator questionText : questionsList) {
                 try {
-                    String text = questionText.textContent().trim();
+                    String text = playwright.getText(questionText);
                     if (!text.isEmpty()) {
                         questionsListing.add(text);
                     }
@@ -115,7 +115,7 @@ public class ChatTenantPO {
             
             for (Locator questionText : questionsList) {
                 try {
-                    String text = questionText.textContent().trim();
+                    String text = playwright.getText(questionText);
                     if (!text.isEmpty()) {
                         questionsListing.add(text);
                     }
