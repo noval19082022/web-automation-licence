@@ -41,6 +41,8 @@ public class ChatTenantPO {
     Locator backBtnToChatroomFromSurveyDetail;
     Locator chevronDetailSurvei;
     Locator inputTextbox;
+    Locator modalChat;
+    Locator wrapperQuestion;
 
     public ChatTenantPO(Page page) {
         this.page = page;
@@ -71,6 +73,8 @@ public class ChatTenantPO {
         backBtnToChatroomFromSurveyDetail = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("back"));
         chevronDetailSurvei = page.locator("//div[@class='mc-product-card__tenant-survey-detail']");
         inputTextbox = page.locator("//textarea[@placeholder='Ceritakan secara singkat dan jelas.']");
+        modalChat = page.locator("#modalChat");
+        wrapperQuestion = page.locator("[data-testid='wrapper-question']");
     }
 
     /**
@@ -80,16 +84,14 @@ public class ChatTenantPO {
      */
     public List<String> listQuestions() {
         // Wait for modal to be visible
-        playwright.waitTillLocatorIsVisible(page.locator("#modalChat"), 10000.0);
-        playwright.waitTillLocatorIsVisible(page.locator("[data-testid='wrapper-question']"), 10000.0);
+        playwright.waitTillLocatorIsVisible(modalChat, 10000.0);
+        playwright.waitTillLocatorIsVisible(wrapperQuestion, 10000.0);
         
         // Additional wait for questions to fully load
         playwright.hardWait(2000);
         
         List<String> questionsListing = new ArrayList<>();
         List<Locator> questionsList = questionTextLabels.all();
-        
-        System.out.println("Found " + questionsList.size() + " questions with selector: [data-testid='wrapper-question'] .question-option p.bg-c-radio__label");
         
         // Process questions without visibility check first
         if (!questionsList.isEmpty()) {
@@ -98,10 +100,9 @@ public class ChatTenantPO {
                     String text = questionText.textContent().trim();
                     if (!text.isEmpty()) {
                         questionsListing.add(text);
-                        System.out.println("Question found: " + text);
                     }
                 } catch (Exception e) {
-                    System.out.println("Error getting text from element: " + e.getMessage());
+                    // Continue with alternative selector if this fails
                 }
             }
         }
@@ -111,22 +112,19 @@ public class ChatTenantPO {
             // Try the selector used in clickQuestion method
             Locator alternativeSelector = page.locator("[data-testid='wrapper-question'] .wrapper-question__label");
             questionsList = alternativeSelector.all();
-            System.out.println("Found " + questionsList.size() + " questions with alternative selector: [data-testid='wrapper-question'] .wrapper-question__label");
             
             for (Locator questionText : questionsList) {
                 try {
                     String text = questionText.textContent().trim();
                     if (!text.isEmpty()) {
                         questionsListing.add(text);
-                        System.out.println("Question found: " + text);
                     }
                 } catch (Exception e) {
-                    System.out.println("Error getting text from element: " + e.getMessage());
+                    // Continue if this fails
                 }
             }
         }
         
-        System.out.println("Total questions found: " + questionsListing.size());
         return questionsListing;
     }
 
@@ -137,7 +135,7 @@ public class ChatTenantPO {
      */
     public String verifySendLabel() {
         // Wait for modal to be visible first
-        playwright.waitTillLocatorIsVisible(page.locator("#modalChat"), 10000.0);
+        playwright.waitTillLocatorIsVisible(modalChat, 10000.0);
         
         // Wait for the button to appear with the expected text after question selection
         playwright.waitTillLocatorIsVisible(ajukanSewaButton, 20000.0);

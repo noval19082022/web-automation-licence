@@ -31,12 +31,6 @@ public class ChatTenantSteps {
         // Presisi validation seperti original, tapi dengan safety check
         Assert.assertTrue(questionList.size() > 0, "No questions found. Expected at least: " + questions.size());
         
-        // Print actual questions found for debugging
-        System.out.println("Actual questions found: " + questionList.size());
-        for (int i = 0; i < questionList.size(); i++) {
-            System.out.println((i+1) + ". " + questionList.get(i));
-        }
-        
         // Check if all expected questions are present (using contains for partial match)
         List<String> missingQuestions = new ArrayList<>();
         for (String expectedQuestion : questions) {
@@ -50,13 +44,6 @@ public class ChatTenantSteps {
             }
             if (!found) {
                 missingQuestions.add(expectedQuestion);
-            }
-        }
-        
-        if (!missingQuestions.isEmpty()) {
-            System.out.println("Missing expected questions:");
-            for (String missing : missingQuestions) {
-                System.out.println("- " + missing);
             }
         }
         
@@ -79,7 +66,6 @@ public class ChatTenantSteps {
     public void userSelectQuestion(String questionOption) {
         // Get aria snapshot before clicking the question
         String ariaSnapshotBefore = chat.getModalChatAriaSnapshot();
-        System.out.println("Aria snapshot before clicking question: " + ariaSnapshotBefore);
 
         // Verify that the question option exists in the aria snapshot
         Assert.assertTrue(ariaSnapshotBefore.contains(questionOption),
