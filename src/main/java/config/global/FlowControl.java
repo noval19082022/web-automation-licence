@@ -5,5 +5,15 @@ import lombok.Setter;
 
 public class FlowControl {
     @Getter @Setter
-    private static boolean contextOneFlow,contextTwoFlow,continueFlow,strictFlow, multipleContextFlow, continueTag, apiFlow;
+    private static boolean
+            contextOneFlow,
+            contextTwoFlow,
+            continueFlow,
+            strictFlow,
+            multipleContextFlow,
+            continueTag,
+            apiFlow;
+
+    @Getter @Setter
+    private static String scenarioName;
 }

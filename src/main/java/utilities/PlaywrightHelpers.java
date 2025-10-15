@@ -597,19 +597,18 @@ public class PlaywrightHelpers {
     }
 
     /**
-     * Wait until no network activity
-     */
-    public void waitTillNetworkIdle() {
-        page.waitForLoadState(LoadState.NETWORKIDLE);
-    }
-
-    /**
      * Wait till page loaded
-     *
      * @param timeout double data type in millisecond
      */
     public void waitTillPageLoaded(Double timeout) {
         page.waitForLoadState(LoadState.LOAD, new Page.WaitForLoadStateOptions().setTimeout(timeout));
+    }
+
+    /**
+     * Wait until no network activity
+     */
+    public void waitTillNetworkIdle() {
+        page.waitForLoadState(LoadState.NETWORKIDLE);
     }
 
     public void waitTillDomContentLoaded() {
