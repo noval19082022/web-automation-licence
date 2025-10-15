@@ -79,13 +79,54 @@ public class ChatTenantPO {
      * @return list questions
      */
     public List<String> listQuestions() {
+        // Wait for modal to be visible
+        playwright.waitTillLocatorIsVisible(page.locator("#modalChat"), 10000.0);
+        playwright.waitTillLocatorIsVisible(page.locator("[data-testid='wrapper-question']"), 10000.0);
+        
+        // Additional wait for questions to fully load
+        playwright.hardWait(2000);
+        
         List<String> questionsListing = new ArrayList<>();
         List<Locator> questionsList = questionTextLabels.all();
-        for (Locator questionText : questionsList) {
-            if (questionText.isVisible()) {
-                questionsListing.add(playwright.getText(questionText).trim());
+        
+        System.out.println("Found " + questionsList.size() + " questions with selector: [data-testid='wrapper-question'] .question-option p.bg-c-radio__label");
+        
+        // Process questions without visibility check first
+        if (!questionsList.isEmpty()) {
+            for (Locator questionText : questionsList) {
+                try {
+                    String text = questionText.textContent().trim();
+                    if (!text.isEmpty()) {
+                        questionsListing.add(text);
+                        System.out.println("Question found: " + text);
+                    }
+                } catch (Exception e) {
+                    System.out.println("Error getting text from element: " + e.getMessage());
+                }
             }
         }
+        
+        // If no questions found with the primary selector, try alternative selector
+        if (questionsListing.isEmpty()) {
+            // Try the selector used in clickQuestion method
+            Locator alternativeSelector = page.locator("[data-testid='wrapper-question'] .wrapper-question__label");
+            questionsList = alternativeSelector.all();
+            System.out.println("Found " + questionsList.size() + " questions with alternative selector: [data-testid='wrapper-question'] .wrapper-question__label");
+            
+            for (Locator questionText : questionsList) {
+                try {
+                    String text = questionText.textContent().trim();
+                    if (!text.isEmpty()) {
+                        questionsListing.add(text);
+                        System.out.println("Question found: " + text);
+                    }
+                } catch (Exception e) {
+                    System.out.println("Error getting text from element: " + e.getMessage());
+                }
+            }
+        }
+        
+        System.out.println("Total questions found: " + questionsListing.size());
         return questionsListing;
     }
 

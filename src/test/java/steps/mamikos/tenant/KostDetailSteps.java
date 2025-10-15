@@ -387,7 +387,7 @@ public class KostDetailSteps {
     // ----------------Kost Benefit---------------------
     @Then("user see benefit title, benefit description")
     public void userSeeBenefitTitleBenefitDescription() {
-        kostDetail.dismissFTUE();
+        kostDetail.dismissFTUEIfExist();
         Assert.assertTrue(kostDetail.isBenefitTitlePresent(), "Title Of Kos Benefit is not displayed");
         Assert.assertTrue(kostDetail.isBenefitDescPresent(), "Description of Kos Benefit is not displayed");
     }
