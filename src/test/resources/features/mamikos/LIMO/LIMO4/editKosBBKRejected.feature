@@ -49,6 +49,6 @@ Feature: Edit Kos BBK Rejected
     Then admin reject BBK kos
 
     Examples:
-      | FullName1      | BankNo1    | BankOwner1   | BankName1                              | FullName2                              | BankNo2    | BankOwner2   | BankName2                              |
+      | FullName1                              | BankNo1    | BankOwner1   | BankName1                              | FullName2                              | BankNo2    | BankOwner2   | BankName2                              |
       | tiara lapan abcdefghijklmnopqrstuvwxyz | 36337373   | test         | Bank China Construction Bank Indonesia | eko lapan abcd                         | 8989898989 | Kiai Santang | Bank China Construction Bank Indonesia |
-      | eko lapan abcd | 8989898989 | Kiai Santang | Bank China Construction Bank Indonesia | tiara lapan abcdefghijklmnopqrstuvwxyz | 36337373   | test         | Bank China Construction Bank Indonesia |
+      | eko lapan abcd                         | 8989898989 | Kiai Santang | Bank China Construction Bank Indonesia | tiara lapan abcdefghijklmnopqrstuvwxyz | 36337373   | test         | Bank China Construction Bank Indonesia |

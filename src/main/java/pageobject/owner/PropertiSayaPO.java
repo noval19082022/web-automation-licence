@@ -476,7 +476,6 @@ public class PropertiSayaPO {
     public String getFirstKosName() {
         playwright.waitTillPageLoaded();
         playwright.waitTillLocatorIsVisible(firstKosNameLabel, 30000.0);
-        page.pause();
         return playwright.getText(firstKosNameLabel);
     }
 
