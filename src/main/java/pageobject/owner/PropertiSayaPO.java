@@ -252,7 +252,7 @@ public class PropertiSayaPO {
         editAction = page.locator("(//*[@class='room-table__cta bg-c-icon bg-c-icon--md'])[1]");
         updateKamarCheckbox = page.locator("span").filter(new Locator.FilterOptions().setHasText("checkmark")).locator("svg");
         updateKamarButtonPopup = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
-        firstKosNameLabel = page.locator(".owner-kos-list > div:nth-of-type(1) .kos-card__title > .text");
+        firstKosNameLabel = page.locator(".kos-card__title").first();
         seeOtherPriceButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lihat harga lainnya"));
         priceKostTextBox = page.locator("//*[@class='input property-room__price-item-input-currency satu']");
         continueInputDataButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lanjut Isi Data"));
@@ -291,7 +291,7 @@ public class PropertiSayaPO {
         closeInfobarButton = page.locator(".delete");
         priceKostTextBoxDisable = page.locator("//*[@class='input property-room__price-item-input-currency satu --disabled']");
         modalPopUp = page.locator("//div[@class='modal-content']");
-        statusKos = page.locator(".kos-card__status-name--kos-verified");
+        statusKos = page.locator(".kos-card__status");
         tambahDataIklan = page.getByTestId("add-room-btn");
         tambahIklanBaru = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah Iklan Baru"));
         propertyNameField = page.locator("//input[@id='propertyName']");
@@ -475,6 +475,7 @@ public class PropertiSayaPO {
      */
     public String getFirstKosName() {
         playwright.waitTillPageLoaded();
+        playwright.waitTillLocatorIsVisible(firstKosNameLabel, 30000.0);
         return playwright.getText(firstKosNameLabel);
     }
 
