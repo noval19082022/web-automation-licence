@@ -15,3 +15,11 @@ Feature: GPSP Exposure on OD
     And owner check countdown value running
     Then owner wants to accses dashboard GP
     And Owner see gp onboarding pop up is exist
+
+  @TEST-LIMO-9299
+  Scenario: [Owner][GPSP][OD] Override display for active GP subscription
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag  | phone prod | password  |
+      | 08159787775 | 0          | qwerty123 |
+    Then owner check no countdown value running

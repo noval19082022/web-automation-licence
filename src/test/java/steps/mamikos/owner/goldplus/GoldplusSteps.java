@@ -919,7 +919,7 @@ public class GoldplusSteps {
         System.out.println("Countdown timer is running correctly!");
     }
 
-    @Then("user check no countdown value running")
+    @Then("user/owner check no countdown value running")
     public void userCheckNoCountdownValueRunning() {
         Assert.assertFalse(goldplus.isCountdownTimerDisplayed(), "Countdown timer should not be displayed, but it is visible on the page");
         System.out.println("Confirmed: No countdown timer is running on the page");
