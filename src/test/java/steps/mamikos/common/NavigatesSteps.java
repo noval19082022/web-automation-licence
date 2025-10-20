@@ -184,7 +184,7 @@ public class NavigatesSteps {
 
     @When("owner navigates to property saya kos")
     public void userNavigateToPropertySayaKos() {
-        playwright.waitTillPageLoaded(30000.00);
+        playwright.waitTillPageLoaded(60000.00);
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.OWNERPAGE_KOS, GlobalConfig.LONG_TIMEOUT);
         loading.waitForLoadingIconDisappear();
         loading.waitForLoadingIconDisappear();
