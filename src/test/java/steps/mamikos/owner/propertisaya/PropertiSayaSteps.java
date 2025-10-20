@@ -1122,7 +1122,7 @@ public class PropertiSayaSteps {
         propertySaya.clickOnMovePhotoHover();
     }
 
-    @And("user/owner clicks button move photo on {string}")
+    @When("user/owner clicks button move photo on {string}")
     public void userClicksButtonMovePhoto(String photoLocation) {
         propertySaya.hoverAndClickMovePhoto(photoLocation);
     }

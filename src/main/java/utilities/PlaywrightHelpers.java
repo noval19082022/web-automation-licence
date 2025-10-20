@@ -664,6 +664,16 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * hover specific locator
+     * @param locator
+     */
+    public void hover(Locator locator, Boolean force) {
+        locator.hover(new Locator.HoverOptions().setForce(force));
+    }
+
+
+
+    /**
      * Hover on specific locator with position options
      *
      * @param locator target locator to hover

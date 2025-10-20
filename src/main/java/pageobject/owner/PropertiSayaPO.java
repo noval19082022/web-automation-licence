@@ -72,7 +72,6 @@ public class PropertiSayaPO {
     Locator titleSuccessEditPopUpText;
     Locator doneButtonEditKosPopUp;
     Locator locationTextBox;
-    Locator locationAutoComplete;
     Locator addressNotesInput;
     Locator promoNgebutLabel;
     Locator closeInfobarButton;
@@ -426,11 +425,11 @@ public class PropertiSayaPO {
         moveButtonFotoBangunanTampakDepan = fotoBangunanTampakDepanSection.getByText("Pindahkan Foto").first();
         moveButtonFotoTampilanDalamBangunan = fotoTampilanDalamBangunanSection.getByText("Pindahkan Foto").first();
 
-        // Initialize preview areas for specific sections
-        previewFotoDalamKamar = fotoDalamKamarSection.locator(".image-uploader__preview").first();
-        previewFotoDepanKamar = fotoDepanKamarSection.locator(".image-uploader__preview").first();
-        previewFotoBangunanTampakDepan = fotoBangunanTampakDepanSection.locator(".image-uploader__preview").first();
-        previewFotoTampilanDalamBangunan = fotoTampilanDalamBangunanSection.locator(".image-uploader__preview").first();
+        // Initialize preview areas for specific sections - using img tag which is more reliable
+        previewFotoDalamKamar = fotoDalamKamarSection.locator("img").first();
+        previewFotoDepanKamar = fotoDepanKamarSection.locator("img").first();
+        previewFotoBangunanTampakDepan = fotoBangunanTampakDepanSection.locator("img").first();
+        previewFotoTampilanDalamBangunan = fotoTampilanDalamBangunanSection.locator("img").first();
     }
 
     /**
@@ -439,7 +438,7 @@ public class PropertiSayaPO {
      * user choose kost name
      */
     public void searchKostPropertySaya(String kostName) {
-        playwright.waitTillPageLoaded();
+        playwright.waitTillPageLoaded(60000.0);
         playwright.waitForSelectorState(filterRoomBox, WaitForSelectorState.VISIBLE, GlobalConfig.LONG_TIMEOUT);
         playwright.clickOn(kostDropdown);
         searchKostTextbox.fill(kostName);
@@ -871,18 +870,26 @@ public class PropertiSayaPO {
 
     /**
      * Click button edit kost
-     *
      * @param dataKos which part to edit
      */
     public void clickEditDataKos(String dataKos) {
-        editDataKos = page.locator("//p[normalize-space()='"+dataKos+"']");
-        if (playwright.waitTillLocatorIsVisible(editDataKos)) {
-            playwright.clickOn(editDataKos);
-        } else {
+        try {
+            editDataKos = page.locator("//p[normalize-space()='"+dataKos+"']");
+            if (playwright.waitTillLocatorIsVisible(editDataKos)) {
+                playwright.clickOn(editDataKos);
+            } else {
+                playwright.reloadPage();
+                playwright.waitForLocatorVisibleAndClickOn(editDataKos);
+            }
+            playwright.waitForSelectorState(loadingSpinner, WaitForSelectorState.HIDDEN, GlobalConfig.LONG_TIMEOUT);
+        } catch (Exception e) {
+            // Handle blank page or instability by reloading and retrying
             playwright.reloadPage();
+            playwright.waitTillPageLoaded();
+            editDataKos = page.locator("//p[normalize-space()='"+dataKos+"']");
             playwright.waitForLocatorVisibleAndClickOn(editDataKos);
+            playwright.waitForSelectorState(loadingSpinner, WaitForSelectorState.HIDDEN, GlobalConfig.LONG_TIMEOUT);
         }
-        playwright.waitForSelectorState(loadingSpinner, WaitForSelectorState.HIDDEN, GlobalConfig.LONG_TIMEOUT);
     }
 
     /**
@@ -950,7 +957,7 @@ public class PropertiSayaPO {
      * @return String pop up title
      */
     public String getTitlePopUpSuccessEditKos() {
-        playwright.waitTillLocatorIsVisible(titleSuccessEditPopUpText);
+        playwright.waitTillLocatorIsVisible(titleSuccessEditPopUpText, 60000.0);
         return playwright.getText(titleSuccessEditPopUpText);
     }
 
@@ -972,14 +979,6 @@ public class PropertiSayaPO {
         });
         playwright.clickOn(locationTextBox);
         playwright.fill(locationTextBox, locationName);
-    }
-
-    /**
-     * Click on the first autocomplete result
-     */
-    public void clickOnFirstResult(String location) {
-        locationAutoComplete = page.getByText(location).first();
-        playwright.clickOn(locationAutoComplete);
     }
 
     /**
@@ -2233,15 +2232,6 @@ public class PropertiSayaPO {
     }
 
     /**
-     * if other price list appears
-     */
-    public void deleteOtherPrice() {
-        playwright.clickOn(deleteOtherPrice);
-        playwright.clickOn(confirmDeleteOtherPrice);
-        playwright.clickOn(toggleOtherPrice);
-    }
-
-    /**
      * Click on Selesai button add kos when add kos from duplicate kos
      */
     public void clickOnSelesaiAddKos() {
@@ -2504,80 +2494,45 @@ public class PropertiSayaPO {
     }
 
     /**
-     * Hover on photo and click move photo button - NO nested locators
-     * This method uses predefined locators following Playwright best practices
+     * Hover on photo and click move photo option from menu
+     * This method hovers on the photo preview container to trigger the menu, then clicks "Pindahkan Foto"
      *
      * @param photoLocation - the location/section of the photo (e.g., "Foto dalam kamar")
      */
     public void hoverAndClickMovePhoto(String photoLocation) {
-        Locator targetMoveButton = getMoveButtonByLocation(photoLocation);
-        Locator targetPreview = getPreviewByLocation(photoLocation);
-        
-        try {
-            if (playwright.waitTillLocatorIsVisible(targetMoveButton)) {
-                playwright.clickOn(targetMoveButton);
-                return;
-            }
-            
-            if (playwright.waitTillLocatorIsVisible(targetPreview)) {
-                playwright.hoverAtPosition(targetPreview, 0.5, 0.5);
-                page.waitForTimeout(300);
-                playwright.clickOn(targetMoveButton);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to click move photo button for: " + photoLocation, e);
-        }
+            // Find the specific photo section and elements
+            Locator photoSection = getPhotoSectionByLocation(photoLocation);
+            // Hover on the .preview container, not the parent .image-uploader__preview
+            Locator movePhotoOption = getMovePhotoMenuOption(photoSection);
+
+            // Scroll element into view first to ensure it's interactable
+            playwright.pageScrollUntilElementIsVisible(photoSection);
+            playwright.hardWait(1000);
+
+            // Hover on the preview container to trigger the menu
+            playwright.hover(photoSection);
+            playwright.hardWait(1000);
+            playwright.clickOn(movePhotoOption);
     }
 
     /**
-     * Get predefined move button locator - NO nested locators created
+     * Get photo section locator by location text
      *
-     * @param photoLocation - the photo section location
-     * @return Locator for the move button
+     * @param photoLocation - the photo section heading text
+     * @return Locator for the photo section
      */
-    private Locator getMoveButtonByLocation(String photoLocation) {
-        switch (photoLocation) {
-            case "Foto dalam kamar":
-                return moveButtonFotoDalamKamar;
-            case "Foto depan kamar":
-                return moveButtonFotoDepanKamar;
-            case "Foto bangunan tampak depan":
-                return moveButtonFotoBangunanTampakDepan;
-            case "Foto tampilan dalam bangunan":
-                return moveButtonFotoTampilanDalamBangunan;
-            default:
-                throw new IllegalArgumentException("Unknown photo location: " + photoLocation);
-        }
+    private Locator getPhotoSectionByLocation(String photoLocation) {
+        return page.locator("//h4[contains(text(), '"+photoLocation+"')]/following-sibling::*[@class='image-uploader']");
     }
 
     /**
-     * Get predefined preview locator - NO nested locators created
+     * Get "Pindahkan Foto" menu option within a photo section
      *
-     * @param photoLocation - the photo section location
-     * @return Locator for the preview area
+     * @param photoSection - the photo section locator
+     * @return Locator for the "Pindahkan Foto" menu item
      */
-    private Locator getPreviewByLocation(String photoLocation) {
-        switch (photoLocation) {
-            case "Foto dalam kamar":
-                return previewFotoDalamKamar;
-            case "Foto depan kamar":
-                return previewFotoDepanKamar;
-            case "Foto bangunan tampak depan":
-                return previewFotoBangunanTampakDepan;
-            case "Foto tampilan dalam bangunan":
-                return previewFotoTampilanDalamBangunan;
-            default:
-                throw new IllegalArgumentException("Unknown photo location: " + photoLocation);
-        }
-    }
-
-    /**
-     * Verify the button hover is visible
-     *
-     * @return boolean
-     */
-    public boolean isButtonHoverOnPhotoVisible() {
-        return playwright.isLocatorVisibleAfterLoad(hoverButtonsOnPhoto, 3000.0);
+    private Locator getMovePhotoMenuOption(Locator photoSection) {
+        return photoSection.locator(".preview__menu-item").filter(new Locator.FilterOptions().setHasText("Pindahkan Foto"));
     }
 
     /**
