@@ -2,6 +2,7 @@ package pageobject.admin.mamipay.bangkrupux;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import lombok.Getter;
 import lombok.Setter;
 import utilities.PlaywrightHelpers;
@@ -173,7 +174,7 @@ public class LevelManagementPO {
      */
     public void clickOnSubMenuOfManagementLevel(String submenu){
         playwright.waitTillPageLoaded();
-        kostListMenu = page.locator("//a[@id='kost-level']/following-sibling::ul//span[text()='" +submenu+ "']");
+        kostListMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(submenu));
         playwright.pageScrollInView(kostListMenu);
         playwright.clickOn(kostListMenu);
     }
