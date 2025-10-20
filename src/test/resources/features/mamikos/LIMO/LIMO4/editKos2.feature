@@ -1,5 +1,5 @@
-@regression @LIMO4 @editKostFeature2 @flaky @editKosSakti
-Feature: Edit Kost 2
+@regression @LIMO4 @editKostFeature2 @flaky
+Feature: Edit Kos 2
 
   @precondition
   Scenario: Verify Edited Kos In Admin MAMAHMUDALIMO
