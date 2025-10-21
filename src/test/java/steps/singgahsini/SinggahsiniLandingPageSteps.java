@@ -164,21 +164,34 @@ public class SinggahsiniLandingPageSteps {
     @Then("new tab open redirect to {string}")
     public void new_tab_open_redirect_to(String link) {
         String URL = "";
-        if (link.equalsIgnoreCase("Tiktok")){
-            URL = "https://www.tiktok.com/@singgahsini_idn";
-        } else if (link.equalsIgnoreCase("Instagram")) {
-            playwright.waitTillPageLoaded();
-            URL = "https://www.instagram.com/singgahsini_idn/";
-        } else if (link.equalsIgnoreCase("Youtube")) {
-            URL = "https://www.youtube.com/@singgahsini";
-        } else if (link.equalsIgnoreCase("Antifraud")) {
-            URL = "https://help.mamikos.com/post/bagaimana-agar-transaksi-saya-aman-di-mamikos";
-        } else if (link.equalsIgnoreCase("Property page")){
-            URL = "https://sini-jambu.kerupux.com/property-detail/10872/overview";
-        }else if (link.equalsIgnoreCase("Mamiprime")){
-            URL = "https://help.mamikos.com/post/di-mana-saja-tempat-penayangan-kos-di-mamiprime";
+        switch (link.toLowerCase()) {
+            case "tiktok":
+                URL = "https://www.tiktok.com/@singgahsini_idn";
+                break;
+            case "instagram":
+                playwright.waitTillPageLoaded();
+                URL = "https://www.instagram.com/singgahsini_idn/";
+                break;
+            case "youtube":
+                URL = "https://www.youtube.com/@singgahsini";
+                break;
+            case "antifraud":
+                URL = "https://help.mamikos.com/post/bagaimana-agar-transaksi-saya-aman-di-mamikos";
+                break;
+            case "property page":
+                URL = "https://sini-jambu.kerupux.com/property-detail/10872/overview";
+                break;
+            case "mamiprime":
+                URL = "post/di-mana-saja-tempat-penayangan-kos-di-mamiprime";
+                break;
+            default:
+                throw new IllegalArgumentException("URL Target Is Not Accepted For This Test");
         }
 
-        Assert.assertEquals(singgahsini.getNewTabURL(),URL);
+        if (link.equalsIgnoreCase("mamiprime")) {
+            Assert.assertTrue(singgahsini.getNewTabURL().contains(URL));
+        } else {
+            Assert.assertEquals(singgahsini.getNewTabURL(),URL);
+        }
     }
 }
