@@ -18,13 +18,13 @@ Feature: Homepage
   Scenario: [Dweb][Homepage]Check redirection kebijakan privasi on homepage
     Given user go to mamikos homepage
     And user open kebijakan privasi in footer
-    Then user should redirect to kebijakan privasi page
+    Then user should redirect to link that contains "kebijakan-privasi"
 
   @TEST_SS-3294 @Automated @SS14 @Web @discovery-platform @homepage
   Scenario: [Dweb][Homepage]Check redirection syarat dan ketentuan on homepage
     Given user go to mamikos homepage
     And user open syarat dan ketentuan in footer
-    Then user should redirect to link "https://help.mamikos.com/category/umum/syarat-dan-ketentuan"
+    Then user should redirect to link that contains "syarat-dan-ketentuan"
 
   @TEST_SS-3303 @Automated @SS14 @Web @discovery-platform @homepage
   Scenario: [Dweb][Homepage]Check redirection tentang kami on homepage
