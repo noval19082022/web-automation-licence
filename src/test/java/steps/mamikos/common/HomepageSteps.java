@@ -49,7 +49,17 @@ public class HomepageSteps {
 
     @Then("user should redirect to link {string}")
     public void userShouldRedirectToLink(String url) {
+        playwright = new PlaywrightHelpers(ActiveContext.getActivePage());
         home = new HomePO(ActiveContext.getActivePage());
+        
+        // Wait for navigation away from about:blank
+        if (home.getURL().contains("about:blank")) {
+            playwright.waitTillUrlToBe(url, 10000.0);
+        } else {
+            // If not blank, just wait for page to fully load
+            playwright.waitTillPageLoaded(10000.0);
+        }
+        
         Assert.assertEquals(home.getURL(), url, "Link is not equal");
     }
 
@@ -78,7 +88,18 @@ public class HomepageSteps {
 
     @Then("user should redirect to link that contains {string}")
     public void userShouldRedirectToLinkThatContains(String url) {
+        playwright = new PlaywrightHelpers(ActiveContext.getActivePage());
         home = new HomePO(ActiveContext.getActivePage());
+        
+        // Wait for navigation away from about:blank
+        if (home.getURL().contains("about:blank")) {
+            playwright.waitTillPageLoaded(10000.0);
+            playwright.waitTillNetworkIdle();
+        } else {
+            // If not blank, just wait for page to fully load
+            playwright.waitTillPageLoaded(10000.0);
+        }
+        
         Assert.assertTrue(home.getURL().contains(url), "URL doesn't match");
     }
 
