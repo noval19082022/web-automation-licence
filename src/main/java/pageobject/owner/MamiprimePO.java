@@ -120,7 +120,7 @@ public class MamiprimePO {
      * Navigates to Mamiprime page
      */
     public void navigatesToMamiprime() {
-        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIPRIME, 50000.0, LoadState.LOAD);
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIPRIME, 120000.0, LoadState.LOAD);
     }
 
     /**
