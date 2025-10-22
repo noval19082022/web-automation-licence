@@ -255,12 +255,6 @@ public class SinggahsiniPlusPO {
         playwright.clickOn(singgahsiniCardKostSaya);
     }
 
-    /**
-     * click on Oke Mengerti button on popup starter
-     */
-    public void clickOkeMengertiButton(){
-        playwright.clickOn(okeMengertiButton);
-    }
 
     /**
      * verify invoice singgahsini level is visible

@@ -44,7 +44,6 @@ public class SinggahsiniPlusSteps {
 
     @Then("tenant can see tier active with {string}")
     public void tenantCanSeeTierActive(String text){
-        singgahsiniPlus.clickOkeMengertiButton();
         Assert.assertTrue(singgahsiniPlus.isTierActiveVisible(text), "tier active is not visible");
     }
 
