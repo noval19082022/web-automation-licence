@@ -25,6 +25,13 @@ public class SinggahsiniPlusPO {
     private Locator mamipoinCardTierBarTitle;
     private Locator tierDescriptionText;
     private Locator mamipoinMenuText;
+    private Locator okeMengertiButton;
+    private Locator tierActiveText1;
+    private Locator tierActiveText2;
+    private Locator singgahsiniCardKostSaya;
+    private Locator singgahsiniPlusCardText;
+    private Locator invoiceSSText1;
+    private Locator invoiceSSText2;
 
     public SinggahsiniPlusPO(Page page) {
         this.page = page;
@@ -40,6 +47,8 @@ public class SinggahsiniPlusPO {
         this.mamiPoinLink = page.locator("a").filter(new Locator.FilterOptions().setHasText("MamiPoin"));
         this.mamipoinCardTierBarTitle = page.getByTestId("ssPlusMamipoinCardTierBarTitle");
         this.tierDescriptionText = page.getByText("Ngekos lama, levelnya naik,");
+        this.singgahsiniCardKostSaya = page.getByTestId("singgahsiniPlusCard");
+        this.okeMengertiButton = page.locator("//button[@class=\"bg-c-button bg-c-button--secondary bg-c-button--lg bg-u-theme-singgahsini\"]");
     }
 
     /**
@@ -90,12 +99,41 @@ public class SinggahsiniPlusPO {
 
     /**
      * verify active tier on profile page is visible
-     * @param text
-     * @return text
+     * checks all 3 tier text locators and returns true if any contains the expected text
+     * @param text expected tier text to verify
+     * @return true if any of the 3 locators is visible and contains the text
      */
     public boolean isTierActiveVisible(String text){
-        tierActiveText = page.locator("//*[@data-testid='singgahsiniPlusCard']//*[contains(text(),'"+text+"')]");
-        return playwright.waitTillLocatorIsVisible(tierActiveText);
+        tierActiveText = page.locator(".singgahsini-plus-main__tiers-item--active p").first();
+        tierActiveText1 = page.locator(".singgahsini-plus-main__tiers-item--active p").nth(1);
+        tierActiveText2 = page.locator(".singgahsini-plus-main__tiers-item--active p").last();
+
+        // Check if any of the 3 locators is visible and contains the expected text
+        boolean isFirstVisible = playwright.waitTillLocatorIsVisible(tierActiveText) &&
+                                playwright.getText(tierActiveText).contains(text);
+        boolean isSecondVisible = playwright.waitTillLocatorIsVisible(tierActiveText1) &&
+                                 playwright.getText(tierActiveText1).contains(text);
+        boolean isThirdVisible = playwright.waitTillLocatorIsVisible(tierActiveText2) &&
+                                playwright.getText(tierActiveText2).contains(text);
+
+        return isFirstVisible || isSecondVisible || isThirdVisible;
+    }
+
+    /**
+     * verify locked tiers are visible
+     * checks up to 7 locked tier locators
+     * @return true if all locked tiers are visible
+     */
+    public boolean isLockedTierVisible(){
+        boolean allVisible = true;
+        for (int i = 0; i < 7; i++) {
+            Locator lockedTier = page.locator(".singgahsini-plus-main__tiers-item--locked").nth(i);
+            if (!playwright.waitTillLocatorIsVisible(lockedTier)) {
+                allVisible = false;
+                break;
+            }
+        }
+        return allVisible;
     }
 
     /**
@@ -181,5 +219,44 @@ public class SinggahsiniPlusPO {
     public boolean isMamipoinMenutextVisible(String text){
         mamipoinMenuText = page.locator("//p[contains(text(),'"+text+"')]");
         return playwright.waitTillLocatorIsVisible(mamipoinMenuText);
+    }
+
+    /**
+     * verify text in singgahsini plus card is visible
+     * @param text expected text to verify
+     * @return true if text is visible in singgahsini plus card
+     */
+    public boolean isSinggahsiniPlusCardTextVisible(String text){
+        singgahsiniPlusCardText = page.locator("//*[@data-testid='singgahsiniPlusCard']//*[contains(text(),'"+text+"')]");
+        return playwright.waitTillLocatorIsVisible(singgahsiniPlusCardText);
+    }
+
+    /**
+     * click on singgahsini card on kost saya page
+     */
+    public void clickSinggahsiniCardKostSaya(){
+        playwright.clickOn(singgahsiniCardKostSaya);
+    }
+
+    /**
+     * click on Oke Mengerti button on popup starter
+     */
+    public void clickOkeMengertiButton(){
+        playwright.clickOn(okeMengertiButton);
+    }
+
+    /**
+     * verify invoice singgahsini level is visible
+     * checks both invoice text locators
+     * @return true if both invoice level texts are visible
+     */
+    public boolean isInvoiceSSLevel(){
+        invoiceSSText1 = page.locator(".invoice-singgahsini-plus-level p").first();
+        invoiceSSText2 = page.locator(".invoice-singgahsini-plus-level p").last();
+
+        boolean isFirstVisible = playwright.waitTillLocatorIsVisible(invoiceSSText1);
+        boolean isSecondVisible = playwright.waitTillLocatorIsVisible(invoiceSSText2);
+        playwright.hardWait(10000);
+        return isFirstVisible && isSecondVisible;
     }
 }

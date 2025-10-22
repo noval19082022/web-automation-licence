@@ -97,6 +97,7 @@ public class OwnerDashboardPO {
     private Locator widgetInfoUntukAndaParagraph;
     private Locator generalCloseButton;
     private Locator pilihPaketGoldplus;
+    private Locator inginKosDikelolaLink;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -180,6 +181,7 @@ public class OwnerDashboardPO {
         generalCloseButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
         pilihPaketGoldplus = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Paket GoldPlus"));
         entryPointCardGP = page.locator(".membership-card__section").first();
+        inginKosDikelolaLink = page.locator("a").filter(new Locator.FilterOptions().setHasText("Ingin kos dikelola secara"));
     }
 
     /**
@@ -1065,5 +1067,23 @@ public class OwnerDashboardPO {
         }
         
         return false;
+    }
+
+    /**
+     * Click on "Ingin kos dikelola secara..." link in owner dashboard
+     */
+    public void clickOnInginKosDikelolaLink() {
+        playwright.waitTillLocatorIsVisible(inginKosDikelolaLink);
+        playwright.clickOn(inginKosDikelolaLink);
+    }
+
+    /**
+     * Check if "Ingin kos dikelola secara..." link is visible
+     * @return true if visible, false otherwise
+     */
+    public boolean isInginKosDikelolaLinkVisible() {
+        playwright.waitFor(inginKosDikelolaLink);
+        playwright.pageScrollInView(inginKosDikelolaLink);
+        return playwright.waitTillLocatorIsVisible(inginKosDikelolaLink, 20000.0);
     }
 }

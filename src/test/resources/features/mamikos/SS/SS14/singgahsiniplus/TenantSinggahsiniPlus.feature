@@ -1,4 +1,4 @@
-@SS14
+@SS14 @a
 Feature: Singgahsini Plus
 
   @TEST_SS-9190 @continue
@@ -14,6 +14,10 @@ Feature: Singgahsini Plus
     Then tenant should see tier message in Singgahsini plus with "Makin lama ngekos di Singgahsini/APIK, makin banyak poin yang kamu dapat."
     When tenant clicks on Singgahsini text
     Then tenant can see tier message description on singgahsini page is visible
+
+  @TEST_SS-9193 @continue
+  Scenario: [Web][Singgahsini+] Singgahsini+ Page Tab Layout Locked
+    Then tenant can see locked tier
 
   @TEST_SS-9519
   Scenario: [Web][Reward & Poin][Mamipoin Tab] Poin Kamu section for Non Tenant Singgahsini+
@@ -37,9 +41,7 @@ Feature: Singgahsini Plus
   @TEST_SS-9194 @continue
   Scenario: [Web][Singgahsini+] Singgahsini+ Page Tab Layout Active
     When tenant clicks on Singgahsini text
-    Then tenant can see tier active with "Level kamu saat ini"
-    When tenant can see tier active with "Level 1: Starter"
-    Then tenant can see tier active with "Lanjut ngekos sampai 27 hari untuk naik ke level dan dapat"
+    Then tenant can see tier active with "Level 1: Starter"
 
   @TEST_SS-9517
   Scenario: [Web][Reward & Poin][Mamipoin Tab] Poin Kamu section for Active Tenant Singgahsini+
@@ -74,3 +76,16 @@ Feature: Singgahsini Plus
     Then tenant can see mamipoin menu with "Poin Kamu"
     When tenant can see mamipoin menu with "Riwayat Mamipoin"
     Then tenant can see mamipoin menu with "Dapatkan Poin"
+
+  @TEST_SS-9197 @continue
+  Scenario: [Web][Kost Saya][Singgahsini +]Check Kost saya when tier card for active P1 tenant with progress bar (First Level)
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag | password  |
+      | 08100000704 | qwerty123 |
+    And tenant open menu kost saya
+    Then tenant can see "Level kamu saat ini" in singgahsini plus card
+    When tenant can see "Level 1: Starter" in singgahsini plus card
+    Then tenant can see "Lanjut ngekos sampai 27 hari untuk naik ke level" in singgahsini plus card
+    And tenant clicks on singgahsini card on kost saya
+    Then tenant can see tier active with "Level 1: Starter"
