@@ -33,6 +33,8 @@ public class SinggahsiniPlusPO {
     private Locator singgahsiniPlusCardText;
     private Locator invoiceSSText1;
     private Locator invoiceSSText2;
+    private Locator singgahsiniPassedTier;
+    private Locator passedDescriptiontext;
 
     public SinggahsiniPlusPO(Page page) {
         this.page = page;
@@ -52,6 +54,7 @@ public class SinggahsiniPlusPO {
         this.okeMengertiButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Oke, Mengerti"));
         this.singgahsiniCardKostSaya = page.getByTestId("singgahsiniPlusCard");
         this.okeMengertiButton = page.locator("//button[@class=\"bg-c-button bg-c-button--secondary bg-c-button--lg bg-u-theme-singgahsini\"]");
+        this.singgahsiniPassedTier = page.locator(" div:nth-child(1) > div.singgahsini-plus-main__tiers-stepper");
     }
 
     /**
@@ -118,7 +121,7 @@ public class SinggahsiniPlusPO {
                                  playwright.getText(tierActiveText1).contains(text);
         boolean isThirdVisible = playwright.waitTillLocatorIsVisible(tierActiveText2) &&
                                 playwright.getText(tierActiveText2).contains(text);
-
+        handleLevelUpPopup();
         return isFirstVisible || isSecondVisible || isThirdVisible;
     }
 
@@ -270,4 +273,24 @@ public class SinggahsiniPlusPO {
         playwright.hardWait(10000);
         return isFirstVisible && isSecondVisible;
     }
+
+    /**
+     * validated passed tier is visible
+     * @return tier passed
+     */
+    public boolean isPassedTierVisible(){
+        handleLevelUpPopup();
+        return playwright.waitTillLocatorIsVisible(singgahsiniPassedTier, 10000.0);
+    }
+
+    /**
+     * validated description passed tier is visble
+     * @param text
+     * @return text example :Level 1 sudah terlewati. Kumpulkan lebih banyak poin di level berikutnya!
+     */
+    public boolean passedDescriptionTextVisible(String text){
+        passedDescriptiontext = page.locator("//p[contains(text(),'"+text+"')]");
+        return playwright.waitTillLocatorIsVisible(passedDescriptiontext);
+    }
+
 }

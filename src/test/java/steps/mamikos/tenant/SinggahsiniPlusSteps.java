@@ -136,4 +136,14 @@ public class SinggahsiniPlusSteps {
         Assert.assertTrue(singgahsiniPlus.isInvoiceSSLevel(), "singgahsini level is not visible on invoice");
     }
 
+    @Then("tenant can see tier passed")
+    public void tenantCanSeeTierPassedWith(){
+        Assert.assertTrue(singgahsiniPlus.isPassedTierVisible(), "singgahsini not appears passed tier");
+    }
+
+    @Then("tenant can see tier passed description {string}")
+    public void tenantCanSeeTierPassedDescription(String text){
+        singgahsiniPlus.passedDescriptionTextVisible(text);
+    }
+
 }

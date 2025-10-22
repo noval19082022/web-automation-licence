@@ -89,3 +89,29 @@ Feature: Singgahsini Plus
     Then tenant can see "Lanjut ngekos sampai 27 hari untuk naik ke level" in singgahsini plus card
     And tenant clicks on singgahsini card on kost saya
     Then tenant can see tier active with "Level 1: Starter"
+
+  @TEST_SS-9287
+  Scenario: [Web][Singgahsini+] Singgahsini+ Page Tab Layout Passed
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag  | password  |
+      | 08100000703 | qwerty123 |
+    And tenant click on icon profil
+    And tenant click on profile
+    And tenant clicks on Singgahsini text
+    When tenant can see tier passed
+    Then tenant can see tier passed description "Level 1 sudah terlewati. Kumpulkan lebih banyak poin di level berikutnya!"
+
+  @TEST_SS-9288
+  Scenario: [Web][Singgahsini+] Singgahsini+ Page Tab Layout Max Level
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag  | password  |
+      | 08100000701 | qwerty123 |
+    And tenant click on icon profil
+    And tenant click on profile
+    And tenant clicks on Singgahsini text
+    When tenant can see "Diamond" label
+    Then tenant can see tier passed
+    When tenant can see tier active with "Level 7: Diamond"
+    Then tenant can see tier passed description "Selamat! Kamu sudah di level tertinggi Singgahsini+. Pertahankan level-mu, ya!"
