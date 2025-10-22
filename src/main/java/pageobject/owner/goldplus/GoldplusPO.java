@@ -58,6 +58,8 @@ public class GoldplusPO {
     Locator gpOnboardingNextPopUpBtn;
     Locator gpOnboardingPreviousPopUpBtn;
     Locator pilihPaketBtn;
+    Locator countdownValueInMenuPackageGP;
+    Locator countdownValueOwnerDashboard;
 
     //==== Popup Recurring ===//
     Locator imagePopupRecurring;
@@ -183,7 +185,8 @@ public class GoldplusPO {
         gpOnboardingNextPopUpBtn = page.getByTestId("goldplus-onboarding-feature").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Next slide"));
         gpOnboardingPreviousPopUpBtn = page.getByTestId("goldplus-onboarding-feature").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Previous slide"));
         pilihPaketBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Paket GoldPlus"));
-
+        countdownValueInMenuPackageGP = page.locator("//div[@class='counter-promo']");
+        countdownValueOwnerDashboard = page.getByTestId("popperReference").getByTestId("countdown-container");
         mamikosActionCard = page.locator(".mk-action-card__main");
         periodeBerlanggananContainer = page.locator("div.goldplus-subscribe-periode-desktop");
         paketJangkaPanjangContainer = page.locator("div.goldplus-periode-select__list").nth(1);
@@ -1213,8 +1216,12 @@ public class GoldplusPO {
      * @return String countdown value (e.g., "23:59:59")
      */
     public String getCountdownTimerValue() {
-        Locator countdownValue = page.getByTestId("popperReference").getByTestId("countdown-container");
-        playwright.waitFor(countdownValue);
-        return playwright.getText(countdownValue);
+        if (playwright.waitTillLocatorIsVisible(countdownValueOwnerDashboard)) {
+            playwright.waitFor(countdownValueOwnerDashboard);
+        return playwright.getText(countdownValueOwnerDashboard);
+    } else {
+        playwright.waitFor(countdownValueInMenuPackageGP);
+        return playwright.getText(countdownValueInMenuPackageGP);
+    }
     }
 }

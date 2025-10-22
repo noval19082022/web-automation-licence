@@ -26,6 +26,7 @@ public class Hooks{
         tags = scenario.getSourceTagNames();
         FlowControl.setMultipleContextFlow(tags.contains("@context1") || tags.contains("@context2"));
         FlowControl.setContinueTag(tags.contains("@continue"));
+        FlowControl.setScenarioName(scenario.getName());
 
         if (FlowControl.isMultipleContextFlow()) {
             if (!FlowControl.isContinueTag() || !FlowControl.isContinueFlow()) {

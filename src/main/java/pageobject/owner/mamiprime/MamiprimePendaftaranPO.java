@@ -177,14 +177,18 @@ public class MamiprimePendaftaranPO {
         return playwright.waitTillLocatorIsVisible(registerPrimeHeader);
     }
 
+    /**
+     * Select Mamiprime package option
+     * @param mamiprimeOption the package option to select
+     */
     public void selectOptionMamiprime(String mamiprimeOption) {
-        playwright.clickOn(
-                page.getByTestId("package-placement-result")
-                        .locator("div")
-                        .filter(new Locator.FilterOptions()
-                                .setHasText(mamiprimeOption))
-                        .nth(3)
-        );
+        Locator mamiprimePackagePlacement = page.getByTestId("package-placement-result")
+                .locator("div")
+                .filter(new Locator.FilterOptions()
+                        .setHasText(mamiprimeOption))
+                .nth(3);
+        playwright.waitTillLocatorIsVisible(mamiprimePackagePlacement, 60000.0);
+        playwright.clickOn(mamiprimePackagePlacement);
     }
 
     public void clickOnLanjutkanBtnFromMamiprimeLanding() {

@@ -25,6 +25,7 @@ public class SinggahsiniPlusPO {
     private Locator mamipoinCardTierBarTitle;
     private Locator tierDescriptionText;
     private Locator mamipoinMenuText;
+    private Locator modalWrapper;
     private Locator okeMengertiButton;
     private Locator tierActiveText1;
     private Locator tierActiveText2;
@@ -47,6 +48,8 @@ public class SinggahsiniPlusPO {
         this.mamiPoinLink = page.locator("a").filter(new Locator.FilterOptions().setHasText("MamiPoin"));
         this.mamipoinCardTierBarTitle = page.getByTestId("ssPlusMamipoinCardTierBarTitle");
         this.tierDescriptionText = page.getByText("Ngekos lama, levelnya naik,");
+        this.modalWrapper = page.locator(".bg-c-modal__wrapper");
+        this.okeMengertiButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Oke, Mengerti"));
         this.singgahsiniCardKostSaya = page.getByTestId("singgahsiniPlusCard");
         this.okeMengertiButton = page.locator("//button[@class=\"bg-c-button bg-c-button--secondary bg-c-button--lg bg-u-theme-singgahsini\"]");
     }
@@ -185,7 +188,21 @@ public class SinggahsiniPlusPO {
      * click on MamiPoin link
      */
     public void clickMamiPoinLink() {
+        // Handle level up popup if it appears
+        handleLevelUpPopup();
         playwright.clickOn(mamiPoinLink);
+    }
+
+    /**
+     * Handle level up popup that might appear
+     */
+    private void handleLevelUpPopup() {
+        if (playwright.waitTillLocatorIsVisible(modalWrapper, 3000.0)) {
+            if (playwright.waitTillLocatorIsVisible(okeMengertiButton, 2000.0)) {
+                playwright.clickOn(okeMengertiButton);
+                playwright.waitTillLocatorIsNotVisible(modalWrapper, 1000.0, 5);
+            }
+        }
     }
 
     /**

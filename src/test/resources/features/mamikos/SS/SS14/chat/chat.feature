@@ -37,20 +37,17 @@ Feature: Chat and Chat Optimization
               And user click chat in kos detail
              Then user see phone number field and selectable question options :
                   | Apakah boleh bawa hewan peliharaan?          |
-                  | Testing Emoji dua Rini                       |
-                  | Saya butuh cepat nih. Bisa booking sekarang? |
                   | Masih ada kamar?                             |
+                  | Saya butuh cepat nih. Bisa booking sekarang? |
                   | Ada diskon untuk kos ini?                    |
-                  | Saya ingin survei dulu                       |
+                  | Saya ingin survei dulu  Kos melayani Survei Hari Ini |
                   | Alamat kos di mana?                          |
-                  | Testing Emoji Rini tiga                      |
                   | Kamar bisa diisi lebih dari 1 orang?         |
                   | Cara menghubungi pemilik?                    |
                   | Boleh tanya-tanya dulu?                      |
                   | Bisa pasutri?                                |
                   | Boleh bawa hewan?                            |
                   | Bisa sewa harian?                            |
-                  | Emangnya boleh booking sama lawan jenis      |
                   | Ada fasilitas parkir?                        |
                   | Apakah singgahsini boleh dikontrakan?        |
 

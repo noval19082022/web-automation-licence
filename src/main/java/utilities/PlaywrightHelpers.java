@@ -597,19 +597,18 @@ public class PlaywrightHelpers {
     }
 
     /**
-     * Wait until no network activity
-     */
-    public void waitTillNetworkIdle() {
-        page.waitForLoadState(LoadState.NETWORKIDLE);
-    }
-
-    /**
      * Wait till page loaded
-     *
      * @param timeout double data type in millisecond
      */
     public void waitTillPageLoaded(Double timeout) {
         page.waitForLoadState(LoadState.LOAD, new Page.WaitForLoadStateOptions().setTimeout(timeout));
+    }
+
+    /**
+     * Wait until no network activity
+     */
+    public void waitTillNetworkIdle() {
+        page.waitForLoadState(LoadState.NETWORKIDLE);
     }
 
     public void waitTillDomContentLoaded() {
@@ -663,6 +662,16 @@ public class PlaywrightHelpers {
     public void hover(Locator locator) {
         locator.hover();
     }
+
+    /**
+     * hover specific locator
+     * @param locator
+     */
+    public void hover(Locator locator, Boolean force) {
+        locator.hover(new Locator.HoverOptions().setForce(force));
+    }
+
+
 
     /**
      * Hover on specific locator with position options
