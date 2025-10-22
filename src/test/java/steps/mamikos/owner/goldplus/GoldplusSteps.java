@@ -929,4 +929,9 @@ public class GoldplusSteps {
     public void ownerSeeGPSPPromoCountdown() {
         Assert.assertTrue(owner.isGpspPromoCountDownExist(), "gpsp promo countdown is not exist on owner dashboard");
     }
+
+    @And("owner disable gp pop up")
+    public void ownerDisableGpPopUp() {
+        owner.dismissFTUEGoldplus();
+    }
 }

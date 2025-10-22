@@ -237,7 +237,7 @@ public class OwnerDashboardPO {
      * Dismiss FTUE Godlplus
      */
     public void dismissFTUEGoldplus() {
-        playwright.waitTillLocatorIsVisible(nantiSajaButton, 2000.0);
+        playwright.waitTillLocatorIsVisible(nantiSajaButton, 10_000.0);
         if (playwright.waitTillLocatorIsVisible(nantiSajaButton)) {
             playwright.clickOn(nantiSajaButton);
         }
