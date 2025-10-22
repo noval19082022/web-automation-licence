@@ -2395,7 +2395,29 @@ public class KostDetailsPO {
         LocalDate currentDate = LocalDate.now();
         LocalDate futureDate = currentDate.plusMonths(numberOfMonths);
         String formattedDate = futureDate.format(DateTimeFormatter.ofPattern("d", Locale.ENGLISH));
-        page.click("//span[@class='cell day'][normalize-space()='"+formattedDate+"']");
+        
+        // Try multiple selectors for the date
+        Locator dateLocator = page.locator("//span[@class='cell day'][normalize-space()='"+formattedDate+"']")
+            .or(page.locator("//span[contains(@class,'cell') and contains(@class,'day') and not(contains(@class,'disabled'))][normalize-space()='"+formattedDate+"']"));
+        
+        // Wait for the date to be visible
+        playwright.waitTillLocatorIsVisible(dateLocator, 10000.0);
+        
+        // If the exact date is disabled, try to find the nearest available date
+        if (!dateLocator.isEnabled() || dateLocator.getAttribute("class").contains("disabled")) {
+            // Try the next day
+            for (int i = 1; i <= 7; i++) {
+                LocalDate alternateDate = futureDate.plusDays(i);
+                String alternateDateFormatted = alternateDate.format(DateTimeFormatter.ofPattern("d", Locale.ENGLISH));
+                Locator alternateDateLocator = page.locator("//span[contains(@class,'cell') and contains(@class,'day') and not(contains(@class,'disabled'))][normalize-space()='"+alternateDateFormatted+"']");
+                if (playwright.waitTillLocatorIsVisible(alternateDateLocator, 2000.0) && alternateDateLocator.isEnabled()) {
+                    playwright.clickOn(alternateDateLocator);
+                    return;
+                }
+            }
+        }
+        
+        playwright.clickOn(dateLocator);
     }
     /**
      * checking date next month
