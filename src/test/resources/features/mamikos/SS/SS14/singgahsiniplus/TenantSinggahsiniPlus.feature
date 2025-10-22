@@ -90,7 +90,7 @@ Feature: Singgahsini Plus
     And tenant clicks on singgahsini card on kost saya
     Then tenant can see tier active with "Level 1: Starter"
 
-  @TEST_SS-9287 @singgahsiniPlusTierInteraction @a
+  @TEST_SS-9287
   Scenario: [Web][Singgahsini+] Singgahsini+ Page Tab Layout Passed
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -102,7 +102,7 @@ Feature: Singgahsini Plus
     When tenant can see tier passed
     Then tenant can see tier passed description "Level 1 sudah terlewati. Kumpulkan lebih banyak poin di level berikutnya!"
 
-  @TEST_SS-9288 @a
+  @TEST_SS-9288
   Scenario: [Web][Singgahsini+] Singgahsini+ Page Tab Layout Max Level
     Given user go to mamikos homepage
     When user login as tenant via phone number:
