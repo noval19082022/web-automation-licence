@@ -116,4 +116,24 @@ public class SinggahsiniPlusSteps {
         Assert.assertFalse(singgahsiniPlus.isMamipoinCardTierBarTitleVisible(), "singgahsini plus summary card is visible");
     }
 
+    @Then("tenant can see locked tier")
+    public void tenantCanSeeLockedTier(){
+        Assert.assertTrue(singgahsiniPlus.isLockedTierVisible(), "locked tier is not visible");
+    }
+
+    @Then("tenant can see {string} in singgahsini plus card")
+    public void tenantCanSeeTextInSinggahsiniPlusCard(String text){
+        Assert.assertTrue(singgahsiniPlus.isSinggahsiniPlusCardTextVisible(text), text + " is not visible in singgahsini plus card");
+    }
+
+    @And("tenant clicks on singgahsini card on kost saya")
+    public void tenantClicksOnSinggahsiniCardOnKostSaya(){
+        singgahsiniPlus.clickSinggahsiniCardKostSaya();
+    }
+
+    @Then("tenant can see singgahsini level on invoice")
+    public void tenantCanSeeSinggahsiniLevelOnInvoice(){
+        Assert.assertTrue(singgahsiniPlus.isInvoiceSSLevel(), "singgahsini level is not visible on invoice");
+    }
+
 }

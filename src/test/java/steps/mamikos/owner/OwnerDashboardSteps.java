@@ -410,5 +410,20 @@ public class OwnerDashboardSteps {
     public void ownerDismissActivePopUps() {
         ownerDashboardPO.clicksOnCloseIconDialogOwnerPopUp();
     }
+
+    @When("owner click on expose singgahsini link")
+    public void ownerClickOnExposeSinggahsiniLink() {
+        ownerDashboardPO.clickOnInginKosDikelolaLink();
+    }
+
+    @Then("owner should see expose singgahini link")
+    public void ownerShouldSeeExposeSinggahsiniLink() {
+        Assert.assertTrue(ownerDashboardPO.isInginKosDikelolaLinkVisible(), "expose singgahsjini link is not visible");
+    }
+
+    @Then("owner can not see expose singgahsini link")
+    public void ownerCanNotSeeExposeSinggahsiniLink(){
+        Assert.assertFalse(ownerDashboardPO.isInginKosDikelolaLinkVisible(), "expose singgahsini link is visible");
+    }
 }
 
