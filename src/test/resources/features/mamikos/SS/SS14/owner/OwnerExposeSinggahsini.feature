@@ -1,4 +1,4 @@
-@SS14 @a
+@SS14
 Feature: Owner Expose Singgahsini
 
   @TEST_SS-9797
