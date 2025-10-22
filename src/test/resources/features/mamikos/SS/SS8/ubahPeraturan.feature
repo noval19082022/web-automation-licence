@@ -241,7 +241,7 @@ Feature: Owner - Ubah Peraturan
     Given user go to mamikos homepage
     And tenant redirect to kost details:
       | kost path stag                                                                            | kost path prod               |
-      | kost-kabupaten-tangerang-kost-campur-murah-kost-primaya-tangerang-pasar-kemis-tangerang-2 | Kos DC BAR Automation Tipe A |
+      | kost-kabupaten-tangerang-kost-campur-murah-kost-seribu-pintu-pasar-kemis-tangerang-2 | Kos DC BAR Automation Tipe A |
     Then tenant see today's date and cannot make booking
 
   @TEST_SS-3337
@@ -251,7 +251,7 @@ Feature: Owner - Ubah Peraturan
       | phone stag   | phone prod    | password  |
       | 085697344170 | 0891111020198 | qwerty123 |
     And owner navigate to rules enter kos
-    And owner select kost "Kost Primaya Halogen jaya Pasar kemis Tangerang Rajeg"
+    And owner select kost "Kost Seribu Pintu Pasar Kemis Tangerang"
     And owner clicks on ubah waktu button
     And owner click on toggle pengajuan dan waktu masuk kos if active
     And owner choose minim checkin time with :
@@ -270,7 +270,7 @@ Feature: Owner - Ubah Peraturan
     Given user go to mamikos homepage
     And tenant redirect to kost details:
       | kost path stag                                                                            | kost path prod               |
-      | kost-kabupaten-tangerang-kost-campur-murah-kost-primaya-tangerang-pasar-kemis-tangerang-2 | Kos DC BAR Automation Tipe A |
+      | kost-kabupaten-tangerang-kost-campur-murah-kost-seribu-pintu-pasar-kemis-tangerang-2 | Kos DC BAR Automation Tipe A |
     Then tenant see today's date and cannot make booking
 
   @TEST_SS-3336
@@ -280,7 +280,7 @@ Feature: Owner - Ubah Peraturan
       | phone stag   | phone prod    | password  |
       | 085697344170 | 0891111020198 | qwerty123 |
     And owner navigate to rules enter kos
-    And owner select kost "Kost Primaya Halogen jaya Pasar kemis Tangerang Rajeg"
+    And owner select kost "Kost Seribu Pintu Pasar Kemis Tangerang"
     And owner clicks on ubah waktu button
     And owner click on toggle pengajuan dan waktu masuk kos if active
     And owner choose minim checkin time with :
@@ -299,7 +299,7 @@ Feature: Owner - Ubah Peraturan
     Given user go to mamikos homepage
     And tenant redirect to kost details:
       | kost path stag                                                                            | kost path prod               |
-      | kost-kabupaten-tangerang-kost-campur-murah-kost-primaya-tangerang-pasar-kemis-tangerang-2 | Kos DC BAR Automation Tipe A |
+      | kost-kabupaten-tangerang-kost-campur-murah-kost-seribu-pintu-pasar-kemis-tangerang-2 | Kos DC BAR Automation Tipe A |
     Then tenant can choose checkin date in the next "1" week
 
   @TEST_COOP-916
@@ -309,7 +309,7 @@ Feature: Owner - Ubah Peraturan
       | phone stag   | phone prod    | password  |
       | 085697344170 | 0891111020198 | qwerty123 |
     And owner navigate to rules enter kos
-    And owner select kost "Kost Primaya Halogen jaya Pasar kemis Tangerang Rajeg"
+    And owner select kost "Kost Seribu Pintu Pasar Kemis Tangerang"
     And owner clicks on ubah waktu button
     And owner click on toogle today
     And owner click on dropdown satuan waktu jarak waktu terjauh
@@ -333,5 +333,5 @@ Feature: Owner - Ubah Peraturan
     Given user go to mamikos homepage
     And tenant redirect to kost details:
       | kost path stag                                                                            | kost path prod               |
-      | kost-kabupaten-tangerang-kost-campur-murah-kost-primaya-tangerang-pasar-kemis-tangerang-2 | Kos DC BAR Automation Tipe A |
+      | kost-kabupaten-tangerang-kost-campur-murah-kost-seribu-pintu-pasar-kemis-tangerang-2 | Kos DC BAR Automation Tipe A |
     Then tenant can choose checkin date in the next "4" month
