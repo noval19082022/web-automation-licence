@@ -2,20 +2,30 @@ package steps.mamikos.tenant.survei;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.admin.mamipay.bangkrupux.tenantSurveyPO;
+import pageobject.common.HomePO;
+import pageobject.common.KostDetailsPO;
+import pageobject.common.SearchPO;
 import pageobject.tenant.survei.TenantSurveyFormPO;
 import utilities.JavaHelpers;
+import utilities.PlaywrightHelpers;
 
 import java.text.ParseException;
 import java.util.List;
 
 public class tenantSurveySteps {
     Page page = ActiveContext.getActivePage();
+    PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     tenantSurveyPO surveyPO = new tenantSurveyPO(page);
     TenantSurveyFormPO tenantSurveyFormPO = new TenantSurveyFormPO(page);
+    HomePO home = new HomePO(page);
+    SearchPO searchPO;
+    KostDetailsPO kostDetail = new KostDetailsPO(page);
     private JavaHelpers java = new JavaHelpers();
 
     @And("user edit Tenant Survey on {string}")
@@ -295,5 +305,44 @@ public class tenantSurveySteps {
             dateTime = java.updateTimeLocal("yyyy MMM dd", java.getTimeStamp("yyy MMM dd"), "d", "en", 0, 1, 0, 0, 0);
             tenantSurveyFormPO.userSelectDateSurvei(dateTime);
         }
+    }
+
+    @When("user Login with tenant")
+    public void userLoginWithTenant() {
+        String phone = Mamikos.ENV.equals("stag") ? "0891111020199" : "0";
+        String password = "mamikosqa123";
+
+        home.clickOnButtonMasuk()
+            .clickOnPencariKostButton()
+            .waitForPasswordInput()
+            .fillPhoneNumber(phone)
+            .fillPassword(password)
+            .clickOnLoginButton()
+            .waitTillLogoIsVisible();
+        home.waitForProfileMenuToBeVisible();
+        home.clickOnSayaSetujuButton();
+    }
+
+    @And("user open detail page GP listing")
+    public void userOpenDetailPageGPListing() {
+        kostDetail.waitTillKostDetailPageVisible();
+    }
+
+    @And("user check section label below price")
+    public void userCheckSectionLabelBelowPrice() {
+        playwright.pageScrollToDown(300);
+        Assert.assertTrue(kostDetail.isSurveyLabelSectionVisible(), "Survey label section is not visible");
+    }
+
+    @Then("Verifikasi label survey tampil {string}")
+    public void verifikasiLabelSurveyTampil(String expectedText) {
+        String actualText = kostDetail.getSurveyLabelText();
+        Assert.assertTrue(actualText.contains(expectedText), "Expected survey label to contain: " + expectedText + " but found: " + actualText);
+    }
+
+    @Then("user check the label not displayed")
+    public void userCheckTheLabelNotDisplayed() {
+        playwright.pageScrollToDown(300);
+        Assert.assertFalse(kostDetail.isSurveyLabelSectionVisible(), "Survey label section should not be visible for non-GP kost");
     }
 }

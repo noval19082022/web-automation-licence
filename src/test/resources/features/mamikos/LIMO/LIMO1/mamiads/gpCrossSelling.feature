@@ -45,52 +45,58 @@ Feature: GP Cross-Selling
     When user click "Lihat lebih banyak"
     Then user view detail list saldo MamiAds
       """
-      - paragraph: Mau tambah Saldo MamiAds?
-      - paragraph: Agar posisi kos Anda makin naik! Ada bonus saldo untuk pengguna GoldPlus.
-      - text: Favorit
-      - paragraph: 150 ribu
-      - paragraph: Rp150.000
-      - paragraph: 10 ribu
-      - paragraph: Rp10.000
-      - paragraph: 30 ribu
-      - paragraph: + 3.000
-      - paragraph: 10%
-      - paragraph: "30.000"
-      - paragraph: Rp27.000
-      - paragraph: Hemat Rp6.000
-      - paragraph: 75 ribu
-      - paragraph: + 7.500
-      - paragraph: 6%
-      - paragraph: "80.000"
-      - paragraph: Rp75.000
-      - paragraph: Hemat Rp12.500
-      - paragraph: 80 ribu
-      - paragraph: + 8.000
-      - paragraph: Rp80.000
-      - paragraph: Hemat Rp8.000
-      - paragraph: 300 ribu
-      - paragraph: + 24.000
-      - paragraph: 8%
-      - paragraph: "300.000"
-      - paragraph: Rp276.000
-      - paragraph: Hemat Rp48.000
-      - paragraph: 850 ribu
-      - paragraph: + 85.000
-      - paragraph: Rp850.000
-      - paragraph: Hemat Rp85.000
-      - paragraph: 1 juta
-      - paragraph: + 100.000
-      - paragraph: 15%
-      - paragraph: 1.000.000
-      - paragraph: Rp850.000
-      - paragraph: Hemat Rp250.000
-      - paragraph: 20 juta
-      - paragraph: + 4.000.000
-      - paragraph: 50%
-      - paragraph: 20.000.000
-      - paragraph: Rp10.000.000
-      - paragraph: Hemat Rp14.000.000
-      - paragraph: Tutup
+- paragraph: Mau tambah Saldo MamiAds?
+- paragraph: Agar posisi kos Anda makin naik! Ada bonus saldo untuk pengguna GoldPlus.
+- text: Favorit
+- paragraph: 150 ribu
+- paragraph: Rp150.000
+- paragraph: 10 ribu
+- paragraph: Rp10.000
+- paragraph: 30 ribu
+- paragraph: + 3.000
+- paragraph: 10%
+- paragraph: "30.000"
+- paragraph: Rp27.000
+- paragraph: Hemat Rp6.000
+- paragraph: 75 ribu
+- paragraph: + 7.500
+- paragraph: 7%
+- paragraph: "80.000"
+- paragraph: Rp75.000
+- paragraph: Hemat Rp12.500
+- paragraph: 80 ribu
+- paragraph: + 8.000
+- paragraph: Rp80.000
+- paragraph: Hemat Rp8.000
+- paragraph: 300 ribu
+- paragraph: + 24.000
+- paragraph: 8%
+- paragraph: "300.000"
+- paragraph: Rp276.000
+- paragraph: Hemat Rp48.000
+- paragraph: 850 ribu
+- paragraph: + 85.000
+- paragraph: Rp850.000
+- paragraph: Hemat Rp85.000
+- paragraph: 1 juta
+- paragraph: + 100.000
+- paragraph: 15%
+- paragraph: 1.000.000
+- paragraph: Rp850.000
+- paragraph: Hemat Rp250.000
+- paragraph: 10 juta
+- paragraph: + 1.000.000
+- paragraph: 30%
+- paragraph: 10.000.000
+- paragraph: Rp7.000.000
+- paragraph: Hemat Rp4.000.000
+- paragraph: 20 juta
+- paragraph: + 4.000.000
+- paragraph: 50%
+- paragraph: 20.000.000
+- paragraph: Rp10.000.000
+- paragraph: Hemat Rp14.000.000
+- paragraph: Tutup
       """
     When user click "Tutup"
     And user choose saldo "Rp10.000" on GoldPlus section
@@ -206,7 +212,7 @@ Feature: GP Cross-Selling
     And user navigate to mamiads history page
     And user will see that the text "Saldo MamiAds 30 ribu + GoldPlus 1 (1 Bulan)" is displayed
 
-  @continue @gpCrossPaid @TEST_LIMO-3353
+  @gpCrossPaid @TEST_LIMO-3353
   Scenario: [Goldplus ][Crosseling GP and MamiAds]Success buy cross-selling GP and mamiads
     And owner navigates to owner dashboard
     Then validate that owner have "Menunggu Pembayaran"
@@ -214,4 +220,4 @@ Feature: GP Cross-Selling
     Then payment owner success using ovo as payment method
     And user navigate to mamiads history page
     And user click "Selesai"
-    And validate status transaction mamiads is "Lunas" with price "Rp0" saldo "Saldo 30 ribu"
+    And validate status transaction mamiads is "Lunas" with price "Rp109.500" saldo "Saldo MamiAds 30 ribu + GoldPlus 1 (1 Bulan)"

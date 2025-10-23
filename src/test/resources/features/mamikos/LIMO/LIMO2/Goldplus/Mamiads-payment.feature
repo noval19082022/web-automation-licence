@@ -1,4 +1,4 @@
-@DOM3
+@LIMO2
 Feature: Payment mamiads staging
 
 

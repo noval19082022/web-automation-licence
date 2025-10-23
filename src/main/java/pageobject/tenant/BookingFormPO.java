@@ -196,7 +196,11 @@ public class BookingFormPO {
                 playwright.clickOn(cancelReasonButton);
                 playwright.clickOn(confirmCancelButton);
                 playwright.waitTillLocatorIsVisible(viewRecommendationKos);
-                playwright.clickOn(viewRecommendationKos);
+                if (playwright.waitTillLocatorIsVisible(viewRecommendationKos)) {
+                    playwright.clickOn(viewRecommendationKos);
+                } else {
+                    playwright.clickOnTextButton("Ok");
+                }
             }
         }
     }
