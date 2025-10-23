@@ -6,12 +6,14 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.tenant.InvoicePO;
 import pageobject.tenant.profile.SinggahsiniPlusPO;
 import utilities.PlaywrightHelpers;
 
 public class SinggahsiniPlusSteps {
     Page page = ActiveContext.getActivePage();
-    SinggahsiniPlusPO singgahsiniPlus = new SinggahsiniPlusPO(page);;
+    SinggahsiniPlusPO singgahsiniPlus = new SinggahsiniPlusPO(page);
+    InvoicePO invoice = new InvoicePO(page);
 
     @Then("tenant can see {string} label")
     public void tenantCanSeeLabel(String text){
@@ -126,6 +128,11 @@ public class SinggahsiniPlusSteps {
         Assert.assertTrue(singgahsiniPlus.isSinggahsiniPlusCardTextVisible(text), text + " is not visible in singgahsini plus card");
     }
 
+    @Then("tenant can not see {string} in singgahsini plus card")
+    public void tenantCanNotSeeTextInSinggahsiniPlusCard(String text){
+        Assert.assertFalse(singgahsiniPlus.isSinggahsiniPlusCardTextVisible(text), text + " is not visible in singgahsini plus card");
+    }
+
     @And("tenant clicks on singgahsini card on kost saya")
     public void tenantClicksOnSinggahsiniCardOnKostSaya(){
         singgahsiniPlus.clickSinggahsiniCardKostSaya();
@@ -144,6 +151,16 @@ public class SinggahsiniPlusSteps {
     @Then("tenant can see tier passed description {string}")
     public void tenantCanSeeTierPassedDescription(String text){
         singgahsiniPlus.passedDescriptionTextVisible(text);
+    }
+
+    @Then("tenant can see Singgahsini Plus level on invoice page")
+    public void tenantCanSeeSinggahsiniPlusLevelOnInvoicePage() {
+        Assert.assertTrue(invoice.isSinggahsiniPlusLevelSectionVisible(), "Singgahsini+ level section is not visible on invoice page");
+    }
+
+    @Then("tenant can not see Singgahsini Plus level on invoice page")
+    public void tenantCanNotSeeSinggahsiniPlusLevelOnInvoicePage() {
+        Assert.assertFalse(invoice.isSinggahsiniPlusLevelSectionVisible(), "Singgahsini+ level section is not visible on invoice page");
     }
 
 }

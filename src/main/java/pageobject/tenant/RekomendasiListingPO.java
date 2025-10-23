@@ -240,4 +240,13 @@ public class RekomendasiListingPO {
     public void clickOnHapusHistoriButton() {
         playwright.clickOn(hapusHistoriButton);
     }
+
+    /**
+     * Click on "Mulai cari dan sewa kos" button
+     * This button appears when tenant has no active kos
+     */
+    public void clickOnMulaiCariDanSewaKosButton() {
+        playwright.waitTillLocatorIsVisible(mulaiCariDanSewaKosButton);
+        playwright.clickOn(mulaiCariDanSewaKosButton);
+    }
 }

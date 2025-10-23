@@ -284,4 +284,15 @@ public class PaymentSteps {
                     String.format("invoice billing details is: %s and not contains: %s", invoceBillingDetail, data));
         }
     }
+
+    @And("tenant clicks on Bayar button in tagihan list")
+    public void tenantClicksOnBayarButtonInTagihanList() {
+        kostSaya.clickOnBayarButton();
+
+    }
+
+    @Then("tenant should see Bayar button in tagihan list")
+    public void tenantShouldSeeBayarButtonInTagihanList() {
+        Assert.assertTrue(kostSaya.isBayarButtonVisible(), "Bayar button is not visible in tagihan list");
+    }
 }

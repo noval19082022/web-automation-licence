@@ -3,6 +3,7 @@ package pageobject.tenant;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import config.playwright.context.ActiveContext;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -34,6 +35,8 @@ public class kostSayaPO {
     Locator sudahDiBayarBtn;
     Locator invoiceSudahdiBayar;
     Locator itemCardBillingHasBeenPaid;
+    Locator bayarButton;
+    Locator userKostClaimList;
 
 
     public kostSayaPO(Page page) {
@@ -240,6 +243,37 @@ public class kostSayaPO {
     public void clickItemCardBillingHasBeenPaid(){
         playwright.clickOn(sudahDiBayarBtn);
         playwright.clickOn(itemCardBillingHasBeenPaid);
+    }
+
+    /**
+     * Click on "Bayar" button in the tagihan kos list
+     * This will open a new page/tab with invoice details
+     * @return new page that opens after clicking Bayar button
+     */
+    public Page clickOnBayarButton() {
+        userKostClaimList = page.getByTestId("userKostClaim-list");
+        bayarButton = userKostClaimList.getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Bayar")).first();
+
+        Page newPage = page.waitForPopup(() -> {
+            playwright.clickOn(bayarButton);
+            playwright.hardWait(10000.0);
+        });
+
+        ActiveContext.setActivePage(newPage);
+        return newPage;
+
+    }
+
+    /**
+     * Check if Bayar button is visible
+     * @return boolean true if visible, false otherwise
+     */
+    public boolean isBayarButtonVisible() {
+        userKostClaimList = page.getByTestId("userKostClaim-list");
+        bayarButton = userKostClaimList.getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Bayar"));
+        return playwright.waitTillLocatorIsVisible(bayarButton);
     }
 }
 

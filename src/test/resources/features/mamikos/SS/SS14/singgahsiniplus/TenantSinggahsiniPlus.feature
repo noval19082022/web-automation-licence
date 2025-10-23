@@ -67,7 +67,7 @@ Feature: Singgahsini Plus
     When tenant clicks on Singgahsini text
     Then tenant can see paused allert with "Level Singgahsini+ dijeda karena kamu check-out dari Singgahsini/APIK. Balik ngekos untuk aktifkan lagi."
 
-  @TEST_SS-9518
+  @TEST_SS-9518 @continue
   Scenario: [Web][Reward & Poin][Mamipoin Tab] Poin Kamu section for Pause Tenant Singgahsini+
     When tenant clicks on MamiPoin link in Singgahsini Plus card
     Then tenant should see Singgahsini Plus summary card
@@ -76,6 +76,19 @@ Feature: Singgahsini Plus
     Then tenant can see mamipoin menu with "Poin Kamu"
     When tenant can see mamipoin menu with "Riwayat Mamipoin"
     Then tenant can see mamipoin menu with "Dapatkan Poin"
+
+  @TEST_SS-9199
+  Scenario: [Web][Kost Saya][Singgahsini +]Check kost saya when previously booking kost SS but admin terminated kost SS
+    When user go to mamikos homepage
+    And tenant click on icon profil
+    And tenant click on profile
+    Then tenant should see tier message in Singgahsini plus with "Level & rewards dijeda"
+    And tenant navigate to kost saya page
+    Then tenant can see "Level kamu saat ini" in singgahsini plus card
+    When tenant can see "Level 2: Basic" in singgahsini plus card
+    Then tenant can see "Level dijeda. Ngekos lagi di Singgahsini/APIK untuk mengaktifkan kembali." in singgahsini plus card
+    When tenant should see Mulai cari dan sewa kos button
+    Then tenant clicks on Mulai cari dan sewa kos button
 
   @TEST_SS-9197 @continue
   Scenario: [Web][Kost Saya][Singgahsini +]Check Kost saya when tier card for active P1 tenant with progress bar (First Level)
@@ -102,7 +115,7 @@ Feature: Singgahsini Plus
     When tenant can see tier passed
     Then tenant can see tier passed description "Level 1 sudah terlewati. Kumpulkan lebih banyak poin di level berikutnya!"
 
-  @TEST_SS-9288
+  @TEST_SS-9288 @continue @a
   Scenario: [Web][Singgahsini+] Singgahsini+ Page Tab Layout Max Level
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -115,3 +128,27 @@ Feature: Singgahsini Plus
     Then tenant can see tier passed
     When tenant can see tier active with "Level 7: Diamond"
     Then tenant can see tier passed description "Selamat! Kamu sudah di level tertinggi Singgahsini+. Pertahankan level-mu, ya!"
+
+  @TEST_SS-9694 @a
+  Scenario: [Invoice][Singgahsini+] Invoice for Active Tenant P1
+    When user navigate to tagihan kost saya
+    And tenant clicks on Bayar button in tagihan list
+    Then tenant can see Singgahsini Plus level on invoice page
+
+  @TEST_SS-9200 @continue @a
+  Scenario: [Web][Kost Saya][Singgahsini +]Check kost saya when previously booking kost SS but admin terminated kost SS  and booking kost P2
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag  | password  |
+      | 08100000706 | qwerty123 |
+    And tenant click on icon profil
+    And tenant click on profile
+    When tenant can see "Basic" label
+    Then tenant should see tier message in Singgahsini plus with "Level & rewards dijeda"
+    Then tenant can not see "Level kamu saat ini" in singgahsini plus card
+
+  @TEST_SS-9693 @a
+  Scenario: [Invoice][Singgahsini+] Invoice for tenant P2
+    When user navigate to tagihan kost saya
+    And tenant clicks on Bayar button in tagihan list
+    Then tenant can not see Singgahsini Plus level on invoice page

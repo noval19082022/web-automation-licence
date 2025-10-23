@@ -109,4 +109,15 @@ public class RekomendasiListingSteps {
     public void user_click_on_hapus_histori_button() {
         rekomendasiListing.clickOnHapusHistoriButton();
     }
+
+    @When("tenant clicks on Mulai cari dan sewa kos button")
+    public void tenantClicksOnMulaiCariDanSewaKosButton() {
+        rekomendasiListing.clickOnMulaiCariDanSewaKosButton();
+    }
+
+    @Then("tenant should see Mulai cari dan sewa kos button")
+    public void tenantShouldSeeMulaiCariDanSewaKosButton() {
+        Assert.assertTrue(rekomendasiListing.isMulaiCariDanSewaKosIsVisible(),
+            "Mulai cari dan sewa kos button is not visible");
+    }
 }
