@@ -815,7 +815,6 @@ public class PlaywrightHelpers {
 
     /**
      * Hard wait before an action
-     *
      * @param time Double data type
      */
     public void hardWait(double time) {

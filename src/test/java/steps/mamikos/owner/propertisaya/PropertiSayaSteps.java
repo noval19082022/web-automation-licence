@@ -1,6 +1,7 @@
 package steps.mamikos.owner.propertisaya;
 
 import com.microsoft.playwright.Page;
+import config.global.FlowControl;
 import config.global.GlobalConfig;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
@@ -178,6 +179,11 @@ public class PropertiSayaSteps {
     public void user_click_Lihat_Selengkapnya_button_for_edit() {
         loading.waitForLoadingIconDisappear();
         propertySaya.clickOnLihatSelengkapnyaButton();
+    }
+
+    @When("user/owner clicks on Edit Data Kos button number {string}")
+    public void userOwnerClicksOnEditDataKosButtonNumber(String kosNumber) {
+        propertySaya.clicksOnEditDataKosButton(Integer.parseInt(kosNumber) - 1);
     }
 
     @When("user click Chat in kos list")

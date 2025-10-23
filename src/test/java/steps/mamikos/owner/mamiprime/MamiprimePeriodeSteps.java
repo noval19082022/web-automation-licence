@@ -16,11 +16,11 @@ public class MamiprimePeriodeSteps {
     public void owner_only_choose_period_with_price(String periode, String price) {
         Assert.assertEquals(mamiprimePeriodePO.getPeriodPrime(periode), periode, "Periode not equals");
         Assert.assertEquals(mamiprimePeriodePO.getPricePeriod(price), price, "Price prime not equals");
-        owner_choose_periode(periode);
+        ownerChoosePeriode(periode);
     }
 
     @When("owner choose periode {string}")
-    public void owner_choose_periode(String periode) {
+    public void ownerChoosePeriode(String periode) {
         mamiprimePeriodePO.clickOnPeriodePrime(periode);
     }
 
