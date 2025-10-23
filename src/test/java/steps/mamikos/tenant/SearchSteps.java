@@ -1,6 +1,5 @@
 package steps.mamikos.tenant;
 
-import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
@@ -17,7 +16,6 @@ import pageobject.common.KostLandingAreaPO;
 import pageobject.common.SearchPO;
 import utilities.PlaywrightHelpers;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
