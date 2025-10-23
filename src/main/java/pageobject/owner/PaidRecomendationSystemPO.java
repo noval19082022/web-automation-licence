@@ -19,7 +19,8 @@ public class PaidRecomendationSystemPO {
     private Locator statisticPage;
     private Locator apartementTitle;
     private Locator apartementDesc;
-
+    private Locator nextPprsSlide;
+    private Locator previousPprsSlide;
 
 
     public PaidRecomendationSystemPO(Page page) {
@@ -32,6 +33,9 @@ public class PaidRecomendationSystemPO {
         this.statisticPage = page.locator(".statistic-menu");
         this.apartementTitle = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Statistik Apartemen Belum Ada"));
         this.apartementDesc = page.getByText("Mohon maaf, saat ini data performa untuk apartemen belum dapat ditampilkan. Tung");
+        this.nextPprsSlide = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Next slide")).first();
+        this.previousPprsSlide = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Previous slide")).first();
+
     }
 
     /**
@@ -44,6 +48,7 @@ public class PaidRecomendationSystemPO {
 
     /**
      * get text title on section laporan statistic owner dashboard
+     *
      * @return String
      */
     public String getTitleStatisticDoesntHavePropertyActive() {
@@ -52,6 +57,7 @@ public class PaidRecomendationSystemPO {
 
     /**
      * get text desc on section laporan statistic owner dashboard
+     *
      * @return String
      */
     public String getDescDoesntHavePropertyActive() {
@@ -60,6 +66,7 @@ public class PaidRecomendationSystemPO {
 
     /**
      * check is image property not active is show
+     *
      * @return boolean
      */
     public boolean isImagePropertyNotActiveShow() {
@@ -85,6 +92,7 @@ public class PaidRecomendationSystemPO {
 
     /**
      * get text title for condition apartement only on section laporan statistic owner dashboard
+     *
      * @return String
      */
     public String getTitleStatisticApartement() {
@@ -93,9 +101,22 @@ public class PaidRecomendationSystemPO {
 
     /**
      * get text title for condition apartement only on section laporan statistic page
+     *
      * @return String
      */
     public String getTitleStatisticDescApartement() {
         return playwright.getText(apartementDesc);
+    }
+
+    public void tapNextPprsSlideIfExist() {
+        if (playwright.isButtonEnable(nextPprsSlide)) {
+            playwright.clickOn(nextPprsSlide);
+        }
+    }
+
+    public void tapPreviousPprsSlideIfExist() {
+        if (playwright.isButtonEnable(previousPprsSlide)) {
+            playwright.clickOn(previousPprsSlide);
+        }
     }
 }

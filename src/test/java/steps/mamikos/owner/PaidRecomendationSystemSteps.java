@@ -2,6 +2,7 @@ package steps.mamikos.owner;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -48,5 +49,15 @@ import pageobject.owner.PaidRecomendationSystemPO;
         @Then("owner can see desc for apartment {string} at section statistic")
         public void owner_can_see_desc_for_apartment_at_section_statistic(String text) {
             Assert.assertTrue(pprs.getTitleStatisticDescApartement().contains(text),"description doesnt match");
+        }
+
+        @And("owner swipe next on pprs statistik")
+        public void ownerSwipeLeftOnPprsStatistik() {
+            pprs.tapNextPprsSlideIfExist();
+        }
+
+        @And("owner swipe previous on pprs statistik")
+        public void ownerSwipePreviousOnPprsStatistik() {
+            pprs.tapPreviousPprsSlideIfExist();
         }
     }
