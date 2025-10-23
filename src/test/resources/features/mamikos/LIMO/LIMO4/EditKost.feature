@@ -43,7 +43,7 @@ Feature: Edit Kost
     When owner navigates to property saya kos
     And owner search kost "Kos oke bebek Vvv Depok Sleman" on property saya page
     And user click Lihat Selengkapnya button for edit
-    And user click "Edit Data Kos"
+    And owner clicks on Edit Data Kos button number "1"
     And user click button edit finished
     Then user see success add data kos pop up with text "Data Kos Telah Diperbarui"
     When user click "Edit Data Lain"
@@ -59,7 +59,7 @@ Feature: Edit Kost
     And owner navigates to property saya kos
     And owner search kost "Kos oke bebek Vvv Depok Sleman" on property saya page
     When user click Lihat Selengkapnya button for edit
-    And user click "Edit Data Kos"
+    And owner clicks on Edit Data Kos button number "1"
     And user click button edit "Alamat Kos" kos
     And user input kost location "Tobelo" and clicks on first autocomplete suggestion
     And user input address note "Perubahan agar diperiksa admin " and random text

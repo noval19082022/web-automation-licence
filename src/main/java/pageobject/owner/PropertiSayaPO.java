@@ -66,6 +66,7 @@ public class PropertiSayaPO {
     Locator submitDataMamipayButton;
     Locator backButtonActivationSent;
     Locator editDataKos;
+    Locator getEditDataKosButton;
     Locator fasilitasFeature;
     Locator editSelesaiButton;
     Locator editDataLainBtn;
@@ -674,6 +675,7 @@ public class PropertiSayaPO {
     public void clickOnLihatSelengkapnyaButton() {
         playwright.waitForSelectorState(lihatSelengkapnyaButton, WaitForSelectorState.VISIBLE, 1000.0 * 300);
         playwright.clickOn(lihatSelengkapnyaButton);
+        playwright.hardWait(1500);
     }
 
     /**
@@ -923,8 +925,9 @@ public class PropertiSayaPO {
      */
     public void clickEditDoneButton() {
         playwright.hardWait(2000.0);
+        playwright.waitForSelectorState(loadingSpinner, WaitForSelectorState.HIDDEN, 60000.0);
         playwright.clickOn(editSelesaiButton);
-        playwright.waitForSelectorState(loadingSpinner, WaitForSelectorState.HIDDEN, GlobalConfig.LONG_TIMEOUT);
+        playwright.waitForSelectorState(loadingSpinner, WaitForSelectorState.HIDDEN, 60000.0);
     }
 
     /**
@@ -958,6 +961,7 @@ public class PropertiSayaPO {
      */
     public String getTitlePopUpSuccessEditKos() {
         playwright.waitTillLocatorIsVisible(titleSuccessEditPopUpText, 60000.0);
+        playwright.hardWait(1000);
         return playwright.getText(titleSuccessEditPopUpText);
     }
 
@@ -2657,5 +2661,13 @@ public class PropertiSayaPO {
     public void leftletMarker() {
         playwright.waitTillLocatorIsVisible(leafletMarkerIcon);
         playwright.clickOn(leafletMarkerIcon);
+    }
+
+    /**
+     * Clicks on edit data kos button by index
+     * @param index edit data kos index
+     */
+    public void clicksOnEditDataKosButton(Integer index) {
+        playwright.clickOn(editDataKosButton.nth(index));
     }
 }

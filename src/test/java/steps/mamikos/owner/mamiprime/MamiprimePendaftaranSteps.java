@@ -83,7 +83,7 @@ public class MamiprimePendaftaranSteps {
 
     @When("Owner purchase mamiprime periode {string}")
     public void owner_purchase_mamiprime_periode(String periode) {
-        mamiprimePeriodeSteps.owner_choose_periode(periode);
+        mamiprimePeriodeSteps.ownerChoosePeriode(periode);
         mamiprimePendaftaran.clickOnlanjutBayarPrime();
         mamiprimeDetailTagihanSteps.owner_click_bayar_sekarang_at_detail_tagihan_mamiprime();
     }
