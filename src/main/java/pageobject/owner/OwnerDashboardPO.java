@@ -83,6 +83,7 @@ public class OwnerDashboardPO {
     Locator dariMamikosBanner;
     Locator daftarGpButton;
     Locator entryPointCardGP;
+    Locator gpspPromoCountDown;
 
     private Locator fiturPromosiExpand;
     private Locator nantiSajaButton;
@@ -181,6 +182,7 @@ public class OwnerDashboardPO {
         generalCloseButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
         pilihPaketGoldplus = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Paket GoldPlus"));
         entryPointCardGP = page.locator(".membership-card__section").first();
+        gpspPromoCountDown = page.getByTestId("countdown-container");
         inginKosDikelolaLink = page.locator("a").filter(new Locator.FilterOptions().setHasText("Ingin kos dikelola secara"));
     }
 
@@ -235,7 +237,7 @@ public class OwnerDashboardPO {
      * Dismiss FTUE Godlplus
      */
     public void dismissFTUEGoldplus() {
-        playwright.waitTillLocatorIsVisible(nantiSajaButton, 2000.0);
+        playwright.waitTillLocatorIsVisible(nantiSajaButton, 7_000.0);
         if (playwright.waitTillLocatorIsVisible(nantiSajaButton)) {
             playwright.clickOn(nantiSajaButton);
         }
@@ -879,14 +881,14 @@ public class OwnerDashboardPO {
      */
     private void handleDaftarGPPeriodSelectionPopup() {
         playwright.waitTillPageLoaded();
-        
+
         // Check if we're redirected to the GoldPlus period selection page
         if (page.url().contains("goldplus/submission/periode")) {
             System.out.println("GoldPlus period selection popup detected after clicking daftar GP button");
-            
+
             // Wait for the page to load and elements to be visible
             playwright.hardWait(2000.0);
-            
+
             // Look for the favorite option (4 Bulan option which is marked as "Favorit")
             Locator favoriteOption = page.locator("//div[contains(@class, 'goldplus-periode-select__option') and contains(., '4 Bulan')]");
             if (playwright.waitTillLocatorIsVisible(favoriteOption, 5000.0)) {
@@ -900,7 +902,7 @@ public class OwnerDashboardPO {
                     System.out.println("Selected first available period option in GoldPlus period selection popup");
                 }
             }
-            
+
             // Click the "Pilih Periode" button if it exists
             Locator pilihPeriodeButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Periode"));
             if (playwright.waitTillLocatorIsVisible(pilihPeriodeButton, 3000.0)) {
@@ -1041,7 +1043,7 @@ public class OwnerDashboardPO {
             playwright.hardWait(1000.0);
             return true;
         }
-        
+
         // Strategy 2: Try existing close popup icon
         if (playwright.waitTillLocatorIsVisible(closePopUpIcon, 2000.0)) {
             System.out.println("Strategy 2: Using existing close popup icon");
@@ -1049,7 +1051,7 @@ public class OwnerDashboardPO {
             playwright.hardWait(1000.0);
             return true;
         }
-        
+
         // Strategy 3: Try dialog popup close
         if (playwright.waitTillLocatorIsVisible(dialogPopUp, 2000.0)) {
             System.out.println("Strategy 3: Using dialog popup close");
@@ -1057,7 +1059,7 @@ public class OwnerDashboardPO {
             playwright.hardWait(1000.0);
             return true;
         }
-        
+
         // Strategy 4: Try clicking outside the popup (ESC key)
         if (playwright.isTextDisplayed("close", 1000.0)) {
             System.out.println("Strategy 4: Pressing ESC key to close popup");
@@ -1065,8 +1067,12 @@ public class OwnerDashboardPO {
             playwright.hardWait(1000.0);
             return true;
         }
-        
+
         return false;
+    }
+
+    public boolean isGpspPromoCountDownExist() {
+        return playwright.isLocatorVisibleAfterLoad(gpspPromoCountDown, 2000.0);
     }
 
     /**

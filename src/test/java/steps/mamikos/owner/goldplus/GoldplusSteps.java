@@ -890,7 +890,7 @@ public class GoldplusSteps {
         Assert.assertEquals(actualCopyText, expectedCopyText, "Copy text doesn't match. Expected: " + expectedCopyText + " but found: " + actualCopyText);
     }
 
-    @Then("user check countdown value running")
+    @Then("user/owner check countdown value running")
     public void userCheckCountdownValueRunning() throws InterruptedException {
         // Get initial countdown value
         String initialCountdown = goldplus.getCountdownTimerValue();
@@ -919,9 +919,19 @@ public class GoldplusSteps {
         System.out.println("Countdown timer is running correctly!");
     }
 
-    @Then("user check no countdown value running")
+    @Then("user/owner check no countdown value running")
     public void userCheckNoCountdownValueRunning() {
         Assert.assertFalse(goldplus.isCountdownTimerDisplayed(), "Countdown timer should not be displayed, but it is visible on the page");
         System.out.println("Confirmed: No countdown timer is running on the page");
+    }
+
+    @And("owner see GPSP promo countdown")
+    public void ownerSeeGPSPPromoCountdown() {
+        Assert.assertTrue(owner.isGpspPromoCountDownExist(), "gpsp promo countdown is not exist on owner dashboard");
+    }
+
+    @And("owner disable gp pop up")
+    public void ownerDisableGpPopUp() {
+        owner.dismissFTUEGoldplus();
     }
 }
