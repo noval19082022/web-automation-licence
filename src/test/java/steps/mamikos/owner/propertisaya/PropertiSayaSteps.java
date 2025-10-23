@@ -1,7 +1,6 @@
 package steps.mamikos.owner.propertisaya;
 
 import com.microsoft.playwright.Page;
-import config.global.FlowControl;
 import config.global.GlobalConfig;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;

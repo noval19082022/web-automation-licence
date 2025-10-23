@@ -6,7 +6,6 @@ import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.WaitForSelectorState;
 import config.global.GlobalConfig;
 import config.playwright.context.ActiveContext;
-import data.mamikos.Mamikos;
 import utilities.PlaywrightHelpers;
 
 public class KostOwnerPO {

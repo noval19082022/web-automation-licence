@@ -2,6 +2,7 @@ package steps.mamikos.owner.goldplus;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -10,12 +11,12 @@ import pageobject.common.HomePO;
 import pageobject.common.LoadingPO;
 import pageobject.common.LoginPO;
 import pageobject.owner.OwnerDashboardPO;
-import pageobject.owner.goldplus.GoldplusPO;
 import pageobject.owner.goldplus.GoldPlusSubmissionPO;
+import pageobject.owner.goldplus.GoldplusPO;
 import utilities.PlaywrightHelpers;
+
 import java.util.List;
 import java.util.Map;
-import io.cucumber.datatable.DataTable;
 
 public class GPPackageSelectionSteps {
     Page page = ActiveContext.getActivePage();

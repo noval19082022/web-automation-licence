@@ -5,8 +5,6 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
 
-import java.nio.file.Paths;
-
 public class ContractManagementPO {
     private Page page;
     private PlaywrightHelpers playwright;

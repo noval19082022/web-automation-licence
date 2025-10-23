@@ -12,8 +12,8 @@ import pageobject.owner.chat.ChatOwnerPO;
 import pageobject.tenant.chat.ChatTenantPO;
 import utilities.PlaywrightHelpers;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ChatTenantSteps {
     Page page = ActiveContext.getActivePage();
