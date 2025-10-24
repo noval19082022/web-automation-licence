@@ -97,6 +97,8 @@ public class InvoicePO {
     Locator goldplusBillingDetailSection;
     Locator invoiceContentSection;
     Locator totalPembayaranParentSection;
+    Locator singgahsiniPlusLevelSection;
+    Locator invoiceBillSection;
 
     public InvoicePO(Page page) {
         this.page = page;
@@ -180,6 +182,8 @@ public class InvoicePO {
         goldplusBillingDetailSection = page.locator(".goldplus-billing-detail");
         invoiceContentSection = page.locator("#invoiceContent");
         totalPembayaranParentSection = page.locator("text=Total Pembayaran").locator("..");
+        invoiceBillSection = page.locator("#invoiceBill");
+        singgahsiniPlusLevelSection = page.locator("div.invoice-singgahsini-plus-level");
     }
 
     /**
@@ -886,6 +890,45 @@ public class InvoicePO {
                         replaceAll(" {2}", " "))
         );
         return billingDeyailText.toString();
+    }
+
+    /**
+     * Click on Singgahsini+ level section on invoice page
+     * This clicks on the section containing "Singgahsini+ level kamu:"
+     */
+    public void clickOnSinggahsiniPlusLevelSection() {
+        playwright.waitTillLocatorIsVisible(singgahsiniPlusLevelSection);
+        playwright.clickOn(singgahsiniPlusLevelSection);
+    }
+
+    /**
+     * Check if Singgahsini+ level section is visible on invoice page
+     * @return boolean true if visible, false otherwise
+     */
+    public boolean isSinggahsiniPlusLevelSectionVisible() {
+        playwright.waitTillPageLoaded();
+        return playwright.waitTillLocatorIsVisible(singgahsiniPlusLevelSection, 10000.0);
+    }
+
+    /**
+     * Get Singgahsini+ level text from invoice page
+     * @return String containing the Singgahsini+ level text
+     */
+    public String getSinggahsiniPlusLevelText() {
+        playwright.waitTillLocatorIsVisible(singgahsiniPlusLevelSection);
+        return playwright.getText(singgahsiniPlusLevelSection);
+    }
+
+    /**
+     * Click on specific Singgahsini+ level text by filtering
+     * This is for clicking on nth element with Singgahsini+ level text
+     * @param index the nth element to click (0-based index)
+     */
+    public void clickOnSinggahsiniPlusLevelByIndex(int index) {
+        Locator specificLevelSection = invoiceBillSection.locator("div")
+            .filter(new Locator.FilterOptions().setHasText("Singgahsini+ level kamu:"))
+            .nth(index);
+        playwright.clickOn(specificLevelSection);
     }
 
 }
