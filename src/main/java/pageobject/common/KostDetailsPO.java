@@ -2402,9 +2402,8 @@ public class KostDetailsPO {
         LocalDate futureDate = currentDate.plusMonths(numberOfMonths);
         String formattedDate = futureDate.format(DateTimeFormatter.ofPattern("d", Locale.ENGLISH));
         
-        // Try multiple selectors for the date
-        Locator dateLocator = page.locator("//span[@class='cell day'][normalize-space()='"+formattedDate+"']")
-            .or(page.locator("//span[contains(@class,'cell') and contains(@class,'day') and not(contains(@class,'disabled'))][normalize-space()='"+formattedDate+"']"));
+        // Try multiple selectors for the date, excluding muted dates
+        Locator dateLocator = page.locator("//span[contains(@class,'cell') and contains(@class,'day') and not(contains(@class,'disabled')) and not(contains(@class,'muted'))][normalize-space()='"+formattedDate+"']");
         
         // Wait for the date to be visible
         playwright.waitTillLocatorIsVisible(dateLocator, 10000.0);
@@ -2415,7 +2414,7 @@ public class KostDetailsPO {
             for (int i = 1; i <= 7; i++) {
                 LocalDate alternateDate = futureDate.plusDays(i);
                 String alternateDateFormatted = alternateDate.format(DateTimeFormatter.ofPattern("d", Locale.ENGLISH));
-                Locator alternateDateLocator = page.locator("//span[contains(@class,'cell') and contains(@class,'day') and not(contains(@class,'disabled'))][normalize-space()='"+alternateDateFormatted+"']");
+                Locator alternateDateLocator = page.locator("//span[contains(@class,'cell') and contains(@class,'day') and not(contains(@class,'disabled')) and not(contains(@class,'muted'))][normalize-space()='"+alternateDateFormatted+"']");
                 if (playwright.waitTillLocatorIsVisible(alternateDateLocator, 2000.0) && alternateDateLocator.isEnabled()) {
                     playwright.clickOn(alternateDateLocator);
                     return;
