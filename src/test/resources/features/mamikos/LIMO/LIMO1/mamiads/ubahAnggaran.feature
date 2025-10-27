@@ -77,7 +77,7 @@ Feature: Ubah Anggaran
       | toggle status | off                              |
       | status desc   | Klik tombol untuk naikkan iklan  |
       | text anggaran | Tipe Anggaran: Rp70.000 per-hari |
-    And user click ubah on "kost rane dul Mamitest"
+    And user click ubah on "Kos rane set Mamitest"
     And owner click Simpan Pengaturan on ubah anggaran
 
   @TEST_LIMO-1353 @continue

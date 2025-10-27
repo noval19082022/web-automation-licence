@@ -292,6 +292,9 @@ public class KostDetailsPO {
     private Locator toastMessage;
     private Locator salinDetailButton;
 
+    //-------------------Survey Label---------------//
+    private Locator surveyLabelSection;
+
 
     public KostDetailsPO(Page page) {
         this.page = page;
@@ -549,6 +552,9 @@ public class KostDetailsPO {
         salinButton = page.locator("//button[contains(.,'Salin')]").first();
         toastMessage = page.getByText("Kode voucher berhasil disalin.");
         salinDetailButton = page.locator("//button[@class=\"bg-c-button bg-c-button--primary bg-c-button--lg\"]");
+
+        //------------survey label------------//
+        surveyLabelSection = page.locator("#priceCard").getByTestId("detailFomoLabel");
     }
 
     /**
@@ -2592,4 +2598,33 @@ public class KostDetailsPO {
         playwright.clickOn(salinDetailButton);
     }
 
+    /**
+     * Check if survey label section is visible below price
+     * @return boolean true if visible, false otherwise
+     */
+    public boolean isSurveyLabelSectionVisible() {
+        try {
+            playwright.waitTillLocatorIsVisible(surveyLabelSection, 3000.0);
+            return surveyLabelSection.isVisible();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    /**
+     * Check if survey label section is NOT visible below price
+     * @return boolean true if not visible, false if visible
+     */
+    public boolean isSurveyLabelSectionNotVisible() {
+            return !surveyLabelSection.isVisible();
+    }
+
+    /**
+     * Get survey label text from kost detail page
+     * @return String survey label text
+     */
+    public String getSurveyLabelText() {
+            playwright.waitTillLocatorIsVisible(surveyLabelSection, 3000.0);
+                return playwright.getText(surveyLabelSection);
+    }
 }

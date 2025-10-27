@@ -38,8 +38,8 @@ public class NaikkanIklanPO {
         this.playwright = new PlaywrightHelpers(page);
         this.locatorHelpers = new LocatorHelpers(page);
         selectFilter = page.locator(".bg-c-dropdown__trigger");
-        quickAllocateTitle = page.locator("//div[@class='owner-kos-list col-xs-12']/div[1]//div[@class='alokasi-ads__purchase-desc']");
-        toggleAds = page.locator("//div[@class='owner-kos-list col-xs-12']/div[1]//input[@class='bg-c-switch__input']");
+        quickAllocateTitle = page.locator("//div[@class='detail-kos__statistic statistic']//div[@class='alokasi-ads__description']");
+        toggleAds = page.locator("//div[@class='kos-card'][1]//div[contains(@class,'alokasi-ads__toggle')]");
         titlePopUpConfirmation = page.locator("//h3[@class='bg-c-modal__body-title']");
         descPopUpConfirmation = page.locator("#description-modal-toggle");
         keMamiAdsButton = page.locator("//*[contains(text(),'Ke MamiAds')]");

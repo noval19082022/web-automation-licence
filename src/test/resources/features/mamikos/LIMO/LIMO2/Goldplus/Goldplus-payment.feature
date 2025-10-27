@@ -1,4 +1,4 @@
-@SS13
+@LIMO2
 Feature: Payment Goldplus staging
 
   Background: Admin reset GP owner

@@ -18,70 +18,77 @@ Feature: Beli Saldo
   @TEST_LIMO-3335 @continue
   Scenario: List Promo Saldo
     Then detail list saldo as expected
-      """
-      - paragraph: Saldo Iklan
-      - paragraph: Harga
-      - radio
-      - paragraph
-      - paragraph: 150 ribu Favorit
-      - paragraph: Rp150.000
-      - radio
-      - paragraph
-      - paragraph: 10 ribu
-      - paragraph: Rp10.000
-      - radio
-      - paragraph
-      - paragraph: 30 ribu
-      - paragraph: + Bonus 3 ribu (khusus GoldPlus)
-      - paragraph: Rp27.000
-      - paragraph: 10%
-      - paragraph: Rp30.000
-      - radio
-      - paragraph
-      - paragraph: 75 ribu
-      - paragraph: + Bonus 7.5 ribu (khusus GoldPlus)
-      - paragraph: Rp75.000
-      - paragraph: 6%
-      - paragraph: Rp80.000
-      - radio
-      - paragraph
-      - paragraph: 80 ribu
-      - paragraph: + Bonus 8 ribu (khusus GoldPlus)
-      - paragraph: Rp80.000
-      - radio
-      - paragraph
-      - paragraph: 300 ribu
-      - paragraph: + Bonus 24 ribu (khusus GoldPlus)
-      - paragraph: Rp276.000
-      - paragraph: 8%
-      - paragraph: Rp300.000
-      - radio
-      - paragraph
-      - paragraph: 850 ribu
-      - paragraph: + Bonus 85 ribu (khusus GoldPlus)
-      - paragraph: Rp850.000
-      - radio
-      - paragraph
-      - paragraph: 1 juta
-      - paragraph: + Bonus 100 ribu (khusus GoldPlus)
-      - paragraph: Rp850.000
-      - paragraph: 15%
-      - paragraph: Rp1.000.000
-      - radio
-      - paragraph
-      - paragraph: 20 juta
-      - paragraph: + Bonus 4.4 juta (khusus GoldPlus)
-      - paragraph: Rp10.000.000
-      - paragraph: 50%
-      - paragraph: Rp20.000.000
-      - button "Pilih Saldo" [disabled]
+    """
+- paragraph: Saldo Iklan
+- paragraph: Harga
+- radio
+- paragraph
+- paragraph: 10 ribu
+- paragraph: Rp10.000
+- radio
+- paragraph
+- paragraph: 30 ribu
+- paragraph: + Bonus 3 ribu (khusus GoldPlus)
+- paragraph: Rp27.000
+- paragraph: 19%
+- paragraph: Rp33.000
+- radio
+- paragraph
+- paragraph: 75 ribu
+- paragraph: + Bonus 7.5 ribu (khusus GoldPlus)
+- paragraph: Rp75.000
+- paragraph: 15%
+- paragraph: Rp87.500
+- radio
+- paragraph
+- paragraph: 80 ribu
+- paragraph: + Bonus 8 ribu (khusus GoldPlus)
+- paragraph: Rp88.000
+- radio
+- paragraph
+- paragraph: 150 ribu Favorit
+- paragraph: Rp150.000
+- radio
+- paragraph
+- paragraph: 300 ribu
+- paragraph: + Bonus 24 ribu (khusus GoldPlus)
+- paragraph: Rp276.000
+- paragraph: 15%
+- paragraph: Rp324.000
+- radio
+- paragraph
+- paragraph: 850 ribu
+- paragraph: + Bonus 85 ribu (khusus GoldPlus)
+- paragraph: Rp935.000
+- radio
+- paragraph
+- paragraph: 1 juta
+- paragraph: + Bonus 100 ribu (khusus GoldPlus)
+- paragraph: Rp850.000
+- paragraph: 23%
+- paragraph: Rp1.100.000
+- radio
+- paragraph
+- paragraph: 10 juta
+- paragraph: + Bonus 2 juta (khusus GoldPlus)
+- paragraph: Rp7.000.000
+- paragraph: 42%
+- paragraph: Rp12.000.000
+- radio
+- paragraph
+- paragraph: 20 juta
+- paragraph: + Bonus 4.4 juta (khusus GoldPlus)
+- paragraph: Rp10.000.000
+- paragraph: 60%
+- paragraph: Rp24.400.000
+- button "Pilih Saldo" [disabled]
       """
 
   @TEST_LIMO-3336 @continue
   Scenario: Change Saldo
     Given owner choose saldo "Rp27.000"
     When owner ubah saldo to "Rp80.000"
-    Then owner will see that the text "Saldo MamiAds 80 ribu" is displayed
+    Then owner will see that the text "Saldo MamiAds 150 ribu" is displayed
 
   @TEST_LIMO-3337 @continue
   Scenario: Beli Saldo - Transaction Success

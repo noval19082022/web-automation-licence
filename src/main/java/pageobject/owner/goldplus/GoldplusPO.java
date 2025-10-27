@@ -209,7 +209,7 @@ public class GoldplusPO {
      */
     public void clickOnGoldplusPackageButton(int goldplus){
         playwright.waitTillPageLoaded();
-        playwright.clickOn(page.locator("(//span[@class='bg-c-button__label'][normalize-space()='Pilih Paket'])["+goldplus+"]"));
+        playwright.clickOn(page.locator("(//div[@class='goldplus-package-card__footer-actions'])["+goldplus+"]"));
 
     }
 
@@ -567,7 +567,30 @@ public class GoldplusPO {
             return playwright.getText(page.locator(".invoice-total-amount"));
 
         } else {
-            return playwright.getText(page.locator("//p[normalize-space()='"+text+"']/../../following-sibling::div"));
+            // Try multiple XPath strategies to find the value - robust implementation
+            String[] xpathStrategies = {
+                "//p[normalize-space()='"+text+"']/following-sibling::p[1]",
+                "//p[normalize-space()='"+text+"']/following::p[1]",
+                "//p[normalize-space()='"+text+"']/../following-sibling::*/p[1]",
+                "//p[normalize-space()='"+text+"']/../following-sibling::*[1]//p[1]",
+                "//p[normalize-space()='"+text+"']/parent::*/following-sibling::*[1]//p",
+                "//p[normalize-space()='"+text+"']/../../following-sibling::div//p[1]",
+                "//p[normalize-space()='"+text+"']/../../following-sibling::div"
+            };
+
+            for (String xpath : xpathStrategies) {
+                try {
+                    Locator locator = page.locator(xpath);
+                    if (playwright.waitTillLocatorIsVisible(locator, 2000.0)) {
+                        String result = playwright.getText(locator);
+                        if (result != null && !result.trim().isEmpty()) {
+                            return result;
+                        }
+                    }
+                } catch (Exception e) {
+                }
+            }
+            throw new RuntimeException("Could not find value for field: " + text + ". Tried " + xpathStrategies.length + " XPath strategies.");
         }
     }
 
