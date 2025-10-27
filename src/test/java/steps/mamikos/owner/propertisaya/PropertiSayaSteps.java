@@ -1,6 +1,7 @@
 package steps.mamikos.owner.propertisaya;
 
 import com.microsoft.playwright.Page;
+import config.global.FlowControl;
 import config.global.GlobalConfig;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
@@ -12,6 +13,7 @@ import io.cucumber.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
 import pageobject.common.LoadingPO;
+import pageobject.common.ModalPopUpPO;
 import pageobject.owner.AddTenantPO;
 import pageobject.owner.PropertiSayaPO;
 import pageobject.owner.fiturpromosi.mamiads.NaikkanIklanPO;
@@ -29,6 +31,7 @@ public class PropertiSayaSteps {
     NaikkanIklanPO naikkanIklanPO = new NaikkanIklanPO(page);
     LoadingPO loading = new LoadingPO(page);
     AddTenantPO addTenantPO = new AddTenantPO(page);
+    ModalPopUpPO modalPopUpPO = new ModalPopUpPO(page);
 
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
 
@@ -57,6 +60,9 @@ public class PropertiSayaSteps {
     @When("owner search kost {string} on property saya page")
     public void ownerSearchKostOnPropertySayaPage(String kostName) {
         loading.waitForLoadingIconDisappear();
+        if(modalPopUpPO.isModalCloseIconVisible()){
+            modalPopUpPO.clicksModalCloseIcon();
+        }
         propertySaya.searchKostPropertySaya(kostName);
         Mamikos.setPropertyKosName(kostName);
     }
@@ -182,6 +188,9 @@ public class PropertiSayaSteps {
 
     @When("user/owner clicks on Edit Data Kos button number {string}")
     public void userOwnerClicksOnEditDataKosButtonNumber(String kosNumber) {
+        if (modalPopUpPO.isModalCloseIconVisible()) {
+            modalPopUpPO.clicksModalCloseIcon();
+        }
         propertySaya.clicksOnEditDataKosButton(Integer.parseInt(kosNumber) - 1);
     }
 
