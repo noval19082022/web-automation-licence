@@ -379,7 +379,7 @@ public class PropertiSayaPO {
         pengelolaPhoneField = page.locator("input[type=text]").nth(3);
         bbkPopUp = page.locator("//*[@class='bg-c-modal__inner']");
         untickInhabitedCheckbox = page.locator("svg").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^checkmark$")));
-        editDataKosButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Edit Data Kos"));
+        editDataKosButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("Edit Data Kos"));
         editRoomIcn = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName("1")).getByRole(AriaRole.LINK).first();
         toastMessage = page.locator(".wrapper__toast");
         updateRoom = page.getByText("Update Kamar");
@@ -2668,6 +2668,7 @@ public class PropertiSayaPO {
      * @param index edit data kos index
      */
     public void clicksOnEditDataKosButton(Integer index) {
+        playwright.waitTillLocatorIsVisible(editDataKosButton, 60000.0);
         playwright.clickOn(editDataKosButton.nth(index));
     }
 }

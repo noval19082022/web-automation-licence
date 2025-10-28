@@ -176,7 +176,8 @@ public class HomePO {
      * Navigates to homepage
      */
     public void navigatesToHomepage() {
-        playwright.navigateToAndWaitLocator(Mamikos.URL, getMamikosLogo(), 3000.0);
+        playwright.navigateTo(Mamikos.URL, 60000.0);
+        playwright.waitTillLocatorIsVisible(getMamikosLogo(), 3000.0);
     }
 
     /**
