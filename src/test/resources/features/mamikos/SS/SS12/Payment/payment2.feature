@@ -1,4 +1,4 @@
-@SS12 @BackofficeStagging2
+@SS120 @BackofficeStagging2
 Feature: Payment Backoffice Staging 2 - Refund
 
   @TEST_SS-2892 @Automated @web-covered
