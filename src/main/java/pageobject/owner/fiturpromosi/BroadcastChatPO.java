@@ -85,7 +85,7 @@ public class BroadcastChatPO {
         andaBelumMemilikiKosActiveText = page.getByText("Anda belum memiliki kos aktif");
         broadcastChatPackageContent = page.getByTestId("broadcastChatDesktop");
         lihatDetailButton = playwright.getButtonBySetName("Lihat Detail");
-        ajukanGantiPaketButton = playwright.getButtonBySetName("Ajukan Ganti Paket");
+        ajukanGantiPaketButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Ganti Paket"));
         beliPaketButton = playwright.getButtonBySetName("Beli Paket");
         gpHeader = page.locator("div.broadcast-chat-content__alert").getByRole(AriaRole.PARAGRAPH).first();
         lihatRincianButton = playwright.getButtonByText("Lihat Rincian");
@@ -373,7 +373,34 @@ public class BroadcastChatPO {
     public void clickOnTambahBroadcastChatButton() {
         if (!playwright.getActivePageURL().contains("kos")) {
             playwright.clickIfElementVisibleAfterLoad(tambahBroadcastChatButton, 5_000.0);
+
+            // Dismiss modal intercept if it appears
+            dismissInterceptModalIfExists();
+
             playwright.clickIfElementVisible(buatBroadcastChatButton);
+        }
+    }
+
+    /**
+     * Dismiss broadcast chat intercept modal if it exists
+     */
+    private void dismissInterceptModalIfExists() {
+        // Check for intercept modal for first-time broadcast chat users
+        Locator interceptModal = page.locator(".intercept-first-timer-broadcast-chat");
+
+        if (playwright.waitTillLocatorIsVisible(interceptModal, 2000.0)) {
+            // Try pressing Escape key first
+            page.keyboard().press("Escape");
+            playwright.hardWait(500.0);
+
+            // If modal still exists, try clicking close button
+            if (interceptModal.isVisible()) {
+                Locator closeButton = page.locator(".bg-c-modal__action-closable");
+                if (playwright.waitTillLocatorIsVisible(closeButton, 1000.0)) {
+                    playwright.clickOn(closeButton);
+                    playwright.hardWait(500.0);
+                }
+            }
         }
     }
 

@@ -244,6 +244,8 @@ Feature: Broadcast Chat Owner
     When user login as owner:
       | phone stag  | phone prod | password  |
       | 08646547892 | 0          | fathul123 |
+    And user click daftar GP button
+    And user click "Pilih Paket GoldPlus" button
     And user wants to subscribe Goldplus 2
     And owner navigates to owner dashboard
     And user click chat button in top bar owner home page
@@ -265,12 +267,17 @@ Feature: Broadcast Chat Owner
     When user login as owner:
       | phone stag  | phone prod | password  |
       | 08646547892 | 0          | fathul123 |
+    And user click daftar GP button
+    And user click "Pilih Paket GoldPlus" button
     And user wants to subscribe Goldplus 1
+    And owner select payment from invoice detail with DANA
+    And owner set active page to 0
+    And owner navigates to "/goldplus/payment"
+    And owner click filter "Selesai" in Pembayaran Tagihan Goldplus page
     And owner navigates to owner dashboard
     And user click chat button in top bar owner home page
     And user click on the broadcast message icon in the chat page
-    When user click "Lihat Detail Paket"
-    Then user will see that the text "Detail Paket" is displayed
+    Then user will see that the text "Lihat Detail Paket" is displayed
     Then owner can sees button "Lihat Detail Paket" and button "Ajukan Ganti Paket" is visible
 
   @TEST_LIMO-1175
@@ -323,7 +330,7 @@ Feature: Broadcast Chat Owner
       | phone stag | phone prod | password  |
       | 0891202413 | 0          | qwerty123 |
     When owner navigates to broadcast chat page
-  #  And owner dismiss FTUE Broadcast
+    And owner dismiss FTUE Broadcast
     And owner add broadcast chat for kost "Kos Insto Cool Rajeg Tangerang"
     And owner clicks Kos "Kos Insto Cool Rajeg Tangerang" and Pilih Kos button
     And owner Masukan Pesan and choose row number 1 from the broadcast chat dashboard
@@ -367,7 +374,7 @@ Feature: Broadcast Chat Owner
       | phone stag | phone prod | password  |
       | 0891202413 | 0          | qwerty123 |
     When owner navigates to broadcast chat page
-   # And owner dismiss FTUE Broadcast
+    And owner dismiss FTUE Broadcast
     And owner add broadcast chat for kost "Kos Insto Cool Rajeg Tangerang"
     And owner clicks Kos "Kos Insto Cool Rajeg Tangerang" and Pilih Kos button
     And owner Masukan Pesan and choose row number 1 from the broadcast chat dashboard

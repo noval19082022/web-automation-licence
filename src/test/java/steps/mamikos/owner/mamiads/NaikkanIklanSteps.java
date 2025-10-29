@@ -173,7 +173,6 @@ public class NaikkanIklanSteps {
 
     @And("user verify the wording anggaran of iklan {string} contains {string}")
     public void user_verify_the_wording_anggaran_of_iklan_contains(String adsName, String anggaranDesc) {
-        playwright.waitTillPageLoaded(5000.0);
         var anggaranReal = naikkanIklanPO.getTextAnggaranDesc(adsName);
         Assert.assertTrue(anggaranReal.contains(anggaranDesc), String.format("Anggaran description doesn't match! real is %s", anggaranReal));
     }
