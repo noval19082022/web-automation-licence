@@ -1029,7 +1029,8 @@ public class PlaywrightHelpers {
      * @param locator clickable
      */
     private void logElementNotClickable(Locator locator) {
-        log.info("locator is not clicked or visible {}", locator);
+        // log.info("locator is not clicked or visible {}", locator);
+        System.out.println("locator is not clicked or visible " + locator);
     }
 
     /**
