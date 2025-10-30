@@ -13,7 +13,7 @@ Feature: Rajawali Chat Room
   Scenario: Check if User can click on Kost Name in Rajawali Chat Room
     And user click on Kos Name from chat list
     Then user able to see Kos Name
-#    When admin set active page to 1
+    When admin set active page to 1
     Then user will directed to Kos Detail in new tab
 
   @TEST_SS-3358 @rajawali-chat @toAutomate @web
