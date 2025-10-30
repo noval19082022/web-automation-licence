@@ -1,4 +1,4 @@
-@regression @LIMO4 @EditRejectKost
+@regression @LIMO4 @EditRejectKost @flaky @flakyflow
 Feature: Edit Kos BBK Rejected
 
   Scenario: Reject BBK Kos

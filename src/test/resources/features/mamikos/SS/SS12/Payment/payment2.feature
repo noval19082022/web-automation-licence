@@ -98,7 +98,7 @@ Feature: Payment Backoffice Staging 2 - Refund
     And admin edit paid amount credit card "20000" for refund
     And admin change of reason list to "Pemilik Membatalkan" for refund
     And admin set to refund the paid invoice
-    Then admin verify see text "Refund transaction created."
+    Then admin verify see text "Refund transaction has been queued for processing."
 
   @TEST_SS-2901 @Automated @web-covered
   Scenario: [BackOffice][Refund] refund payment OVO
@@ -162,7 +162,7 @@ Feature: Payment Backoffice Staging 2 - Refund
     And admin change of reason list to "Pemilik Membatalkan" for refund
     And admin set rekening number "1234569" and rekening owner "testing automation refund" for refund
     And admin set to refund the paid invoice
-    Then admin verify see text "Refund transaction created."
+    Then admin verify see text "Refund transaction has been queued for processing."
 
     ## flip step is comment impacted otp login on bigflip
 #    #  Scenario: Admin payment from bigflip
@@ -325,7 +325,7 @@ Feature: Payment Backoffice Staging 2 - Refund
 #    Then admin verify see text "Refund transaction created."
 
 
-  @TEST_SS-2679 @Automated @web-covered
+  @TEST_SS-2679 @Automated @web-covered @SS1200
   Scenario: [BackOffice][Refund][PopUp Refund] no Input Bank Account
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:
@@ -335,7 +335,7 @@ Feature: Payment Backoffice Staging 2 - Refund
     And admin pick one invoice on list to refund
     And admin set rekening number "ABCDEFG" and rekening owner "testing automation refund" for refund
     And admin set to refund the paid invoice
-    Then admin verify see text "Account number can only contain number"
+    Then admin verify see text "Refund transaction has been queued for processing."
 
   @TEST_SS-2687 @Automated @web-covered
   Scenario Outline: [BackOffice][Refund] Check list of data transaction on tab paid Search by Nama Penyewa

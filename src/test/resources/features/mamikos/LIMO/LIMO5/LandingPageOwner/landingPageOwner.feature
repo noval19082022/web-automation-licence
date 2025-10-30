@@ -49,7 +49,7 @@ Feature: Landing Page Owner
     And user can see information "Anda tinggal menikmati keuntungannya setiap bulan dan pantau melalui Laporan Performa." on Landing Page Owner
     When user scroll and click "Lihat Singgahsini" button
     And tenant set active page to 1
-    Then user should redirect to link "https://singgahsini.id/"
+    Then user should redirect to link "https://www.singgahsini.id/"
 
   @TEST_LIMO-367 @WEB @AUTOMATED
   Scenario: [Landing Page Owner] Owner can see "FAQ" section when open landing page owner
