@@ -4,6 +4,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import utilities.PlaywrightHelpers;
+import java.util.regex.Pattern;
 
 public class ChatPO {
     Page page;
@@ -27,15 +28,15 @@ public class ChatPO {
         this.playwright = new PlaywrightHelpers(page);
         tenantChatList = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName("CS Okta Consultant")).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Consultant"));
         chatRoomMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Chat Room"));
-        kostTitleList = page.locator("//div[@class=\"list-item\"]").first();
-        chatKosTitle = page.locator("//div[@class=\"chat-title is-group\"]");
+        kostTitleList = page.locator("//div[@class=\"channel-list-item__content\"]").first();
+        chatKosTitle = page.locator("//div[@class=\"chat-room-header flex-align-center bg-u-p-lg\"]");
         chatSearchDropdown = page.locator("#search_type");
         chatSearchInput = page.getByPlaceholder("Cari Chat");
         allChatMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("All"));
 
         //--------important----//
-        markImportantButton = page.locator(".list-item__left-content > div > svg").first();
-        importantMark = page.locator("path:nth-child(2)").first();
+        markImportantButton = page.locator("//div[@class=\"channel-list-item__important-button-icon\"]").first();
+        importantMark = page.locator("//div[@data-testid=\"important-button-active\"]").first();
     }
 
     /**
@@ -80,18 +81,18 @@ public class ChatPO {
      * Click on Chat type search
      */
     public void setChatSearchType(String type) {
-        searchType = page.locator("(//label[@for='filter_kost_level']//following::div)[2]");
+        searchType = page.locator("//span[@class=\"bg-c-select__trigger-text\"]");
         playwright.clickOn(searchType);
-        playwright.hardWait(5);
-        Locator searchTypeChat = page.locator("//select[@name='search_type']");
+        playwright.hardWait(2);
+
         if(type.equalsIgnoreCase("kos")) {
-            playwright.selectDropdownByValue(searchTypeChat, "kos");
+            page.locator("a").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Kos$"))).click();
         }
         else if (type.equalsIgnoreCase("kos/tenant")) {
-            playwright.selectDropdownByValue(searchTypeChat, "kos/tenant");
+            page.locator("a").filter(new Locator.FilterOptions().setHasText("Kos/Tenant")).click();
         }
         else if (type.equalsIgnoreCase("tenant")) {
-            playwright.selectDropdownByValue(searchTypeChat, "tenant");
+            page.locator("a").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Tenant$"))).click();
         }
     }
 
@@ -115,7 +116,7 @@ public class ChatPO {
      * @return data search
      */
     public String getResutlSearch() {
-        Locator textTitle = page.locator("//*[@id='group_list']");
+        Locator textTitle = page.locator("//div[@class=\"channel-list-item__content\"]").first();
         return playwright.getText(textTitle);
     }
 

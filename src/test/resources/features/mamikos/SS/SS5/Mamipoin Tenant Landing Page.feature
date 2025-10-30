@@ -6,13 +6,13 @@ Feature: Mamipoin Tenant Landing Page
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag  | phone prod    | password  |
-      | 08123000002 | 0890867321215 | qwerty123 |
+      | 0810000006  | 0890867321215 | qwerty123 |
     And user navigate to kost saya page
     And user clicks on mamipoin tenant entry point button
     And user verify informasi poin button is displayed
     And user verify riwayat poin button is displayed
     And user verify dapatkan poin button is displayed
-    And user verify expired point information on mamipoin landing page "11.000 poin kedaluwarsa pada 30 Sep 2025"
+    And user verify expired point information on mamipoin landing page "5.936 poin kedaluwarsa pada 31 Mar 2026"
 
   @SS-5061
   Scenario: Information about points that will expire and Tenant has no point

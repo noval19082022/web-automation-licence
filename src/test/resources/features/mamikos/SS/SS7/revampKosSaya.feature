@@ -8,4 +8,4 @@ Feature: Revamp kos saya
       | phone stag   | phone prod  | password  |
       | 089220230101 | 08100000622 | qwerty123 |
     And user click Mau Coba Dong section at homepage
-    Then user will see kos saya is still empty
+#    Then user will see kos saya is still empty

@@ -99,6 +99,7 @@ public class InvoicePO {
     Locator totalPembayaranParentSection;
     Locator singgahsiniPlusLevelSection;
     Locator invoiceBillSection;
+    Locator disableMamipoinButton;
 
     public InvoicePO(Page page) {
         this.page = page;
@@ -184,6 +185,7 @@ public class InvoicePO {
         totalPembayaranParentSection = page.locator("text=Total Pembayaran").locator("..");
         invoiceBillSection = page.locator("#invoiceBill");
         singgahsiniPlusLevelSection = page.locator("div.invoice-singgahsini-plus-level");
+        disableMamipoinButton = page.locator("//*[@class=\"bg-c-switch invoice-point-switch bg-c-switch--on bg-c-switch--disabled\"]");
     }
 
     /**
@@ -813,6 +815,13 @@ public class InvoicePO {
             playwright.uncheckBox(mamipoinToggleButton);
         }
         playwright.checkBox(mamipoinToggleButton);
+    }
+
+    /**
+     * verify mamipoin on invoice is disable
+      */
+    public boolean isMamipoinisDisable(){
+        return playwright.isButtonDisable(disableMamipoinButton);
     }
 
     /**
