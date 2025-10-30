@@ -7,7 +7,7 @@ Feature: MamiPoin Tenant Informasi Poin Page
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag  | phone prod    | password  |
-      | 08123000002 | 0890867321215 | qwerty123 |
+      | 0810000006 | 0890867321215 | qwerty123 |
     And tenant navigate to mamipoint expired page
     Then user verify title in the informasi poin page is displayed
     And user verify subtitle in the informasi poin page is displayed
@@ -17,7 +17,7 @@ Feature: MamiPoin Tenant Informasi Poin Page
   @SS-5058
   Scenario: Description on Tanggal Kedaluwarsa
     Then user verify expired point on information point page
-      | 30 Sep 2025 |
+      | 31 Mar 2026 |
 
   @SS-5059
   Scenario: MamiPoin Tenant Informasi Poin Page When the User Poin is Empty

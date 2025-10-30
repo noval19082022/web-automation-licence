@@ -392,6 +392,11 @@ public class PaymentSteps {
         invoice.clickMamipoinToggleButtonToOnOff();
     }
 
+    @Then("tenant can see disable mamipoin button")
+    public void tenantCanSeeDisbleMamipoinButton(){
+        invoice.isMamipoinisDisable();
+    }
+
     @Then("tenant point estimate not displayed on invoice")
     public void tenant_point_estimate_not_displayed_on_invoice()  {
         Assert.assertFalse(invoice.isPointEstimateTenantVisible());
