@@ -116,7 +116,11 @@ public class SearchContractSteps {
 
     @Then("admin verify see text {string}")
     public void seeText(String text) {
-        Assert.assertTrue(admin.getPopUpText(text), "Text " + text + " isn't exist");
+        boolean textFound = admin.getPopUpText(text);
+        if (!textFound) {
+            String actualMessages = admin.getAllVisibleMessages();
+            Assert.assertTrue(textFound, "Expected text '" + text + "' not found. Actual messages found:\n" + actualMessages);
+        }
     }
 
     @Then("admin see maximal length {string}")

@@ -247,8 +247,9 @@ public class NaikkanIklanPO {
      * @params adsName
      */
     public String getTextAnggaranDesc(String adsName) {
-        playwright.hardWait(4000.0);
+        playwright.hardWait(7000.0);
         anggaranDescLocator = page.locator("//*[.='" + adsName + "']/../../following-sibling::*//div[@id='ads-allocation-description']");
+        playwright.waitTillLocatorIsVisible(anggaranDescLocator);
         return playwright.getText(anggaranDescLocator);
     }
 

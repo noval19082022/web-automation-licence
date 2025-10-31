@@ -69,7 +69,36 @@ public class AdminMamipayDashboardPO {
      * @return boolean
      */
     public Boolean getPopUpText(String popUp) {
-        return page.getByText(popUp).first().isVisible();
+        Locator textLocator = page.getByText(popUp).first();
+        return playwright.waitTillLocatorIsVisible(textLocator, 5000.0);
+    }
+    
+    /**
+     * Get all visible text messages for debugging
+     * This helps identify what messages are actually shown
+     * 
+     * @return String containing all visible alert/notification messages
+     */
+    public String getAllVisibleMessages() {
+        StringBuilder messages = new StringBuilder();
+        
+        // Check common notification selectors
+        String[] selectors = {".alert", ".notification", ".toast", ".message", 
+                            ".modal-body", "[role='alert']", ".swal2-container"};
+        
+        for (String selector : selectors) {
+            Locator elements = page.locator(selector);
+            if (elements.count() > 0) {
+                for (int i = 0; i < elements.count(); i++) {
+                    String text = playwright.getLocatorTextContent(elements.nth(i));
+                    if (text != null && !text.trim().isEmpty()) {
+                        messages.append("Found in ").append(selector).append(": ").append(text.trim()).append("\n");
+                    }
+                }
+            }
+        }
+        
+        return messages.toString();
     }
 
     /**

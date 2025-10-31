@@ -13,6 +13,14 @@ Feature: Broadcast Chat Owner Tenant Booking Required
     And tenant booking kost for "today"
     Then tenant should success booking kost
 
+  @cancelBooking
+  Scenario: cancel booking
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag  | phone prod | password  |
+      | 08100000622 | 0892202105 | qwerty123 |
+    And user cancel booking
+
   @TEST_LIMO-3630 @Broadcast-chat @GP2 @automated @listing-monetization @web @continue
   Scenario: [Broadcast Chat][View Receiver] User want to back from page view receiver
     Given user go to mamikos homepage

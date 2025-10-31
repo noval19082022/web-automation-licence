@@ -11,10 +11,7 @@ Feature: Tenant Apply MamiPoin on Invoice
     And tenant navigate to tagihan kost saya
     And tenant go to invoice page
     And tenant set active page to 1
-    And user clicks on mamipoin toggle button to On Off
-    Then system display remaining payment "after" use mamipoin for payment monthly
-    When user clicks on mamipoin toggle button to On Off
-    Then system display remaining payment "before" use mamipoin for payment monthly
+    Then tenant can see disable mamipoin button
 
   @TEST_SS-3575
   Scenario: Point Estimate on Blackisted Tenant

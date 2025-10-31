@@ -19,19 +19,20 @@ Feature: Rajawali Chat Room
   @TEST_SS-3358 @rajawali-chat @toAutomate @web
   Scenario: [Rajawali Chat][Search]Search by Kos/Tenant
     When admin select filter "kos/tenant"
-    And admin fill search chat with "empatt"
+    And admin fill search chat with "bakwan"
     Then admin can see result data
 
   @TEST_SS-3359 @rajawali-chat @toAutomate @web
   Scenario: [Rajawali Chat][Search]Search by Kos
     When admin select filter "kos/tenant"
-    And admin fill search chat with "kost singgahsini camon"
+    And admin fill search chat with "kost zahira papua"
     Then admin can see result data
 
   @rajawali-chat @toAutomate @web
   Scenario: [Rajawali Chat][Search]Search by Tenant
     When admin select filter "tenant"
-    And admin fill search chat with "empatt"
+    And admin fill search chat with "bakwan"
+    And admin filter "Important" on chat list
     Then admin can see result data
 
   @TEST_SS-5741

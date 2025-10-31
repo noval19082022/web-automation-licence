@@ -210,6 +210,8 @@ public class RefundPO {
      */
     public void clickOnRefundAndTransfer() {
         playwrightHelpers.clickOn(refundBtnAction);
+        // Wait for response after clicking refund button
+        playwrightHelpers.hardWait(2000.0);
     }
 
     /**
