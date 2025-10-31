@@ -31,7 +31,7 @@ public class PaymentPO extends InvoicePO {
         super(page);
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
-        this.paymentSuccessText = page.getByText("Pembayaran Berhasil").first();
+        this.paymentSuccessText = page.locator("section:has(img[alt*='success']) >> text=Pembayaran Berhasil");
         // BNI
         this.vaNumberPlaceHolder = page.getByLabel("VA Number");
         this.searchBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(""));
@@ -65,7 +65,7 @@ public class PaymentPO extends InvoicePO {
      * Payment method using cc
      */
     public void paymentUsingCC() {
-        playwright.waitFor(codeCCPlaceHolder, 10_000.0);
+        playwright.waitTillLocatorIsVisible(codeCCPlaceHolder, 60_000.0);
         playwright.clickLocatorAndTypeKeyboard(codeCCPlaceHolder, "1234");
         playwright.clickOn(submitBtnForCC);
         playwright.hardWait(3_000.00);
@@ -77,7 +77,7 @@ public class PaymentPO extends InvoicePO {
             if (maxReload == 5) {
                 break;
             }
-        } while (!playwright.waitTillLocatorIsVisible(pembayaranBerhasilText));
+        } while (!playwright.waitTillLocatorIsVisible(pembayaranBerhasilText, 2000.0));
     }
 
     /**

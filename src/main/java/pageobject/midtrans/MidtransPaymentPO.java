@@ -25,6 +25,7 @@ public class MidtransPaymentPO {
     Locator flagButtonBNI;
     Locator searchButtonPaymentBNI;
     Locator vaCodePlaceHolderButtonBNINew;
+    Locator bniSuccessPayment;
 
     public MidtransPaymentPO(Page page) {
         this.page = page;
@@ -41,6 +42,7 @@ public class MidtransPaymentPO {
         flagButtonBNI = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Flag"));
         searchButtonPaymentBNI = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(""));
         vaCodePlaceHolderButtonBNINew = page.getByLabel("VA Number");
+        bniSuccessPayment = page.locator(".note.note-success");
     }
 
     /**
@@ -88,12 +90,12 @@ public class MidtransPaymentPO {
      * payment process BNI simulator fro BNI
      * @param amountBNI
      */
-    public void amountBNI(String amountBNI){
+    public void amountBNI(String amountBNI) {
         playwright = Optional.ofNullable(playwright).orElseGet(() -> new PlaywrightHelpers(page));
-        playwright.clickLocatorAndTypeKeyboard(paymentAmountBNINewText,amountBNI);
+        playwright.clickLocatorAndTypeKeyboard(paymentAmountBNINewText, amountBNI);
         playwright.clickOn(flagButtonBNI);
+        playwright.waitTillLocatorIsVisible(bniSuccessPayment, 60000.0);
     }
-
     /**
      * Payment process midtrans for BRI
      * @param kodePembayaran payment virtual account

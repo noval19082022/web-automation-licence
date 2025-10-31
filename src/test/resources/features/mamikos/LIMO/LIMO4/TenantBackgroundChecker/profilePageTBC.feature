@@ -1,4 +1,4 @@
-@LIMO4 @regression @tbclimo4
+@LIMO4 @regression @tbclimo4 @flaky @selasamaintenanceskuy
 Feature: Profile Tenant Background Checker
 
   Scenario: reset Gp

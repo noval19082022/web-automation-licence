@@ -23,7 +23,7 @@ public class GoldPlusSubmissionPO {
         this.page = page;
         GoldPlusPO GoldPlusPO = new GoldPlusPO(page);
         playwright = new PlaywrightHelpers(this.page);
-        pilihPeriode = page.locator("//div[@class='goldplus-periode__cta-container']");
+        pilihPeriode = page.locator("button:has-text('Pilih Rp')");
         bayarSekarangButton = playwright.getButtonBySetName("Bayar Sekarang Rp");
         gpSectionCardList = page.getByTestId("periode-card-gp");
         selectedFavoritGpPackage = page.locator(".bg-c-radio--checked + .goldplus-periode-select__option .bg-c-label--pill-red");

@@ -165,7 +165,7 @@ public class InvoicePO {
         mamipoinToggleButton = page.getByRole(AriaRole.CHECKBOX);
         tenantPointEstimate = page.locator(".mamipoin-estimated-text");
         discountMamipoinText = page.locator("xpath = //p[text()='Potongan MamiPoin']/following-sibling::p");
-        pembayaranBerhasilText = page.locator("h3").filter(new Locator.FilterOptions().setHasText("Pembayaran Berhasil!"));
+        pembayaranBerhasilText = page.locator("section:has(img[alt*='success']) >> text=Pembayaran Berhasil");
         sayaSudahBayarBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Sudah Bayar"));
         pilihUbahMetodePembayaranButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah Metode Pembayaran"));
         ubahButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah").setExact(true));

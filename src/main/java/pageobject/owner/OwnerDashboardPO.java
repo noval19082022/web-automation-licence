@@ -871,6 +871,7 @@ public class OwnerDashboardPO {
             playwright.clickOn(daftarGpButton);
             handleDaftarGPPeriodSelectionPopup();
         } else {
+            playwright.waitTillLocatorIsVisible(entryPointCardGP, 30000.0);
             playwright.clickOn(entryPointCardGP);
         }
     }
