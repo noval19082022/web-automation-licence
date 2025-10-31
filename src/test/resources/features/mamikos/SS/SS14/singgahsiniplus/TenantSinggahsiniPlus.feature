@@ -124,7 +124,7 @@ Feature: Singgahsini Plus
     When tenant can see tier passed
     Then tenant can see tier passed description "Level 1 sudah terlewati. Kumpulkan lebih banyak poin di level berikutnya!"
 
-  @TEST_SS-9288 @continue @a
+  @TEST_SS-9288 @continue
   Scenario: [Web][Singgahsini+] Singgahsini+ Page Tab Layout Max Level
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -138,13 +138,13 @@ Feature: Singgahsini Plus
     When tenant can see tier active with "Level 7: Diamond"
     Then tenant can see tier passed description "Selamat! Kamu sudah di level tertinggi Singgahsini+. Pertahankan level-mu, ya!"
 
-  @TEST_SS-9694 @continue @a
+  @TEST_SS-9694 @continue
   Scenario: [Invoice][Singgahsini+] Invoice for Active Tenant P1
     When user navigate to tagihan kost saya
     And tenant clicks on Bayar button in tagihan list
     Then tenant can see Singgahsini Plus level on invoice page
 
-  @TEST_SS-9520 @continue @a
+  @TEST_SS-9520 @continue
   Scenario: [Web][Reward & Poin][Mamipoin Tab] Riwayat Mamipoin section
     When user go to mamikos homepage
     And tenant click on icon profil
@@ -154,7 +154,7 @@ Feature: Singgahsini Plus
     When tenant clicks on riwayat poin link
     Then user verify title in the riwayat poin page is displayed
 
-  @TEST_SS-9521 @a
+  @TEST_SS-9521
   Scenario: [Web][Reward & Poin][Mamipoin Tab] Dapatkan Mamipoin section
     When tenant clicks on Singgahsini text
     And tenant clicks on MamiPoin link in Singgahsini Plus card
