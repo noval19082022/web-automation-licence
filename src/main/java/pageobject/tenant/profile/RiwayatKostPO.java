@@ -24,6 +24,7 @@ public class RiwayatKostPO {
     Locator reviewKostSayaTitle;
     Locator titleReview;
     Locator ajukanBerhentiSewaButton;
+    Locator berhentiSewaButtonPopup;
 
     Locator ajukanBerhentiSewaButtonAfterReviewKos;
     Locator kirimFormButton;
@@ -92,7 +93,7 @@ public class RiwayatKostPO {
         bankNameButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih bank dropdown-down"));
         accountNumber = page.getByPlaceholder("Masukkan nomor rekening");
         accountOwnerName = page.getByPlaceholder("Masukkan nama pemilik rekening");
-
+        berhentiSewaButtonPopup = page.locator("//*[@class=\"bg-c-button bg-c-button--tertiary bg-c-button--lg\"]");
     }
 
     /**
@@ -405,5 +406,31 @@ public class RiwayatKostPO {
     public void clickButtonOnPopup(String text){
         Locator popupAccountButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(""+text+""));
         playwright.clickOn(popupAccountButton);
+    }
+
+    /**
+     * validate berhenti sewa popup
+     * @param text example Sayang banget kalau kamu berhenti sewa sekarang
+     * @return text
+     */
+    public boolean validateBerhentiSewaPopup(String text){
+        Locator berhentiSewaText = page.locator("//*[contains(text(),'"+text+"')]");
+        return playwright.waitTillLocatorIsVisible(berhentiSewaText);
+    }
+
+    /**
+     * click berhenti sewa popup
+     */
+    public void clickBerhentiSewaButtonOnPopup(){
+        playwright.clickOn(berhentiSewaButtonPopup);
+    }
+
+    /**
+     * validate stop rent contract text on berhenti sewa page
+     * @return text
+     */
+    public boolean getStopRentContract(){
+        Locator stopRentContractText = page.locator("//*[@data-testid=\"userKostModalStopRent-contract\"]");
+        return playwright.waitTillLocatorIsVisible(stopRentContractText);
     }
 }
