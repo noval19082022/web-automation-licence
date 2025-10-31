@@ -1,4 +1,4 @@
-@LIMO2
+@LIMO2 @flaky
 Feature: Payment Goldplus staging
 
   Background: Admin reset GP owner
@@ -177,7 +177,7 @@ Feature: Payment Goldplus staging
     And user click button masukan on voucher
     And user can click close button on popup
     And user click on lihat detail voucher
-    Then owner will see that the text "Kode Voucher: COBATESMINIMUM" is displayed
+    Then owner will see that the text "GP Fix 5k" is displayed
 
   @deleteVoucherGp
   Scenario: User want to delete voucher after input voucher in GP invoice

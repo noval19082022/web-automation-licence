@@ -25,7 +25,8 @@ public class LoginAdminMamipayPO extends LoginPO {
      * @param email email String data type
      */
     public void fillEmail(String email) {
-        emailInput.fill(email);
+        playwright.waitTillLocatorIsVisible(emailInput, 30000.0);
+        playwright.fill(emailInput, email);
     }
 
     /**

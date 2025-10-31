@@ -907,8 +907,12 @@ public class PlaywrightHelpers {
      * @param duration Double type
      * @return boolean
      */
-    public boolean isTextDisplayed(String text, double duration) {
-        return isLocatorVisibleAfterLoad(page.getByText(text).first(), duration);
+    public Boolean isTextDisplayed(String text, double duration) {
+        Boolean result = isLocatorVisibleAfterLoad(page.getByText(text).first(), duration);
+        if (!result) {
+            log.info("Locator text target is not visible: {}", text);
+        }
+        return  result;
     }
 
     /**
