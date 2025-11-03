@@ -40,15 +40,11 @@ public class HomepagePO {
     Locator monthYear;
     Locator year;
     Locator monthOctober;
-    Locator monthDecember;
     Locator selectDate;
     Locator terapkanBtn;
     Locator tglLiveAkhir;
     Locator tglExpiredMulai;
-    Locator year2023;
     Locator tglExpiredAkhir;
-    Locator year2024;
-    Locator year2025;
     Locator pilihProdukDropdown;
     Locator produkValue;
     Locator pilihBSEDropdown;
@@ -770,11 +766,15 @@ public class HomepagePO {
     }
 
     /**
-     * Selects Date in Tanggal Mulai at Tanggal Live section
-     * @param tanggalLiveMulai
+     * Helper method to select a date in calendar picker
+     * @param dateFieldLocator the date field to click
+     * @param yearText the year to select (e.g., "2024", "2026")
+     * @param datePickerTestId the test ID for the date picker
+     * @param dateValue the date to select
+     * @param useFirst whether to use .first() (true) or .last() (false)
      */
-    public void inputsTanggalMulaiLiveDate(String tanggalLiveMulai) {
-        playwright.clickOn(tglLiveMulai);
+    private void selectDateInCalendar(Locator dateFieldLocator, String yearText, String datePickerTestId, String dateValue, boolean useFirst) {
+        playwright.clickOn(dateFieldLocator);
 
         //clicks Bulan Tahun in Calendar View
         monthYear = page.locator("//span[@class='day__month_btn up']");
@@ -784,17 +784,30 @@ public class HomepagePO {
         year = page.locator("//span[@class='month__year_btn up']");
         playwright.clickOn(year);
 
-        //clicks Year 2023
-        year2023 = page.locator("//span[8]");
-        playwright.clickOn(year2023);
+        //clicks specified Year
+        Locator yearLocator = page.locator("span.year", new Page.LocatorOptions().setHasText(yearText));
+        playwright.clickOn(yearLocator);
 
-        //clicks Month October
-        monthOctober = page.locator("//span[10]");
+        //clicks Month Oktober
+        monthOctober = page.locator("span.month", new Page.LocatorOptions().setHasText("Oktober"));
         playwright.clickOn(monthOctober);
 
         //select date based on parameter
-        selectDate = page.getByTestId("homeFilterModalDate-datePickerStart").getByText(tanggalLiveMulai, new Locator.GetByTextOptions().setExact(true)).first();
+        selectDate = page.getByTestId(datePickerTestId).getByText(dateValue, new Locator.GetByTextOptions().setExact(true));
+        if (useFirst) {
+            selectDate = selectDate.first();
+        } else {
+            selectDate = selectDate.last();
+        }
         playwright.clickOn(selectDate);
+    }
+
+    /**
+     * Selects Date in Tanggal Mulai at Tanggal Live section
+     * @param tanggalLiveMulai
+     */
+    public void inputsTanggalMulaiLiveDate(String tanggalLiveMulai) {
+        selectDateInCalendar(tglLiveMulai, "2024", "homeFilterModalDate-datePickerStart", tanggalLiveMulai, true);
     }
 
     /**
@@ -802,27 +815,7 @@ public class HomepagePO {
      * @param tanggalLiveAkhir
      */
     public void inputsTanggalAkhirLiveDate(String tanggalLiveAkhir) {
-        playwright.clickOn(tglLiveAkhir);
-
-        //clicks Bulan Tahun in Calendar View
-        monthYear = page.locator("//span[@class='day__month_btn up']");
-        playwright.clickOn(monthYear);
-
-        //clicks Tahun in Calendar View
-        year = page.locator("//span[@class='month__year_btn up']");
-        playwright.clickOn(year);
-
-        //clicks Year 2024
-        year2024 = page.locator("//span[9]");
-        playwright.clickOn(year2024);
-
-        //clicks Month October
-        monthOctober = page.locator("//span[10]");
-        playwright.clickOn(monthOctober);
-
-        //select date based on parameter
-        selectDate = page.getByTestId("homeFilterModalDate-datePickerEnd").getByText(tanggalLiveAkhir, new Locator.GetByTextOptions().setExact(true)).first();
-        playwright.clickOn(selectDate);
+        selectDateInCalendar(tglLiveAkhir, "2024", "homeFilterModalDate-datePickerEnd", tanggalLiveAkhir, true);
     }
 
     /**
@@ -830,27 +823,7 @@ public class HomepagePO {
      * @param tanggalExpiredMulai
      */
     public void inputsTanggalMulaiExpiredDate(String tanggalExpiredMulai) {
-        playwright.clickOn(tglExpiredMulai);
-
-        //clicks Bulan Tahun in Calendar View
-        monthYear = page.locator("//span[@class='day__month_btn up']");
-        playwright.clickOn(monthYear);
-
-        //clicks Tahun in Calendar View
-        year = page.locator("//span[@class='month__year_btn up']");
-        playwright.clickOn(year);
-
-        //clicks Year 2024
-        year2024 = page.locator("//span[9]");
-        playwright.clickOn(year2024);
-
-        //clicks Month October
-        monthOctober = page.locator("//span[10]");
-        playwright.clickOn(monthOctober);
-
-        //select date based on parameter
-        selectDate = page.getByTestId("homeFilterModalExpiredDate-datePickerStart").getByText(tanggalExpiredMulai, new Locator.GetByTextOptions().setExact(true)).first();
-        playwright.clickOn(selectDate);
+        selectDateInCalendar(tglExpiredMulai, "2026", "homeFilterModalExpiredDate-datePickerStart", tanggalExpiredMulai, true);
     }
 
     /**
@@ -858,27 +831,7 @@ public class HomepagePO {
      * @param tanggalExpiredAkhir
      */
     public void inputsTanggalAkhirExpiredDate(String tanggalExpiredAkhir) {
-        playwright.clickOn(tglExpiredAkhir);
-
-        //clicks Bulan Tahun in Calendar View
-        monthYear = page.locator("//span[@class='day__month_btn up']");
-        playwright.clickOn(monthYear);
-
-        //clicks Tahun in Calendar View
-        year = page.locator("//span[@class='month__year_btn up']");
-        playwright.clickOn(year);
-
-        //clicks Year 2025
-        year2025 = page.locator("//span[10]");
-        playwright.clickOn(year2025);
-
-        //clicks Month December
-        monthDecember = page.locator("//span[12]");
-        playwright.clickOn(monthDecember);
-
-        //select date based on parameter
-        selectDate = page.getByTestId("homeFilterModalExpiredDate-datePickerEnd").getByText(tanggalExpiredAkhir);
-        playwright.clickOn(selectDate);
+        selectDateInCalendar(tglExpiredAkhir, "2026", "homeFilterModalExpiredDate-datePickerEnd", tanggalExpiredAkhir, false);
     }
 
     /**
