@@ -100,6 +100,14 @@ public class CommonSteps {
         Assert.assertTrue(playwright.getActivePageURL().contains(link), "Url doesn't match");
     }
 
+    @Then("user redirected to URL {string}")
+    public void user_redirect_to_url_only(String expectedUrl) {
+        playwright.hardWait(3000); // Wait for redirect to complete
+        String currentUrl = playwright.getActivePageURL();
+        Assert.assertTrue(currentUrl.contains(expectedUrl), 
+            "Expected URL to contain: " + expectedUrl + " but actual URL is: " + currentUrl);
+    }
+
     @Then("user/owner/tenant will see that the text {string} is displayed on the table")
     public void user_will_see_that_the_text_is_displayed_on_the_table(String text) {
         Assert.assertTrue(playwright.waitTillLocatorIsVisible(playwright.locatorByRoleSetName(AriaRole.CELL, text).first()));

@@ -7,7 +7,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
     When user is on the LandingPage EnaknyaNgekos
     And user click on Google play on the footer
     And tenant set active page to 1
-    Then user redirected to "https://play.google.com/store/apps/details?id=com.git.mami.kos&utm_campaign=DAppAndroFooter&utm_source=DownloadAppFooter&utm_medium=DownloadAppFooter&utm_term=DownloadAppFooter"
+    Then user redirected to URL "https://play.google.com/store/apps/details?id=com.git.mami.kos&utm_campaign=DAppAndroFooter&utm_source=DownloadAppFooter&utm_medium=DownloadAppFooter&utm_term=DownloadAppFooter"
 
   @TEST_SS-3002 @TESTSET_UG-6228 @Automated @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Instagram icon
@@ -15,7 +15,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
     When user is on the LandingPage EnaknyaNgekos
     And user open instagram in footer
     And tenant set active page to 1
-    Then user redirected to "https://www.instagram.com/mamikosapp/"
+    Then user redirected to URL "https://www.instagram.com/mamikosapp/"
 
   @TEST_SS-3003 @TESTSET_UG-6228 @Automated @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Twitter icon
@@ -23,7 +23,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
     When user is on the LandingPage EnaknyaNgekos
     And user open twitter in footer
     And tenant set active page to 1
-    Then user redirected to "https://x.com/mamikosapp"
+    Then user redirected to URL "https://x.com/mamikosapp"
 
   @TEST_SS-3004 @TESTSET_UG-6228 @Automated @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Facebook icon
@@ -31,7 +31,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
     When user is on the LandingPage EnaknyaNgekos
     And user open facebook in footer
     And tenant set active page to 1
-    Then user redirected to "https://www.facebook.com/mamikosapp"
+    Then user redirected to URL "https://www.facebook.com/mamikosapp"
 
   @TEST_SS-3005 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - tentang kami
@@ -39,7 +39,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
     When user is on the LandingPage EnaknyaNgekos
     And user open tentang kami in footer
     And tenant set active page to 1
-    Then user redirected to "https://mamikos.com/tentang-kami"
+    Then user redirected to URL "https://mamikos.com/tentang-kami"
 
   @TEST_SS-5139 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - career
@@ -47,7 +47,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
     When user is on the LandingPage EnaknyaNgekos
     And user open job mamikos in footer
     And tenant set active page to 1
-    Then user redirected to "https://mamikos.com/career"
+    Then user redirected to URL "https://mamikos.com/career"
 
   @TEST_SS-5140 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - mamiads
@@ -55,7 +55,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
     When user is on the LandingPage EnaknyaNgekos
     And user open promosikan kost anda in footer
     And tenant set active page to 1
-    Then user redirected to "https://mamikos.com/mamiads"
+    Then user redirected to URL "https://mamikos.com/mamiads"
 
   @TEST_SS-5141 @TEST_DOM-304 @TEST_DOM-303 @TESTSET_UG-6228 @AUTOMATED @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - help
@@ -63,7 +63,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
     When user is on the LandingPage EnaknyaNgekos
     And user open pusat bantuan in footer
     And tenant set active page to 1
-    Then user redirected to "https://help.mamikos.com/"
+    Then user redirected to URL "https://help.mamikos.com/"
 
   @TEST_SS-5142 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - info
@@ -71,7 +71,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
     When user is on the LandingPage EnaknyaNgekos
     And user open blog mamikos in footer
     And tenant set active page to 1
-    Then user redirected to "https://mamikos.com/info/"
+    Then user redirected to URL "https://mamikos.com/info/"
 
 #  @TEST_SS-5143 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @web-covered
 #  Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - corporate
@@ -87,7 +87,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
     When user is on the LandingPage EnaknyaNgekos
     And user open kebijakan privasi in footer
     And tenant set active page to 1
-    Then user redirected to "https://help.mamikos.com/post/kebijakan-privasi-mamikos"
+    Then user redirected to URL "https://help.mamikos.com/post/kebijakan-privasi-mamikos"
 
   @TEST_SS-5144 @TEST_DOM-304 @TESTSET_UG-6228 @AUTOMATED @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Syarat dan Ketentuan
@@ -95,7 +95,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
     When user is on the LandingPage EnaknyaNgekos
     And user open syarat dan ketentuan in footer
     And tenant set active page to 1
-    Then user redirected to "https://help.mamikos.com/category/umum/syarat-dan-ketentuan"
+    Then user redirected to URL "https://help.mamikos.com/syarat-dan-ketentuan"
 
   @TEST_SS-5145 @TESTSET_UG-6228 @AUTOMATED @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: View Content - click Cari kos Singgahsini
@@ -103,7 +103,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
     When user is on the LandingPage EnaknyaNgekos
     And user open singgahsini in footer
     And tenant set active page to 1
-    Then user redirected to "https://singgahsini.id/"
+    Then user redirected to URL "https://www.singgahsini.id/"
 
   @TEST_SS-3011 @TESTSET_UG-6228 @Automated @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Header - Scroll Page
@@ -116,7 +116,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
     And user click booking kos button
-    Then user redirected to "/booking"
+    Then user redirected to URL "/booking"
 
   @TEST_SS-3015 @TESTSET_UG-6228 @Automated @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Header - click Fitur Unggulan
@@ -138,7 +138,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
     When user is on the LandingPage EnaknyaNgekos
     And user clicks on Mulai Cari Kos Button on enaknyangekos page
     And tenant set active page to 1
-    Then user redirected to "/kos/andalan"
+    Then user redirected to URL "/kos/andalan"
 
   @TEST_SS-2991 @TESTSET_UG-6228 @AUTOMATED @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos] Footer - click Email Address
@@ -152,14 +152,14 @@ Feature: [Test-Execution][DOM] Web - Campaign
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
     And user want to click on App Store on the footer
-    Then user redirected to "https://apps.apple.com/"
+    Then user redirected to URL "https://apps.apple.com/"
 
   @TEST_SS-2992 @TESTSET_UG-6228 @AUTOMATED @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos] Footer - click Whatsapp number
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
     And user open whatsapp in footer
-    Then user redirected to "https://api.whatsapp.com/"
+    Then user redirected to URL "https://api.whatsapp.com/"
 
   @TEST_SS-2980 @TESTSET_UG-6228 @Automated @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Visit Page - Play Video
