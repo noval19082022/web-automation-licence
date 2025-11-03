@@ -89,3 +89,31 @@
         And admin can see log facility "Fasilitas Kamar Mandi"
           | Old Data                        | New Data           | Updated by      |
           | Bak mandi, Gayung, Kloset Duduk | Bak mandi, Gayung  | Owner (Nurjono) |
+
+      @TEST_SS-10120 @test
+      Scenario: Log add facility by admin
+        Given admin go to mamikos bangkrupux admin
+        And admin login to bangkrupux:
+          | email stag                   | email prod                   | password  |
+          | automationpman01@mamikos.com | automationpman01@mamikos.com | qwerty123 |
+        And admin navigates to "/admin/kost/1000044307/edit"
+        When admin add facility in "Fasilitas Umum"
+          | Kulkas  |
+        And admin add facility in "*Fasilitas Kamar"
+          | TV  |
+        And admin add facility in "Fasilitas Kamar Mandi"
+          | Kloset Jongkok  |
+        And admin add facility in "Fasilitas Parkir"
+          | Parkir Motor  |
+        And admin add facility in "Fasilitas Lainnya"
+          | ATM / Bank  |
+        And admin add facility in "Peraturan Kos"
+          | Akses 24 Jam  |
+        And admin save edit kost
+        Then admin should see success toast message "Success!"
+        #check log facility
+        When admin navigates to "/admin/room/tag-change-log?room_id=1000044307"
+
+
+    @TEST_SS-10176
+      Scenario: Log delete facility by admin
