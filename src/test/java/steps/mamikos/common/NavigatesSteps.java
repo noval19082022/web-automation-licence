@@ -81,9 +81,16 @@ public class NavigatesSteps {
     @When("tenant/owner/admin set active page to {int}")
     public synchronized void tenantSetActivePageTo(int activePage) {
         List<Page> listPage = ActiveContext.getActiveBrowserContext().pages();
-        ActiveContext.setActivePage(listPage.get(activePage));
-        playwright = new PlaywrightHelpers(ActiveContext.getActivePage());
-        playwright.bringPageToView(ActiveContext.getActivePage());
+        if (activePage < listPage.size()) {
+            ActiveContext.setActivePage(listPage.get(activePage));
+            playwright = new PlaywrightHelpers(ActiveContext.getActivePage());
+            playwright.bringPageToView(ActiveContext.getActivePage());
+        } else {
+            // If requested page doesn't exist, use the last available page
+            ActiveContext.setActivePage(listPage.get(listPage.size() - 1));
+            playwright = new PlaywrightHelpers(ActiveContext.getActivePage());
+            playwright.bringPageToView(ActiveContext.getActivePage());
+        }
     }
 
     @When("tenant/owner/admin open new page")

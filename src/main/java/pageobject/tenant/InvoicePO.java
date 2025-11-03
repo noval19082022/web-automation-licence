@@ -206,7 +206,9 @@ public class InvoicePO {
      */
     public void clickOnMasukkanVoucher() {
         playwright.waitTillLocatorIsVisible(masukkanVoucher, 30000.0);
+        playwright.hardWait(2000); // Wait for stability before clicking
         playwright.clickOn(masukkanVoucher);
+        playwright.hardWait(2000); // Wait after click for animation/transition
     }
 
     /**
@@ -322,7 +324,9 @@ public class InvoicePO {
      * click on hapus in toast button
      */
     public void clickOnHapusInToast() {
+        playwright.hardWait(2000); // Wait for toast to be fully displayed
         playwright.clickOn(hapusToastButton);
+        playwright.hardWait(2000); // Wait for animation after click
         masukkanVoucher.waitFor();
     }
 

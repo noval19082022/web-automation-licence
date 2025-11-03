@@ -93,6 +93,7 @@ public class PaymentSteps {
 
     @Then("tenant can not use the voucher")
     public void tenantCanNotUseTheVoucher() {
+        playwright.hardWait(3000); // Wait for toast to appear
         var voucherInvalidWording = "Kode voucher tidak bisa digunakan. Silakan hapus voucher.";
         String toastStringRemoveLineSeparator = invoice.getToastText().replaceAll("\\R", " ");
         String toastRemoveExtraSpace = toastStringRemoveLineSeparator.replaceAll("\\s+", " ");
