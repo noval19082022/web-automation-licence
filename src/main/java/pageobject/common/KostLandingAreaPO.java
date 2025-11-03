@@ -343,7 +343,6 @@ public class KostLandingAreaPO {
     public String getRecommendationKosList() {
         playwright.waitTillLocatorIsVisible(recommendationListTitle, 5000.0);
         playwright.pageScrollInView(recommendationListTitle);
-        System.out.println(playwright.getText(recommendationListTitle));
         return playwright.getText(recommendationListTitle);
     }
 
@@ -409,7 +408,6 @@ public class KostLandingAreaPO {
                 }
                 
                 if (!videoFound) {
-                    System.out.println("Video element not found, skipping video interaction");
                     return;
                 }
             }
@@ -422,7 +420,7 @@ public class KostLandingAreaPO {
                     playwright.assertVisible(videoIsOccur);
                 }
             } catch (Exception e) {
-                System.out.println("Video frame not found, but continuing...");
+                // Video frame not found, but continuing...
             }
             
             try {
@@ -430,12 +428,11 @@ public class KostLandingAreaPO {
                     playwright.assertVisible(videoIsPlayed);
                 }
             } catch (Exception e) {
-                System.out.println("Video play indicators not found, but continuing...");
+                // Video play indicators not found, but continuing...
             }
             
         } catch (Exception e) {
-            System.out.println("Video interaction failed: " + e.getMessage());
-            // Don't fail the test, just log and continue
+            // Video interaction failed, but continuing without failing test
         }
     }
 
