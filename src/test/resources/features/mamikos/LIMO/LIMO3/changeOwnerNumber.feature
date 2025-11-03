@@ -1,7 +1,7 @@
 @regression @LIMO3 @listing-monetization @changeOwnerNumber @DONEMIGRATINGTONEWBOARD
 Feature: Owner Setting - Change Owner Number
 
-  @noInputNumber @continue @TEST_LIMO-871
+  @noInputNumber @TEST_LIMO-871
   Scenario: Change Owner Number - No input phone number
     Given user go to mamikos homepage
     When user login as owner:
