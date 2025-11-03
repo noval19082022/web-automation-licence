@@ -125,7 +125,7 @@ public class ChatOwnerPO {
     }
 
     public void dismissFTUEMarsGPAndSurveyIfExist() {
-        if (playwright.waitTillLocatorIsVisible(ftueMarsBroadcast, 3000.0)) {
+        if (playwright.waitTillLocatorIsVisible(ftueMarsBroadcast, 5000.0)) {
             this.dismissFTUEMarsGPAndBroadCast();
         }
 
