@@ -162,4 +162,37 @@ public class SinggahsiniPlusSteps {
         Assert.assertFalse(invoice.isSinggahsiniPlusLevelSectionVisible(), "Singgahsini+ level section is not visible on invoice page");
     }
 
+    @When("tenant clicks on lihat informasi poin link")
+    public void tenantClicksOnLihatInformasiPoinLink() {
+        singgahsiniPlus.clickLihatPoinInfoText();
+    }
+
+    @When("tenant clicks on riwayat poin link")
+    public void tenantClicksOnRiwayatPoinLink() {
+        singgahsiniPlus.clickRiwayatPoinText();
+    }
+
+    @When("tenant clicks on dapatkan poin link")
+    public void tenantClicksOnDapatkanPoinLink() {
+        singgahsiniPlus.clickDapatkanPointText();
+    }
+
+    @Then("tenant should see lihat informasi poin")
+    public void tenantShouldSeeLihatInformasiPoin() {
+        Assert.assertTrue(singgahsiniPlus.isLihatPoinInfoTextVisible(),
+            "MamiPoin card point info link is not visible");
+    }
+
+    @Then("tenant should see riwayat poin")
+    public void tenantShouldSeeRiwayatPoin() {
+        Assert.assertTrue(singgahsiniPlus.isRiwayatPoinTextVisible(),
+            "MamiPoin history link is not visible");
+    }
+
+    @Then("tenant should see poin {string}")
+    public void tenantShouldSeePoin(String text) {
+        Assert.assertTrue(singgahsiniPlus.isDapatkanPointextVisible(text),
+            "MamiPoin guideline link is not visible");
+    }
+
 }

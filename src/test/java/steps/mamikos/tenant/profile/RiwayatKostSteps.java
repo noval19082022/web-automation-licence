@@ -83,6 +83,21 @@ public class RiwayatKostSteps {
         riwayatKost.clickAjukanBerhentiSewaText();
     }
 
+    @Then("tenant can see hentikan sewa singgahsini popup with {string}")
+    public void userCanSeeHentikanSewaSinggahSiniPopup(String text){
+        Assert.assertTrue(riwayatKost.validateBerhentiSewaPopup(text), "popup not appears");
+    }
+
+    @And("tenant click on berhenti sewa button on popup")
+    public void tenantClickOnBerhentiSewaButtonOnPopup(){
+        riwayatKost.clickBerhentiSewaButtonOnPopup();
+    }
+
+    @Then("tenant can see stop rent contract")
+    public void tenantCanSeeStopRentContract(){
+        Assert.assertTrue(riwayatKost.getStopRentContract(), "stop rent contract not visible");
+    }
+
     @Then("there will be a ajukan sewa with the title {string}")
     public void there_will_be_a_ajukan_sewa_with_the_title(String title){
         Assert.assertEquals(riwayatKost.getTitleAjukanSewaText(),title, "title is not correct");

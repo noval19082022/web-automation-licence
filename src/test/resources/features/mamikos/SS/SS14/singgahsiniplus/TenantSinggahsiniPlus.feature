@@ -43,7 +43,7 @@ Feature: Singgahsini Plus
     When tenant clicks on Singgahsini text
     Then tenant can see tier active with "Level 1: Starter"
 
-  @TEST_SS-9517
+  @TEST_SS-9517 @continue
   Scenario: [Web][Reward & Poin][Mamipoin Tab] Poin Kamu section for Active Tenant Singgahsini+
     When tenant clicks on MamiPoin link in Singgahsini Plus card
     Then tenant should see Singgahsini Plus summary card
@@ -52,6 +52,15 @@ Feature: Singgahsini Plus
     Then tenant can see mamipoin menu with "Poin Kamu"
     When tenant can see mamipoin menu with "Riwayat Mamipoin"
     Then tenant can see mamipoin menu with "Dapatkan Poin"
+
+  @TEST_SS-10228 @a
+  Scenario: [Web][Kost Saya][Kontrak]Check popup Hentikan sewa from detail tagihan for kost P1
+    When tenant navigate to kontrak kost saya
+    And user click ajukan berhenti sewa on kontrak saya page
+    Then tenant can see hentikan sewa singgahsini popup with "Sayang banget kalau kamu berhenti sewa sekarang"
+    When tenant can see hentikan sewa singgahsini popup with "Kalau berhenti sekarang, Singgahsini+ kamu akan dijeda."
+    And tenant click on berhenti sewa button on popup
+    Then tenant can see stop rent contract
 
   @TEST_SS-9192 @continue
   Scenario: [Web][Singgahsini+] Entry Point Singgahsini for tenant P1 user Paused
@@ -90,7 +99,7 @@ Feature: Singgahsini Plus
     When tenant should see Mulai cari dan sewa kos button
     Then tenant clicks on Mulai cari dan sewa kos button
 
-  @TEST_SS-9197 @continue
+  @TEST_SS-9197
   Scenario: [Web][Kost Saya][Singgahsini +]Check Kost saya when tier card for active P1 tenant with progress bar (First Level)
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -129,11 +138,28 @@ Feature: Singgahsini Plus
     When tenant can see tier active with "Level 7: Diamond"
     Then tenant can see tier passed description "Selamat! Kamu sudah di level tertinggi Singgahsini+. Pertahankan level-mu, ya!"
 
-  @TEST_SS-9694
+  @TEST_SS-9694 @continue
   Scenario: [Invoice][Singgahsini+] Invoice for Active Tenant P1
     When user navigate to tagihan kost saya
     And tenant clicks on Bayar button in tagihan list
     Then tenant can see Singgahsini Plus level on invoice page
+
+  @TEST_SS-9520 @continue
+  Scenario: [Web][Reward & Poin][Mamipoin Tab] Riwayat Mamipoin section
+    When user go to mamikos homepage
+    And tenant click on icon profil
+    And tenant click on profile
+    And tenant clicks on Singgahsini text
+    And tenant clicks on MamiPoin link in Singgahsini Plus card
+    When tenant clicks on riwayat poin link
+    Then user verify title in the riwayat poin page is displayed
+
+  @TEST_SS-9521
+  Scenario: [Web][Reward & Poin][Mamipoin Tab] Dapatkan Mamipoin section
+    When tenant clicks on Singgahsini text
+    And tenant clicks on MamiPoin link in Singgahsini Plus card
+    When tenant clicks on dapatkan poin link
+    Then tenant should see poin "Cara Mudah Mendapatkan MamiPoin"
 
   @TEST_SS-9200 @continue
   Scenario: [Web][Kost Saya][Singgahsini +]Check kost saya when previously booking kost SS but admin terminated kost SS  and booking kost P2
@@ -152,3 +178,4 @@ Feature: Singgahsini Plus
     When user navigate to tagihan kost saya
     And tenant clicks on Bayar button in tagihan list
     Then tenant can not see Singgahsini Plus level on invoice page
+

@@ -35,6 +35,10 @@ public class SinggahsiniPlusPO {
     private Locator invoiceSSText2;
     private Locator singgahsiniPassedTier;
     private Locator passedDescriptiontext;
+    private Locator lihatPoinInfoText;
+    private Locator riwayatPoinText;
+    private Locator dapatkanPoinText;
+    private Locator syaratDanKetentuanText;
 
     public SinggahsiniPlusPO(Page page) {
         this.page = page;
@@ -55,6 +59,10 @@ public class SinggahsiniPlusPO {
         this.singgahsiniCardKostSaya = page.getByTestId("singgahsiniPlusCard");
         this.okeMengertiButton = page.locator("//button[@class=\"bg-c-button bg-c-button--secondary bg-c-button--lg bg-u-theme-singgahsini\"]");
         this.singgahsiniPassedTier = page.locator(" div:nth-child(1) > div.singgahsini-plus-main__tiers-stepper");
+        this.lihatPoinInfoText = page.getByTestId("ssPlusMamipoinCardPointInfoLink");
+        this.riwayatPoinText = page.getByTestId("ssPlusMamipoinHistoryLink");
+        this.dapatkanPoinText = page.getByTestId("ssPlusMamipoinGuidelineLink");
+        this.syaratDanKetentuanText = page.locator("#contentBox").getByText("Syarat dan Ketentuan");
     }
 
     /**
@@ -291,6 +299,51 @@ public class SinggahsiniPlusPO {
     public boolean passedDescriptionTextVisible(String text){
         passedDescriptiontext = page.locator("//p[contains(text(),'"+text+"')]");
         return playwright.waitTillLocatorIsVisible(passedDescriptiontext);
+    }
+
+    /**
+     * click on MamiPoin card point info link
+     */
+    public void clickLihatPoinInfoText() {
+        playwright.clickOn(lihatPoinInfoText);
+    }
+
+    /**
+     * click on MamiPoin history link
+     */
+    public void clickRiwayatPoinText() {
+        playwright.clickOn(riwayatPoinText);
+    }
+
+    /**
+     * click on MamiPoin guideline link
+     */
+    public void clickDapatkanPointText() {
+        playwright.clickOn(dapatkanPoinText);
+    }
+
+    /**
+     * verify MamiPoin card point info link is visible
+     * @return true if visible
+     */
+    public boolean isLihatPoinInfoTextVisible() {
+        return playwright.waitTillLocatorIsVisible(lihatPoinInfoText);
+    }
+
+    /**
+     * verify MamiPoin history link is visible
+     * @return true if visible
+     */
+    public boolean isRiwayatPoinTextVisible() {
+        return playwright.waitTillLocatorIsVisible(riwayatPoinText);
+    }
+
+    /**
+     * verify MamiPoin guideline link is visible
+     * @return true if visible
+     */
+    public boolean isDapatkanPointextVisible(String text) {
+        return playwright.waitTillLocatorIsVisible(syaratDanKetentuanText);
     }
 
 }
