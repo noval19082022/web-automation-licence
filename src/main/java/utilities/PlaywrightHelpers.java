@@ -612,20 +612,6 @@ public class PlaywrightHelpers {
     }
 
     /**
-     * Wait until all fetch API calls are finished in the browser
-     * This method waits for network idle state and additionally ensures
-     * all pending fetch requests have completed
-     */
-    public void waitTillFetchFinish() {
-        // Wait for network to be idle (no network connections for at least 500ms)
-        page.waitForLoadState(LoadState.NETWORKIDLE);
-
-        // Additional check: evaluate JavaScript to ensure no pending fetch calls
-        // This waits for window.fetch promises to resolve
-        page.evaluate("() => { return Promise.resolve(); }");
-    }
-
-    /**
      * Wait until all fetch API calls are finished in the browser with custom timeout
      * This method waits for network idle state with a specified timeout
      *
@@ -636,7 +622,7 @@ public class PlaywrightHelpers {
         page.waitForLoadState(LoadState.NETWORKIDLE, new Page.WaitForLoadStateOptions().setTimeout(timeout));
 
         // Additional check: evaluate JavaScript to ensure no pending fetch calls
-        page.evaluate("() => { return Promise.resolve(); }");
+        waitTillDomContentLoaded(timeout);
 
         // Wait for skeleton loaders to disappear
         waitTillSkeletonLoadingDisappears(timeout);
