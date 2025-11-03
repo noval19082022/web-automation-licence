@@ -1,7 +1,7 @@
 @regression @LIMO3 @listing-monetization @changeOwnerName @DONEMIGRATINGTONEWBOARD
 Feature: Owner Setting - Change Owner Name
 
-  @TEST_LIMO-873 @continue
+  @TEST_LIMO-873
   Scenario: [Setelan Akun][Change Name] Change Owner Name
     Given user go to mamikos homepage
     When user login as owner:
