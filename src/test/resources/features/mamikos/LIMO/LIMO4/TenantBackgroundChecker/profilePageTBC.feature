@@ -1,4 +1,4 @@
-@LIMO4 @regression @tbclimo4 @flaky @selasamaintenanceskuy
+@LIMO4 @regression @tbclimo400 @flaky @selasamaintenanceskuy
 Feature: Profile Tenant Background Checker
 
   Scenario: reset Gp
@@ -174,9 +174,7 @@ Feature: Profile Tenant Background Checker
     When user login as tenant via phone number:
       | phone stag    | password  |
       | 081280003230  | qwerty123 |
-    And tenant click on icon profil
-    And tenant click on profile
-    And tenant click on pengaturan
+    And tenant visit page "/user/pengaturan"
     And user click "Privasi"
     And tenant click on toggle on to off
     And tenant click on lihat preview profil

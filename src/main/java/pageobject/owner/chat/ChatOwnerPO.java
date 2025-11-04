@@ -52,6 +52,10 @@ public class ChatOwnerPO {
     Locator nextFtueButton;
     Locator surveyKostBtn;
     Locator FTUEMarsPresent;
+    Locator lanjutkanButton;
+    Locator caraIsiKuotaButton;
+    Locator chatBebasKuotaButton;
+    Locator apaItuKuotaChatRoomButton;
 
     public ChatOwnerPO(Page page) {
         this.page = page;
@@ -98,6 +102,10 @@ public class ChatOwnerPO {
         nextFtueButton = page.locator("[class*='next-button']");
         surveyKostBtn = page.getByText("Survei Kos").first();
         FTUEMarsPresent = page.getByText("Apa itu fitur Chat");
+        lanjutkanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lanjutkan"));
+        caraIsiKuotaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cara isi kuota"));
+        chatBebasKuotaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Chat bebas kuota"));
+        apaItuKuotaChatRoomButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Apa itu kuota chat room?"));
     }
 
     /**
@@ -117,7 +125,7 @@ public class ChatOwnerPO {
     }
 
     public void dismissFTUEMarsGPAndSurveyIfExist() {
-        if (playwright.waitTillLocatorIsVisible(ftueMarsBroadcast, 3000.0)) {
+        if (playwright.waitTillLocatorIsVisible(ftueMarsBroadcast, 5000.0)) {
             this.dismissFTUEMarsGPAndBroadCast();
         }
 
@@ -178,7 +186,7 @@ public class ChatOwnerPO {
         playwright.pressKeyboardKey("Escape");
         playwright.waitTillLocatorIsVisible(searchChat);
         Locator chatOnList = page.locator("(//h6[contains(.,'" + inputText + "')])[1]");
-        searchChat.fill(inputText);
+        playwright.clickLocatorAndTypeKeyboard(searchChat, inputText);
         playwright.hardWait(2000);
         playwright.clickOn(chatOnList);
     }
@@ -358,8 +366,47 @@ public class ChatOwnerPO {
      * Dismiss FTUE Mars Godlplus
      */
     public void dismissFTUEMarsGPAndBroadCast() {
-        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Apa itu kuota chat room?")).click();
-        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti")).click();
+        // Keep clicking through carousel buttons until FTUE is dismissed
+        int maxAttempts = 5;
+        int attempts = 0;
+        var timeout = 1000.0;
+
+        while (playwright.waitTillLocatorIsVisible(ftueMarsBroadcast, timeout) && attempts < maxAttempts) {
+            attempts++;
+
+            // Handle "Lanjutkan" button if it appears
+            if (playwright.waitTillLocatorIsVisible(lanjutkanButton, timeout)) {
+                playwright.clickOn(lanjutkanButton);
+                continue;
+            }
+
+            // Handle "Cara isi kuota" button if it appears after Lanjutkan
+            if (playwright.waitTillLocatorIsVisible(caraIsiKuotaButton, timeout)) {
+                playwright.clickOn(caraIsiKuotaButton);
+                continue;
+            }
+
+            // Handle "Chat bebas kuota" button if it appears
+            if (playwright.waitTillLocatorIsVisible(chatBebasKuotaButton, timeout)) {
+                playwright.clickOn(chatBebasKuotaButton);
+                continue;
+            }
+
+            // Handle "Apa itu kuota chat room?" button if it appears
+            if (playwright.waitTillLocatorIsVisible(apaItuKuotaChatRoomButton, timeout)) {
+                playwright.clickOn(apaItuKuotaChatRoomButton);
+                continue;
+            }
+
+            // Final button to dismiss the FTUE
+            if (playwright.waitTillLocatorIsVisible(sayaMengertiChatRoom, timeout)) {
+                playwright.clickOn(sayaMengertiChatRoom);
+                break;
+            }
+
+            // If no button found, exit the loop
+            break;
+        }
     }
 
     /**

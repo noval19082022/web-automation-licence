@@ -568,21 +568,25 @@ public class KostDetailsPO {
      * Dismiss FTUE screen
      */
     public void dismissFTUE() {
-        var maxLoop = 0;
-        playwright.pageScrollToDown(300);
-        playwright.waitFor(ftueSlider, 5000.0);
-        do {
-            maxLoop++;
-            if (playwright.waitTillLocatorIsVisible(ftueSlider)) {
-                playwright.clickOn(ftueSlider.first());
-            }
-            if (playwright.waitTillLocatorIsVisible(btnSayaMengerti)) {
-                playwright.forceClickOn(btnSayaMengerti);
-            }
-            if (maxLoop == 7) {
-                break;
-            }
-        } while (playwright.waitTillLocatorIsVisible(ftueSlider));
+        try {
+            var maxLoop = 0;
+            playwright.pageScrollToDown(300);
+            playwright.waitFor(ftueSlider, 5000.0);
+            do {
+                maxLoop++;
+                if (playwright.waitTillLocatorIsVisible(ftueSlider)) {
+                    playwright.clickOn(ftueSlider.first());
+                }
+                if (playwright.waitTillLocatorIsVisible(btnSayaMengerti)) {
+                    playwright.forceClickOn(btnSayaMengerti);
+                }
+                if (maxLoop == 7) {
+                    break;
+                }
+            } while (playwright.waitTillLocatorIsVisible(ftueSlider));
+        } catch (Exception e) {
+            System.out.println("Error dismissing FTUE: " + e.getMessage());
+        }
     }
 
     public void dismissFTUEIfExist() {

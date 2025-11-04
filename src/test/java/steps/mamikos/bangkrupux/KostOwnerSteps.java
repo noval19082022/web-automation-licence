@@ -67,7 +67,7 @@ public class KostOwnerSteps {
         String kosName = Mamikos.getPropertyKosName();
         if (kosName == null || kosName.isEmpty()) {
             // Use a default kos name for search if none is set
-            kosName = "kos Automation TEST";
+            kosName = "Kost Automation Test Hapus Di Akhir";
             System.out.println("Warning: Kos name not found in shared data, using default: " + kosName);
         }
         kostOwner.searchKosName(kosName);

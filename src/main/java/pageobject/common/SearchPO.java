@@ -10,6 +10,8 @@ import utilities.PlaywrightHelpers;
 import java.util.ArrayList;
 import java.util.List;
 
+import static config.global.GlobalConfig.DEFAULT_TIMEOUT;
+
 public class SearchPO {
     Page page;
     Locator inputSearch;
@@ -660,6 +662,7 @@ public class SearchPO {
      */
     public void enterTextToSearch(String searchText) {
         playwright.clickLocatorAndTypeKeyboard(inputSearch, searchText);
+        playwright.waitTillFetchFinish(DEFAULT_TIMEOUT);
     }
 
     /**

@@ -28,8 +28,8 @@ Feature: Survei - kos detail
       | phone stag    | phone prod | password     |
       | 0891111020199 | 0          | mamikosqa123 |
     And tenant redirect to kost details:
-      | kost path stag                                                                      | kost path prod                                      |
-      | kost-kabupaten-tangerang-kost-campur-murah-kost-primaya-tangerang-rajeg-tangerang-2 | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+      | kost path stag                                                      | kost path prod                                      |
+      | kost-tangerang-kost-campur-eksklusif-kost-siera-jatiuwung-tangerang | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
     And user dismiss FTUE booking benefit
     Then "Survei Kos Tersedia" are not displayed in the kos pilar non gp
       | Survei Kos Tersedia                                                                                              |

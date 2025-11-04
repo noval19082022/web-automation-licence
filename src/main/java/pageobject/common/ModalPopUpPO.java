@@ -2,6 +2,7 @@ package pageobject.common;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import config.global.GlobalConfig;
 import utilities.PlaywrightHelpers;
 
 public class ModalPopUpPO {
@@ -27,6 +28,6 @@ public class ModalPopUpPO {
      * @return true if visible otherwise false.
      */
     public Boolean isModalCloseIconVisible() {
-        return playwright.waitTillLocatorIsVisible(modalCloseIcon, 3000.0);
+        return playwright.waitTillLocatorIsVisible(modalCloseIcon, GlobalConfig.DEFAULT_TIMEOUT);
     }
 }

@@ -43,7 +43,6 @@ Feature: Create Kos Mamipay Active
     When owner input room type with random text in pop up
     And owner click lanjutkan button in bottom of add kos page
     And owner click "Edit Selesai" button
-    And owner click "Edit Selesai" button
 #    Then verify kos description is disabled
 #    And verify kos build year is disabled
    # When user click button edit "Fasilitas" kos

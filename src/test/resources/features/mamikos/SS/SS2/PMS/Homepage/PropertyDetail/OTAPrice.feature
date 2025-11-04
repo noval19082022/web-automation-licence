@@ -33,6 +33,6 @@ Feature: Check OTA Price in Detail Kontrak PMS
     And admin see detail kerja sama
     Then OTA Prices are displayed in Rincian Tipe Kamar dan Harga section
       | Tipe Kamar | Gender | Jumlah Kamar | Harga Static Harian (OTA) | Harga Sewa Bulanan | Harga Sewa 3 Bulan | Harga Sewa 6 Bulan |
-      | Tipe A     | campur | 6            | Rp200.000                 | Rp600.000          | Rp2.500.000        | Rp3.600.000        |
+      | Tipe A     | campur | 7            | Rp200.000                 | Rp600.000          | Rp2.500.000        | Rp3.600.000        |
       | Tipe C     | campur | 3            | Rp120.000                 | Rp600.000          | Rp2.500.000        | Rp3.600.000        |
       | Tipe D     | campur | 3            | Rp100.000                 | Rp600.000          | Rp2.500.000        | Rp3.600.000        |

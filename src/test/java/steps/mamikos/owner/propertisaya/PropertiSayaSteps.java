@@ -927,6 +927,9 @@ public class PropertiSayaSteps {
 
     @And("owner search kos on property saya page")
     public void ownerSearchKosOnPropertySayaPage() {
+        if(modalPopUpPO.isModalCloseIconVisible()){
+            modalPopUpPO.clicksModalCloseIcon();
+        }
         propertySaya.searchKostPropertySaya(Mamikos.getPropertyKosName());
     }
 
