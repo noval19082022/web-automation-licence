@@ -144,7 +144,7 @@ Feature: Singgahsini Plus
     And tenant clicks on Bayar button in tagihan list
     Then tenant can see Singgahsini Plus level on invoice page
 
-  @TEST_SS-9570 @TEST_SS-9571 @continue
+  @TEST_SS-9570 @continue
   Scenario: [Web][Invoice page][Mamipoin]Tenant cann't redeem MamiPoin via desktop browser
     When user navigate to tagihan kost saya
     And tenant clicks on Bayar button in tagihan list
