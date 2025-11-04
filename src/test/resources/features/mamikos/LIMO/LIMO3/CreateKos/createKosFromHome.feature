@@ -1,4 +1,4 @@
-@regression @LIMO3 @listing-monetization @createKosFromHome @DONEMIGRATINGTONEWBOARD
+@regression @LIMO3 @listing-monetization @createKosFromHome @DONEMIGRATINGTONEWBOARD @mantan
 
 Feature: Create Kos From Home
 
@@ -25,8 +25,8 @@ Feature: Create Kos From Home
     And owner click tambah data iklan "Kost"
     And owner clicks on Tambah Kos Baru button
     And owner fills valid data kos as expected
-      | kos name            | room type check | room type name | kos type | description kos                 | build kos | other note |
-      | kos Automation TEST | yes             | Tipe A         | girl     | kos for case invalid rule photo | 2023      |            |
+      | kos name                            | room type check | room type name | kos type | description kos                 | build kos | other note |
+      | Kost Automation Test Hapus Di Akhir | yes             | Tipe A         | girl     | kos for case invalid rule photo | 2023      |            |
     And owner set rules kos:
       | Akses 24 Jam |
     And owner upload rule kos

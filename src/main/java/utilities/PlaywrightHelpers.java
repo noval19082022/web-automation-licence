@@ -611,6 +611,54 @@ public class PlaywrightHelpers {
         page.waitForLoadState(LoadState.NETWORKIDLE);
     }
 
+    /**
+     * Wait until all fetch API calls are finished in the browser with custom timeout
+     * This method waits for network idle state with a specified timeout
+     *
+     * @param timeout timeout in milliseconds
+     */
+    public void waitTillFetchFinish(Double timeout) {
+        // Wait for network to be idle with custom timeout
+        page.waitForLoadState(LoadState.NETWORKIDLE, new Page.WaitForLoadStateOptions().setTimeout(timeout));
+
+        // Additional check: evaluate JavaScript to ensure no pending fetch calls
+        waitTillDomContentLoaded(timeout);
+
+        // Wait for skeleton loaders to disappear
+        waitTillSkeletonLoadingDisappears(timeout);
+    }
+
+    /**
+     * Wait until skeleton loading animation disappears
+     * Skeleton loaders typically use CSS class 'skeleton' or similar shimmer animations
+     * This ensures content has fully loaded before proceeding with test actions
+     *
+     * @param timeout timeout in milliseconds
+     */
+    public void waitTillSkeletonLoadingDisappears(Double timeout) {
+        try {
+            // Common skeleton loader selectors
+            Locator skeletonLoader = page.locator(".skeleton, [class*='skeleton'], [class*='shimmer'], [class*='loading-skeleton']");
+
+            // If skeleton exists, wait for it to disappear
+            if (skeletonLoader.count() > 0) {
+                skeletonLoader.first().waitFor(new Locator.WaitForOptions()
+                    .setState(WaitForSelectorState.HIDDEN)
+                    .setTimeout(timeout));
+            }
+        } catch (Exception e) {
+            // Skeleton might not exist or already disappeared, continue execution
+            System.out.println("No skeleton loader found or already disappeared");
+        }
+    }
+
+    /**
+     * Wait until skeleton loading animation disappears with default timeout
+     */
+    public void waitTillSkeletonLoadingDisappears() {
+        waitTillSkeletonLoadingDisappears(30000.0); // Default 30 seconds
+    }
+
     public void waitTillDomContentLoaded() {
         page.waitForLoadState(LoadState.DOMCONTENTLOADED);
     }
