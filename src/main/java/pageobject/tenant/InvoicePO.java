@@ -185,7 +185,7 @@ public class InvoicePO {
         totalPembayaranParentSection = page.locator("text=Total Pembayaran").locator("..");
         invoiceBillSection = page.locator("#invoiceBill");
         singgahsiniPlusLevelSection = page.locator("div.invoice-singgahsini-plus-level");
-        disableMamipoinButton = page.locator("//*[@class=\"bg-c-switch invoice-point-switch bg-c-switch--on bg-c-switch--disabled\"]");
+        disableMamipoinButton = page.locator("//*[@class=\"bg-c-switch__input\"]");
     }
 
     /**
@@ -905,14 +905,6 @@ public class InvoicePO {
         return billingDeyailText.toString();
     }
 
-    /**
-     * Click on Singgahsini+ level section on invoice page
-     * This clicks on the section containing "Singgahsini+ level kamu:"
-     */
-    public void clickOnSinggahsiniPlusLevelSection() {
-        playwright.waitTillLocatorIsVisible(singgahsiniPlusLevelSection);
-        playwright.clickOn(singgahsiniPlusLevelSection);
-    }
 
     /**
      * Check if Singgahsini+ level section is visible on invoice page
@@ -932,16 +924,5 @@ public class InvoicePO {
         return playwright.getText(singgahsiniPlusLevelSection);
     }
 
-    /**
-     * Click on specific Singgahsini+ level text by filtering
-     * This is for clicking on nth element with Singgahsini+ level text
-     * @param index the nth element to click (0-based index)
-     */
-    public void clickOnSinggahsiniPlusLevelByIndex(int index) {
-        Locator specificLevelSection = invoiceBillSection.locator("div")
-            .filter(new Locator.FilterOptions().setHasText("Singgahsini+ level kamu:"))
-            .nth(index);
-        playwright.clickOn(specificLevelSection);
-    }
 
 }

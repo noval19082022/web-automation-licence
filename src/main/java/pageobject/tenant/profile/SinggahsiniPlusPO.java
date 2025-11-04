@@ -256,6 +256,7 @@ public class SinggahsiniPlusPO {
      */
     public boolean isSinggahsiniPlusCardTextVisible(String text){
         singgahsiniPlusCardText = page.locator("//*[@data-testid='singgahsiniPlusCard']//*[contains(text(),'"+text+"')]");
+        playwright.hardWait(500.0);
         return playwright.waitTillLocatorIsVisible(singgahsiniPlusCardText);
     }
 

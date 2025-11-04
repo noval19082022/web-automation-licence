@@ -1,4 +1,4 @@
-@SS14
+@SS14 @a
 Feature: Singgahsini Plus
 
   @TEST_SS-9190 @continue
@@ -53,7 +53,7 @@ Feature: Singgahsini Plus
     When tenant can see mamipoin menu with "Riwayat Mamipoin"
     Then tenant can see mamipoin menu with "Dapatkan Poin"
 
-  @TEST_SS-10228 @a
+  @TEST_SS-10228
   Scenario: [Web][Kost Saya][Kontrak]Check popup Hentikan sewa from detail tagihan for kost P1
     When tenant navigate to kontrak kost saya
     And user click ajukan berhenti sewa on kontrak saya page
@@ -144,6 +144,13 @@ Feature: Singgahsini Plus
     And tenant clicks on Bayar button in tagihan list
     Then tenant can see Singgahsini Plus level on invoice page
 
+  @TEST_SS-9570 @TEST_SS-9571 @continue
+  Scenario: [Web][Invoice page][Mamipoin]Tenant cann't redeem MamiPoin via desktop browser
+    When user navigate to tagihan kost saya
+    And tenant clicks on Bayar button in tagihan list
+    When tenant can see disable mamipoin button
+    Then tenant can see mamipoin menu with "MamiPoin hanya bisa ditukar di aplikasi Mamikos."
+
   @TEST_SS-9520 @continue
   Scenario: [Web][Reward & Poin][Mamipoin Tab] Riwayat Mamipoin section
     When user go to mamikos homepage
@@ -173,9 +180,23 @@ Feature: Singgahsini Plus
     Then tenant should see tier message in Singgahsini plus with "Level & rewards dijeda"
     Then tenant can not see "Level kamu saat ini" in singgahsini plus card
 
-  @TEST_SS-9693
+  @TEST_SS-9693 @continue
   Scenario: [Invoice][Singgahsini+] Invoice for tenant P2
     When user navigate to tagihan kost saya
     And tenant clicks on Bayar button in tagihan list
     Then tenant can not see Singgahsini Plus level on invoice page
 
+  @TEST_SS-10229 @continue
+  Scenario: [Web][Kost Saya][Kontrak]Check popup Hentikan sewa from detail tagihan for kost P2
+    When tenant navigate to kontrak kost saya
+    And user click ajukan berhenti sewa on kontrak saya page
+    Then tenant can not see hentikan sewa singgahsini popup with "Sayang banget kalau kamu berhenti sewa sekarang"
+
+  @TEST_SS-9422
+  Scenario: [Web][Profil][Singgahsini+]Tenant check display default copy when tenant booking kost P2
+    When user go to mamikos homepage
+    And tenant click on icon profil
+    And tenant click on profile
+    When tenant can see "Basic" label
+    And tenant clicks on Singgahsini text
+    Then tenant can see tier message description on singgahsini page is visible

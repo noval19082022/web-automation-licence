@@ -93,6 +93,11 @@ public class RiwayatKostSteps {
         riwayatKost.clickBerhentiSewaButtonOnPopup();
     }
 
+    @Then("tenant can not see hentikan sewa singgahsini popup with {string}")
+    public void tenantCannotSeeHentikanSewaSinggahsiniPopup(String text){
+        Assert.assertFalse(riwayatKost.validateBerhentiSewaPopup(text), "popup is appears");
+    }
+
     @Then("tenant can see stop rent contract")
     public void tenantCanSeeStopRentContract(){
         Assert.assertTrue(riwayatKost.getStopRentContract(), "stop rent contract not visible");
