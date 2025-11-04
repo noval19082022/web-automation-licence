@@ -63,7 +63,7 @@ public class AdminSanJuniperoPO {
      * @param slug
      */
     public void setSlugOnCreateSanJunipero(String slug) {
-        playwrightHelpers.clickLocatorAndTypeKeyboard(slugPlaceHolder, slug);
+        playwrightHelpers.fill(slugPlaceHolder, slug);
     }
 
     /**
@@ -72,7 +72,7 @@ public class AdminSanJuniperoPO {
      * @param kostType
      */
     public void setKostTypeOnCreateSanJunipero(String kostType) {
-        playwrightHelpers.clickLocatorAndTypeKeyboard(kostTypePlaceHolder.getByRole(AriaRole.TEXTBOX), kostType);
+        playwrightHelpers.fill(kostTypePlaceHolder.getByRole(AriaRole.TEXTBOX), kostType);
         playwrightHelpers.clickOn(kostTypePlaceHolder.getByText(kostType));
     }
 
@@ -82,7 +82,7 @@ public class AdminSanJuniperoPO {
      * @param biayaSewa
      */
     public void setBiayaSewaOnCreateSanJunipero(String biayaSewa) {
-        playwrightHelpers.clickLocatorAndTypeKeyboard(biayaSewaPlaceHolder.getByRole(AriaRole.TEXTBOX), biayaSewa);
+        playwrightHelpers.fill(biayaSewaPlaceHolder.getByRole(AriaRole.TEXTBOX), biayaSewa);
         playwrightHelpers.clickOn(biayaSewaPlaceHolder.getByText(biayaSewa));
     }
 
@@ -92,7 +92,7 @@ public class AdminSanJuniperoPO {
      * @param titleTag
      */
     public void setTitleTagOnCreateSanJunipero(String titleTag) {
-        playwrightHelpers.clickLocatorAndTypeKeyboard(titleTagPlaceHolder, titleTag);
+        playwrightHelpers.fill(titleTagPlaceHolder, titleTag);
     }
 
     /**
@@ -101,7 +101,7 @@ public class AdminSanJuniperoPO {
      * @param titleHeader
      */
     public void setTitleHeaderOnCreateSanJunipero(String titleHeader) {
-        playwrightHelpers.clickLocatorAndTypeKeyboard(titleHeaderPlaceHolder, titleHeader);
+        playwrightHelpers.fill(titleHeaderPlaceHolder, titleHeader);
     }
 
     /**
@@ -110,7 +110,7 @@ public class AdminSanJuniperoPO {
      * @param subTitleHeader
      */
     public void setSubTitleOnCreateSanJunipero(String subTitleHeader) {
-        playwrightHelpers.clickLocatorAndTypeKeyboard(subTitleHeaderPlaceHolder, subTitleHeader);
+        playwrightHelpers.fill(subTitleHeaderPlaceHolder, subTitleHeader);
     }
 
     /**
@@ -119,7 +119,7 @@ public class AdminSanJuniperoPO {
      * @param facility
      */
     public void setFacilityOnCreateSanJunipero(String facility) {
-        playwrightHelpers.clickLocatorAndTypeKeyboard(facilityPlaceHolder.getByRole(AriaRole.TEXTBOX), facility);
+        playwrightHelpers.fill(facilityPlaceHolder.getByRole(AriaRole.TEXTBOX), facility);
         playwrightHelpers.clickOn(facilityPlaceHolder.getByText(facility));
     }
 
@@ -130,7 +130,7 @@ public class AdminSanJuniperoPO {
      */
     public void setFaqOnCreateSanJunipero(String faq) {
         playwrightHelpers.waitTillLocatorIsVisible(faqPlaceHolder.first(), 30000.0);
-        playwrightHelpers.clickLocatorAndTypeKeyboard(faqPlaceHolder.first(), faq);
+        playwrightHelpers.fill(faqPlaceHolder.first(), faq);
         playwrightHelpers.hardWait(2000); // Wait after FAQ question to ensure answer field becomes available
     }
 
