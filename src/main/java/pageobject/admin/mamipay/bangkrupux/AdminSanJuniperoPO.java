@@ -144,7 +144,7 @@ public class AdminSanJuniperoPO {
             // Try primary selector (textarea)
             if (playwrightHelpers.waitTillLocatorIsVisible(faqAnswerPlaceHolder.first(), 10000.0)) {
                 playwrightHelpers.hardWait(2000);
-                playwrightHelpers.clickLocatorAndTypeKeyboard(faqAnswerPlaceHolder.first(), faqAnswer);
+                playwrightHelpers.fill(faqAnswerPlaceHolder.first(), faqAnswer);
                 return;
             }
         } catch (Exception e) {
@@ -162,7 +162,7 @@ public class AdminSanJuniperoPO {
         for (Locator selector : fallbackSelectors) {
             try {
                 if (playwrightHelpers.waitTillLocatorIsVisible(selector, 5000.0)) {
-                    playwrightHelpers.clickLocatorAndTypeKeyboard(selector, faqAnswer);
+                    playwrightHelpers.fill(selector, faqAnswer);
                     return;
                 }
             } catch (Exception e) {
