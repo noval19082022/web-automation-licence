@@ -1,4 +1,4 @@
-@SS8 @SS8
+@SS8 @LIMO6
 Feature: Time manage owner
 
   @checkContentOnWaktuMengelolaKos @TEST_SS-3466

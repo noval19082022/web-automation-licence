@@ -1,4 +1,4 @@
-@updateRoom @SS10
+@updateRoom @LIMO6
 Feature: Update Room number
 
   @TEST_SS-3310

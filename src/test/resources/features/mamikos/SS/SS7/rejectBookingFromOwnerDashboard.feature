@@ -1,4 +1,4 @@
-@SS7
+@LIMO6
 Feature: Reject Booking From Owner Dashboard
 
   Scenario Outline: Cancel and create booking

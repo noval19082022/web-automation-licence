@@ -1,4 +1,4 @@
-@booking @rejectBooking @SS7
+@booking @rejectBooking @LIMO6
 Feature: OB Owner Reject Booking Full Room
 
   Scenario: Admin Batalkan Contract
