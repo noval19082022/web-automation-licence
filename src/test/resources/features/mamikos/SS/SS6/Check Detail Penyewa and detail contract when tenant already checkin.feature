@@ -1,4 +1,4 @@
-@SS15
+@LIMO6
 Feature: Check Detail Penyewa and detail contract when tenant already checkin
 
   @TEST_SS-4273

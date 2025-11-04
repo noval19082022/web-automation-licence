@@ -1,4 +1,4 @@
-@SS8 @SS8 @flaky
+@LIMO6 @flaky
 Feature: Owner - Penyewa Feature
 
   @waitingTerminateConfirmation

@@ -1,4 +1,4 @@
-@SS11
+@LIMO6
 Feature: Owner - Forgot Password
 
 #  @TEST_COOP-5180 @Automated @DOM @web-covered

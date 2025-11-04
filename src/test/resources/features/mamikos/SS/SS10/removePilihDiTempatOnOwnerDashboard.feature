@@ -1,4 +1,4 @@
-@regression @booking @SS10
+@regression @booking @LIMO6
 Feature: Owner Confirm Booking - Remove Pilih Di Tempat
 
   @TEST_SS-3311

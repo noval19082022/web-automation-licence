@@ -1,4 +1,4 @@
-@SS8 @SS8
+@LIMO6
 Feature: check contract status on all filter and download biodata fakedoor
 
 

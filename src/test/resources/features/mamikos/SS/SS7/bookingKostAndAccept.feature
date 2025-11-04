@@ -1,4 +1,4 @@
-@SS7 @regression @confirmBooking @TEST_SS-3482 @essentialTest2
+@LIMO6 @regression @confirmBooking @TEST_SS-3482 @essentialTest2
 Feature: [Owner dashboard][Ada yang menunggu]Accept Booking via Homepage (more than 1 waiting booking)
 
   Scenario Outline: Cancel and create booking

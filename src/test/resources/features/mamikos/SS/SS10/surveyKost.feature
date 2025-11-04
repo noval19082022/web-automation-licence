@@ -1,4 +1,4 @@
-@regression @surveyTenant @SS10
+@regression @surveyTenant @LIMO6
 
 Feature: Survey Tenant
 
