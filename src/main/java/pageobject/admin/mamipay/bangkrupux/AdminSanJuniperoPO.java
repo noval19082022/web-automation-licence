@@ -40,8 +40,8 @@ public class AdminSanJuniperoPO {
         this.subTitleHeaderPlaceHolder = page.getByPlaceholder("For subtitle header");
         this.facilityPlaceHolder = page.locator("#facilityTag_chosen");
         this.faqPlaceHolder = page.locator("input[name='faq_question[]']");
-        this.faqAnswerPlaceHolder = page.locator("input[name='faq_answer[]']");
-        this.checkBoxActive = page.getByRole(AriaRole.INSERTION);
+        this.faqAnswerPlaceHolder = page.locator("textarea[name='faq_answer[]']");
+        this.checkBoxActive = page.getByRole(AriaRole.INSERTION).nth(1);
         this.saveBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Save"));
         this.successMessageOnCreateSanJunipero = page.getByText("Success! Record success to saved.");
         this.previewBtn = page.locator("//i[@class='fa fa-external-link']").first();
@@ -129,7 +129,9 @@ public class AdminSanJuniperoPO {
      * @param faq
      */
     public void setFaqOnCreateSanJunipero(String faq) {
-        playwrightHelpers.clickLocatorAndTypeKeyboard(faqPlaceHolder, faq);
+        playwrightHelpers.waitTillLocatorIsVisible(faqPlaceHolder.first(), 30000.0);
+        playwrightHelpers.clickLocatorAndTypeKeyboard(faqPlaceHolder.first(), faq);
+        playwrightHelpers.hardWait(2000); // Wait after FAQ question to ensure answer field becomes available
     }
 
     /**
@@ -138,13 +140,45 @@ public class AdminSanJuniperoPO {
      * @param faqAnswer
      */
     public void setFaqAnswerOnCreateSanJunipero(String faqAnswer) {
-        playwrightHelpers.clickLocatorAndTypeKeyboard(faqAnswerPlaceHolder, faqAnswer);
+        try {
+            // Try primary selector (textarea)
+            if (playwrightHelpers.waitTillLocatorIsVisible(faqAnswerPlaceHolder.first(), 10000.0)) {
+                playwrightHelpers.hardWait(2000);
+                playwrightHelpers.clickLocatorAndTypeKeyboard(faqAnswerPlaceHolder.first(), faqAnswer);
+                return;
+            }
+        } catch (Exception e) {
+            // Continue to fallback
+        }
+        
+        // Try fallback selectors
+        Locator[] fallbackSelectors = {
+            page.locator("input[name='faq_answer[]']").first(),
+            page.getByLabel("FAQ Answer").first(),
+            page.getByLabel("Answer").first(),
+            page.getByPlaceholder("answer").first()
+        };
+        
+        for (Locator selector : fallbackSelectors) {
+            try {
+                if (playwrightHelpers.waitTillLocatorIsVisible(selector, 5000.0)) {
+                    playwrightHelpers.clickLocatorAndTypeKeyboard(selector, faqAnswer);
+                    return;
+                }
+            } catch (Exception e) {
+                continue;
+            }
+        }
+        
+        // If still not found, throw meaningful error
+        throw new RuntimeException("FAQ answer field not found with any selector. Available fields might need 'Add FAQ' button clicked first.");
     }
 
     /**
      * checkmar active on create san junipero
      */
     public void cekActiveOnCreateSanJunipero() {
+        playwrightHelpers.waitTillLocatorIsVisible(checkBoxActive, 10000.0);
         playwrightHelpers.clickOn(checkBoxActive);
     }
 

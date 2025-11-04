@@ -15,7 +15,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
     When user is on the LandingPage EnaknyaNgekos
     And user open instagram in footer
     And tenant set active page to 1
-    Then user redirected to URL "https://www.instagram.com/mamikosapp/"
+    Then user redirected to URL "instagram.com/"
 
   @TEST_SS-3003 @TESTSET_UG-6228 @Automated @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Twitter icon
