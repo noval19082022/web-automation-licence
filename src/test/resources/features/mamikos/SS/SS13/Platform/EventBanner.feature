@@ -9,7 +9,7 @@ Feature: [Test-Execution][DOM] Web - Event Banner
       | 081328787342 | Perempuan123 |
     And owner go to event banner section
     And owner click on banner on dari mamikos section
-    Then user redirected to "https://docs.google.com/forms/d/e/1FAIpQLSdGrn3lbLwSWxdb4tJ1hVJI7qi0nYW77sVXB0YsMXaA4tORKA/"
+    Then user redirected to URL "https://docs.google.com/forms/d/e/1FAIpQLSdGrn3lbLwSWxdb4tJ1hVJI7qi0nYW77sVXB0YsMXaA4tORKA/"
 
   @TEST_SS-3021 @Automated @web-covered
   Scenario: [OD Revamp][Event Banner] Event banner check content
