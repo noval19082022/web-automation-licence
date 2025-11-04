@@ -186,7 +186,7 @@ public class ChatOwnerPO {
         playwright.pressKeyboardKey("Escape");
         playwright.waitTillLocatorIsVisible(searchChat);
         Locator chatOnList = page.locator("(//h6[contains(.,'" + inputText + "')])[1]");
-        searchChat.fill(inputText);
+        playwright.clickLocatorAndTypeKeyboard(searchChat, inputText);
         playwright.hardWait(2000);
         playwright.clickOn(chatOnList);
     }
