@@ -13,6 +13,7 @@ public class EditKostPO {
     private Locator saveButton;
     private Locator successToast;
     private Locator facilityDropdown;
+    private Locator facilityRemoveButton;
     private Locator facilityTag;
 
     /**
@@ -24,7 +25,37 @@ public class EditKostPO {
         playwright = new PlaywrightHelpers(page);
 
         saveButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Save"));
-        successToast = page.locator(".toast-success, .Toastify__toast--success, .success-message");
+        successToast = page.locator(".alert b");
+    }
+
+    /**
+     * Get category ID selector based on category name
+     * @param category The facility category name
+     * @return String CSS selector for the category
+     */
+    private String getCategoryID(String category) {
+        switch (category){
+            case "Fasilitas Umum":
+                return "#inputFacilityShare_chosen";
+
+            case "*Fasilitas Kamar":
+                return "#inputFacilityRoom_chosen";
+
+            case "Fasilitas Kamar Mandi":
+                return "#inputFacilityBath_chosen";
+
+            case "Fasilitas Parkir":
+                return "#inputFacilityPark_chosen";
+
+            case "Fasilitas Lainnya":
+                return "#inputFacilityOther_chosen";
+
+            case "Peraturan Kos":
+                return "#inputKosRule_chosen";
+
+            default:
+                throw new IllegalArgumentException("Unknown category: " + category);
+        }
     }
 
     /**
@@ -33,8 +64,11 @@ public class EditKostPO {
      * @param facility The facility name to add
      */
     public void addFacility(String category, String facility) {
-        facilityDropdown = page.getByText(category);
-        facilityTag = page.getByLabel(category).filter(new Locator.FilterOptions().setHasText(facility));
+        String categoryID = getCategoryID(category);
+
+        facilityDropdown = page.locator(categoryID);
+        // Target only the li elements in the dropdown results, not the selected tags
+        facilityTag = page.locator(categoryID + " .chosen-results li").getByText(facility,new Locator.GetByTextOptions().setExact(true));
 
         playwright.pageScrollInView(facilityDropdown);
         playwright.clickOn(facilityDropdown);
@@ -47,11 +81,12 @@ public class EditKostPO {
      * @param facility The facility name to remove
      */
     public void removeFacility(String category, String facility) {
-        Locator facilityCheckbox = page.locator("//input[@type='checkbox' and @value='" + facility + "']");
+        String categoryID = getCategoryID(category);
 
-        if (facilityCheckbox.isChecked()) {
-            playwright.clickOn(facilityCheckbox);
-        }
+        facilityRemoveButton = page.locator(categoryID).getByRole(AriaRole.LISTITEM).filter(new Locator.FilterOptions().setHas(page.getByText(facility, new Page.GetByTextOptions().setExact(true)))).locator("a");
+
+        playwright.pageScrollInView(facilityRemoveButton);
+        playwright.clickOn(facilityRemoveButton);
     }
 
     /**

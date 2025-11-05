@@ -90,7 +90,7 @@
           | Old Data                        | New Data           | Updated by      |
           | Bak mandi, Gayung, Kloset Duduk | Bak mandi, Gayung  | Owner (Nurjono) |
 
-      @TEST_SS-10120 @test
+      @TEST_SS-10120
       Scenario: Log add facility by admin
         Given admin go to mamikos bangkrupux admin
         And admin login to bangkrupux:
@@ -102,7 +102,7 @@
         And admin add facility in "*Fasilitas Kamar"
           | TV  |
         And admin add facility in "Fasilitas Kamar Mandi"
-          | Kloset Jongkok  |
+          | Kloset jongkok  |
         And admin add facility in "Fasilitas Parkir"
           | Parkir Motor  |
         And admin add facility in "Fasilitas Lainnya"
@@ -113,7 +113,58 @@
         Then admin should see success toast message "Success!"
         #check log facility
         When admin navigates to "/admin/room/tag-change-log?room_id=1000044307"
+        Then admin can see log facility "Fasilitas Umum"
+          | Old Data                                                             | New Data                                                                                   | Updated by              |
+          | Air Jernih, WiFi, TV, Kompor, Dapur, Dispenser, Dilarang bawa hewan  | WiFi, Dapur, Kulkas, Dispenser, TV, Akses 24 Jam, Kompor, Air Jernih, Dilarang bawa hewan  | Admin (Automation Pman) |
+        And admin can see log facility "Fasilitas Lainnya"
+          | Old Data         | New Data                     | Updated by              |
+          | Kampus / Sekolah | ATM / Bank, Kampus / Sekolah | Admin (Automation Pman) |
+        And admin can see log facility "Fasilitas Parkir"
+          | Old Data                            | New Data                                           | Updated by              |
+          | Parkir Mobil, Parkir Motor & Sepeda | Parkir Mobil, Parkir Motor, Parkir Motor & Sepeda	 | Admin (Automation Pman) |
+        And admin can see log facility "Fasilitas Kamar"
+          | Old Data                                                         | New Data                                                             | Updated by              |
+          | Kasur, AC, Lemari / Storage, Meja, Kursi, Tidak boleh bawa anak	 | Kasur, Lemari / Storage, TV , AC, Meja, Kursi, Tidak boleh bawa anak	| Admin (Automation Pman) |
+        And admin can see log facility "Fasilitas Kamar Mandi"
+          | Old Data                                | New Data                                                | Updated by                      |
+          | Gayung, Bak mandi, Ember mandi, Shower  | Shower, Kloset jongkok, Bak mandi, Ember mandi, Gayung  | Admin (Automation Pman) |
 
 
     @TEST_SS-10176
       Scenario: Log delete facility by admin
+      Given admin go to mamikos bangkrupux admin
+        And admin login to bangkrupux:
+          | email stag                   | email prod                   | password  |
+          | automationpman01@mamikos.com | automationpman01@mamikos.com | qwerty123 |
+        And admin navigates to "/admin/kost/1000044307/edit"
+        When admin remove facility in "Fasilitas Umum"
+          | Kulkas  |
+        And admin remove facility in "*Fasilitas Kamar"
+          | TV  |
+        And admin remove facility in "Fasilitas Kamar Mandi"
+          | Kloset jongkok  |
+        And admin remove facility in "Fasilitas Parkir"
+          | Parkir Motor  |
+        And admin remove facility in "Fasilitas Lainnya"
+          | ATM / Bank  |
+        And admin remove facility in "Peraturan Kos"
+          | Akses 24 Jam  |
+        And admin save edit kost
+        Then admin should see success toast message "Success!"
+        #check log facility
+        When admin navigates to "/admin/room/tag-change-log?room_id=1000044307"
+        Then admin can see log facility "Fasilitas Umum"
+          | Old Data                                                                                    | New Data                                                              | Updated by              |
+          | Air Jernih, WiFi, TV, Kompor, Dapur, Dispenser, Dilarang bawa hewan, Kulkas, Akses 24 Jam  | WiFi, Dapur, Dispenser, TV, Kompor, Air Jernih, Dilarang bawa hewan  | Admin (Automation Pman) |
+        And admin can see log facility "Fasilitas Lainnya"
+          | Old Data                     | New Data         | Updated by              |
+          | Kampus / Sekolah, ATM / Bank | Kampus / Sekolah | Admin (Automation Pman) |
+        And admin can see log facility "Fasilitas Parkir"
+          | Old Data                                           | New Data                            | Updated by              |
+          | Parkir Mobil, Parkir Motor & Sepeda, Parkir Motor  | Parkir Mobil, Parkir Motor & Sepeda | Admin (Automation Pman) |
+        And admin can see log facility "Fasilitas Kamar"
+          | Old Data                                                            | New Data                                                         | Updated by              |
+          | Kasur, AC, Lemari / Storage, Meja, Kursi, Tidak boleh bawa anak, TV  | Kasur, Lemari / Storage, AC, Meja, Kursi, Tidak boleh bawa anak | Admin (Automation Pman) |
+        And admin can see log facility "Fasilitas Kamar Mandi"
+          | Old Data                                                | New Data                                | Updated by              |
+          | Gayung, Bak mandi, Ember mandi, Shower, Kloset jongkok  | Shower, Bak mandi, Ember mandi, Gayung  | Admin (Automation Pman) |
