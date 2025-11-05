@@ -53,6 +53,15 @@ Feature: Singgahsini Plus
     When tenant can see mamipoin menu with "Riwayat Mamipoin"
     Then tenant can see mamipoin menu with "Dapatkan Poin"
 
+  @TEST_SS-10050 @continue
+  Scenario: [Web][Singgahsini+ Page][Singgahsini Level]Check copy round up for active card when have number of tiers less than 30
+    When tenant clicks on Singgahsini text
+    Then tenant can see tier passed description "Lanjut ngekos sampai 27 hari untuk naik ke level"
+
+  @TEST_SS-10051 @continue
+  Scenario: [Web][Singgahsini+ Page][Singgahsini Level]Check copy round up when have number of tiers more than 30 hari
+    Then tenant can see tier passed description "Lanjut ngekos sampai 3 bulan untuk naik ke level 3"
+
   @TEST_SS-10228
   Scenario: [Web][Kost Saya][Kontrak]Check popup Hentikan sewa from detail tagihan for kost P1
     When tenant navigate to kontrak kost saya
@@ -200,3 +209,19 @@ Feature: Singgahsini Plus
     When tenant can see "Basic" label
     And tenant clicks on Singgahsini text
     Then tenant can see tier message description on singgahsini page is visible
+
+  @TEST_SS-10051
+  Scenario: [Web][Singgahsini+ Page][Singgahsini Level]Check copy round up when have number of tiers more than 12 Bulan
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag  | password  |
+      | 081300000708 | qwerty123 |
+    And tenant click on icon profil
+    And tenant click on profile
+    And tenant clicks on Singgahsini text
+    Then tenant can see tier passed description "Level 1 sudah terlewati. Kumpulkan lebih banyak poin di level berikutnya!"
+    When tenant can see tier passed description "Level 2 sudah terlewati. Kumpulkan lebih banyak poin di level berikutnya!"
+    Then tenant can see tier passed description "Level 3 sudah terlewati. Kumpulkan lebih banyak poin di level berikutnya!"
+    When tenant can see tier passed description "Level 4 sudah terlewati. Kumpulkan lebih banyak poin di level berikutnya!"
+    Then tenant can see tier passed description "Level 5 sudah terlewati. Kumpulkan lebih banyak poin di level berikutnya!"
+    When tenant can see tier passed description "Lanjut ngekos 1 tahun 3 bulan lagi untuk naik level"
