@@ -57,7 +57,7 @@ Feature: Owner Expose Singgahsini
     When owner click CTA button Expose Singgahsini
     Then owner should redirect to singgahsini.id from Kos
 
-  @TEST_SS-SS-9801
+  @TEST_SS-9801
   Scenario: [Web][Owner Dashboard][Kos Menu]Check CTA singgahsini id on Kost List when owner have kost p2 with "DIperiksa admin" status  and have Area Prio
     Given user go to mamikos homepage
     When user login as owner:
