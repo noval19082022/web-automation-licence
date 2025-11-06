@@ -182,15 +182,9 @@ public class TenantBookingSteps {
 
     @When("tenant checkin kost from riwayat booking")
     public void tenantCheckinKostFromRiwayatBooking() {
-        try {
-            riwayatBooking.clickOnCheckinButton();
-            riwayatBooking.clickOnCheckinPopUpButton();
-            riwayatBooking.clickOnSelesaiAndKeKostSaya();
-        } catch (TimeoutError e) {
-            ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(0));
-            Assert.assertNull(e.getMessage(), "failed on step => tenant checkin kost from riwayat booking");
-            e.printStackTrace();
-        }
+        riwayatBooking.clickOnCheckinButton();
+        riwayatBooking.clickOnCheckinPopUpButton();
+        riwayatBooking.clickOnSelesaiAndKeKostSaya();
     }
 
 

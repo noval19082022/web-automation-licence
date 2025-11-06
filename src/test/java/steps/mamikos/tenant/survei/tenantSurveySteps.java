@@ -314,11 +314,12 @@ public class tenantSurveySteps {
         String phone = Mamikos.ENV.equals("stag") ? "0891111020199" : "0";
         String password = "mamikosqa123";
 
-        tenantLogin = (TenantLoginPO) home.clickOnButtonMasuk()
+        home.clickOnButtonMasuk()
             .clickOnPencariKostButton()
             .waitForPasswordInput()
             .fillPhoneNumber(phone)
             .fillPassword(password);
+        tenantLogin = new TenantLoginPO(page);
         tenantLogin.clickOnTenantLoginButton()
             .waitTillLogoIsVisible();
         home.waitForProfileMenuToBeVisible();

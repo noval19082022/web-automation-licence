@@ -233,7 +233,6 @@ public class SearchContractPO {
         page.waitForLoadState(LoadState.LOAD);
         if (playwright.waitTillLocatorIsVisible(akhiriContractButton.first())) {
             playwright.forceClickOn(akhiriContractButton.first());
-            page.pause();
             playwright.forceClickOn(akhiriContractLink);
         }
         page.waitForLoadState(LoadState.LOAD);
