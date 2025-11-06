@@ -82,7 +82,7 @@ public class TenantSurveyFormPO {
         surveyTimePeriodSiang = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Siang"));
         surveyTimePeriodSore = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sore"));
         phoneNumberInput = page.getByPlaceholder("Masukan nomormu di sini");
-        tncCheckbox = page.locator("span").filter(new Locator.FilterOptions().setHasText("checkmark"));
+        tncCheckbox = page.locator("label[for='tnc-survey']");
         popupConfirmationHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Pastikan Datamu Benar"));
         popupConfirmationKembaliBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kembali"));
         popupConfirmationMengertiBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Mengerti, Kirim"));
