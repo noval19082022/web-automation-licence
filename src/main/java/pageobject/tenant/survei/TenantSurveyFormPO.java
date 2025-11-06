@@ -82,8 +82,7 @@ public class TenantSurveyFormPO {
         surveyTimePeriodSiang = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Siang"));
         surveyTimePeriodSore = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sore"));
         phoneNumberInput = page.getByPlaceholder("Masukan nomormu di sini");
-        // TnC checkbox - try to find by text containing "Dengan mengirimkan form ini"
-        tncCheckbox = page.locator("div:has-text('Dengan mengirimkan form ini')").locator("span").first();
+        tncCheckbox = page.locator("span").filter(new Locator.FilterOptions().setHasText("checkmark"));
         popupConfirmationHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Pastikan Datamu Benar"));
         popupConfirmationKembaliBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kembali"));
         popupConfirmationMengertiBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Mengerti, Kirim"));
@@ -349,9 +348,8 @@ public class TenantSurveyFormPO {
         // Scroll to phone number field
         phoneNumberInput.scrollIntoViewIfNeeded();
         playwright.waitTillLocatorIsVisible(phoneNumberInput);
+        playwright.clearText(phoneNumberInput);
         playwright.clickLocatorAndTypeKeyboard(phoneNumberInput, phoneNumber);
-        // Wait for TnC checkbox to become visible (indicates form validation is done)
-        playwright.waitTillLocatorIsVisible(tncCheckbox);
     }
 
     /**
