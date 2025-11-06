@@ -40,10 +40,10 @@ public class LoginAdminMamipayPO extends LoginPO {
     }
 
     /**
-     * Click on login button admin mamipay
+     * Click on login button for admin mamipay
      * @return AdminMamipayDashboardPO class
      */
-    public AdminMamipayDashboardPO clickOnLoginButton() {
+    public AdminMamipayDashboardPO clickOnAdminMamipayLoginButton() {
         playwright.clickOn(loginBtn);
         return new AdminMamipayDashboardPO(page);
     }

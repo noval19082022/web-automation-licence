@@ -14,44 +14,51 @@ public class TenantLoginPO extends LoginPO {
      * wait for password input form to be available
      * @return TenantLoginPO class
      */
+    @Override
     public synchronized TenantLoginPO waitForPasswordInput() {
-        passwordInput.waitFor();
-        return new TenantLoginPO(page);
+        playwright.waitFor(passwordInput);
+        return this;
     }
 
     @Override
     public synchronized TenantLoginPO fillPassword(String password) {
-        passwordInput.fill(password);
-        return new TenantLoginPO(page);
+        playwright.fill(passwordInput, password);
+        return this;
     }
 
     @Override
     public synchronized TenantLoginPO fillPhoneNumber(String phoneNumber) {
-        phoneNumberInput.fill(phoneNumber);
-        return new TenantLoginPO(page);
+        playwright.fill(phoneNumberInput, phoneNumber);
+        return this;
     }
 
-    @Override
-    public synchronized HomePO clickOnLoginButton() {
-        loginBtn.click();
+    /**
+     * Click on login button for tenant
+     * @return HomePO class
+     */
+    public synchronized HomePO clickOnTenantLoginButton() {
+        playwright.clickOn(loginBtn);
         return new HomePO(page);
     }
 
     @Override
     public synchronized TenantLoginPO fillEmailAddress(String emailAddress) {
-        emailAddressFBInput.fill(emailAddress);
-        return new TenantLoginPO(page);
+        playwright.fill(emailAddressFBInput, emailAddress);
+        return this;
     }
 
     @Override
     public synchronized TenantLoginPO fillPasswordFacebook(String passwordFB) {
-        passwordFBInput.fill(passwordFB);
-        return new TenantLoginPO(page);
+        playwright.fill(passwordFBInput, passwordFB);
+        return this;
     }
 
-    @Override
-    public synchronized HomePO clickOnLoginFacebookButton() {
-        loginFacebookBtn.click();
+    /**
+     * Click on login Facebook button for tenant
+     * @return HomePO class
+     */
+    public synchronized HomePO clickOnTenantLoginFacebookButton() {
+        playwright.clickOn(loginFacebookBtn);
         playwright.hardWait(2000);
         return new HomePO(page);
     }

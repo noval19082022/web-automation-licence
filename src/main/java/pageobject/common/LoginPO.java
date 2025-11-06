@@ -3,8 +3,6 @@ package pageobject.common;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
-import pageobject.owner.OwnerLoginPO;
-import pageobject.tenant.TenantLoginPO;
 import utilities.PlaywrightHelpers;
 
 public class LoginPO {
@@ -65,21 +63,21 @@ public class LoginPO {
     /**
      * Click on pencari kost button
      *
-     * @return TenantLoginPO class
+     * @return LoginPO class
      */
-    public synchronized TenantLoginPO clickOnPencariKostButton() {
+    public synchronized LoginPO clickOnPencariKostButton() {
         playwright.clickOn(pencariKostBtn);
-        return new TenantLoginPO(page);
+        return this;
     }
 
     /**
      * Click on pemilik kost button
      *
-     * @return OwnerLoginPO class
+     * @return LoginPO class
      */
-    public OwnerLoginPO clickOnPemilikKostButton() {
+    public LoginPO clickOnPemilikKostButton() {
         playwright.clickOn(pemilikKostBtn);
-        return new OwnerLoginPO(page);
+        return this;
     }
 
 
@@ -96,11 +94,11 @@ public class LoginPO {
     /**
      * Click on Sign in With Facebook button
      *
-     * @return TenantLoginPO class
+     * @return LoginPO class
      */
-    public synchronized TenantLoginPO clickOnSignInWithFacebookButton() {
+    public synchronized LoginPO clickOnSignInWithFacebookButton() {
         playwright.clickOn(signInWithFBtBtn);
-        return new TenantLoginPO(page);
+        return this;
     }
 
 
@@ -257,5 +255,73 @@ public class LoginPO {
     public void clickOnContinueFBButton() {
         playwright.clickOn(continueFBLogin);
         playwright.hardWait(FB_CONTINUE_WAIT_MS);
+    }
+
+    /**
+     * Wait for password input form to be available
+     * @return LoginPO class
+     */
+    public synchronized LoginPO waitForPasswordInput() {
+        playwright.waitFor(passwordInput);
+        return this;
+    }
+
+    /**
+     * Fill password
+     * @param password password string type
+     * @return LoginPO class
+     */
+    public synchronized LoginPO fillPassword(String password) {
+        playwright.fill(passwordInput, password);
+        return this;
+    }
+
+    /**
+     * Fill phone number
+     * @param phoneNumber phone number string type
+     * @return LoginPO class
+     */
+    public synchronized LoginPO fillPhoneNumber(String phoneNumber) {
+        playwright.fill(phoneNumberInput, phoneNumber);
+        return this;
+    }
+
+    /**
+     * Fill email address for Facebook login
+     * @param emailAddress email address string
+     * @return LoginPO class
+     */
+    public synchronized LoginPO fillEmailAddress(String emailAddress) {
+        playwright.fill(emailAddressFBInput, emailAddress);
+        return this;
+    }
+
+    /**
+     * Fill password for Facebook login
+     * @param passwordFB Facebook password string
+     * @return LoginPO class
+     */
+    public synchronized LoginPO fillPasswordFacebook(String passwordFB) {
+        playwright.fill(passwordFBInput, passwordFB);
+        return this;
+    }
+
+    /**
+     * Click on login button
+     * @return LoginPO class
+     */
+    public synchronized LoginPO clickOnLoginButton() {
+        playwright.clickOn(loginBtn);
+        return this;
+    }
+
+    /**
+     * Click on login Facebook button
+     * @return LoginPO class
+     */
+    public synchronized LoginPO clickOnLoginFacebookButton() {
+        playwright.clickOn(loginFacebookBtn);
+        playwright.hardWait(2000);
+        return this;
     }
 }

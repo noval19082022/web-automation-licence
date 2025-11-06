@@ -52,12 +52,12 @@ public class LoginSteps {
         phoneNumberCredential = table.asMaps(String.class, String.class);
         var phone = phoneNumberCredential.get(0).get("phone "+ Mamikos.ENV);
         var password = phoneNumberCredential.get(0).get("password");
-        home.clickOnButtonMasuk()
+        tenantLogin = (TenantLoginPO) home.clickOnButtonMasuk()
             .clickOnPencariKostButton()
             .waitForPasswordInput()
             .fillPhoneNumber(phone)
-            .fillPassword(password)
-            .clickOnLoginButton()
+            .fillPassword(password);
+        tenantLogin.clickOnTenantLoginButton()
             .waitTillLogoIsVisible();
         home.waitForProfileMenuToBeVisible();
         home.clickOnSayaSetujuButton();
@@ -298,12 +298,12 @@ public class LoginSteps {
         phoneNumberCredential = table.asMaps(String.class, String.class);
         var phone = phoneNumberCredential.get(0).get("phone "+ Mamikos.ENV);
         var password = phoneNumberCredential.get(0).get("password");
-        home.clickOnButtonMasukOnPopularArea()
+        tenantLogin = (TenantLoginPO) home.clickOnButtonMasukOnPopularArea()
                 .clickOnPencariKostButton()
                 .waitForPasswordInput()
                 .fillPhoneNumber(phone)
-                .fillPassword(password)
-                .clickOnLoginButton()
+                .fillPassword(password);
+        tenantLogin.clickOnTenantLoginButton()
                 .waitTillLogoIsVisible();
     }
 
