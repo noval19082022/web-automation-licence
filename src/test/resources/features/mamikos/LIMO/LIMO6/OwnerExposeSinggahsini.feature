@@ -9,7 +9,7 @@ Feature: Owner Expose Singgahsini
       | 089604239002 | 089604239002 | qwerty123 |
     Then owner should see expose singgahini link
     When owner click on expose singgahsini link
-    Then user navigates to singgahsini.id
+    Then owner should redirect to singgahsini.id from Info Untuk Anda
 
   @TEST_SS-9798
   Scenario: [Web][Owner Dashboard][Singgahsini ID]Check Info untuk anda section and redirection when login owner p2
@@ -19,4 +19,52 @@ Feature: Owner Expose Singgahsini
       | 089604239001 | 089604239002 | qwerty123 |
     Then owner should see expose singgahini link
     When owner click on expose singgahsini link
-    Then user navigates to singgahsini.id
+    Then owner should redirect to singgahsini.id from Info Untuk Anda
+
+  @TEST-SS-9803
+  Scenario: [Web][Owner Dashboard][Kos Menu]Check CTA singgahsini id on Kost List when owner have kost p2 with "Aktif" status and have area prio
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | password  |
+      | 082088301090 | mamikos290|
+    And owner dismiss FTUE goldplus
+    And owner navigates to property saya kos
+    Then owner should see CTA button Expose Singgahsini
+    When owner click CTA button Expose Singgahsini
+    Then owner should redirect to singgahsini.id from Kos
+
+  @TEST_SS-9805
+  Scenario: [Web][Owner Dashboard][Kos Menu]Check CTA singgahsini id on Kost List when owner have kost p2 with "Aktif" and "Diperiksa Admin" status and all have area prio
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | password  |
+      | 082088301091 | mamikos290|
+    And owner dismiss FTUE goldplus
+    And owner navigates to property saya kos
+    Then owner should see CTA button Expose Singgahsini
+    When owner click CTA button Expose Singgahsini
+    Then owner should redirect to singgahsini.id from Kos
+
+  @TEST_SS-9807
+  Scenario: [Web][Owner Dashboard][Kos Menu]Check CTA singgahsini id on Kost List when owner have kost p2 with "Aktif" and "Diperiksa Admin" status and one of listing has match area prio
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | password  |
+      | 082088301092 | mamikos290|
+    And owner dismiss FTUE goldplus
+    And owner navigates to property saya kos
+    Then owner should see CTA button Expose Singgahsini
+    When owner click CTA button Expose Singgahsini
+    Then owner should redirect to singgahsini.id from Kos
+
+  @TEST_SS-SS-9801
+  Scenario: [Web][Owner Dashboard][Kos Menu]Check CTA singgahsini id on Kost List when owner have kost p2 with "DIperiksa admin" status  and have Area Prio
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | password  |
+      | 082088301093 | mamikos290|
+    And owner dismiss FTUE goldplus
+    And owner navigates to property saya kos
+    Then owner should see CTA button Expose Singgahsini
+    When owner click CTA button Expose Singgahsini
+    Then owner should redirect to singgahsini.id from Kos
