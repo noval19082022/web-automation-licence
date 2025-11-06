@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SS3 and SS4 Combined Suite" parallel="tests" thread-count="2">
+
+    <test name="SS3 Test Suite">
+        <parameter name="squadName" value="SS"/>
+        <classes>
+            <class name="runners.SS3TestRunner"/>
+        </classes>
+    </test>
+
+    <test name="SS4 Test Suite">
+        <parameter name="squadName" value="SS4"/>
+        <classes>
+            <class name="runners.SS4TestRunner"/>
+        </classes>
+    </test>
+
+</suite>
