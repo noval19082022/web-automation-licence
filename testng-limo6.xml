@@ -3,7 +3,7 @@
 <suite name="All Test Suite">
 
     <parameter name="squadName" value="LIMO6"/>
-    <test name="LIMO6 Tests">
+    <test name="LIMO6TestRunner">
         <classes>
             <class name="runners.LIMO6TestRunner"/>
         </classes>
