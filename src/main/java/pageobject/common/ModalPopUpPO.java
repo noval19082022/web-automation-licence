@@ -12,7 +12,7 @@ public class ModalPopUpPO {
 
     public ModalPopUpPO(Page page) {
         this.page = page;
-        this.playwright = new PlaywrightHelpers(page);
+        this.playwright = new PlaywrightHelpers(this.page);
         this.modalCloseIcon = page.locator(".bg-c-modal__action-closable");
     }
 
