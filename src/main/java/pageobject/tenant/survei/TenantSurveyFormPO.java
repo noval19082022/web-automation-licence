@@ -6,11 +6,8 @@ import com.microsoft.playwright.options.AriaRole;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class TenantSurveyFormPO {
     private Page page;
@@ -23,7 +20,6 @@ public class TenantSurveyFormPO {
     Locator dateViewToday;
     Locator nextMonthBtn;
     Locator previousMonthBtn;
-    Locator timeOption;
     Locator editProfileBtn;
     Locator profileNamePlaceHolder;
     Locator profileBirthdayPlaceHolder;
@@ -39,6 +35,20 @@ public class TenantSurveyFormPO {
     Locator hubunganOrangLainYangAkanDatangSurveyPlaceHolder;
     Locator selectDateSurvei;
 
+    // NEW FLOW - Sameday Survey Elements
+    Locator surveyFormContainer;
+    Locator surveyDateTypeSurveiHariIni;
+    Locator surveyDateTypeTanggalLain;
+    Locator surveyDatePickerTextbox;
+    Locator surveyTimePeriodPagi;
+    Locator surveyTimePeriodSiang;
+    Locator surveyTimePeriodSore;
+    Locator phoneNumberInput;
+    Locator tncCheckbox;
+    Locator popupConfirmationHeading;
+    Locator popupConfirmationKembaliBtn;
+    Locator popupConfirmationMengertiBtn;
+
     public TenantSurveyFormPO(Page page) {
         this.page = page;
         playwright = new PlaywrightHelpers(page);
@@ -48,7 +58,6 @@ public class TenantSurveyFormPO {
         dateViewToday = page.locator("//span[@class='cell day selected today']");
         nextMonthBtn = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("arrow-right"));
         previousMonthBtn = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("arrow-left"));
-        timeOption = page.getByTestId("available-time");
         editProfileBtn = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("edit"));
         profileNamePlaceHolder = page.getByPlaceholder("Masukkan nama lengkap kamu");
         profileBirthdayPlaceHolder = page.getByPlaceholder("Masukkan Tanggal Lahir");
@@ -63,32 +72,23 @@ public class TenantSurveyFormPO {
         namaOrangLainYangAkanDatangSurveyPlaceHolder = page.getByPlaceholder("Masukkan nama orang yang akan datang survei");
         hubunganOrangLainYangAkanDatangSurveyPlaceHolder = page.getByPlaceholder("Contoh: Kakak, Teman");
         selectDateSurvei = page.locator("//div[@class='bg-c-datepicker']");
+
+        // NEW FLOW - Initialize Sameday Survey Elements
+        surveyFormContainer = page.locator(".form-survey");
+        surveyDateTypeSurveiHariIni = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Survei Hari ini"));
+        surveyDateTypeTanggalLain = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tanggal Lain"));
+        surveyDatePickerTextbox = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Pilih Tanggal"));
+        surveyTimePeriodPagi = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pagi"));
+        surveyTimePeriodSiang = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Siang"));
+        surveyTimePeriodSore = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sore"));
+        phoneNumberInput = page.getByPlaceholder("Masukan nomormu di sini");
+        // TnC checkbox - try to find by text containing "Dengan mengirimkan form ini"
+        tncCheckbox = page.locator("div:has-text('Dengan mengirimkan form ini')").locator("span").first();
+        popupConfirmationHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Pastikan Datamu Benar"));
+        popupConfirmationKembaliBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kembali"));
+        popupConfirmationMengertiBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Mengerti, Kirim"));
     }
 
-
-    //******** Private METHOD PART ********
-
-    /**
-     * Extracts all valid time strings in "HH:mm" format from a given string.
-     *
-     * @param text The input string containing multiple times.
-     * @return Array of valid time strings in "HH:mm" format.
-     */
-    private String[] extractAllTimes(String text) {
-        List<String> times = new ArrayList<>();
-
-        // Define a regex pattern to match "HH:mm" format (24-hour time)
-        Pattern pattern = Pattern.compile("\\b(\\d{2}:\\d{2})\\b");
-        Matcher matcher = pattern.matcher(text);
-
-        // Find all occurrences and add to list
-        while (matcher.find()) {
-            times.add(matcher.group(1));
-        }
-
-        // Convert List to String[]
-        return times.toArray(new String[0]);
-    }
 
     //************************************************************************************************************
 
@@ -139,27 +139,6 @@ public class TenantSurveyFormPO {
         return !playwright.waitTillLocatorIsVisible(locator);
     }
 
-    public void tapOnSurveyTimeOption() {
-        playwright.clickOn(timeOption);
-    }
-
-    public String[] getCurrentAvailableTime() {
-        var timeAvailable = playwright.getText(timeOption);
-
-        // this condition will prevent if automation run more than 19:00
-        if (timeAvailable.equals("There is no data")) {
-            var timeCustom = JavaHelpers.getModifiedTimeGMT7(1);
-            return extractAllTimes(timeCustom);
-        }
-
-        return extractAllTimes(timeAvailable);
-    }
-
-    public void selectTimeOption(String time) {
-        var timeOptionLocator = page.locator("a").filter(new Locator.FilterOptions().setHasText(time));
-        playwright.clickOn(timeOptionLocator);
-    }
-
     public String getTenantGender() {
         return playwright.getText(genderPlaceHolder);
     }
@@ -174,6 +153,12 @@ public class TenantSurveyFormPO {
     }
 
     public void tapOnAjukanSurveyBtn() {
+        // Wait for button to be in DOM
+        playwright.waitTillLocatorIsVisible(ajukanSurveyBtn);
+        // Scroll button into view (this should scroll the form container automatically)
+        ajukanSurveyBtn.scrollIntoViewIfNeeded();
+        // Wait a bit after scroll
+        page.waitForTimeout(300);
         playwright.clickOn(ajukanSurveyBtn);
     }
 
@@ -217,7 +202,6 @@ public class TenantSurveyFormPO {
 
     public void checkedOnToogleOrangLainYangAkanDatangSurvei() {
         playwright.checkBox(orangLainYangAkanDatangSurveyToogle);
-        playwright.zoomOutBrowser("0.8");
     }
 
     public void uncheckedOnToogleOrangLainYangAkanDatangSurvei() {
@@ -249,6 +233,174 @@ public class TenantSurveyFormPO {
             if (pick.isEnabled() && pick.isVisible()) {
                 pick.click();
             }
+        }
+    }
+
+    //************************************************************************************************************
+    //******** HELPER METHODS - SCROLL SURVEY FORM ********
+    //************************************************************************************************************
+
+    /**
+     * Scroll survey form container (not main page) to make bottom elements visible
+     *
+     * @param scrollAmount - amount to scroll in pixels
+     */
+    public void scrollSurveyFormDown(int scrollAmount) {
+        // Wait for container to be visible first
+        playwright.waitTillLocatorIsVisible(surveyFormContainer);
+
+        // Try multiple scroll approaches
+        try {
+            // Approach 1: Direct scrollTop
+            surveyFormContainer.evaluate("el => el.scrollTop += " + scrollAmount);
+        } catch (Exception e1) {
+            try {
+                // Approach 2: Scroll using scrollTo
+                surveyFormContainer.evaluate("el => el.scrollTo({top: el.scrollTop + " + scrollAmount + ", behavior: 'smooth'})");
+            } catch (Exception e2) {
+                // Approach 3: Force scroll on body inside container
+                surveyFormContainer.evaluate("el => { const target = el.scrollTop + " + scrollAmount + "; el.scrollTop = target; }");
+            }
+        }
+
+        // Wait a bit for scroll animation to complete
+        page.waitForTimeout(500);
+    }
+
+    //************************************************************************************************************
+    //******** NEW FLOW - SAMEDAY SURVEY METHODS ********
+    //************************************************************************************************************
+
+    /**
+     * Select survey date type: "Survei Hari ini" or "Tanggal Lain"
+     *
+     * @param dateType - "Survei Hari ini" or "Tanggal Lain"
+     */
+    public void selectSurveyDateType(String dateType) {
+        if (dateType.equalsIgnoreCase("Survei Hari ini")) {
+            playwright.waitTillLocatorIsVisible(surveyDateTypeSurveiHariIni);
+            playwright.clickOn(surveyDateTypeSurveiHariIni);
+        } else if (dateType.equalsIgnoreCase("Tanggal Lain")) {
+            playwright.waitTillLocatorIsVisible(surveyDateTypeTanggalLain);
+            playwright.clickOn(surveyDateTypeTanggalLain);
+            // Wait for date picker textbox to appear after selecting "Tanggal Lain"
+            playwright.waitTillLocatorIsVisible(surveyDatePickerTextbox);
+        }
+    }
+
+    /**
+     * Open survey date picker (for "Tanggal Lain" option)
+     */
+    public void openSurveyDatePicker() {
+        playwright.waitTillLocatorIsVisible(surveyDatePickerTextbox);
+        playwright.clickOn(surveyDatePickerTextbox);
+    }
+
+    /**
+     * Select specific date from date picker
+     *
+     * @param date - day number as string (e.g., "7", "15")
+     */
+    public void selectDateFromPicker(String date) {
+        var dateLocator = page.getByText(date, new Page.GetByTextOptions().setExact(true));
+        playwright.waitTillLocatorIsVisible(dateLocator);
+        playwright.clickOn(dateLocator);
+    }
+
+    /**
+     * Select survey time period: "Pagi", "Siang", or "Sore"
+     *
+     * @param period - "Pagi", "Siang", or "Sore"
+     */
+    public void selectSurveyTimePeriod(String period) {
+        switch (period.toLowerCase()) {
+            case "pagi":
+                playwright.waitTillLocatorIsVisible(surveyTimePeriodPagi);
+                playwright.clickOn(surveyTimePeriodPagi);
+                break;
+            case "siang":
+                playwright.waitTillLocatorIsVisible(surveyTimePeriodSiang);
+                playwright.clickOn(surveyTimePeriodSiang);
+                break;
+            case "sore":
+                playwright.waitTillLocatorIsVisible(surveyTimePeriodSore);
+                playwright.clickOn(surveyTimePeriodSore);
+                break;
+        }
+    }
+
+    /**
+     * Select specific survey time (e.g., "08:00", "15:30")
+     *
+     * @param time - time in HH:mm format
+     */
+    public void selectSurveyTime(String time) {
+        var timeButtonLocator = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(time));
+        playwright.waitTillLocatorIsVisible(timeButtonLocator);
+        playwright.clickOn(timeButtonLocator);
+    }
+
+    /**
+     * Fill phone number in survey form
+     *
+     * @param phoneNumber - phone number to fill
+     */
+    public void fillPhoneNumber(String phoneNumber) {
+        // Scroll to phone number field
+        phoneNumberInput.scrollIntoViewIfNeeded();
+        playwright.waitTillLocatorIsVisible(phoneNumberInput);
+        playwright.clickLocatorAndTypeKeyboard(phoneNumberInput, phoneNumber);
+        // Wait for TnC checkbox to become visible (indicates form validation is done)
+        playwright.waitTillLocatorIsVisible(tncCheckbox);
+    }
+
+    /**
+     * Check TnC agreement checkbox
+     */
+    public void checkTnCCheckbox() {
+        // Wait for checkbox to be in DOM
+        playwright.waitTillLocatorIsVisible(tncCheckbox);
+        // Scroll checkbox into view (this should scroll the form container automatically)
+        tncCheckbox.scrollIntoViewIfNeeded();
+        // Wait a bit after scroll
+        page.waitForTimeout(300);
+        playwright.clickOn(tncCheckbox);
+    }
+
+    /**
+     * Check if popup confirmation is visible
+     *
+     * @return true if popup is visible
+     */
+    public boolean isPopupConfirmationVisible() {
+        return playwright.waitTillLocatorIsVisible(popupConfirmationHeading);
+    }
+
+    /**
+     * Click "Kembali" button on confirmation popup
+     */
+    public void clickKembaliOnPopup() {
+        playwright.clickOn(popupConfirmationKembaliBtn);
+    }
+
+    /**
+     * Click "Mengerti, Kirim" button on confirmation popup
+     */
+    public void clickMengertiOnPopup() {
+        playwright.clickOn(popupConfirmationMengertiBtn);
+    }
+
+    /**
+     * Confirm popup ajukan survey if it appears (only for P2 kost)
+     * If popup appears, click "Mengerti, Kirim", otherwise do nothing
+     */
+    public void confirmPopupIfAppear() {
+        try {
+            if (isPopupConfirmationVisible()) {
+                clickMengertiOnPopup();
+            }
+        } catch (Exception e) {
+            // Popup not visible, continue
         }
     }
 }
