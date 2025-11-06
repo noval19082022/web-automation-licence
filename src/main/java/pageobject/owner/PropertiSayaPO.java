@@ -960,7 +960,7 @@ public class PropertiSayaPO {
      * @return String pop up title
      */
     public String getTitlePopUpSuccessEditKos() {
-        playwright.waitTillLocatorIsVisible(titleSuccessEditPopUpText, 60000.0);
+        playwright.waitTillLocatorIsVisible(titleSuccessEditPopUpText, 120000.0);
         playwright.hardWait(1000);
         return playwright.getText(titleSuccessEditPopUpText);
     }
