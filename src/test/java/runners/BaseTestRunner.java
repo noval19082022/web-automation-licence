@@ -42,8 +42,13 @@ public class BaseTestRunner extends AbstractTestNGCucumberTests {
     public void afterTest(String squadName) throws CluecumberException {
         String jsonDirectory = "target/result/" + squadName;
         String reportDirectory = "target/result/" + squadName + "/cluecumber_report";
-        PlaywrightSourceManager.getLocalBrowser().close();
-        PlaywrightSourceManager.getLocalPlaywright().close();
+
+        // Clean up ThreadLocal resources (Browser and Playwright are closed inside cleanup)
+        PlaywrightSourceManager.cleanup();
+        config.playwright.context.ActiveContext.cleanup();
+        config.playwright.context.MamikosBrowserContext.cleanup();
+        FlowControl.cleanup();
+
         new CluecumberCore.Builder()
             .setCustomCssFile("src/test/resources/cluecumber-style/cluecumberStyle.css")
             .setLogLevel(CluecumberLogger.CluecumberLogLevel.MINIMAL)

@@ -1,4 +1,4 @@
-@LIMO6 @MARS_SEARCH_MIGRATE
+@LIMO6 @maintenancecheckkamis
 Feature: Mars Project
 
   @TEST_SS-2808 @Automated @MARS-DOM @Web @discovery-platform

@@ -1,4 +1,4 @@
-@essential @finalcontextimplement
+@essential @finalcontextimplement @qualitycall
 Feature: Login Tenant
 
 #  @continue @context1

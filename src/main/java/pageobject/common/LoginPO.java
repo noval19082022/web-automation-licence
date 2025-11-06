@@ -8,6 +8,10 @@ import pageobject.tenant.TenantLoginPO;
 import utilities.PlaywrightHelpers;
 
 public class LoginPO {
+    // Timeout constants
+    private static final double PROFILE_BUTTON_WAIT_TIMEOUT = 5_000.0;
+    private static final int FB_CONTINUE_WAIT_MS = 5_000;
+
     protected Page page;
     protected PlaywrightHelpers playwright;
     private Locator pencariKostBtn;
@@ -24,11 +28,12 @@ public class LoginPO {
     private Locator loginOwnerPopUp;
     private Locator backButtonLogin;
     private Locator closeBtn;
-    Locator profileTenantButton;
-    Locator keluarButton;
-    Locator profilPictureTenant;
-    Locator profilePictureNull;
-    Locator continueFBLogin;
+    private Locator profileTenantButton;
+    private Locator keluarButton;
+    private Locator profilPictureTenant;
+    private Locator profilePictureNull;
+    private Locator continueFBLogin;
+    private Locator loginPopUpTitle;
 
 
     public LoginPO(Page page) {
@@ -52,7 +57,9 @@ public class LoginPO {
         keluarButton = page.getByTestId("exitButton");
         profilPictureTenant = page.locator("//img[@alt='User Photo']");
         profilePictureNull = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("mamikos").setExact(true));
-        continueFBLogin = page.locator(".x78zum5 > div > div > div > div:nth-child(3) > div > div > div > div > div").first();
+        // More robust locator using role-based selection for Facebook continue button
+        continueFBLogin = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Continue"));
+        loginPopUpTitle = page.getByText("Masuk ke Mamikos");
     }
 
     /**
@@ -61,7 +68,7 @@ public class LoginPO {
      * @return TenantLoginPO class
      */
     public synchronized TenantLoginPO clickOnPencariKostButton() {
-        pencariKostBtn.click();
+        playwright.clickOn(pencariKostBtn);
         return new TenantLoginPO(page);
     }
 
@@ -71,30 +78,19 @@ public class LoginPO {
      * @return OwnerLoginPO class
      */
     public OwnerLoginPO clickOnPemilikKostButton() {
-        pemilikKostBtn.click();
+        playwright.clickOn(pemilikKostBtn);
         return new OwnerLoginPO(page);
     }
 
-    protected Object fillPassword(String password) {
-        return new Object();
-    }
-
-    protected Object fillPhoneNumber(String phoneNumber) {
-        return new Object();
-    }
-
-    protected Object clickOnLoginButton() {
-        return new Object();
-    }
 
     /**
      * Check if login pop up is appear
      *
-     * @return
+     * @return true if both Facebook and Google login buttons are visible
      */
     public boolean checkLoginPopUpFromFavoritePage() {
-        return FBLoginTenantFav.isVisible()
-                && googleLoginTenantFav.isVisible();
+        return playwright.waitTillLocatorIsVisible(FBLoginTenantFav)
+                && playwright.waitTillLocatorIsVisible(googleLoginTenantFav);
     }
 
     /**
@@ -103,31 +99,20 @@ public class LoginPO {
      * @return TenantLoginPO class
      */
     public synchronized TenantLoginPO clickOnSignInWithFacebookButton() {
-        signInWithFBtBtn.click();
+        playwright.clickOn(signInWithFBtBtn);
         return new TenantLoginPO(page);
     }
 
-    protected Object fillEmailAddress(String phoneNumber) {
-        return new Object();
-    }
-
-    protected Object fillPasswordFacebook(String passwordFB) {
-        return new Object();
-    }
-
-    protected Object clickOnLoginFacebookButton() {
-        return new Object();
-    }
 
 
 
     /**
-     * verify that login owner pop up is appear
+     * Verify that login owner pop up is appear
      *
-     * @return Boolean
+     * @return Boolean true if login owner popup is visible
      */
     public Boolean popUpOwnerLogin() {
-        return loginOwnerPopUp.isVisible();
+        return playwright.waitTillLocatorIsVisible(loginOwnerPopUp);
     }
 
     /**
@@ -145,20 +130,20 @@ public class LoginPO {
     }
 
     /**
-     * Click back Pop up Login
+     * Check if login popup is displayed
      *
-     * @return Boolean
+     * @return Boolean true if login popup is visible
      */
     public Boolean popUpLogin() {
-        return page.getByText("Masuk ke Mamikos").isVisible();
+        return playwright.waitTillLocatorIsVisible(loginPopUpTitle);
     }
 
     /**
      * User Log out as a Tenant
      */
     public void logoutAsTenant() {
-        profileTenantButton.click();
-        keluarButton.click();
+        playwright.clickOn(profileTenantButton);
+        playwright.clickOn(keluarButton);
     }
 
 
@@ -166,7 +151,7 @@ public class LoginPO {
      * Try to Logout from mamikos
      */
     public void tryToLogoutFromMamikos() {
-        if (playwright.waitTillLocatorIsVisible(profileTenantButton, 5_000.0)) {
+        if (playwright.waitTillLocatorIsVisible(profileTenantButton, PROFILE_BUTTON_WAIT_TIMEOUT)) {
             playwright.clickOn(profileTenantButton);
             playwright.clickOn(keluarButton);
         }
@@ -196,56 +181,74 @@ public class LoginPO {
     }
 
     /**
+     * Get dynamic locator for paragraph containing text
+     *
+     * @param text Text to search for in paragraph
+     * @return Locator for paragraph containing the specified text
+     */
+    private Locator getParagraphByText(String text) {
+        return page.locator("//p[contains(., '" + text + "')]");
+    }
+
+    /**
      * Get login error messages text
-     * @return string
+     *
+     * @param error Error message text to search for
+     * @return string error message text
      */
     public String getLoginErrorMessagesText(String error){
-        playwright.waitTillLocatorIsVisible(page.locator("//p[contains(., '" + error + "')]"));
-        return playwright.getText(page.locator("//p[contains(., '" + error + "')]"));
+        Locator errorLocator = getParagraphByText(error);
+        playwright.waitTillLocatorIsVisible(errorLocator);
+        return playwright.getText(errorLocator);
     }
 
     /**
      * Get Login Title Pop Up Text
-     * @param text text
-     * @return string
+     *
+     * @param text text to search for in title
+     * @return string title text
      */
     public String getLoginTitlePopUpText(String text){
-        return playwright.getText(page.locator("//p[contains(., '" + text + "')]"));
+        return playwright.getText(getParagraphByText(text));
     }
 
     /**
      * Get Login Subtitle Pop Up Text
-     * @param text text
-     * @return string
+     *
+     * @param text text to search for in subtitle
+     * @return string subtitle text
      */
     public String getLoginSubtitleText(String text){
-        return playwright.getText(page.locator("//p[contains(., '" + text + "')]"));
+        return playwright.getText(getParagraphByText(text));
     }
 
     /**
-     * Is Pop up title text appeared?
-     * @param text text
-     * @return true or false
+     * Check if popup title text appeared
+     *
+     * @param text text to search for in title
+     * @return true if title is visible
      */
     public boolean isPopupTitleTextAppeared(String text){
-        return playwright.waitTillLocatorIsVisible(page.locator("//p[contains(., '" + text + "')]"));
-
+        return playwright.waitTillLocatorIsVisible(getParagraphByText(text));
     }
 
     /**
-     * Is Pop up subtitle text appeared?
-     * @param text text
-     * @return true or false
+     * Check if popup subtitle text appeared
+     *
+     * @param text text to search for in subtitle
+     * @return true if subtitle is visible
      */
     public Boolean isPopupSubtitleTextAppeared(String text){
-        return playwright.waitTillLocatorIsVisible(page.locator("//p[contains(., '" + text + "')]"));
+        return playwright.waitTillLocatorIsVisible(getParagraphByText(text));
     }
 
     /**
-     * Get Profile Picture Is Null
+     * Check if profile picture is not null (default profile icon visible)
+     *
+     * @return Boolean true if default profile picture is visible
      */
     public Boolean isProfilePictureNotNull(){
-        return profilePictureNull.isVisible();
+        return playwright.waitTillLocatorIsVisible(profilePictureNull);
     }
 
     /**
@@ -253,6 +256,6 @@ public class LoginPO {
      */
     public void clickOnContinueFBButton() {
         playwright.clickOn(continueFBLogin);
-        playwright.hardWait(5000);
+        playwright.hardWait(FB_CONTINUE_WAIT_MS);
     }
 }
