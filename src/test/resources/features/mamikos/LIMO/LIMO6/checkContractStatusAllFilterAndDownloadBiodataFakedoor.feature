@@ -1,4 +1,4 @@
-@LIMO6
+@LIMO6 @checkContractStatusBiodataFaker
 Feature: check contract status on all filter and download biodata fakedoor
 
 

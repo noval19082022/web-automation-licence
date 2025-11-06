@@ -196,50 +196,6 @@ public class tenantSurveySteps {
         Assert.assertEquals(tenantSurveyFormPO.getSurveyDateAutoSelected(), dateToday);
     }
 
-    @And("user open time survey option on form survey")
-    public void userOpenTimeSurveyOptionOnFormSurvey() {
-        tenantSurveyFormPO.tapOnSurveyTimeOption();
-    }
-
-    @Then("user verify available time is higher than current time")
-    public void userVerifyAvailableTimeIsHigherThanCurrentTime() {
-        var currentTime = JavaHelpers.getCurrentTimeServerForSurvey();
-
-        var timeAvailable = tenantSurveyFormPO.getCurrentAvailableTime();
-
-        for (var time : timeAvailable) {
-            if (currentTime.equals(time)) {
-                continue;
-            }
-
-            Assert.assertTrue(
-                    JavaHelpers.isTimeGreater(time, currentTime));
-        }
-    }
-
-    @Then("user select survey available time")
-    public void userSelectSurveyTimeHoursFromCurrentTime() {
-        var timeAvailable = tenantSurveyFormPO.getCurrentAvailableTime();
-        if (timeAvailable.length != 0) {
-            tenantSurveyFormPO.selectTimeOption(timeAvailable[0]);
-        } else {
-            tenantSurveyFormPO.tapOnSurveyDateForm();
-            tenantSurveyFormPO.tapOnNextMonthBtnSurveyDateForm();
-            tenantSurveyFormPO.selectSurveyDate("15");
-            tenantSurveyFormPO.tapOnSurveyTimeOption();
-            tenantSurveyFormPO.selectTimeOption("08:00");
-        }
-    }
-
-    @Then("user see there is no available survey time for today if open more than 19:00")
-    public void userSeeThereIsNoAvailableSurveyTimeForTodayIfOpenMoreThan() {
-        var currentTime = JavaHelpers.getCurrentTimeGMT7ForSurvey();
-
-        if (JavaHelpers.isTimeGreater(currentTime, "19:00")) {
-            var timeAvailable = tenantSurveyFormPO.getCurrentAvailableTime();
-            Assert.assertEquals(timeAvailable.length, 0);
-        }
-    }
 
     @Then("user see the gender on survey form is {string}")
     public void userSeeTheGenderOnSurveyFormIs(String gender) {
@@ -344,5 +300,58 @@ public class tenantSurveySteps {
     public void userCheckTheLabelNotDisplayed() {
         playwright.pageScrollToDown(300);
         Assert.assertFalse(kostDetail.isSurveyLabelSectionVisible(), "Survey label section should not be visible for non-GP kost");
+    }
+
+
+    //************************************************************************************************************
+    //******** NEW FLOW - SAMEDAY SURVEY STEP DEFINITIONS ********
+    //************************************************************************************************************
+    @And("user select survey date type {string}")
+    public void userSelectSurveyDateType(String dateType) {
+        tenantSurveyFormPO.selectSurveyDateType(dateType);
+    }
+
+    @And("user open survey date picker on form survey")
+    public void userOpenSurveyDatePickerOnFormSurvey() {
+        tenantSurveyFormPO.openSurveyDatePicker();
+    }
+
+    @And("user select date {string} on survey form")
+    public void userSelectDateOnSurveyForm(String date) {
+        tenantSurveyFormPO.selectDateFromPicker(date);
+    }
+
+    @And("user select survey time period {string}")
+    public void userSelectSurveyTimePeriod(String period) {
+        tenantSurveyFormPO.selectSurveyTimePeriod(period);
+    }
+
+    @And("user select survey time {string}")
+    public void userSelectSurveyTime(String time) {
+        tenantSurveyFormPO.selectSurveyTime(time);
+    }
+
+    @And("user fill phone number {string} on survey form")
+    public void userFillPhoneNumberOnSurveyForm(String phoneNumber) {
+        tenantSurveyFormPO.fillPhoneNumber(phoneNumber);
+    }
+
+    @And("user check TnC agreement checkbox on survey form")
+    public void userCheckTnCAgreementCheckboxOnSurveyForm() {
+        tenantSurveyFormPO.checkTnCCheckbox();
+    }
+
+    @And("user tap {string} on survey confirmation popup")
+    public void userTapOnSurveyConfirmationPopup(String action) {
+        if (action.equalsIgnoreCase("Kembali")) {
+            tenantSurveyFormPO.clickKembaliOnPopup();
+        } else if (action.equalsIgnoreCase("Mengerti")) {
+            tenantSurveyFormPO.clickMengertiOnPopup();
+        }
+    }
+
+    @And("user confirm popup ajukan survey if appear")
+    public void userConfirmPopupAjukanSurveyIfAppear() {
+        tenantSurveyFormPO.confirmPopupIfAppear();
     }
 }
