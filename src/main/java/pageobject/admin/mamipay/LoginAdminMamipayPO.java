@@ -34,19 +34,17 @@ public class LoginAdminMamipayPO extends LoginPO {
      * @param password password String
      * @return LoginAdminMamipayPO class
      */
-    @Override
     public LoginAdminMamipayPO fillPassword(String password) {
-        passwordInput.fill(password);
-        return new LoginAdminMamipayPO(page);
+        playwright.fill(passwordInput, password);
+        return this;
     }
 
     /**
      * Click on login button admin mamipay
      * @return AdminMamipayDashboardPO class
      */
-    @Override
     public AdminMamipayDashboardPO clickOnLoginButton() {
-        loginBtn.click();
+        playwright.clickOn(loginBtn);
         return new AdminMamipayDashboardPO(page);
     }
 }
