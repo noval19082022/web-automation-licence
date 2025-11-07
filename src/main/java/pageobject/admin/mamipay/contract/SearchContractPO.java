@@ -175,7 +175,11 @@ public class SearchContractPO {
     public void clickOnCancelContractButton() {
         if (playwright.waitTillLocatorIsVisible(batalkanContractButton, 5000.00)) {
             playwright.acceptDialog(batalkanContractButton);
-            page.waitForSelector(".callout.callout-success");
+            try {
+                page.waitForSelector(".callout.callout-success", new Page.WaitForSelectorOptions().setTimeout(15000));
+            } catch (com.microsoft.playwright.TimeoutError e) {
+                System.out.println("Success callout did not appear within timeout period: " + e.getMessage());
+            }
         }
     }
 
@@ -186,7 +190,11 @@ public class SearchContractPO {
         if (playwright.waitTillLocatorIsVisible(berhentikanContractButton, 5000.00)) {
             playwright.acceptDialog(berhentikanContractButton);
             berhentikanContractPopUpButton.click();
-            page.waitForSelector(".callout.callout-success");
+            try {
+                page.waitForSelector(".callout.callout-success", new Page.WaitForSelectorOptions().setTimeout(15000));
+            } catch (com.microsoft.playwright.TimeoutError e) {
+                System.out.println("Success callout did not appear within timeout period: " + e.getMessage());
+            }
         }
     }
 

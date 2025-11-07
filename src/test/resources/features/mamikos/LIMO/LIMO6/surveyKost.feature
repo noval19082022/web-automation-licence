@@ -1,4 +1,4 @@
-@regression @surveyTenant @LIMO6
+@regression @surveyTenantP1 @LIMO6
 
 Feature: Survey Tenant
 
@@ -11,23 +11,66 @@ Feature: Survey Tenant
     And user click on chat button in top bar tenant home page
     And user click "Kost Adi Auto SinggahSini Tobelo Halmahera Utara"
     And user tap on survey kost btn on detail chatroom
-    And user open time survey option on form survey
-    Then user select survey available time
+    # NEW FLOW - Select survey date type
+    And user select survey date type "Tanggal Lain"
+    And user open survey date picker on form survey
+    And user select date "7" on survey form
+    # NEW FLOW - Select survey time (2 steps: period + specific time)
+    And user select survey time period "Pagi"
+    And user select survey time "08:00"
+    # NEW FLOW - Fill phone number
+    And user fill phone number "0811978788416" on survey form
+    # NEW FLOW - Check TnC checkbox
+    And user check TnC agreement checkbox on survey form
+    # Submit survey
     And user tap on ajukan survey btn on form
+    # NEW FLOW - Confirm popup if appear (only for P2)
+    And user confirm popup ajukan survey if appear
+    # Verify
     And user go to mamikos homepage
     And user click on chat button in top bar tenant home page
     And user click "Kost Adi Auto SinggahSini Tobelo Halmahera Utara"
     Then chat room appear with latest message "Survei Diterima"
 
-  @TEST_SS-3645 @continue
-  Scenario: Reschedule survei from chat room
-    When user go to mamikos homepage
+  @TEST_LIMO-9323 @continue
+  Scenario: Submit survei hari ini from chat template on Kost Detail
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag    | phone prod | password  |
+      | 0811978788416 | 0812000005 | qwerty123 |
     And user click on chat button in top bar tenant home page
     And user click "Kost Adi Auto SinggahSini Tobelo Halmahera Utara"
-    And user click on Ubah Jadwal button
-    And user open time survey option on form survey
-    Then user select survey available time
+    And user tap on survey kost btn on detail chatroom
+    # NEW FLOW - Select "Survei Hari Ini"
+    And user select survey date type "Survei Hari ini"
+    Then user verify survey date on form is "today"
+    # NEW FLOW - Select survey time (2 steps: period + specific time)
+    And user select survey time period "Pagi"
+    And user select survey time "08:00"
+    # NEW FLOW - Fill phone number
+    And user fill phone number "0811978788416" on survey form
+    # NEW FLOW - Check TnC checkbox
+    And user check TnC agreement checkbox on survey form
+    # Submit survey
+    And user tap on ajukan survey btn on form
+    # NEW FLOW - Confirm popup if appear (only for P2)
+    And user confirm popup ajukan survey if appear
+    # Verify
+    And user go to mamikos homepage
+    And user click on chat button in top bar tenant home page
+    And user click "Kost Adi Auto SinggahSini Tobelo Halmahera Utara"
     Then chat room appear with latest message "Survei Diterima"
+
+    ## currently reschedule survey is disable
+#  @TEST_SS-3645 @continue
+#  Scenario: Reschedule survei from chat room
+#    When user go to mamikos homepage
+#    And user click on chat button in top bar tenant home page
+#    And user click "Kost Adi Auto SinggahSini Tobelo Halmahera Utara"
+#    And user click on Ubah Jadwal button
+#    And user open time survey option on form survey
+#    Then user select survey available time
+#    Then chat room appear with latest message "Survei Diterima"
 
   @TEST_SS-3592
   Scenario: cancel survei from chat template on Kost Detail

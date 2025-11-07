@@ -4,59 +4,62 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import utilities.PlaywrightHelpers;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class LogFacilityPO {
     private Page page;
     PlaywrightHelpers playwright;
-    private static final Map<String, Integer> ROW_INDEX_MAP = new HashMap<>();
-
-    static {
-        ROW_INDEX_MAP.put("Fasilitas Umum", 0);
-        ROW_INDEX_MAP.put("Fasilitas Kamar", 1);
-        ROW_INDEX_MAP.put("Fasilitas Parkir", 2);
-        ROW_INDEX_MAP.put("Fasilitas Kamar Mandi", 3);
-    }
 
     public LogFacilityPO(Page page){
         this.page = page;
         playwright = new PlaywrightHelpers(page);
     }
 
-    private String getColumnData(String row, int columnNumber) {
-        Integer rowIndex = ROW_INDEX_MAP.get(row);
-        if (rowIndex == null) {
-            throw new IllegalArgumentException("Invalid row: " + row);
-        }
-        Locator columnLocator = page.locator("tr td:nth-of-type(" + columnNumber + ")").nth(rowIndex);
+    /**
+     * Find the table row that contains the facility category name
+     * Returns the first (most recent) matching row
+     * @param facilityCategory The facility category name (e.g., "Fasilitas Umum")
+     * @return Locator for the row containing the category
+     */
+    private Locator findRowByCategory(String facilityCategory) {
+        // Find the first row that contains the facility category text (most recent log entry)
+        return page.locator("tr").filter(new Locator.FilterOptions().setHasText(facilityCategory)).first();
+    }
+
+    /**
+     * Get column data from a specific row by facility category
+     * @param facilityCategory The facility category name
+     * @param columnNumber The column number (1-based index)
+     * @return String value of the column
+     */
+    private String getColumnData(String facilityCategory, int columnNumber) {
+        Locator row = findRowByCategory(facilityCategory);
+        Locator columnLocator = row.locator("td:nth-of-type(" + columnNumber + ")");
         return playwright.getText(columnLocator);
     }
 
     /**
-     * get Old Data
-     * @param row
-     * @return String
+     * Get Old Data from the facility log
+     * @param facilityCategory The facility category name (e.g., "Fasilitas Umum")
+     * @return String value of the Old Data column
      */
-    public String getOldData(String row) {
-        return getColumnData(row, 4);
+    public String getOldData(String facilityCategory) {
+        return getColumnData(facilityCategory, 4);
     }
 
     /**
-     * get New Data
-     * @param row
-     * @return
+     * Get New Data from the facility log
+     * @param facilityCategory The facility category name (e.g., "Fasilitas Umum")
+     * @return String value of the New Data column
      */
-    public String getNewData(String row) {
-        return getColumnData(row, 5);
+    public String getNewData(String facilityCategory) {
+        return getColumnData(facilityCategory, 5);
     }
 
     /**
-     * get Update By
-     * @param row
-     * @return
+     * Get Updated By information from the facility log
+     * @param facilityCategory The facility category name (e.g., "Fasilitas Umum")
+     * @return String value of the Updated By column
      */
-    public String updateBy(String row) {
-        return getColumnData(row, 6);
+    public String updateBy(String facilityCategory) {
+        return getColumnData(facilityCategory, 6);
     }
 }
