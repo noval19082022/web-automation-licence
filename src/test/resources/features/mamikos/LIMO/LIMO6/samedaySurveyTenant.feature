@@ -40,24 +40,24 @@ Feature: Sameday Survey Tenant
     And user verify sameday survey message is visible
     And user verify only today is enabled in calendar
 
-#  @TEST_LIMO-9394
-#  Scenario: [Survey][Tenant] Select "Tanggal Lain" option
-#    Given user go to mamikos homepage
-#    When user login as tenant via phone number:
-#      | phone stag   | phone prod   | password  |
-#      | 081197878846 | 081197878846 | Perempuan |
-#    And tenant search kost then go to kost details:
-#      | kost name stag                | kost name prod                |
-#      | Kost Apik Desta Tipe B Tamvan | Kost Apik Desta Tipe B Tamvan |
-#    And user dismiss FTUE booking benefit
-#    And user click chat in kos detail
-#    And user tap on survey kost btn on detail chatroom
-#    And user select survey date type "Tanggal Lain"
-#    Then user verify survey date picker placeholder is "Pilih Tanggal"
-#    And user verify tanggal lain message contains "Survei dilakukan di akhir pekan agar pemilik dapat bersiap"
-#    And user open survey date picker on form survey
-#    And user verify date range is selectable up to "30" days from today
-#    And user verify past dates are disabled
+  @TEST_LIMO-9394
+  Scenario: [Survey][Tenant] Select "Tanggal Lain" option
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 081197878846 | 081197878846 | Perempuan |
+    And tenant search kost then go to kost details:
+      | kost name stag                | kost name prod                |
+      | Kost Apik Desta Tipe B Tamvan | Kost Apik Desta Tipe B Tamvan |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    And user select survey date type "Tanggal Lain"
+    Then user verify survey date picker placeholder is "Pilih Tanggal"
+    And user will see that the text "Survei dianjurkan di akhir pekan agar pemilik dapat bersiap" is displayed
+    And user open survey date picker on form survey
+    And user verify date range is selectable up to "30" days from today
+    And user verify past dates are disabled
 #
 #  @TEST_LIMO-9395
 #  Scenario: [Survey][Tenant] Attempt to select sameday for ineligible/Disabled P2 owner

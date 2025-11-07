@@ -612,12 +612,36 @@ public class TenantSurveyFormPO {
      * @return true if date range is selectable
      */
     public boolean verifyDateRangeSelectable(int daysFromToday) {
-        // Scope search to the date picker container
-        var basedLocator = page.locator("//div[@class='date-wrapper__cell-parent']/span[@class='cell day']");
+        try {
+            // Get current month and target month
+            String currentMonth = JavaHelpers.getCostumDateOrTime("MMMM", 0, 0, 0);
+            String targetMonth = JavaHelpers.getCostumDateOrTime("MMMM", daysFromToday, 0, 0);
 
-        String futureDate = JavaHelpers.getCostumDateOrTime("d", daysFromToday, 0, 0);
-        var futureDateLocator = basedLocator.getByText(futureDate, new Locator.GetByTextOptions().setExact(true)).first();
-        return playwright.waitTillLocatorIsVisible(futureDateLocator);
+            // Navigate to the target month if it's different from current month
+            if (!currentMonth.equals(targetMonth)) {
+                // Click next month button to navigate to the target month
+                playwright.clickOn(nextMonthBtn);
+                playwright.hardWait(1000); // Wait for calendar to update
+            }
+
+            // Scope search to the date picker container
+            var basedLocator = page.locator("//div[@class='date-wrapper__cell-parent']/span[@class='cell day']");
+
+            String futureDate = JavaHelpers.getCostumDateOrTime("d", daysFromToday, 0, 0);
+            var futureDateLocator = basedLocator.getByText(futureDate, new Locator.GetByTextOptions().setExact(true)).first();
+
+            // Check if the date is visible
+            boolean isVisible = playwright.waitTillLocatorIsVisible(futureDateLocator);
+
+            // Navigate back to current month if we navigated away
+            if (!currentMonth.equals(targetMonth)) {
+                playwright.clickOn(previousMonthBtn);
+            }
+
+            return isVisible;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /**
