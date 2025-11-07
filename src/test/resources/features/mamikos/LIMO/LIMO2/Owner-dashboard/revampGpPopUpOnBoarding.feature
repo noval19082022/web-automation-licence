@@ -36,65 +36,64 @@ Feature: Revamp GP Onboarding
   Scenario: [Revamp Pilih Paket GP] Verify Backend Content Handling for Package Copies
     Then owner verify list of Pilih Gp Package is appear
        """
-      - img "back"
-      - paragraph: Paket GoldPlus
-      - img
-      - paragraph: Paket Simpel
-      - separator
-      - paragraph: Chat tanpa batas
-      - paragraph: Iklan lebih prioritas dari non-GoldPlus
-      - paragraph: Lihat profil penyewa dasar
-      - paragraph: Daftar Tunggu 10 penyewa
-      - text: Baru
-      - paragraph: Terima Survei Kos fitur dasar
-      - paragraph: Cek Properti Sekitar
-      - paragraph: Buat Promo Iklan
-      - paragraph: Cashback MamiAds mulai dari 7.500
-      - separator
-      - paragraph: Mulai dari
-      - paragraph: Rp54.000/Bulan
-      - text: "-10%"
-      - paragraph: Rp60.000
-      - button "Pilih Paket"
-      - paragraph: Manfaat GoldPlus 1
-      - dialog
-      - img
-      - paragraph: Paket Lengkap
-      - text: Favorit
-      - separator
-      - img
-      - paragraph: Chat tanpa batas
-      - img
-      - paragraph: Iklan lebih prioritas dari GoldPlus 1
-      - img
-      - paragraph: Lihat profil penyewa lengkap
-      - img
-      - paragraph: Daftar Tunggu tanpa batas
-      - text: Baru
-      - img
-      - paragraph: Terima Survei Kos fitur penuh
-      - img
-      - paragraph: Cek Properti Sekitar
-      - img
-      - paragraph: Buat Promo Iklan
-      - img
-      - paragraph: Broadcast Chat
-      - img
-      - paragraph: Cashback MamiAds mulai dari 35.000
-      - separator
-      - paragraph: Mulai dari
-      - paragraph: Rp145.000/Bulan
-      - text: "-3%"
-      - paragraph: Rp150.000
-      - button "Pilih Paket"
-      - text: Yuk coba, lagi promo
-      - paragraph: Manfaat GoldPlus 2
-      - dialog
-      - paragraph: Masih bingung?
-      - paragraph: Cari tahu lebih banyak di bawah
-      - img "book"
-      - paragraph: Baca tentang GoldPlus di sini
-      - img "chevron-right"
+     - img "back"
+- paragraph: Paket GoldPlus
+- img
+- paragraph: Paket Simpel
+- separator
+- paragraph: Chat tanpa batas
+- paragraph: Iklan lebih prioritas dari non-GoldPlus
+- paragraph: Lihat profil penyewa dasar
+- paragraph: Daftar Tunggu 10 penyewa
+- text: Baru
+- paragraph: Terima Survei Kos fitur dasar
+- paragraph: Cek Properti Sekitar
+- paragraph: Buat Promo Iklan
+- paragraph: Cashback MamiAds mulai dari 7.500
+- separator
+- paragraph: Mulai dari
+- paragraph: Rp249.000/Bulan
+- text: "-17%"
+- paragraph: Rp299.000
+- button "Pilih Paket"
+- paragraph: Manfaat GoldPlus 1
+- dialog
+- img
+- paragraph: Paket Lengkap
+- text: Favorit
+- separator
+- img
+- paragraph: Chat tanpa batas
+- img
+- paragraph: Iklan lebih prioritas dari GoldPlus 1
+- img
+- paragraph: Lihat profil penyewa lengkap
+- img
+- paragraph: Daftar Tunggu tanpa batas
+- text: Baru
+- img
+- paragraph: Terima Survei Kos fitur penuh
+- img
+- paragraph: Cek Properti Sekitar
+- img
+- paragraph: Buat Promo Iklan
+- img
+- paragraph: Broadcast Chat
+- img
+- paragraph: Cashback MamiAds mulai dari 35.000
+- separator
+- paragraph: Mulai dari
+- paragraph: Rp24.000.000/Bulan
+- text: "-20%"
+- paragraph: Rp30.000.000
+- button "Pilih Paket"
+- paragraph: Manfaat GoldPlus 2
+- dialog
+- paragraph: Masih bingung?
+- paragraph: Cari tahu lebih banyak di bawah
+- img "book"
+- paragraph: Baca tentang GoldPlus di sini
+- img "chevron-right"
        """
 
   @TEST_LIMO-9187
@@ -117,9 +116,9 @@ Feature: Revamp GP Onboarding
       - paragraph: Cashback MamiAds mulai dari 7.500
       - separator
       - paragraph: Mulai dari
-      - paragraph: Rp54.000/Bulan
-      - text: "-10%"
-      - paragraph: Rp60.000
+      - paragraph: Rp249.000/Bulan
+      - text: "-17%"
+      - paragraph: Rp299.000
       - button "Pilih Paket"
       - paragraph: Manfaat GoldPlus 1
        """
@@ -136,7 +135,7 @@ Feature: Revamp GP Onboarding
 
   @TEST_LIMO-9188
   Scenario: [Revamp Pilih Paket GP] Verify MamiAds Copy for GPMA Segment Users
-    Then owner will see that the text "Termasuk MamiAds 150 ribu" is displayed
+    Then owner will see that the text "Cashback MamiAds mulai dari 35.000" is displayed
 
   @TEST_LIMO-9189
   Scenario: [Revamp Pilih Paket GP] Verify "Tawaran Terbatas" Display for GPSP Segment
@@ -163,12 +162,14 @@ Feature: Revamp GP Onboarding
       - paragraph: Buat Promo Iklan
       - paragraph: Cashback MamiAds mulai dari 7.500
       - separator
+      - paragraph:
+        - img "promo"
+        - text: Tawaran terbatas!
       - paragraph: Mulai dari
       - paragraph: Rp99.000/Bulan
       - text: "-18%"
       - paragraph: Rp120.000
       - button "Pilih Paket"
-      - text: Tawaran terbatas!
       - paragraph: Manfaat GoldPlus 1
       """
 
@@ -201,8 +202,9 @@ Feature: Revamp GP Onboarding
     Then owner will see that the text "Yuk coba, lagi promo" is displayed
     Then owner verify list of Pilih Gp Package is contains
       """
-      - text: Yuk coba, lagi promo
-      - paragraph: Manfaat GoldPlus 2
+      - paragraph:
+        - img "promo"
+        - text: Yuk coba, lagi promo
       """
 
   @TEST_LIMO-9218
@@ -216,6 +218,7 @@ Feature: Revamp GP Onboarding
     Then owner will see that the text "Yuk coba, lagi promo" is displayed
     Then owner verify list of Pilih Gp Package is contains
       """
-      - text: Yuk coba, lagi promo
-      - paragraph: Manfaat GoldPlus 1
+      - paragraph:
+        - img "promo"
+        - text: Yuk coba, lagi promo
       """

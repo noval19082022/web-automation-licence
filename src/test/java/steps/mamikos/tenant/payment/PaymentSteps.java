@@ -124,7 +124,10 @@ public class PaymentSteps {
         invoicePO.clickOnPermata();
         invoicePO.clickOnBayarSekarang();
         var kodePembayaran = invoicePO.getKodePembayaranNumberText();
-        // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
+        page = ActiveContext.getActiveBrowserContext().waitForPage(() -> {
+            ActiveContext.getActiveBrowserContext().newPage();
+        });
+        ActiveContext.setActivePage(page);
         midtransPaymentPO = Optional.ofNullable(midtransPaymentPO).orElseGet(() -> new MidtransPaymentPO(ActiveContext.getActivePage()));
         midtransPaymentPO.paymentForPermata(kodePembayaran, Bank);
     }
@@ -157,6 +160,10 @@ public class PaymentSteps {
         invoicePO.clickOnBayarSekarang();
         var kodePembayaran = invoicePO.getKodePembayaranNumberText();
         var amountPembayaranBNI = invoicePO.getAmountPembayaranBNINumberText();
+        page = ActiveContext.getActiveBrowserContext().waitForPage(() -> {
+            ActiveContext.getActiveBrowserContext().newPage();
+        });
+        ActiveContext.setActivePage(page);
         // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
         midtransPaymentPO = Optional.ofNullable(midtransPaymentPO).orElseGet(() -> new MidtransPaymentPO(ActiveContext.getActivePage()));
         midtransPaymentPO.paymentForBNI(kodePembayaran);
@@ -207,6 +214,10 @@ public class PaymentSteps {
         invoicePO.clickOnBRI();
         invoicePO.clickOnBayarSekarang();
         var kodePembayaran = invoicePO.getKodePembayaranNumberText();
+        page = ActiveContext.getActiveBrowserContext().waitForPage(() -> {
+            ActiveContext.getActiveBrowserContext().newPage();
+        });
+        ActiveContext.setActivePage(page);
         // this optional will check if object is null will create object using java lambda with lazy arg to avoid null pointer exception
         midtransPaymentPO = Optional.ofNullable(midtransPaymentPO).orElseGet(() -> new MidtransPaymentPO(ActiveContext.getActivePage()));
         midtransPaymentPO.paymentForBRI(kodePembayaran);
