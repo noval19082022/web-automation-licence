@@ -37,7 +37,6 @@ public class CreateKosPO {
             playwright.clickOn(ctaButtonExposeSinggahsini);
         });
         newTab.waitForLoadState();
-        System.out.println("New tab URL: " + newTab.url());
         ActiveContext.setActivePage(newTab);
     }
 
