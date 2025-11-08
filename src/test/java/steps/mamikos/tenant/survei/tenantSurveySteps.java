@@ -425,12 +425,6 @@ public class tenantSurveySteps {
         }
     }
 
-    @And("user verify survey date type {string} shows tooltip with unavailable message")
-    public void userVerifySurveyDateTypeShowsTooltipWithUnavailableMessage(String dateType) {
-        String tooltipText = tenantSurveyFormPO.getSurveyDateTypeTooltipText();
-        Assert.assertFalse(tooltipText.isEmpty(), "Tooltip should be visible with unavailable message");
-    }
-
     @And("user verify sameday survey message is visible")
     public void userVerifySamedaySurveyMessageIsVisible() {
         Assert.assertTrue(tenantSurveyFormPO.isSamedaySurveyMessageVisible(),

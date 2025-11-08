@@ -538,23 +538,6 @@ public class TenantSurveyFormPO {
     }
 
     /**
-     * Get tooltip text for "Survei Hari Ini" (when disabled)
-     *
-     * @return tooltip text or empty string
-     */
-    public String getSurveyDateTypeTooltipText() {
-        try {
-            Locator tooltip = page.locator(".tooltip, [data-tooltip]");
-            if (playwright.waitTillLocatorIsVisible(tooltip)) {
-                return playwright.getText(tooltip);
-            }
-        } catch (Exception e) {
-            // No tooltip found
-        }
-        return "";
-    }
-
-    /**
      * Check if sameday survey message is visible
      *
      * @return true if visible

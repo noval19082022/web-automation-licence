@@ -58,25 +58,25 @@ Feature: Sameday Survey Tenant
     And user open survey date picker on form survey
     And user verify date range is selectable up to "30" days from today
     And user verify past dates are disabled
-#
-#  @TEST_LIMO-9395
-#  Scenario: [Survey][Tenant] Attempt to select sameday for ineligible/Disabled P2 owner
-#    Given user go to mamikos homepage
-#    When user login as tenant via phone number:
-#      | phone stag   | phone prod   | password  |
-#      | 081197878846 | 081197878846 | Perempuan |
-#    And tenant search kost then go to kost details:
-#      | kost name stag                | kost name prod                |
-#      | Kost P2 With Sameday Inactive | Kost P2 With Sameday Inactive |
-#    And user dismiss FTUE booking benefit
-#    And user click chat in kos detail
-#    And user tap on survey kost btn on detail chatroom
-#    Then user verify survey date type "Survei Hari Ini" is visible
-#    And user verify survey date type "Survei Hari Ini" is disabled
-#    And user verify survey date type "Survei Hari Ini" is grayed out
-#    And user verify survey date type "Survei Hari Ini" is not clickable
+
+  @TEST_LIMO-9395
+  Scenario: [Survey][Tenant] Attempt to select sameday for ineligible/Disabled P2 owner
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 081197878846 | 081197878846 | Perempuan |
+    And tenant search kost then go to kost details:
+      | kost name stag                | kost name prod                |
+      | Kost P2 With Sameday Inactive | Kost P2 With Sameday Inactive |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    Then user verify survey date type "Survei Hari Ini" is visible
+    And user verify survey date type "Survei Hari Ini" is disabled
+    And user verify survey date type "Survei Hari Ini" is grayed out
+    And user verify survey date type "Survei Hari Ini" is not clickable
 #    And user verify survey date type "Survei Hari Ini" shows tooltip with unavailable message
-#
+
 #  @TEST_LIMO-9410
 #  Scenario Outline: [Survey][Tenant] P2 time slot availability with 3-hour rule
 #    Given user go to mamikos homepage
