@@ -547,6 +547,7 @@ public class tenantSurveySteps {
 
             // If period is disabled, skip slot verification
             if (isPeriodDisabled) {
+                Assert.assertTrue(tenantSurveyFormPO.isTimePeriodDisabled(timePeriod), String.format("time period %s should be disable", timePeriod));
                 continue;
             }
 
