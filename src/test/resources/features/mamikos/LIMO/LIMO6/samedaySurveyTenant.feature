@@ -77,34 +77,25 @@ Feature: Sameday Survey Tenant
     And user verify survey date type "Survei Hari Ini" is not clickable
 #    And user verify survey date type "Survei Hari Ini" shows tooltip with unavailable message
 
-#  @TEST_LIMO-9410
-#  Scenario Outline: [Survey][Tenant] P2 time slot availability with 3-hour rule
-#    Given user go to mamikos homepage
-#    When user login as tenant via phone number:
-#      | phone stag   | phone prod   | password  |
-#      | 081197878846 | 081197878846 | Perempuan |
-#    And tenant search kost then go to kost details:
-#      | kost name stag              | kost name prod              |
-#      | Kost P2 With Sameday Active | Kost P2 With Sameday Active |
-#    And user dismiss FTUE booking benefit
-#    And user click chat in kos detail
-#    And user tap on survey kost btn on detail chatroom
-#    And user select survey date type "Survei Hari ini"
-#    And current time is set to "<current_time>"
-#    And user select survey time period "Pagi"
-#    Then user verify time slot "08:00" status is "<status_08:00>"
-#    When user select survey time period "Siang"
-#    Then user verify time slot "12:00" status is "<status_12:00>"
-#    When user select survey time period "Sore"
-#    Then user verify time slot "15:00" status is "<status_15:00>"
-#    And user verify time slot "19:00" status is "<status_19:00>"
-#
-#    Examples:
-#      | current_time | status_08:00 | status_12:00 | status_15:00 | status_19:00 |
-#      | 06:00        | Disabled     | Enabled      | Enabled      | Enabled      |
-#      | 10:00        | Disabled     | Disabled     | Enabled      | Enabled      |
-#      | 15:00        | Disabled     | Disabled     | Disabled     | Enabled      |
-#      | 16:01        | Disabled     | Disabled     | Disabled     | Disabled     |
+  @TEST_LIMO-9410
+  Scenario: [Survey][Tenant] P2 time slot availability with 3-hour rule
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 081197878846 | 081197878846 | Perempuan |
+    And tenant search kost then go to kost details:
+      | kost name stag              | kost name prod              |
+      | Kost P2 With Sameday Active | Kost P2 With Sameday Active |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    And user select survey date type "Survei Hari ini"
+    Then user verify time slot availability for P2 with 3-hour rule:
+      | time_period | time_slot |
+      | Pagi        | 08:00     |
+      | Siang       | 12:00     |
+      | Sore        | 15:00     |
+      | Sore        | 19:00     |
 #
 #  @TEST_LIMO-9411
 #  Scenario: [Survey][Tenant] P1 time slot availability without 3-hour restriction

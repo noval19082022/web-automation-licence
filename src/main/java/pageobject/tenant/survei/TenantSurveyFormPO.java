@@ -324,6 +324,8 @@ public class TenantSurveyFormPO {
         if (dateType.equalsIgnoreCase("Survei Hari ini")) {
             playwright.waitTillLocatorIsVisible(surveyDateTypeSurveiHariIni);
             playwright.clickOn(surveyDateTypeSurveiHariIni);
+            // Wait for time period options to appear after selecting "Survei Hari ini"
+            page.waitForTimeout(1500);
         } else if (dateType.equalsIgnoreCase("Tanggal Lain")) {
             playwright.waitTillLocatorIsVisible(surveyDateTypeTanggalLain);
             playwright.clickOn(surveyDateTypeTanggalLain);
@@ -373,6 +375,54 @@ public class TenantSurveyFormPO {
                 playwright.waitTillLocatorIsVisible(surveyTimePeriodSore);
                 playwright.clickOn(surveyTimePeriodSore);
                 break;
+        }
+    }
+
+    /**
+     * Check if time period button is disabled
+     *
+     * @param period - "Pagi", "Siang", or "Sore"
+     * @return true if the period button is disabled
+     */
+    public boolean isTimePeriodDisabled(String period) {
+        Locator periodLocator;
+        switch (period.toLowerCase()) {
+            case "pagi":
+                periodLocator = surveyTimePeriodPagi;
+                break;
+            case "siang":
+                periodLocator = surveyTimePeriodSiang;
+                break;
+            case "sore":
+                periodLocator = surveyTimePeriodSore;
+                break;
+            default:
+                return false;
+        }
+
+        // Check multiple indicators for disabled state
+        try {
+            // Check if button is disabled
+            if (playwright.isButtonDisable(periodLocator)) {
+                return true;
+            }
+
+            // Check aria-disabled attribute
+            String ariaDisabled = periodLocator.getAttribute("aria-disabled");
+            if (ariaDisabled != null && ariaDisabled.equals("true")) {
+                return true;
+            }
+
+            // Check for disabled CSS classes
+            String classAttr = periodLocator.getAttribute("class");
+            if (classAttr != null && (classAttr.contains("disabled") || classAttr.contains("bg-c-tag--disabled"))) {
+                return true;
+            }
+
+            return false;
+        } catch (Exception e) {
+            System.out.println("Error checking if period is disabled: " + e.getMessage());
+            return false;
         }
     }
 

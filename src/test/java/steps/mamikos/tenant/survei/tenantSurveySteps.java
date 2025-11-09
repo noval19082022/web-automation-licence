@@ -16,6 +16,8 @@ import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
 import java.text.ParseException;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class tenantSurveySteps {
@@ -464,13 +466,6 @@ public class tenantSurveySteps {
                 "Past dates should be disabled");
     }
 
-    @And("current time is set to {string}")
-    public void currentTimeIsSetTo(String time) {
-        // This step is for documentation/context
-        // Actual time mocking would need to be implemented based on test environment
-        // For now, this is a placeholder step
-    }
-
     @Then("user verify time slot {string} status is {string}")
     public void userVerifyTimeSlotStatusIs(String time, String expectedStatus) {
         if (expectedStatus.equalsIgnoreCase("Enabled")) {
@@ -479,6 +474,96 @@ public class tenantSurveySteps {
         } else if (expectedStatus.equalsIgnoreCase("Disabled")) {
             Assert.assertTrue(tenantSurveyFormPO.isTimeSlotDisabled(time),
                     "Time slot " + time + " should be disabled");
+        }
+    }
+
+    @Then("user verify time slot availability for P2 with 3-hour rule:")
+    public void userVerifyTimeSlotAvailabilityForP2With3HourRule(io.cucumber.datatable.DataTable dataTable) {
+      //  survey time only available 3 hours from the time of submission,
+        //  so if  the time doesn't meet the survey time submission criteria (3 jam dari waktu pengajuan)
+        //   or has passed, the time cannot be selected (disabled)
+        // note :
+        //Pagi  : 08:00 , 08:30 , 09:00 , 09:30 , 10:00 and 10.30
+        //Siang : 11:00 , 11:30 , 12:00 , 12:30 , 13:00 , 13:30 , 14:00 , 14:30
+        //Sore : 15:00 , 15:30 , 16:00 , 16:30 , 17:00 , 17:30 , 18:00 , 18:30 , 19:00
+
+        List<java.util.Map<String, String>> rows = dataTable.asMaps(String.class, String.class);
+
+        // Get current server time and add 3 hours to create threshold
+        String currentServerTime = JavaHelpers.getCurrentTimeServerForSurvey();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime currentTime = LocalTime.parse(currentServerTime, formatter);
+        LocalTime thresholdTime = currentTime.plusHours(3);
+        String threshold = thresholdTime.format(formatter);
+
+        System.out.println("Current server time: " + currentServerTime);
+        System.out.println("Threshold time (current + 3 hours): " + threshold);
+
+        // Define time period ranges
+        String pagiStart = "08:00", pagiEnd = "10:30";
+        String siangStart = "11:00", siangEnd = "14:30";
+        String soreStart = "15:00", soreEnd = "19:00";
+
+        String currentPeriod = null;
+
+        for (java.util.Map<String, String> row : rows) {
+            String timePeriod = row.get("time_period");
+            String timeSlot = row.get("time_slot");
+
+            // Determine period range
+            String periodStart = "", periodEnd = "";
+            if (timePeriod.equalsIgnoreCase("Pagi")) {
+                periodStart = pagiStart;
+                periodEnd = pagiEnd;
+            } else if (timePeriod.equalsIgnoreCase("Siang")) {
+                periodStart = siangStart;
+                periodEnd = siangEnd;
+            } else if (timePeriod.equalsIgnoreCase("Sore")) {
+                periodStart = soreStart;
+                periodEnd = soreEnd;
+            }
+
+            // Check if period should be enabled or disabled
+            // Period is disabled if threshold > all slots in that period (threshold > periodEnd)
+            boolean isPeriodDisabled = JavaHelpers.isTimeGreater(threshold, periodEnd);
+
+            System.out.println("Period: " + timePeriod + " (" + periodStart + " - " + periodEnd + ")");
+            System.out.println("Period should be: " + (isPeriodDisabled ? "DISABLED" : "ENABLED"));
+
+            // Only select time period if it's different from current one and not disabled
+            if (currentPeriod == null || !currentPeriod.equals(timePeriod)) {
+                if (!isPeriodDisabled) {
+                    tenantSurveyFormPO.selectSurveyTimePeriod(timePeriod);
+                    currentPeriod = timePeriod;
+                    System.out.println("Selected period: " + timePeriod);
+                } else {
+                    System.out.println("Skipping period " + timePeriod + " - it should be disabled");
+                    // Verify period is actually disabled/not clickable
+                    Assert.assertTrue(tenantSurveyFormPO.isTimePeriodDisabled(timePeriod),
+                            "Period " + timePeriod + " should be disabled when threshold (" + threshold + ") > period end (" + periodEnd + ")");
+                    continue; // Skip time slot verification for disabled period
+                }
+            }
+
+            // If period is disabled, skip slot verification
+            if (isPeriodDisabled) {
+                continue;
+            }
+
+            // Determine expected status for time slot based on 3-hour rule
+            // If timeSlot > threshold, it should be Enabled; otherwise Disabled
+            String expectedStatus = JavaHelpers.isTimeGreater(timeSlot, threshold) ? "Enabled" : "Disabled";
+
+            System.out.println("Verifying time slot: " + timeSlot + " - Expected status: " + expectedStatus);
+
+            // Verify time period(pagi, siang, malam) time slot status
+            if (expectedStatus.equalsIgnoreCase("Enabled")) {
+                Assert.assertTrue(tenantSurveyFormPO.isTimeSlotEnabled(timeSlot),
+                        "Time slot " + timeSlot + " in period " + timePeriod + " should be enabled (current: " + currentServerTime + ", threshold: " + threshold + ")");
+            } else {
+                Assert.assertTrue(tenantSurveyFormPO.isTimeSlotDisabled(timeSlot),
+                        "Time slot " + timeSlot + " in period " + timePeriod + " should be disabled (current: " + currentServerTime + ", threshold: " + threshold + ")");
+            }
         }
     }
 
