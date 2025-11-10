@@ -131,7 +131,7 @@ public class ChatTenantSteps {
 
     @And("user batalkan survey if the survey already submitted")
     public void user_cancel_survey() {
-        if (playwright.isTextDisplayed("Ubah Survei", 5)) {
+        if (playwright.isTextDisplayed("Survei Diajukan", 5_000.0)) {
             chat.visitDetailSurveyFromChatroom();
             chat.clickOnBatalkanSurveiButton();
             chat.fillBatalkanForm("kita juga dari perusahaan banteng mas");
@@ -194,5 +194,10 @@ public class ChatTenantSteps {
     @And("user tap on survey kost btn on detail chatroom")
     public void userTapOnSurveyKostBtnOnDetailChatroom() {
         chat.clickOnSurveyKosButton();
+    }
+
+    @And("user close survey form")
+    public void userCloseSurveyForm() {
+        chat.backToChatroomFromSurveyDetail();
     }
 }
