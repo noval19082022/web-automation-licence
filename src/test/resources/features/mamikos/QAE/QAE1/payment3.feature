@@ -1,4 +1,4 @@
-@SS12 @BackofficeStagging3
+@QAE1 @BackofficeStagging3
 Feature: Payment Backoffice Staging 3 - Add on List & Payment Premium
 
   @TEST_SS-2927 @Automated @web-covered

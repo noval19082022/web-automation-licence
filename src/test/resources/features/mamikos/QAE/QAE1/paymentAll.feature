@@ -1,4 +1,4 @@
-@SS11 @essentialTest @paymentAllBooking
+@QAE1 @essentialTest @paymentAllBooking
 Feature: Payment All
 
   Scenario: Delete and create contract
