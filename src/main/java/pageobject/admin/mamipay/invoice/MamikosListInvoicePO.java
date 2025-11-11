@@ -389,6 +389,7 @@ public class MamikosListInvoicePO {
         page.keyboard().type(To);
         inputScheduleFrom.click();
         page.keyboard().type(From);
+        page.keyboard().press("Escape");
         playwright.clickOn(cariInvoice);
     }
 

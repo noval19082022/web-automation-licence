@@ -17,6 +17,8 @@ import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
 import java.text.ParseException;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class tenantSurveySteps {
@@ -356,5 +358,360 @@ public class tenantSurveySteps {
     @And("user confirm popup ajukan survey if appear")
     public void userConfirmPopupAjukanSurveyIfAppear() {
         tenantSurveyFormPO.confirmPopupIfAppear();
+    }
+
+    //************************************************************************************************************
+    //******** SAMEDAY SURVEY STEP DEFINITIONS ********
+    //************************************************************************************************************
+
+    @Then("user verify survey date type {string} is {string}")
+    public void userVerifySurveyDateTypeIs(String dateType, String status) {
+        if (dateType.equalsIgnoreCase("Survei Hari Ini")) {
+            if (status.equalsIgnoreCase("Visible")) {
+                Assert.assertTrue(tenantSurveyFormPO.isSurveyDateTypeSurveiHariIniVisible(),
+                        "Survei Hari Ini should be visible");
+            } else if (status.contains("disabled")) {
+                Assert.assertTrue(tenantSurveyFormPO.isSurveyDateTypeSurveiHariIniDisabled(),
+                        "Survei Hari Ini should be disabled");
+            }
+        } else if (dateType.equalsIgnoreCase("Tanggal Lain")) {
+            Assert.assertTrue(tenantSurveyFormPO.isSurveyDateTypeTanggalLainVisible(),
+                    "Tanggal Lain should be visible");
+        }
+    }
+
+    @And("user verify survey date type {string} clickable is {string}")
+    public void userVerifySurveyDateTypeClickableIs(String dateType, String clickable) {
+        boolean shouldBeClickable = clickable.equalsIgnoreCase("Yes");
+
+        if (dateType.equalsIgnoreCase("Survei Hari Ini")) {
+            if (shouldBeClickable) {
+                Assert.assertTrue(tenantSurveyFormPO.isSurveyDateTypeSurveiHariIniEnabled(),
+                        "Survei Hari Ini should be clickable");
+            } else {
+                Assert.assertTrue(tenantSurveyFormPO.isSurveyDateTypeSurveiHariIniDisabled(),
+                        "Survei Hari Ini should not be clickable");
+            }
+        } else if (dateType.equalsIgnoreCase("Tanggal Lain")) {
+            Assert.assertTrue(tenantSurveyFormPO.isSurveyDateTypeTanggalLainClickable(),
+                    "Tanggal Lain should be clickable");
+        }
+    }
+
+    @Then("user verify survey date type {string} is visible")
+    public void userVerifySurveyDateTypeIsVisible(String dateType) {
+        if (dateType.equalsIgnoreCase("Tanggal Lain")) {
+            Assert.assertTrue(tenantSurveyFormPO.isSurveyDateTypeTanggalLainVisible(),
+                    "Tanggal Lain should be visible");
+        }
+    }
+
+    @And("user verify survey date type {string} is disabled")
+    public void userVerifySurveyDateTypeIsDisabled(String dateType) {
+        if (dateType.equalsIgnoreCase("Survei Hari Ini")) {
+            Assert.assertTrue(tenantSurveyFormPO.isSurveyDateTypeSurveiHariIniDisabled(),
+                    "Survei Hari Ini should be disabled");
+        }
+    }
+
+    @And("user verify survey date type {string} is grayed out")
+    public void userVerifySurveyDateTypeIsGrayedOut(String dateType) {
+        if (dateType.equalsIgnoreCase("Survei Hari Ini")) {
+            Assert.assertTrue(tenantSurveyFormPO.isSurveyDateTypeSurveiHariIniGrayedOut(),
+                    "Survei Hari Ini should appear grayed out");
+        }
+    }
+
+    @And("user verify survey date type {string} is not clickable")
+    public void userVerifySurveyDateTypeIsNotClickable(String dateType) {
+        if (dateType.equalsIgnoreCase("Survei Hari Ini")) {
+            Assert.assertTrue(tenantSurveyFormPO.isSurveyDateTypeSurveiHariIniDisabled(),
+                    "Survei Hari Ini should not be clickable");
+        }
+    }
+
+    @And("user verify sameday survey message is visible")
+    public void userVerifySamedaySurveyMessageIsVisible() {
+        Assert.assertTrue(tenantSurveyFormPO.isSamedaySurveyMessageVisible(),
+                "Sameday survey message should be visible");
+    }
+
+    @And("user verify only today is enabled in calendar")
+    public void userVerifyOnlyTodayIsEnabledInCalendar() {
+        Assert.assertTrue(tenantSurveyFormPO.isOnlyTodayEnabledInCalendar(),
+                "Only today should be enabled in calendar");
+    }
+
+    @Then("user verify survey date picker placeholder is {string}")
+    public void userVerifySurveyDatePickerPlaceholderIs(String expectedPlaceholder) {
+        String actualPlaceholder = tenantSurveyFormPO.getSurveyDatePickerPlaceholder();
+        Assert.assertEquals(actualPlaceholder, expectedPlaceholder,
+                "Survey date picker placeholder should be: " + expectedPlaceholder);
+    }
+
+    @And("user verify tanggal lain message contains {string}")
+    public void userVerifyTanggalLainMessageContains(String expectedText) {
+        String actualMessage = tenantSurveyFormPO.getTanggalLainMessage();
+        Assert.assertTrue(actualMessage.contains(expectedText),
+                "Tanggal Lain message should contain: " + expectedText);
+    }
+
+    @And("user verify date range is selectable up to {string} days from today")
+    public void userVerifyDateRangeIsSelectableUpToDaysFromToday(String days) {
+        int daysFromToday = Integer.parseInt(days);
+        Assert.assertTrue(tenantSurveyFormPO.verifyDateRangeSelectable(daysFromToday),
+                "Date range should be selectable up to " + days + " days from today");
+    }
+
+    @And("user verify past dates are disabled")
+    public void userVerifyPastDatesAreDisabled() {
+        Assert.assertTrue(tenantSurveyFormPO.arePastDatesDisabled(),
+                "Past dates should be disabled");
+    }
+
+    @Then("user verify time slot {string} status is {string}")
+    public void userVerifyTimeSlotStatusIs(String time, String expectedStatus) {
+        if (expectedStatus.equalsIgnoreCase("Enabled")) {
+            Assert.assertTrue(tenantSurveyFormPO.isTimeSlotEnabled(time),
+                    "Time slot " + time + " should be enabled");
+        } else if (expectedStatus.equalsIgnoreCase("Disabled")) {
+            Assert.assertTrue(tenantSurveyFormPO.isTimeSlotDisabled(time),
+                    "Time slot " + time + " should be disabled");
+        }
+    }
+
+    @Then("user verify time slot availability for P2 with 3-hour rule:")
+    public void userVerifyTimeSlotAvailabilityForP2With3HourRule(io.cucumber.datatable.DataTable dataTable) {
+      //  survey time only available 3 hours from the time of submission,
+        //  so if  the time doesn't meet the survey time submission criteria (3 jam dari waktu pengajuan)
+        //   or has passed, the time cannot be selected (disabled)
+        // note :
+        //Pagi  : 08:00 , 08:30 , 09:00 , 09:30 , 10:00 and 10.30
+        //Siang : 11:00 , 11:30 , 12:00 , 12:30 , 13:00 , 13:30 , 14:00 , 14:30
+        //Sore : 15:00 , 15:30 , 16:00 , 16:30 , 17:00 , 17:30 , 18:00 , 18:30 , 19:00
+
+        List<java.util.Map<String, String>> rows = dataTable.asMaps(String.class, String.class);
+
+        // Get current server time and add 3 hours to create threshold
+        String currentServerTime = JavaHelpers.getCurrentTimeServerForSurvey();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime currentTime = LocalTime.parse(currentServerTime, formatter);
+        LocalTime thresholdTime = currentTime.plusHours(3);
+        String threshold = thresholdTime.format(formatter);
+
+        System.out.println("Current server time: " + currentServerTime);
+        System.out.println("Threshold time (current + 3 hours): " + threshold);
+
+        // Define time period ranges
+        String pagiStart = "08:00", pagiEnd = "10:30";
+        String siangStart = "11:00", siangEnd = "14:30";
+        String soreStart = "15:00", soreEnd = "19:00";
+
+        String currentPeriod = null;
+
+        for (java.util.Map<String, String> row : rows) {
+            String timePeriod = row.get("time_period");
+            String timeSlot = row.get("time_slot");
+
+            // Determine period range
+            String periodStart = "", periodEnd = "";
+            if (timePeriod.equalsIgnoreCase("Pagi")) {
+                periodStart = pagiStart;
+                periodEnd = pagiEnd;
+            } else if (timePeriod.equalsIgnoreCase("Siang")) {
+                periodStart = siangStart;
+                periodEnd = siangEnd;
+            } else if (timePeriod.equalsIgnoreCase("Sore")) {
+                periodStart = soreStart;
+                periodEnd = soreEnd;
+            }
+
+            // Check if period should be enabled or disabled
+            // Period is disabled if threshold > all slots in that period (threshold > periodEnd)
+            boolean isPeriodDisabled = JavaHelpers.isTimeGreater(threshold, periodEnd);
+
+            System.out.println("Period: " + timePeriod + " (" + periodStart + " - " + periodEnd + ")");
+            System.out.println("Period should be: " + (isPeriodDisabled ? "DISABLED" : "ENABLED"));
+
+            // Only select time period if it's different from current one and not disabled
+            if (currentPeriod == null || !currentPeriod.equals(timePeriod)) {
+                if (!isPeriodDisabled) {
+                    tenantSurveyFormPO.selectSurveyTimePeriod(timePeriod);
+                    currentPeriod = timePeriod;
+                    System.out.println("Selected period: " + timePeriod);
+                } else {
+                    System.out.println("Skipping period " + timePeriod + " - it should be disabled");
+                    // Verify period is actually disabled/not clickable
+                    Assert.assertTrue(tenantSurveyFormPO.isTimePeriodDisabled(timePeriod),
+                            "Period " + timePeriod + " should be disabled when threshold (" + threshold + ") > period end (" + periodEnd + ")");
+                    continue; // Skip time slot verification for disabled period
+                }
+            }
+
+            // If period is disabled, skip slot verification
+            if (isPeriodDisabled) {
+                Assert.assertTrue(tenantSurveyFormPO.isTimePeriodDisabled(timePeriod), String.format("time period %s should be disable", timePeriod));
+                continue;
+            }
+
+            // Determine expected status for time slot based on 3-hour rule
+            // If timeSlot > threshold, it should be Enabled; otherwise Disabled
+            String expectedStatus = JavaHelpers.isTimeGreater(timeSlot, threshold) ? "Enabled" : "Disabled";
+
+            System.out.println("Verifying time slot: " + timeSlot + " - Expected status: " + expectedStatus);
+
+            // Verify time period(pagi, siang, malam) time slot status
+            if (expectedStatus.equalsIgnoreCase("Enabled")) {
+                Assert.assertTrue(tenantSurveyFormPO.isTimeSlotEnabled(timeSlot),
+                        "Time slot " + timeSlot + " in period " + timePeriod + " should be enabled (current: " + currentServerTime + ", threshold: " + threshold + ")");
+            } else {
+                Assert.assertTrue(tenantSurveyFormPO.isTimeSlotDisabled(timeSlot),
+                        "Time slot " + timeSlot + " in period " + timePeriod + " should be disabled (current: " + currentServerTime + ", threshold: " + threshold + ")");
+            }
+        }
+    }
+
+    @Then("user verify all time slots are disabled in period {string}")
+    public void userVerifyAllTimeSlotsAreDisabledInPeriod(String period) {
+        Assert.assertTrue(tenantSurveyFormPO.areAllTimeSlotsDisabledInPeriod(period),
+                "All time slots should be disabled in period " + period);
+    }
+
+    @Then("user verify all time slots from {string} are enabled")
+    public void userVerifyAllTimeSlotsFromAreEnabled(String startTime) {
+        Assert.assertTrue(tenantSurveyFormPO.areAllTimeSlotsFromTimeEnabled(startTime),
+                "All time slots from " + startTime + " should be enabled");
+    }
+
+    @Then("user verify all time slots are disabled")
+    public void userVerifyAllTimeSlotsAreDisabled() {
+        Assert.assertTrue(tenantSurveyFormPO.areAllTimeSlotsDisabled(),
+                "All time slots should be disabled");
+    }
+
+    @And("user verify {string} option becomes unselectable")
+    public void userVerifyOptionBecomesUnselectable(String option) {
+        if (option.equalsIgnoreCase("Survei Hari Ini")) {
+            Assert.assertTrue(tenantSurveyFormPO.isSurveyHariIniUnselectable(),
+                    "Survei Hari Ini option should become unselectable");
+        }
+    }
+
+    @And("user verify system suggests {string} option")
+    public void userVerifySystemSuggestsOption(String option) {
+        if (option.equalsIgnoreCase("Tanggal Lain")) {
+            Assert.assertTrue(tenantSurveyFormPO.isSuggestionToSelectTanggalLainVisible(),
+                    "System should suggest Tanggal Lain option");
+        }
+    }
+
+    @Then("user verify only time slots for period {string} are displayed")
+    public void userVerifyOnlyTimeSlotsForPeriodAreDisplayed(String period) {
+        List<String> displayedSlots = tenantSurveyFormPO.getDisplayedTimeSlotsForPeriod(period);
+        Assert.assertFalse(displayedSlots.isEmpty(),
+                "Time slots for period " + period + " should be displayed");
+    }
+
+    @And("user verify displayed time slots are between {string} and {string}")
+    public void userVerifyDisplayedTimeSlotsAreBetweenAnd(String startTime, String endTime) {
+        Assert.assertTrue(tenantSurveyFormPO.verifyDisplayedTimeSlotsRange(startTime, endTime),
+                "Displayed time slots should be between " + startTime + " and " + endTime);
+    }
+
+    @And("user verify displayed time slots switch to period {string}")
+    public void userVerifyDisplayedTimeSlotsSwitchToPeriod(String period) {
+        List<String> displayedSlots = tenantSurveyFormPO.getDisplayedTimeSlotsForPeriod(period);
+        Assert.assertFalse(displayedSlots.isEmpty(),
+                "Time slots should switch to period " + period);
+    }
+
+    @And("user verify previously selected time {string} remains selected")
+    public void userVerifyPreviouslySelectedTimeRemainsSelected(String time) {
+        Assert.assertTrue(tenantSurveyFormPO.isTimePreviouslySelected(time),
+                "Previously selected time " + time + " should remain selected");
+    }
+
+    @Then("user verify phone number validation is {string}")
+    public void userVerifyPhoneNumberValidationIs(String isValid) {
+        if (isValid.equalsIgnoreCase("Yes")) {
+            Assert.assertTrue(tenantSurveyFormPO.isPhoneNumberValidationPassed(),
+                    "Phone number validation should pass");
+        } else {
+            Assert.assertFalse(tenantSurveyFormPO.isPhoneNumberValidationPassed(),
+                    "Phone number validation should fail");
+        }
+    }
+
+    @And("user verify phone number error message is {string}")
+    public void userVerifyPhoneNumberErrorMessageIs(String expectedErrorMsg) {
+        if (!expectedErrorMsg.equals("-")) {
+            String actualErrorMsg = tenantSurveyFormPO.getPhoneNumberErrorMessage();
+            Assert.assertEquals(actualErrorMsg, expectedErrorMsg,
+                    "Phone number error message should be: " + expectedErrorMsg);
+        }
+    }
+
+    @Then("user verify TnC link text is {string}")
+    public void userVerifyTnCLinkTextIs(String expectedText) {
+        String actualText = tenantSurveyFormPO.getTnCLinkText();
+        Assert.assertTrue(actualText.contains(expectedText),
+                "T&C link text should contain: " + expectedText);
+    }
+
+    @When("user click on TnC link")
+    public void userClickOnTnCLink() {
+        tenantSurveyFormPO.clickTnCLink();
+    }
+
+    @Then("user verify TnC link opens {string}")
+    public void userVerifyTnCLinkOpens(String expectedDestination) {
+        String actualDestination = tenantSurveyFormPO.getTnCLinkDestination();
+        Assert.assertTrue(actualDestination.contains(expectedDestination) ||
+                        actualDestination.contains("kebijakan-privasi"),
+                "T&C link should open: " + expectedDestination);
+    }
+
+    @And("user verify TnC section is scrollable not sticky")
+    public void userVerifyTnCSectionIsScrollableNotSticky() {
+        Assert.assertTrue(tenantSurveyFormPO.isTnCSectionScrollable(),
+                "T&C section should be scrollable, not sticky");
+    }
+
+    @Then("user verify popup confirmation is visible")
+    public void userVerifyPopupConfirmationIsVisible() {
+        Assert.assertTrue(tenantSurveyFormPO.isPopupConfirmationVisible(),
+                "Popup confirmation should be visible");
+    }
+
+    @And("user verify popup confirmation heading is {string}")
+    public void userVerifyPopupConfirmationHeadingIs(String expectedHeading) {
+        String actualHeading = tenantSurveyFormPO.getPopupConfirmationHeadingText();
+        Assert.assertEquals(actualHeading, expectedHeading,
+                "Popup confirmation heading should be: " + expectedHeading);
+    }
+
+    @Then("user verify navigation to chatroom is successful")
+    public void userVerifyNavigationToChatroomIsSuccessful() {
+        Assert.assertTrue(tenantSurveyFormPO.isNavigationToChatroomSuccessful(),
+                "Navigation to chatroom should be successful");
+    }
+
+    @And("user verify survey request sent with phone number visible")
+    public void userVerifySurveyRequestSentWithPhoneNumberVisible() {
+        Assert.assertTrue(tenantSurveyFormPO.isSurveyRequestSentWithPhoneVisible(),
+                "Survey request should be sent with phone number visible");
+    }
+
+    @And("user verify P2 autoreply message appears")
+    public void userVerifyP2AutoreplyMessageAppears() {
+        Assert.assertTrue(tenantSurveyFormPO.isP2AutoreplyMessageVisible(),
+                "P2 autoreply message should appear");
+    }
+
+    @And("user verify survey status shows {string}")
+    public void userVerifySurveyStatusShows(String expectedStatus) {
+        String actualStatus = tenantSurveyFormPO.getSurveyStatusText();
+        Assert.assertTrue(actualStatus.contains(expectedStatus),
+                "Survey status should show: " + expectedStatus);
     }
 }

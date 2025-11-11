@@ -502,7 +502,12 @@ public class ChatOwnerPO {
      * Click on button on chat list or chat room owner
      */
     public void clickButtonOnChatRoomList(String buttonText) {
-        buttonOnChatRoomList = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(buttonText));
+        // Dismiss Shepherd modal if present
+        if (playwright.waitTillLocatorIsVisible(Iunderstand, 2000.0)) {
+            playwright.clickOn(Iunderstand);
+        }
+
+        buttonOnChatRoomList = page.getByTestId("popperReference").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(buttonText));
         playwright.waitFor(buttonOnChatRoomList);
         playwright.clickOn(buttonOnChatRoomList);
     }

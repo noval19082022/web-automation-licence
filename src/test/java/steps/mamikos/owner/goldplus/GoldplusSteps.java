@@ -861,6 +861,9 @@ public class GoldplusSteps {
 
     @And("user Navigasi ke Chat List")
     public void userNavigasiKeChatList() {
+        if (playwright.isTextDisplayed("Sudah cek fitur-fitur GoldPlus ini?")) {
+            chat.clickCloseOnFTUEBeforeChat();
+        }
         chat.clickChatOwner();
         chat.dismissAllFTUE();
         chat.dismissFTUEMarsGPAndSurveyIfExist();

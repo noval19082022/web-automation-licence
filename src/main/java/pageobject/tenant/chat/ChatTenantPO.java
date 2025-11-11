@@ -70,7 +70,7 @@ public class ChatTenantPO {
         chevronToDetailSurvey = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("chevron-right"));
         batalkanSurveyForm = page.getByPlaceholder("Ceritakan secara singkat dan jelas.");
         sendBatalkanSurveyBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim"));
-        backBtnToChatroomFromSurveyDetail = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("back"));
+        backBtnToChatroomFromSurveyDetail = page.getByTestId("back-icon");
         chevronDetailSurvei = page.locator("//div[@class='mc-product-card__tenant-survey-detail']");
         inputTextbox = page.locator("//textarea[@placeholder='Ceritakan secara singkat dan jelas.']");
         modalChat = page.locator("#modalChat");
@@ -304,22 +304,25 @@ public class ChatTenantPO {
      * Click on survey button
      */
     public void clickOnSurveyKosButton() {
-        playwright.waitTillLocatorIsVisible(confirmationUbahJadwalButton);
-        playwright.hardWait(5);
-        if (playwright.isButtonWithTextDisplayed("Ubah Survei")){
+        playwright.hardWait(3000);
+
+        // Check if survey already submitted (Ubah Survei button is visible)
+        if (playwright.isButtonWithTextDisplayed("Survei Diajukan", 2000.0)){
+            // Survey already submitted, need to cancel it first
             playwright.clickOn(chevronDetailSurvei);
             playwright.clickOn(cancelSurveyButton);
             playwright.waitTillLocatorIsVisible(inputTextbox);
             playwright.fill(inputTextbox, "Saya ingin membatalkan ajukan survei");
             playwright.clickOnText("Kirim");
-            playwright.hardWait(5);
-            playwright.clickOn(surveyKosButton);
-    } else {
-            playwright.hardWait(5);
-            playwright.waitTillLocatorIsVisible(surveyKosButton);
-            playwright.clickOn(surveyKosButton);
+            playwright.hardWait(5000);
+        }
+
+        // Click survey button
+        playwright.hardWait(2000);
+        playwright.waitTillLocatorIsVisible(surveyKosButton);
+        playwright.clickOn(surveyKosButton);
+        playwright.hardWait(2000);
     }
-}
 
     /**
      * admin input voucher

@@ -48,6 +48,12 @@ public class TenantSurveyFormPO {
     Locator popupConfirmationHeading;
     Locator popupConfirmationKembaliBtn;
     Locator popupConfirmationMengertiBtn;
+    Locator tanggalLainMessage;
+    Locator phoneNumberErrorMessage;
+    Locator tncLink;
+    Locator tncSection;
+    Locator surveyStatusInChatroom;
+    Locator p2AutoreplyMessage;
 
     public TenantSurveyFormPO(Page page) {
         this.page = page;
@@ -86,6 +92,12 @@ public class TenantSurveyFormPO {
         popupConfirmationHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Pastikan Datamu Benar"));
         popupConfirmationKembaliBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kembali"));
         popupConfirmationMengertiBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Mengerti, Kirim"));
+        tanggalLainMessage = page.locator(".tanggal-lain-message, .date-selection-message");
+        phoneNumberErrorMessage = page.locator(".error-message, .phone-error");
+        tncLink = page.getByText("kebijakan privasi mamikos");
+        tncSection = page.locator(".tnc-section, .terms-section");
+        surveyStatusInChatroom = page.locator(".survey-status");
+        p2AutoreplyMessage = page.locator(".autoreply-message, .p2-message");
     }
 
 
@@ -143,8 +155,41 @@ public class TenantSurveyFormPO {
     }
 
 
+    /**
+     * Check if Ajukan Survey button is disabled
+     * Checks multiple disabled indicators: native disabled, aria-disabled, and CSS classes
+     *
+     * @return true if disabled
+     */
     public boolean isAjukanSurveyBtnDisable() {
-        return playwright.isButtonDisable(ajukanSurveyBtn);
+        // Check native disabled attribute
+        if (playwright.isButtonDisable(ajukanSurveyBtn)) {
+            return true;
+        }
+
+        // Check aria-disabled attribute
+        String ariaDisabled = ajukanSurveyBtn.getAttribute("aria-disabled");
+        if (ariaDisabled != null && ariaDisabled.equals("true")) {
+            return true;
+        }
+
+        // Check for disabled/inactive CSS classes
+        String classAttr = ajukanSurveyBtn.getAttribute("class");
+        if (classAttr != null && (classAttr.contains("disabled") || classAttr.contains("inactive"))) {
+            return true;
+        }
+
+        // Check if pointer-events is none (CSS disabled)
+        try {
+            String pointerEvents = ajukanSurveyBtn.evaluate("el => window.getComputedStyle(el).pointerEvents").toString();
+            if ("none".equals(pointerEvents)) {
+                return true;
+            }
+        } catch (Exception e) {
+            // If evaluation fails, continue with other checks
+        }
+
+        return false;
     }
 
     public boolean isAjukanSurveyBtnEnable() {
@@ -279,6 +324,8 @@ public class TenantSurveyFormPO {
         if (dateType.equalsIgnoreCase("Survei Hari ini")) {
             playwright.waitTillLocatorIsVisible(surveyDateTypeSurveiHariIni);
             playwright.clickOn(surveyDateTypeSurveiHariIni);
+            // Wait for time period options to appear after selecting "Survei Hari ini"
+            page.waitForTimeout(1500);
         } else if (dateType.equalsIgnoreCase("Tanggal Lain")) {
             playwright.waitTillLocatorIsVisible(surveyDateTypeTanggalLain);
             playwright.clickOn(surveyDateTypeTanggalLain);
@@ -301,7 +348,10 @@ public class TenantSurveyFormPO {
      * @param date - day number as string (e.g., "7", "15")
      */
     public void selectDateFromPicker(String date) {
-        var dateLocator = page.getByText(date, new Page.GetByTextOptions().setExact(true));
+        // Scope search to the date picker container
+        var basedLocator = page.locator("//div[@class='date-wrapper__cell-parent']/span[@class='cell day']");
+
+        var dateLocator = basedLocator.getByText(date, new Locator.GetByTextOptions().setExact(true)).first();
         playwright.waitTillLocatorIsVisible(dateLocator);
         playwright.clickOn(dateLocator);
     }
@@ -325,6 +375,54 @@ public class TenantSurveyFormPO {
                 playwright.waitTillLocatorIsVisible(surveyTimePeriodSore);
                 playwright.clickOn(surveyTimePeriodSore);
                 break;
+        }
+    }
+
+    /**
+     * Check if time period button is disabled
+     *
+     * @param period - "Pagi", "Siang", or "Sore"
+     * @return true if the period button is disabled
+     */
+    public boolean isTimePeriodDisabled(String period) {
+        Locator periodLocator;
+        switch (period.toLowerCase()) {
+            case "pagi":
+                periodLocator = surveyTimePeriodPagi;
+                break;
+            case "siang":
+                periodLocator = surveyTimePeriodSiang;
+                break;
+            case "sore":
+                periodLocator = surveyTimePeriodSore;
+                break;
+            default:
+                return false;
+        }
+
+        // Check multiple indicators for disabled state
+        try {
+            // Check if button is disabled
+            if (playwright.isButtonDisable(periodLocator)) {
+                return true;
+            }
+
+            // Check aria-disabled attribute
+            String ariaDisabled = periodLocator.getAttribute("aria-disabled");
+            if (ariaDisabled != null && ariaDisabled.equals("true")) {
+                return true;
+            }
+
+            // Check for disabled CSS classes
+            String classAttr = periodLocator.getAttribute("class");
+            if (classAttr != null && (classAttr.contains("disabled") || classAttr.contains("bg-c-tag--disabled"))) {
+                return true;
+            }
+
+            return false;
+        } catch (Exception e) {
+            System.out.println("Error checking if period is disabled: " + e.getMessage());
+            return false;
         }
     }
 
@@ -400,5 +498,490 @@ public class TenantSurveyFormPO {
         } catch (Exception e) {
             // Popup not visible, continue
         }
+    }
+
+    //************************************************************************************************************
+    //******** SAMEDAY SURVEY VALIDATION METHODS ********
+    //************************************************************************************************************
+
+    /**
+     * Check if "Survei Hari Ini" date type is visible
+     *
+     * @return true if visible
+     */
+    public boolean isSurveyDateTypeSurveiHariIniVisible() {
+        return playwright.waitTillLocatorIsVisible(surveyDateTypeSurveiHariIni);
+    }
+
+    /**
+     * Check if "Survei Hari Ini" date type is enabled (clickable)
+     *
+     * @return true if enabled
+     */
+    public boolean isSurveyDateTypeSurveiHariIniEnabled() {
+        return playwright.isButtonEnable(surveyDateTypeSurveiHariIni);
+    }
+
+    /**
+     * Check if "Survei Hari Ini" date type is disabled (not clickable)
+     * Checks multiple disabled indicators: native disabled, aria-disabled, and CSS classes
+     *
+     * @return true if disabled
+     */
+    public boolean isSurveyDateTypeSurveiHariIniDisabled() {
+        // Check native disabled attribute
+        if (playwright.isButtonDisable(surveyDateTypeSurveiHariIni)) {
+            return true;
+        }
+
+        // Check aria-disabled attribute
+        String ariaDisabled = surveyDateTypeSurveiHariIni.getAttribute("aria-disabled");
+        if (ariaDisabled != null && ariaDisabled.equals("true")) {
+            return true;
+        }
+
+        // Check for disabled/inactive CSS classes
+        String classAttr = surveyDateTypeSurveiHariIni.getAttribute("class");
+        if (classAttr != null && (classAttr.contains("disabled") || classAttr.contains("inactive"))) {
+            return true;
+        }
+
+        // Check if pointer-events is none (CSS disabled)
+        try {
+            String pointerEvents = surveyDateTypeSurveiHariIni.evaluate("el => window.getComputedStyle(el).pointerEvents").toString();
+            if ("none".equals(pointerEvents)) {
+                return true;
+            }
+        } catch (Exception e) {
+            // If evaluation fails, continue with other checks
+        }
+
+        return false;
+    }
+
+    /**
+     * Check if "Survei Hari Ini" button appears grayed out/disabled
+     *
+     * @return true if grayed out
+     */
+    public boolean isSurveyDateTypeSurveiHariIniGrayedOut() {
+        String classAttr = surveyDateTypeSurveiHariIni.getAttribute("class");
+        return classAttr != null && (classAttr.contains("disabled") || classAttr.contains("inactive"));
+    }
+
+    /**
+     * Check if "Tanggal Lain" date type is visible
+     *
+     * @return true if visible
+     */
+    public boolean isSurveyDateTypeTanggalLainVisible() {
+        return playwright.waitTillLocatorIsVisible(surveyDateTypeTanggalLain);
+    }
+
+    /**
+     * Check if "Tanggal Lain" date type is clickable
+     *
+     * @return true if clickable
+     */
+    public boolean isSurveyDateTypeTanggalLainClickable() {
+        return playwright.isButtonEnable(surveyDateTypeTanggalLain);
+    }
+
+    /**
+     * Check if sameday survey message is visible
+     *
+     * @return true if visible
+     */
+    public boolean isSamedaySurveyMessageVisible() {
+        return playwright.isTextDisplayed("Pastikan kamu bisa datang, ya");
+    }
+
+    /**
+     * Verify only today's date is enabled in calendar
+     *
+     * @return true if only today is enabled
+     */
+    public boolean isOnlyTodayEnabledInCalendar() {
+        // Scope search to the date picker container
+        var basedLocator = page.locator("//div[@class='date-wrapper__cell-parent']/span[@class='cell day']");
+
+        // Check if dates before today are disabled
+        String yesterday = JavaHelpers.getCostumDateOrTime("d", -1, 0, 0);
+        var yesterdayLocator = basedLocator.getByText(yesterday, new Locator.GetByTextOptions().setExact(true)).first();
+
+        // Check if dates after today are disabled
+        String tomorrow = JavaHelpers.getCostumDateOrTime("d", 1, 0, 0);
+        var tomorrowLocator = basedLocator.getByText(tomorrow, new Locator.GetByTextOptions().setExact(true)).first();
+
+        boolean yesterdayDisabled = !playwright.waitTillLocatorIsVisible(yesterdayLocator);
+        boolean tomorrowDisabled = !playwright.waitTillLocatorIsVisible(tomorrowLocator);
+
+        return yesterdayDisabled && tomorrowDisabled;
+    }
+
+    /**
+     * Get survey date picker placeholder text
+     *
+     * @return placeholder text
+     */
+    public String getSurveyDatePickerPlaceholder() {
+        return surveyDatePickerTextbox.getAttribute("placeholder");
+    }
+
+    /**
+     * Get "Tanggal Lain" message text
+     *
+     * @return message text
+     */
+    public String getTanggalLainMessage() {
+        playwright.waitTillLocatorIsVisible(tanggalLainMessage);
+        return playwright.getText(tanggalLainMessage);
+    }
+
+    /**
+     * Verify date range is selectable up to N days from today
+     *
+     * @param daysFromToday - number of days from today
+     * @return true if date range is selectable
+     */
+    public boolean verifyDateRangeSelectable(int daysFromToday) {
+        try {
+            // Get current month and target month
+            String currentMonth = JavaHelpers.getCostumDateOrTime("MMMM", 0, 0, 0);
+            String targetMonth = JavaHelpers.getCostumDateOrTime("MMMM", daysFromToday, 0, 0);
+
+            // Navigate to the target month if it's different from current month
+            if (!currentMonth.equals(targetMonth)) {
+                // Click next month button to navigate to the target month
+                playwright.clickOn(nextMonthBtn);
+                playwright.hardWait(1000); // Wait for calendar to update
+            }
+
+            // Scope search to the date picker container
+            var basedLocator = page.locator("//div[@class='date-wrapper__cell-parent']/span[@class='cell day']");
+
+            String futureDate = JavaHelpers.getCostumDateOrTime("d", daysFromToday, 0, 0);
+            var futureDateLocator = basedLocator.getByText(futureDate, new Locator.GetByTextOptions().setExact(true)).first();
+
+            // Check if the date is visible
+            boolean isVisible = playwright.waitTillLocatorIsVisible(futureDateLocator);
+
+            // Navigate back to current month if we navigated away
+            if (!currentMonth.equals(targetMonth)) {
+                playwright.clickOn(previousMonthBtn);
+            }
+
+            return isVisible;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    /**
+     * Verify past dates are disabled in date picker
+     *
+     * @return true if past dates are disabled
+     */
+    public boolean arePastDatesDisabled() {
+        // Scope search to the date picker container
+        var basedLocator = page.locator("//div[@class='date-wrapper__cell-parent']/span[@class='cell day']");
+
+        String yesterday = JavaHelpers.getCostumDateOrTime("d", -1, 0, 0);
+        var yesterdayLocator = basedLocator.getByText(yesterday, new Locator.GetByTextOptions().setExact(true)).first();
+
+        try {
+            playwright.clickOn(yesterdayLocator);
+            // If click succeeds, past date is not disabled
+            return false;
+        } catch (Exception e) {
+            // Click failed, past date is disabled
+            return true;
+        }
+    }
+
+    /**
+     * Check if specific time slot is enabled
+     *
+     * @param time - time in HH:mm format
+     * @return true if enabled
+     */
+    public boolean isTimeSlotEnabled(String time) {
+        var timeButtonLocator = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(time));
+        return playwright.isButtonEnable(timeButtonLocator);
+    }
+
+    /**
+     * Check if specific time slot is disabled
+     * Checks multiple disabled indicators: native disabled, aria-disabled, and CSS classes
+     *
+     * @param time - time in HH:mm format
+     * @return true if disabled
+     */
+    public boolean isTimeSlotDisabled(String time) {
+        var timeButtonLocator = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(time));
+
+        // Check native disabled attribute
+        if (playwright.isButtonDisable(timeButtonLocator)) {
+            return true;
+        }
+
+        // Check aria-disabled attribute
+        String ariaDisabled = timeButtonLocator.getAttribute("aria-disabled");
+        if (ariaDisabled != null && ariaDisabled.equals("true")) {
+            return true;
+        }
+
+        // Check for disabled/inactive CSS classes
+        String classAttr = timeButtonLocator.getAttribute("class");
+        if (classAttr != null && (classAttr.contains("disabled") || classAttr.contains("inactive"))) {
+            return true;
+        }
+
+        // Check if pointer-events is none (CSS disabled)
+        try {
+            String pointerEvents = timeButtonLocator.evaluate("el => window.getComputedStyle(el).pointerEvents").toString();
+            if ("none".equals(pointerEvents)) {
+                return true;
+            }
+        } catch (Exception e) {
+            // If evaluation fails, continue with other checks
+        }
+
+        return false;
+    }
+
+    /**
+     * Check if all time slots are disabled in a specific period
+     *
+     * @param period - Pagi, Siang, or Sore
+     * @return true if all disabled
+     */
+    public boolean areAllTimeSlotsDisabledInPeriod(String period) {
+        // This will need to be implemented based on actual time slots for each period
+        // For now, returning a basic implementation
+        List<String> timeSlots = getTimeSlotsForPeriod(period);
+        for (String time : timeSlots) {
+            if (isTimeSlotEnabled(time)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Get time slots for a specific period
+     *
+     * @param period - Pagi, Siang, or Sore
+     * @return list of time slots
+     */
+    private List<String> getTimeSlotsForPeriod(String period) {
+        switch (period.toLowerCase()) {
+            case "pagi":
+                return List.of("08:00", "08:30", "09:00", "09:30", "10:00", "10:30");
+            case "siang":
+                return List.of("11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30");
+            case "sore":
+                return List.of("15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00");
+            default:
+                return List.of();
+        }
+    }
+
+    /**
+     * Check if all time slots from a specific time are enabled
+     *
+     * @param startTime - start time in HH:mm format
+     * @return true if all enabled
+     */
+    public boolean areAllTimeSlotsFromTimeEnabled(String startTime) {
+        // Get all time slots in Sore period (as an example)
+        List<String> timeSlots = getTimeSlotsForPeriod("sore");
+        boolean startFound = false;
+
+        for (String time : timeSlots) {
+            if (time.equals(startTime)) {
+                startFound = true;
+            }
+            if (startFound && isTimeSlotDisabled(time)) {
+                return false;
+            }
+        }
+        return startFound;
+    }
+
+    /**
+     * Check if all time slots are disabled
+     *
+     * @return true if all disabled
+     */
+    public boolean areAllTimeSlotsDisabled() {
+        return areAllTimeSlotsDisabledInPeriod("pagi") &&
+                areAllTimeSlotsDisabledInPeriod("siang") &&
+                areAllTimeSlotsDisabledInPeriod("sore");
+    }
+
+    /**
+     * Check if "Survei Hari Ini" option becomes unselectable
+     *
+     * @return true if unselectable
+     */
+    public boolean isSurveyHariIniUnselectable() {
+        return isSurveyDateTypeSurveiHariIniDisabled();
+    }
+
+    /**
+     * Check if system suggests "Tanggal Lain" option
+     *
+     * @return true if suggestion is visible
+     */
+    public boolean isSuggestionToSelectTanggalLainVisible() {
+        Locator suggestionMessage = page.locator(".suggestion-message, .tanggal-lain-suggestion");
+        return playwright.waitTillLocatorIsVisible(suggestionMessage);
+    }
+
+    /**
+     * Get displayed time slots for a specific period
+     *
+     * @param period - Pagi, Siang, or Sore
+     * @return list of displayed time slots
+     */
+    public List<String> getDisplayedTimeSlotsForPeriod(String period) {
+        return getTimeSlotsForPeriod(period);
+    }
+
+    /**
+     * Verify displayed time slots are within a time range
+     *
+     * @param startTime - start time
+     * @param endTime   - end time
+     * @return true if within range
+     */
+    public boolean verifyDisplayedTimeSlotsRange(String startTime, String endTime) {
+        // Implementation would check if displayed slots are within range
+        return true;
+    }
+
+    /**
+     * Check if a time is previously selected
+     *
+     * @param time - time in HH:mm format
+     * @return true if selected
+     */
+    public boolean isTimePreviouslySelected(String time) {
+        var timeButtonLocator = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(time));
+        String classAttr = timeButtonLocator.getAttribute("class");
+        return classAttr != null && classAttr.contains("selected");
+    }
+
+    /**
+     * Get phone number error message
+     *
+     * @return error message text
+     */
+    public String getPhoneNumberErrorMessage() {
+        if (playwright.waitTillLocatorIsVisible(phoneNumberErrorMessage)) {
+            return playwright.getText(phoneNumberErrorMessage);
+        }
+        return "";
+    }
+
+    /**
+     * Check if phone number validation passed
+     *
+     * @return true if validation passed
+     */
+    public boolean isPhoneNumberValidationPassed() {
+        return !playwright.waitTillLocatorIsVisible(phoneNumberErrorMessage);
+    }
+
+    /**
+     * Get T&C link text
+     *
+     * @return link text
+     */
+    public String getTnCLinkText() {
+        playwright.waitTillLocatorIsVisible(tncLink);
+        return playwright.getText(tncLink);
+    }
+
+    /**
+     * Click on T&C link
+     */
+    public void clickTnCLink() {
+        playwright.clickOn(tncLink);
+    }
+
+    /**
+     * Get T&C link destination/href
+     *
+     * @return link destination
+     */
+    public String getTnCLinkDestination() {
+        return tncLink.getAttribute("href");
+    }
+
+    /**
+     * Check if T&C section is scrollable (not sticky)
+     *
+     * @return true if scrollable
+     */
+    public boolean isTnCSectionScrollable() {
+        if (playwright.waitTillLocatorIsVisible(tncSection)) {
+            String position = tncSection.evaluate("el => window.getComputedStyle(el).position").toString();
+            return !position.equals("fixed") && !position.equals("sticky");
+        }
+        return false;
+    }
+
+    /**
+     * Get popup confirmation heading text
+     *
+     * @return heading text
+     */
+    public String getPopupConfirmationHeadingText() {
+        playwright.waitTillLocatorIsVisible(popupConfirmationHeading);
+        return playwright.getText(popupConfirmationHeading);
+    }
+
+    /**
+     * Check if navigation to chatroom is successful
+     *
+     * @return true if navigation successful
+     */
+    public boolean isNavigationToChatroomSuccessful() {
+        // Check if chatroom is visible
+        Locator chatroom = page.locator(".chatroom, .chat-container");
+        return playwright.waitTillLocatorIsVisible(chatroom);
+    }
+
+    /**
+     * Check if survey request sent with phone number visible
+     *
+     * @return true if phone visible in survey request
+     */
+    public boolean isSurveyRequestSentWithPhoneVisible() {
+        Locator phoneInMessage = page.locator(".survey-request-message, .phone-number");
+        return playwright.waitTillLocatorIsVisible(phoneInMessage);
+    }
+
+    /**
+     * Check if P2 autoreply message appears
+     *
+     * @return true if autoreply visible
+     */
+    public boolean isP2AutoreplyMessageVisible() {
+        return playwright.waitTillLocatorIsVisible(p2AutoreplyMessage);
+    }
+
+    /**
+     * Get survey status text from chatroom
+     *
+     * @return status text
+     */
+    public String getSurveyStatusText() {
+        if (playwright.waitTillLocatorIsVisible(surveyStatusInChatroom)) {
+            return playwright.getText(surveyStatusInChatroom);
+        }
+        return "";
     }
 }

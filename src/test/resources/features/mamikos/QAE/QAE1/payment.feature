@@ -1,4 +1,4 @@
-@SS12 @BackofficeStagging
+@QAE1 @BackofficeStagging
 Feature: Payment BackOffice Staging 1 - Search Contract and Edit Deposit
 
   Background: set active browser

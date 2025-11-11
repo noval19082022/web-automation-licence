@@ -195,6 +195,13 @@ public class OwnerDashboardPO {
         playwright.hardWait(2000);
     }
 
+    public void clickOnButtonIconCloseIfExist(){
+        if (playwright.waitTillLocatorIsVisible(closePopUpIcon, 3000.0)) {
+            playwright.clickOn(closePopUpIcon);
+            playwright.hardWait(2000);
+        }
+    }
+
     /**
      * Click on owner profile
      */

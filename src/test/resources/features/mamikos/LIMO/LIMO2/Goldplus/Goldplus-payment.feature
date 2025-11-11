@@ -1,4 +1,4 @@
-@LIMO2 @flaky
+@LIMO2
 Feature: Payment Goldplus staging
 
   Background: Admin reset GP owner

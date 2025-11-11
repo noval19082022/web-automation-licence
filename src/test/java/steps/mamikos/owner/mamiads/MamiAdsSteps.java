@@ -46,8 +46,10 @@ public class MamiAdsSteps {
     public void ownerWantToBuyMamiadsSaldo(String saldo) {
         mamiAdsPO.clickSaldoMamiadsCard();
         mamiAdsPO.handleRedirectToMamiadsWebview();
-        mamiAdsPO.handlePopupMamiAds();
-        mamiAdsPO.clickOnBeliSaldoBtn();
+        if (playwright.isTextDisplayed("Naikkan Posisi Iklan Properti dengan MamiAds")) {
+            mamiAdsPO.handlePopupMamiAds();
+            mamiAdsPO.clickOnBeliSaldoBtn();
+        }
         mamiAdsPO.choosingSaldoToBuy(saldo);
         detailTagihanPO.clicksOnBayarSekarangButton();
     }
@@ -252,6 +254,7 @@ public class MamiAdsSteps {
 
     @Then("owner verify invoice success paid mamiads")
     public void ownerVerifyInvoiceSuccessPaidMamiads() {
+        playwright.hardWait(3000);
         playwright = new PlaywrightHelpers(ActiveContext.getActivePage());
         Assert.assertTrue(playwright.isTextDisplayed("Pembayaran Berhasil", 5000));
     }
