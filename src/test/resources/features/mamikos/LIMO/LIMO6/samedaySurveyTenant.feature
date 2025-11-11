@@ -96,28 +96,27 @@ Feature: Sameday Survey Tenant
       | Siang       | 12:00     |
       | Sore        | 15:00     |
       | Sore        | 19:00     |
-#
-#  @TEST_LIMO-9411
-#  Scenario: [Survey][Tenant] P1 time slot availability without 3-hour restriction
-#    Given user go to mamikos homepage
-#    When user login as tenant via phone number:
-#      | phone stag   | phone prod   | password  |
-#      | 081197878846 | 081197878846 | Perempuan |
-#    And tenant search kost then go to kost details:
-#      | kost name stag                | kost name prod                |
-#      | Kost Apik Desta Tipe B Tamvan | Kost Apik Desta Tipe B Tamvan |
-#    And user dismiss FTUE booking benefit
-#    And user click chat in kos detail
-#    And user tap on survey kost btn on detail chatroom
-#    And user select survey date type "Survei Hari ini"
-#    And current time is set to "14:30"
-#    When user select survey time period "Pagi"
-#    Then user verify all time slots are disabled in period "Pagi"
-#    When user select survey time period "Siang"
-#    Then user verify time slot "14:30" status is "Enabled"
-#    When user select survey time period "Sore"
-#    Then user verify all time slots from "15:00" are enabled
-#
+
+  @TEST_LIMO-9411
+  Scenario: [Survey][Tenant] P1 time slot availability without 3-hour restriction
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 081197878846 | 081197878846 | Perempuan |
+    And tenant search kost then go to kost details:
+      | kost name stag                | kost name prod                |
+      | Kost Apik Desta Tipe B Tamvan | Kost Apik Desta Tipe B Tamvan |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    And user select survey date type "Survei Hari ini"
+    Then user verify time slot availability for P1 without 3-hour rule:
+      | time_period | time_slot |
+      | Pagi        | 08:00     |
+      | Siang       | 12:00     |
+      | Sore        | 15:00     |
+      | Sore        | 19:00     |
+
 #  @TEST_LIMO-9412 @TESTSET_LIMO-9679 @TESTSET_LIMO-10116
 #  Scenario: [Survey][Tenant] All time slots exhausted for sameday or unselectable
 #    Given user go to mamikos homepage
