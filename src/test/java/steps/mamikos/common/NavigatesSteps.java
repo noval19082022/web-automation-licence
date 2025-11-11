@@ -71,6 +71,14 @@ public class NavigatesSteps {
     public synchronized void tenantClosePageNumber(int pageNumber) throws InterruptedException {
         ActiveContext.getActiveBrowserContext().pages().get(pageNumber).close();
         Thread.sleep(2000);
+
+        // Automatically set active page to first available page if current page was closed
+        List<Page> remainingPages = ActiveContext.getActiveBrowserContext().pages();
+        if (!remainingPages.isEmpty()) {
+            // Set to first page (index 0) as default
+            ActiveContext.setActivePage(remainingPages.get(0));
+            playwright = new PlaywrightHelpers(ActiveContext.getActivePage());
+        }
     }
 
     @When("tenant/owner/admin refresh page {int}")

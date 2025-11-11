@@ -48,10 +48,6 @@ Feature: Multiple Invoice
 
   @TEST_LIMO-3518 @checkChatlistMultipleInvoice @continue  @multiple-invoice
   Scenario: Check Lanjut bayar button on chatlist
-    Given user go to mamikos homepage
-    When user login as owner:
-      | phone stag   | password  |
-      | 081905128517 | qwerty123 |
     Given owner navigates to owner dashboard
     And user dismiss FTUE MARS and FTUE Broadcast
     And user dismiss FTUE survey kost

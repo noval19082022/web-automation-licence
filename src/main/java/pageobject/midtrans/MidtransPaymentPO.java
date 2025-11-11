@@ -73,6 +73,7 @@ public class MidtransPaymentPO {
         playwright.clickOn(inquireButton);
         playwright.waitFor(bayarButtonOnMidtrans);
         playwright.clickOn(bayarButtonOnMidtrans);
+        playwright.hardWait(2000);
     }
 
     /**

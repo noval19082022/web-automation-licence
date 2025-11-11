@@ -6,65 +6,65 @@ Feature: Check Period Goldplus Page
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag     | phone prod | password |
-      | 0812345678123 | 0          | qwerty123 |
+      | 0812345678123  | 0          | qwerty123 |
     And owner navigates to owner dashboard
     When owner navigate to list package goldplus 2
     Then user verify list of Periode Berlangganan is appear
       """
       - img "back"
-      - paragraph: Pilih Periode Goldplus 2
-      - paragraph: Paket Dasar
-      - paragraph: Rp145.000 per bulan
-      - paragraph: Diskon 3%
-      - paragraph: Rp150.000
-      - separator
-      - paragraph: + Gratis MamiAds 100.000
-      - text: Favorit
-      - paragraph: Paket Jangka Panjang
-      - paragraph: Bisa chat dengan penyewa kapanpun
-      - paragraph: Rp1.740.000
-      - paragraph: Diskon 13%
-      - paragraph: Rp2.000.000
-      - paragraph: 12 Bulan
-      - paragraph: Rp145.000 per bulan
-      - separator
-      - paragraph: + Gratis MamiAds 120.000
-      - paragraph: Rp1.000.000
-      - paragraph: Diskon 17%
-      - paragraph: Rp1.200.000
-      - paragraph: 9 Bulan
-      - paragraph: Rp111.111 per bulan
-      - paragraph: Rp817.800
-      - paragraph: Diskon 6%
-      - paragraph: Rp870.000
-      - paragraph: 6 Bulan
-      - paragraph: Rp136.300 per bulan
-      - separator
-      - paragraph: + Gratis MamiAds 60.000
-      - paragraph: Rp320.000
-      - paragraph: Diskon 29%
-      - paragraph: Rp450.000
-      - paragraph: 4 Bulan
-      - paragraph: Rp80.000 per bulan
-      - separator
-      - paragraph: + Gratis MamiAds 40.000
-      - text: Favorit
-      - paragraph: Rp417.600
-      - paragraph: Diskon 4%
-      - paragraph: Rp435.000
-      - paragraph: 3 Bulan
-      - paragraph: Rp139.200 per bulan
-      - separator
-      - paragraph: + Gratis MamiAds 25.000
-      - text: Favorit
-      - paragraph: Rp278.400
-      - paragraph: Diskon 4%
-      - paragraph: Rp290.000
-      - paragraph: 2 Bulan
-      - paragraph: Rp139.200 per bulan
-      - separator
-      - paragraph: + Gratis MamiAds 20.000
-      - button "Pilih Periode"
+- paragraph: Pilih Periode Goldplus 2
+- paragraph: Paket Dasar
+- paragraph: Rp145.000 per bulan
+- paragraph: Diskon 3%
+- paragraph: Rp150.000
+- separator
+- paragraph: + Gratis MamiAds 100.000
+- text: Favorit
+- paragraph: Paket Jangka Panjang
+- paragraph: Bisa chat dengan penyewa kapanpun
+- paragraph: Rp1.740.000
+- paragraph: Diskon 13%
+- paragraph: Rp2.000.000
+- paragraph: 12 Bulan
+- paragraph: Rp145.000 per bulan
+- separator
+- paragraph: + Gratis MamiAds 120.000
+- paragraph: Rp1.000.000
+- paragraph: Diskon 17%
+- paragraph: Rp1.200.000
+- paragraph: 9 Bulan
+- paragraph: Rp111.111 per bulan
+- paragraph: Rp817.800
+- paragraph: Diskon 6%
+- paragraph: Rp870.000
+- paragraph: 6 Bulan
+- paragraph: Rp136.300 per bulan
+- separator
+- paragraph: + Gratis MamiAds 60.000
+- paragraph: Rp320.000
+- paragraph: Diskon 29%
+- paragraph: Rp450.000
+- paragraph: 4 Bulan
+- paragraph: Rp80.000 per bulan
+- separator
+- paragraph: + Gratis MamiAds 40.000
+- text: Favorit
+- paragraph: Rp417.600
+- paragraph: Diskon 4%
+- paragraph: Rp435.000
+- paragraph: 3 Bulan
+- paragraph: Rp139.200 per bulan
+- separator
+- paragraph: + Gratis MamiAds 25.000
+- text: Favorit
+- paragraph: Rp278.400
+- paragraph: Diskon 4%
+- paragraph: Rp290.000
+- paragraph: 2 Bulan
+- paragraph: Rp139.200 per bulan
+- separator
+- paragraph: + Gratis MamiAds 20.000
+- button "Pilih Rp145.000 / bulan"
       """
 
   @TEST_LIMO-3521
@@ -125,7 +125,7 @@ Feature: Check Period Goldplus Page
       - paragraph: Rp77.420 per bulan
       - separator
       - paragraph: + Gratis MamiAds 177.000
-      - button "Pilih Periode"
+      - button "Pilih Rp79.000 / bulan"
       """
     And owner should not see "Favorit" on Paket Jangka Panjang
     And owner should successfully log out
@@ -192,7 +192,7 @@ Feature: Check Period Goldplus Page
       - separator
       - paragraph: + Gratis MamiAds 177.000
       - text: Favorit
-      - button "Pilih Periode"
+      - button "Pilih Rp79.000 / bulan"
       """
     And owner should successfully log out
 

@@ -199,6 +199,10 @@ public class PaymentSteps {
         invoice.clickOnPilihPembayaran();
         invoice.clickOnMandiri();
         invoice.clickOnBayarSekarang();
+        page = ActiveContext.getActiveBrowserContext().waitForPage(() -> {
+            ActiveContext.getActiveBrowserContext().newPage();
+        });
+        ActiveContext.setActivePage(page);
         var kodePerusahaan = invoice.getCompanyCodeText();
         var nomorVirtualAccount = invoice.getVirtualAccountNumberText();
         playwright = new PlaywrightHelpers(ActiveContext.getActivePage());
