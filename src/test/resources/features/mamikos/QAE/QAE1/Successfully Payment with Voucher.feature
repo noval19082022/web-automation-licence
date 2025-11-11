@@ -1,4 +1,4 @@
-@SS15
+@QAE1
 Feature: Successfully Payment with Voucher
 
   Scenario: Admin Batalkan Contract
