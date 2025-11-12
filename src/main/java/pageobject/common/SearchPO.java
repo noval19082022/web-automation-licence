@@ -19,6 +19,7 @@ public class SearchPO {
     private Locator suggetionKostOnTheSearchList;
     Locator suggestionAreaOnTheSearchList;
     private PlaywrightHelpers playwright;
+    private LoadingPO loadingPO;
     //private static String propertyName;
     @Setter @Getter
     public static String Property;
@@ -63,6 +64,7 @@ public class SearchPO {
 
     public SearchPO(Page page) {
         this.playwright = new PlaywrightHelpers(page);
+        this.loadingPO = new LoadingPO(page);
         this.page = page;
         this.inputSearch = page.locator("input[type='search']").or(page.locator("input.form-control")).or(page.locator("input[title]"));
         this.searchKost = page.getByText("Masukan nama lokasi/area/alamat");
@@ -662,7 +664,7 @@ public class SearchPO {
      */
     public void enterTextToSearch(String searchText) {
         playwright.clickLocatorAndTypeKeyboard(inputSearch, searchText);
-        playwright.waitTillFetchFinish(DEFAULT_TIMEOUT);
+        loadingPO.waitTillFetchFinish(DEFAULT_TIMEOUT);
     }
 
     /**
