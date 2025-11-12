@@ -815,6 +815,7 @@ public class TenantSurveyFormPO {
      * @return true if all disabled
      */
     public boolean areAllTimeSlotsDisabled() {
+        // all time is disable if user or tenant open more than 16:00 for p2 or 19:00 for p1
         return areAllTimeSlotsDisabledInPeriod("pagi") &&
                 areAllTimeSlotsDisabledInPeriod("siang") &&
                 areAllTimeSlotsDisabledInPeriod("sore");
