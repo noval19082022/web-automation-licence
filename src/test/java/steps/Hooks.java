@@ -76,8 +76,8 @@ public class Hooks{
     @After
     public void cleanUp(Scenario scenario) {
         FlowControl.setContinueFlow(tags.contains("@continue"));
-        FlowControl.setStrictFlow(true);
         FlowControl.setApiFlow(false);
+
         if (scenario.isFailed()) {
             System.out.println(scenario.getName() + " is failed");
             scenario.attach(ActiveContext.getActivePage().screenshot(), "image/png", scenario.getName());
@@ -89,9 +89,20 @@ public class Hooks{
         }
 
         if (!tags.contains("@continue")) {
-            if (MamikosBrowserContext.getBrowserContextOne() != null) MamikosBrowserContext.getBrowserContextOne().close();
-            if (MamikosBrowserContext.getBrowserContextTwo() != null) MamikosBrowserContext.getBrowserContextTwo().close();
+            // Close browser contexts if not continuing
+            if (MamikosBrowserContext.getBrowserContextOne() != null) {
+                MamikosBrowserContext.getBrowserContextOne().close();
+            }
+            if (MamikosBrowserContext.getBrowserContextTwo() != null) {
+                MamikosBrowserContext.getBrowserContextTwo().close();
+            }
             FlowControl.setContinueFlow(false);
+
+            // Reset flow control for next scenario (but don't cleanup ThreadLocal - that's in @AfterTest)
+            FlowControl.reset();
+        } else {
+            // For @continue scenarios, only reset strict flow
+            FlowControl.setStrictFlow(true);
         }
 
         System.out.println(scenario.getName() + " is finished");

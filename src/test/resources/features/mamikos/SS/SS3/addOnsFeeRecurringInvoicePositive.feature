@@ -2,7 +2,7 @@
 Feature: addOns Fee Recurring Invoice Positive
 
 
-  @SS-4951
+  @SS-4951 @inifailed
   Scenario: [Add Ons - Fee Recurring Invoice Positive Scenario] Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
     When admin login to mamipay:

@@ -22,8 +22,8 @@ public class OwnerLoginPO extends LoginPO {
      */
     @Override
     public OwnerLoginPO fillPassword(String password) {
-        passwordInput.fill(password);
-        return new OwnerLoginPO(page);
+        playwright.fill(passwordInput, password);
+        return this;
     }
 
     /**
@@ -33,19 +33,18 @@ public class OwnerLoginPO extends LoginPO {
      */
     @Override
     public OwnerLoginPO fillPhoneNumber(String phoneNumber) {
-        phoneNumberInput.fill(phoneNumber);
-        return new OwnerLoginPO(page);
+        playwright.fill(phoneNumberInput, phoneNumber);
+        return this;
     }
 
     /**
-     * Click on login button
+     * Click on login button for owner
      * @return OwnerDashboardPO
      */
-    @Override
-    public OwnerDashboardPO clickOnLoginButton() {
-        loginBtn.click();
-        page.waitForLoadState(LoadState.LOAD);
-        page.waitForTimeout(5000);
+    public OwnerDashboardPO clickOnOwnerLoginButton() {
+        playwright.clickOn(loginBtn);
+        playwright.waitTillPageLoaded();
+        playwright.hardWait(5000);
         return new OwnerDashboardPO(page);
     }
 
@@ -53,7 +52,7 @@ public class OwnerLoginPO extends LoginPO {
      * User Log out as a Owner
      */
     public void logoutAsOwner() {
-        profileOwnerBtn.click();
+        playwright.clickOn(profileOwnerBtn);
         playwright.clickOnText("Logout ");
     }
 

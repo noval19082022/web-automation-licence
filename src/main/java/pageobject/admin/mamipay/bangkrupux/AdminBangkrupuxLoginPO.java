@@ -30,7 +30,7 @@ public class AdminBangkrupuxLoginPO extends LoginPO {
      * @param email email String data type
      */
     public void fillEmail(String email) {
-        emailInput.fill(email);
+        playwright.fill(emailInput, email);
     }
 
     /**
@@ -38,27 +38,25 @@ public class AdminBangkrupuxLoginPO extends LoginPO {
      * @param password password string type
      * @return AdminBangkrupuxLoginPO class
      */
-    @Override
     public AdminBangkrupuxLoginPO fillPassword (String password){
-        passwordInput.fill(password);
-        return new AdminBangkrupuxLoginPO(page);
+        playwright.fill(passwordInput, password);
+        return this;
     }
 
     /**
-     * Click on login button admin mamipay
-     * @return AdminMamipayDashboardPO class
+     * Click on login button for bangkrupux admin
+     * @return AdminBangkrupuxLoginPO class
      */
-    @Override
-    public AdminBangkrupuxLoginPO clickOnLoginButton() {
-        loginBtn.click();
-        return new AdminBangkrupuxLoginPO(page);
+    public AdminBangkrupuxLoginPO clickOnBangkrupuxLoginButton() {
+        playwright.clickOn(loginBtn);
+        return this;
     }
 
     /**
      * User Log out as a Mamikos Bangkrupux Admin
      */
     public void logoutAsMamikosBangkrupuxAdmin() {
-        profileMamikosBangkrupuxAdminBtn.click();
+        playwright.clickOn(profileMamikosBangkrupuxAdminBtn);
         playwright.clickOnText("Sign Out ");
     }
 }

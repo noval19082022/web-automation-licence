@@ -11,6 +11,7 @@ import pageobject.admin.mamipay.bangkrupux.tenantSurveyPO;
 import pageobject.common.HomePO;
 import pageobject.common.KostDetailsPO;
 import pageobject.common.SearchPO;
+import pageobject.tenant.TenantLoginPO;
 import pageobject.tenant.survei.TenantSurveyFormPO;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
@@ -26,6 +27,7 @@ public class tenantSurveySteps {
     tenantSurveyPO surveyPO = new tenantSurveyPO(page);
     TenantSurveyFormPO tenantSurveyFormPO = new TenantSurveyFormPO(page);
     HomePO home = new HomePO(page);
+    TenantLoginPO tenantLogin;
     SearchPO searchPO;
     KostDetailsPO kostDetail = new KostDetailsPO(page);
     private JavaHelpers java = new JavaHelpers();
@@ -274,8 +276,9 @@ public class tenantSurveySteps {
             .clickOnPencariKostButton()
             .waitForPasswordInput()
             .fillPhoneNumber(phone)
-            .fillPassword(password)
-            .clickOnLoginButton()
+            .fillPassword(password);
+        tenantLogin = new TenantLoginPO(page);
+        tenantLogin.clickOnTenantLoginButton()
             .waitTillLogoIsVisible();
         home.waitForProfileMenuToBeVisible();
         home.clickOnSayaSetujuButton();

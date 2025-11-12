@@ -23,9 +23,10 @@ public class TenantPrivacySettingsSteps {
     public void userLoginAsTenant(String phoneNumber, String password) {
         // Click on login button
         loginPO = home.clickOnButtonMasuk();
-        
+
         // Click on pencari kost option
-        tenantLogin = loginPO.clickOnPencariKostButton();
+        tenantLogin = new TenantLoginPO(page);
+        tenantLogin.clickOnPencariKostButton();
         
         // Fill phone number
         tenantLogin.fillPhoneNumber(phoneNumber);

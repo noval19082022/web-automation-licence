@@ -56,8 +56,9 @@ public class LoginSteps {
             .clickOnPencariKostButton()
             .waitForPasswordInput()
             .fillPhoneNumber(phone)
-            .fillPassword(password)
-            .clickOnLoginButton()
+            .fillPassword(password);
+        tenantLogin = new TenantLoginPO(page);
+        tenantLogin.clickOnTenantLoginButton()
             .waitTillLogoIsVisible();
         home.waitForProfileMenuToBeVisible();
         home.clickOnSayaSetujuButton();
@@ -302,8 +303,9 @@ public class LoginSteps {
                 .clickOnPencariKostButton()
                 .waitForPasswordInput()
                 .fillPhoneNumber(phone)
-                .fillPassword(password)
-                .clickOnLoginButton()
+                .fillPassword(password);
+        tenantLogin = new TenantLoginPO(page);
+        tenantLogin.clickOnTenantLoginButton()
                 .waitTillLogoIsVisible();
     }
 
