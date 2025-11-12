@@ -10,3 +10,5 @@ import io.cucumber.testng.CucumberOptions;
 )
 public class MTResearchAdminTestRunner extends BaseTestRunner {
 }
+// runner for MTResearch Admin tests
+// check the testng xml runner for mutli-threading execution example

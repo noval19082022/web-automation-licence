@@ -10,3 +10,5 @@ import io.cucumber.testng.CucumberOptions;
 )
 public class MTResearchOwnerTestRunner extends BaseTestRunner {
 }
+// runner for MTResearch Owner tests
+// check the testng xml runner for mutli-threading execution example
