@@ -43,6 +43,11 @@ public class BookingFormPO {
     Locator viewRecommendationKos;
     Locator roomLimitAlert;
     Locator roomLimitAlertText;
+    Locator ubahProfileButton;
+    Locator pekerjaanDropdown;
+    Locator instansiDropdown;
+    Locator simpanProfileButton;
+    Locator pekerjaanBelumTerisiText;
 
     public BookingFormPO(Page page) {
         this.page = page;
@@ -79,6 +84,11 @@ public class BookingFormPO {
         this.viewRecommendationKos = page.locator("//button[normalize-space()='Lihat Rekomendasi Kos']");
         roomLimitAlert = page.getByTestId("bookingRequestForm-roomScarcityPrompt");
         roomLimitAlertText = page.locator("div[data-testid='bookingRequestForm-roomScarcityPrompt'] p");
+        this.ubahProfileButton = page.locator(".booking-form-section__head").filter(new Locator.FilterOptions().setHasText("Informasi penyewa")).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Ubah"));
+        this.pekerjaanDropdown = page.getByTestId("inputProfession-jobOptions");
+        this.instansiDropdown = page.getByTestId("inputProfession-workplaceOption");
+        this.simpanProfileButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan").setExact(true));
+        this.pekerjaanBelumTerisiText = page.getByText("Pekerjaan belum terisi");
     }
 
     /**
@@ -92,7 +102,24 @@ public class BookingFormPO {
      * Click on booking confirmation checkmark
      */
     public void clickOnBookingConfirmationCheckmark() {
-        bookingConfirmationCheckmark.click();
+        playwright.waitTillLocatorIsVisible(bookingConfirmationCheckmark);
+        playwright.clickOn(bookingConfirmationCheckmark);
+    }
+
+    /**
+     * Handle occupation/instansi validation and click booking confirmation checkmark
+     * If validation alert appears, fills in required fields (Mahasiswa + Universitas Diponegoro),
+     * then clicks Ajukan Sewa again before proceeding to click the confirmation checkmark
+     */
+    public void clickOnBookingConfirmationCheckmarkWithValidation() {
+        if (isOccupationAlertVisible()) {
+            clickUbahProfileButton();
+            selectPekerjaan("Mahasiswa"); //hardcoded for data preparation only
+            selectInstansi("Universitas Diponegoro"); //hardcoded for data preparation only
+            clickSimpanProfileButton();
+            clickOnAjukanSewaButton();
+        }
+        clickOnBookingConfirmationCheckmark();
     }
 
     /**
@@ -288,6 +315,62 @@ public class BookingFormPO {
      */
     public String getAlertJobsTextAfterClick() {
         return alertTextAfterClick.textContent().trim();
+    }
+
+    /**
+     * Check if occupation/instansi needs to be filled by checking if "Pekerjaan belum terisi" text is visible
+     * @return true if pekerjaan is not filled (shows "Pekerjaan belum terisi"), false otherwise
+     */
+    public boolean isOccupationAlertVisible() {
+        return playwright.isLocatorVisibleAfterLoad(pekerjaanBelumTerisiText, 2000.0);
+    }
+
+    /**
+     * Click on Ubah button in Informasi penyewa section to edit profile
+     */
+    public void clickUbahProfileButton() {
+        playwright.clickOn(ubahProfileButton);
+    }
+
+    /**
+     * Select pekerjaan using radio button
+     * @param pekerjaan occupation name (e.g., "Mahasiswa", "Karyawan", "Lainnya")
+     */
+    public void selectPekerjaan(String pekerjaan) {
+        Locator pekerjaanRadio = page.getByRole(AriaRole.RADIO, new Page.GetByRoleOptions().setName(pekerjaan));
+        playwright.clickOn(pekerjaanRadio);
+    }
+
+    /**
+     * Select university/instansi from combobox dropdown
+     * @param instansi university or institution name (e.g., "Universitas Diponegoro")
+     */
+    public void selectInstansi(String instansi) {
+        // Click the dropdown button to open university list
+        // The button contains example text like "Contoh: Institut Teknologi Bandung"
+        Locator dropdownButton = page.getByRole(AriaRole.BUTTON)
+                .filter(new Locator.FilterOptions().setHasText("Contoh: Institut Teknologi Bandung"));
+        playwright.clickOn(dropdownButton);
+
+        // Fill the search input to filter universities
+        Locator searchInput = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Search"));
+        playwright.fill(searchInput, instansi);
+
+        // Wait a moment for the filtered results to appear
+        playwright.hardWait(500);
+
+        // Click the university from the filtered list
+        // Use locator("a") to target the visible clickable element, not the hidden <option>
+        Locator universityOption = page.locator("a").filter(new Locator.FilterOptions().setHasText(instansi)).first();
+        playwright.clickOn(universityOption);
+    }
+
+    /**
+     * Click Simpan button after editing profile in booking form
+     */
+    public void clickSimpanProfileButton() {
+        Locator simpanBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
+        playwright.clickOn(simpanBtn);
     }
 
     /**

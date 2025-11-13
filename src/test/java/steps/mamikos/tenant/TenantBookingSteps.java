@@ -66,7 +66,7 @@ public class TenantBookingSteps {
         kostDetail.selectBookingPeriod("Per Bulan");
         bookingForm = kostDetail.clickOnAjukanSewaButton();
         bookingForm.clickOnAjukanSewaButton();
-        bookingForm.clickOnBookingConfirmationCheckmark();
+        bookingForm.clickOnBookingConfirmationCheckmarkWithValidation();
         successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
     }
 
@@ -79,7 +79,7 @@ public class TenantBookingSteps {
         kostDetail.selectBookingPeriod(paymentPeriod);
         bookingForm = kostDetail.clickOnAjukanSewaButton();
         bookingForm.clickOnAjukanSewaButton();
-        bookingForm.clickOnBookingConfirmationCheckmark();
+        bookingForm.clickOnBookingConfirmationCheckmarkWithValidation();
         successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
     }
 
@@ -102,7 +102,7 @@ public class TenantBookingSteps {
     @And("user can set Ajukan Sewa")
     public void ajukanSewa() {
         bookingForm.clickOnAjukanSewaButton();
-        bookingForm.clickOnBookingConfirmationCheckmark();
+        bookingForm.clickOnBookingConfirmationCheckmarkWithValidation();
         successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
     }
 
@@ -147,7 +147,7 @@ public class TenantBookingSteps {
             kostDetail.selectBookingPeriod("Per Bulan");
             bookingForm = kostDetail.clickOnAjukanSewaButton();
             bookingForm.clickOnAjukanSewaButton();
-            bookingForm.clickOnBookingConfirmationCheckmark();
+            bookingForm.clickOnBookingConfirmationCheckmarkWithValidation();
             successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
         } else if (bookingTime.equalsIgnoreCase("Tomorrow")) {
             kostDetail.selectBookingDate(bookingTime);
@@ -171,7 +171,7 @@ public class TenantBookingSteps {
                 }
             }
             bookingForm.clickOnAjukanSewaButton();
-            bookingForm.clickOnBookingConfirmationCheckmark();
+            bookingForm.clickOnBookingConfirmationCheckmarkWithValidation();
             successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
         } else if (bookingTime.equalsIgnoreCase("Tomorrow")) {
             kostDetail.selectBookingDate(bookingTime);
@@ -198,7 +198,7 @@ public class TenantBookingSteps {
             bookingForm.increaseRateDuration();
         }
         bookingForm.clickOnAjukanSewaButton();
-        bookingForm.clickOnBookingConfirmationCheckmark();
+        bookingForm.clickOnBookingConfirmationCheckmarkWithValidation();
         successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
     }
 
@@ -305,7 +305,7 @@ public class TenantBookingSteps {
     public void tenantBookingKostAfterFillDateAndRentType() {
         bookingForm = kostDetail.clickOnAjukanSewaButton();
         bookingForm.clickOnAjukanSewaButton();
-        bookingForm.clickOnBookingConfirmationCheckmark();
+        bookingForm.clickOnBookingConfirmationCheckmarkWithValidation();
         successBooking = bookingForm.clickOnKirimPengajuanKePemilik();
     }
 
