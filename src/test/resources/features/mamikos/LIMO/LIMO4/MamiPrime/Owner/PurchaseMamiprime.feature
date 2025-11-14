@@ -110,7 +110,7 @@ Feature: Purchase Mamiprime
     And owner click "Lihat kata kunci lainnya"
     And owner click on Hubungi Kami
     And owner set active page to 1
-    Then user should redirect to link "https://help.mamikos.com/hubungi-kami"
+    Then user should redirect to link "https://help-waras.kerupux.com/hubungi-kami"
 
 #  @TEST_LIMO-4784 @WEB @AUTOMATED
 #  Scenario: Click on Chat dengan CS on page Mamihelp

@@ -507,7 +507,7 @@ public class ChatOwnerPO {
             playwright.clickOn(Iunderstand);
         }
 
-        buttonOnChatRoomList = page.getByTestId("popperReference").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(buttonText));
+        buttonOnChatRoomList = page.locator("//h6[normalize-space()='"+buttonText+"']");
         playwright.waitFor(buttonOnChatRoomList);
         playwright.clickOn(buttonOnChatRoomList);
     }

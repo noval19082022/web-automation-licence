@@ -6,6 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.common.LoadingPO;
 import pageobject.owner.TenantBackgroundCheckerPO;
 import pageobject.owner.chat.ChatOwnerPO;
 import pageobject.owner.fiturpromosi.BroadcastChatPO;
@@ -20,12 +21,15 @@ public class TenantBackgroundCheckerSteps {
     ChatOwnerPO chat = new ChatOwnerPO(page);
     BroadcastChatPO broadcast = new BroadcastChatPO(page);
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
+    LoadingPO loading = new LoadingPO(page);
 
     @Then("owner can see entry point TBC Lihat Profil at chatroom {string}")
     public void owner_can_see_entry_point_tbc_lihat_profil_at_chatroom(String buttonTxt) {
         chat.dismissFTUEMars();
         chat.dismissFTUEMarsKuotaNol();
         chat.dismissFTUEJemputBola();
+        // Wait for chat page to be fully loaded after navigation in dismissFTUEJemputBola
+        loading.waitForLoadingIconDisappear();
         chat.clickButtonOnChatRoomList(buttonTxt);
         Assert.assertTrue(tenantBackgroundCheckerPO.isLihatProfilDisplayed(), "entry point not displayed");
     }
@@ -57,8 +61,9 @@ public class TenantBackgroundCheckerSteps {
 
     @And("owner open TBC Lihat Profil at chatroom {string}")
     public void owner_open_tbc_lihat_profil_at_chatroom(String buttonTxt) {
-        chat.dismissFTUEMarsGPAndSurveyIfExist();
-        chat.dismissFTUEJemputBola();
+//        chat.dismissFTUEMarsGPAndSurveyIfExist();
+//        chat.dismissFTUEJemputBola();
+        loading.waitForLoadingIconDisappear();
         chat.clickButtonOnChatRoomList(buttonTxt);
         chat.dismissFTUETBC();
         tenantBackgroundCheckerPO.clickOnLihatProfil();
@@ -74,6 +79,8 @@ public class TenantBackgroundCheckerSteps {
         chat.dismissFTUEMars();
         chat.dismissFTUEMarsKuotaNol();
         chat.dismissFTUEJemputBola();
+        // Wait for chat page to be fully loaded after navigation in dismissFTUEJemputBola
+        loading.waitForLoadingIconDisappear();
         chat.clickButtonOnChatRoomList(buttonTxt);
         chat.dismissFTUETBC();
         tenantBackgroundCheckerPO.clickOnLihatProfil();

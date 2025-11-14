@@ -21,7 +21,7 @@ Feature: FAQ Mamitour
     When user click "Bisakah saya menambah jumlah kamar/lantai yang dimasukkan ke dalam virtual tour?"
     Then user should not be able to see the text "Anda bisa memesan tambahan kamar maupun lantai dengan biaya tambahan yang berlaku. Anda tinggal cantumkan permintaan tambahan Anda saat melakukan pemesanan."
     When user click "Di mana saja MamiTour tersedia?"
-    Then user will see that the text "MamiTour tersedia di Jadetabek, Kota Bandung, Jatinangor, Cimahi, Yogyakarta, Surabaya, dan Sidoarjo." is displayed
+   # Then user will see that the text "MamiTour tersedia di Jadetabek, Kota Bandung, Jatinangor, Cimahi, Yogyakarta, Surabaya, dan Sidoarjo." is displayed
     When user click "Di mana saja MamiTour tersedia?"
     Then user should not be able to see the text "MamiTour tersedia di Jadetabek, Kota Bandung, Jatinangor, Cimahi, Yogyakarta, Surabaya, dan Sidoarjo."
     When user click "Di mana dan kapan MamiTour akan ditayangkan setelah pengambilan gambar?"

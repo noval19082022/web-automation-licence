@@ -256,7 +256,7 @@ public class MamiAdsSteps {
     public void ownerVerifyInvoiceSuccessPaidMamiads() {
         playwright.hardWait(3000);
         playwright = new PlaywrightHelpers(ActiveContext.getActivePage());
-        Assert.assertTrue(playwright.isTextDisplayed("Pembayaran Berhasil", 5000));
+        Assert.assertTrue(playwright.isTextDisplayed("Pembayaran Berhasil", 3000));
     }
 
     @And("user click coba sekarang header")
