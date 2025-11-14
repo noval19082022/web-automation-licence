@@ -357,6 +357,80 @@ public class TenantSurveyFormPO {
     }
 
     /**
+     * Find and select the first available (enabled) date from date picker
+     * This method dynamically finds an available date to avoid issues with disabled dates
+     *
+     * @return the selected date as string
+     */
+    public String selectFirstAvailableDate() {
+        // Scope search to the date picker container - get all date cells
+        var basedLocator = page.locator("//div[@class='date-wrapper__cell-parent']/span[@class='cell day']");
+
+        // Get all date elements
+        int count = basedLocator.count();
+
+        if (count == 0) {
+            throw new RuntimeException("No date elements found in the date picker");
+        }
+
+        // Find the first available date that is clickable and not disabled
+        String currentDay = JavaHelpers.getCostumDateOrTime("d", 0, 0, 0);
+        int currentDayInt = Integer.parseInt(currentDay);
+
+        for (int i = 0; i < count; i++) {
+            Locator dateElement = basedLocator.nth(i);
+
+            // Check if element is disabled by checking class attribute
+            String classAttr = dateElement.getAttribute("class");
+            boolean isDisabled = classAttr != null && classAttr.contains("disabled");
+
+            // Skip if disabled
+            if (isDisabled) {
+                continue;
+            }
+
+            // Check if element is visible and enabled
+            if (!playwright.waitTillLocatorIsVisible(dateElement)) {
+                continue;
+            }
+
+            String dateText = playwright.getText(dateElement);
+
+            try {
+                int dateInt = Integer.parseInt(dateText.trim());
+
+                // Select dates that are today or in the future
+                // If the date number is >= current day, or if we're near end of month and date is low number (next month)
+                if (dateInt >= currentDayInt || (currentDayInt > 25 && dateInt < 10)) {
+                    playwright.clickOn(dateElement);
+                    System.out.println("Selected available date: " + dateText);
+                    return dateText.trim();
+                }
+            } catch (NumberFormatException e) {
+                // Skip if dateText is not a number
+                continue;
+            }
+        }
+
+        // If no future date found based on date number, just select the first enabled date
+        for (int i = 0; i < count; i++) {
+            Locator dateElement = basedLocator.nth(i);
+
+            String classAttr = dateElement.getAttribute("class");
+            boolean isDisabled = classAttr != null && classAttr.contains("disabled");
+
+            if (!isDisabled && playwright.waitTillLocatorIsVisible(dateElement)) {
+                String selectedDate = playwright.getText(dateElement);
+                playwright.clickOn(dateElement);
+                System.out.println("Selected first available date: " + selectedDate);
+                return selectedDate.trim();
+            }
+        }
+
+        throw new RuntimeException("No available dates found in the date picker");
+    }
+
+    /**
      * Select survey time period: "Pagi", "Siang", or "Sore"
      *
      * @param period - "Pagi", "Siang", or "Sore"
@@ -815,6 +889,7 @@ public class TenantSurveyFormPO {
      * @return true if all disabled
      */
     public boolean areAllTimeSlotsDisabled() {
+        // all time is disable if user or tenant open more than 16:00 for p2 or 19:00 for p1
         return areAllTimeSlotsDisabledInPeriod("pagi") &&
                 areAllTimeSlotsDisabledInPeriod("siang") &&
                 areAllTimeSlotsDisabledInPeriod("sore");
@@ -868,9 +943,61 @@ public class TenantSurveyFormPO {
      * @return true if selected
      */
     public boolean isTimePreviouslySelected(String time) {
-        var timeButtonLocator = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(time));
-        String classAttr = timeButtonLocator.getAttribute("class");
-        return classAttr != null && classAttr.contains("selected");
+        try {
+            var timeButtonLocator = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(time));
+
+            // Wait a bit to ensure the DOM is updated after period switch
+            page.waitForTimeout(500);
+
+            // Check if button exists in DOM (might be hidden but still in DOM)
+            int buttonCount = timeButtonLocator.count();
+            if (buttonCount == 0) {
+                // Button not in DOM at all, check for other indicators
+                // Maybe there's a hidden input or display showing selected time
+                return false;
+            }
+
+            // Button exists in DOM, check its state (even if not visible)
+            String classAttr = timeButtonLocator.getAttribute("class");
+
+            // Check multiple possible class names for selected state
+            if (classAttr != null) {
+                boolean hasSelectedClass = classAttr.contains("selected") ||
+                       classAttr.contains("active") ||
+                       classAttr.contains("bg-c-tag--active") ||
+                       classAttr.contains("bg-c-tag--selected") ||
+                       classAttr.contains("is-active") ||
+                       classAttr.contains("is-selected") ||
+                       classAttr.contains("chosen");
+
+                if (hasSelectedClass) {
+                    return true;
+                }
+            }
+
+            // Also check aria-selected attribute
+            String ariaSelected = timeButtonLocator.getAttribute("aria-selected");
+            if (ariaSelected != null && ariaSelected.equals("true")) {
+                return true;
+            }
+
+            // Check if button has aria-checked attribute (for toggle buttons)
+            String ariaChecked = timeButtonLocator.getAttribute("aria-checked");
+            if (ariaChecked != null && ariaChecked.equals("true")) {
+                return true;
+            }
+
+            // Check data attributes that might indicate selection
+            String dataSelected = timeButtonLocator.getAttribute("data-selected");
+            if (dataSelected != null && dataSelected.equals("true")) {
+                return true;
+            }
+
+            return false;
+        } catch (Exception e) {
+            System.out.println("Error checking if time is selected: " + e.getMessage());
+            return false;
+        }
     }
 
     /**

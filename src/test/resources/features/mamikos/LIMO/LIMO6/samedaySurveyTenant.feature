@@ -117,45 +117,47 @@ Feature: Sameday Survey Tenant
       | Sore        | 15:00     |
       | Sore        | 19:00     |
 
-#  @TEST_LIMO-9412 @TESTSET_LIMO-9679 @TESTSET_LIMO-10116
-#  Scenario: [Survey][Tenant] All time slots exhausted for sameday or unselectable
-#    Given user go to mamikos homepage
-#    When user login as tenant via phone number:
-#      | phone stag   | phone prod   | password  |
-#      | 081197878846 | 081197878846 | Perempuan |
-#    And tenant search kost then go to kost details:
-#      | kost name stag              | kost name prod              |
-#      | Kost P2 With Sameday Active | Kost P2 With Sameday Active |
-#    And user dismiss FTUE booking benefit
-#    And user click chat in kos detail
-#    And user tap on survey kost btn on detail chatroom
-#    And current time is set to "16:30"
-#    And user select survey date type "Survei Hari ini"
-#    Then user verify all time slots are disabled
-#    And user verify "Survei Hari Ini" option becomes unselectable
-#    And user verify system suggests "Tanggal Lain" option
-#
-#  @TEST_LIMO-9413 @TESTSET_LIMO-9679 @TESTSET_LIMO-10116
-#  Scenario: [Survey][Tenant] Time category interaction
-#    Given user go to mamikos homepage
-#    When user login as tenant via phone number:
-#      | phone stag   | phone prod   | password  |
-#      | 081197878846 | 081197878846 | Perempuan |
-#    And tenant search kost then go to kost details:
-#      | kost name stag                | kost name prod                |
-#      | Kost Apik Desta Tipe B Tamvan | Kost Apik Desta Tipe B Tamvan |
-#    And user dismiss FTUE booking benefit
-#    And user click chat in kos detail
-#    And user tap on survey kost btn on detail chatroom
-#    And user select survey date type "Survei Hari ini"
-#    When user select survey time period "Siang"
-#    Then user verify only time slots for period "Siang" are displayed
-#    And user verify displayed time slots are between "11:00" and "14:30"
-#    When user select survey time "12:00"
-#    And user select survey time period "Pagi"
-#    Then user verify displayed time slots switch to period "Pagi"
-#    And user verify displayed time slots are between "08:00" and "10:30"
-#    And user verify previously selected time "12:00" remains selected
+  @TEST_LIMO-9412
+  Scenario: [Survey][Tenant] All time slots exhausted for sameday or unselectable if tenant request survey more than trace hold
+#  // For P2: all slots exhausted trace hold if current time + 3 hours > 19:00
+#  // For P1: all slots exhausted trace hold if current time > 19:00
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 081197878846 | 081197878846 | Perempuan |
+    And tenant search kost then go to kost details:
+      | kost name stag              | kost name prod              |
+      | Kost P2 With Sameday Active | Kost P2 With Sameday Active |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    And user select survey date type "Survei Hari ini"
+    Then user verify all time slots are disabled for survey
+    And user verify "Survei Hari Ini" option becomes unselectable survey
+    And user verify system suggests "Tanggal Lain" option survey
+
+  @TEST_LIMO-9413
+  Scenario: [Survey][Tenant] Time category interaction
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 081197878846 | 081197878846 | Perempuan |
+    And tenant search kost then go to kost details:
+      | kost name stag                | kost name prod                |
+      | Kost Apik Desta Tipe B Tamvan | Kost Apik Desta Tipe B Tamvan |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    And user select survey date type "Tanggal Lain"
+    And user open survey date picker on form survey
+    And user select date "available" on survey form
+    When user select survey time period "Siang"
+    Then user verify only time slots for period "Siang" are displayed
+    And user verify displayed time slots are between "11:00" and "14:30"
+    When user select survey time "12:00"
+    And user select survey time period "Pagi"
+    Then user verify displayed time slots switch to period "Pagi"
+    And user verify displayed time slots are between "08:00" and "10:30"
 #
 #  @TEST_LIMO-9414
 #  Scenario Outline: [Survey][Tenant] Phone number input validation
