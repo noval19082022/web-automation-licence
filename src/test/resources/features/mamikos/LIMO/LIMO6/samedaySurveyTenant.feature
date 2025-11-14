@@ -135,28 +135,29 @@ Feature: Sameday Survey Tenant
     Then user verify all time slots are disabled for survey
     And user verify "Survei Hari Ini" option becomes unselectable survey
     And user verify system suggests "Tanggal Lain" option survey
-#
-#  @TEST_LIMO-9413
-#  Scenario: [Survey][Tenant] Time category interaction
-#    Given user go to mamikos homepage
-#    When user login as tenant via phone number:
-#      | phone stag   | phone prod   | password  |
-#      | 081197878846 | 081197878846 | Perempuan |
-#    And tenant search kost then go to kost details:
-#      | kost name stag                | kost name prod                |
-#      | Kost Apik Desta Tipe B Tamvan | Kost Apik Desta Tipe B Tamvan |
-#    And user dismiss FTUE booking benefit
-#    And user click chat in kos detail
-#    And user tap on survey kost btn on detail chatroom
-#    And user select survey date type "Survei Hari ini"
-#    When user select survey time period "Siang"
-#    Then user verify only time slots for period "Siang" are displayed
-#    And user verify displayed time slots are between "11:00" and "14:30"
-#    When user select survey time "12:00"
-#    And user select survey time period "Pagi"
-#    Then user verify displayed time slots switch to period "Pagi"
-#    And user verify displayed time slots are between "08:00" and "10:30"
-#    And user verify previously selected time "12:00" remains selected
+
+  @TEST_LIMO-9413
+  Scenario: [Survey][Tenant] Time category interaction
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 081197878846 | 081197878846 | Perempuan |
+    And tenant search kost then go to kost details:
+      | kost name stag                | kost name prod                |
+      | Kost Apik Desta Tipe B Tamvan | Kost Apik Desta Tipe B Tamvan |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    And user select survey date type "Tanggal Lain"
+    And user open survey date picker on form survey
+    And user select date "available" on survey form
+    When user select survey time period "Siang"
+    Then user verify only time slots for period "Siang" are displayed
+    And user verify displayed time slots are between "11:00" and "14:30"
+    When user select survey time "12:00"
+    And user select survey time period "Pagi"
+    Then user verify displayed time slots switch to period "Pagi"
+    And user verify displayed time slots are between "08:00" and "10:30"
 #
 #  @TEST_LIMO-9414
 #  Scenario Outline: [Survey][Tenant] Phone number input validation

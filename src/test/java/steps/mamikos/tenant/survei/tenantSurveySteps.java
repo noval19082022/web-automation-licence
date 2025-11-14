@@ -323,7 +323,12 @@ public class tenantSurveySteps {
 
     @And("user select date {string} on survey form")
     public void userSelectDateOnSurveyForm(String date) {
-        tenantSurveyFormPO.selectDateFromPicker(date);
+        // Support dynamic date selection using keywords
+        if (date.equalsIgnoreCase("available") || date.equalsIgnoreCase("next_available") || date.equalsIgnoreCase("any_available")) {
+            tenantSurveyFormPO.selectFirstAvailableDate();
+        } else {
+            tenantSurveyFormPO.selectDateFromPicker(date);
+        }
     }
 
     @And("user select survey time period {string}")

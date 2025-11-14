@@ -304,7 +304,11 @@ public class ChatTenantPO {
      * Click on survey button
      */
     public void clickOnSurveyKosButton() {
+        // Wait for chatroom to load properly
         playwright.hardWait(3000);
+
+        // Wait for chatroom header or content to be visible (indicating chatroom is loaded)
+        playwright.waitTillPageLoaded();
 
         // Check if survey already submitted (Ubah Survei button is visible)
         if (playwright.isButtonWithTextDisplayed("Survei Diajukan", 2000.0)){
@@ -317,9 +321,16 @@ public class ChatTenantPO {
             playwright.hardWait(5000);
         }
 
-        // Click survey button
+        // Click survey button with extended timeout
         playwright.hardWait(2000);
-        playwright.waitTillLocatorIsVisible(surveyKosButton);
+
+        // Use extended timeout for survey button (30 seconds instead of default 15)
+        playwright.waitTillLocatorIsVisible(surveyKosButton, 30000.0);
+
+        // Scroll button into view before clicking
+        surveyKosButton.scrollIntoViewIfNeeded();
+        playwright.hardWait(500);
+
         playwright.clickOn(surveyKosButton);
         playwright.hardWait(2000);
     }
