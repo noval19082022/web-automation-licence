@@ -30,6 +30,7 @@ Feature: Payment Goldplus staging
     And user click daftar GP button
     And user wants to subscribe Goldplus 1
     And owner select payment method from invoice detail using "PERMATA"
+    And owner set active page to 0
     And owner navigates to "/goldplus/payment"
     And owner click filter "Selesai" in Pembayaran Tagihan Goldplus page
     Then owner will see that the text "Lunas" is displayed
@@ -89,6 +90,7 @@ Feature: Payment Goldplus staging
     And user click daftar GP button
     And user wants to subscribe Goldplus 1
     And owner select payment method from invoice detail using BNI
+    And owner set active page to 0
     And owner navigates to "/goldplus/payment"
     And owner click filter "Selesai" in Pembayaran Tagihan Goldplus page
     Then owner will see that the text "Lunas" is displayed
@@ -103,6 +105,7 @@ Feature: Payment Goldplus staging
     And user click daftar GP button
     And user wants to subscribe Goldplus 1
     And owner select payment method from invoice detail using BRI
+    And owner set active page to 0
     And owner navigates to "/goldplus/payment"
     And owner click filter "Selesai" in Pembayaran Tagihan Goldplus page
     Then owner will see that the text "Lunas" is displayed
@@ -117,6 +120,7 @@ Feature: Payment Goldplus staging
     And user click daftar GP button
     And user wants to subscribe Goldplus 1
     And owner pay invoice from invoice detail using mandiri without close the page
+    And owner set active page to 0
     And owner navigates to "/goldplus/payment"
     And owner click filter "Selesai" in Pembayaran Tagihan Goldplus page
     Then owner will see that the text "Lunas" is displayed
@@ -134,6 +138,7 @@ Feature: Payment Goldplus staging
       | voucher name stag | voucher name prod |
       | GPFIX5K           | VTOTALUSAGE       |
     And owner select payment method from invoice detail using BNI
+    And owner set active page to 0
     And owner navigates to "/goldplus/payment"
     And owner click filter "Selesai" in Pembayaran Tagihan Goldplus page
     Then owner will see that the text "Lunas" is displayed

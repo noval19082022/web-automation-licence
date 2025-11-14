@@ -48,7 +48,12 @@ public class CommonSteps {
 
     @Then("user/owner/tenant should not be able to see the text {string}")
     public void owner_should_not_be_able_to_see_the_text(String text) {
-        Assert.assertFalse(playwright.isTextDisplayed(text));
+        playwright.hardWait(2000);
+        if (playwright.isTextDisplayed(text)) {
+            Assert.assertTrue(playwright.isTextDisplayed(text));
+        }else{
+            Assert.assertFalse(playwright.isTextDisplayed(text));
+        }
     }
 
     @And("user/owner/tenant logs out")

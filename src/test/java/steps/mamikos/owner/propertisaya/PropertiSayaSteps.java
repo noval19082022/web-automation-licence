@@ -182,6 +182,9 @@ public class PropertiSayaSteps {
     @When("user click Lihat Selengkapnya button for edit")
     public void user_click_Lihat_Selengkapnya_button_for_edit() {
         loading.waitForLoadingIconDisappear();
+        if(modalPopUpPO.isModalCloseIconVisible()){
+            modalPopUpPO.clicksModalCloseIcon();
+        }
         propertySaya.clickOnLihatSelengkapnyaButton();
     }
 

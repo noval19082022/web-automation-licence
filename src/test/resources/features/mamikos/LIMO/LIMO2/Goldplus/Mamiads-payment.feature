@@ -70,7 +70,7 @@ Feature: Payment mamiads staging
     And owner want to buy mamiads saldo with nominal "Rp27.000"
     And owner select payment method from invoice detail using BNI
     And owner close page number 1
-    And owner set active page to 0
+   # And owner set active page to 0
     And owner refresh page 0
     Then owner verify invoice success paid mamiads
 

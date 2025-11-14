@@ -13,10 +13,10 @@ Feature: Profile Tenant Background Checker
   Scenario: [Web][Tenant Background Checker][Profil Tenant] Check back on tenant profile page
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag  | phone prod    | password  |
-      | 08119787884 | 0891111020203 | Perempuan |
+      | phone stag   | password  |
+      | 089145645603 | qwerty123 |
     And user click chat button in top bar owner home page
-    And owner open TBC Lihat Profil at chatroom "Coba Daftar"
+    And owner open TBC Lihat Profil at chatroom "Noval New"
     Then owner will see that the text "Untuk saat ini, fitur Profil Penyewa hanya dapat digunakan di aplikasi Mamikos di Android dan iOS." is displayed
 
   @TEST_LIMO-317 @WEB @AUTOMATED
