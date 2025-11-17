@@ -69,7 +69,7 @@ Feature: Owner Expose Singgahsini
     When owner click CTA button Expose Singgahsini
     Then owner should redirect to singgahsini.id from Kos
 
-  @TEST_SS-9817 @continue @PopupCTA @test
+  @TEST_SS-9817 @continue @PopupCTA
   Scenario: Owner sees Singgahsini popup when changing draft property location to area prio
     Given user go to mamikos homepage
     When user login as owner:
@@ -82,7 +82,7 @@ Feature: Owner Expose Singgahsini
       | button  | Pelajari lebih lanjut                                         |
       | button  | Lewati dulu                                                   |
 
-  @TEST_SS-9818 @PopupCTA @test
+  @TEST_SS-9818 @PopupCTA
   Scenario: Owner redirects to Singgahsini.id when clicking "Pelajari lebih lanjut" on popup
     When owner clicks "Pelajari lebih lanjut" on the popup
     Then owner is redirected to Singgahsini.id with source "kos saya pop up singgahsini"
