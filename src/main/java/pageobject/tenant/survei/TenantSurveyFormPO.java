@@ -93,7 +93,8 @@ public class TenantSurveyFormPO {
         popupConfirmationKembaliBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kembali"));
         popupConfirmationMengertiBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Mengerti, Kirim"));
         tanggalLainMessage = page.locator(".tanggal-lain-message, .date-selection-message");
-        phoneNumberErrorMessage = page.locator(".error-message, .phone-error");
+        // Error message for phone number field - search within form-survey container
+        phoneNumberErrorMessage = page.locator(".form-survey .bg-c-field__message, .form-survey [class*='error'], .form-survey [class*='field-message']").first();
         tncLink = page.getByText("kebijakan privasi mamikos");
         tncSection = page.locator(".tnc-section, .terms-section");
         surveyStatusInChatroom = page.locator(".survey-status");
@@ -514,14 +515,21 @@ public class TenantSurveyFormPO {
     /**
      * Fill phone number in survey form
      *
-     * @param phoneNumber - phone number to fill
+     * @param phoneNumber - phone number to fill (can be empty string for testing empty validation)
      */
     public void fillPhoneNumber(String phoneNumber) {
         // Scroll to phone number field
         phoneNumberInput.scrollIntoViewIfNeeded();
         playwright.waitTillLocatorIsVisible(phoneNumberInput);
         playwright.clearText(phoneNumberInput);
-        playwright.clickLocatorAndTypeKeyboard(phoneNumberInput, phoneNumber);
+
+        // Only type if phoneNumber is not empty
+        if (phoneNumber != null && !phoneNumber.isEmpty()) {
+            playwright.clickLocatorAndTypeKeyboard(phoneNumberInput, phoneNumber);
+        } else {
+            // For empty phone number test, just click to focus then blur
+            playwright.clickOn(phoneNumberInput);
+        }
     }
 
     /**
@@ -544,6 +552,22 @@ public class TenantSurveyFormPO {
      */
     public boolean isPopupConfirmationVisible() {
         return playwright.waitTillLocatorIsVisible(popupConfirmationHeading);
+    }
+
+    /**
+     * Quick check if popup confirmation is visible (with short timeout)
+     * Used for validation testing where we don't want to wait too long
+     *
+     * @param timeoutMs - timeout in milliseconds
+     * @return true if popup is visible within timeout
+     */
+    public boolean isPopupConfirmationVisibleQuick(int timeoutMs) {
+        try {
+            popupConfirmationHeading.waitFor(new Locator.WaitForOptions().setTimeout(timeoutMs));
+            return popupConfirmationHeading.isVisible();
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /**
@@ -1006,19 +1030,74 @@ public class TenantSurveyFormPO {
      * @return error message text
      */
     public String getPhoneNumberErrorMessage() {
-        if (playwright.waitTillLocatorIsVisible(phoneNumberErrorMessage)) {
-            return playwright.getText(phoneNumberErrorMessage);
+        // Wait a bit for error message to appear after form validation
+        page.waitForTimeout(2000);
+
+        // Try multiple locator strategies to find the error message
+        try {
+            // Strategy 1: Check form-survey container for bg-c-field__message
+            Locator formError = page.locator(".form-survey .bg-c-field__message").first();
+            if (playwright.waitTillLocatorIsVisible(formError)) {
+                return playwright.getText(formError);
+            }
+        } catch (Exception e) {
+            // Continue to next strategy
         }
+
+        try {
+            // Strategy 2: Look for any error message in the form
+            Locator anyError = page.locator(".form-survey [class*='error']").first();
+            if (playwright.waitTillLocatorIsVisible(anyError)) {
+                return playwright.getText(anyError);
+            }
+        } catch (Exception e) {
+            // Continue
+        }
+
+        try {
+            // Strategy 3: Original locator
+            if (playwright.waitTillLocatorIsVisible(phoneNumberErrorMessage)) {
+                return playwright.getText(phoneNumberErrorMessage);
+            }
+        } catch (Exception e) {
+            // Continue
+        }
+
         return "";
     }
 
     /**
      * Check if phone number validation passed
      *
-     * @return true if validation passed
+     * @return true if validation passed (no error message visible)
      */
     public boolean isPhoneNumberValidationPassed() {
-        return !playwright.waitTillLocatorIsVisible(phoneNumberErrorMessage);
+        // Wait a bit for potential error message to appear
+        page.waitForTimeout(2000);
+
+        // Check if any error message is visible using multiple strategies
+        try {
+            // Check for error in form-survey container
+            Locator formError = page.locator(".form-survey .bg-c-field__message").first();
+            if (playwright.waitTillLocatorIsVisible(formError)) {
+                return false; // Error message found, validation failed
+            }
+        } catch (Exception e) {
+            // No error found, continue checking
+        }
+
+        try {
+            // Check for any element with error class
+            Locator anyError = page.locator(".form-survey [class*='error']").first();
+            if (playwright.waitTillLocatorIsVisible(anyError)) {
+                return false; // Error message found, validation failed
+            }
+        } catch (Exception e) {
+            // No error found, continue
+        }
+
+        // No error message found, validation passed
+        return true;
     }
 
     /**

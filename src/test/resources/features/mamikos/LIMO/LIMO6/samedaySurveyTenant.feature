@@ -136,7 +136,7 @@ Feature: Sameday Survey Tenant
     And user verify "Survei Hari Ini" option becomes unselectable survey
     And user verify system suggests "Tanggal Lain" option survey
 
-  @TEST_LIMO-9413
+@TEST_LIMO-9413
   Scenario: [Survey][Tenant] Time category interaction
     Given user go to mamikos homepage
     When user login as tenant via phone number:
@@ -158,37 +158,35 @@ Feature: Sameday Survey Tenant
     And user select survey time period "Pagi"
     Then user verify displayed time slots switch to period "Pagi"
     And user verify displayed time slots are between "08:00" and "10:30"
-#
-#  @TEST_LIMO-9414
-#  Scenario Outline: [Survey][Tenant] Phone number input validation
-#    Given user go to mamikos homepage
-#    When user login as tenant via phone number:
-#      | phone stag   | phone prod   | password  |
-#      | 081197878846 | 081197878846 | Perempuan |
-#    And tenant search kost then go to kost details:
-#      | kost name stag              | kost name prod              |
-#      | Kost P2 With Sameday Active | Kost P2 With Sameday Active |
-#    And user dismiss FTUE booking benefit
-#    And user click chat in kos detail
-#    And user tap on survey kost btn on detail chatroom
-#    And user select survey date type "Survei Hari ini"
-#    And user select survey time period "Pagi"
-#    And user select survey time "08:00"
-#    And user fill phone number "<phone_input>" on survey form
-#    And user check TnC agreement checkbox on survey form
-#    And user tap on ajukan survey btn on form
-#    Then user verify phone number validation is "<is_valid>"
-#    And user verify phone number error message is "<error_msg>"
-#    Examples:
-#      | phone_input      | is_valid | error_msg                          |
-#      |                  | No       | Field required                     |
-#      | 0812345678       | Yes      | -                                  |
-#      | 081234567890123  | Yes      | -                                  |
-#      | 08123456         | No       | Mohon masukkan nomor HP yang valid |
-#      | 0812345678901234 | No       | Mohon masukkan nomor HP yang valid |
-#      | 628123456789     | No       | Mohon diawali dengan 08            |
-#      | 12345678901      | No       | Mohon diawali dengan 08            |
-#
+
+  @TEST_LIMO-9414
+  Scenario: [Survey][Tenant] Phone number input validation
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 081197878846 | 081197878846 | Perempuan |
+    And tenant search kost then go to kost details:
+      | kost name stag              | kost name prod              |
+      | Kost P2 With Sameday Active | Kost P2 With Sameday Active |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    And user select survey date type "Tanggal Lain"
+    And user open survey date picker on form survey
+    And user select date "available" on survey form
+    And user select survey time period "Pagi"
+    And user select survey time "08:00"
+    And user check TnC agreement checkbox on survey form
+    Then user validate multiple phone numbers:
+      | phone_input      | is_valid | error_msg                          |
+      |                  | No       | Field required                     |
+      | 0812345678       | Yes      | -                                  |
+      | 081234567890123  | Yes      | -                                  |
+      | 08123456         | No       | Mohon masukkan nomor HP yang valid |
+      | 0812345678901234 | No       | Mohon masukkan nomor HP yang valid |
+      | 628123456789     | No       | Mohon diawali dengan 08            |
+      | 12345678901      | No       | Mohon diawali dengan 08            |
+
 #  @TEST_LIMO-9415
 #  Scenario: [Survey][Tenant] T&C checkbox on survey form and pop up confirmation
 #    Given user go to mamikos homepage
