@@ -58,7 +58,7 @@ Feature: Owner Expose Singgahsini
     Then owner should redirect to singgahsini.id from Kos
 
   @TEST_SS-9801
-  Scenario: [Web][Owner Dashboard][Kos Menu]Check CTA singgahsini id on Kost List when owner have kost p2 with "DIperiksa admin" status  and have Area Prio
+  Scenario: [Web][Owner Dashboard][Kos Menu]Check CTA singgahsini id on Kost List when owner have kost p2 with "Diperiksa admin" status  and have Area Prio
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | password  |
@@ -68,3 +68,21 @@ Feature: Owner Expose Singgahsini
     Then owner should see CTA button Expose Singgahsini
     When owner click CTA button Expose Singgahsini
     Then owner should redirect to singgahsini.id from Kos
+
+  @TEST_SS-9817 @continue @PopupCTA @test
+  Scenario: Owner sees Singgahsini popup when changing draft property location to area prio
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | password   |
+      | 082088301094 | mamikos290 |
+    And owner resets draft property location back to "Kretek"
+    And owner edits draft property location to area prio "Tamantirto"
+    Then Expose Singgahsini popup is displayed with:
+      | message | Kos Anda dapat kesempatan untuk dikelola secara profesional! |
+      | button  | Pelajari lebih lanjut                                         |
+      | button  | Lewati dulu                                                   |
+
+  @TEST_SS-9818 @PopupCTA @test
+  Scenario: Owner redirects to Singgahsini.id when clicking "Pelajari lebih lanjut" on popup
+    When owner clicks "Pelajari lebih lanjut" on the popup
+    Then owner is redirected to Singgahsini.id with source "kos saya pop up singgahsini"
