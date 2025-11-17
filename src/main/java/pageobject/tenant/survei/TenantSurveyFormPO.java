@@ -95,10 +95,10 @@ public class TenantSurveyFormPO {
         tanggalLainMessage = page.locator(".tanggal-lain-message, .date-selection-message");
         // Error message for phone number field - search within form-survey container
         phoneNumberErrorMessage = page.locator(".form-survey .bg-c-field__message, .form-survey [class*='error'], .form-survey [class*='field-message']").first();
-        tncLink = page.getByText("kebijakan privasi mamikos");
+        tncLink = page.locator("a").filter(new Locator.FilterOptions().setHasText("Kebijakan Privasi Mamikos")).first();
         tncSection = page.locator(".tnc-section, .terms-section");
         surveyStatusInChatroom = page.locator(".survey-status");
-        p2AutoreplyMessage = page.locator(".autoreply-message, .p2-message");
+        p2AutoreplyMessage = page.getByText("Untuk Pencari: Silakan tunggu konfirmasi dari pemilik. Kamu juga bisa chat di sini untuk mengingatkan pemilik.").first();
     }
 
 
@@ -592,6 +592,8 @@ public class TenantSurveyFormPO {
         try {
             if (isPopupConfirmationVisible()) {
                 clickMengertiOnPopup();
+                // Wait for the popup to disappear after clicking
+                playwright.hardWait(2000);
             }
         } catch (Exception e) {
             // Popup not visible, continue
@@ -1150,33 +1152,12 @@ public class TenantSurveyFormPO {
     }
 
     /**
-     * Check if navigation to chatroom is successful
-     *
-     * @return true if navigation successful
-     */
-    public boolean isNavigationToChatroomSuccessful() {
-        // Check if chatroom is visible
-        Locator chatroom = page.locator(".chatroom, .chat-container");
-        return playwright.waitTillLocatorIsVisible(chatroom);
-    }
-
-    /**
-     * Check if survey request sent with phone number visible
-     *
-     * @return true if phone visible in survey request
-     */
-    public boolean isSurveyRequestSentWithPhoneVisible() {
-        Locator phoneInMessage = page.locator(".survey-request-message, .phone-number");
-        return playwright.waitTillLocatorIsVisible(phoneInMessage);
-    }
-
-    /**
      * Check if P2 autoreply message appears
      *
      * @return true if autoreply visible
      */
     public boolean isP2AutoreplyMessageVisible() {
-        return playwright.waitTillLocatorIsVisible(p2AutoreplyMessage);
+        return playwright.waitTillLocatorIsVisible(p2AutoreplyMessage, 5_000.0);
     }
 
     /**

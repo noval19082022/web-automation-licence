@@ -839,18 +839,6 @@ public class tenantSurveySteps {
                 "Popup confirmation heading should be: " + expectedHeading);
     }
 
-    @Then("user verify navigation to chatroom is successful")
-    public void userVerifyNavigationToChatroomIsSuccessful() {
-        Assert.assertTrue(tenantSurveyFormPO.isNavigationToChatroomSuccessful(),
-                "Navigation to chatroom should be successful");
-    }
-
-    @And("user verify survey request sent with phone number visible")
-    public void userVerifySurveyRequestSentWithPhoneNumberVisible() {
-        Assert.assertTrue(tenantSurveyFormPO.isSurveyRequestSentWithPhoneVisible(),
-                "Survey request should be sent with phone number visible");
-    }
-
     @And("user verify P2 autoreply message appears")
     public void userVerifyP2AutoreplyMessageAppears() {
         Assert.assertTrue(tenantSurveyFormPO.isP2AutoreplyMessageVisible(),

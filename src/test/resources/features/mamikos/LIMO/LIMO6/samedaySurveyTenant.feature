@@ -11,6 +11,7 @@ Feature: Sameday Survey Tenant
       | kost name stag | kost name prod |
       | <kost_name>    | <kost_name>    |
     And user dismiss FTUE booking benefit
+    And user dismiss promo ngebut pop up
     And user click chat in kos detail
     And user tap on survey kost btn on detail chatroom
     Then user verify survey date type "Survei Hari Ini" is "<hari_ini_status>"
@@ -33,6 +34,7 @@ Feature: Sameday Survey Tenant
       | kost name stag                | kost name prod                |
       | Kost Apik Desta Tipe B Tamvan | Kost Apik Desta Tipe B Tamvan |
     And user dismiss FTUE booking benefit
+    And user dismiss promo ngebut pop up
     And user click chat in kos detail
     And user tap on survey kost btn on detail chatroom
     And user select survey date type "Survei Hari ini"
@@ -50,6 +52,7 @@ Feature: Sameday Survey Tenant
       | kost name stag                | kost name prod                |
       | Kost Apik Desta Tipe B Tamvan | Kost Apik Desta Tipe B Tamvan |
     And user dismiss FTUE booking benefit
+    And user dismiss promo ngebut pop up
     And user click chat in kos detail
     And user tap on survey kost btn on detail chatroom
     And user select survey date type "Tanggal Lain"
@@ -69,6 +72,7 @@ Feature: Sameday Survey Tenant
       | kost name stag                | kost name prod                |
       | Kost P2 With Sameday Inactive | Kost P2 With Sameday Inactive |
     And user dismiss FTUE booking benefit
+    And user dismiss promo ngebut pop up
     And user click chat in kos detail
     And user tap on survey kost btn on detail chatroom
     Then user verify survey date type "Survei Hari Ini" is visible
@@ -87,6 +91,7 @@ Feature: Sameday Survey Tenant
       | kost name stag              | kost name prod              |
       | Kost P2 With Sameday Active | Kost P2 With Sameday Active |
     And user dismiss FTUE booking benefit
+    And user dismiss promo ngebut pop up
     And user click chat in kos detail
     And user tap on survey kost btn on detail chatroom
     And user select survey date type "Survei Hari ini"
@@ -107,6 +112,7 @@ Feature: Sameday Survey Tenant
       | kost name stag                | kost name prod                |
       | Kost Apik Desta Tipe B Tamvan | Kost Apik Desta Tipe B Tamvan |
     And user dismiss FTUE booking benefit
+    And user dismiss promo ngebut pop up
     And user click chat in kos detail
     And user tap on survey kost btn on detail chatroom
     And user select survey date type "Survei Hari ini"
@@ -129,6 +135,7 @@ Feature: Sameday Survey Tenant
       | kost name stag              | kost name prod              |
       | Kost P2 With Sameday Active | Kost P2 With Sameday Active |
     And user dismiss FTUE booking benefit
+    And user dismiss promo ngebut pop up
     And user click chat in kos detail
     And user tap on survey kost btn on detail chatroom
     And user select survey date type "Survei Hari ini"
@@ -146,6 +153,7 @@ Feature: Sameday Survey Tenant
       | kost name stag                | kost name prod                |
       | Kost Apik Desta Tipe B Tamvan | Kost Apik Desta Tipe B Tamvan |
     And user dismiss FTUE booking benefit
+  And user dismiss promo ngebut pop up
     And user click chat in kos detail
     And user tap on survey kost btn on detail chatroom
     And user select survey date type "Tanggal Lain"
@@ -169,6 +177,7 @@ Feature: Sameday Survey Tenant
       | kost name stag              | kost name prod              |
       | Kost P2 With Sameday Active | Kost P2 With Sameday Active |
     And user dismiss FTUE booking benefit
+    And user dismiss promo ngebut pop up
     And user click chat in kos detail
     And user tap on survey kost btn on detail chatroom
     And user select survey date type "Tanggal Lain"
@@ -187,40 +196,43 @@ Feature: Sameday Survey Tenant
       | 628123456789     | No       | Mohon diawali dengan 08            |
       | 12345678901      | No       | Mohon diawali dengan 08            |
 
-#  @TEST_LIMO-9415
-#  Scenario: [Survey][Tenant] T&C checkbox on survey form and pop up confirmation
-#    Given user go to mamikos homepage
-#    When user login as tenant via phone number:
-#      | phone stag   | phone prod   | password  |
-#      | 081197878846 | 081197878846 | Perempuan |
-#    And tenant search kost then go to kost details:
-#      | kost name stag              | kost name prod              |
-#      | Kost P2 With Sameday Active | Kost P2 With Sameday Active |
-#    And user dismiss FTUE booking benefit
-#    And user click chat in kos detail
-#    And user tap on survey kost btn on detail chatroom
-#    And user select survey date type "Tanggal Lain"
-#    And user select date "25" on survey form
-#    And user select survey time period "Pagi"
-#    And user select survey time "08:00"
-#    And user fill phone number "081197878846" on survey form
-#    # Verify T&C link
-#    Then user verify TnC link text is "kebijakan privasi mamikos"
+  @TEST_LIMO-9415 @continue
+  Scenario: [Survey][Tenant] T&C checkbox on survey form and pop up confirmation
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 081197878846 | 081197878846 | Perempuan |
+    And tenant search kost then go to kost details:
+      | kost name stag              | kost name prod              |
+      | Kost P2 With Sameday Active | Kost P2 With Sameday Active |
+    And user dismiss FTUE booking benefit
+    And user dismiss promo ngebut pop up
+    And user click chat in kos detail
+    And user tap on survey kost btn on detail chatroom
+    And user select survey date type "Tanggal Lain"
+    And user open survey date picker on form survey
+    And user select date "available" on survey form
+    And user select survey time period "Pagi"
+    And user select survey time "08:00"
+    And user fill phone number "081197878846" on survey form
+    # Verify T&C link
+    Then user verify TnC link text is "Kebijakan Privasi Mamikos"
 #    When user click on TnC link
-#    Then user verify TnC link opens "Kebijakan privasi mamikos Help Center"
+#    Then user verify TnC link opens "Kebijakan Privasi Mamikos Help Center"
 #    And user verify TnC section is scrollable not sticky
-#    # Verify button state based on checkbox
-#    Then user verify ajukan survey btn is disable on survey form
-#    When user check TnC agreement checkbox on survey form
-#    Then user verify ajukan survey btn is enable on survey form
-#    # Submit and verify popup
-#    And user tap on ajukan survey btn on form
-#    Then user verify popup confirmation is visible
-#    And user verify popup confirmation heading is "Pastikan Datamu Benar"
-#    When user confirm popup ajukan survey if appear
-#    # Verify chatroom result
-#    Then user verify navigation to chatroom is successful
-#    And user verify survey request sent with phone number visible
-#    And user verify P2 autoreply message appears
-#    # Cleanup - batalkan survey for next run
-#    And user batalkan survey if the survey already submitted
+    # Verify button state based on checkbox
+    Then user verify ajukan survey btn is disable on survey form
+    When user check TnC agreement checkbox on survey form
+    Then user verify ajukan survey btn is enable on survey form
+    # Submit and verify popup
+    And user tap on ajukan survey btn on form
+    Then user verify popup confirmation is visible
+    And user verify popup confirmation heading is "Pastikan Datamu Benar"
+    When user confirm popup ajukan survey if appear
+    # Verify chatroom result
+    And user verify P2 autoreply message appears
+
+  @TEST_LIMO-9415
+  Scenario: cleanup survey @TEST_LIMO-9415
+    # Cleanup - batalkan survey for next run
+    And user batalkan survey if the survey already submitted
