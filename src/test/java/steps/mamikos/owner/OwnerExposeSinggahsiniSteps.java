@@ -7,19 +7,18 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import utilities.PlaywrightHelpers;
+import pageobject.owner.kos.OwnerExposeSinggahsiniPO;
 
 import java.util.List;
-import java.util.Map;
 
 public class OwnerExposeSinggahsiniSteps {
     Page page = ActiveContext.getActivePage();
-    PlaywrightHelpers playwright = new PlaywrightHelpers(page);
+    OwnerExposeSinggahsiniPO exposeSinggahsiniPO = new OwnerExposeSinggahsiniPO(page);
 
     @Then("Expose Singgahsini popup is displayed with:")
     public void exposeSinggahsiniPopupIsDisplayedWith(DataTable dataTable) {
         // Wait for page to be fully loaded to ensure popup has time to appear
-        playwright.waitTillPageLoaded(30000.0);
+        exposeSinggahsiniPO.waitForPageLoad();
 
         // DataTable format: | type | text |
         // Each row is a key-value pair without header
@@ -31,16 +30,13 @@ public class OwnerExposeSinggahsiniSteps {
 
             if (type.equals("message")) {
                 // Wait for and verify the message text is displayed in the popup
-                var messageLocator = page.getByText(expectedText);
-                playwright.waitFor(messageLocator, 10000.0);
-                Assert.assertTrue(messageLocator.isVisible(),
+                exposeSinggahsiniPO.waitForPopupMessage(expectedText);
+                Assert.assertTrue(exposeSinggahsiniPO.isPopupMessageVisible(expectedText),
                         "Popup message '" + expectedText + "' should be visible");
             } else if (type.equals("button")) {
                 // Wait for and verify the button is displayed in the popup
-                var buttonLocator = page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
-                        new Page.GetByRoleOptions().setName(expectedText));
-                playwright.waitFor(buttonLocator, 10000.0);
-                Assert.assertTrue(buttonLocator.isVisible(),
+                exposeSinggahsiniPO.waitForPopupButton(expectedText);
+                Assert.assertTrue(exposeSinggahsiniPO.isPopupButtonVisible(expectedText),
                         "Button '" + expectedText + "' should be visible");
             }
         }
@@ -56,36 +52,23 @@ public class OwnerExposeSinggahsiniSteps {
 
     @When("owner clicks {string} on the popup")
     public void ownerClicksOnThePopup(String buttonText) {
-        var button = page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
-                new Page.GetByRoleOptions().setName(buttonText));
-        button.click();
-        // Wait for navigation to complete after clicking the button
-        playwright.waitTillPageLoaded(60000.0);
+        exposeSinggahsiniPO.clickPopupButton(buttonText);
     }
 
     @Then("owner is redirected to Singgahsini.id with source {string}")
     public void ownerIsRedirectedToSinggahsiniIdWithSource(String source) {
         // Wait for the redirect to complete by waiting for page to load
-        playwright.waitTillPageLoaded(30000.0);
+        exposeSinggahsiniPO.waitForPageLoad();
 
         // Get the current URL
-        String currentUrl = page.url();
+        String currentUrl = exposeSinggahsiniPO.getCurrentUrl();
 
         // Verify the URL contains singgahsini.id
-        Assert.assertTrue(currentUrl.contains("singgahsini.id"),
+        Assert.assertTrue(exposeSinggahsiniPO.isRedirectedToSinggahsini(),
                 "Should be redirected to singgahsini.id but current URL is: " + currentUrl);
 
         // Verify the source parameter is in the URL
-        // The URL may contain the source parameter in various encoded formats:
-        // - redirection_source='kos saya pop up singgahsini' (with quotes)
-        // - spaces encoded as + or %20
-        // - quotes encoded as %27
-        boolean hasSourceParam = currentUrl.contains("redirection_source") ||
-                                 currentUrl.contains("source=" + source) ||
-                                 currentUrl.contains("source=" + source.replace(" ", "+")) ||
-                                 currentUrl.contains("source=" + source.replace(" ", "%20"));
-
-        Assert.assertTrue(hasSourceParam,
+        Assert.assertTrue(exposeSinggahsiniPO.urlContainsSourceParameter(source),
                 "URL should contain source parameter with '" + source + "' but current URL is: " + currentUrl);
     }
 
@@ -94,6 +77,10 @@ public class OwnerExposeSinggahsiniSteps {
         // Reset location back to the specified location (e.g., Kretek)
         // This ensures the test can run again and trigger the popup
         OwnerLocationSteps locationSteps = new OwnerLocationSteps();
-        locationSteps.editDraftPropertyLocation(location, true); // true = navigate back to property list
+
+        // If location is Kretek, don't navigate away (stay on page)
+        // Otherwise, navigate back to property list
+        boolean navigateAway = !location.equalsIgnoreCase("Kretek");
+        locationSteps.editDraftPropertyLocation(location, navigateAway);
     }
 }
