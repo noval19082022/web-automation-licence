@@ -69,24 +69,16 @@ public class OwnerLocationPO {
      * @return true if visible, false otherwise
      */
     public boolean isGoldplusPopupVisible() {
-        try {
-            return goldplusPopupText.isVisible();
-        } catch (Exception e) {
-            return false;
-        }
+        return goldplusPopupText.isVisible();
     }
 
     /**
      * Dismiss FTUE Goldplus popup if present
      */
     public void dismissFTUEGoldplusIfPresent() {
-        try {
-            if (isGoldplusPopupVisible()) {
-                playwright.clickOn(closeButton);
-                playwright.waitTillPageLoaded(30000.0);
-            }
-        } catch (Exception e) {
-            System.out.println("FTUE Goldplus popup not present: " + e.getMessage());
+        if (isGoldplusPopupVisible()) {
+            playwright.clickOn(closeButton);
+            playwright.waitTillPageLoaded(30000.0);
         }
     }
 
@@ -178,19 +170,15 @@ public class OwnerLocationPO {
      * @param location The location to change to
      */
     public void changeLocationTo(String location) {
-        try {
-            waitForLoadingDisappear();
-            waitForMapToAppear();
-            waitForLocationSearchInput();
-            clickLocationSearchInput();
-            clearLocationSearchInput();
-            typeLocationName(location);
-            waitForSearchResults();
-            clickFirstSearchResult();
-            waitForLoadingDisappear();
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to change location to " + location + ": " + e.getMessage(), e);
-        }
+        waitForLoadingDisappear();
+        waitForMapToAppear();
+        waitForLocationSearchInput();
+        clickLocationSearchInput();
+        clearLocationSearchInput();
+        typeLocationName(location);
+        waitForSearchResults();
+        clickFirstSearchResult();
+        waitForLoadingDisappear();
     }
 
     /**
@@ -206,11 +194,7 @@ public class OwnerLocationPO {
      * Wait for photo info popup to appear (indicates page fully loaded)
      */
     public void waitForPhotoInfoPopup() {
-        try {
-            playwright.waitFor(photoInfoPopupText, 15000.0);
-        } catch (Exception e) {
-            System.out.println("Photo info popup not found: " + e.getMessage());
-        }
+        playwright.waitFor(photoInfoPopupText, 15000.0);
     }
 
     /**
@@ -218,10 +202,6 @@ public class OwnerLocationPO {
      * Waits for the loading spinner element to become hidden from the page
      */
     public void waitForLoadingDisappear() {
-        try {
-            playwright.waitForSelectorState(loadingSpinner, WaitForSelectorState.HIDDEN, 30000.0);
-        } catch (Exception e) {
-            System.out.println("Loading spinner not found or already disappeared: " + e.getMessage());
-        }
+        playwright.waitForSelectorState(loadingSpinner, WaitForSelectorState.HIDDEN, 30000.0);
     }
 }
