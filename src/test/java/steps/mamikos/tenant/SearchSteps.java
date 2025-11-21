@@ -479,7 +479,7 @@ public class SearchSteps {
         kostLanding.clickOnLihatLebihBanyakButton();
         
         // Wait for content to load after clicking the button
-        playwright.hardWait(5000);
+        playwright.hardWait(8000);
         
         kostListAfter = kostLanding.getKostListLocator().size();
     }

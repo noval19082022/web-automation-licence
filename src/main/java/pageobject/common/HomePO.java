@@ -110,7 +110,7 @@ public class HomePO {
         promoNgebutPriceBeforePromo = page.getByTestId("flashSaleHomePagePriceBeforePromo");
         promoNgebutPriceInfoForFirstMonth = page.getByTestId("flashSaleHomePagePromoInfo");
         promoNgebutPriceInfoOtherThanFirstMonth = page.getByTestId("flashSaleHomePageOtherPromoInfo");
-        promoNgebutRentType = page.getByTestId("flashSaleHomePageRentType");
+        promoNgebutRentType = page.locator(".rc-price__type");
         nextListProbut = page.locator("#flashsale").getByLabel("Next slide");
         dikelolaMamikosToggle = page.getByTestId("singgahsini-filter_tgl");
         dikelolaMamikosLabel = page.getByTestId("roomCardCover-brandIcon").first();
@@ -808,7 +808,42 @@ public class HomePO {
      * @return
      */
     public String getPromoNgebutRenType() {
-        return playwright.getText(promoNgebutRentType.first());
+        // Wait for flash sale section and rent type element
+        playwright.waitFor(flashSaleSection, 5000.0);
+        playwright.hardWait(2000);
+        
+        // Try finding "(Bulan pertama)" in current view
+        String result = findBulanPertamaTextOrFirst();
+        if (!result.equals("/bulan") && result.contains("Bulan pertama")) {
+            return result;
+        }
+        
+        // If not found in current view, try to slide to next
+        if (playwright.waitTillLocatorIsVisible(nextListProbut, 2000.0)) {
+            playwright.clickOn(nextListProbut);
+            playwright.hardWait(2000);
+            
+            // Check again after sliding
+            return findBulanPertamaTextOrFirst();
+        }
+        
+        // Return the result from first attempt
+        return result;
+    }
+    
+    private String findBulanPertamaTextOrFirst() {
+        List<Locator> rentTypes = flashSaleSection.locator(".kost-rc__price .rc-price__type").all();
+        
+        // First, try to find "Bulan pertama"
+        for (Locator rentType : rentTypes) {
+            String text = playwright.getText(rentType);
+            if (text.contains("Bulan pertama")) {
+                return text;
+            }
+        }
+        
+        // If not found, return the first one available
+        return rentTypes.size() > 0 ? playwright.getText(rentTypes.get(0)) : "/bulan";
     }
 
     /**

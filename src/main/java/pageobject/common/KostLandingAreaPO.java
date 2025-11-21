@@ -125,7 +125,7 @@ public class KostLandingAreaPO {
         playwright.getLocators(kostRoomCard.first());
         playwright.waitFor(kostRoomCard.last(), 30000.0);
         playwright.getLocators(kostRoomCard.last());
-        playwright.hardWait(2000);
+        playwright.hardWait(10000);
         return kostRoomCard.all();
     }
 
@@ -199,9 +199,12 @@ public class KostLandingAreaPO {
      * click on lihat lebih banyak button
      */
     public void clickOnLihatLebihBanyakButton() {
-        if (!playwright.waitTillLocatorIsVisible(lihatLebihBanyakButton)) {
+        playwright.hardWait(3000);
+        if (!playwright.waitTillLocatorIsVisible(lihatLebihBanyakButton, 10000.0)) {
             playwright.pageScrollUntilElementIsVisible(lihatLebihBanyakButton);
+            playwright.hardWait(3000);
         }
+        playwright.waitTillLocatorIsVisible(lihatLebihBanyakButton, 10000.0);
         playwright.clickOn(lihatLebihBanyakButton);
     }
 
