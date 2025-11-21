@@ -1,4 +1,4 @@
-@LIMO6 @test
+@LIMO6
 Feature: Owner Expose Singgahsini
 
   @TEST_SS-9797
