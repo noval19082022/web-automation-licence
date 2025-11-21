@@ -360,10 +360,8 @@ public class TenantSurveyFormPO {
     /**
      * Find and select the first available (enabled) date from date picker
      * This method dynamically finds an available date to avoid issues with disabled dates
-     *
-     * @return the selected date as string
      */
-    public String selectFirstAvailableDate() {
+    public void selectFirstAvailableDate() {
         // Scope search to the date picker container - get all date cells
         var basedLocator = page.locator("//div[@class='date-wrapper__cell-parent']/span[@class='cell day']");
 
@@ -405,7 +403,7 @@ public class TenantSurveyFormPO {
                 if (dateInt >= currentDayInt || (currentDayInt > 25 && dateInt < 10)) {
                     playwright.clickOn(dateElement);
                     System.out.println("Selected available date: " + dateText);
-                    return dateText.trim();
+                    return;
                 }
             } catch (NumberFormatException e) {
                 // Skip if dateText is not a number
@@ -424,7 +422,7 @@ public class TenantSurveyFormPO {
                 String selectedDate = playwright.getText(dateElement);
                 playwright.clickOn(dateElement);
                 System.out.println("Selected first available date: " + selectedDate);
-                return selectedDate.trim();
+                return;
             }
         }
 
@@ -597,6 +595,7 @@ public class TenantSurveyFormPO {
             }
         } catch (Exception e) {
             // Popup not visible, continue
+            System.out.println("Error confirming popup: " + e.getMessage());
         }
     }
 
