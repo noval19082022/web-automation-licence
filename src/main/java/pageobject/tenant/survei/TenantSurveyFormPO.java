@@ -188,6 +188,7 @@ public class TenantSurveyFormPO {
             }
         } catch (Exception e) {
             // If evaluation fails, continue with other checks
+            System.out.println("Failed to evaluate pointer-events CSS: " + e.getMessage());
         }
 
         return false;
@@ -299,11 +300,13 @@ public class TenantSurveyFormPO {
             // Approach 1: Direct scrollTop
             surveyFormContainer.evaluate("el => el.scrollTop += " + scrollAmount);
         } catch (Exception e1) {
+            System.out.println("Scroll approach 1 failed, trying approach 2: " + e1.getMessage());
             try {
                 // Approach 2: Scroll using scrollTo
                 surveyFormContainer.evaluate("el => el.scrollTo({top: el.scrollTop + " + scrollAmount + ", behavior: 'smooth'})");
             } catch (Exception e2) {
                 // Approach 3: Force scroll on body inside container
+                System.out.println("Scroll approach 2 failed, using approach 3: " + e2.getMessage());
                 surveyFormContainer.evaluate("el => { const target = el.scrollTop + " + scrollAmount + "; el.scrollTop = target; }");
             }
         }
@@ -406,7 +409,8 @@ public class TenantSurveyFormPO {
                     return;
                 }
             } catch (NumberFormatException e) {
-                // Skip if dateText is not a number
+                // Skip if dateText is not a number (e.g., month header)
+                System.out.println("Skipping non-numeric date text: " + dateText);
                 continue;
             }
         }
@@ -564,6 +568,7 @@ public class TenantSurveyFormPO {
             popupConfirmationHeading.waitFor(new Locator.WaitForOptions().setTimeout(timeoutMs));
             return popupConfirmationHeading.isVisible();
         } catch (Exception e) {
+            System.out.println("Popup confirmation not visible within " + timeoutMs + "ms: " + e.getMessage());
             return false;
         }
     }
@@ -653,6 +658,7 @@ public class TenantSurveyFormPO {
             }
         } catch (Exception e) {
             // If evaluation fails, continue with other checks
+            System.out.println("Failed to evaluate pointer-events for Survei Hari Ini: " + e.getMessage());
         }
 
         return false;
@@ -772,6 +778,7 @@ public class TenantSurveyFormPO {
 
             return isVisible;
         } catch (Exception e) {
+            System.out.println("Error verifying date range selectable: " + e.getMessage());
             return false;
         }
     }
@@ -793,7 +800,8 @@ public class TenantSurveyFormPO {
             // If click succeeds, past date is not disabled
             return false;
         } catch (Exception e) {
-            // Click failed, past date is disabled
+            // Click failed, past date is disabled (expected behavior)
+            System.out.println("Past date click failed as expected - date is disabled: " + e.getMessage());
             return true;
         }
     }
@@ -844,6 +852,7 @@ public class TenantSurveyFormPO {
             }
         } catch (Exception e) {
             // If evaluation fails, continue with other checks
+            System.out.println("Failed to evaluate pointer-events for time slot " + time + ": " + e.getMessage());
         }
 
         return false;
@@ -1042,7 +1051,8 @@ public class TenantSurveyFormPO {
                 return playwright.getText(formError);
             }
         } catch (Exception e) {
-            // Continue to next strategy
+            // Strategy 1 failed, continue to next strategy
+            System.out.println("Error message strategy 1 failed: " + e.getMessage());
         }
 
         try {
@@ -1052,7 +1062,8 @@ public class TenantSurveyFormPO {
                 return playwright.getText(anyError);
             }
         } catch (Exception e) {
-            // Continue
+            // Strategy 2 failed, continue to next strategy
+            System.out.println("Error message strategy 2 failed: " + e.getMessage());
         }
 
         try {
@@ -1061,9 +1072,11 @@ public class TenantSurveyFormPO {
                 return playwright.getText(phoneNumberErrorMessage);
             }
         } catch (Exception e) {
-            // Continue
+            // Strategy 3 failed, all strategies exhausted
+            System.out.println("Error message strategy 3 failed: " + e.getMessage());
         }
 
+        System.out.println("No phone number error message found after trying all strategies");
         return "";
     }
 

@@ -190,6 +190,7 @@ public class BroadcastChatSteps {
             loading.waitForLoadingIconDisappear();
             broadcast.clickOnTambahBroadcastChatButton();
         } catch (Exception e) {
+            System.out.println("Failed to click broadcast button, reloading page: " + e.getMessage());
             playwright.reloadPage();
         } finally {
             loading.waitForLoadingIconDisappear();
