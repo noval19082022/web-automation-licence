@@ -813,9 +813,9 @@ public class HomePO {
         playwright.hardWait(2000);
         
         // Try finding "(Bulan pertama)" in current view
-        String bulanPertama = findBulanPertamaText();
-        if (bulanPertama != null) {
-            return bulanPertama;
+        String result = findBulanPertamaTextOrFirst();
+        if (!result.equals("/bulan") && result.contains("Bulan pertama")) {
+            return result;
         }
         
         // If not found in current view, try to slide to next
@@ -824,26 +824,26 @@ public class HomePO {
             playwright.hardWait(2000);
             
             // Check again after sliding
-            bulanPertama = findBulanPertamaText();
-            if (bulanPertama != null) {
-                return bulanPertama;
-            }
+            return findBulanPertamaTextOrFirst();
         }
         
-        // If still not found, return the first one available
-        List<Locator> rentTypes = flashSaleSection.locator(".kost-rc__price .rc-price__type").all();
-        return rentTypes.size() > 0 ? playwright.getText(rentTypes.get(0)) : "/bulan";
+        // Return the result from first attempt
+        return result;
     }
     
-    private String findBulanPertamaText() {
+    private String findBulanPertamaTextOrFirst() {
         List<Locator> rentTypes = flashSaleSection.locator(".kost-rc__price .rc-price__type").all();
+        
+        // First, try to find "Bulan pertama"
         for (Locator rentType : rentTypes) {
             String text = playwright.getText(rentType);
             if (text.contains("Bulan pertama")) {
                 return text;
             }
         }
-        return null;
+        
+        // If not found, return the first one available
+        return rentTypes.size() > 0 ? playwright.getText(rentTypes.get(0)) : "/bulan";
     }
 
     /**
