@@ -86,3 +86,19 @@ Feature: Owner Expose Singgahsini
   Scenario: Owner redirects to Singgahsini.id when clicking "Pelajari lebih lanjut" on popup
     When owner clicks "Pelajari lebih lanjut" on the popup
     Then owner is redirected to Singgahsini.id with source "kos saya pop up singgahsini"
+
+  @TEST_SS-9802
+  Scenario: [Web][Owner Singgahsini ID][Kos Menu ]Check CTA singgahsini id on Kost List when owner have kost p2 with "Diperiksa admin" status  and don't have Area Prio
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | password   |
+      | 082088301096 | mamikos290 |
+    Then owner can't see button CTA expose singgahsini
+
+  @TEST_SS-9804
+  Scenario: [Web][Owner Singgahsini ID][Kos Menu ]Check CTA singgahsini id on Kost List when owner have kost p2 with "Aktif" status and don't have area prio
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | password   |
+      | 082088301097 | mamikos290 |
+    Then owner can't see button CTA expose singgahsini
