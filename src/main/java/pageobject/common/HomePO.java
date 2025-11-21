@@ -812,14 +812,10 @@ public class HomePO {
         playwright.waitFor(flashSaleSection, 5000.0);
         playwright.hardWait(2000);
         
-        // Try to find "(Bulan pertama)" in current view
-        List<Locator> rentTypes = flashSaleSection.locator(".rc-price__type").all();
-        
-        for (Locator rentType : rentTypes) {
-            String text = playwright.getText(rentType);
-            if (text.contains("Bulan pertama")) {
-                return text;
-            }
+        // Try finding "(Bulan pertama)" in current view
+        String bulanPertama = findBulanPertamaText();
+        if (bulanPertama != null) {
+            return bulanPertama;
         }
         
         // If not found in current view, try to slide to next
@@ -828,17 +824,26 @@ public class HomePO {
             playwright.hardWait(2000);
             
             // Check again after sliding
-            rentTypes = flashSaleSection.locator(".rc-price__type").all();
-            for (Locator rentType : rentTypes) {
-                String text = playwright.getText(rentType);
-                if (text.contains("Bulan pertama")) {
-                    return text;
-                }
+            bulanPertama = findBulanPertamaText();
+            if (bulanPertama != null) {
+                return bulanPertama;
             }
         }
         
         // If still not found, return the first one available
+        List<Locator> rentTypes = flashSaleSection.locator(".kost-rc__price .rc-price__type").all();
         return rentTypes.size() > 0 ? playwright.getText(rentTypes.get(0)) : "/bulan";
+    }
+    
+    private String findBulanPertamaText() {
+        List<Locator> rentTypes = flashSaleSection.locator(".kost-rc__price .rc-price__type").all();
+        for (Locator rentType : rentTypes) {
+            String text = playwright.getText(rentType);
+            if (text.contains("Bulan pertama")) {
+                return text;
+            }
+        }
+        return null;
     }
 
     /**
