@@ -1097,7 +1097,7 @@ public class TenantSurveyFormPO {
                 return false; // Error message found, validation failed
             }
         } catch (Exception e) {
-            // No error found, continue checking
+            System.out.println("Error element not found in form-survey container: " + e.getMessage());
         }
 
         try {
@@ -1107,7 +1107,7 @@ public class TenantSurveyFormPO {
                 return false; // Error message found, validation failed
             }
         } catch (Exception e) {
-            // No error found, continue
+            System.out.println("No error element with error class found: " + e.getMessage());
         }
 
         // No error message found, validation passed
