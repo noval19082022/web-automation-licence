@@ -434,11 +434,10 @@ public class MamiAdsPO {
      * @return int countHistoryIcn
      */
     public int getCountRiwayatBeliSaldo() {
-        if (playwright.waitTillLocatorIsVisible(countHistoryIcon, 3000.0)) {
-            return Integer.parseInt(playwright.getText(countHistoryIcon));
-        } else {
-            return 0;
-        }
+        String countText = playwright.waitTillLocatorIsVisible(countHistoryIcon, 3000.0)
+            ? playwright.getText(countHistoryIcon)
+            : null;
+        return countText != null && !countText.isEmpty() ? Integer.parseInt(countText) : 0;
     }
 
     /**

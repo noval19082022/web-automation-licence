@@ -2606,12 +2606,7 @@ public class KostDetailsPO {
      * @return boolean true if visible, false otherwise
      */
     public boolean isSurveyLabelSectionVisible() {
-        try {
-            playwright.waitTillLocatorIsVisible(surveyLabelSection, 3000.0);
-            return surveyLabelSection.isVisible();
-        } catch (Exception e) {
-            return false;
-        }
+        return playwright.waitTillLocatorIsVisible(surveyLabelSection, 3000.0);
     }
 
     /**

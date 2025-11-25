@@ -30,18 +30,8 @@ public class MamifotoSteps {
 
     @Then("owner can see mamifoto page")
     public void owner_can_see_mamifoto_page() {
-        // Use enhanced wait method for better reliability
-        try {
-            mamifoto.waitForMamiFotoPageLoad();
-            Assert.assertTrue(mamifoto.mamifotoHeaderLandingPageisAppear(),"Mamifoto Landing Page Doesnt Appear!");
-        } catch (Exception e) {
-            // Fallback to original method
-            playwright.hardWait(2000);
-            if (!mamifoto.isMamitFotoLandingPageVisible()) {
-                playwright.reloadPage();
-            }
-            Assert.assertTrue(mamifoto.mamifotoHeaderLandingPageisAppear(),"Mamifoto Landing Page Doesnt Appear!");
-        }
+        mamifoto.waitForMamiFotoPageLoad();
+        Assert.assertTrue(mamifoto.mamifotoHeaderLandingPageisAppear(),"Mamifoto Landing Page Doesnt Appear!");
     }
 
 
@@ -68,16 +58,7 @@ public class MamifotoSteps {
 
     @When("owner click Lihat Paket button")
     public void owner_click_lihat_paket_button() {
-        // Use enhanced method for better reliability
-        try {
-            mamifoto.clickLihatPaketEnhanced();
-        } catch (Exception e) {
-            // Fallback to original method with reload if needed
-            mamifoto.clickOnLihatPaket();
-            if (!mamifoto.isMamiFotoContentPackageVisible()) {
-                playwright.reloadPage();
-            }
-        }
+        mamifoto.clickLihatPaketEnhanced();
     }
 
     @And("owner select package mamifoto")
@@ -274,13 +255,7 @@ public class MamifotoSteps {
 
     @When("owner click button lihat paket")
     public void owner_click_button_lihat_paket() {
-        // Use enhanced method for better reliability
-        try {
-            mamifoto.clickLihatPaketEnhanced();
-        } catch (Exception e) {
-            // Fallback to original method
-            mamifoto.clickOnLihatPaket();
-        }
+        mamifoto.clickLihatPaketEnhanced();
     }
 
     @Then("owner paid transaction unpaid")

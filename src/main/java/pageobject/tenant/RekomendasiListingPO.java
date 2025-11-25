@@ -113,12 +113,8 @@ public class RekomendasiListingPO {
      * @return integer data type
      */
     public int getPaginationActual() {
-        try {
-            return Integer.parseInt(playwright.getText(paginationNumberAct));
-        }
-        catch (Exception e) {
-            return 0;
-        }
+        String paginationText = playwright.getText(paginationNumberAct);
+        return paginationText != null && !paginationText.isEmpty() ? Integer.parseInt(paginationText) : 0;
     }
 
     /**
@@ -126,12 +122,8 @@ public class RekomendasiListingPO {
      * @return integer data type
      */
     public int getRekomendasiActual() {
-        try {
-            return Integer.parseInt(playwright.getText(rekomendasiListingActual));
-        }
-        catch (Exception e) {
-            return 0;
-        }
+        String rekomendasiText = playwright.getText(rekomendasiListingActual);
+        return rekomendasiText != null && !rekomendasiText.isEmpty() ? Integer.parseInt(rekomendasiText) : 0;
     }
 
     /**

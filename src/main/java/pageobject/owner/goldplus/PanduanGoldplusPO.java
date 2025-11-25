@@ -136,7 +136,8 @@ public class PanduanGoldplusPO {
      */
     public int getSelectedOnboardingNumber() {
         playwright.waitFor(selectedOnboardingNumber);
-        return Integer.parseInt(playwright.getText(selectedOnboardingNumber));
+        String onboardingText = playwright.getText(selectedOnboardingNumber);
+        return onboardingText != null && !onboardingText.isEmpty() ? Integer.parseInt(onboardingText) : 0;
     }
 
     /**

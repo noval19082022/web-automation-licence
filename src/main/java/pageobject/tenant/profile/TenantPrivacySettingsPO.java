@@ -3,18 +3,21 @@ package pageobject.tenant.profile;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import utilities.PlaywrightHelpers;
 
 public class TenantPrivacySettingsPO {
     private Page page;
+    private PlaywrightHelpers playwright;
     private Locator iconProfile;
     private Locator profileMenu;
     private Locator pengaturanMenu;
     private Locator privacyToggle;
     private Locator lihatPreviewProfilButton;
-    
+
     public TenantPrivacySettingsPO(Page page) {
         this.page = page;
-        this.iconProfile = page.getByRole(AriaRole.BUTTON, 
+        this.playwright = new PlaywrightHelpers(page);
+        this.iconProfile = page.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName("User Photo"));
         this.profileMenu = page.getByText("Profil");
         this.pengaturanMenu = page.getByText("Pengaturan");
@@ -40,11 +43,7 @@ public class TenantPrivacySettingsPO {
      * Click on Pengaturan (Settings) menu
      */
     public void clickOnPengaturanMenu() {
-        try {
-            pengaturanMenu.click();
-        } catch (Exception e) {
-            pengaturanMenu.click();
-        }
+        playwright.clickOn(pengaturanMenu);
     }
 
     /**
