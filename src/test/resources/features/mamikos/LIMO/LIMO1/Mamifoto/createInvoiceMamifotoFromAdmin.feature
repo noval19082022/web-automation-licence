@@ -1,4 +1,4 @@
-@LIMO2 @Mamifoto @mamifotoAdmin
+@LIMO1 @Mamifoto @mamifotoAdmin
 Feature: Create invoice mamifoto from admin
 
   @TEST_LIMO-3568 @continue

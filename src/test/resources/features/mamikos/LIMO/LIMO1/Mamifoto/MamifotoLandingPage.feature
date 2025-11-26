@@ -1,4 +1,4 @@
-@LIMO2 @Mamifoto
+@LIMO1 @Mamifoto
 Feature: Check Mamifoto Landing Page
 
   @TEST_LIMO-3587 @continue @declarative @listing-monetization @reviewed @Automated @web @playWright

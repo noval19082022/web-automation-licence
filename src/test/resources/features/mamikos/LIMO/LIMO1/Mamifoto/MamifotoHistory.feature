@@ -1,4 +1,4 @@
-@LIMO2 @Mamifoto @MamifotoHistory @DONEMIGRATINGTONEWBOARD
+@LIMO1 @Mamifoto @MamifotoHistory @DONEMIGRATINGTONEWBOARD
 
 Feature: Owner can see MamiFoto Purchase History
 

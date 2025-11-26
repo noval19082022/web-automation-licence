@@ -18,7 +18,7 @@ Feature: GP Cross-Selling
       | 085951394565 | 0          | qwerty123 |
     And user click daftar GP button
     And owner choose Goldplus package 1
-    And user click on "Pilih Periode"
+    And owner click bayar sekarang on detail tagihan page goldplus
 
   @mamiads  @gpCrossSelling @continue @TEST_LIMO-3355
   Scenario: Detail list saldo
@@ -122,7 +122,7 @@ Feature: GP Cross-Selling
   Scenario: Ubah package GP after choose MamiAds
     When user click on ubah package gold plus button
     And owner choose Goldplus package 2
-    And user click on "Pilih Periode"
+    And owner click bayar sekarang on detail tagihan page goldplus
     Then user verify saldo MamiAds is choosen on Rincian Pembayaran
       """
       - paragraph: Rincian Pembayaran
@@ -150,7 +150,7 @@ Feature: GP Cross-Selling
 
   @mamiads  @gpCrossSelling @continue @TEST_LIMO-3357
   Scenario: Ubah package before select saldo mamiads
-    And user click on "Pilih Periode"
+    And owner click bayar sekarang on detail tagihan page goldplus
     When user click on ubah package gold plus button
     And owner choose periode goldplus 2
     And user choose saldo "30 ribu" on GoldPlus section
@@ -193,7 +193,7 @@ Feature: GP Cross-Selling
     And user click "Pilih Paket GoldPlus" button
     And owner choose Goldplus package 1
     And user choose saldo "Rp79.000" on GoldPlus section
-    And user click on "Pilih Periode"
+    And owner click bayar sekarang on detail tagihan page goldplus
     Then user verify saldo MamiAds is choosen on Rincian Pembayaran
       """
       - paragraph: Rincian Pembayaran
@@ -220,4 +220,4 @@ Feature: GP Cross-Selling
     Then payment owner success using ovo as payment method
     And user navigate to mamiads history page
     And user click "Selesai"
-    And validate status transaction mamiads is "Lunas" with price "Rp109.500" saldo "Saldo MamiAds 30 ribu + GoldPlus 1 (1 Bulan)"
+    And validate status transaction mamiads is "Lunas" with price "Rp0" saldo "Saldo 30 ribu"
