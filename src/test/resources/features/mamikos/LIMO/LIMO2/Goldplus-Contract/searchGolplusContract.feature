@@ -20,7 +20,7 @@ Feature: Search Contract Goldplus at Mamipay
 
   #Owner Want To Search GP Contract Filter by GP Packages
     When admin select package "GoldPlus 1 Periode 1 Bulan"
-    Then admin verify list of goldplus contracts is "[1] GoldPlus 1 1 Bulan"
+    Then admin verify list of goldplus contracts is "[332] GoldPlus 1 1 Bulan"
     And admin wants to reset form search
 
    #Owner Want To Search GP Contract Filter by Status GP

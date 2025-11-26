@@ -1,4 +1,4 @@
-@LIMO2 @Mamifoto @DONEMIGRATINGTONEWBOARD
+@LIMO1 @Mamifoto @DONEMIGRATINGTONEWBOARD
 Feature: Check when accsess prophoto Landing Page
 
   @TEST_LIMO-3597 @declarative @listing-monetization @reviewed @Automated @web @playWright

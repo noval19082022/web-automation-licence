@@ -1,4 +1,4 @@
-@regression @LIMO2
+@regression @LIMO1
 Feature: Search Kos area
 
   @TEST_LIMO-4165

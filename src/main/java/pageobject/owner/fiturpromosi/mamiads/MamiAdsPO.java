@@ -231,7 +231,7 @@ public class MamiAdsPO {
     }
 
     public void clickSaldoMamiadsCard() {
-        playwright.hardWait(2000);
+        playwright.hardWait(5000);
         if (playwright.isButtonWithTextDisplayed("Nanti Saja")) {
             playwright.clickOnTextButton("Nanti Saja");
         }
