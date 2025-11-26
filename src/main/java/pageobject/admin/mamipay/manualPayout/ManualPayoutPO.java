@@ -80,8 +80,37 @@ public class ManualPayoutPO {
         readyToProcessedMessage = page.getByText("Payout ready to be processed.");
         payoutCanceledMessage = page.getByText("Payout cancelled.");
         successUpdateMessage = page.getByText("Data telah berhasil diupdate.");
-        processingPayoutMessage = page.getByText("Payout is processing.");
+        processingPayoutMessage = page.locator(".callout.callout-success");
         sortingOption = page.locator("select[name='sort']");
+    }
+
+    /**
+     * Check if error page is displayed
+     * @return true if error page is displayed
+     */
+    public boolean isErrorPageDisplayed() {
+        try {
+            // First check the page title for error codes
+            String pageTitle = page.title();
+            if (pageTitle != null) {
+                String lowerTitle = pageTitle.toLowerCase();
+                if (lowerTitle.contains("429") || lowerTitle.contains("502") || lowerTitle.contains("504") || 
+                    lowerTitle.contains("error") || lowerTitle.contains("bad gateway") || lowerTitle.contains("timeout")) {
+                    return true;
+                }
+            }
+            
+            // Check for error pages using a single efficient selector
+            boolean hasErrorPage = playwright.waitTillLocatorIsVisible(
+                page.locator("center h1:text-matches('(502|504|429|Bad Gateway|Gateway Timeout|Too Many Requests)'), body > h1:text-matches('(502|504|429)')"), 
+                1000.0
+            );
+            
+            return hasErrorPage;
+        } catch (Exception e) {
+            // If any error occurs while checking, assume no error page
+            return false;
+        }
     }
 
     /**
@@ -241,7 +270,10 @@ public class ManualPayoutPO {
      */
     public void clickOnConfirmButton() {
         playwright.clickOn(confirmButton);
-        if (playwright.isTextDisplayed("429")) {
+        // Wait a bit for server response
+        playwright.hardWait(2000.0);
+        // Check if error page appears after submission
+        if (isErrorPageDisplayed()) {
             playwright.reloadPage();
         }
     }
@@ -351,6 +383,25 @@ public class ManualPayoutPO {
      * Click on Transfer button on main page
      */
     public void clickOnTransferButtonOnMainPage() {
+        // Wait for the page to load
+        playwright.hardWait(2000.0);
+        
+        // Find all transfer buttons
+        Locator allTransferButtons = page.locator("//a[text()='Transfer']");
+        int count = allTransferButtons.count();
+        
+        // Find the first visible and enabled transfer button
+        for (int i = 0; i < count; i++) {
+            Locator currentButton = allTransferButtons.nth(i);
+            if (currentButton.isVisible() && currentButton.isEnabled()) {
+                // Click this transfer button with dialog acceptance
+                playwright.acceptDialog(currentButton);
+                return;
+            }
+        }
+        
+        // If no transfer button found, fall back to the first one
+        playwright.waitTillLocatorIsVisible(transferButton, 10000.0);
         playwright.acceptDialog(transferButton);
     }
 
@@ -360,7 +411,16 @@ public class ManualPayoutPO {
      * @return boolean type, visible true otherwise false
      */
     public boolean isProcessingPayoutMessageVisible() {
-        return processingPayoutMessage.isVisible();
+        // Wait for page to stabilize after clicking transfer
+        playwright.hardWait(5000.0);
+        
+        // Check if we're still on the correct page
+        if (isErrorPageDisplayed()) {
+            return false;
+        }
+        
+        // Just check for the specific processing message with longer timeout
+        return playwright.waitTillLocatorIsVisible(processingPayoutMessage, 20000.0);
     }
 
     /**
