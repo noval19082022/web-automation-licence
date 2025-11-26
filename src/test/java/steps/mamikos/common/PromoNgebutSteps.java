@@ -11,6 +11,7 @@ import pageobject.common.HomePO;
 import pageobject.common.KostDetailsPO;
 import pageobject.common.promongebut.PromoNgebutLandingAreaPO;
 import pageobject.common.promongebut.PromoNgebutLandingPO;
+import utilities.PlaywrightHelpers;
 
 public class PromoNgebutSteps {
     Page page = ActiveContext.getActivePage();
@@ -18,6 +19,7 @@ public class PromoNgebutSteps {
     PromoNgebutLandingPO promo = new PromoNgebutLandingPO(page);
     PromoNgebutLandingAreaPO promoArea = new PromoNgebutLandingAreaPO(page);
     KostDetailsPO kostDetail = new KostDetailsPO(page);
+    PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     @Then("user can see flash sale landing page")
     public void userCanSeeFlashSaleLandingPage() {
         Assert.assertTrue(promo.isPromoNgebutHeadingVisible(), "Promo ngebut heading text is not visible");
@@ -63,7 +65,15 @@ public class PromoNgebutSteps {
 
     @Then("user can see promo ngebut pop-up")
     public void userCanSeePromoNgebutPopUp() {
-        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
+        // Wait for new page/tab to open
+        playwright.hardWait(3000);
+        
+        // Check if new tab opened, if not stay on current page
+        var pages = ActiveContext.getActiveBrowserContext().pages();
+        if (pages.size() > 1) {
+            ActiveContext.setActivePage(pages.get(1));
+        }
+        
         page = ActiveContext.getActivePage();
         kostDetail = new KostDetailsPO(page);
         kostDetail.scrollDownToUntilPromoPopUpVisible();
@@ -74,6 +84,10 @@ public class PromoNgebutSteps {
 
     @Then("user can see Promo Ngebut discount in nominal amount with normal price with strikethrough and {string} text on homepage")
     public void userCanSeePromoNgebutDiscountInNominalAmountWithNormalPriceWithStrikethroughAndBulanPertamaTextOnHomePage(String rentType) {
+        // Scroll to flash sale section first
+        homePO.scrollIntoPromoNgebut();
+        playwright.hardWait(2000);
+        
         Assert.assertTrue(homePO.priceStrikePromoNgebutIsVisible());
         Assert.assertTrue(homePO.promoNgebutInfoIsVisible());
         Assert.assertEquals(homePO.getPromoNgebutRenType(), rentType);
@@ -88,12 +102,28 @@ public class PromoNgebutSteps {
     @And("user visit kost detail that has promo bulan pertama from homepage")
     public void userVisitKostDetailThatHasPromoBulanPertamaFromHomepage() {
         homePO.clickOnKostCardPromoNgebutBulanPertama();
-        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
+        
+        // Wait for new page/tab to open
+        playwright.hardWait(3000);
+        
+        // Check if new tab opened, if not stay on current page
+        var pages = ActiveContext.getActiveBrowserContext().pages();
+        if (pages.size() > 1) {
+            ActiveContext.setActivePage(pages.get(1));
+        }
     }
 
     @And("user visit kost detail that has promo other than bulan pertama from homepage")
     public void userVisitKostDetailThatHasPromoOtherThanBulanPertamaFromHomepage() {
         homePO.clickOnKostCardPromoNgebutOtherThanBulanPertama();
-        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
+        
+        // Wait for new page/tab to open
+        playwright.hardWait(3000);
+        
+        // Check if new tab opened, if not stay on current page
+        var pages = ActiveContext.getActiveBrowserContext().pages();
+        if (pages.size() > 1) {
+            ActiveContext.setActivePage(pages.get(1));
+        }
     }
 }

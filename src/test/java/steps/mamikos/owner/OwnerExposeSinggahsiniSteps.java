@@ -7,13 +7,17 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.owner.kos.CreateKosPO;
 import pageobject.owner.kos.OwnerExposeSinggahsiniPO;
+import steps.mamikos.common.NavigatesSteps;
+import steps.mamikos.owner.chat.ChatOwnerSteps;
 
 import java.util.List;
 
 public class OwnerExposeSinggahsiniSteps {
     Page page = ActiveContext.getActivePage();
     OwnerExposeSinggahsiniPO exposeSinggahsiniPO = new OwnerExposeSinggahsiniPO(page);
+    CreateKosPO createKosPO = new CreateKosPO(page);
 
     @Then("Expose Singgahsini popup is displayed with:")
     public void exposeSinggahsiniPopupIsDisplayedWith(DataTable dataTable) {
@@ -82,5 +86,20 @@ public class OwnerExposeSinggahsiniSteps {
         // Otherwise, navigate back to property list
         boolean navigateAway = !location.equalsIgnoreCase("Kretek");
         locationSteps.editDraftPropertyLocation(location, navigateAway);
+    }
+
+    @Then("owner can't see button CTA expose singgahsini")
+    public void ownerCantSeeButtonCtaExposeSinggahsini() {
+        // Dismiss FTUE goldplus
+        ChatOwnerSteps chatOwnerSteps = new ChatOwnerSteps();
+        chatOwnerSteps.userDismissFTUEGoldplus();
+
+        // Navigate to property saya kos
+        NavigatesSteps navigatesSteps = new NavigatesSteps();
+        navigatesSteps.userNavigateToPropertySayaKos();
+
+        // Assert CTA button is not visible
+        Assert.assertFalse(createKosPO.isCtaButtonExposeSinggahsiniVisible(),
+                "CTA button Expose Singgahsini should not be visible");
     }
 }

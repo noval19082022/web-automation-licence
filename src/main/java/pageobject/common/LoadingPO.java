@@ -54,20 +54,16 @@ public class LoadingPO {
      * @param timeout timeout in milliseconds
      */
     public void waitTillSkeletonLoadingDisappears(Double timeout) {
-        try {
-            // Common skeleton loader selectors
-            Locator skeletonLoader = page.locator(".skeleton, [class*='skeleton'], [class*='shimmer'], [class*='loading-skeleton']");
+        // Common skeleton loader selectors
+        Locator skeletonLoader = page.locator(".skeleton, [class*='skeleton'], [class*='shimmer'], [class*='loading-skeleton']");
 
-            // If skeleton exists, wait for it to disappear
-            if (skeletonLoader.count() > 0) {
-                skeletonLoader.first().waitFor(new Locator.WaitForOptions()
-                        .setState(WaitForSelectorState.HIDDEN)
-                        .setTimeout(timeout));
-            }
-        } catch (Exception e) {
-            // Skeleton might not exist or already disappeared, continue execution
-            System.out.println("No skeleton loader found or already disappeared");
+        // Check if skeleton exists before waiting
+        if (skeletonLoader.count() > 0) {
+            skeletonLoader.first().waitFor(new Locator.WaitForOptions()
+                    .setState(WaitForSelectorState.HIDDEN)
+                    .setTimeout(timeout));
         }
+        // If skeleton doesn't exist, it's already loaded - continue execution
     }
 
     /**

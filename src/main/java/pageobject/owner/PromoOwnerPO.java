@@ -156,19 +156,15 @@ public class PromoOwnerPO {
             playwright.forceClickOn(theNextMonthButton);
         }
         var theDayAfterTomorrowDate = JavaHelpers.getCostumDateOrTime("d", 2, 0, 0);
-        try {
-            switch (periodePromo){
-                case "tomorrow":
-                    locatorElement = tomorrowDate;
-                    break;
-                case "the day after tomorrow":
-                    locatorElement = theDayAfterTomorrowDate;
-                    break;
-                default:
-                    locatorElement = periodePromo;
-            }
-        } catch (Exception e) {
-            throw new IllegalStateException("Unexpected value: " + periodePromo);
+        switch (periodePromo){
+            case "tomorrow":
+                locatorElement = tomorrowDate;
+                break;
+            case "the day after tomorrow":
+                locatorElement = theDayAfterTomorrowDate;
+                break;
+            default:
+                locatorElement = periodePromo;
         }
         Locator startDatePromo = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(locatorElement).setExact(true));
         playwright.clickOn(startDatePromo);
@@ -193,19 +189,15 @@ public class PromoOwnerPO {
         var theDayAfterTomorrowDate = JavaHelpers.getCostumDateOrTime("d", 2, 0, 0);
         var theNextMonthDate = page.locator("//i[@class='mdi mdi-chevron-right mdi-24px']/following::*//div[@class='dropdown-menu']");
 
-        try {
-            switch (periodePromo){
-                case "tomorrow":
-                    locatorElement = tomorrowDate;
-                    break;
-                case "the day after tomorrow":
-                    locatorElement = theDayAfterTomorrowDate;
-                    break;
-                default:
-                    locatorElement = periodePromo;
-            }
-        } catch (Exception e) {
-            throw new IllegalStateException("Unexpected value: " + periodePromo);
+        switch (periodePromo){
+            case "tomorrow":
+                locatorElement = tomorrowDate;
+                break;
+            case "the day after tomorrow":
+                locatorElement = theDayAfterTomorrowDate;
+                break;
+            default:
+                locatorElement = periodePromo;
         }
         Locator endDatePromo = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(locatorElement).setExact(true));
         playwright.clickOn(endDatePromo);
@@ -386,19 +378,15 @@ public class PromoOwnerPO {
             playwright.forceClickOn(nextBtnCalendarAdmin);
         }
         var theDayAfterTomorrowDate = JavaHelpers.getCostumDateOrTime("d", 2, 0, 0);
-        try {
-            switch (startDate){
-                case "tomorrow":
-                    locatorElement = tomorrowDate;
-                    break;
-                case "the day after tomorrow":
-                    locatorElement = theDayAfterTomorrowDate;
-                    break;
-                default:
-                    locatorElement = startDate;
-            }
-        } catch (Exception e) {
-            throw new IllegalStateException("Unexpected value: " + startDate);
+        switch (startDate){
+            case "tomorrow":
+                locatorElement = tomorrowDate;
+                break;
+            case "the day after tomorrow":
+                locatorElement = theDayAfterTomorrowDate;
+                break;
+            default:
+                locatorElement = startDate;
         }
         Locator startDatePromo = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(locatorElement).setExact(true));
         playwright.clickOn(startDatePromo);
@@ -420,19 +408,15 @@ public class PromoOwnerPO {
             playwright.forceClickOn(nextBtnCalendarAdmin);
         }
         var theDayAfterTomorrowDate = JavaHelpers.getCostumDateOrTime("d", 2, 0, 0);
-        try {
-            switch (endDate){
-                case "tomorrow":
-                    locatorElement = tomorrowDate;
-                    break;
-                case "the day after tomorrow":
-                    locatorElement = theDayAfterTomorrowDate;
-                    break;
-                default:
-                    locatorElement = endDate;
-            }
-        } catch (Exception e) {
-            throw new IllegalStateException("Unexpected value: " + endDate);
+        switch (endDate){
+            case "tomorrow":
+                locatorElement = tomorrowDate;
+                break;
+            case "the day after tomorrow":
+                locatorElement = theDayAfterTomorrowDate;
+                break;
+            default:
+                locatorElement = endDate;
         }
         Locator startDatePromo = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(locatorElement).setExact(true));
         playwright.clickOn(startDatePromo);

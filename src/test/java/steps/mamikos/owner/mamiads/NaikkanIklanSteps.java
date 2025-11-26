@@ -213,26 +213,24 @@ public class NaikkanIklanSteps {
         for (Map<String, String> content : table) {
             Assert.assertEquals(naikkanIklanPO.listAds("adsName", i), content.get("adsName"));
             Assert.assertEquals(naikkanIklanPO.listAds("posisiIklan", i), content.get("posisiIklan"));
-            try {
-                if (!content.get("currentToggle").equals("-")) {
-                    Assert.assertTrue(naikkanIklanPO.listAdsToggle(content.get("currentToggle"), j), content.get("currentToggle"));
-                }
-            } catch (java.lang.NullPointerException ignored1) {
+
+            String currentToggle = content.get("currentToggle");
+            if (currentToggle != null && !currentToggle.equals("-")) {
+                Assert.assertTrue(naikkanIklanPO.listAdsToggle(currentToggle, j), currentToggle);
             }
-            try {
-                if (!content.get("availRoom").equals("-")) {
-                    Assert.assertEquals(naikkanIklanPO.listAds("availRoom", j), content.get("availRoom"));
-                    j++;
-                }
-            } catch (java.lang.NullPointerException ignored1) {
+
+            String availRoom = content.get("availRoom");
+            if (availRoom != null && !availRoom.equals("-")) {
+                Assert.assertEquals(naikkanIklanPO.listAds("availRoom", j), availRoom);
+                j++;
             }
-            try {
-                if (!content.get("currentStatusDesc").equals("-")) {
-                    Assert.assertEquals(naikkanIklanPO.listAds("currentStatusDesc", k), content.get("currentStatusDesc"));
-                    k++;
-                }
-            } catch (java.lang.NullPointerException ignored1) {
+
+            String currentStatusDesc = content.get("currentStatusDesc");
+            if (currentStatusDesc != null && !currentStatusDesc.equals("-")) {
+                Assert.assertEquals(naikkanIklanPO.listAds("currentStatusDesc", k), currentStatusDesc);
+                k++;
             }
+
             i++;
         }
     }

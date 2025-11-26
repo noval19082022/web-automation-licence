@@ -44,4 +44,8 @@ public class CreateKosPO {
         Page activePage = ActiveContext.getActivePage();
         return activePage.url();
     }
+
+    public boolean isCtaButtonExposeSinggahsiniVisible() {
+        return playwright.waitTillLocatorIsVisible(ctaButtonExposeSinggahsini,10000.0);
+    }
 }
