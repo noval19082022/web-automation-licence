@@ -4,6 +4,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import config.playwright.context.ActiveContext;
+import pageobject.CommonPO;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
@@ -13,6 +14,7 @@ public class ManualPayoutPO {
     private Page page;
     private PlaywrightHelpers playwright;
     private LocatorHelpers locator;
+    private CommonPO commonPO;
     private Locator searchButton;
     private Locator invoiceType;
     private Locator invoiceStatus;
@@ -38,7 +40,7 @@ public class ManualPayoutPO {
     private Locator updatePayoutButton;
     private Locator transferButton;
     private Locator amountWarning;
-    private Locator reasonWaring;
+    private Locator reasonWarning;
     private Locator notAllowedWarning;
     private Locator minimalAmountWarning;
     private Locator readyToProcessedMessage;
@@ -51,6 +53,7 @@ public class ManualPayoutPO {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         this.locator = new LocatorHelpers(page);
+        this.commonPO = new CommonPO(page);
         searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Search"));
         invoiceType = page.locator("select[name=\"type\"]");
         invoiceStatus = page.locator("select[name=\"status\"]");
@@ -74,7 +77,7 @@ public class ManualPayoutPO {
         updatePayoutButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Update Payout"));
         transferButton = page.locator("//a[text()='Transfer']").first();
         amountWarning = page.getByText("Amount required.");
-        reasonWaring = page.getByText("Reason required.");
+        reasonWarning = page.getByText("Reason required.");
         notAllowedWarning = page.getByText("Not allowed to create transfer.");
         minimalAmountWarning = page.getByText("Amount minimal 10000.");
         readyToProcessedMessage = page.getByText("Payout ready to be processed.");
@@ -89,32 +92,11 @@ public class ManualPayoutPO {
      * @return true if error page is displayed
      */
     public boolean isErrorPageDisplayed() {
-        try {
-            // First check the page title for error codes
-            String pageTitle = page.title();
-            if (pageTitle != null) {
-                String lowerTitle = pageTitle.toLowerCase();
-                if (lowerTitle.contains("429") || lowerTitle.contains("502") || lowerTitle.contains("504") || 
-                    lowerTitle.contains("error") || lowerTitle.contains("bad gateway") || lowerTitle.contains("timeout")) {
-                    return true;
-                }
-            }
-            
-            // Check for error pages using a single efficient selector
-            boolean hasErrorPage = playwright.waitTillLocatorIsVisible(
-                page.locator("center h1:text-matches('(502|504|429|Bad Gateway|Gateway Timeout|Too Many Requests)'), body > h1:text-matches('(502|504|429)')"), 
-                1000.0
-            );
-            
-            return hasErrorPage;
-        } catch (Exception e) {
-            // If any error occurs while checking, assume no error page
-            return false;
-        }
+        return commonPO.isErrorPageDisplayed();
     }
 
     /**
-     * Click on serch button
+     * Click on search button
      */
     public void clickOnSearchButton() {
         searchButton.click();
@@ -169,7 +151,7 @@ public class ManualPayoutPO {
     /**
      * User verify data transaction that has been searched by create date
      */
-    public void vefirytTransactionbyCreateDate(String createFrom, String createTo) {
+    public void verifyTransactionByCreateDate(String createFrom, String createTo) {
         Page page = ActiveContext.getActivePage();
         createDateFrom = page.locator("//td[contains(text(), '" + createFrom + "')]");
         createDateFrom.isVisible();
@@ -199,7 +181,7 @@ public class ManualPayoutPO {
      * @return boolean type, visible true otherwise false
      */
     public boolean isReasonWarningVisible() {
-        return reasonWaring.isVisible();
+        return reasonWarning.isVisible();
     }
 
     /**
@@ -214,10 +196,10 @@ public class ManualPayoutPO {
     /**
      * Fill Account number
      *
-     * @param acount String data type
+     * @param account String data type
      */
-    public void fillAccountNumber(String acount) {
-        accountNumberField.fill(acount);
+    public void fillAccountNumber(String account) {
+        accountNumberField.fill(account);
     }
 
     /**
@@ -354,7 +336,6 @@ public class ManualPayoutPO {
      * @return boolean type, visible true otherwise false
      */
     public boolean isSuccessUpdateMessageVisible() {
-        playwright.waitTillLocatorIsVisible(successUpdateMessage);
         return playwright.waitTillLocatorIsVisible(successUpdateMessage);
     }
 
@@ -425,7 +406,7 @@ public class ManualPayoutPO {
 
     /**
      * sorting payout list
-     * @param sortDirection
+     * @param sortDirection String data type - direction to sort (newest/oldest)
      */
     public void sortPayoutList(String sortDirection) {
         String direction = Optional.ofNullable(sortDirection)

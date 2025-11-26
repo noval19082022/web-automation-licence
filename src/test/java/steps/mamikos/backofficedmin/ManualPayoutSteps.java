@@ -68,7 +68,7 @@ public class ManualPayoutSteps {
 
     @Then("admin verify transaction based on create date from {string} to {string}")
     public void adminVerifyTransactionBasedOnCreateDateFromTo(String createFrom, String createTo) throws InterruptedException {
-        manualPayout.vefirytTransactionbyCreateDate(createFrom, createTo);
+        manualPayout.verifyTransactionByCreateDate(createFrom, createTo);
     }
 
     @And("admin want to create payout without input the mandatory data")
