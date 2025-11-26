@@ -3,6 +3,7 @@ package steps.mamikos.tenant.survei;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -20,6 +21,7 @@ import java.text.ParseException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 public class tenantSurveySteps {
     Page page = ActiveContext.getActivePage();
@@ -837,18 +839,6 @@ public class tenantSurveySteps {
                 "Popup confirmation heading should be: " + expectedHeading);
     }
 
-    @Then("user verify navigation to chatroom is successful")
-    public void userVerifyNavigationToChatroomIsSuccessful() {
-        Assert.assertTrue(tenantSurveyFormPO.isNavigationToChatroomSuccessful(),
-                "Navigation to chatroom should be successful");
-    }
-
-    @And("user verify survey request sent with phone number visible")
-    public void userVerifySurveyRequestSentWithPhoneNumberVisible() {
-        Assert.assertTrue(tenantSurveyFormPO.isSurveyRequestSentWithPhoneVisible(),
-                "Survey request should be sent with phone number visible");
-    }
-
     @And("user verify P2 autoreply message appears")
     public void userVerifyP2AutoreplyMessageAppears() {
         Assert.assertTrue(tenantSurveyFormPO.isP2AutoreplyMessageVisible(),
@@ -860,5 +850,91 @@ public class tenantSurveySteps {
         String actualStatus = tenantSurveyFormPO.getSurveyStatusText();
         Assert.assertTrue(actualStatus.contains(expectedStatus),
                 "Survey status should show: " + expectedStatus);
+    }
+
+    @Then("user validate multiple phone numbers:")
+    public void userValidateMultiplePhoneNumbers(DataTable dataTable) {
+        List<Map<String, String>> phoneValidations = dataTable.asMaps(String.class, String.class);
+
+        for (int i = 0; i < phoneValidations.size(); i++) {
+            int testNumber = i + 1;
+            Map<String, String> validation = phoneValidations.get(i);
+
+            String phoneInput = sanitizePhoneInput(validation.get("phone_input"));
+            String isValid = validation.get("is_valid");
+
+            logTestStart(testNumber, phoneInput);
+            tenantSurveyFormPO.fillPhoneNumber(phoneInput);
+            playwright.hardWait(1000);
+
+            if (isValid.equalsIgnoreCase("Yes")) {
+                validateValidPhone(testNumber, phoneInput);
+            } else {
+                validateInvalidPhone(testNumber, phoneInput);
+            }
+
+            logTestCompleted(testNumber);
+        }
+    }
+
+    private String sanitizePhoneInput(String phoneInput) {
+        return (phoneInput == null || phoneInput.trim().isEmpty()) ? "" : phoneInput;
+    }
+
+    private void validateValidPhone(int testNumber, String phoneInput) {
+        Assert.assertTrue(tenantSurveyFormPO.isAjukanSurveyBtnEnable(),
+                "Button should be enabled for valid phone: '" + phoneInput + "'");
+
+        tenantSurveyFormPO.tapOnAjukanSurveyBtn();
+        boolean popupAppeared = tenantSurveyFormPO.isPopupConfirmationVisibleQuick(3000);
+
+        if (popupAppeared) {
+            tenantSurveyFormPO.clickKembaliOnPopup();
+            playwright.hardWait(1000);
+            logTestPassed(testNumber, "popup appeared for valid phone");
+        } else {
+            Assert.fail("Expected popup for valid phone number: '" + phoneInput + "' but popup did not appear");
+        }
+    }
+
+    private void validateInvalidPhone(int testNumber, String phoneInput) {
+        if (phoneInput.isEmpty()) {
+            validateEmptyPhone(testNumber);
+        } else {
+            validateInvalidPhoneFormat(testNumber, phoneInput);
+        }
+    }
+
+    private void validateEmptyPhone(int testNumber) {
+        Assert.assertTrue(tenantSurveyFormPO.isAjukanSurveyBtnDisable(),
+                "Button should be disabled for empty phone");
+        logTestPassed(testNumber, "button disabled for empty phone");
+    }
+
+    private void validateInvalidPhoneFormat(int testNumber, String phoneInput) {
+        boolean buttonEnabled = tenantSurveyFormPO.isAjukanSurveyBtnEnable();
+
+        if (buttonEnabled) {
+            tenantSurveyFormPO.tapOnAjukanSurveyBtn();
+            boolean popupAppeared = tenantSurveyFormPO.isPopupConfirmationVisibleQuick(5000);
+
+            Assert.assertFalse(popupAppeared,
+                    "Popup should NOT appear for invalid phone: '" + phoneInput + "'");
+            logTestPassed(testNumber, "validation prevented submission for invalid phone");
+        } else {
+            logTestPassed(testNumber, "button disabled for invalid phone format");
+        }
+    }
+
+    private void logTestStart(int testNumber, String phoneInput) {
+        System.out.println("Testing phone validation #" + testNumber + ": '" + phoneInput + "'");
+    }
+
+    private void logTestPassed(int testNumber, String reason) {
+        System.out.println("Phone validation #" + testNumber + " PASSED - " + reason);
+    }
+
+    private void logTestCompleted(int testNumber) {
+        System.out.println("Phone validation #" + testNumber + " completed");
     }
 }

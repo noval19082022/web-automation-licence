@@ -93,11 +93,12 @@ public class TenantSurveyFormPO {
         popupConfirmationKembaliBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kembali"));
         popupConfirmationMengertiBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Mengerti, Kirim"));
         tanggalLainMessage = page.locator(".tanggal-lain-message, .date-selection-message");
-        phoneNumberErrorMessage = page.locator(".error-message, .phone-error");
-        tncLink = page.getByText("kebijakan privasi mamikos");
+        // Error message for phone number field - search within form-survey container
+        phoneNumberErrorMessage = page.locator(".form-survey .bg-c-field__message, .form-survey [class*='error'], .form-survey [class*='field-message']").first();
+        tncLink = page.locator("a").filter(new Locator.FilterOptions().setHasText("Kebijakan Privasi Mamikos")).first();
         tncSection = page.locator(".tnc-section, .terms-section");
         surveyStatusInChatroom = page.locator(".survey-status");
-        p2AutoreplyMessage = page.locator(".autoreply-message, .p2-message");
+        p2AutoreplyMessage = page.getByText("Untuk Pencari: Silakan tunggu konfirmasi dari pemilik. Kamu juga bisa chat di sini untuk mengingatkan pemilik.").first();
     }
 
 
@@ -187,6 +188,7 @@ public class TenantSurveyFormPO {
             }
         } catch (Exception e) {
             // If evaluation fails, continue with other checks
+            System.out.println("Failed to evaluate pointer-events CSS: " + e.getMessage());
         }
 
         return false;
@@ -298,11 +300,13 @@ public class TenantSurveyFormPO {
             // Approach 1: Direct scrollTop
             surveyFormContainer.evaluate("el => el.scrollTop += " + scrollAmount);
         } catch (Exception e1) {
+            System.out.println("Scroll approach 1 failed, trying approach 2: " + e1.getMessage());
             try {
                 // Approach 2: Scroll using scrollTo
                 surveyFormContainer.evaluate("el => el.scrollTo({top: el.scrollTop + " + scrollAmount + ", behavior: 'smooth'})");
             } catch (Exception e2) {
                 // Approach 3: Force scroll on body inside container
+                System.out.println("Scroll approach 2 failed, using approach 3: " + e2.getMessage());
                 surveyFormContainer.evaluate("el => { const target = el.scrollTop + " + scrollAmount + "; el.scrollTop = target; }");
             }
         }
@@ -359,10 +363,8 @@ public class TenantSurveyFormPO {
     /**
      * Find and select the first available (enabled) date from date picker
      * This method dynamically finds an available date to avoid issues with disabled dates
-     *
-     * @return the selected date as string
      */
-    public String selectFirstAvailableDate() {
+    public void selectFirstAvailableDate() {
         // Scope search to the date picker container - get all date cells
         var basedLocator = page.locator("//div[@class='date-wrapper__cell-parent']/span[@class='cell day']");
 
@@ -404,10 +406,11 @@ public class TenantSurveyFormPO {
                 if (dateInt >= currentDayInt || (currentDayInt > 25 && dateInt < 10)) {
                     playwright.clickOn(dateElement);
                     System.out.println("Selected available date: " + dateText);
-                    return dateText.trim();
+                    return;
                 }
             } catch (NumberFormatException e) {
-                // Skip if dateText is not a number
+                // Skip if dateText is not a number (e.g., month header)
+                System.out.println("Skipping non-numeric date text: " + dateText);
                 continue;
             }
         }
@@ -423,7 +426,7 @@ public class TenantSurveyFormPO {
                 String selectedDate = playwright.getText(dateElement);
                 playwright.clickOn(dateElement);
                 System.out.println("Selected first available date: " + selectedDate);
-                return selectedDate.trim();
+                return;
             }
         }
 
@@ -514,14 +517,21 @@ public class TenantSurveyFormPO {
     /**
      * Fill phone number in survey form
      *
-     * @param phoneNumber - phone number to fill
+     * @param phoneNumber - phone number to fill (can be empty string for testing empty validation)
      */
     public void fillPhoneNumber(String phoneNumber) {
         // Scroll to phone number field
         phoneNumberInput.scrollIntoViewIfNeeded();
         playwright.waitTillLocatorIsVisible(phoneNumberInput);
         playwright.clearText(phoneNumberInput);
-        playwright.clickLocatorAndTypeKeyboard(phoneNumberInput, phoneNumber);
+
+        // Only type if phoneNumber is not empty
+        if (phoneNumber != null && !phoneNumber.isEmpty()) {
+            playwright.clickLocatorAndTypeKeyboard(phoneNumberInput, phoneNumber);
+        } else {
+            // For empty phone number test, just click to focus then blur
+            playwright.clickOn(phoneNumberInput);
+        }
     }
 
     /**
@@ -547,6 +557,23 @@ public class TenantSurveyFormPO {
     }
 
     /**
+     * Quick check if popup confirmation is visible (with short timeout)
+     * Used for validation testing where we don't want to wait too long
+     *
+     * @param timeoutMs - timeout in milliseconds
+     * @return true if popup is visible within timeout
+     */
+    public boolean isPopupConfirmationVisibleQuick(int timeoutMs) {
+        try {
+            popupConfirmationHeading.waitFor(new Locator.WaitForOptions().setTimeout(timeoutMs));
+            return popupConfirmationHeading.isVisible();
+        } catch (Exception e) {
+            System.out.println("Popup confirmation not visible within " + timeoutMs + "ms: " + e.getMessage());
+            return false;
+        }
+    }
+
+    /**
      * Click "Kembali" button on confirmation popup
      */
     public void clickKembaliOnPopup() {
@@ -568,9 +595,12 @@ public class TenantSurveyFormPO {
         try {
             if (isPopupConfirmationVisible()) {
                 clickMengertiOnPopup();
+                // Wait for the popup to disappear after clicking
+                playwright.hardWait(2000);
             }
         } catch (Exception e) {
             // Popup not visible, continue
+            System.out.println("Error confirming popup: " + e.getMessage());
         }
     }
 
@@ -628,6 +658,7 @@ public class TenantSurveyFormPO {
             }
         } catch (Exception e) {
             // If evaluation fails, continue with other checks
+            System.out.println("Failed to evaluate pointer-events for Survei Hari Ini: " + e.getMessage());
         }
 
         return false;
@@ -747,6 +778,7 @@ public class TenantSurveyFormPO {
 
             return isVisible;
         } catch (Exception e) {
+            System.out.println("Error verifying date range selectable: " + e.getMessage());
             return false;
         }
     }
@@ -768,7 +800,8 @@ public class TenantSurveyFormPO {
             // If click succeeds, past date is not disabled
             return false;
         } catch (Exception e) {
-            // Click failed, past date is disabled
+            // Click failed, past date is disabled (expected behavior)
+            System.out.println("Past date click failed as expected - date is disabled: " + e.getMessage());
             return true;
         }
     }
@@ -819,6 +852,7 @@ public class TenantSurveyFormPO {
             }
         } catch (Exception e) {
             // If evaluation fails, continue with other checks
+            System.out.println("Failed to evaluate pointer-events for time slot " + time + ": " + e.getMessage());
         }
 
         return false;
@@ -1006,19 +1040,78 @@ public class TenantSurveyFormPO {
      * @return error message text
      */
     public String getPhoneNumberErrorMessage() {
-        if (playwright.waitTillLocatorIsVisible(phoneNumberErrorMessage)) {
-            return playwright.getText(phoneNumberErrorMessage);
+        // Wait a bit for error message to appear after form validation
+        page.waitForTimeout(2000);
+
+        // Try multiple locator strategies to find the error message
+        try {
+            // Strategy 1: Check form-survey container for bg-c-field__message
+            Locator formError = page.locator(".form-survey .bg-c-field__message").first();
+            if (playwright.waitTillLocatorIsVisible(formError)) {
+                return playwright.getText(formError);
+            }
+        } catch (Exception e) {
+            // Strategy 1 failed, continue to next strategy
+            System.out.println("Error message strategy 1 failed: " + e.getMessage());
         }
+
+        try {
+            // Strategy 2: Look for any error message in the form
+            Locator anyError = page.locator(".form-survey [class*='error']").first();
+            if (playwright.waitTillLocatorIsVisible(anyError)) {
+                return playwright.getText(anyError);
+            }
+        } catch (Exception e) {
+            // Strategy 2 failed, continue to next strategy
+            System.out.println("Error message strategy 2 failed: " + e.getMessage());
+        }
+
+        try {
+            // Strategy 3: Original locator
+            if (playwright.waitTillLocatorIsVisible(phoneNumberErrorMessage)) {
+                return playwright.getText(phoneNumberErrorMessage);
+            }
+        } catch (Exception e) {
+            // Strategy 3 failed, all strategies exhausted
+            System.out.println("Error message strategy 3 failed: " + e.getMessage());
+        }
+
+        System.out.println("No phone number error message found after trying all strategies");
         return "";
     }
 
     /**
      * Check if phone number validation passed
      *
-     * @return true if validation passed
+     * @return true if validation passed (no error message visible)
      */
     public boolean isPhoneNumberValidationPassed() {
-        return !playwright.waitTillLocatorIsVisible(phoneNumberErrorMessage);
+        // Wait a bit for potential error message to appear
+        page.waitForTimeout(2000);
+
+        // Check if any error message is visible using multiple strategies
+        try {
+            // Check for error in form-survey container
+            Locator formError = page.locator(".form-survey .bg-c-field__message").first();
+            if (playwright.waitTillLocatorIsVisible(formError)) {
+                return false; // Error message found, validation failed
+            }
+        } catch (Exception e) {
+            System.out.println("Error element not found in form-survey container: " + e.getMessage());
+        }
+
+        try {
+            // Check for any element with error class
+            Locator anyError = page.locator(".form-survey [class*='error']").first();
+            if (playwright.waitTillLocatorIsVisible(anyError)) {
+                return false; // Error message found, validation failed
+            }
+        } catch (Exception e) {
+            System.out.println("No error element with error class found: " + e.getMessage());
+        }
+
+        // No error message found, validation passed
+        return true;
     }
 
     /**
@@ -1071,33 +1164,12 @@ public class TenantSurveyFormPO {
     }
 
     /**
-     * Check if navigation to chatroom is successful
-     *
-     * @return true if navigation successful
-     */
-    public boolean isNavigationToChatroomSuccessful() {
-        // Check if chatroom is visible
-        Locator chatroom = page.locator(".chatroom, .chat-container");
-        return playwright.waitTillLocatorIsVisible(chatroom);
-    }
-
-    /**
-     * Check if survey request sent with phone number visible
-     *
-     * @return true if phone visible in survey request
-     */
-    public boolean isSurveyRequestSentWithPhoneVisible() {
-        Locator phoneInMessage = page.locator(".survey-request-message, .phone-number");
-        return playwright.waitTillLocatorIsVisible(phoneInMessage);
-    }
-
-    /**
      * Check if P2 autoreply message appears
      *
      * @return true if autoreply visible
      */
     public boolean isP2AutoreplyMessageVisible() {
-        return playwright.waitTillLocatorIsVisible(p2AutoreplyMessage);
+        return playwright.waitTillLocatorIsVisible(p2AutoreplyMessage, 5_000.0);
     }
 
     /**

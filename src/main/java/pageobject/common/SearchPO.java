@@ -636,18 +636,18 @@ public class SearchPO {
         // Click on searchKost to open the search modal (following existing pattern)
         playwright.clickOn(searchKost);
         playwright.hardWait(1000); // Wait for modal/search input to appear
-        
+
         // Fill the search input using playwright helper
         playwright.fill(inputSearch, searchText);
         playwright.pressKeyboardKey("Enter");
-        
+
         // Wait for suggestions and click the area suggestion
         playwright.hardWait(2000); // Wait for suggestions to load
-        
+
         // Try to find and click the suggestion
         // First try: exact text match in suggestion area list
         Locator resultLocator = page.locator("//*[@data-testid='suggestionsBox-areaList']//label[contains(text(), '" + searchText + "')]");
-        
+
         if (resultLocator.count() > 0) {
             playwright.clickOn(resultLocator.first());
         } else {
@@ -881,14 +881,20 @@ public class SearchPO {
      * This clicks on "Masukan nama lokasi/area/alamat" text which opens the search modal
      */
     public void clickOnSearchKos() {
-        // Click on the search textbox area with placeholder text
-        Locator searchTextbox = page.getByText("Masukan nama lokasi/area/alamat");
-        if (searchTextbox.isVisible()) {
-            playwright.clickOn(searchTextbox);
-        } else {
-            // Alternative locators for the search area
-            Locator altSearchArea = page.locator(".search-input, [placeholder*='lokasi'], [placeholder*='area']");
-            playwright.clickOn(altSearchArea.first());
+        try {
+            // Click on the search textbox area with placeholder text
+            Locator searchTextbox = page.getByText("Masukan nama lokasi/area/alamat");
+            if (searchTextbox.isVisible()) {
+                playwright.clickOn(searchTextbox);
+            } else {
+                // Alternative locators for the search area
+                Locator altSearchArea = page.locator(".search-input, [placeholder*='lokasi'], [placeholder*='area']");
+                playwright.clickOn(altSearchArea.first());
+            }
+        } catch (Exception e) {
+            // Fallback to any search-related element
+            System.out.println("Primary search locators failed, using fallback: " + e.getMessage());
+            page.locator("*:has-text('Masukan nama lokasi'), *:has-text('Cari'), .search").first().click();
         }
         playwright.hardWait(1000);
     }
@@ -899,14 +905,21 @@ public class SearchPO {
      * @param area the area to search for
      */
     public void inputArea(String area) {
-        // Target the specific search box in the modal with correct placeholder
-        Locator searchBox = page.getByRole(AriaRole.SEARCHBOX, new Page.GetByRoleOptions().setName("Cari nama tempat atau alamat"));
-        if (searchBox.isVisible()) {
-            playwright.fill(searchBox, area);
-        } else {
-            // Alternative locators for the search input
-            Locator altSearchBox = page.locator("input[placeholder*='Cari nama tempat'], input[placeholder*='alamat']");
-            playwright.fill(altSearchBox.first(), area);
+        try {
+            // Target the specific search box in the modal with correct placeholder
+            Locator searchBox = page.getByRole(AriaRole.SEARCHBOX, new Page.GetByRoleOptions().setName("Cari nama tempat atau alamat"));
+            if (searchBox.isVisible()) {
+                playwright.fill(searchBox, area);
+            } else {
+                // Alternative locators for the search input
+                Locator altSearchBox = page.locator("input[placeholder*='Cari nama tempat'], input[placeholder*='alamat']");
+                playwright.fill(altSearchBox.first(), area);
+            }
+        } catch (Exception e) {
+            // Last resort - find any visible search input
+            System.out.println("Primary search input locators failed, using last resort: " + e.getMessage());
+            Locator anyInput = page.locator("searchbox, input[type='text']:visible").first();
+            playwright.fill(anyInput, area);
         }
         playwright.hardWait(2000); // Wait for suggestions to appear
     }
