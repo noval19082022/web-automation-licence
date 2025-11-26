@@ -68,7 +68,7 @@ public class ManualPayoutSteps {
 
     @Then("admin verify transaction based on create date from {string} to {string}")
     public void adminVerifyTransactionBasedOnCreateDateFromTo(String createFrom, String createTo) throws InterruptedException {
-        manualPayout.vefirytTransactionbyCreateDate(createFrom, createTo);
+        manualPayout.verifyTransactionByCreateDate(createFrom, createTo);
     }
 
     @And("admin want to create payout without input the mandatory data")
@@ -106,8 +106,10 @@ public class ManualPayoutSteps {
     @And("admin want to create payout with amount less than 10000")
     public void adminWantToCreatePayoutWithAmountLessThan10000() {
         playwright.navigateTo(Mamikos.ADMINMAMIPAY + "/backoffice/manual-payout");
-        if (playwright.isTextDisplayed("429") || playwright.isTextDisplayed("502") || playwright.isTextDisplayed("504")) {
+        playwright.hardWait(3000.0); // Wait for page to fully load
+        if (manualPayout.isErrorPageDisplayed()) {
             playwright.reloadPage();
+            playwright.hardWait(2000.0); // Wait after reload
         }
         manualPayout.clickOnCreatePayoutButton();
         manualPayout.selectPayoutType("Disbursement");
@@ -128,8 +130,10 @@ public class ManualPayoutSteps {
     @And("admin want to create payout with type {string}")
     public void adminWantToCreatePayoutWithType(String type) {
         playwright.navigateTo(Mamikos.ADMINMAMIPAY + "/backoffice/manual-payout");
-        if (playwright.isTextDisplayed("429") || playwright.isTextDisplayed("502") || playwright.isTextDisplayed("504")) {
+        playwright.hardWait(3000.0); // Wait for page to fully load
+        if (manualPayout.isErrorPageDisplayed()) {
             playwright.reloadPage();
+            playwright.hardWait(2000.0); // Wait after reload
         }
         manualPayout.clickOnCreatePayoutButton();
         manualPayout.selectPayoutType(type);
@@ -150,8 +154,10 @@ public class ManualPayoutSteps {
     @And("admin cancel payout transaction")
     public void adminCancelPayoutTransaction() {
         manualPayout.clickCancelButtonOnMainPage();
-        if (playwright.isTextDisplayed("429") || playwright.isTextDisplayed("502") || playwright.isTextDisplayed("504")) {
+        playwright.hardWait(2000.0); // Wait for cancellation to process
+        if (manualPayout.isErrorPageDisplayed()) {
             playwright.reloadPage();
+            playwright.hardWait(2000.0); // Wait after reload
         }
     }
 
@@ -163,8 +169,10 @@ public class ManualPayoutSteps {
     @And("admin want to change payout type into {string}")
     public void adminWantToChangePayoutTypeInto(String type) {
         playwright.navigateTo(Mamikos.ADMINMAMIPAY + "/backoffice/manual-payout");
-        if (playwright.isTextDisplayed("429") || playwright.isTextDisplayed("502") || playwright.isTextDisplayed("504")) {
+        playwright.hardWait(3000.0); // Wait for page to fully load
+        if (manualPayout.isErrorPageDisplayed()) {
             playwright.reloadPage();
+            playwright.hardWait(2000.0); // Wait after reload
         }
         manualPayout.clickOnChangeTypeButton();
         manualPayout.changePayoutType(type);
