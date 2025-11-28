@@ -17,6 +17,13 @@ public class WhitelistFeaturePO {
     Locator editBtn;
     Locator saveBtn;
     Locator logoutBtn;
+    Locator alternativeSubmitBtn;
+    Locator inputSubmitBtn;
+    Locator anySubmitBtn;
+    Locator profileDropdownBtn;
+    Locator alternativeLogoutBtn;
+    Locator navLogoutBtn;
+    Locator anyLogoutBtn;
 
     public WhitelistFeaturePO(Page page) {
         this.page = page;
@@ -30,6 +37,13 @@ public class WhitelistFeaturePO {
         editBtn = page.locator("//a[normalize-space()='Edit']");
         saveBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Submit"));
         logoutBtn = page.locator("//a[contains(text(), 'Logout')]");
+        alternativeSubmitBtn = page.locator("//button[contains(text(), 'Submit')]");
+        inputSubmitBtn = page.locator("input[type='submit'][value='Submit']");
+        anySubmitBtn = page.locator("input[type='submit'], button[type='submit']");
+        profileDropdownBtn = page.locator(".dropdown-toggle");
+        alternativeLogoutBtn = page.locator("//a[text()='Logout']");
+        navLogoutBtn = page.locator("nav a[href*='logout'], header a[href*='logout']");
+        anyLogoutBtn = page.locator("a[href*='logout']");
     }
 
     /**
@@ -147,17 +161,14 @@ public class WhitelistFeaturePO {
             playwright.clickOn(saveBtn);
         } else {
             // Alternative locators for submit button
-            Locator alternativeSubmitBtn = page.locator("//button[contains(text(), 'Submit')]");
             if (playwright.waitTillLocatorIsVisible(alternativeSubmitBtn, 3000.0)) {
                 playwright.clickOn(alternativeSubmitBtn);
             } else {
                 // Try input submit button with Submit value
-                Locator inputSubmitBtn = page.locator("input[type='submit'][value='Submit']");
                 if (playwright.waitTillLocatorIsVisible(inputSubmitBtn, 3000.0)) {
                     playwright.clickOn(inputSubmitBtn);
                 } else {
                     // Last resort - any submit button
-                    Locator anySubmitBtn = page.locator("input[type='submit'], button[type='submit']");
                     playwright.waitFor(anySubmitBtn.first(), 5000.0);
                     playwright.clickOn(anySubmitBtn.first());
                 }
@@ -170,7 +181,6 @@ public class WhitelistFeaturePO {
      */
     public void clickOnLogoutButton() {
         // Strategy 1: Dropdown-toggle approach (most reliable for Bangkrupux admin)
-        Locator profileDropdownBtn = page.locator(".dropdown-toggle");
         if (playwright.waitTillLocatorIsVisible(profileDropdownBtn, 3000.0)) {
             playwright.clickOn(profileDropdownBtn);
             playwright.hardWait(1000.0); // Wait for dropdown to appear
@@ -181,17 +191,14 @@ public class WhitelistFeaturePO {
                 playwright.clickOn(logoutBtn);
             } else {
                 // Strategy 3: Alternative logout link with exact text
-                Locator alternativeLogoutBtn = page.locator("//a[text()='Logout']");
                 if (playwright.waitTillLocatorIsVisible(alternativeLogoutBtn, 3000.0)) {
                     playwright.clickOn(alternativeLogoutBtn);
                 } else {
                     // Strategy 4: Navigation or header area logout
-                    Locator navLogoutBtn = page.locator("nav a[href*='logout'], header a[href*='logout']");
                     if (playwright.waitTillLocatorIsVisible(navLogoutBtn.first(), 3000.0)) {
                         playwright.clickOn(navLogoutBtn.first());
                     } else {
                         // Strategy 5: Last resort - any link containing logout
-                        Locator anyLogoutBtn = page.locator("a[href*='logout']");
                         playwright.waitFor(anyLogoutBtn.first(), 5000.0);
                         playwright.clickOn(anyLogoutBtn.first());
                     }

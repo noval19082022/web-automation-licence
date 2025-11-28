@@ -31,6 +31,8 @@ public class NaikkanIklanPO {
     Locator actionButtonLocator;
     Locator currentStatusSaldo;
     Locator activeButton;
+    Locator nonaktifkanButton;
+    Locator aktifkanButton;
 
 
     public NaikkanIklanPO(Page page) {
@@ -50,6 +52,8 @@ public class NaikkanIklanPO {
         toggleLocatorOn = page.locator("//*[@id='room-toggle-switch-on']");
         toggleLocatorOff = page.locator("//*[@id='room-toggle-switch-off']").first();
         activeButton = page.locator("//button[normalize-space()='Aktifkan']");
+        nonaktifkanButton = page.locator("//button[normalize-space()='Ya, Nonaktifkan']");
+        aktifkanButton = page.locator("//button[normalize-space()='Aktifkan']");
     }
 
 
@@ -319,11 +323,7 @@ public class NaikkanIklanPO {
      */
     public void clickActionButtonInPopUp(String actionButton) {
         playwright.hardWait(3000.0);
-        
-        // Check which popup is displayed and click the appropriate button
-        Locator nonaktifkanButton = page.locator("//button[normalize-space()='Ya, Nonaktifkan']");
-        Locator aktifkanButton = page.locator("//button[normalize-space()='Aktifkan']");
-        
+
         // Determine which button to click based on visibility
         if (nonaktifkanButton.isVisible()) {
             // Popup for deactivating (turning OFF) is shown

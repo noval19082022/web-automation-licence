@@ -57,6 +57,8 @@ public class BroadcastChatPO {
     private Locator ftueBroadcast;
     private Locator closeBtn;
     private Locator ubahHyperlink;
+    private Locator interceptModal;
+    private Locator interceptCloseButton;
 
     public BroadcastChatPO(Page page) {
         this.page = page;
@@ -110,6 +112,8 @@ public class BroadcastChatPO {
         broadcastPhoneNumberInput = page.getByPlaceholder("Phone Number").nth(1);
         broadcastResetButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset")).nth(1);
         createBroadcastChatButton = page.locator("//button[normalize-space()='Buat Broadcast Chat']");
+        interceptModal = page.locator(".intercept-first-timer-broadcast-chat");
+        interceptCloseButton = page.locator(".bg-c-modal__action-closable");
     }
 
     /**
@@ -386,8 +390,6 @@ public class BroadcastChatPO {
      */
     private void dismissInterceptModalIfExists() {
         // Check for intercept modal for first-time broadcast chat users
-        Locator interceptModal = page.locator(".intercept-first-timer-broadcast-chat");
-
         if (playwright.waitTillLocatorIsVisible(interceptModal, 2000.0)) {
             // Try pressing Escape key first
             page.keyboard().press("Escape");
@@ -395,9 +397,8 @@ public class BroadcastChatPO {
 
             // If modal still exists, try clicking close button
             if (interceptModal.isVisible()) {
-                Locator closeButton = page.locator(".bg-c-modal__action-closable");
-                if (playwright.waitTillLocatorIsVisible(closeButton, 1000.0)) {
-                    playwright.clickOn(closeButton);
+                if (playwright.waitTillLocatorIsVisible(interceptCloseButton, 1000.0)) {
+                    playwright.clickOn(interceptCloseButton);
                     playwright.hardWait(500.0);
                 }
             }

@@ -48,6 +48,15 @@ public class BookingFormPO {
     Locator instansiDropdown;
     Locator simpanProfileButton;
     Locator pekerjaanBelumTerisiText;
+    Locator instansiDropdownButton;
+    Locator instansiSearchInput;
+    Locator inputCatatanTambahanField;
+    Locator summaryBookingFormText;
+    Locator viewPengajuanStatusLink;
+    Locator deskriptionDiriText;
+    Locator simpanBtn;
+    Locator tambahBarangButton;
+    Locator ubahFasilitasButton;
 
     public BookingFormPO(Page page) {
         this.page = page;
@@ -89,6 +98,15 @@ public class BookingFormPO {
         this.instansiDropdown = page.getByTestId("inputProfession-workplaceOption");
         this.simpanProfileButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan").setExact(true));
         this.pekerjaanBelumTerisiText = page.getByText("Pekerjaan belum terisi");
+        this.instansiDropdownButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("Contoh: Institut Teknologi Bandung"));
+        this.instansiSearchInput = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Search"));
+        this.inputCatatanTambahanField = page.locator("//*[@id='bookingFormTenantNote-textArea']");
+        this.summaryBookingFormText = page.getByTestId("booking-request-form__summary").getByText("Total pembayaran pertama belum termasuk biaya yang mungkin pemilik akan terapkan");
+        this.viewPengajuanStatusLink = page.locator("//span[contains(text(), 'Lihat status pengajuan')]");
+        this.deskriptionDiriText = page.locator("//*[@class=\"booking-item --tenant-description\"]/div").last();
+        this.simpanBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
+        this.tambahBarangButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("add-plus Pilih tambahan barang/fasilitas"));
+        this.ubahFasilitasButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("edit Ubah tambahan barang/fasilitas"));
     }
 
     /**
@@ -347,14 +365,10 @@ public class BookingFormPO {
      */
     public void selectInstansi(String instansi) {
         // Click the dropdown button to open university list
-        // The button contains example text like "Contoh: Institut Teknologi Bandung"
-        Locator dropdownButton = page.getByRole(AriaRole.BUTTON)
-                .filter(new Locator.FilterOptions().setHasText("Contoh: Institut Teknologi Bandung"));
-        playwright.clickOn(dropdownButton);
+        playwright.clickOn(instansiDropdownButton);
 
         // Fill the search input to filter universities
-        Locator searchInput = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Search"));
-        playwright.fill(searchInput, instansi);
+        playwright.fill(instansiSearchInput, instansi);
 
         // Wait a moment for the filtered results to appear
         playwright.hardWait(500);
@@ -369,7 +383,6 @@ public class BookingFormPO {
      * Click Simpan button after editing profile in booking form
      */
     public void clickSimpanProfileButton() {
-        Locator simpanBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
         playwright.clickOn(simpanBtn);
     }
 
@@ -445,9 +458,8 @@ public class BookingFormPO {
      */
     public void inputCatatanTambahan(String text){
        playwright.pageScrollUsingCoordinate(10000, 1500);
-        Locator inputCatatanTambahan = page.locator("//*[@id='bookingFormTenantNote-textArea']");
-        playwright.clearText(inputCatatanTambahan);
-        playwright.fill(inputCatatanTambahan, text);
+        playwright.clearText(inputCatatanTambahanField);
+        playwright.fill(inputCatatanTambahanField, text);
     }
 
     /**
@@ -455,9 +467,8 @@ public class BookingFormPO {
      * @return Text
      */
     public Boolean getSummaryBookingForm(){
-        Locator summaryBookingForm = page.getByTestId("booking-request-form__summary").getByText("Total pembayaran pertama belum termasuk biaya yang mungkin pemilik akan terapkan");
-        playwright.pageScrollInView(summaryBookingForm);
-        return summaryBookingForm.isVisible();
+        playwright.pageScrollInView(summaryBookingFormText);
+        return summaryBookingFormText.isVisible();
     }
 
     /**
@@ -465,7 +476,6 @@ public class BookingFormPO {
      */
     public void clickTambahBarangButton(){
         playwright.hardWait(100);
-        Locator tambahBarangButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("add-plus Pilih tambahan barang/fasilitas"));
         if (tambahBarangButton.isVisible()){
             playwright.clickOn(tambahBarangButton);
         }
@@ -479,7 +489,6 @@ public class BookingFormPO {
      * click on ubah fasilitas button
      */
     public void clickUbahFasilitas(){
-        Locator ubahFasilitasButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("edit Ubah tambahan barang/fasilitas"));
         playwright.clickOn(ubahFasilitasButton);
     }
 
@@ -497,13 +506,12 @@ public class BookingFormPO {
      * Click on Lihat pengajuan sewa and chat button on first booking
      */
     public void clickChatPemilikButton(){
-        Locator viewPengajuanStatus = page.locator("//span[contains(text(), 'Lihat status pengajuan')]");
-        if (viewPengajuanStatus.isVisible()){
-            playwright.clickOn(viewPengajuanStatus);
+        if (viewPengajuanStatusLink.isVisible()){
+            playwright.clickOn(viewPengajuanStatusLink);
         }
         else {
-            playwright.pageScrollInView(viewPengajuanStatus);
-            playwright.clickOn(viewPengajuanStatus);
+            playwright.pageScrollInView(viewPengajuanStatusLink);
+            playwright.clickOn(viewPengajuanStatusLink);
         }
         playwright.clickOn(chatPemilikButton);
     }
@@ -513,8 +521,7 @@ public class BookingFormPO {
      * @return text
      */
     public String getDeskriptionDiri(){
-        Locator getDeskriptionText = page.locator("//*[@class=\"booking-item --tenant-description\"]/div").last();
-       return playwright.getText(getDeskriptionText);
+       return playwright.getText(deskriptionDiriText);
     }
 
     /**

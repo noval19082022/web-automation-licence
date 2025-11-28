@@ -54,6 +54,11 @@ public class TenantSurveyFormPO {
     Locator tncSection;
     Locator surveyStatusInChatroom;
     Locator p2AutoreplyMessage;
+    Locator basedLocatorDateCell;
+    Locator timeButtonLocator;
+    Locator chatroomContainer;
+    Locator suggestionMessage;
+    Locator phoneInMessage;
 
     public TenantSurveyFormPO(Page page) {
         this.page = page;
@@ -98,6 +103,10 @@ public class TenantSurveyFormPO {
         tncSection = page.locator(".tnc-section, .terms-section");
         surveyStatusInChatroom = page.locator(".survey-status");
         p2AutoreplyMessage = page.locator(".autoreply-message, .p2-message");
+        basedLocatorDateCell = page.locator("//div[@class='date-wrapper__cell-parent']/span[@class='cell day']");
+        chatroomContainer = page.locator(".chatroom, .chat-container");
+        suggestionMessage = page.locator(".suggestion-message, .tanggal-lain-suggestion");
+        phoneInMessage = page.locator(".survey-request-message, .phone-number");
     }
 
 
@@ -233,13 +242,11 @@ public class TenantSurveyFormPO {
         int randomNum = ThreadLocalRandom.current().nextInt(10, 14); // 16 is exclusive
         String randomStr = String.valueOf(randomNum);
 
-        var basedLocator = page.locator("//div[@class='date-wrapper__cell-parent']/span[@class='cell day']");
-
-        var date = basedLocator.getByText(randomStr).first();
+        var date = basedLocatorDateCell.getByText(randomStr).first();
 
         if (!playwright.waitTillLocatorIsVisible(date)) {
             randomStr = String.valueOf(randomNum + 1);
-            date = basedLocator.getByText(randomStr).first();
+            date = basedLocatorDateCell.getByText(randomStr).first();
         }
         playwright.clickOn(date);
     }
@@ -348,10 +355,8 @@ public class TenantSurveyFormPO {
      * @param date - day number as string (e.g., "7", "15")
      */
     public void selectDateFromPicker(String date) {
-        // Scope search to the date picker container
-        var basedLocator = page.locator("//div[@class='date-wrapper__cell-parent']/span[@class='cell day']");
-
-        var dateLocator = basedLocator.getByText(date, new Locator.GetByTextOptions().setExact(true)).first();
+        // Use class-level locator for date cells
+        var dateLocator = basedLocatorDateCell.getByText(date, new Locator.GetByTextOptions().setExact(true)).first();
         playwright.waitTillLocatorIsVisible(dateLocator);
         playwright.clickOn(dateLocator);
     }
@@ -363,11 +368,9 @@ public class TenantSurveyFormPO {
      * @return the selected date as string
      */
     public String selectFirstAvailableDate() {
-        // Scope search to the date picker container - get all date cells
-        var basedLocator = page.locator("//div[@class='date-wrapper__cell-parent']/span[@class='cell day']");
-
+        // Use class-level locator for date cells
         // Get all date elements
-        int count = basedLocator.count();
+        int count = basedLocatorDateCell.count();
 
         if (count == 0) {
             throw new RuntimeException("No date elements found in the date picker");
@@ -378,7 +381,7 @@ public class TenantSurveyFormPO {
         int currentDayInt = Integer.parseInt(currentDay);
 
         for (int i = 0; i < count; i++) {
-            Locator dateElement = basedLocator.nth(i);
+            Locator dateElement = basedLocatorDateCell.nth(i);
 
             // Check if element is disabled by checking class attribute
             String classAttr = dateElement.getAttribute("class");
@@ -414,7 +417,7 @@ public class TenantSurveyFormPO {
 
         // If no future date found based on date number, just select the first enabled date
         for (int i = 0; i < count; i++) {
-            Locator dateElement = basedLocator.nth(i);
+            Locator dateElement = basedLocatorDateCell.nth(i);
 
             String classAttr = dateElement.getAttribute("class");
             boolean isDisabled = classAttr != null && classAttr.contains("disabled");
@@ -676,16 +679,14 @@ public class TenantSurveyFormPO {
      * @return true if only today is enabled
      */
     public boolean isOnlyTodayEnabledInCalendar() {
-        // Scope search to the date picker container
-        var basedLocator = page.locator("//div[@class='date-wrapper__cell-parent']/span[@class='cell day']");
-
+        // Use class-level locator for date cells
         // Check if dates before today are disabled
         String yesterday = JavaHelpers.getCostumDateOrTime("d", -1, 0, 0);
-        var yesterdayLocator = basedLocator.getByText(yesterday, new Locator.GetByTextOptions().setExact(true)).first();
+        var yesterdayLocator = basedLocatorDateCell.getByText(yesterday, new Locator.GetByTextOptions().setExact(true)).first();
 
         // Check if dates after today are disabled
         String tomorrow = JavaHelpers.getCostumDateOrTime("d", 1, 0, 0);
-        var tomorrowLocator = basedLocator.getByText(tomorrow, new Locator.GetByTextOptions().setExact(true)).first();
+        var tomorrowLocator = basedLocatorDateCell.getByText(tomorrow, new Locator.GetByTextOptions().setExact(true)).first();
 
         boolean yesterdayDisabled = !playwright.waitTillLocatorIsVisible(yesterdayLocator);
         boolean tomorrowDisabled = !playwright.waitTillLocatorIsVisible(tomorrowLocator);
@@ -731,11 +732,9 @@ public class TenantSurveyFormPO {
                 playwright.hardWait(1000); // Wait for calendar to update
             }
 
-            // Scope search to the date picker container
-            var basedLocator = page.locator("//div[@class='date-wrapper__cell-parent']/span[@class='cell day']");
-
+            // Use class-level locator for date cells
             String futureDate = JavaHelpers.getCostumDateOrTime("d", daysFromToday, 0, 0);
-            var futureDateLocator = basedLocator.getByText(futureDate, new Locator.GetByTextOptions().setExact(true)).first();
+            var futureDateLocator = basedLocatorDateCell.getByText(futureDate, new Locator.GetByTextOptions().setExact(true)).first();
 
             // Check if the date is visible
             boolean isVisible = playwright.waitTillLocatorIsVisible(futureDateLocator);
@@ -757,11 +756,9 @@ public class TenantSurveyFormPO {
      * @return true if past dates are disabled
      */
     public boolean arePastDatesDisabled() {
-        // Scope search to the date picker container
-        var basedLocator = page.locator("//div[@class='date-wrapper__cell-parent']/span[@class='cell day']");
-
+        // Use class-level locator for date cells
         String yesterday = JavaHelpers.getCostumDateOrTime("d", -1, 0, 0);
-        var yesterdayLocator = basedLocator.getByText(yesterday, new Locator.GetByTextOptions().setExact(true)).first();
+        var yesterdayLocator = basedLocatorDateCell.getByText(yesterday, new Locator.GetByTextOptions().setExact(true)).first();
 
         try {
             playwright.clickOn(yesterdayLocator);
@@ -910,7 +907,6 @@ public class TenantSurveyFormPO {
      * @return true if suggestion is visible
      */
     public boolean isSuggestionToSelectTanggalLainVisible() {
-        Locator suggestionMessage = page.locator(".suggestion-message, .tanggal-lain-suggestion");
         return playwright.waitTillLocatorIsVisible(suggestionMessage);
     }
 
@@ -1076,9 +1072,8 @@ public class TenantSurveyFormPO {
      * @return true if navigation successful
      */
     public boolean isNavigationToChatroomSuccessful() {
-        // Check if chatroom is visible
-        Locator chatroom = page.locator(".chatroom, .chat-container");
-        return playwright.waitTillLocatorIsVisible(chatroom);
+        // Check if chatroom is visible using class variable
+        return playwright.waitTillLocatorIsVisible(chatroomContainer);
     }
 
     /**
@@ -1087,7 +1082,6 @@ public class TenantSurveyFormPO {
      * @return true if phone visible in survey request
      */
     public boolean isSurveyRequestSentWithPhoneVisible() {
-        Locator phoneInMessage = page.locator(".survey-request-message, .phone-number");
         return playwright.waitTillLocatorIsVisible(phoneInMessage);
     }
 

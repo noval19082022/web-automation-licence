@@ -48,6 +48,7 @@ public class DisbursementPO {
     private Locator totalTransferTitle;
     private Locator filterTransferPeriodValue;
     private Locator filterTransferValue;
+    private Locator row;
 
     //---Detail Transfer Pendapatan Page---//
     Locator tambahkanTransaksiBtn;
@@ -118,6 +119,7 @@ public class DisbursementPO {
         filterTransferType = page.locator(".bg-c-select__trigger-text").first();
         filterTransferPeriod = page.locator(".bg-c-select__trigger-text").last();
         totalTransferTitle = page.locator("p.bg-u-text-neutral-500");
+        row = page.locator("(//*[@class='detail-transfer-page-table-list__table'])[4]//tr");
 
         //---Detail Transfer Pendapatan Page---//
         tambahkanTransaksiBtn = page.locator("//button[contains(., 'Tambahkan Transaksi')]");
@@ -365,7 +367,6 @@ public class DisbursementPO {
      * @return String
      */
     public String getTambahanPendapatanTotalPendapatan() {
-        Locator row = page.locator("(//*[@class='detail-transfer-page-table-list__table'])[4]//tr");
         int totalRow = row.count();
         tambahanPendapatanTable = page.locator("((//*[@class='detail-transfer-page-table-list__table'])[4]//tr)["+totalRow+"]/td");
         return playwright.getText(tambahanPendapatanTable.nth(2));

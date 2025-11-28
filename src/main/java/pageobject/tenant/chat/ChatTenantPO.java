@@ -43,6 +43,9 @@ public class ChatTenantPO {
     Locator inputTextbox;
     Locator modalChat;
     Locator wrapperQuestion;
+    Locator alternativeQuestionSelector;
+    Locator questionLabelWithFilter;
+    Locator modalChatForm;
 
     public ChatTenantPO(Page page) {
         this.page = page;
@@ -75,6 +78,9 @@ public class ChatTenantPO {
         inputTextbox = page.locator("//textarea[@placeholder='Ceritakan secara singkat dan jelas.']");
         modalChat = page.locator("#modalChat");
         wrapperQuestion = page.locator("[data-testid='wrapper-question']");
+        alternativeQuestionSelector = page.locator("[data-testid='wrapper-question'] .wrapper-question__label");
+        questionLabelWithFilter = page.locator("[data-testid='wrapper-question'] .wrapper-question__label");
+        modalChatForm = page.locator("#modalChat form");
     }
 
     /**
@@ -110,8 +116,7 @@ public class ChatTenantPO {
         // If no questions found with the primary selector, try alternative selector
         if (questionsListing.isEmpty()) {
             // Try the selector used in clickQuestion method
-            Locator alternativeSelector = page.locator("[data-testid='wrapper-question'] .wrapper-question__label");
-            questionsList = alternativeSelector.all();
+            questionsList = alternativeQuestionSelector.all();
             
             for (Locator questionText : questionsList) {
                 try {
@@ -152,7 +157,7 @@ public class ChatTenantPO {
         playwright.waitTillLocatorIsVisible(questionsOption.first(), 10000.0);
 
         // Find the clickable question label that contains the text
-        Locator questionLabel = page.locator("[data-testid='wrapper-question'] .wrapper-question__label")
+        Locator questionLabel = questionLabelWithFilter
             .filter(new Locator.FilterOptions().setHasText(text));
         playwright.waitTillLocatorIsVisible(questionLabel, 5000.0);
         playwright.clickOn(questionLabel);
@@ -425,8 +430,7 @@ public class ChatTenantPO {
      * @return String representation of the modal chat accessibility tree
      */
     public String getModalChatAriaSnapshot() {
-        Locator modalChat = page.locator("#modalChat form");
-        playwright.waitTillLocatorIsVisible(modalChat, 10000.0);
-        return playwright.getAriaSnapshot(modalChat);
+        playwright.waitTillLocatorIsVisible(modalChatForm, 10000.0);
+        return playwright.getAriaSnapshot(modalChatForm);
     }
 }

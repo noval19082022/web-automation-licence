@@ -104,6 +104,7 @@ public class MamifotoPO {
     Locator alertSuccsess;
     Locator ownerPhoneNumber;
     Locator statusInvoice;
+    Locator mamifotoHistoryDoneButtons;
 
     public MamifotoPO(Page page) {
         this.page = page;
@@ -175,6 +176,7 @@ public class MamifotoPO {
         // Enhanced FAQ locators for better reliability
         this.faqContainer = page.locator("[data-testid='mamifotoDesktop'] .tanya-jawab-section, [data-testid='mamifotoDesktop'] section:has-text('Tanya Jawab')");
         this.faqExpandedContent = page.locator("group[role='group'] p");
+        this.mamifotoHistoryDoneButtons = page.locator("//div[@id='mamifoto-history-done']//button");
 
     }
 
@@ -486,8 +488,7 @@ public class MamifotoPO {
      * Click on Lihat detail transaksi at riwayat page mamifoto
      */
     public void clickOnSeeDetailTransactionMamifoto() {
-        Locator element = page.locator("//div[@id='mamifoto-history-done']//button");
-        List<Locator> elements = playwright.getLocators(element);
+        List<Locator> elements = playwright.getLocators(mamifotoHistoryDoneButtons);
         elements.get(1).click();
     }
 

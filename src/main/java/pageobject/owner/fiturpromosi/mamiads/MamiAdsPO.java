@@ -48,6 +48,7 @@ public class MamiAdsPO {
     private Locator balanceListContainer;
     private Locator robustBalanceListContainer;
     private Locator promosikanIklanAnda;
+    private Locator radioButtons;
 
     //--- Mamiads popup ubah anggaran  ---//
     private Locator saldoMaksimalRadioButton;
@@ -123,6 +124,7 @@ public class MamiAdsPO {
         this.balanceListContainer = page.locator(".balance-list__container");
         this.robustBalanceListContainer = page.locator("div:has-text('Saldo Iklan'):has-text('Harga')");
         this.promosikanIklanAnda = page.locator("//img[@alt='Icon Promote']");
+        this.radioButtons = page.locator("input[type='radio']");
         //--- Mamiads popup ubah anggaran  ---//
         this.ubahAnggaranInputText = page.getByTestId("mamiadsDashboard-inputDailyBudget");
         this.saldoMaksimalRadioButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Saldo Maksimal")).locator("span").nth(1);
@@ -926,9 +928,8 @@ public class MamiAdsPO {
         
         // Fallback strategy 2: Reload page if content still not visible
         playwright.reloadPageIfElementNotVisible(2, balanceListContainer);
-        
+
         // Final verification: Wait for radio buttons to be present (indicates full functionality)
-        Locator radioButtons = page.locator("input[type='radio']");
         playwright.waitFor(radioButtons.first(), 10000.0);
         
         // Ensure "Favorit" text is visible (indicates 150k option loaded)

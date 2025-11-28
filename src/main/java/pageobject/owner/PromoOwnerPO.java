@@ -45,6 +45,7 @@ public class PromoOwnerPO {
     Locator showAndEditPromoLink;
     Locator detailPromoOwner;
     Locator nextBtnCalendarAdmin;
+    Locator buatPromoButton;
 
     public PromoOwnerPO(Page page) {
         this.page = page;
@@ -68,6 +69,7 @@ public class PromoOwnerPO {
         createPromotionButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Create Promotion"));
         showAndEditPromoLink = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Show or Edit")).first();
         nextBtnCalendarAdmin = page.getByTitle("Next");
+        buatPromoButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Buat Promo"));
     }
 
     /**
@@ -121,7 +123,6 @@ public class PromoOwnerPO {
      *
      */
     public void clickOnBuatPromo() {
-        Locator buatPromoButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Buat Promo"));
         playwright.waitFor(buatPromoButton);
         playwright.clickOn(buatPromoButton);
     }

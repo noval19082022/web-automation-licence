@@ -186,6 +186,8 @@ public class KostDetailsPO {
     private Locator photoRecommendation;
     private Locator nextRecommendation;
     private Locator firstKostCard;
+    private Locator breadcrumbTrail;
+    private Locator priceCardBase;
 
     //------------ Right Panel Section -----------------
     private Locator totalPriceText;
@@ -209,6 +211,9 @@ public class KostDetailsPO {
     private Locator kosBenefit;
     private Locator benefitTitle;
     private Locator benefitDesc;
+
+    // ----------------Job Locator---------------------
+    private Locator jobLocator;
 
     // ------------ Kost Review Section --------------
     private Locator reviewSection;
@@ -455,6 +460,8 @@ public class KostDetailsPO {
         this.photoRecommendation = page.locator(".rc-photo__cover");
         this.nextRecommendation = page.locator("//h3[@data-path='lbl_roomTitle']").nth(5);
         this.firstKostCard = page.locator("//h3[@data-path='lbl_roomTitle']").first();
+        this.breadcrumbTrail = page.locator("ol").locator("li").locator(".breadcrumb-trail");
+        this.priceCardBase = page.locator("#priceCard");
 
         //------------ Right Panel Section -----------------
         this.totalPriceText = page.locator("#priceCard .rc-price__real");
@@ -478,6 +485,9 @@ public class KostDetailsPO {
         this.kosBenefit = page.getByTestId("kostBenefitContent");
         this.benefitTitle = page.locator("#detailKostContainer .detail-kost-benefit-content span").first();
         this.benefitDesc = page.locator("#detailKostContainer .detail-kost-benefit-content p").first();
+
+        // ----------------Job Locator---------------------
+        this.jobLocator = page.locator("//div[@class='bg-c-select__trigger bg-c-select__trigger--lg']");
 
         // ------------ Kost Review Section -----------
         this.reviewSection = page.locator("#detailKostReview");
@@ -649,7 +659,7 @@ public class KostDetailsPO {
      * @return string list of breadcrumb
      */
     public List<String> getListBreadCrumb() {
-        return page.locator("ol").locator("li").locator(".breadcrumb-trail").allInnerTexts();
+        return breadcrumbTrail.allInnerTexts();
     }
 
     /**
@@ -1512,7 +1522,7 @@ public class KostDetailsPO {
      * @return string data type
      */
     public String getDescBookingDateText(String desc) {
-        Locator description = page.locator("#priceCard").getByText(desc).first();
+        Locator description = priceCardBase.getByText(desc).first();
         return playwright.getText(description).toLowerCase();
     }
 
@@ -2247,8 +2257,7 @@ public class KostDetailsPO {
      */
     public void userWillSeeHaveJobName() {
         playwright.pageScrollHeightToBottom();
-        Locator job = page.locator("//div[@class='bg-c-select__trigger bg-c-select__trigger--lg']");
-        playwright.getText(job);
+        playwright.getText(jobLocator);
     }
 
     /**

@@ -120,6 +120,7 @@ public class HomepagePO {
     Locator yaSimpanButton;
     Locator dbetCategoryButton;
     Locator contractIdText;
+    Locator contractIdDropdownOption;
     Locator notestext;
     Locator notesCountertext;
     Locator contractIdErrorMessage;
@@ -144,6 +145,10 @@ public class HomepagePO {
     Locator rescheduleButton;
     Locator agreeButton;
     Locator relocationButton;
+
+    //-------add fee-------//
+    Locator addFeeSelectedText;
+    Locator addFeeName;
 
     public HomepagePO(Page page) {
         this.page = page;
@@ -209,6 +214,7 @@ public class HomepagePO {
         selectMethodPaymentFullPayment = page.locator("//p[normalize-space()='Full Payment']");
         dbetCategoryButton = page.locator("//div[@data-testid=\"categorySelect_ddl\"]//div[@class=\"bg-c-select__trigger bg-c-select__trigger--lg\"]");
         contractIdText = page.locator("//input[@id=\"contractId_txt\"]");
+        contractIdDropdownOption = page.getByTestId("fieldWithOptions-options").locator("a");
         notestext = page.getByPlaceholder("Isi catatan di sini");
         notesCountertext = page.locator(".bg-c-textarea__counter");
         contractIdErrorMessage = page.locator("//div[@label=\"Contract ID\"]//*[@class=\"bg-c-field__message\"]");
@@ -217,6 +223,10 @@ public class HomepagePO {
         rescheduleButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("Reschedule"));
         agreeButton = page.locator("//button[contains(.,'Setuju')]");
         relocationButton = page.locator("a").filter(new Locator.FilterOptions().setHasText("Relocation"));
+
+        //---add fee---//
+        addFeeSelectedText = page.locator("//input[@name =\"costs[fixed][0][name]\"]");
+        addFeeName = page.locator("//input[@id=\"additionalPriceName1_txt\"]");
 
         //---Filter---//
         filterBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Filter"));
@@ -411,8 +421,7 @@ public class HomepagePO {
      */
     public void fillContractId(String number){
         contractIdText.fill(number);
-        Locator contractIdText = page.getByTestId("fieldWithOptions-options").locator("a");
-        playwright.clickOn(contractIdText);
+        playwright.clickOn(contractIdDropdownOption);
     }
 
     /**
@@ -1147,7 +1156,6 @@ public class HomepagePO {
     }
 
     public boolean getAddFeeSelected(String addfeename){
-        Locator addFeeSelectedText = page.locator("//input[@name =\"costs[fixed][0][name]\"]");
         return playwright.waitTillLocatorIsVisible(addFeeSelectedText);
     }
 
@@ -1249,7 +1257,6 @@ public class HomepagePO {
      * @return text
      */
     public boolean getAddFeeisVisible(String text){
-        Locator addFeeName = page.locator("//input[@id=\"additionalPriceName1_txt\"]");
         return playwright.waitTillLocatorIsVisible(addFeeName);
     }
 

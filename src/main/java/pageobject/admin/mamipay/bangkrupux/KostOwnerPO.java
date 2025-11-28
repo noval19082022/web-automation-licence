@@ -30,6 +30,8 @@ public class KostOwnerPO {
     Locator updateStatus;
     Locator actionBox;
     Locator confirmRejectButton;
+    Locator rejectBbkButtonNested;
+    Locator rejectRemarkTextArea;
 
     public KostOwnerPO(Page page) {
         this.page = page;
@@ -51,6 +53,8 @@ public class KostOwnerPO {
         updateStatus = page.getByText("× Success! Room has been successfully updated");
         actionBox = page.locator(".btn-action-group");
         confirmRejectButton = page.locator("//button[normalize-space()='Reject']");
+        rejectBbkButtonNested = page.locator("//a[normalize-space()='Reject']");
+        rejectRemarkTextArea = page.locator("//textarea[@name='reject_remark_text']");
     }
 
     /**
@@ -248,13 +252,11 @@ public class KostOwnerPO {
      * Click Reject button on request BBK form
      */
     public void clickOnRejectBBK() {
-        Locator rejectBbkButton = page.locator("//a[normalize-space()='Reject']");
-        if (playwright.waitTillLocatorIsVisible(rejectBbkButton)) {
-            playwright.clickOn(rejectBbkButton);
+        if (playwright.waitTillLocatorIsVisible(rejectBbkButtonNested)) {
+            playwright.clickOn(rejectBbkButtonNested);
 //            playwright.waitTillLocatorIsVisible(firstRejectReasonRadioButton);
 //            playwright.clickOn(firstRejectReasonRadioButton);
-            Locator inputText= page.locator("//textarea[@name='reject_remark_text']");
-            playwright.forceFill(inputText, "Reject BBK");
+            playwright.forceFill(rejectRemarkTextArea, "Reject BBK");
             playwright.waitTillLocatorIsVisible(confirmRejectButton);
             playwright.clickOn(confirmRejectButton);
         //    page.mouse().click(6149, 3311);
