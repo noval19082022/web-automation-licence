@@ -241,6 +241,16 @@ public class PropertiSayaPO {
     Locator previewFotoBangunanTampakDepan;
     Locator previewFotoTampilanDalamBangunan;
 
+    // Payment and pricing locators
+    Locator rangeTimeDropdown;
+    Locator amountTime;
+    Locator unitTimeNearest;
+    Locator penaltyRules;
+    Locator deposit;
+    Locator nameOtherPriceInput;
+    Locator amountOtherPriceInput;
+    Locator popUpBBK;
+
     public PropertiSayaPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -431,6 +441,16 @@ public class PropertiSayaPO {
         previewFotoDepanKamar = fotoDepanKamarSection.locator("img").first();
         previewFotoBangunanTampakDepan = fotoBangunanTampakDepanSection.locator("img").first();
         previewFotoTampilanDalamBangunan = fotoTampilanDalamBangunanSection.locator("img").first();
+
+        // Initialize payment and pricing locators
+        rangeTimeDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hari dropdown-down").setExact(true));
+        amountTime = page.getByRole(AriaRole.SPINBUTTON).first();
+        unitTimeNearest = page.getByPlaceholder("0");
+        penaltyRules = page.locator(".is-active .c-field-select__select");
+        deposit = page.locator("//input[@class='input field-amount']");
+        nameOtherPriceInput = page.locator("//input[@placeholder='Contoh: Listrik, Parkir']");
+        amountOtherPriceInput = page.locator("//input[@class='input']");
+        popUpBBK = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("join-mamibooking"));
     }
 
     /**
@@ -2089,7 +2109,6 @@ public class PropertiSayaPO {
         playwright.clickOnTextButton("1 dropdown-down");
         Locator numberSelected = page.locator("//div[contains(@class,'bg-c-dropdown__menu bg-c-dropdown__menu--open bg-c-dropdown__menu--scrollable bg-c-dropdown__menu--fit-to-trigger bg-c-dropdown__menu--text-lg')]//li[" + number + "]/a");
         playwright.clickOn(numberSelected);
-        Locator rangeTimeDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hari dropdown-down").setExact(true));
         playwright.clickOn(rangeTimeDropdown);
         Locator rangeTimeSelected = page.locator("a").filter(new Locator.FilterOptions().setHasText(rangeTime));
         playwright.clickOn(rangeTimeSelected);
@@ -2147,14 +2166,11 @@ public class PropertiSayaPO {
      */
     public void fillDendaAmountTime(String amount, String unitTime, String penalty) {
         playwright.clickOn(textBoxTotalDenda);
-        Locator amountTime = page.getByRole(AriaRole.SPINBUTTON).first();
         amountTime.press("Control+a");
         playwright.fill(amountTime, amount);
         playwright.clickOn(textBoxLatePay);
-        Locator unitTimeNearest = page.getByPlaceholder("0");
         playwright.fill(unitTimeNearest, unitTime);
         playwright.clickOn(dropdownLatePay);
-        Locator penaltyRules = page.locator(".is-active .c-field-select__select");
         playwright.selectDropdownByValue(penaltyRules, penalty);
     }
 
@@ -2188,7 +2204,6 @@ public class PropertiSayaPO {
      */
     public void fillDepositAmountTime(String amountDeposit) {
 //        playwright.clickOn(textBoxDeposit);
-        Locator deposit = page.locator("//input[@class='input field-amount']");
         playwright.fill(deposit, amountDeposit);
     }
 
@@ -2211,10 +2226,8 @@ public class PropertiSayaPO {
      * fill other price
      */
     public void fillOtherPrice(String namePrice, String amountPrice) {
-        Locator nameOtherPrice = page.locator("//input[@placeholder='Contoh: Listrik, Parkir']");
-        playwright.fill(nameOtherPrice, namePrice);
-        Locator amountOtherPrice = page.locator("//input[@class='input']");
-        playwright.fill(amountOtherPrice, amountPrice);
+        playwright.fill(nameOtherPriceInput, namePrice);
+        playwright.fill(amountOtherPriceInput, amountPrice);
     }
 
     /**
@@ -2304,7 +2317,6 @@ public class PropertiSayaPO {
      * @return true false
      */
     public boolean BBKPopUpVisible() {
-        Locator popUpBBK = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("join-mamibooking"));
         return playwright.isLocatorVisibleAfterLoad(popUpBBK, 2000.0);
     }
 

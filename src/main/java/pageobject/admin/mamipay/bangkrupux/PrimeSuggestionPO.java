@@ -26,6 +26,7 @@ public class PrimeSuggestionPO {
     Locator searchBtn;
     Locator deleteButton;
     Locator dropdownAllStatus;
+    Locator fileInput;
 
 
     public PrimeSuggestionPO(Page page) {
@@ -47,6 +48,7 @@ public class PrimeSuggestionPO {
         searchBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Search"));
         deleteButton = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName("tangerang ")).getByRole(AriaRole.BUTTON);
         dropdownAllStatus = page.getByRole(AriaRole.COMBOBOX);
+        fileInput = page.locator("//input[@name='keyword_csv']");
     }
 
     /**
@@ -81,7 +83,6 @@ public class PrimeSuggestionPO {
      * upload file csv
      */
     public void clickOnInputFileCsv(){
-        Locator fileInput = page.locator("//input[@name='keyword_csv']");
         fileInput.setInputFiles(Paths.get("src/main/resources/file/samplePrimeSuggestion.csv"));
     }
 

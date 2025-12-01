@@ -60,6 +60,9 @@ public class GoldplusPO {
     Locator pilihPaketBtn;
     Locator countdownValueInMenuPackageGP;
     Locator countdownValueOwnerDashboard;
+    Locator gpEntryPoint;
+    Locator copyTextElement;
+    Locator countdownTimer;
 
     //==== Popup Recurring ===//
     Locator imagePopupRecurring;
@@ -111,6 +114,8 @@ public class GoldplusPO {
     private Locator periodeBerlanggananContainer;
     private Locator paketJangkaPanjangContainer;
     private Locator pilihPaketGoldplusContainer;
+    private Locator activeMamiadsBalance;
+    private Locator favoriteOption;
 
 
     public GoldplusPO(Page page) {
@@ -187,6 +192,9 @@ public class GoldplusPO {
         pilihPaketBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Paket GoldPlus"));
         countdownValueInMenuPackageGP = page.locator("//div[@class='counter-promo']");
         countdownValueOwnerDashboard = page.getByTestId("popperReference").getByTestId("countdown-container");
+        gpEntryPoint = page.locator("a").filter(new Locator.FilterOptions().setHasText("Paket murah untuk interaksi"));
+        copyTextElement = page.getByTestId("popperReference").getByText("Paket murah untuk interaksi");
+        countdownTimer = page.getByTestId("popperReference").getByTestId("countdown-container");
         mamikosActionCard = page.locator(".mk-action-card__main");
         periodeBerlanggananContainer = page.locator("div.goldplus-subscribe-periode-desktop");
         paketJangkaPanjangContainer = page.locator("div.goldplus-periode-select__list").nth(1);
@@ -199,6 +207,8 @@ public class GoldplusPO {
         goldplusPeriodSelectionPopup = page.locator("//div[contains(@class, 'goldplus-periode-select')]");
         goldplusPeriodOptions = page.locator("//div[contains(@class, 'goldplus-periode-select__option')]");
         pilihPeriodeButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Periode"));
+        activeMamiadsBalance = page.locator("//div[@class='goldplus-mamiads-detail__item bg-c-card bg-c-card--md bg-c-card--light active']");
+        favoriteOption = page.locator("//div[contains(@class, 'goldplus-periode-select__option') and .//div[contains(text(), 'Favorit')]]");
 
     }
 
@@ -497,8 +507,7 @@ public class GoldplusPO {
      * @throws InterruptedException
      */
     public void unCheckedSaldo() throws InterruptedException {
-        Locator element = page.locator("//div[@class='goldplus-mamiads-detail__item bg-c-card bg-c-card--md bg-c-card--light active']");
-        playwright.clickOn(element);
+        playwright.clickOn(activeMamiadsBalance);
     }
 
     /**
@@ -1088,7 +1097,6 @@ public class GoldplusPO {
      */
     private void selectDefaultFavoritePeriod() {
         // Look for the favorite option (marked with "Favorit" badge)
-        Locator favoriteOption = page.locator("//div[contains(@class, 'goldplus-periode-select__option') and .//div[contains(text(), 'Favorit')]]");
         if (playwright.waitTillLocatorIsVisible(favoriteOption, 3000.0)) {
             playwright.clickOn(favoriteOption);
             System.out.println("Selected favorite period option");
@@ -1203,7 +1211,6 @@ public class GoldplusPO {
      * @return boolean
      */
     public boolean isGpEntryPointDisplayed() {
-        Locator gpEntryPoint = page.locator("a").filter(new Locator.FilterOptions().setHasText("Paket murah untuk interaksi"));
         return playwright.waitTillLocatorIsVisible(gpEntryPoint);
     }
 
@@ -1212,7 +1219,6 @@ public class GoldplusPO {
      * @return boolean
      */
     public boolean isCountdownTimerDisplayed() {
-        Locator countdownTimer = page.getByTestId("popperReference").getByTestId("countdown-container");
         return playwright.waitTillLocatorIsVisible(countdownTimer);
     }
 
@@ -1231,7 +1237,6 @@ public class GoldplusPO {
      * @return String copy text
      */
     public String getEntryPointCopyText() {
-        Locator copyTextElement =  page.getByTestId("popperReference").getByText("Paket murah untuk interaksi");
         playwright.waitFor(copyTextElement);
         return playwright.getText(copyTextElement);
     }

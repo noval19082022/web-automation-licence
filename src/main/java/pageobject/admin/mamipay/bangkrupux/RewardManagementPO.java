@@ -38,6 +38,7 @@ public class RewardManagementPO {
     Locator saveRewardTypeButton;
     Locator errorMessageText;
     Locator editTypeButton;
+    Locator tableHeaderElements;
 
     public RewardManagementPO(Page page) {
         this.page = page;
@@ -68,6 +69,7 @@ public class RewardManagementPO {
         createRewardType =page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Add Reward Type"));
         keyRewardType = page.getByLabel("Key");
         nameRewardType = page.getByLabel("Name");
+        tableHeaderElements = page.locator("//table[@class='table table-hover']//tr/th");
     }
 
     /**
@@ -84,8 +86,7 @@ public class RewardManagementPO {
      * @return status true or false
      */
     public Boolean fieldOnTableIsDisplayed(Integer counter){
-        Locator element = page.locator("//table[@class='table table-hover']//tr/th");
-        List<Locator> elements = playwright.getLocators(element);
+        List<Locator> elements = playwright.getLocators(tableHeaderElements);
         return playwright.waitTillLocatorIsVisible(elements.get(counter));
     }
 

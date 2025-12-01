@@ -54,6 +54,12 @@ public class SearchPO {
     Locator kostRoomAvailableFilter;
     private Locator suggestionResult;
     private Locator kostCard;
+    private Locator areaSuggestions;
+    private Locator searchTextbox;
+    private Locator altSearchArea;
+    private Locator searchBox;
+    private Locator altSearchBox;
+    private Locator kosSuggestions;
 
     //--------- Map Section ----------
     private Locator mapLegendButton;
@@ -105,6 +111,12 @@ public class SearchPO {
         this.zoomInButton = page.locator("a.leaflet-control-zoom-in");
         this.zoomOutButton = page.locator("a.leaflet-control-zoom-out");
         this.kostRoomAvailableFilter = page.locator("//span[normalize-space()='Kamar Tersedia']");
+        this.areaSuggestions = page.locator("img[alt='icon area']").locator("xpath=..//..");
+        this.searchTextbox = page.getByText("Masukan nama lokasi/area/alamat");
+        this.altSearchArea = page.locator(".search-input, [placeholder*='lokasi'], [placeholder*='area']");
+        this.searchBox = page.getByRole(AriaRole.SEARCHBOX, new Page.GetByRoleOptions().setName("Cari nama tempat atau alamat"));
+        this.altSearchBox = page.locator("input[placeholder*='Cari nama tempat'], input[placeholder*='alamat']");
+        this.kosSuggestions = page.locator("article, [data-testid*='property'], [data-testid*='kos'], .property-card, .kos-card");
 
     }
 
@@ -636,18 +648,18 @@ public class SearchPO {
         // Click on searchKost to open the search modal (following existing pattern)
         playwright.clickOn(searchKost);
         playwright.hardWait(1000); // Wait for modal/search input to appear
-
+        
         // Fill the search input using playwright helper
         playwright.fill(inputSearch, searchText);
         playwright.pressKeyboardKey("Enter");
-
+        
         // Wait for suggestions and click the area suggestion
         playwright.hardWait(2000); // Wait for suggestions to load
-
+        
         // Try to find and click the suggestion
         // First try: exact text match in suggestion area list
         Locator resultLocator = page.locator("//*[@data-testid='suggestionsBox-areaList']//label[contains(text(), '" + searchText + "')]");
-
+        
         if (resultLocator.count() > 0) {
             playwright.clickOn(resultLocator.first());
         } else {
@@ -881,20 +893,12 @@ public class SearchPO {
      * This clicks on "Masukan nama lokasi/area/alamat" text which opens the search modal
      */
     public void clickOnSearchKos() {
-        try {
-            // Click on the search textbox area with placeholder text
-            Locator searchTextbox = page.getByText("Masukan nama lokasi/area/alamat");
-            if (searchTextbox.isVisible()) {
-                playwright.clickOn(searchTextbox);
-            } else {
-                // Alternative locators for the search area
-                Locator altSearchArea = page.locator(".search-input, [placeholder*='lokasi'], [placeholder*='area']");
-                playwright.clickOn(altSearchArea.first());
-            }
-        } catch (Exception e) {
-            // Fallback to any search-related element
-            System.out.println("Primary search locators failed, using fallback: " + e.getMessage());
-            page.locator("*:has-text('Masukan nama lokasi'), *:has-text('Cari'), .search").first().click();
+        // Click on the search textbox area with placeholder text
+        if (searchTextbox.isVisible()) {
+            playwright.clickOn(searchTextbox);
+        } else {
+            // Alternative locators for the search area
+            playwright.clickOn(altSearchArea.first());
         }
         playwright.hardWait(1000);
     }
@@ -905,21 +909,12 @@ public class SearchPO {
      * @param area the area to search for
      */
     public void inputArea(String area) {
-        try {
-            // Target the specific search box in the modal with correct placeholder
-            Locator searchBox = page.getByRole(AriaRole.SEARCHBOX, new Page.GetByRoleOptions().setName("Cari nama tempat atau alamat"));
-            if (searchBox.isVisible()) {
-                playwright.fill(searchBox, area);
-            } else {
-                // Alternative locators for the search input
-                Locator altSearchBox = page.locator("input[placeholder*='Cari nama tempat'], input[placeholder*='alamat']");
-                playwright.fill(altSearchBox.first(), area);
-            }
-        } catch (Exception e) {
-            // Last resort - find any visible search input
-            System.out.println("Primary search input locators failed, using last resort: " + e.getMessage());
-            Locator anyInput = page.locator("searchbox, input[type='text']:visible").first();
-            playwright.fill(anyInput, area);
+        // Target the specific search box in the modal with correct placeholder
+        if (searchBox.isVisible()) {
+            playwright.fill(searchBox, area);
+        } else {
+            // Alternative locators for the search input
+            playwright.fill(altSearchBox.first(), area);
         }
         playwright.hardWait(2000); // Wait for suggestions to appear
     }
@@ -934,24 +929,24 @@ public class SearchPO {
         // Wait for suggestions to appear
         playwright.hardWait(2000);
 
-        // Look for area suggestions with various approaches (removing hard-coded Jakarta)
-        Locator areaSuggestions = page.locator("img[alt='icon area']").locator("xpath=..//..");
+        // Use class-level locator for area suggestions
+        Locator suggestions = areaSuggestions;
 
-        if (areaSuggestions.count() == 0) {
+        if (suggestions.count() == 0) {
             // Alternative: look for suggestion boxes or area containers
-            areaSuggestions = page.locator("[data-testid*='suggestion'], [data-testid*='area'], .suggestion, .area-result");
+            suggestions = page.locator("[data-testid*='suggestion'], [data-testid*='area'], .suggestion, .area-result");
         }
 
-        if (areaSuggestions.count() == 0) {
+        if (suggestions.count() == 0) {
             // Try generic approach: look for visible clickable elements that could be suggestions
-            areaSuggestions = page.locator("button:visible, a:visible, div[role='button']:visible").filter(new Locator.FilterOptions().setHas(page.locator("text=/\\w+/")));
+            suggestions = page.locator("button:visible, a:visible, div[role='button']:visible").filter(new Locator.FilterOptions().setHas(page.locator("text=/\\w+/")));
         }
 
         // Check if we have at least the expected number of suggestions visible
         int visibleSuggestions = 0;
-        for (int i = 0; i < Math.min(areaSuggestions.count(), 10); i++) {
-            if (areaSuggestions.nth(i).isVisible()) {
-                String suggestionText = playwright.getText(areaSuggestions.nth(i));
+        for (int i = 0; i < Math.min(suggestions.count(), 10); i++) {
+            if (suggestions.nth(i).isVisible()) {
+                String suggestionText = playwright.getText(suggestions.nth(i));
                 if (suggestionText != null && !suggestionText.trim().isEmpty()) {
                     visibleSuggestions++;
                 }
@@ -968,24 +963,24 @@ public class SearchPO {
     public String[] getSuggestionTexts() {
         playwright.hardWait(2000);
 
-        // Look for area suggestions without hard-coding specific city
-        Locator areaSuggestions = page.locator("img[alt='icon area']").locator("xpath=..//..");
+        // Use class-level locator for area suggestions
+        Locator suggestions = areaSuggestions;
 
-        if (areaSuggestions.count() == 0) {
+        if (suggestions.count() == 0) {
             // Alternative: look for suggestion boxes or area containers
-            areaSuggestions = page.locator("[data-testid*='suggestion'], [data-testid*='area'], .suggestion, .area-result");
+            suggestions = page.locator("[data-testid*='suggestion'], [data-testid*='area'], .suggestion, .area-result");
         }
 
-        if (areaSuggestions.count() == 0) {
+        if (suggestions.count() == 0) {
             // Try generic approach: look for visible clickable elements that could be suggestions
-            areaSuggestions = page.locator("button:visible, a:visible, div[role='button']:visible").filter(new Locator.FilterOptions().setHas(page.locator("text=/\\w+/")));
+            suggestions = page.locator("button:visible, a:visible, div[role='button']:visible").filter(new Locator.FilterOptions().setHas(page.locator("text=/\\w+/")));
         }
 
         // Extract actual suggestion texts from the website
         List<String> textList = new ArrayList<>();
-        for (int i = 0; i < Math.min(10, areaSuggestions.count()); i++) {
-            if (areaSuggestions.nth(i).isVisible()) {
-                String text = playwright.getText(areaSuggestions.nth(i));
+        for (int i = 0; i < Math.min(10, suggestions.count()); i++) {
+            if (suggestions.nth(i).isVisible()) {
+                String text = playwright.getText(suggestions.nth(i));
                 if (text != null && !text.trim().isEmpty()) {
                     textList.add(text.trim());
                 }
@@ -1030,8 +1025,6 @@ public class SearchPO {
 
         // Look for kos cards or suggestion items that appear after clicking
         // These could be property cards, kos listings, or area suggestions
-        Locator kosSuggestions = page.locator("article, [data-testid*='property'], [data-testid*='kos'], .property-card, .kos-card");
-
         if (kosSuggestions.count() == 0) {
             // Alternative: look for elements that contain typical kos information
             kosSuggestions = page.locator("*:has-text('Rp'):has-text('bulan'), *:has-text('Kos')");

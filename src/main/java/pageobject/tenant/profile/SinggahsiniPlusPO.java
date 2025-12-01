@@ -39,6 +39,7 @@ public class SinggahsiniPlusPO {
     private Locator riwayatPoinText;
     private Locator dapatkanPoinText;
     private Locator syaratDanKetentuanText;
+    private Locator lockedTierBase;
 
     public SinggahsiniPlusPO(Page page) {
         this.page = page;
@@ -63,6 +64,7 @@ public class SinggahsiniPlusPO {
         this.riwayatPoinText = page.getByTestId("ssPlusMamipoinHistoryLink");
         this.dapatkanPoinText = page.getByTestId("ssPlusMamipoinGuidelineLink");
         this.syaratDanKetentuanText = page.locator("#contentBox").getByText("Syarat dan Ketentuan");
+        this.lockedTierBase = page.locator(".singgahsini-plus-main__tiers-item--locked");
     }
 
     /**
@@ -141,7 +143,7 @@ public class SinggahsiniPlusPO {
     public boolean isLockedTierVisible(){
         boolean allVisible = true;
         for (int i = 0; i < 7; i++) {
-            Locator lockedTier = page.locator(".singgahsini-plus-main__tiers-item--locked").nth(i);
+            Locator lockedTier = lockedTierBase.nth(i);
             if (!playwright.waitTillLocatorIsVisible(lockedTier)) {
                 allVisible = false;
                 break;

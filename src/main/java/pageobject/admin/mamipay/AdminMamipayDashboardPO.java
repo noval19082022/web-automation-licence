@@ -30,6 +30,7 @@ public class AdminMamipayDashboardPO {
     Locator inputPhoneNumberRecurring;
     Locator optionGpRecurring;
     Locator createRecurringBtn;
+    Locator addFeeButton;
 
     public AdminMamipayDashboardPO(Page page) {
         this.page = page;
@@ -51,6 +52,7 @@ public class AdminMamipayDashboardPO {
         inputPhoneNumberRecurring = page.locator("form").filter(new Locator.FilterOptions().setHasText("Create Recurring")).getByPlaceholder("Phone Number");
         optionGpRecurring = page.getByRole(AriaRole.COMBOBOX);
         createRecurringBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Create Recurring"));
+        addFeeButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Add Fee"));
     }
 
     /**
@@ -269,7 +271,6 @@ public class AdminMamipayDashboardPO {
      * click on Add fee button on detail fee page
      */
     public void clickOnAddFee() {
-        Locator addFeeButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Add Fee"));
         playwright.clickOn(addFeeButton);
     }
 

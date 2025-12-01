@@ -17,6 +17,11 @@ public class LandmarkPO {
     Locator editPageText;
     Locator scoreInput;
     Locator saveButton;
+    Locator searchByTypeDropdown;
+    Locator filterCategoryDropdown;
+    Locator categorySrpDropdown;
+    Locator getSrpStatusYesLabel;
+    Locator getSrpStatusNoLabel;
 
     public LandmarkPO(Page page) {
         this.page = page;
@@ -29,6 +34,11 @@ public class LandmarkPO {
         editPageText = page.locator("//*[contains(text() , 'Edit Landmark')]");
         scoreInput = page.locator("//input[@id=\"input-score\"]");
         saveButton = page.locator("//button[@class=\"btn btn-primary\"]");
+        searchByTypeDropdown = page.locator("select[name=\"search_by\"]");
+        filterCategoryDropdown = page.locator("select[name=\"category_id\"]");
+        categorySrpDropdown = page.locator("select[name=\"is_shown_srp\"]");
+        getSrpStatusYesLabel = page.locator("(//span[@class='label label-success'][normalize-space()='Yes'])[1]");
+        getSrpStatusNoLabel = page.locator("(//span[@class='label label-danger'][normalize-space()='No'])[1]");
     }
 
     /**
@@ -46,12 +56,11 @@ public class LandmarkPO {
      * @param text
      */
     public void clickSearchType(String text){
-        Locator searchByType = page.locator("select[name=\"search_by\"]");
         if (text.equalsIgnoreCase("id")){
-            playwright.selectDropdownByValue(searchByType, "id");
+            playwright.selectDropdownByValue(searchByTypeDropdown, "id");
         }
         else if(text.equalsIgnoreCase("name")){
-            playwright.selectDropdownByValue(searchByType, "name");
+            playwright.selectDropdownByValue(searchByTypeDropdown, "name");
         }
     }
 
@@ -60,21 +69,20 @@ public class LandmarkPO {
      * @param text
      */
     public void filterCatrgory(String text){
-        Locator filterCategory = page.locator("select[name=\"category_id\"]");
         if(text.equalsIgnoreCase("Food Stalls")){
-            playwright.selectDropdownByValue(filterCategory, "1");
+            playwright.selectDropdownByValue(filterCategoryDropdown, "1");
         }
         else if(text.equalsIgnoreCase("Shopping")){
-            playwright.selectDropdownByValue(filterCategory, "2");
+            playwright.selectDropdownByValue(filterCategoryDropdown, "2");
         }
         else if(text.equalsIgnoreCase("Mosque")){
-            playwright.selectDropdownByValue(filterCategory, "3");
+            playwright.selectDropdownByValue(filterCategoryDropdown, "3");
         }
         if(text.equalsIgnoreCase("Church")){
-            playwright.selectDropdownByValue(filterCategory, "4");
+            playwright.selectDropdownByValue(filterCategoryDropdown, "4");
         }
         if(text.equalsIgnoreCase("Pagoda")){
-            playwright.selectDropdownByValue(filterCategory, "5");
+            playwright.selectDropdownByValue(filterCategoryDropdown, "5");
         }
     }
 
@@ -83,12 +91,11 @@ public class LandmarkPO {
      * @param text
      */
     public void filterShowSrp(String text){
-        Locator categorySrp = page.locator("select[name=\"is_shown_srp\"]");
         if(text.equalsIgnoreCase("show srp yes")){
-            playwright.selectDropdownByValue(categorySrp, "yes");
+            playwright.selectDropdownByValue(categorySrpDropdown, "yes");
         }
         else if(text.equalsIgnoreCase("show srp no")){
-            playwright.selectDropdownByValue(categorySrp, "no");
+            playwright.selectDropdownByValue(categorySrpDropdown, "no");
         }
     }
 
@@ -129,12 +136,10 @@ public class LandmarkPO {
      */
     public boolean getShowSrp(String text){
         if(text.equalsIgnoreCase("Yes")){
-            Locator getSrpStatusYes = page.locator("(//span[@class='label label-success'][normalize-space()='Yes'])[1]");
-            return getSrpStatusYes.isVisible();
+            return getSrpStatusYesLabel.isVisible();
         }
         else if(text.equalsIgnoreCase("No")){
-            Locator getSrpStatusNo = page.locator("(//span[@class='label label-danger'][normalize-space()='No'])[1]");
-            return getSrpStatusNo.isVisible();
+            return getSrpStatusNoLabel.isVisible();
         }
         return false;
     }

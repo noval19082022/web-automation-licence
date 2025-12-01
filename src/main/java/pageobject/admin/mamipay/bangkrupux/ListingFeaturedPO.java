@@ -12,6 +12,10 @@ public class ListingFeaturedPO {
     Locator searchButton;
     Locator confirmButton;
     Locator columnName;
+    Locator markAsFeatured;
+    Locator markAsUnFeatured;
+    Locator photoButton;
+    Locator filterStatus;
 
     public ListingFeaturedPO(Page page) {
         this.page = page;
@@ -19,6 +23,10 @@ public class ListingFeaturedPO {
         searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Search"));
         confirmButton = page.locator("//button[@class=\"swal2-confirm swal2-styled\"]");
         columnName = page.locator("tr th");
+        markAsFeatured = page.locator("//a[@class=\"change-feature-status\"]/i[contains(@class, 'glyphicon glyphicon-thumbs-up')]");
+        markAsUnFeatured = page.locator("//a[@class=\"change-feature-status\"]/i[contains(@class, 'glyphicon glyphicon-circle-arrow-down')]");
+        photoButton = page.locator("//a[contains(text(),'Photo')]");
+        filterStatus = page.locator("//select[@name='featured_status']");
     }
 
     /**
@@ -43,7 +51,6 @@ public class ListingFeaturedPO {
      * @param status
      */
     public void filteringByStatus(String status){
-        Locator filterStatus = page.locator("//select[@name='featured_status']");
         if(status.equalsIgnoreCase("good")){
             playwright.selectDropdownByValue(filterStatus, "good");
         }
@@ -68,17 +75,14 @@ public class ListingFeaturedPO {
      */
     public void clickMarkAsFeatured(String text) {
         if (text.equalsIgnoreCase("Mark as Featured")) {
-            Locator markAsFeatured = page.locator("//a[@class=\"change-feature-status\"]/i[contains(@class, 'glyphicon glyphicon-thumbs-up')]");;
             playwright.clickOn(markAsFeatured);
             playwright.clickOn(confirmButton);
         }
         else if (text.equalsIgnoreCase("Unmark as Featured")) {
-            Locator markAsUnFeatured = page.locator("//a[@class=\"change-feature-status\"]/i[contains(@class, 'glyphicon glyphicon-circle-arrow-down')]");;
             playwright.clickOn(markAsUnFeatured);
             playwright.clickOn(confirmButton);
         }
         else if (text.equalsIgnoreCase("Photo")) {
-            Locator photoButton = page.locator("//a[contains(text(),'Photo')]");
             playwright.clickOn(photoButton);
         }
     }

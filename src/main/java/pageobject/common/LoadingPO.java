@@ -15,12 +15,14 @@ public class LoadingPO {
 
     private Locator loadingIcon;
     private Locator loadingAnimation;
+    private Locator skeletonLoader;
 
     public LoadingPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(this.page);
         loadingIcon = page.locator(".c-loader");
         loadingAnimation = page.getByTestId("loading-animation");
+        skeletonLoader = page.locator(".skeleton, [class*='skeleton'], [class*='shimmer'], [class*='loading-skeleton']");
     }
 
     /**
@@ -54,9 +56,7 @@ public class LoadingPO {
      * @param timeout timeout in milliseconds
      */
     public void waitTillSkeletonLoadingDisappears(Double timeout) {
-        // Common skeleton loader selectors
-        Locator skeletonLoader = page.locator(".skeleton, [class*='skeleton'], [class*='shimmer'], [class*='loading-skeleton']");
-
+        // Use class-level skeleton loader locator
         // Check if skeleton exists before waiting
         if (skeletonLoader.count() > 0) {
             skeletonLoader.first().waitFor(new Locator.WaitForOptions()

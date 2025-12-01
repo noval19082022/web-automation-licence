@@ -54,6 +54,11 @@ public class TenantSurveyFormPO {
     Locator tncSection;
     Locator surveyStatusInChatroom;
     Locator p2AutoreplyMessage;
+    Locator basedLocatorDateCell;
+    Locator timeButtonLocator;
+    Locator chatroomContainer;
+    Locator suggestionMessage;
+    Locator phoneInMessage;
 
     public TenantSurveyFormPO(Page page) {
         this.page = page;
@@ -98,6 +103,11 @@ public class TenantSurveyFormPO {
         tncLink = page.locator("a").filter(new Locator.FilterOptions().setHasText("Kebijakan Privasi Mamikos")).first();
         tncSection = page.locator(".tnc-section, .terms-section");
         surveyStatusInChatroom = page.locator(".survey-status");
+        p2AutoreplyMessage = page.locator(".autoreply-message, .p2-message");
+        basedLocatorDateCell = page.locator("//div[@class='date-wrapper__cell-parent']/span[@class='cell day']");
+        chatroomContainer = page.locator(".chatroom, .chat-container");
+        suggestionMessage = page.locator(".suggestion-message, .tanggal-lain-suggestion");
+        phoneInMessage = page.locator(".survey-request-message, .phone-number");
         p2AutoreplyMessage = page.getByText("Untuk Pencari: Silakan tunggu konfirmasi dari pemilik. Kamu juga bisa chat di sini untuk mengingatkan pemilik.").first();
     }
 
@@ -181,17 +191,8 @@ public class TenantSurveyFormPO {
         }
 
         // Check if pointer-events is none (CSS disabled)
-        try {
-            String pointerEvents = ajukanSurveyBtn.evaluate("el => window.getComputedStyle(el).pointerEvents").toString();
-            if ("none".equals(pointerEvents)) {
-                return true;
-            }
-        } catch (Exception e) {
-            // If evaluation fails, continue with other checks
-            System.out.println("Failed to evaluate pointer-events CSS: " + e.getMessage());
-        }
-
-        return false;
+        String pointerEvents = ajukanSurveyBtn.evaluate("el => window.getComputedStyle(el).pointerEvents").toString();
+        return "none".equals(pointerEvents);
     }
 
     public boolean isAjukanSurveyBtnEnable() {
@@ -235,13 +236,11 @@ public class TenantSurveyFormPO {
         int randomNum = ThreadLocalRandom.current().nextInt(10, 14); // 16 is exclusive
         String randomStr = String.valueOf(randomNum);
 
-        var basedLocator = page.locator("//div[@class='date-wrapper__cell-parent']/span[@class='cell day']");
-
-        var date = basedLocator.getByText(randomStr).first();
+        var date = basedLocatorDateCell.getByText(randomStr).first();
 
         if (!playwright.waitTillLocatorIsVisible(date)) {
             randomStr = String.valueOf(randomNum + 1);
-            date = basedLocator.getByText(randomStr).first();
+            date = basedLocatorDateCell.getByText(randomStr).first();
         }
         playwright.clickOn(date);
     }
@@ -295,21 +294,8 @@ public class TenantSurveyFormPO {
         // Wait for container to be visible first
         playwright.waitTillLocatorIsVisible(surveyFormContainer);
 
-        // Try multiple scroll approaches
-        try {
-            // Approach 1: Direct scrollTop
-            surveyFormContainer.evaluate("el => el.scrollTop += " + scrollAmount);
-        } catch (Exception e1) {
-            System.out.println("Scroll approach 1 failed, trying approach 2: " + e1.getMessage());
-            try {
-                // Approach 2: Scroll using scrollTo
-                surveyFormContainer.evaluate("el => el.scrollTo({top: el.scrollTop + " + scrollAmount + ", behavior: 'smooth'})");
-            } catch (Exception e2) {
-                // Approach 3: Force scroll on body inside container
-                System.out.println("Scroll approach 2 failed, using approach 3: " + e2.getMessage());
-                surveyFormContainer.evaluate("el => { const target = el.scrollTop + " + scrollAmount + "; el.scrollTop = target; }");
-            }
-        }
+        // Scroll using scrollTop
+        surveyFormContainer.evaluate("el => el.scrollTop += " + scrollAmount);
 
         // Wait a bit for scroll animation to complete
         page.waitForTimeout(500);
@@ -352,10 +338,8 @@ public class TenantSurveyFormPO {
      * @param date - day number as string (e.g., "7", "15")
      */
     public void selectDateFromPicker(String date) {
-        // Scope search to the date picker container
-        var basedLocator = page.locator("//div[@class='date-wrapper__cell-parent']/span[@class='cell day']");
-
-        var dateLocator = basedLocator.getByText(date, new Locator.GetByTextOptions().setExact(true)).first();
+        // Use class-level locator for date cells
+        var dateLocator = basedLocatorDateCell.getByText(date, new Locator.GetByTextOptions().setExact(true)).first();
         playwright.waitTillLocatorIsVisible(dateLocator);
         playwright.clickOn(dateLocator);
     }
@@ -364,12 +348,10 @@ public class TenantSurveyFormPO {
      * Find and select the first available (enabled) date from date picker
      * This method dynamically finds an available date to avoid issues with disabled dates
      */
-    public void selectFirstAvailableDate() {
-        // Scope search to the date picker container - get all date cells
-        var basedLocator = page.locator("//div[@class='date-wrapper__cell-parent']/span[@class='cell day']");
-
+    public String selectFirstAvailableDate() {
+        // Use class-level locator for date cells
         // Get all date elements
-        int count = basedLocator.count();
+        int count = basedLocatorDateCell.count();
 
         if (count == 0) {
             throw new RuntimeException("No date elements found in the date picker");
@@ -380,7 +362,7 @@ public class TenantSurveyFormPO {
         int currentDayInt = Integer.parseInt(currentDay);
 
         for (int i = 0; i < count; i++) {
-            Locator dateElement = basedLocator.nth(i);
+            Locator dateElement = basedLocatorDateCell.nth(i);
 
             // Check if element is disabled by checking class attribute
             String classAttr = dateElement.getAttribute("class");
@@ -398,26 +380,26 @@ public class TenantSurveyFormPO {
 
             String dateText = playwright.getText(dateElement);
 
-            try {
-                int dateInt = Integer.parseInt(dateText.trim());
-
-                // Select dates that are today or in the future
-                // If the date number is >= current day, or if we're near end of month and date is low number (next month)
-                if (dateInt >= currentDayInt || (currentDayInt > 25 && dateInt < 10)) {
-                    playwright.clickOn(dateElement);
-                    System.out.println("Selected available date: " + dateText);
-                    return;
-                }
-            } catch (NumberFormatException e) {
-                // Skip if dateText is not a number (e.g., month header)
+            // Skip if dateText is not a number (e.g., month header)
+            if (!dateText.trim().matches("\\d+")) {
                 System.out.println("Skipping non-numeric date text: " + dateText);
                 continue;
+            }
+
+            int dateInt = Integer.parseInt(dateText.trim());
+
+            // Select dates that are today or in the future
+            // If the date number is >= current day, or if we're near end of month and date is low number (next month)
+            if (dateInt >= currentDayInt || (currentDayInt > 25 && dateInt < 10)) {
+                playwright.clickOn(dateElement);
+                System.out.println("Selected available date: " + dateText);
+                return dateText;
             }
         }
 
         // If no future date found based on date number, just select the first enabled date
         for (int i = 0; i < count; i++) {
-            Locator dateElement = basedLocator.nth(i);
+            Locator dateElement = basedLocatorDateCell.nth(i);
 
             String classAttr = dateElement.getAttribute("class");
             boolean isDisabled = classAttr != null && classAttr.contains("disabled");
@@ -426,7 +408,7 @@ public class TenantSurveyFormPO {
                 String selectedDate = playwright.getText(dateElement);
                 playwright.clickOn(dateElement);
                 System.out.println("Selected first available date: " + selectedDate);
-                return;
+                return selectedDate;
             }
         }
 
@@ -478,29 +460,20 @@ public class TenantSurveyFormPO {
         }
 
         // Check multiple indicators for disabled state
-        try {
-            // Check if button is disabled
-            if (playwright.isButtonDisable(periodLocator)) {
-                return true;
-            }
-
-            // Check aria-disabled attribute
-            String ariaDisabled = periodLocator.getAttribute("aria-disabled");
-            if (ariaDisabled != null && ariaDisabled.equals("true")) {
-                return true;
-            }
-
-            // Check for disabled CSS classes
-            String classAttr = periodLocator.getAttribute("class");
-            if (classAttr != null && (classAttr.contains("disabled") || classAttr.contains("bg-c-tag--disabled"))) {
-                return true;
-            }
-
-            return false;
-        } catch (Exception e) {
-            System.out.println("Error checking if period is disabled: " + e.getMessage());
-            return false;
+        // Check if button is disabled
+        if (playwright.isButtonDisable(periodLocator)) {
+            return true;
         }
+
+        // Check aria-disabled attribute
+        String ariaDisabled = periodLocator.getAttribute("aria-disabled");
+        if (ariaDisabled != null && ariaDisabled.equals("true")) {
+            return true;
+        }
+
+        // Check for disabled CSS classes
+        String classAttr = periodLocator.getAttribute("class");
+        return classAttr != null && (classAttr.contains("disabled") || classAttr.contains("bg-c-tag--disabled"));
     }
 
     /**
@@ -564,13 +537,8 @@ public class TenantSurveyFormPO {
      * @return true if popup is visible within timeout
      */
     public boolean isPopupConfirmationVisibleQuick(int timeoutMs) {
-        try {
-            popupConfirmationHeading.waitFor(new Locator.WaitForOptions().setTimeout(timeoutMs));
-            return popupConfirmationHeading.isVisible();
-        } catch (Exception e) {
-            System.out.println("Popup confirmation not visible within " + timeoutMs + "ms: " + e.getMessage());
-            return false;
-        }
+        popupConfirmationHeading.waitFor(new Locator.WaitForOptions().setTimeout(timeoutMs));
+        return popupConfirmationHeading.isVisible();
     }
 
     /**
@@ -592,15 +560,10 @@ public class TenantSurveyFormPO {
      * If popup appears, click "Mengerti, Kirim", otherwise do nothing
      */
     public void confirmPopupIfAppear() {
-        try {
-            if (isPopupConfirmationVisible()) {
-                clickMengertiOnPopup();
-                // Wait for the popup to disappear after clicking
-                playwright.hardWait(2000);
-            }
-        } catch (Exception e) {
-            // Popup not visible, continue
-            System.out.println("Error confirming popup: " + e.getMessage());
+        if (isPopupConfirmationVisible()) {
+            clickMengertiOnPopup();
+            // Wait for the popup to disappear after clicking
+            playwright.hardWait(2000);
         }
     }
 
@@ -651,17 +614,8 @@ public class TenantSurveyFormPO {
         }
 
         // Check if pointer-events is none (CSS disabled)
-        try {
-            String pointerEvents = surveyDateTypeSurveiHariIni.evaluate("el => window.getComputedStyle(el).pointerEvents").toString();
-            if ("none".equals(pointerEvents)) {
-                return true;
-            }
-        } catch (Exception e) {
-            // If evaluation fails, continue with other checks
-            System.out.println("Failed to evaluate pointer-events for Survei Hari Ini: " + e.getMessage());
-        }
-
-        return false;
+        String pointerEvents = surveyDateTypeSurveiHariIni.evaluate("el => window.getComputedStyle(el).pointerEvents").toString();
+        return "none".equals(pointerEvents);
     }
 
     /**
@@ -707,16 +661,14 @@ public class TenantSurveyFormPO {
      * @return true if only today is enabled
      */
     public boolean isOnlyTodayEnabledInCalendar() {
-        // Scope search to the date picker container
-        var basedLocator = page.locator("//div[@class='date-wrapper__cell-parent']/span[@class='cell day']");
-
+        // Use class-level locator for date cells
         // Check if dates before today are disabled
         String yesterday = JavaHelpers.getCostumDateOrTime("d", -1, 0, 0);
-        var yesterdayLocator = basedLocator.getByText(yesterday, new Locator.GetByTextOptions().setExact(true)).first();
+        var yesterdayLocator = basedLocatorDateCell.getByText(yesterday, new Locator.GetByTextOptions().setExact(true)).first();
 
         // Check if dates after today are disabled
         String tomorrow = JavaHelpers.getCostumDateOrTime("d", 1, 0, 0);
-        var tomorrowLocator = basedLocator.getByText(tomorrow, new Locator.GetByTextOptions().setExact(true)).first();
+        var tomorrowLocator = basedLocatorDateCell.getByText(tomorrow, new Locator.GetByTextOptions().setExact(true)).first();
 
         boolean yesterdayDisabled = !playwright.waitTillLocatorIsVisible(yesterdayLocator);
         boolean tomorrowDisabled = !playwright.waitTillLocatorIsVisible(tomorrowLocator);
@@ -750,37 +702,30 @@ public class TenantSurveyFormPO {
      * @return true if date range is selectable
      */
     public boolean verifyDateRangeSelectable(int daysFromToday) {
-        try {
-            // Get current month and target month
-            String currentMonth = JavaHelpers.getCostumDateOrTime("MMMM", 0, 0, 0);
-            String targetMonth = JavaHelpers.getCostumDateOrTime("MMMM", daysFromToday, 0, 0);
+        // Get current month and target month
+        String currentMonth = JavaHelpers.getCostumDateOrTime("MMMM", 0, 0, 0);
+        String targetMonth = JavaHelpers.getCostumDateOrTime("MMMM", daysFromToday, 0, 0);
 
-            // Navigate to the target month if it's different from current month
-            if (!currentMonth.equals(targetMonth)) {
-                // Click next month button to navigate to the target month
-                playwright.clickOn(nextMonthBtn);
-                playwright.hardWait(1000); // Wait for calendar to update
-            }
-
-            // Scope search to the date picker container
-            var basedLocator = page.locator("//div[@class='date-wrapper__cell-parent']/span[@class='cell day']");
-
-            String futureDate = JavaHelpers.getCostumDateOrTime("d", daysFromToday, 0, 0);
-            var futureDateLocator = basedLocator.getByText(futureDate, new Locator.GetByTextOptions().setExact(true)).first();
-
-            // Check if the date is visible
-            boolean isVisible = playwright.waitTillLocatorIsVisible(futureDateLocator);
-
-            // Navigate back to current month if we navigated away
-            if (!currentMonth.equals(targetMonth)) {
-                playwright.clickOn(previousMonthBtn);
-            }
-
-            return isVisible;
-        } catch (Exception e) {
-            System.out.println("Error verifying date range selectable: " + e.getMessage());
-            return false;
+        // Navigate to the target month if it's different from current month
+        if (!currentMonth.equals(targetMonth)) {
+            // Click next month button to navigate to the target month
+            playwright.clickOn(nextMonthBtn);
+            playwright.hardWait(1000); // Wait for calendar to update
         }
+
+        // Use class-level locator for date cells
+        String futureDate = JavaHelpers.getCostumDateOrTime("d", daysFromToday, 0, 0);
+        var futureDateLocator = basedLocatorDateCell.getByText(futureDate, new Locator.GetByTextOptions().setExact(true)).first();
+
+        // Check if the date is visible
+        boolean isVisible = playwright.waitTillLocatorIsVisible(futureDateLocator);
+
+        // Navigate back to current month if we navigated away
+        if (!currentMonth.equals(targetMonth)) {
+            playwright.clickOn(previousMonthBtn);
+        }
+
+        return isVisible;
     }
 
     /**
@@ -789,21 +734,13 @@ public class TenantSurveyFormPO {
      * @return true if past dates are disabled
      */
     public boolean arePastDatesDisabled() {
-        // Scope search to the date picker container
-        var basedLocator = page.locator("//div[@class='date-wrapper__cell-parent']/span[@class='cell day']");
-
+        // Use class-level locator for date cells
         String yesterday = JavaHelpers.getCostumDateOrTime("d", -1, 0, 0);
-        var yesterdayLocator = basedLocator.getByText(yesterday, new Locator.GetByTextOptions().setExact(true)).first();
+        var yesterdayLocator = basedLocatorDateCell.getByText(yesterday, new Locator.GetByTextOptions().setExact(true)).first();
 
-        try {
-            playwright.clickOn(yesterdayLocator);
-            // If click succeeds, past date is not disabled
-            return false;
-        } catch (Exception e) {
-            // Click failed, past date is disabled (expected behavior)
-            System.out.println("Past date click failed as expected - date is disabled: " + e.getMessage());
-            return true;
-        }
+        // Check if yesterday's date has disabled class
+        String classAttr = yesterdayLocator.getAttribute("class");
+        return classAttr != null && classAttr.contains("disabled");
     }
 
     /**
@@ -845,17 +782,8 @@ public class TenantSurveyFormPO {
         }
 
         // Check if pointer-events is none (CSS disabled)
-        try {
-            String pointerEvents = timeButtonLocator.evaluate("el => window.getComputedStyle(el).pointerEvents").toString();
-            if ("none".equals(pointerEvents)) {
-                return true;
-            }
-        } catch (Exception e) {
-            // If evaluation fails, continue with other checks
-            System.out.println("Failed to evaluate pointer-events for time slot " + time + ": " + e.getMessage());
-        }
-
-        return false;
+        String pointerEvents = timeButtonLocator.evaluate("el => window.getComputedStyle(el).pointerEvents").toString();
+        return "none".equals(pointerEvents);
     }
 
     /**
@@ -944,7 +872,6 @@ public class TenantSurveyFormPO {
      * @return true if suggestion is visible
      */
     public boolean isSuggestionToSelectTanggalLainVisible() {
-        Locator suggestionMessage = page.locator(".suggestion-message, .tanggal-lain-suggestion");
         return playwright.waitTillLocatorIsVisible(suggestionMessage);
     }
 
@@ -977,61 +904,51 @@ public class TenantSurveyFormPO {
      * @return true if selected
      */
     public boolean isTimePreviouslySelected(String time) {
-        try {
-            var timeButtonLocator = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(time));
+        var timeButtonLocator = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(time));
 
-            // Wait a bit to ensure the DOM is updated after period switch
-            page.waitForTimeout(500);
+        // Wait a bit to ensure the DOM is updated after period switch
+        page.waitForTimeout(500);
 
-            // Check if button exists in DOM (might be hidden but still in DOM)
-            int buttonCount = timeButtonLocator.count();
-            if (buttonCount == 0) {
-                // Button not in DOM at all, check for other indicators
-                // Maybe there's a hidden input or display showing selected time
-                return false;
-            }
-
-            // Button exists in DOM, check its state (even if not visible)
-            String classAttr = timeButtonLocator.getAttribute("class");
-
-            // Check multiple possible class names for selected state
-            if (classAttr != null) {
-                boolean hasSelectedClass = classAttr.contains("selected") ||
-                       classAttr.contains("active") ||
-                       classAttr.contains("bg-c-tag--active") ||
-                       classAttr.contains("bg-c-tag--selected") ||
-                       classAttr.contains("is-active") ||
-                       classAttr.contains("is-selected") ||
-                       classAttr.contains("chosen");
-
-                if (hasSelectedClass) {
-                    return true;
-                }
-            }
-
-            // Also check aria-selected attribute
-            String ariaSelected = timeButtonLocator.getAttribute("aria-selected");
-            if (ariaSelected != null && ariaSelected.equals("true")) {
-                return true;
-            }
-
-            // Check if button has aria-checked attribute (for toggle buttons)
-            String ariaChecked = timeButtonLocator.getAttribute("aria-checked");
-            if (ariaChecked != null && ariaChecked.equals("true")) {
-                return true;
-            }
-
-            // Check data attributes that might indicate selection
-            String dataSelected = timeButtonLocator.getAttribute("data-selected");
-            if (dataSelected != null && dataSelected.equals("true")) {
-                return true;
-            }
-
-            return false;
-        } catch (Exception e) {
-            System.out.println("Error checking if time is selected: " + e.getMessage());
+        // Check if button exists in DOM (might be hidden but still in DOM)
+        int buttonCount = timeButtonLocator.count();
+        if (buttonCount == 0) {
+            // Button not in DOM at all
             return false;
         }
+
+        // Button exists in DOM, check its state (even if not visible)
+        String classAttr = timeButtonLocator.getAttribute("class");
+
+        // Check multiple possible class names for selected state
+        if (classAttr != null) {
+            boolean hasSelectedClass = classAttr.contains("selected") ||
+                   classAttr.contains("active") ||
+                   classAttr.contains("bg-c-tag--active") ||
+                   classAttr.contains("bg-c-tag--selected") ||
+                   classAttr.contains("is-active") ||
+                   classAttr.contains("is-selected") ||
+                   classAttr.contains("chosen");
+
+            if (hasSelectedClass) {
+                return true;
+            }
+        }
+
+        // Also check aria-selected attribute
+        String ariaSelected = timeButtonLocator.getAttribute("aria-selected");
+        if (ariaSelected != null && ariaSelected.equals("true")) {
+            return true;
+        }
+
+        // Check if button has aria-checked attribute (for toggle buttons)
+        String ariaChecked = timeButtonLocator.getAttribute("aria-checked");
+        if (ariaChecked != null && ariaChecked.equals("true")) {
+            return true;
+        }
+
+        // Check data attributes that might indicate selection
+        String dataSelected = timeButtonLocator.getAttribute("data-selected");
+        return dataSelected != null && dataSelected.equals("true");
     }
 
     /**
@@ -1043,37 +960,21 @@ public class TenantSurveyFormPO {
         // Wait a bit for error message to appear after form validation
         page.waitForTimeout(2000);
 
-        // Try multiple locator strategies to find the error message
-        try {
-            // Strategy 1: Check form-survey container for bg-c-field__message
-            Locator formError = page.locator(".form-survey .bg-c-field__message").first();
-            if (playwright.waitTillLocatorIsVisible(formError)) {
-                return playwright.getText(formError);
-            }
-        } catch (Exception e) {
-            // Strategy 1 failed, continue to next strategy
-            System.out.println("Error message strategy 1 failed: " + e.getMessage());
+        // Strategy 1: Check form-survey container for bg-c-field__message
+        Locator formError = page.locator(".form-survey .bg-c-field__message").first();
+        if (playwright.waitTillLocatorIsVisible(formError)) {
+            return playwright.getText(formError);
         }
 
-        try {
-            // Strategy 2: Look for any error message in the form
-            Locator anyError = page.locator(".form-survey [class*='error']").first();
-            if (playwright.waitTillLocatorIsVisible(anyError)) {
-                return playwright.getText(anyError);
-            }
-        } catch (Exception e) {
-            // Strategy 2 failed, continue to next strategy
-            System.out.println("Error message strategy 2 failed: " + e.getMessage());
+        // Strategy 2: Look for any error message in the form
+        Locator anyError = page.locator(".form-survey [class*='error']").first();
+        if (playwright.waitTillLocatorIsVisible(anyError)) {
+            return playwright.getText(anyError);
         }
 
-        try {
-            // Strategy 3: Original locator
-            if (playwright.waitTillLocatorIsVisible(phoneNumberErrorMessage)) {
-                return playwright.getText(phoneNumberErrorMessage);
-            }
-        } catch (Exception e) {
-            // Strategy 3 failed, all strategies exhausted
-            System.out.println("Error message strategy 3 failed: " + e.getMessage());
+        // Strategy 3: Original locator
+        if (playwright.waitTillLocatorIsVisible(phoneNumberErrorMessage)) {
+            return playwright.getText(phoneNumberErrorMessage);
         }
 
         System.out.println("No phone number error message found after trying all strategies");
@@ -1089,25 +990,16 @@ public class TenantSurveyFormPO {
         // Wait a bit for potential error message to appear
         page.waitForTimeout(2000);
 
-        // Check if any error message is visible using multiple strategies
-        try {
-            // Check for error in form-survey container
-            Locator formError = page.locator(".form-survey .bg-c-field__message").first();
-            if (playwright.waitTillLocatorIsVisible(formError)) {
-                return false; // Error message found, validation failed
-            }
-        } catch (Exception e) {
-            System.out.println("Error element not found in form-survey container: " + e.getMessage());
+        // Check for error in form-survey container
+        Locator formError = page.locator(".form-survey .bg-c-field__message").first();
+        if (playwright.waitTillLocatorIsVisible(formError)) {
+            return false; // Error message found, validation failed
         }
 
-        try {
-            // Check for any element with error class
-            Locator anyError = page.locator(".form-survey [class*='error']").first();
-            if (playwright.waitTillLocatorIsVisible(anyError)) {
-                return false; // Error message found, validation failed
-            }
-        } catch (Exception e) {
-            System.out.println("No error element with error class found: " + e.getMessage());
+        // Check for any element with error class
+        Locator anyError = page.locator(".form-survey [class*='error']").first();
+        if (playwright.waitTillLocatorIsVisible(anyError)) {
+            return false; // Error message found, validation failed
         }
 
         // No error message found, validation passed
@@ -1161,6 +1053,25 @@ public class TenantSurveyFormPO {
     public String getPopupConfirmationHeadingText() {
         playwright.waitTillLocatorIsVisible(popupConfirmationHeading);
         return playwright.getText(popupConfirmationHeading);
+    }
+
+    /**
+     * Check if navigation to chatroom is successful
+     *
+     * @return true if navigation successful
+     */
+    public boolean isNavigationToChatroomSuccessful() {
+        // Check if chatroom is visible using class variable
+        return playwright.waitTillLocatorIsVisible(chatroomContainer);
+    }
+
+    /**
+     * Check if survey request sent with phone number visible
+     *
+     * @return true if phone visible in survey request
+     */
+    public boolean isSurveyRequestSentWithPhoneVisible() {
+        return playwright.waitTillLocatorIsVisible(phoneInMessage);
     }
 
     /**

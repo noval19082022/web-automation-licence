@@ -99,6 +99,9 @@ public class OwnerDashboardPO {
     private Locator generalCloseButton;
     private Locator pilihPaketGoldplus;
     private Locator inginKosDikelolaLink;
+    private Locator gpPeriodFavoriteOption;
+    private Locator gpPeriodFirstOption;
+    private Locator pilihPeriodeButton;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -184,6 +187,9 @@ public class OwnerDashboardPO {
         entryPointCardGP = page.locator(".membership-card__section").first();
         gpspPromoCountDown = page.getByTestId("countdown-container");
         inginKosDikelolaLink = page.locator("a").filter(new Locator.FilterOptions().setHasText("Ingin kos dikelola secara"));
+        gpPeriodFavoriteOption = page.locator("//div[contains(@class, 'goldplus-periode-select__option') and contains(., '4 Bulan')]");
+        gpPeriodFirstOption = page.locator("//div[contains(@class, 'goldplus-periode-select__option')]").first();
+        pilihPeriodeButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Periode"));
     }
 
     /**
@@ -898,21 +904,18 @@ public class OwnerDashboardPO {
             playwright.hardWait(2000.0);
 
             // Look for the favorite option (4 Bulan option which is marked as "Favorit")
-            Locator favoriteOption = page.locator("//div[contains(@class, 'goldplus-periode-select__option') and contains(., '4 Bulan')]");
-            if (playwright.waitTillLocatorIsVisible(favoriteOption, 5000.0)) {
-                playwright.clickOn(favoriteOption);
+            if (playwright.waitTillLocatorIsVisible(gpPeriodFavoriteOption, 5000.0)) {
+                playwright.clickOn(gpPeriodFavoriteOption);
                 System.out.println("Selected 4 Bulan (Favorit) option in GoldPlus period selection popup");
             } else {
                 // If favorite option not found, select the first available option
-                Locator firstOption = page.locator("//div[contains(@class, 'goldplus-periode-select__option')]").first();
-                if (playwright.waitTillLocatorIsVisible(firstOption, 3000.0)) {
-                    playwright.clickOn(firstOption);
+                if (playwright.waitTillLocatorIsVisible(gpPeriodFirstOption, 3000.0)) {
+                    playwright.clickOn(gpPeriodFirstOption);
                     System.out.println("Selected first available period option in GoldPlus period selection popup");
                 }
             }
 
             // Click the "Pilih Periode" button if it exists
-            Locator pilihPeriodeButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Periode"));
             if (playwright.waitTillLocatorIsVisible(pilihPeriodeButton, 3000.0)) {
                 playwright.clickOn(pilihPeriodeButton);
                 System.out.println("Clicked 'Pilih Periode' button in GoldPlus period selection popup");

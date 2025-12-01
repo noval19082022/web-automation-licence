@@ -25,6 +25,10 @@ public class AdminApproveBookingPO {
     Locator confirmDeleteOtherPrice;
     Locator detailButton;
     Locator toggleOtherPrice;
+    Locator filterPhoneInput;
+    Locator kosTypeSearchInput;
+    Locator kosTypeHighlightedOption;
+    Locator cancelDPButton;
 
     public AdminApproveBookingPO(Page page) {
         this.page = page;
@@ -41,6 +45,10 @@ public class AdminApproveBookingPO {
         confirmDeleteOtherPrice =  page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Hapus"));
         detailButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Detail"));
         toggleOtherPrice = page.locator("label").filter(new Locator.FilterOptions().setHasText("Biaya Lainnya Per Bulan")).locator("span").first();
+        filterPhoneInput = page.locator("//input[@placeholder='Ex: 081987654321']");
+        kosTypeSearchInput = page.locator("//span[@class='select2-search select2-search--dropdown']//input[@role='searchbox']");
+        kosTypeHighlightedOption = page.locator("//li[@class='select2-results__option select2-results__option--highlighted']");
+        cancelDPButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Batalkan"));
     }
 
     /**
@@ -56,13 +64,10 @@ public class AdminApproveBookingPO {
      */
     public void fillFilterDataBooking(String tenantPhone,String kosType) {
         playwright.clickOn(textBoxFilterDataPhone);
-        Locator dataFilterPhone = page.locator("//input[@placeholder='Ex: 081987654321']");
-        playwright.fill(dataFilterPhone,tenantPhone);
+        playwright.fill(filterPhoneInput,tenantPhone);
         playwright.clickOn(dropdownFilterDataKosType);
-        Locator fillTextboxKosType = page.locator("//span[@class='select2-search select2-search--dropdown']//input[@role='searchbox']");
-        playwright.fill(fillTextboxKosType,kosType);
-        Locator dataFilterkosType = page.locator("//li[@class='select2-results__option select2-results__option--highlighted']");
-        playwright.clickOn(dataFilterkosType);
+        playwright.fill(kosTypeSearchInput,kosType);
+        playwright.clickOn(kosTypeHighlightedOption);
         playwright.clickOn(searchButton);
         playwright.waitTillNetworkIdle();
     }
@@ -113,7 +118,6 @@ public class AdminApproveBookingPO {
      */
     public void clickOnNextButonConfirmBooking(){
         playwright.clickOn(nextConfirmBooking);
-        Locator cancelDPButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Batalkan"));
         playwright.clickOn(cancelDPButton);
         playwright.clickOn(nextConfirmBooking);
         playwright.clickOn(confirmBooking);

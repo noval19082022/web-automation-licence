@@ -18,6 +18,7 @@ public class ChatPO {
     Locator chatSearchInput;
     Locator allChatMenu;
     Locator searchType;
+    Locator textTitle;
 
     //-----important---//
     Locator markImportantButton;
@@ -34,6 +35,7 @@ public class ChatPO {
         chatSearchDropdown = page.locator("#search_type");
         chatSearchInput = page.getByPlaceholder("Cari Chat");
         allChatMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("All"));
+        textTitle = page.locator("//div[@class=\"channel-list-item__content\"]").first();
 
         //--------important----//
         markImportantButton = page.locator("//div[@class=\"channel-list-item__important-button-icon\"]").first();
@@ -117,7 +119,6 @@ public class ChatPO {
      * @return data search
      */
     public String getResutlSearch() {
-        Locator textTitle = page.locator("//div[@class=\"channel-list-item__content\"]").first();
         return playwright.getText(textTitle);
     }
 

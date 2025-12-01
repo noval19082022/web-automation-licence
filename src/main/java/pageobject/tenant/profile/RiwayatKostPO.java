@@ -52,6 +52,7 @@ public class RiwayatKostPO {
     Locator bankNameButton;
     Locator accountNumber;
     Locator accountOwnerName;
+    Locator stopRentContractText;
 
 
     public RiwayatKostPO(Page page) {
@@ -94,6 +95,7 @@ public class RiwayatKostPO {
         accountNumber = page.getByPlaceholder("Masukkan nomor rekening");
         accountOwnerName = page.getByPlaceholder("Masukkan nama pemilik rekening");
         berhentiSewaButtonPopup = page.locator("//*[@class=\"bg-c-button bg-c-button--tertiary bg-c-button--lg\"]");
+        stopRentContractText = page.locator("//*[@data-testid=\"userKostModalStopRent-contract\"]");
     }
 
     /**
@@ -430,7 +432,6 @@ public class RiwayatKostPO {
      * @return text
      */
     public boolean getStopRentContract(){
-        Locator stopRentContractText = page.locator("//*[@data-testid=\"userKostModalStopRent-contract\"]");
         return playwright.waitTillLocatorIsVisible(stopRentContractText);
     }
 }

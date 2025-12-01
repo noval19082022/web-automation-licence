@@ -49,6 +49,7 @@ public class RefundPO {
     private Locator phoneNumberPlaceHolder;
     private Locator cariBtn;
     private Locator reasonField;
+    private Locator searchInputField;
 
     public RefundPO(Page page) {
         this.page = page;
@@ -93,6 +94,7 @@ public class RefundPO {
         this.phoneNumberPlaceHolder = page.getByPlaceholder("Ex: 081987654321");
         this.cariBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Cari"));
         this.reasonField = page.locator("//div[@class='refund-invoice__modal modal fade in']//select[@class='form-control refund-invoice__modal-select']");
+        this.searchInputField = page.locator("input[placeholder='Search']");
     }
 
     /**
@@ -299,8 +301,7 @@ public class RefundPO {
         playwrightHelpers.clickOn(searchBy);
         Locator searchBy = page.locator("//span[normalize-space()='"+name+"']");
         playwrightHelpers.clickOn(searchBy);
-        Locator valueBy = page.locator("input[placeholder='Search']");
-        playwrightHelpers.fill(valueBy, value);
+        playwrightHelpers.fill(searchInputField, value);
         playwrightHelpers.clickOn(searchBtnAction);
     }
 
