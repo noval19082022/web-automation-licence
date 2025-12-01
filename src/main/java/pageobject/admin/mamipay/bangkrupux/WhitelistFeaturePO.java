@@ -33,6 +33,14 @@ public class WhitelistFeaturePO {
     }
 
     /**
+     * Click on feature dropdown
+     */
+    public void clickOnFeatureDropdown() {
+        playwright.waitTillLocatorIsVisible(selectFeature);
+        playwright.clickOn(selectFeature);
+    }
+
+    /**
      * Choose feature whitelist
      */
     public void chooseFeatureWhitelist(String feature) {
