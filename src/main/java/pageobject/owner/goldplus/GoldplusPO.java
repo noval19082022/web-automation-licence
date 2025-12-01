@@ -597,6 +597,8 @@ public class GoldplusPO {
                         }
                     }
                 } catch (Exception e) {
+                    // XPath strategy failed, trying next strategy
+                    System.out.println("XPath strategy failed for field '" + text + "': " + e.getMessage());
                 }
             }
             throw new RuntimeException("Could not find value for field: " + text + ". Tried " + xpathStrategies.length + " XPath strategies.");

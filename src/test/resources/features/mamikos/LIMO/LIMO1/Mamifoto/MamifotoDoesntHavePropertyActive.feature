@@ -1,4 +1,4 @@
-@LIMO2 @Mamifoto @MamifotoDoesntHavePropertyActive
+@LIMO1 @Mamifoto @MamifotoDoesntHavePropertyActive
 Feature: Entry Point Mamifoto when does not have property active
 
   @continue @TEST_LIMO-3570 @declarative @listing-monetization @reviewed @Automated @web @playWright

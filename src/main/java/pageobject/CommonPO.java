@@ -1,0 +1,41 @@
+package pageobject;
+
+import com.microsoft.playwright.Page;
+import utilities.PlaywrightHelpers;
+
+public class CommonPO {
+    private Page page;
+    private PlaywrightHelpers playwright;
+
+    public CommonPO(Page page) {
+        this.page = page;
+        this.playwright = new PlaywrightHelpers(page);
+    }
+
+    /**
+     * Check if error page is displayed
+     * @return true if error page is displayed
+     */
+    public boolean isErrorPageDisplayed() {
+        try {
+            // First check the page title for error codes
+            String pageTitle = page.title();
+            if (pageTitle != null) {
+                String lowerTitle = pageTitle.toLowerCase();
+                if (lowerTitle.contains("429") || lowerTitle.contains("502") || lowerTitle.contains("504") || 
+                    lowerTitle.contains("error") || lowerTitle.contains("bad gateway") || lowerTitle.contains("timeout")) {
+                    return true;
+                }
+            }
+            
+            // Check for error pages using a single efficient selector
+            return playwright.waitTillLocatorIsVisible(
+                page.locator("center h1:text-matches('(502|504|429|Bad Gateway|Gateway Timeout|Too Many Requests)'), body > h1:text-matches('(502|504|429)')"), 
+                1000.0
+            );
+        } catch (Exception e) {
+            // If any error occurs while checking, assume no error page
+            return false;
+        }
+    }
+}

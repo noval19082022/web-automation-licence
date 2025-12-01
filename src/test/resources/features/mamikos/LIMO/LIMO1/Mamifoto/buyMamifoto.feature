@@ -1,4 +1,4 @@
-@LIMO2 @Mamifoto @essentialTest2 @DONEMIGRATINGTONEWBOARD
+@LIMO1 @Mamifoto @essentialTest2 @DONEMIGRATINGTONEWBOARD
 Feature: Owner Purchase Mamifoto
 
   @TEST_LIMO-3560 @declarative @listing-monetization @reviewed @Automated @web @playWright

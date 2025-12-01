@@ -109,6 +109,7 @@ public class ChatTenantPO {
                     }
                 } catch (Exception e) {
                     // Continue with alternative selector if this fails
+                    System.out.println("Error getting question text: " + e.getMessage());
                 }
             }
         }
@@ -126,6 +127,7 @@ public class ChatTenantPO {
                     }
                 } catch (Exception e) {
                     // Continue if this fails
+                    System.out.println("Error getting question text from alternative selector: " + e.getMessage());
                 }
             }
         }

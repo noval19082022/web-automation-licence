@@ -1,38 +1,7 @@
 @regression @surveyTenantP1 @LIMO6
-
 Feature: Survey Tenant
 
-  @TEST_SS-3591 @continue
-  Scenario: Submit survei from chat template on Kost Detail
-    Given user go to mamikos homepage
-    When user login as tenant via phone number:
-      | phone stag    | phone prod | password  |
-      | 0811978788416 | 0812000005 | qwerty123 |
-    And user click on chat button in top bar tenant home page
-    And user click "Kost Adi Auto SinggahSini Tobelo Halmahera Utara"
-    And user tap on survey kost btn on detail chatroom
-    # NEW FLOW - Select survey date type
-    And user select survey date type "Tanggal Lain"
-    And user open survey date picker on form survey
-    And user select date "7" on survey form
-    # NEW FLOW - Select survey time (2 steps: period + specific time)
-    And user select survey time period "Pagi"
-    And user select survey time "08:00"
-    # NEW FLOW - Fill phone number
-    And user fill phone number "0811978788416" on survey form
-    # NEW FLOW - Check TnC checkbox
-    And user check TnC agreement checkbox on survey form
-    # Submit survey
-    And user tap on ajukan survey btn on form
-    # NEW FLOW - Confirm popup if appear (only for P2)
-    And user confirm popup ajukan survey if appear
-    # Verify
-    And user go to mamikos homepage
-    And user click on chat button in top bar tenant home page
-    And user click "Kost Adi Auto SinggahSini Tobelo Halmahera Utara"
-    Then chat room appear with latest message "Survei Diterima"
-
-  @TEST_LIMO-9323 @continue
+  @TEST_LIMO-9323 @TEST_SS-3591 @continue
   Scenario: Submit survei hari ini from chat template on Kost Detail
     Given user go to mamikos homepage
     When user login as tenant via phone number:

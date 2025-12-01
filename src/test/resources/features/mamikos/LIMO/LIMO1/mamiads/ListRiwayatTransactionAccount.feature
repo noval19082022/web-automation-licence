@@ -24,7 +24,7 @@ Feature: List Riwayat Transaction Account
     And user open the invoice mamiads if invoice already maximal on riwayat
     And user wants to buy saldo MamiAds "6.000"
     And user navigates to mamiads dashboard
-    Then user verify count of riwayat added 0
+    Then user verify count of riwayat added 1
 
   @TEST_LIMO-1500
   Scenario: red counter badge if all transaction is complete

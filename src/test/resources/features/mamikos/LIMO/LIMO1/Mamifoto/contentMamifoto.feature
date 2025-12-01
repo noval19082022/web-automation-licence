@@ -1,4 +1,4 @@
-@LIMO2 @Mamifoto @ContentMamifoto @DONEMIGRATINGTONEWBOARD
+@LIMO1 @Mamifoto @ContentMamifoto @DONEMIGRATINGTONEWBOARD
 
 Feature: Check content Mamifoto
 

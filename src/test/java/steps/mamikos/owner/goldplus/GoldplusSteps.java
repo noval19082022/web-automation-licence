@@ -1,5 +1,6 @@
 package steps.mamikos.owner.goldplus;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.LoadState;
 import config.playwright.context.ActiveContext;
@@ -861,9 +862,8 @@ public class GoldplusSteps {
 
     @And("user Navigasi ke Chat List")
     public void userNavigasiKeChatList() {
-        if (playwright.isTextDisplayed("Sudah cek fitur-fitur GoldPlus ini?")) {
-            chat.clickCloseOnFTUEBeforeChat();
-        }
+        playwright.hardWait(3000);
+        chat.clickCloseOnFTUEBeforeChat();
         chat.clickChatOwner();
         chat.dismissAllFTUE();
         chat.dismissFTUEMarsGPAndSurveyIfExist();

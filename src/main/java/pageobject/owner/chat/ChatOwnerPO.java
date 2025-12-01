@@ -43,6 +43,8 @@ public class ChatOwnerPO {
     Locator berikutnyaBtn;
     Locator chatListEmptyState;
     Locator buttonOnChatRoomList;
+    Locator buttonOnChatRoom;
+    Locator buttonOnOwnerDashboard;
     Locator Iunderstand;
     Locator sayaMengertiChatRoom;
     Locator bookingLabel;
@@ -93,7 +95,7 @@ public class ChatOwnerPO {
         ftueSurveyTitle = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Baru! Terima Survei Kos"));
         berikutnyaBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Berikutnya"));
         chatListEmptyState = page.getByText("Chat kosong");
-        Iunderstand = page.locator("//button[@class=' shepherd-button ']");
+        Iunderstand = page.locator("//button[normalize-space()='Saya Mengerti']");
         sayaMengertiChatRoom = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti"));
         bookingLabel = page.getByTestId("chatRoomHeaderWrapper").getByTestId("booking-status-label");
         closeIcon = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
@@ -106,6 +108,8 @@ public class ChatOwnerPO {
         caraIsiKuotaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cara isi kuota"));
         chatBebasKuotaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Chat bebas kuota"));
         apaItuKuotaChatRoomButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Apa itu kuota chat room?"));
+        buttonOnChatRoom = page.locator("button[class='bg-c-button bg-c-button--primary bg-c-button--sm']");
+        buttonOnChatRoomList = page.locator("button.bg-c-button.mc-non-gp-entrypoint-card__entrypoint-button.bg-c-button--primary.bg-c-button--sm");
     }
 
     /**
@@ -339,7 +343,9 @@ public class ChatOwnerPO {
      * Click close button on FTUE Before chat FTUE Mars
      */
     public void clickCloseOnFTUEBeforeChat() {
-        closeFTUEBeforeChat.click();
+        if (playwright.waitTillLocatorIsVisible(closeFTUEBeforeChat)) {
+            closeFTUEBeforeChat.click();
+        }
     }
 
     /**
@@ -503,13 +509,22 @@ public class ChatOwnerPO {
      */
     public void clickButtonOnChatRoomList(String buttonText) {
         // Dismiss Shepherd modal if present
-        if (playwright.waitTillLocatorIsVisible(Iunderstand, 2000.0)) {
+        if (playwright.waitTillLocatorIsVisible(Iunderstand, 5000.0)) {
             playwright.clickOn(Iunderstand);
         }
+        buttonOnOwnerDashboard = page.locator("//button[normalize-space()='"+buttonText+"']");
+        if (playwright.waitTillLocatorIsVisible(buttonOnChatRoomList)) {
+            playwright.hardWait(2000);
+           playwright.waitFor(buttonOnChatRoomList);
+           playwright.clickOn(buttonOnChatRoomList);
+       } else if (playwright.waitTillLocatorIsVisible(buttonOnChatRoom)){
+            playwright.hardWait(2000);
+           playwright.waitFor(buttonOnChatRoom);
+           playwright.clickOn(buttonOnChatRoom);
+       } else {
 
-        buttonOnChatRoomList = page.locator("//h6[normalize-space()='"+buttonText+"']");
-        playwright.waitFor(buttonOnChatRoomList);
-        playwright.clickOn(buttonOnChatRoomList);
+            playwright.clickOn(buttonOnOwnerDashboard);
+        }
     }
 
     /**
