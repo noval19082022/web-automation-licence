@@ -182,6 +182,7 @@ public class BroadcastChatSteps {
     public void ownerClicksOnBacaSelengkapnyaButton() {
         loading.waitForLoadingIconDisappear();
         broadcast.clicksOnLihatSelengkapnyaButton();
+        playwright.hardWait(1_000);
     }
 
     @When("owner add broadcast chat for kost {string}")
