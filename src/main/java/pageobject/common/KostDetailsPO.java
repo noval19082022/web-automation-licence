@@ -300,6 +300,9 @@ public class KostDetailsPO {
     //-------------------Survey Label---------------//
     private Locator surveyLabelSection;
 
+    //-------------------Inactive Owner Warning---------------//
+    private Locator inactiveOwnerWarningInfoBox;
+    private Locator inactiveOwnerWarningCloseIcon;
 
     public KostDetailsPO(Page page) {
         this.page = page;
@@ -565,6 +568,10 @@ public class KostDetailsPO {
 
         //------------survey label------------//
         surveyLabelSection = page.locator("#priceCard").getByTestId("detailFomoLabel");
+
+        //------------inactive owner warning------------//
+        inactiveOwnerWarningInfoBox = page.locator(".bg-c-alert--warning").filter(new Locator.FilterOptions().setHasText("Pemilik Kos Tidak Aktif"));
+        inactiveOwnerWarningCloseIcon = page.locator(".bg-c-alert--warning button.bg-c-alert__action-close");
     }
 
     /**
@@ -2633,5 +2640,39 @@ public class KostDetailsPO {
     public String getSurveyLabelText() {
             playwright.waitTillLocatorIsVisible(surveyLabelSection, 3000.0);
                 return playwright.getText(surveyLabelSection);
+    }
+
+    //------------ Inactive Owner Warning Section ----------------
+
+    /**
+     * Check if inactive owner warning info box is displayed
+     * @return boolean true if visible, false otherwise
+     */
+    public boolean isInactiveOwnerWarningInfoBoxDisplayed() {
+        return playwright.waitTillLocatorIsVisible(inactiveOwnerWarningInfoBox, 5000.0);
+    }
+
+    /**
+     * Click on close icon on inactive owner warning info box
+     */
+    public void clickCloseIconOnInactiveOwnerWarning() {
+        playwright.waitTillLocatorIsVisible(inactiveOwnerWarningCloseIcon);
+        playwright.clickOn(inactiveOwnerWarningCloseIcon);
+    }
+
+    /**
+     * Navigate back to previous page (SRP)
+     */
+    public void navigateBackToPreviousPage() {
+        page.goBack();
+        playwright.waitTillPageLoaded();
+    }
+
+    /**
+     * Navigate forward to next page (property detail)
+     */
+    public void navigateForwardToNextPage() {
+        page.goForward();
+        playwright.waitTillPageLoaded();
     }
 }

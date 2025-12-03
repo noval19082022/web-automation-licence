@@ -540,4 +540,31 @@ public class KostDetailSteps {
     public void tenant_can_see_placeholder_hone_number_with(String text){
         Assert.assertTrue(kostDetail.isPhoneNumberPlaceHolderText(text), "not see place holder");
     }
+
+    //------------ Inactive Owner Warning Section ----------------
+
+    @And("a tenant is on a property detail page where the inactive owner warning is displayed")
+    public void aTenantIsOnAPropertyDetailPageWhereTheInactiveOwnerWarningIsDisplayed() {
+        Assert.assertTrue(kostDetail.isInactiveOwnerWarningInfoBoxDisplayed(), "Inactive owner warning info box is not displayed");
+    }
+
+    @And("the tenant clicks the close icon on the warning info box")
+    public void theTenantClicksTheCloseIconOnTheWarningInfoBox() {
+        kostDetail.clickCloseIconOnInactiveOwnerWarning();
+    }
+
+    @When("the tenant navigates back to the Search Result Page SRP")
+    public void theTenantNavigatesBackToTheSearchResultPageSRP() {
+        kostDetail.navigateBackToPreviousPage();
+    }
+
+    @And("then navigates back to the same property detail page")
+    public void thenNavigatesBackToTheSamePropertyDetailPage() {
+        kostDetail.navigateForwardToNextPage();
+    }
+
+    @Then("the inactive owner warning info box should be displayed again")
+    public void theInactiveOwnerWarningInfoBoxShouldBeDisplayedAgain() {
+        Assert.assertTrue(kostDetail.isInactiveOwnerWarningInfoBoxDisplayed(), "Inactive owner warning info box should be displayed again after navigating back");
+    }
 }

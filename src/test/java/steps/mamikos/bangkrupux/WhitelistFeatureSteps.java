@@ -58,4 +58,19 @@ public class WhitelistFeatureSteps {
     public void adminLogoutFromBangkrupux() {
         whitelistFeaturePO.clickOnLogoutButton();
     }
+
+    @And("admin click on dropdown feature")
+    public void adminClickOnDropdownFeature() {
+        whitelistFeaturePO.clickOnFeatureDropdown();
+    }
+
+    @And("admin choose feature {string}")
+    public void adminChooseFeature(String feature) {
+        whitelistFeaturePO.chooseFeatureWhitelist(feature);
+    }
+
+    @And("admin click submit button whitelist")
+    public void adminClickSubmitButtonWhitelist() {
+        whitelistFeaturePO.clickOnSaveButton();
+    }
 }
