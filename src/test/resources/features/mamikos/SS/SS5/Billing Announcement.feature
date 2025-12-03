@@ -1,4 +1,4 @@
-@SS5 @billingAnnouncement @checkrunpasstidak
+@SS5 @billingAnnouncement
 Feature: Billing Announcement
 
   @SS-5002 @continue
