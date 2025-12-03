@@ -1,4 +1,4 @@
-@SS5 @billingAnnouncement
+@SS5 @billingAnnouncement @checkrunpasstidak
 Feature: Billing Announcement
 
   @SS-5002 @continue
@@ -47,6 +47,10 @@ Feature: Billing Announcement
   @SS-4364
   Scenario: [Billing Tracker][Productivity] Create announcement for 1 BSE
     And admin choose bse name with "Dida"
+    And admin click on "Ubah" button
+    And admin input announcement with " "
+    And admin can see announcement toast "Announcement berhasil tersimpan."
+    And admin can see blank announcement with "Belum ada announcement untuk akun BSE ini"
     And admin click on "Tambah" button
     And admin input announcement with "Hallo Dida jangan sampai lupa untuk bikin announcement"
     And admin can see announcement toast "Announcement berhasil tersimpan."
