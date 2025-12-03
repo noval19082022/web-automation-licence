@@ -49,7 +49,7 @@ public class TenantBackgroundCheckerSteps {
 
     @Then("owner can see entry point TBC Lihat Profil second time at chatroom {string}")
     public void owner_can_see_entry_point_tbc_lihat_profil_second_time_at_chatroom(String buttonTxt) {
-        chat.clickButtonOnChatRoomList(buttonTxt);
+        chat.searchChatTenant(buttonTxt);
         Assert.assertTrue(tenantBackgroundCheckerPO.isLihatProfilDisplayed(), "entry point not displayed");
     }
 

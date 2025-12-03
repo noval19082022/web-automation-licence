@@ -860,7 +860,7 @@ public class GoldplusSteps {
         goldplus.clickOnPeriodGoldPlus(period);
     }
 
-    @And("user Navigasi ke Chat List")
+    @And("user/owner Navigasi ke Chat List")
     public void userNavigasiKeChatList() {
         playwright.hardWait(3000);
         chat.clickCloseOnFTUEBeforeChat();
