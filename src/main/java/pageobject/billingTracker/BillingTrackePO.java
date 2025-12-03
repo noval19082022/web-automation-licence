@@ -263,7 +263,8 @@ public class BillingTrackePO {
     }
 
     /**
-     * Click on Tambah announcement
+     * Click on Tambah announcement button
+     * Note: This button only appears when no announcement exists for the selected BSE
      */
     public void clickTambahAnnouncement(){
         playwright.clickOn(tambahAnnouncementButton);
