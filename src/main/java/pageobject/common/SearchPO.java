@@ -645,21 +645,32 @@ public class SearchPO {
      * @param searchText is text we want to search
      */
     public void enterTextToSearchAndSelectResultCity(String searchText) {
-        // Click on searchKost to open the search modal (following existing pattern)
-        playwright.clickOn(searchKost);
+        // Wait for page to be loaded and dismiss any modal overlay
+        playwright.waitTillPageLoaded(10000.0);
+
+        // Check for search-box-modal and dismiss it by clicking outside or waiting
+        Locator searchBoxModal = page.getByTestId("search-box-modal");
+        if (playwright.isLocatorVisibleAfterLoad(searchBoxModal, 2000.0)) {
+            // Try pressing Escape to close modal or click outside
+            playwright.pressKeyboardKey("Escape");
+            playwright.hardWait(500);
+        }
+
+        // Try to click the search input directly using force click to bypass modal overlay
+        playwright.forceClickOn(searchKost);
         playwright.hardWait(1000); // Wait for modal/search input to appear
-        
+
         // Fill the search input using playwright helper
         playwright.fill(inputSearch, searchText);
         playwright.pressKeyboardKey("Enter");
-        
+
         // Wait for suggestions and click the area suggestion
         playwright.hardWait(2000); // Wait for suggestions to load
-        
+
         // Try to find and click the suggestion
         // First try: exact text match in suggestion area list
         Locator resultLocator = page.locator("//*[@data-testid='suggestionsBox-areaList']//label[contains(text(), '" + searchText + "')]");
-        
+
         if (resultLocator.count() > 0) {
             playwright.clickOn(resultLocator.first());
         } else {

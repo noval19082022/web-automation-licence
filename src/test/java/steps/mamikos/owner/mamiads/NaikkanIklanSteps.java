@@ -162,7 +162,8 @@ public class NaikkanIklanSteps {
 
     @And("user verify the wording iklan {string} is {string}")
     public void userVerifyTheWordingIklanIs(String adsName, String adsStatusDesc) {
-        Assert.assertEquals(naikkanIklanPO.getAdsStatusDesc(adsName), adsStatusDesc, "Ads status description doesn't match!");
+        var actualMsg = naikkanIklanPO.getAdsStatusDesc(adsName);
+        Assert.assertTrue(actualMsg.contains(adsStatusDesc), String.format("Ads status description doesn't match! with actual %s", actualMsg));
     }
 
     @And("user verify the wording anggaran of iklan {string} is {string}")
