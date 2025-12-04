@@ -205,7 +205,6 @@ public class HomePO {
      * Wait till mamikos logo is visible
      */
     public void waitTillLogoIsVisible() {
-        page.waitForLoadState(LoadState.LOAD);
         playwright.waitFor(userProfile, 30000.0);
         playwright.assertVisible(userProfile);
     }

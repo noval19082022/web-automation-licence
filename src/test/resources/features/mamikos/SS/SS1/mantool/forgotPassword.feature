@@ -1,5 +1,4 @@
 @regression @essentialTest2 @SS18 @mantool
-
 Feature: Forgot password mantool
 
   @TEST_SS-910 @continue
