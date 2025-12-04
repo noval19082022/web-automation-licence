@@ -113,7 +113,7 @@ public class OwnerDashboardPO {
         kelolaTagihan = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kelola Tagihan"));
         broadcastChatBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Broadcast Chat"));
         warningBroadcastText = page.locator("//h3[@class='bg-c-modal__body-title']");
-        closePopUpIcon = page.locator(".bg-c-modal__action-closable"); //bg-c-modal__action-closable
+        closePopUpIcon = page.locator(".bg-c-modal__action-closable");
         penyewaMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Penyewa"));
         notificationButton = page.locator(".notification-menu > .bg-c-icon");
         firstNotificationText = page.locator(".c-notification__item").first();
