@@ -333,12 +333,15 @@ public class NaikkanIklanPO {
             // Popup for activating (turning ON) is shown
             System.out.println("Clicking 'Aktifkan' button to turn ON the toggle...");
             playwright.clickOn(aktifkanButton);
+            // add hardwait to make sure the backend already sign as active or deactive on listing page
+            playwright.hardWait(5_000);
         } else {
             // Fallback to original logic using the provided actionButton parameter
             System.out.println("Using fallback: clicking '" + actionButton + "' button...");
             actionButtonLocator = page.locator("(//button[normalize-space()='"+actionButton+"'])");
             playwright.clickOn(actionButtonLocator);
         }
+
     }
 
     /**

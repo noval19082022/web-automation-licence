@@ -250,9 +250,13 @@ public class OwnerDashboardPO {
      * Dismiss FTUE Godlplus
      */
     public void dismissFTUEGoldplus() {
-        playwright.waitTillLocatorIsVisible(nantiSajaButton, 7_000.0);
+        playwright.hardWait(7_000.0);
         if (playwright.waitTillLocatorIsVisible(nantiSajaButton)) {
             playwright.clickOn(nantiSajaButton);
+        }
+
+        if (playwright.isTextDisplayed("Sudah cek fitur-fitur GoldPlus ini?")) {
+            playwright.clickOn(closePopUpIcon);
         }
     }
 

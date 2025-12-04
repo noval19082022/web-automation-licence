@@ -1,4 +1,4 @@
-@listing-monetization @regression @LIMO5 @broadcastChat @staging-only @broadcastChatOwner
+@listing-monetization @regression @LIMO5 @broadcastChat @staging-only @broadcastChatOwnerTenantBooking1
 Feature: Broadcast Chat Owner Tenant Booking Required 2
 
   #test is precondition only

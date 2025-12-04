@@ -533,6 +533,7 @@ public class SearchSteps {
         for (int i = 0; i < times; i++) {
             searchPO.selectFirstKostOnSearchResult();
         }
+        playwright.hardWait(3000);
     }
 
     @When("user use filter {string}")

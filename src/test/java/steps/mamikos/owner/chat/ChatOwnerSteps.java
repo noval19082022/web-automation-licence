@@ -176,4 +176,9 @@ public class ChatOwnerSteps {
     public void userDismissLaporanKlikFTUE() {
         chat.dismissFTUEJemputBola();
     }
+
+    @And("owner open chatroom {string} without close FTUE")
+    public void ownerOpenChatroomWithoutCloseFTUE(String arg0) {
+        chat.searchChatTenant(arg0);
+    }
 }
