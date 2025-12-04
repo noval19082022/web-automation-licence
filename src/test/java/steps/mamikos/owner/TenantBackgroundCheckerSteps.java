@@ -10,6 +10,7 @@ import pageobject.common.LoadingPO;
 import pageobject.owner.TenantBackgroundCheckerPO;
 import pageobject.owner.chat.ChatOwnerPO;
 import pageobject.owner.fiturpromosi.BroadcastChatPO;
+import pageobject.tenant.chat.ChatTenantPO;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class TenantBackgroundCheckerSteps {
     Page page = ActiveContext.getActivePage();
     TenantBackgroundCheckerPO tenantBackgroundCheckerPO = new TenantBackgroundCheckerPO(page);
     ChatOwnerPO chat = new ChatOwnerPO(page);
+    ChatTenantPO chatTenantPO = new ChatTenantPO(page);
     BroadcastChatPO broadcast = new BroadcastChatPO(page);
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     LoadingPO loading = new LoadingPO(page);
@@ -53,9 +55,10 @@ public class TenantBackgroundCheckerSteps {
         Assert.assertTrue(tenantBackgroundCheckerPO.isLihatProfilDisplayed(), "entry point not displayed");
     }
 
-    @Then("tenant can't see entry point TBC Lihat Profil at chatroom {string}")
-    public void tenant_cant_see_entry_point_tbc_lihat_profil_at_chatroom(String buttonTxt) {
-        chat.clickButtonOnChatRoomList(buttonTxt);
+    @Then("tenant can't see entry point TBC Lihat Profil at chatroom order {string}")
+    public void tenant_cant_see_entry_point_tbc_lihat_profil_at_chatroom(String order) {
+        var orderNumber = Integer.parseInt(order) - 1;
+        chatTenantPO.openChatroomByOrder(orderNumber);
         Assert.assertFalse(tenantBackgroundCheckerPO.isLihatProfilDisplayed(), "entry point displayed");
     }
 
