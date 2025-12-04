@@ -254,6 +254,10 @@ public class OwnerDashboardPO {
         if (playwright.waitTillLocatorIsVisible(nantiSajaButton)) {
             playwright.clickOn(nantiSajaButton);
         }
+
+        if (playwright.isTextDisplayed("Sudah cek fitur-fitur GoldPlus ini?")) {
+            playwright.clickOn(nantiSajaButton);
+        }
     }
 
     /**
