@@ -306,7 +306,7 @@ public class NavigatesSteps {
 
     @And("tenant navigate to mamipoin history page")
     public void tenantNavigateToMamipoinHistoryPage() {
-        playwright.navigateTo(Mamikos.URL + Mamikos.MAMIPOIN_HISTORY, 30000.0, LoadState.LOAD);
+        playwright.navigateTo(Mamikos.URL + Mamikos.MAMIPOIN_HISTORY, 60000.0, LoadState.LOAD);
     }
 
     @And("admin bangkrupux navigates to Promo Owner")

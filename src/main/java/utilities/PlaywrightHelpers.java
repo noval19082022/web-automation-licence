@@ -85,11 +85,12 @@ public class PlaywrightHelpers {
     /**
      * This overloaded version of the navigateTo method waits for a specific load state before navigating to the URL.
      *
-     * @param url   String data type of URL formatte
+     * @param url   String data type of URL format
+     * @param timeout Double data type of specific timeout
      * @param state The load state to wait for before navigating.
      */
     public void navigateTo(String url, Double timeout, LoadState state) {
-        page.waitForLoadState(state);
+        page.waitForLoadState(state, new Page.WaitForLoadStateOptions().setTimeout(timeout));
         page.navigate(url, new Page.NavigateOptions().setTimeout(timeout));
     }
 

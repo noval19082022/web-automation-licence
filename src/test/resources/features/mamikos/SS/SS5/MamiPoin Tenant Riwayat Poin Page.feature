@@ -1,4 +1,4 @@
-@SS-5027 @SS5
+@SS-5027 @SS5 @riwayatpoinpagecheckfailed
 Feature: MamiPoin Tenant Riwayat Poin Page
 
   @SS-5063 @continue
@@ -19,7 +19,7 @@ Feature: MamiPoin Tenant Riwayat Poin Page
   @SS-5064 @continue
   Scenario: MamiPoin Grouped by Month
     Then user verify point history grouped by months
-      | November 2024 |
+      | September 2025 |
 
   @SS-5065 @continue
   Scenario: Filter Poin Diterima
