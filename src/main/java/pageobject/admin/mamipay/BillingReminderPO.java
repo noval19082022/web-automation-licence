@@ -74,18 +74,20 @@ public class BillingReminderPO {
     }
 
     /**
-     *  Delete billing reminder period
+     * Delete billing reminder period - deletes first matching row if duplicates exist
+     * @param period the period/template name to delete
      */
     public void deleteBillingReminderPeriod(String period){
-        Locator periodRow = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(period));
+        Locator periodRow = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(period)).first();
         playwright.clickOn(periodRow.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(DELETE_BUTTON_NAME)));
     }
 
     /**
-     *  Edit billing reminder period
+     * Edit billing reminder period - edits first matching row if duplicates exist
+     * @param day the day period to edit
      */
     public void editBillingReminderPeriod(String day){
-        Locator dayRow = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(day));
+        Locator dayRow = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(day)).first();
         playwright.clickOn(dayRow.getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName(EDIT_BUTTON_NAME)));
     }
 
@@ -95,8 +97,8 @@ public class BillingReminderPO {
      * @return true if template is displayed, false otherwise
      */
     public boolean isTableContentTemplateDisplayed(String content){
-        Locator contentRow = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(content));
-        return playwright.waitTillLocatorIsVisible(contentRow.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(DELETE_BUTTON_NAME)));
+        Locator contentRow = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(content)).first();
+        return playwright.waitTillLocatorIsVisible(contentRow.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(DELETE_BUTTON_NAME)), 3000.0);
     }
 
     /**
@@ -131,18 +133,23 @@ public class BillingReminderPO {
     }
 
     /**
-     * Check Email template Day -1 is present
-     * @return true / false
+     * Check if WhatsApp template with specific day and template name exists
+     * @param day the day period to check
+     * @param WATemplate the WhatsApp template name to check
+     * @return true if template exists, false otherwise
      */
-    public boolean isWABillingTemplateDisplayed(){
-        return playwright.waitTillLocatorIsVisible(WATemplateSubjectText);
+    public boolean isWABillingTemplateDisplayed(String day, String WATemplate){
+        Locator templateRow = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(day + " " + WATemplate)).first();
+        return playwright.waitTillLocatorIsVisible(templateRow, 2000.0);
     }
 
     /**
-     * Set Email Template
+     * Set WhatsApp Template - creates template only if it doesn't exist
+     * @param day the day period for the template
+     * @param WATemplate the WhatsApp template name to set
      */
     public void setWABillingTemplate(String day, String WATemplate) {
-        if (!isWABillingTemplateDisplayed()){
+        if (!isWABillingTemplateDisplayed(day, WATemplate)){
             playwright.clickOn(addTemplateButton);
             playwright.selectDropdownByValue(selectWAPeriodDropdown, day);
             fillWATemplate(WATemplate);
