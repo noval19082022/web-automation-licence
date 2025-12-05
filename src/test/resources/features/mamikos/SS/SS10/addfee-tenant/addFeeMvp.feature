@@ -71,7 +71,7 @@ Feature: Add fee Mvp - Tenant
 
   @TEST_SS-2714 @continue
   Scenario: [Tenant][Detail booking]  After the tenant ajukan sewa, chat will be sent to Rajawali  - if not choose extra fee and don't write a note
-    When user go to mamikos homepage
+    When tenant navigate to riwayat and draf booking
     And user cancel booking
     When user go to mamikos homepage
     And tenant redirect to kost details:

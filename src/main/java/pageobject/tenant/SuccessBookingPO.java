@@ -13,7 +13,7 @@ public class SuccessBookingPO {
         this.page = page;
         this.playwrightHelpers = new PlaywrightHelpers(page);
         this.bookingContainer = page.locator("#bookingContainer");
-        this.successBookingHeadingText = page.locator("#bookingContainer .booking-success__title");
+        this.successBookingHeadingText = page.locator("//*[@class=\"booking-success__cta\"]/button");
     }
 
     /**

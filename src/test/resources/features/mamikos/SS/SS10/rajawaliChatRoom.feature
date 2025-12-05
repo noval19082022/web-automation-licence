@@ -57,6 +57,5 @@ Feature: Rajawali Chat Room
     When admin filter "Important" on chat list
     Then admin can see result data
     When admin filter "Important" on chat list
-    And admin filter "Unread" on chat list
     Then admin can see mark important on list
     Then admin can see unread counter on list with "1"
