@@ -153,7 +153,7 @@ public class ChatPO {
      * click unmark important
      */
     public void clickUnmarkImportan(){
-        playwright.clickOn(importantMark.first());
+        playwright.clickOn(importantMark);
         playwright.hardWait(2);
     }
 
