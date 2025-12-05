@@ -31,7 +31,7 @@ public class ChatPO {
         tenantChatList = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName("CS Okta Consultant")).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Consultant"));
         chatRoomMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(" Chat Room"));
         kostTitleList = page.locator("//div[@class=\"channel-list-item__content\"]").first();
-        chatKosTitle = page.locator("//div[@class=\"chat-room-header flex-align-center bg-u-p-lg\"]");
+        chatKosTitle = page.locator(".chat-room-header a");
         chatSearchDropdown = page.locator("#search_type");
         chatSearchInput = page.getByPlaceholder("Cari Chat");
         allChatMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("All"));
@@ -129,6 +129,7 @@ public class ChatPO {
      */
     public void clickMarkImportant(){
         playwright.clickOn(markImportantButton);
+        playwright.hardWait(2);
     }
 
     /**
@@ -153,6 +154,7 @@ public class ChatPO {
      */
     public void clickUnmarkImportan(){
         playwright.clickOn(importantMark);
+        playwright.hardWait(2);
     }
 
     /**
