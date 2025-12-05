@@ -26,6 +26,9 @@ public class PromoOwnerSteps {
     public void ownerAturPromoOwner() {
         promoOwner.clickOnSelengkapnya();
         page1 = promoOwner.clickOnAturPromo();
+        // Reinitialize promoOwner with the new page context after popup opens
+        promoOwner = new PromoOwnerPO(ActiveContext.getActivePage());
+        playwright = new PlaywrightHelpers(ActiveContext.getActivePage());
     }
 
     @Then("verify status promo is {string}")
