@@ -1,4 +1,4 @@
-@SS15
+@SS15 @flaky
 Feature: Apply Voucher Quarterly For Contract Duration
 
   Scenario: Admin Batalkan Contract

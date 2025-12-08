@@ -128,6 +128,7 @@ public class AdminMamipayDashboardPO {
      * @return SearchContractPO class
      */
     public SearchContractPO clickOnSearchContract() {
+        playwright.waitTillLocatorIsVisible(searchContract, 30000.0);
         playwright.clickOn(searchContract);
         return new SearchContractPO(page);
     }

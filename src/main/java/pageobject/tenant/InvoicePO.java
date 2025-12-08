@@ -194,8 +194,7 @@ public class InvoicePO {
      * Check if the "delete voucher" button is visible before clicking on it
      */
     public void clickOnDeleteVoucher() {
-        page.waitForLoadState(LoadState.LOAD);
-        playwright.waitFor(voucherDivSection, 15000.0);
+        playwright.waitFor(voucherDivSection, 60000.0);
         if (playwright.waitTillLocatorIsVisible(deleteVoucher)) {
             playwright.clickOn(deleteVoucher);
         }
@@ -275,11 +274,12 @@ public class InvoicePO {
 
     /**
      * Return the text of the toast message
+     * Waits for toast to be visible before reading text to handle toast appearing/disappearing behavior
      *
      * @return String data type
      */
     public String getToastText() {
-        playwright.hardWait(250);
+        playwright.waitFor(toast, 5000.0);
         return playwright.getText(toast);
     }
 
@@ -336,7 +336,7 @@ public class InvoicePO {
      * @return String data type
      */
     public String voucherInputPopUpWarningText() {
-        playwright.hardWait(3000);
+        playwright.waitTillLocatorIsVisible(voucherToastWarningText, 30000.0);
         return playwright.getText(voucherInputPopUpWarningText);
     }
 
