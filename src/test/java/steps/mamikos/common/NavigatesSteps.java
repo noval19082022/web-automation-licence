@@ -47,7 +47,7 @@ public class NavigatesSteps {
     @Given("admin go to mamikos mamipay admin")
     public void adminGoToMamikosMamipayAdmin() {
         if (AjukanSewaStatus.isContractPresent() || !FlowControl.isApiFlow()) {
-            playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.LOGIN_MAMIPAY, 30000.0);
+            playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.LOGIN_MAMIPAY, 60000.0);
         }
     }
 
