@@ -65,7 +65,7 @@ public class MamipaySteps {
 
     @And("owner check term and condition")
     public void ownerCheckTermAndCondition() {
-        playwright.waitTillPageLoaded(10000.0);
+        playwright.waitTillPageLoaded(5000.0);
         loadingPO.waitForLoadingIconDisappear();
         page1 = mamipayPO.clickOnTermAndCondition();
         Assert.assertTrue(mamipayPO.getTitlePusatBantuan(), "Title pusat bantuan doesn't match!");

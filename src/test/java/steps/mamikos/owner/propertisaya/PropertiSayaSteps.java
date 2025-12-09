@@ -1148,8 +1148,8 @@ public class PropertiSayaSteps {
 
     @And("owner select destination move photo kos")
     public void ownerSelectDestinationMovePhotoKos() {
-        propertySaya.selectDestinationPhoto();
-        propertySaya.clickOnPindahkanPhoto();
+        propertySaya.selectPhotoToMoved();
+        propertySaya.clickOnLanjutkanMovePhoto();
     }
 
     @And("owner select destination move photo room")
@@ -1231,4 +1231,9 @@ public class PropertiSayaSteps {
         // Verify room number placeholder contains "kamar"
         Assert.assertTrue(addTenantPO.getFullRoomName().contains("kamar"), "Room placeholder doesn't contain 'kamar'");
     }
+    @And("owner click on button pindahkan button")
+    public void ownerClickOnPindahkanPhoto() {
+        propertySaya.clickOnPindahkanPhoto();
+    }
 }
+

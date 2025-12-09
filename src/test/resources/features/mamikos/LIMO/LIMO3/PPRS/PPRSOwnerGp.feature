@@ -7,7 +7,7 @@ Feature: PPRS - Check statistic section for owner GP-1 or GP-2
     When user login as owner:
       | phone stag | password  |
       | 0898765431 | qwerty123 |
-    And owner dismiss FTUE goldplus
+    And owner click close icon pop up
     Then user will see that the text "Hore, kos ini penuh!" is displayed
     And owner swipe next on pprs statistik
     Then user will see that the text "Lihat Profil Penyewa" is displayed
@@ -22,7 +22,7 @@ Feature: PPRS - Check statistic section for owner GP-1 or GP-2
     When user login as owner:
       | phone stag | password  |
       | 0898765432 | qwerty123 |
-    And owner dismiss FTUE goldplus
+    And owner click close icon pop up
     Then user will see that the text "Hore, kos ini penuh!" is displayed
     And owner swipe next on pprs statistik
     Then user will see that the text "Lihat Profil Penyewa" is displayed

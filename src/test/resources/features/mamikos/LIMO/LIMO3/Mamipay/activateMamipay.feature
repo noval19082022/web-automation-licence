@@ -58,7 +58,6 @@ Feature: Activate Mamipay
     When owner check term and condition
     And owner close page number 1
     And owner set active page to 0
-    #And owner click term and condition
     And owner click "Kirim Data" button
     Then user see success add data kos pop up with text "Permintaan Aktivasi Dikirimkan"
     And owner click "Kembali" button

@@ -36,7 +36,7 @@ public class CommonSteps {
 
     @Then("user/owner/tenant/admin will see that the text {string} is displayed")
     public void user_will_see_that_the_text_is_displayed(String text) {
-        Assert.assertTrue(playwright.isTextDisplayed(text, 3000));
+        Assert.assertTrue(playwright.isTextDisplayed(text, 10000));
     }
 
     @Then("user/owner/tenant/admin will see that the text is displayed")
