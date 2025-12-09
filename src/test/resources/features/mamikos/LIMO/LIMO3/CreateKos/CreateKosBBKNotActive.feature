@@ -198,6 +198,7 @@ Feature: Create new kos with owner not active BBK
   @TEST_LIMO-3672 @CreateKosFromDraftBBKInactv
   Scenario: Create from kos with status draft && mamipay active && all bbk kos not active
     And owner navigates to property saya kos
+    And owner click close icon pop up
     And owner search kos on property saya page
     And owner click "Lengkapi Data Kos" on kos draft
     When owner close pop up BBK at kos list page

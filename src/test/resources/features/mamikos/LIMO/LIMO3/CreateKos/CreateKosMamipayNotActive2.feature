@@ -60,6 +60,7 @@ Feature: Create new kos with owner that hasn't activate mamipay (2)
     And owner navigates to owner dashboard
     And owner navigates to property saya kos
     Then user see kos with valid name, status "Draft" and type "Kos Putri"
+    And owner click close icon pop up
 
   @CreateKosFromDraft @TEST_LIMO-917
   Scenario: Owner wants to continue create kost with status "Draft" and skip mamipay

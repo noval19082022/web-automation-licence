@@ -68,4 +68,5 @@ Feature: Create new kos with owner that doesn't activate mamipay and BBK
     When owner navigates to owner dashboard
     And owner navigates to property saya kos
     Then user see kos with valid name, status "Draft" and type "Kos Putra"
+    And owner click close icon pop up
     And user delete first kos on the list
