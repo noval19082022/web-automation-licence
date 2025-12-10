@@ -120,7 +120,7 @@ public class BookingFormPO {
      * Click on booking confirmation checkmark
      */
     public void clickOnBookingConfirmationCheckmark() {
-        playwright.waitTillLocatorIsVisible(bookingConfirmationCheckmark);
+        playwright.waitTillLocatorIsVisible(bookingConfirmationCheckmark, 30000.0);
         playwright.clickOn(bookingConfirmationCheckmark);
     }
 

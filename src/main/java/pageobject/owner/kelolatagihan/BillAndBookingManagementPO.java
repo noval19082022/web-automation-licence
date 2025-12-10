@@ -110,7 +110,7 @@ public class BillAndBookingManagementPO {
      * Click ok button after owner accepted new tenant
      */
     public PengajuanSewaPO clickOkButton() {
-        playwright.waitFor(okButton, 30000.0);
+        playwright.waitTillLocatorIsVisible(okButton, 30000.0);
         playwright.clickAndWaitNavigation(okButton);
         return new PengajuanSewaPO(page);
     }
