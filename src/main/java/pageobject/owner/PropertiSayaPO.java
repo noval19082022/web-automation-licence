@@ -163,6 +163,8 @@ public class PropertiSayaPO {
     Locator textBoxLatePay;
     Locator dropdownLatePay;
     Locator dendaPrice;
+    Locator singgahsiniModal;
+    Locator closeButton;
 
     Locator toggleDeposit;
     Locator textBoxDeposit;
@@ -423,6 +425,8 @@ public class PropertiSayaPO {
         loadingSpinner = page.locator(".c-loader").first();
         filterRoomBox = page.locator("#ownerKosContainer");
         tambahkanData = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambahkan Data").setExact(true));
+        singgahsiniModal = page.locator(".singgahsini-landing-modal");
+        closeButton = page.locator(".bg-c-modal__action-closable");
 
         // Initialize photo section locators
         fotoDalamKamarSection = page.locator("//h4[contains(text(),'Foto dalam kamar')]/parent::div");
@@ -461,11 +465,7 @@ public class PropertiSayaPO {
     public void searchKostPropertySaya(String kostName) {
         playwright.waitTillPageLoaded(10000.0);
         playwright.waitForSelectorState(filterRoomBox, WaitForSelectorState.VISIBLE, GlobalConfig.LONG_TIMEOUT);
-
-        // Close singgahsini landing modal if present
-        Locator singgahsiniModal = page.locator(".singgahsini-landing-modal");
         if (singgahsiniModal.isVisible()) {
-            Locator closeButton = singgahsiniModal.locator(".bg-c-modal__action-closable");
             if (closeButton.isVisible()) {
                 playwright.clickOn(closeButton);
                 playwright.hardWait(1000.0);
@@ -473,8 +473,6 @@ public class PropertiSayaPO {
         }
 
         playwright.clickOn(kostDropdown);
-
-        // If kostName is null or empty, select first kos from dropdown
         if (kostName == null || kostName.isEmpty()) {
             Locator firstKost = page.locator("a.bg-c-dropdown__menu-item").first();
             playwright.waitForSelectorState(firstKost, WaitForSelectorState.VISIBLE, GlobalConfig.LONG_TIMEOUT);
@@ -1729,16 +1727,10 @@ public class PropertiSayaPO {
      */
     public void clickOnLanjutkan() {
         if (!playwright.waitTillLocatorIsVisible(lanjutkanButton.first())) {
-            playwright.reloadPage(); // sometimes when render is too slow, it need refetch using reload page
+            playwright.reloadPage();
             playwright.hardWait(10000);
         }
-        // Wait for button to be enabled before clicking (max 30 seconds)
-        int maxRetries = 15;
-        int retryCount = 0;
-        while (retryCount < maxRetries && !lanjutkanButton.first().isEnabled()) {
-            playwright.hardWait(2000);
-            retryCount++;
-        }
+        playwright.hardWait(30000);
         playwright.waitForLocatorVisibleAndClickOn(lanjutkanButton.first());
     }
 
@@ -2179,14 +2171,7 @@ public class PropertiSayaPO {
                 break;
             }
         }
-
-        // Click lengkapi data kos with force option if modal still blocking
-        try {
-            playwright.clickOn(lengkapiDataKosDraft);
-        } catch (Exception e) {
-            // If click fails, try force click
-            lengkapiDataKosDraft.click(new Locator.ClickOptions().setForce(true));
-        }
+        playwright.clickOn(lengkapiDataKosDraft);
         playwright.hardWait(5000.0);
     }
 
