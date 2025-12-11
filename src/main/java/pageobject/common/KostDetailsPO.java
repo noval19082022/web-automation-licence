@@ -585,25 +585,21 @@ public class KostDetailsPO {
      * Dismiss FTUE screen
      */
     public void dismissFTUE() {
-        try {
-            var maxLoop = 0;
-            playwright.pageScrollToDown(300);
-            playwright.waitFor(ftueSlider, 5000.0);
-            do {
-                maxLoop++;
-                if (playwright.waitTillLocatorIsVisible(ftueSlider)) {
-                    playwright.clickOn(ftueSlider.first());
-                }
-                if (playwright.waitTillLocatorIsVisible(btnSayaMengerti)) {
-                    playwright.forceClickOn(btnSayaMengerti);
-                }
-                if (maxLoop == 7) {
-                    break;
-                }
-            } while (playwright.waitTillLocatorIsVisible(ftueSlider));
-        } catch (Exception e) {
-            System.out.println("Error dismissing FTUE: " + e.getMessage());
-        }
+        var maxLoop = 0;
+        playwright.pageScrollToDown(300);
+        playwright.waitFor(ftueSlider, 5000.0);
+        do {
+            maxLoop++;
+            if (playwright.waitTillLocatorIsVisible(ftueSlider)) {
+                playwright.clickOn(ftueSlider.first());
+            }
+            if (playwright.waitTillLocatorIsVisible(btnSayaMengerti)) {
+                playwright.forceClickOn(btnSayaMengerti);
+            }
+            if (maxLoop == 7) {
+                break;
+            }
+        } while (playwright.waitTillLocatorIsVisible(ftueSlider));
     }
 
     public void dismissFTUEIfExist() {
@@ -619,7 +615,6 @@ public class KostDetailsPO {
      * @param date tomorrow, today, or specific date by number on string data type
      */
     public void selectBookingDate(String date) {
-        Locator datePick;
         if (date.equalsIgnoreCase("tomorrow")) {
             this.date = JavaHelpers.getCostumDateOrTime("d", 1, 0, 0);
         } else if (date.equalsIgnoreCase("today")) {
@@ -627,13 +622,13 @@ public class KostDetailsPO {
         } else {
             this.date = date;
         }
-        mulaiKosInput.click();
+        playwright.clickOn(mulaiKosInput);
         playwright.waitFor(datePicker, 5000.0);
-        datePick = page.getByTestId("bookingInputCheckinContent-datePicker").getByText(this.date);
+        Locator datePick = page.getByTestId("bookingInputCheckinContent-datePicker").getByText(this.date);
         List<Locator> datePicks = playwright.getLocators(datePick);
         for (Locator pick : datePicks) {
             if (pick.isEnabled() && pick.isVisible()) {
-                pick.click();
+                playwright.clickOn(pick);
             }
         }
     }
