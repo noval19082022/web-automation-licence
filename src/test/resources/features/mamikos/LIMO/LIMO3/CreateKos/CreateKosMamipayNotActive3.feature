@@ -1,4 +1,4 @@
-@regression @LIMO3 @EX-LG @createKosMamipayNotActive @createKosMamipayNotActive3 @DONEMIGRATINGTONEWBOARD
+@regression @LIMO3 @EX-LG @createKosMamipayNotActive @createKosMamipayNotActive3 @DONEMIGRATINGTONEWBOARD @viu
 
 Feature: Create new kos with owner that hasn't activate mamipay (3)
 
@@ -124,6 +124,7 @@ Feature: Create new kos with owner that hasn't activate mamipay (3)
     And owner navigates to owner dashboard
     And owner navigates to property saya kos
     Then user see kos with valid name, status "Draft" and type "Kos Putra"
+    And owner click close icon pop up
 
     #continue create kos draft
     When owner search kos on property saya page

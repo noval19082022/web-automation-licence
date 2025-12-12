@@ -163,6 +163,8 @@ public class PropertiSayaPO {
     Locator textBoxLatePay;
     Locator dropdownLatePay;
     Locator dendaPrice;
+    Locator singgahsiniModal;
+    Locator closeButton;
 
     Locator toggleDeposit;
     Locator textBoxDeposit;
@@ -343,7 +345,7 @@ public class PropertiSayaPO {
         mapField = page.locator("[src='/_nuxt/img/de2002c.svg']");
         totalRoomField = page.getByPlaceholder("Jumlah kamar", new Page.GetByPlaceholderOptions().setExact(true));
         roomAvailableField = page.getByPlaceholder("Jumlah kamar yang kosong");
-        priceMonthlyField = page.locator("//div[@class='step-seven__content']/div[@class='step-seven__field']/div[@class='bg-c-field']/input[@class='input step-seven__input']");
+        priceMonthlyField = page.locator(".step-seven__content .step-seven__field input.step-seven__input").first();
         minRentDuractionCheckbox = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Anda ingin terapkan minimum durasi sewa? Jangka waktu minimum untuk bisa menyewa kamar kos Anda.")).locator("span");
         otherPriceCheckbox = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Harga sewa selain bulanan")).locator("span");
         minRentDurationDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Min. 1 Bln dropdown-down"));
@@ -423,6 +425,8 @@ public class PropertiSayaPO {
         loadingSpinner = page.locator(".c-loader").first();
         filterRoomBox = page.locator("#ownerKosContainer");
         tambahkanData = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambahkan Data").setExact(true));
+        singgahsiniModal = page.locator(".singgahsini-landing-modal");
+        closeButton = page.locator(".bg-c-modal__action-closable");
 
         // Initialize photo section locators
         fotoDalamKamarSection = page.locator("//h4[contains(text(),'Foto dalam kamar')]/parent::div");
@@ -459,13 +463,26 @@ public class PropertiSayaPO {
      * user choose kost name
      */
     public void searchKostPropertySaya(String kostName) {
-        playwright.waitTillPageLoaded(60000.0);
+        playwright.waitTillPageLoaded(10000.0);
         playwright.waitForSelectorState(filterRoomBox, WaitForSelectorState.VISIBLE, GlobalConfig.LONG_TIMEOUT);
+        if (singgahsiniModal.isVisible()) {
+            if (closeButton.isVisible()) {
+                playwright.clickOn(closeButton);
+                playwright.hardWait(1000.0);
+            }
+        }
+
         playwright.clickOn(kostDropdown);
-        searchKostTextbox.fill(kostName);
-        Locator kostSearch = page.locator("a").filter(new Locator.FilterOptions().setHasText(kostName)).first();
-        playwright.waitForSelectorState(kostSearch, WaitForSelectorState.VISIBLE, GlobalConfig.LONG_TIMEOUT);
-        playwright.clickOn(kostSearch);
+        if (kostName == null || kostName.isEmpty()) {
+            Locator firstKost = page.locator("a.bg-c-dropdown__menu-item").first();
+            playwright.waitForSelectorState(firstKost, WaitForSelectorState.VISIBLE, GlobalConfig.LONG_TIMEOUT);
+            playwright.clickOn(firstKost);
+        } else {
+            searchKostTextbox.fill(kostName);
+            Locator kostSearch = page.locator("a").filter(new Locator.FilterOptions().setHasText(kostName)).first();
+            playwright.waitForSelectorState(kostSearch, WaitForSelectorState.VISIBLE, GlobalConfig.LONG_TIMEOUT);
+            playwright.clickOn(kostSearch);
+        }
     }
 
     /**
@@ -921,12 +938,12 @@ public class PropertiSayaPO {
      * @param facility is facility name
      */
     public void clickFacilitiesCheckbox(String section, String facility) {
-        fasilitasFeature = page.locator("//h4[contains(., '" + section + "')]/following::div//span[contains(text(), '" + facility + "')]").first();
+        fasilitasFeature = page.locator("//h4[contains(., '" + section + "')]/following::div//p[contains(text(), '" + facility + "')]").first();
         playwright.pageScrollUntilElementIsVisible(fasilitasFeature);
         if (playwright.waitTillLocatorIsVisible(fasilitasFeature)) {
             playwright.clickOn(fasilitasFeature);
         } else {
-            fasilitasFeature = page.getByText(facility, new Page.GetByTextOptions().setExact(true));
+            fasilitasFeature = page.getByText(facility);
             playwright.clickOn(fasilitasFeature);
         }
     }
@@ -1710,9 +1727,10 @@ public class PropertiSayaPO {
      */
     public void clickOnLanjutkan() {
         if (!playwright.waitTillLocatorIsVisible(lanjutkanButton.first())) {
-            playwright.reloadPage(); // sometimes when render is too slow, it need refetch using reload page
+            playwright.reloadPage();
             playwright.hardWait(10000);
         }
+        playwright.hardWait(30000);
         playwright.waitForLocatorVisibleAndClickOn(lanjutkanButton.first());
     }
 
@@ -1723,7 +1741,7 @@ public class PropertiSayaPO {
      */
     public void uploadInvalidPhotoKos(String photoName) {
         String imagePath = "src/main/resources/images/mamikos.gif";
-        Locator uploadPhotoKos = page.getByText("camera + Tambah foto " + photoName);
+        Locator uploadPhotoKos = page.getByText("+ Tambah foto " + photoName);
         FileChooser fileChooser = page.waitForFileChooser(() -> uploadPhotoKos.click());
         fileChooser.setFiles(Paths.get(imagePath));
         playwright.waitTillLocatorIsVisible(uploadPhotoKos);
@@ -1777,7 +1795,18 @@ public class PropertiSayaPO {
      */
     public void inputMonthyPrice(String monthlyPrice) {
         playwright.waitTillPageLoaded();
+        playwright.hardWait(3000);
+
+        // Wait for price page to fully load with retry
+        int maxRetries = 10;
+        int retryCount = 0;
+        while (retryCount < maxRetries && !priceMonthlyField.isVisible()) {
+            playwright.hardWait(1000);
+            retryCount++;
+        }
+
         playwright.waitTillLocatorIsVisible(priceMonthlyField);
+        playwright.hardWait(2000);
         playwright.clickOn(priceMonthlyField);
         playwright.clearText(priceMonthlyField);
         playwright.realKeyboardType(monthlyPrice);
@@ -1977,11 +2006,11 @@ public class PropertiSayaPO {
      */
     public void uploadValidPhotoKos(String photoName) {
         String imagePath = "src/main/resources/images/upload5Mb.jpg";
-        Locator uploadPhotoKos = page.getByText("camera + Tambah foto " + photoName);
+        Locator uploadPhotoKos = page.getByText("+ Tambah foto " + photoName);
         FileChooser fileChooser = page.waitForFileChooser(() -> uploadPhotoKos.click());
         fileChooser.setFiles(Paths.get(imagePath));
         playwright.waitTillLocatorIsVisible(uploadPhotoKos);
-        playwright.hardWait(2000); // improve hardwait, sometimes it wait too long for waiting until success upload
+        playwright.hardWait(5000); // improve hardwait, sometimes it wait too long for waiting until success upload
     }
 
     /**
@@ -2118,6 +2147,30 @@ public class PropertiSayaPO {
      * Click on lengkapi button
      */
     public void clickOnLengkapiDataKosDraft() {
+        // Wait for page to load
+        playwright.hardWait(2000.0);
+
+        // Close singgahsini landing modal if present (with retry)
+        int maxRetries = 5;
+        for (int i = 0; i < maxRetries; i++) {
+            Locator singgahsiniModal = page.locator(".singgahsini-landing-modal.bg-c-modal--open");
+            if (singgahsiniModal.isVisible()) {
+                // Try multiple locators for the close button
+                Locator closeButton = singgahsiniModal.locator(".bg-c-modal__action-closable");
+                if (!closeButton.isVisible()) {
+                    closeButton = singgahsiniModal.locator("button:has(img[alt='close'])");
+                }
+                if (!closeButton.isVisible()) {
+                    closeButton = page.locator(".singgahsini-landing-modal button").first();
+                }
+                if (closeButton.isVisible()) {
+                    playwright.clickOn(closeButton);
+                    playwright.hardWait(1000.0);
+                }
+            } else {
+                break;
+            }
+        }
         playwright.clickOn(lengkapiDataKosDraft);
         playwright.hardWait(5000.0);
     }
@@ -2609,13 +2662,17 @@ public class PropertiSayaPO {
      * Select the destinaion photo kos on pindahkan photo steps
      */
     public void selectDestinationPhoto() {
-        playwright.clickOn(destinationPhotoMoved);
+        playwright.hardWait(2000);
+        playwright.waitTillLocatorIsVisible(selectPhotoToMoved);
+        playwright.clickOn(selectPhotoToMoved);
     }
 
     /**
      * Select the destination room photo on pindahkan photo step
      */
     public void selectDestinationPhotoRoom() {
+        playwright.hardWait(2000);
+        playwright.waitTillLocatorIsVisible(destinationPhotoRoomMoved);
         playwright.clickOn(destinationPhotoRoomMoved);
     }
 
@@ -2625,8 +2682,10 @@ public class PropertiSayaPO {
      * @param destination
      */
     public void selectDestinationPhotoRoom(String destination) {
+        playwright.hardWait(2000);
         Locator destinationPhotoRoomMovedLocator = page
-                .locator("//label/child::*/*[contains(.,'" + destination + "')]");
+                .locator("label").filter(new Locator.FilterOptions().setHasText(destination));
+        playwright.waitTillLocatorIsVisible(destinationPhotoRoomMovedLocator);
         playwright.clickOn(destinationPhotoRoomMovedLocator);
     }
 

@@ -45,7 +45,7 @@ Feature: Create Kos Mamipay Active
     And owner click "Edit Selesai" button
 #    Then verify kos description is disabled
 #    And verify kos build year is disabled
-   # When user click button edit "Fasilitas" kos
+    When user click button edit "Fasilitas" kos
     And user uncheck facilities under "Fasilitas Kamar"
       | TV |
     Then user see "Fasilitas Kamar" has warning title "Pilih Fasilitas" and description "Pilih minimal 1 fasilitas"

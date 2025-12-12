@@ -22,7 +22,7 @@ public class LoadingPO {
         this.playwright = new PlaywrightHelpers(this.page);
         loadingIcon = page.locator(".c-loader");
         loadingAnimation = page.getByTestId("loading-animation");
-        skeletonLoader = page.locator(".skeleton, [class*='skeleton'], [class*='shimmer'], [class*='loading-skeleton']");
+        skeletonLoader = page.locator(".skeleton:not([class*='bg-c-skeleton']), [class*='shimmer'], [class*='loading-skeleton']");
     }
 
     /**

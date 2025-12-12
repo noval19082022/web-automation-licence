@@ -21,7 +21,7 @@ public class MamipayPO {
     Locator titleForm;
     Locator titleAutoBbkPopUp;
     Locator kirimData;
-    Locator titlePusatBantuan;
+    Locator tittlePusatBantuan;
 
     public MamipayPO(Page page){
         this.page = page;
@@ -38,7 +38,7 @@ public class MamipayPO {
         titleForm = page.locator(".title");
         titleAutoBbkPopUp = page.locator(".owner-intercept-booking-modal__body-title");
         kirimData = page.locator(".bg-c-button--primary");
-        titlePusatBantuan = page.locator(".mh-article-page__title");
+        tittlePusatBantuan = page.locator("h1.bg-c-text.bg-c-text--heading-2.mh-article-page__title");
     }
 
     /**
@@ -151,7 +151,7 @@ public class MamipayPO {
      *
      */
     public boolean getTitlePusatBantuan() {
-        return playwright.waitTillLocatorIsVisible(titlePusatBantuan, 2000.0);
+        return playwright.isLocatorVisibleAfterLoad(tittlePusatBantuan, 3000.0);
     }
 
     /**
