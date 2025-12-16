@@ -80,27 +80,17 @@ Feature: Kost Review
   @continue
   Scenario: Update kost review to Live
     Given admin go to mamikos bangkrupux admin
-    When admin login to bangkrupux:
-      | email stag                 | email prod                 | password  |
-      | qaeautomation3@mamikos.com | qaeautomation3@mamikos.com | qwerty123 |
     And user click Live button on "Just a test content that will match 25 characters of input edit"
     Then user receive success alert for kost review updated to live with text "Success! Review Updated to live"
 
   @continue
   Scenario: Update kost review to Reject
     Given admin go to mamikos bangkrupux admin
-    When admin login to bangkrupux:
-      | email stag                 | email prod                 | password  |
-      | qaeautomation3@mamikos.com | qaeautomation3@mamikos.com | qwerty123 |
     And user click Reject button on "Just a test content that will match 25 characters of input edit"
     Then user receive success alert for kost review updated to reject with text "Success! Berhasil menolak review"
 
-  @continue
   Scenario: Delete kost review
     Given admin go to mamikos bangkrupux admin
-    When admin login to bangkrupux:
-      | email stag                 | email prod                 | password  |
-      | qaeautomation3@mamikos.com | qaeautomation3@mamikos.com | qwerty123 |
     And user click Delete button on "Just a test content that will match 25 characters of input edit"
     Then user receive success alert for deleted kost review with text "Success! Success, Review Deleted"
 
@@ -144,12 +134,8 @@ Feature: Kost Review
     And user click Save on Create Review section
     Then user verify success edit alert with "Success! Review Updated"
 
-  @continue
   Scenario: Delete kost review
     Given admin go to mamikos bangkrupux admin
-    When admin login to bangkrupux:
-      | email stag                 | email prod                 | password  |
-      | qaeautomation3@mamikos.com | qaeautomation3@mamikos.com | qwerty123 |
     And user click Delete button on "Just a test content that will match 25 characters of input edit"
     Then user receive success alert for deleted kost review with text "Success! Success, Review Deleted"
 		

@@ -342,15 +342,20 @@ public class kostReviewPO {
      * @throws InterruptedException
      */
     public void clickOnEditButton(String content) throws InterruptedException {
+        playwright.hardWait(3000.0);
+        
         List<Locator> edit = playwright.getLocators(editButton);
         List<Locator> contentList = playwright.getLocators(contentLists);
-        for (int i = 0; i < edit.size(); i++) {
+        
+        for (int i = 0; i < contentList.size(); i++) {
             if (playwright.getText(contentList.get(i)).equalsIgnoreCase(content)) {
                 playwright.clickOn(edit.get(i));
                 return;
-            } else if (i == edit.size() - 1) {
+            } else if (i == contentList.size() - 1 && nextPage.count() > 0 && nextPage.isVisible()) {
                 playwright.clickOn(nextPage);
-                i = 0;
+                playwright.hardWait(2000.0);
+                clickOnEditButton(content);
+                return;
             }
         }
     }
@@ -360,15 +365,20 @@ public class kostReviewPO {
      * @throws InterruptedException
      */
     public void clickOnLiveButton(String content) throws InterruptedException {
+        playwright.hardWait(3000.0);
+        
         List<Locator> live = playwright.getLocators(liveButton);
         List<Locator> contentList = playwright.getLocators(contentLists);
-        for (int i = 0; i < live.size(); i++) {
+        
+        for (int i = 0; i < contentList.size(); i++) {
             if (playwright.getText(contentList.get(i)).equalsIgnoreCase(content)) {
                 playwright.clickOn(live.get(i));
                 return;
-            } else if (i == live.size() - 1) {
+            } else if (i == contentList.size() - 1 && nextPage.count() > 0 && nextPage.isVisible()) {
                 playwright.clickOn(nextPage);
-                i = 0;
+                playwright.hardWait(2000.0);
+                clickOnLiveButton(content);
+                return;
             }
         }
     }
@@ -378,15 +388,20 @@ public class kostReviewPO {
      * @throws InterruptedException
      */
     public void clickOnRejectButton(String content) throws InterruptedException {
+        playwright.hardWait(3000.0);
+        
         List<Locator> reject = playwright.getLocators(rejectButton);
         List<Locator> contentList = playwright.getLocators(contentLists);
-        for (int i = 0; i < reject.size(); i++) {
+        
+        for (int i = 0; i < contentList.size(); i++) {
             if (playwright.getText(contentList.get(i)).equalsIgnoreCase(content)) {
                 playwright.clickOn(reject.get(i));
                 return;
-            } else if (i == reject.size() - 1) {
+            } else if (i == contentList.size() - 1 && nextPage.count() > 0 && nextPage.isVisible()) {
                 playwright.clickOn(nextPage);
-                i = 0;
+                playwright.hardWait(2000.0);
+                clickOnRejectButton(content);
+                return;
             }
         }
     }
@@ -396,15 +411,20 @@ public class kostReviewPO {
      * @throws InterruptedException
      */
     public void clickOnDeleteReviewButton(String content) throws InterruptedException {
+        playwright.hardWait(3000.0);
+        
         List<Locator> delete = playwright.getLocators(deleteReviewButton);
         List<Locator> contentList = playwright.getLocators(contentLists);
-        for (int i = 0; i < delete.size(); i++) {
+        
+        for (int i = 0; i < contentList.size(); i++) {
             if (playwright.getText(contentList.get(i)).equalsIgnoreCase(content)) {
                 playwright.acceptDialog(delete.get(i));
                 return;
-            } else if (i == delete.size() - 1) {
+            } else if (i == contentList.size() - 1 && nextPage.count() > 0 && nextPage.isVisible()) {
                 playwright.clickOn(nextPage);
-                i = 0;
+                playwright.hardWait(2000.0);
+                clickOnDeleteReviewButton(content);
+                return;
             }
         }
     }

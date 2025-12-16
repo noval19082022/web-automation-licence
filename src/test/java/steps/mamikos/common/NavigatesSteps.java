@@ -178,7 +178,8 @@ public class NavigatesSteps {
 
     @Given("admin go to mamikos bangkrupux admin")
     public void adminGoToMamikosBangkrupuxAdmin() {
-        playwright.navigateTo(Mamikos.ADMINBANGKRUPUX);
+        playwright.navigateTo(Mamikos.ADMINBANGKRUPUX, 60000.0);
+        playwright.hardWait(3000.0);
     }
 
     @Given("user go to landing apartment")
