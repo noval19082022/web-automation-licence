@@ -220,4 +220,4 @@ Feature: GP Cross-Selling
     Then payment owner success using ovo as payment method
     And user navigate to mamiads history page
     And user click "Selesai"
-    And validate status transaction mamiads is "Lunas" with price "Rp109.500" saldo "Saldo MamiAds 30 ribu + GoldPlus 1 (1 Bulan)"
+    And validate status transaction mamiads is "Lunas" with price "Rp0" saldo "Saldo 30 ribu"

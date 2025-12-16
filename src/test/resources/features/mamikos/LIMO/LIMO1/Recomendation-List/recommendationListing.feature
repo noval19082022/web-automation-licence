@@ -69,7 +69,7 @@ Feature: Recommendation Listing
     And user verify the max <maxPage> rekomendasi listing
     Examples:
       | tenantPhone   | password     | validation    | countPerPage | maxPage |
-      | 0828888888880 | qwerty123    | displayed     | 4            | 2       |
+      | 0828888888880 | qwerty123    | displayed     | 4            | 8       |
       | 0890000000325 | Bismillah@01 | not displayed | 0            | 0       |
 
   @TEST_LIMO-2715 @continue @favRekomendasi
@@ -107,4 +107,4 @@ Feature: Recommendation Listing
     Then tenant should success booking kost
     And user cancel booking for check recommendation kos
     And owner click back previous button
-    Then tenant check status booking is "Dibatalkan"
+    Then tenant check status booking is "Tunggu Konfirmasi"

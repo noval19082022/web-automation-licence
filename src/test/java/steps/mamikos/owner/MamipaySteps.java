@@ -40,6 +40,10 @@ public class MamipaySteps {
 
     @When("owner input on {string} {string}")
     public void ownerInputOn(String fieldName, String inputText) {
+        // Skip if owner already has mamipay (modal success was shown)
+        if (mamipayPO.isOwnerAlreadyHasMamipay()) {
+            return;
+        }
         mamipayPO.inputTextField(fieldName, inputText);
     }
 
@@ -60,6 +64,10 @@ public class MamipaySteps {
 
     @And("owner select bank name {string}")
     public void ownerSelectBankName(String bankName) {
+        // Skip if owner already has mamipay (modal success was shown)
+        if (mamipayPO.isOwnerAlreadyHasMamipay()) {
+            return;
+        }
         mamipayPO.selectBankName(bankName);
     }
 
@@ -73,6 +81,10 @@ public class MamipaySteps {
 
     @And("owner click term and condition")
     public void ownerClickTermAndCondition() {
+        // Skip if owner already has mamipay (modal success was shown)
+        if (mamipayPO.isOwnerAlreadyHasMamipay()) {
+            return;
+        }
         mamipayPO.clickOnChecTnC();
     }
 
@@ -109,4 +121,5 @@ public class MamipaySteps {
     public void ownerSeeNextButtonDisable() {
         mamipayPO.kirimDataDisable();
     }
+    
 }

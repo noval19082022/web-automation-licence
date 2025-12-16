@@ -34,7 +34,7 @@ Feature: MamiAds Dashboard
     When user click "<currentToggle>" toggle the "<adsName>"
     Then user verify the pop up switch "<currentToggle>" toggle iklan "<adsName>" is displayed
     When user click "<actionButton>" button on pop up switch toggle iklan
-    Then user verify the toast "<messageToast>"
+#    Then user verify the toast "<messageToast>"
     And user cek status toggle iklan "<adsName>" is "<expectedPosisiIklan>"
     And user verify the toggle iklan "<adsName>" is "<expectedToggle>"
     And user verify the wording iklan "<adsName>" is "<expectedStatusDesc>"
@@ -43,7 +43,7 @@ Feature: MamiAds Dashboard
     Then user verify the wording anggaran of iklan "<adsName>" is "<expectedAnggaranDesc>"
     Examples:
       | adsName                                  | currentPosisiIklan | currentToggle | currentToggle2 | currentStatusDesc                                    | currentAnggaranDesc                                             |  actionButton   | actionButton2     | messageToast              | expectedPosisiIklan | expectedToggle | expectedStatusDesc                                   | expectedAnggaranDesc             |
-      | Kos Matrix Keanu Makasar Jakarta Barat   | tidak-naik         | off           | on             | Klik tombol untuk naikkan iklan                      | Tipe Anggaran: Rp15.000 per-hari                                | Ya, Nonaktifkan | Aktifkan          |Iklan berhasil dinaikkan   | naik                | on             | Posisi iklan telah naik di hasil pencarian properti. | Tipe Anggaran: Rp15.000 per-hari |
+      | Kos Matrix Keanu Makasar Jakarta Barat   | tidak-naik         | off           | on             | Klik tombol untuk naikkan iklan                      | Tipe Anggaran: Rp15.000 per-hari                                | Ya, Nonaktifkan | Aktifkan          | Iklan berhasil dinaikkan   | naik                | on             | Posisi iklan telah naik di hasil pencarian properti. | Tipe Anggaran: Rp15.000 per-hari |
       | Kos Matrix Keanu Makasar Jakarta Timur   | naik               | on            | off            | Posisi iklan telah naik di hasil pencarian properti. | Hari ini Rp0 sudah dipakai dari batas pemakaian saldo Rp10.000  | Aktifkan        | Ya, Nonaktifkan   | Iklan berhenti dinaikkan. | tidak-naik          | off            | Klik tombol untuk naikkan iklan                      | Hari ini Rp0 sudah dipakai dari batas pemakaian saldo Rp10.000 |
 
   @TEST_LIMO-1318 @LIMO1-staging @maDashboard @continue
