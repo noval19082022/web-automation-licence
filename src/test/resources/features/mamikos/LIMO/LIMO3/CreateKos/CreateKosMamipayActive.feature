@@ -1,4 +1,4 @@
-@regression @LIMO3 @listing-monetization @createKosMamipayActive @essentialTest2 @loadingrevamp
+@regression @LIMO3 @listing-monetization @createKosMamipayActive @essentialTest2 @loadingrevamp @viu
 Feature: Create Kos Mamipay Active
 
   @TEST_LIMO-776 @Automated @web-covered
@@ -43,8 +43,9 @@ Feature: Create Kos Mamipay Active
     When owner input room type with random text in pop up
     And owner click lanjutkan button in bottom of add kos page
     And owner click "Edit Selesai" button
-#    Then verify kos description is disabled
-#    And verify kos build year is disabled
+    And owner upload valid photo "kamar mandi"
+    And owner upload valid photo "lain"
+    And owner click lanjutkan button for next steps
     When user click button edit "Fasilitas" kos
     And user uncheck facilities under "Fasilitas Kamar"
       | TV |
@@ -52,8 +53,6 @@ Feature: Create Kos Mamipay Active
     When user check facilities under "Fasilitas Kamar"
       | TV |
     And owner click "Edit Selesai" button
-#    And user click button edit "Ketersediaan Kamar" kos
-#    And owner click "Keluar" input data on pop up
     And owner input total room and room available as expected
       | total room | room available |
       | 2          | 7              |
