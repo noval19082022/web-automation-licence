@@ -34,7 +34,8 @@ public class MamipaySteps {
 
     @Then("verify nama lengkap equals username owner")
     public void verifyNamaLengkapEqualsUsernameOwner() {
-        playwright.hardWait(3000);
+        // Wait for form to load instead of fixed wait
+        playwright.waitTillPageLoaded();
         Assert.assertEquals(mamipayPO.getNamaLengkap(), ownerDashboardPO.getOwnerUsername(), "Username and Nama Lengkap doesn't match!");
     }
 
@@ -89,9 +90,9 @@ public class MamipaySteps {
 
     @Then("verify info untuk anda Auto BBK not displayed")
     public void verifyInfoUntukAndaAutoBBKNotDisplayed() {
-        playwright.hardWait(2000);
+        // Wait for page to stabilize then verify info is not displayed
+        playwright.waitTillPageLoaded();
         Assert.assertFalse(mamipayPO.isInfoUntukAndaAutoBbkDisplayed(), "Info untuk anda Auto BBK is appear!");
-        playwright.hardWait(2000);
     }
 
     @And("owner verify Auto BBK pop up is displayed")
