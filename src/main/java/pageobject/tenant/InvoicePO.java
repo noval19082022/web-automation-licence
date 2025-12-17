@@ -279,14 +279,13 @@ public class InvoicePO {
      * @return String data type
      */
     public String getToastText() {
-        playwright.waitFor(toast, 5000.0);
+        playwright.waitTillLocatorIsVisible(toast, 6000.0);
         return playwright.getText(toast);
     }
 
     /**
-     * Wait until voucher warning text appear
-     *
-     * @return
+     * Wait until voucher warning text appear.
+     * @return boolean data type true if visible, otherwise false.
      */
     public boolean waitUntilvoucherUsedTextVisible() {
         return voucherToastWarningText.isVisible();

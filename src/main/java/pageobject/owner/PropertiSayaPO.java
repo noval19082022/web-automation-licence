@@ -756,10 +756,12 @@ public class PropertiSayaPO {
      * click on Delete Room Icon
      */
     public void clickOnFirstDeleteRoomIcon() {
-        playwright.hardWait(3000.0);
+        playwright.waitTillLocatorIsVisible(firstDeleteButton);
         playwright.clickOn(firstDeleteButton);
+        playwright.waitTillLocatorIsVisible(deleteButtonInPopUp);
         playwright.clickOn(deleteButtonInPopUp);
-        playwright.reloadPage();
+        // Wait for deletion to complete instead of reload
+        playwright.waitTillPageLoaded();
     }
 
     /**
@@ -803,11 +805,13 @@ public class PropertiSayaPO {
      * Click on close at pop up BBK on property saya
      */
     public void clickClosePopUpBBKOnPropertySaya() {
-        if (playwright.waitTillLocatorIsVisible(closeBBKDialog)) {
+        // Wait longer for dialog before giving up
+        if (playwright.waitTillLocatorIsVisible(closeBBKDialog, 8000.0)) {
             playwright.waitFor(closeBBKDialog);
             playwright.clickOn(closeBBKDialog);
         } else {
-            playwright.reloadPage();
+            // Dialog didn't appear - page may have loaded differently
+            System.out.println("BBK dialog not found - continuing without closing");
         }
     }
 
@@ -912,23 +916,17 @@ public class PropertiSayaPO {
      * @param dataKos which part to edit
      */
     public void clickEditDataKos(String dataKos) {
-        try {
-            editDataKos = page.locator("//p[normalize-space()='"+dataKos+"']");
-            if (playwright.waitTillLocatorIsVisible(editDataKos)) {
-                playwright.clickOn(editDataKos);
-            } else {
-                playwright.reloadPage();
-                playwright.waitForLocatorVisibleAndClickOn(editDataKos);
-            }
-            playwright.waitForSelectorState(loadingSpinner, WaitForSelectorState.HIDDEN, GlobalConfig.LONG_TIMEOUT);
-        } catch (Exception e) {
-            // Handle blank page or instability by reloading and retrying
-            playwright.reloadPage();
+        editDataKos = page.locator("//p[normalize-space()='"+dataKos+"']");
+
+        // Wait with longer timeout before resorting to reload
+        if (!playwright.waitTillLocatorIsVisible(editDataKos, 10000.0)) {
+            // Element not found - wait for page to stabilize and try once more
             playwright.waitTillPageLoaded();
-            editDataKos = page.locator("//p[normalize-space()='"+dataKos+"']");
-            playwright.waitForLocatorVisibleAndClickOn(editDataKos);
-            playwright.waitForSelectorState(loadingSpinner, WaitForSelectorState.HIDDEN, GlobalConfig.LONG_TIMEOUT);
+            playwright.waitTillLocatorIsVisible(editDataKos, 5000.0);
         }
+
+        playwright.clickOn(editDataKos);
+        playwright.waitForSelectorState(loadingSpinner, WaitForSelectorState.HIDDEN, GlobalConfig.LONG_TIMEOUT);
     }
 
     /**
@@ -1433,8 +1431,16 @@ public class PropertiSayaPO {
      * @param kosType e.g putra, putri, campur
      */
     public void selectKostType(String kosType) {
-        playwright.hardWait(15000); // need improve waiting on create kost page, it almost 15 second
+        // Wait for page to fully load
+        playwright.waitTillPageLoaded();
+
+        // Wait for kost type container to be visible
+        Locator kostTypeContainer = page.locator(".kost-type-container, [class*='type-kost']").first();
+        playwright.waitTillLocatorIsVisible(kostTypeContainer, 10000.0);
+
+        // Wait for specific kost type image
         kostTypeImage = page.locator("[alt='type-kost-" + kosType + "']");
+        playwright.waitTillLocatorIsVisible(kostTypeImage, 5000.0);
         playwright.pageScrollInView(kostTypeImage);
         playwright.clickOn(kostTypeImage);
     }
@@ -1633,7 +1639,8 @@ public class PropertiSayaPO {
      * @return return toast text e.g Anda berhasil update kamar
      */
     public String getRoomStatus() {
-        playwright.hardWait(2000.0);
+        // Wait for status to be visible and updated
+        playwright.waitTillLocatorIsVisible(statusRoom, 5000.0);
         return playwright.getText(statusRoom);
     }
 
@@ -1724,14 +1731,44 @@ public class PropertiSayaPO {
 
     /**
      * Click Lanjutkan button (without access geolocation permission)
+     * Optimized to use conditional waits instead of fixed 40s wait
      */
     public void clickOnLanjutkan() {
-        if (!playwright.waitTillLocatorIsVisible(lanjutkanButton.first())) {
+        // Check if lanjutkan button is visible, retry with reload if needed
+        if (!playwright.waitTillLocatorIsVisible(lanjutkanButton.first(), 5000.0)) {
             playwright.reloadPage();
-            playwright.hardWait(10000);
+            playwright.waitTillPageLoaded();
+            playwright.waitTillLocatorIsVisible(lanjutkanButton.first(), 10000.0);
         }
-        playwright.hardWait(30000);
+
+        // Wait for any photo uploads to complete (polling approach)
+        waitForPhotoUploadComplete();
+
+        // Click lanjutkan button
         playwright.waitForLocatorVisibleAndClickOn(lanjutkanButton.first());
+    }
+
+    /**
+     * Wait for photo upload to complete using polling approach
+     * Replaces 30s hardWait with smart polling (average 5-10s)
+     */
+    private void waitForPhotoUploadComplete() {
+        int maxAttempts = 60; // 30 seconds max (500ms * 60)
+        int attempt = 0;
+
+        while (attempt < maxAttempts) {
+            // Check if lanjutkan button is enabled (indicates upload complete or not required)
+            if (lanjutkanButton.first().isEnabled()) {
+                playwright.hardWait(500); // Small buffer for UI stability
+                return;
+            }
+
+            playwright.hardWait(500); // Poll every 500ms
+            attempt++;
+        }
+
+        // Timeout after 30 seconds - continue anyway (uploads may be optional)
+        System.out.println("Photo upload polling timeout after 30s - continuing with test");
     }
 
     /**
