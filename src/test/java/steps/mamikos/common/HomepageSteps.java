@@ -88,15 +88,27 @@ public class HomepageSteps {
 
     @Then("user should redirect to link that contains {string}")
     public void userShouldRedirectToLinkThatContains(String url) {
+        // Wait a bit for navigation to start
+        playwright = new PlaywrightHelpers(ActiveContext.getActivePage());
+        playwright.hardWait(2000.0);
+        
+        // Refresh references after potential page change
         playwright = new PlaywrightHelpers(ActiveContext.getActivePage());
         home = new HomePO(ActiveContext.getActivePage());
         
-        // Wait for navigation away from about:blank
-        if (home.getURL().contains("about:blank")) {
+        String currentUrl = home.getURL();
+        
+        // Check if it's an external URL (like WhatsApp API) or still on about:blank
+        if (url.contains("api.whatsapp.com") || url.contains("twitter.com") || url.contains("x.com") || 
+            currentUrl.contains("api.whatsapp.com") || currentUrl.contains("twitter.com") || currentUrl.contains("x.com")) {
+            // For external URLs, just wait a bit more
+            playwright.hardWait(2000.0);
+        } else if (currentUrl.contains("about:blank")) {
+            // Wait for navigation away from about:blank
             playwright.waitTillPageLoaded(10000.0);
             playwright.waitTillNetworkIdle();
         } else {
-            // If not blank, just wait for page to fully load
+            // If not blank or external, wait for page to fully load
             playwright.waitTillPageLoaded(10000.0);
         }
         
