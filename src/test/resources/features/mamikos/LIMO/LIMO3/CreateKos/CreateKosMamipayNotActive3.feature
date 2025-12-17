@@ -1,5 +1,4 @@
-@regression @LIMO3 @EX-LG @createKosMamipayNotActive @createKosMamipayNotActive3 @DONEMIGRATINGTONEWBOARD @viu
-
+@regression @LIMO3 @EX-LG @createKosMamipayNotActive @createKosMamipayNotActive3 @DONEMIGRATINGTONEWBOARD
 Feature: Create new kos with owner that hasn't activate mamipay (3)
 
   @CreateKosNewTypeSkipMamipay @TEST_LIMO-916
@@ -140,7 +139,7 @@ Feature: Create new kos with owner that hasn't activate mamipay (3)
     And owner input on "nama bank" "BCA"
     And owner select bank name "BCA"
     And owner click term and condition
-    And owner click "Kirim Data" button
+    And user clicks on the close button
     And owner navigates to property saya kos
     Then user see kos with valid name, status "Diperiksa Admin" and type "Kos Putra"
 

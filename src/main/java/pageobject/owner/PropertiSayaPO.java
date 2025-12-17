@@ -943,7 +943,7 @@ public class PropertiSayaPO {
         if (playwright.waitTillLocatorIsVisible(fasilitasFeature)) {
             playwright.clickOn(fasilitasFeature);
         } else {
-            fasilitasFeature = page.getByText(facility);
+            fasilitasFeature = page.getByText(facility, new Page.GetByTextOptions().setExact(true));
             playwright.clickOn(fasilitasFeature);
         }
     }

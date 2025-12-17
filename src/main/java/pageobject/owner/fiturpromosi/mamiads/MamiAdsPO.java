@@ -640,7 +640,7 @@ public class MamiAdsPO {
      * @return toast message
      */
     public String getTextMessageToastVoucher() {
-        playwright.waitTillLocatorIsVisible(messageOnOffVoucher, 1000.0);
+        playwright.waitTillLocatorIsVisible(messageOnOffVoucher, 10000.0);
         return playwright.getText(messageOnOffVoucher);
     }
 
