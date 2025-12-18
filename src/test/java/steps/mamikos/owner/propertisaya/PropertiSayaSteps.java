@@ -1062,8 +1062,8 @@ public class PropertiSayaSteps {
 
     @Then("owner can sees room is on {string} status")
     public void ownerCanSeesRoomIsOnStatus(String statusRoom) {
-        playwright.hardWait(3000); //Need hardwait to wait for room status to be visually updated.
-        Assert.assertEquals(propertySaya.getRoomStatus(), statusRoom, "Status room doesn't macth!");
+        // Wait for status update handled in getRoomStatus() method
+        Assert.assertEquals(propertySaya.getRoomStatus(), statusRoom, "Status room doesn't match!");
     }
 
     @Then("owner can sees toast {string}")
@@ -1148,8 +1148,8 @@ public class PropertiSayaSteps {
 
     @And("owner select destination move photo kos")
     public void ownerSelectDestinationMovePhotoKos() {
-        propertySaya.selectDestinationPhoto();
-        propertySaya.clickOnPindahkanPhoto();
+        propertySaya.selectPhotoToMoved();
+        propertySaya.clickOnLanjutkanMovePhoto();
     }
 
     @And("owner select destination move photo room")
@@ -1231,4 +1231,9 @@ public class PropertiSayaSteps {
         // Verify room number placeholder contains "kamar"
         Assert.assertTrue(addTenantPO.getFullRoomName().contains("kamar"), "Room placeholder doesn't contain 'kamar'");
     }
+    @And("owner click on button pindahkan button")
+    public void ownerClickOnPindahkanPhoto() {
+        propertySaya.clickOnPindahkanPhoto();
+    }
 }
+

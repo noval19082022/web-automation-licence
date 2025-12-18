@@ -172,7 +172,7 @@ public class OwnerDashboardPO {
         ubahPeraturan = page.locator("a").filter(new Locator.FilterOptions().setHasText("booking-management Ubah Peraturan Masuk Kos Aturan untuk calon penyewa chevron-r"));
         dariMamikosSection = page.getByText("Dari Mamikos", new Page.GetByTextOptions().setExact(true));
         dariMamikosBanner = page.locator(".banner-card__image-wrapper > .bg-c-image__img").first();
-        nantiSajaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nanti Saja"));
+        nantiSajaButton = page.locator("//button[normalize-space()='Nanti Saja']");
         widgetDaftarGoldplus = page.getByTestId("registerGP_btn");
         daftarGpButton = page.getByTestId("registerGP_btn");
         leadsMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Leads"));
@@ -222,7 +222,7 @@ public class OwnerDashboardPO {
         if (playwright.isTextDisplayed("Sudah cek fitur-fitur GoldPlus ini?") || playwright.isTextDisplayed("Selamat bergabung di GoldPlus 2!")) {
             playwright.clickOnText("Nanti Saja", 5000.0);
         }
-        playwright.waitTillLocatorIsVisible(manajemenKost);
+        playwright.waitTillLocatorIsVisible(manajemenKost, 60000.0);
         playwright.clickOn(manajemenKost);
     }
 

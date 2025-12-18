@@ -9,7 +9,7 @@ Feature: Listing Availability on Chat Room
       | phone stag    | phone prod    | password     |
       | 0891111020199 | 0891111020199 | mamikosqa123 |
     And user click on chat button in top bar tenant home page
-    And user click "Kost General Irvi Automation Abiansemal Badung"
+    And user click "Kost Tanjakan Indah Rajeg Tangerang"
     And user click Ajukan Sewa "today" from chat room
     Then user will open new tab and go to Booking form
 

@@ -102,7 +102,7 @@ public class BookingFormPO {
         this.instansiSearchInput = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Search"));
         this.inputCatatanTambahanField = page.locator("//*[@id='bookingFormTenantNote-textArea']");
         this.summaryBookingFormText = page.getByTestId("booking-request-form__summary").getByText("Total pembayaran pertama belum termasuk biaya yang mungkin pemilik akan terapkan");
-        this.viewPengajuanStatusLink = page.locator("//span[contains(text(), 'Lihat status pengajuan')]");
+        this.viewPengajuanStatusLink = page.locator("//*[@class=\"booking-success__cta\"]/button");
         this.deskriptionDiriText = page.locator("//*[@class=\"booking-item --tenant-description\"]/div").last();
         this.simpanBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
         this.tambahBarangButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("add-plus Pilih tambahan barang/fasilitas"));
@@ -120,7 +120,7 @@ public class BookingFormPO {
      * Click on booking confirmation checkmark
      */
     public void clickOnBookingConfirmationCheckmark() {
-        playwright.waitTillLocatorIsVisible(bookingConfirmationCheckmark);
+        playwright.waitTillLocatorIsVisible(bookingConfirmationCheckmark, 30000.0);
         playwright.clickOn(bookingConfirmationCheckmark);
     }
 

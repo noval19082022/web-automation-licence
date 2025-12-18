@@ -24,19 +24,23 @@ public class CommonSteps {
     HomePO home = new HomePO(page);
     LoadingPO loadingPO = new LoadingPO(page);
 
+    private PlaywrightHelpers getPlaywright() {
+        return new PlaywrightHelpers(ActiveContext.getActivePage());
+    }
+
     @When("user/owner/tenant click {string}")
     public void user_click(String text) {
-        playwright.clickOnText(text);
+        getPlaywright().clickOnText(text);
     }
 
     @When("user/owner/tenant click {string} button")
     public void user_click_button(String text) {
-        playwright.clickOnTextButton(text);
+        getPlaywright().clickOnTextButton(text);
     }
 
     @Then("user/owner/tenant/admin will see that the text {string} is displayed")
     public void user_will_see_that_the_text_is_displayed(String text) {
-        Assert.assertTrue(playwright.isTextDisplayed(text, 3000));
+        Assert.assertTrue(playwright.isTextDisplayed(text, 10000));
     }
 
     @Then("user/owner/tenant/admin will see that the text is displayed")

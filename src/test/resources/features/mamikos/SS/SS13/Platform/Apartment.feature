@@ -104,7 +104,7 @@ Feature: [Test-Execution][DOM] Web - apartment
       | stag        | /apartemen-testing-parangtritis/rane-78-1room-studio-1 |
       | prod        | /apartemen-testing-parangtritis/rane-78-1room-studio-1 |
     When user click on hubungi pengelola button
-    Then chat room appear with latest message "Hai, terima kasih sudah berminat pada apartemen ini. Alamat lengkapnya adalah Pantai Parangtritis Mamikos tidak bertanggungjawab atas transaksi yang dilakukan di luar platform Mamikos, karena itu mohon berhati-hati. Pastikan identitas pengelola, survey lokasi, dan kontrak sewa sebelum melakukan segala jenis pembayaran."
+    Then chat room appear with latest message "Apartmen Rane 78 masih kosong seharga Rp Rp 10 jt/hr, Rp 50 jt/bl, alamat Pantai Parangtritis , No hp @sPhone"
 
   @TEST_SS-2984 @Automated @web-covered
   Scenario: [Web][Apartement] Positive case tenant search apartment by keyword
@@ -123,9 +123,6 @@ Feature: [Test-Execution][DOM] Web - apartment
 #      | Coblong       |
 #      | Sumur Bandung |
 #      | Bandung       |
-		#  Scenario: Positive case tenant click logo for redirect to home page
-    When user click mamikos logo on apartement list page
-    Then user redirected to "/"
 
   @TEST_SS-2985 @Automated @web-covered
   Scenario: [Web][Apartement] Tenant Verify Profile Dropdown

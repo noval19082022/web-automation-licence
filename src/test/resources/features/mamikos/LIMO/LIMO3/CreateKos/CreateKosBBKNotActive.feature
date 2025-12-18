@@ -197,8 +197,11 @@ Feature: Create new kos with owner not active BBK
 
   @TEST_LIMO-3672 @CreateKosFromDraftBBKInactv
   Scenario: Create from kos with status draft && mamipay active && all bbk kos not active
-    Given owner search kos on property saya page
-    When owner click "Lengkapi Data Kos" on kos draft
+    And owner navigates to property saya kos
+    And owner click close icon pop up
+    And owner search kos on property saya page
+    And owner click "Lengkapi Data Kos" on kos draft
+    When owner close pop up BBK at kos list page
     And owner input the price room as expected
       | monthly price | check min rent duration | min rent duration | check other price | daily price | weekly price | three monthly price | six monthly price | yearly price |
       | 300000        | yes                     | Min. 1 Hari       | yes               | 50000       | 200000       | 800000              | 1700000           | 3000000      |

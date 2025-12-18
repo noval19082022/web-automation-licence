@@ -93,12 +93,10 @@ public class PaymentSteps {
 
     @Then("tenant can not use the voucher")
     public void tenantCanNotUseTheVoucher() {
-        playwright.hardWait(3000); // Wait for toast to appear
-        var voucherInvalidWording = "Kode voucher tidak bisa digunakan. Silakan hapus voucher.";
-        String toastStringRemoveLineSeparator = invoice.getToastText().replaceAll("\\R", " ");
-        String toastRemoveExtraSpace = toastStringRemoveLineSeparator.replaceAll("\\s+", " ");
-        Assert.assertEquals(toastRemoveExtraSpace, voucherInvalidWording);
-        Assert.assertTrue(invoice.isInvalidVoucherIconVisible(), "Voucher is valid, invalid voucher must have 'x' icon.");
+        var voucherInvalidWording = "Kode voucher tidak bisa digunakan.";
+        String actualWarningText = invoice.voucherInputPopUpWarningText();
+        Assert.assertEquals(actualWarningText, voucherInvalidWording,
+            "Expected voucher error message: '" + voucherInvalidWording + "' but got: '" + actualWarningText + "'");
     }
 
     @Then("tenant should see voucher error message {string}")

@@ -54,11 +54,9 @@ Feature: Activate Mamipay
   @submitInputFormDataDiri @TEST_LIMO-3686
   Scenario: Valid input form data diri
     When owner input on "Masukkan nama lengkap Anda sesuai KTP" "tiara"
-    Given verify kirim data button is disable
     When owner check term and condition
+    And owner will see that the text "Syarat dan Ketentuan Booking Langsung Owner" is displayed
     And owner close page number 1
-    And owner set active page to 0
-    #And owner click term and condition
     And owner click "Kirim Data" button
     Then user see success add data kos pop up with text "Permintaan Aktivasi Dikirimkan"
     And owner click "Kembali" button

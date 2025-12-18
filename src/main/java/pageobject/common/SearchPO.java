@@ -79,7 +79,7 @@ public class SearchPO {
         this.resultBasedOnArea = page.locator("//h2[@class = 'list__title']");
         area = page.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("Area"));
         suggetionKostOnTheSearchListNumberSix = page.getByTestId("results-list__item").nth(6);
-        suggestionPrimeResutls = page.getByTestId("suggestionBox-roomList").getByTestId("results-list__item");
+        suggestionPrimeResutls = page.locator("svg use[href*='crown'], svg[class*='crown'], [data-testid='suggestionBox-roomList'] svg");
         suggestionPrimeResultsBox = page.getByTestId("suggestionBox-roomList").first();
         suggestionNonPrimeResutls = page.getByTestId("suggestionBox-roomListNonPrime");
 
@@ -823,6 +823,7 @@ public class SearchPO {
      * @return list of texts inside prime suggestion box
      */
     public List<String> getListSuggestionKostNamePrime() {
+        playwright.hardWait(3000);
         playwright.waitFor(suggestionPrimeResutls.first());
         return playwright.getListTextContentsFromLocator(suggestionPrimeResultsBox);
     }

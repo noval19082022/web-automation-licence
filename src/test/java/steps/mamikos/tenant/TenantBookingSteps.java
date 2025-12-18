@@ -109,7 +109,7 @@ public class TenantBookingSteps {
     @Then("tenant should success booking kost")
     public void tenantShouldSuccesBookingKost() {
         successBooking.waitUntilSuccessBookingHeadingVisible();
-        Assert.assertEquals(successBooking.getSuccessBookingHeadingText(), "Pengajuan sewa berhasil dikirim");
+        Assert.assertEquals(successBooking.getSuccessBookingHeadingText(), "Lihat status pengajuan");
     }
 
     @And("user cancel booking")

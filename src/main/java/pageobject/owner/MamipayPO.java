@@ -8,7 +8,8 @@ import utilities.PlaywrightHelpers;
 
 public class MamipayPO {
     private Page page;
-    private PlaywrightHelpers playwright;
+    private final PlaywrightHelpers playwright;
+    private boolean ownerAlreadyHasMamipay = false;
 
     Locator namaLengkap;
     Locator infoMamipay;
@@ -21,9 +22,9 @@ public class MamipayPO {
     Locator titleForm;
     Locator titleAutoBbkPopUp;
     Locator kirimData;
-    Locator titlePusatBantuan;
+    Locator tittlePusatBantuan;
 
-    public MamipayPO(Page page){
+    public MamipayPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
 
@@ -38,31 +39,48 @@ public class MamipayPO {
         titleForm = page.locator(".title");
         titleAutoBbkPopUp = page.locator(".owner-intercept-booking-modal__body-title");
         kirimData = page.locator(".bg-c-button--primary");
-        titlePusatBantuan = page.locator(".mh-article-page__title");
+        tittlePusatBantuan = page.locator("h1.bg-c-text.bg-c-text--heading-2.mh-article-page__title");
     }
 
     /**
      * Verify title on onboarding of mamipay owner
-     * @return title text
      *
+     * @return title text
      */
     public boolean getTitleOnboarding() {
-        return playwright.isTextDisplayed("Manfaat Beriklan di Mamikos", 3000.0);
+        return playwright.isTextDisplayed("Lengkapi Data Diri", 5000.0)
+                || playwright.isTextDisplayed("Aktifkan Mamipay", 5000.0)
+                || playwright.isTextDisplayed("Data Rekening", 5000.0)
+                || playwright.isTextDisplayed("Data Kos Dikirimkan", 5000.0)
+                || playwright.isTextDisplayed("Manfaat Beriklan di Mamikos", 5000.0);
     }
 
     /**
      * Click button lanjutkan on onboarding mamipay owner
-     *
-     *
+     * If success modal with "Selesai" button appears (owner already has mamipay), click that instead
      */
     public void clickLanjutkanButton() {
-        playwright.clickOnTextButton("Lanjutkan");
+        // Check if success modal is displayed (owner already has mamipay active)
+        if (playwright.isTextDisplayed("Data Kos Dikirimkan", 2000.0)) {
+            ownerAlreadyHasMamipay = true;
+            playwright.clickOnTextButton("Selesai");
+        } else {
+            playwright.clickOnTextButton("Lanjutkan");
+        }
+    }
+
+    /**
+     * Check if owner already has mamipay active
+     * @return true if owner already has mamipay
+     */
+    public boolean isOwnerAlreadyHasMamipay() {
+        return ownerAlreadyHasMamipay;
     }
 
     /**
      * Get Nama Lengkap on Nama Lengkap field
-     * @return namaLengkap
      *
+     * @return namaLengkap
      */
     public String getNamaLengkap() {
         return playwright.getInputValue(namaLengkap);
@@ -70,13 +88,12 @@ public class MamipayPO {
 
     /**
      * input text field
-     * @param fieldName
-     * @param inputText
-     * e.g nama lengkap, nomor rekening, nama bank, nama pemilik rekening for fieldName
      *
+     * @param fieldName
+     * @param inputText e.g nama lengkap, nomor rekening, nama bank, nama pemilik rekening for fieldName
      */
     public void inputTextField(String fieldName, String inputText) {
-        String element = "[placeholder='"+ fieldName +"']";
+        String element = "[placeholder='" + fieldName + "']";
 
         // switch the element
         if (fieldName.contains("Pilih nama bank") || fieldName.contains("nama bank")) {
@@ -90,8 +107,8 @@ public class MamipayPO {
 
     /**
      * get text info mamipay
-     * @return info mamipay
      *
+     * @return info mamipay
      */
     public String getInfoMamipay() {
         return playwright.getText(infoMamipay);
@@ -99,8 +116,8 @@ public class MamipayPO {
 
     /**
      * verify term and condition disable
-     * @return boolean true and false
      *
+     * @return boolean true and false
      */
     public boolean isTermAndConditionDisable() {
         return playwright.isButtonDisable(termAndConditionCheck);
@@ -108,8 +125,8 @@ public class MamipayPO {
 
     /**
      * verify button kirim data disable
-     * @return boolean true, false
      *
+     * @return boolean true, false
      */
     public boolean isKirimDataButtonDisable() {
         return playwright.isButtonDisable(kirimDataButton);
@@ -117,8 +134,8 @@ public class MamipayPO {
 
     /**
      * Select bank name based on type of bank name on input dropdown
-     * @param bankName
      *
+     * @param bankName
      */
     public void selectBankName(String bankName) {
         playwright.clickOnText(bankName);
@@ -126,8 +143,8 @@ public class MamipayPO {
 
     /**
      * click on term and condition link and open new tab
-     * @return page term and condition
      *
+     * @return page term and condition
      */
     public Page clickOnTermAndCondition() {
         page = page.waitForPopup(() -> {
@@ -139,6 +156,7 @@ public class MamipayPO {
 
     /**
      * Get URL
+     *
      * @return url is equal
      */
     public String getURL() {
@@ -147,17 +165,15 @@ public class MamipayPO {
 
     /**
      * Get title pusat bantuan on new page
-     * @return title pusat bantuan
      *
+     * @return title pusat bantuan
      */
     public boolean getTitlePusatBantuan() {
-        return playwright.waitTillLocatorIsVisible(titlePusatBantuan, 2000.0);
+        return playwright.isLocatorVisibleAfterLoad(tittlePusatBantuan, 3000.0);
     }
 
     /**
      * check on tnc
-     *
-     *
      */
     public void clickOnChecTnC() {
         playwright.clickOn(termAndConditionCheck);
@@ -165,8 +181,8 @@ public class MamipayPO {
 
     /**
      * Get username on navbar
-     * @return username
      *
+     * @return username
      */
     public String getUsername() {
         return playwright.getText(username);
@@ -174,8 +190,8 @@ public class MamipayPO {
 
     /**
      * Verify info untuk anda auto BBK dislayed
-     * @return boolean true or false
      *
+     * @return boolean true or false
      */
     public boolean isInfoUntukAndaAutoBbkDisplayed() {
         return playwright.isLocatorVisibleAfterLoad(autoBbkCard, 3000.0);
@@ -183,8 +199,8 @@ public class MamipayPO {
 
     /**
      * Verify title text on form Auto BBK
-     * @return titleForm text
      *
+     * @return titleForm text
      */
     public String getTitleForm() {
         return playwright.getText(titleForm);
@@ -192,8 +208,8 @@ public class MamipayPO {
 
     /**
      * Get title on pop up Auto BBK pop up
-     * @return titleAutoBbkPopUp
      *
+     * @return titleAutoBbkPopUp
      */
     public String getTitleAutoBbkPopUp() {
         return playwright.getText(titleAutoBbkPopUp);
@@ -201,8 +217,6 @@ public class MamipayPO {
 
     /**
      * Verify the Kirim data button on form input BBK is disable
-     *
-     *
      */
     public void kirimDataDisable() {
         playwright.waitFor(kirimData);

@@ -1,4 +1,4 @@
-@regression @LIMO4 @editKostFeature2 @flaky
+@regression @LIMO4 @editKostFeature2
 Feature: Edit Kos 2
 
   @precondition

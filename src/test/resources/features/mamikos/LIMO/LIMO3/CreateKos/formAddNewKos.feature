@@ -24,6 +24,8 @@ Feature: Form Add New Kos
     And owner upload valid photo "bangunan tampak depan"
     And owner clicks button move photo
     And owner select destination move photo kos
+    And owner select destination move photo room on "Foto tampilan dalam bangunan"
+
 
   @TEST_LIMO-856
   Scenario: [Form add New Kost][Foto Kamar]Update, delete, and moved room photo
@@ -35,7 +37,9 @@ Feature: Form Add New Kos
     And owner clicks button delete photo
     And owner upload valid photo "depan kamar"
     And owner clicks button move photo
-    And owner select destination move photo room
+    And owner select destination move photo kos
+    And owner select destination move photo room on "Foto dalam kamar"
+
 
   Scenario: Delete new kos from admin
     Given admin go to mamikos bangkrupux admin
@@ -46,7 +50,7 @@ Feature: Form Add New Kos
     And admin bangkrupux search phone owner in admin kos owner page
     And admin delete kos
     Then verify "Success! Room has been succesfully deleted" displayed
-
+#
 
 
 

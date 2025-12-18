@@ -124,6 +124,7 @@ Feature: Create new kos with owner that hasn't activate mamipay (3)
     And owner navigates to owner dashboard
     And owner navigates to property saya kos
     Then user see kos with valid name, status "Draft" and type "Kos Putra"
+    And owner click close icon pop up
 
     #continue create kos draft
     When owner search kos on property saya page
@@ -139,7 +140,7 @@ Feature: Create new kos with owner that hasn't activate mamipay (3)
     And owner input on "nama bank" "BCA"
     And owner select bank name "BCA"
     And owner click term and condition
-    And owner click "Kirim Data" button
+    And user clicks on the close button
     And owner navigates to property saya kos
     Then user see kos with valid name, status "Diperiksa Admin" and type "Kos Putra"
 

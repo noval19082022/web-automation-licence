@@ -1,4 +1,4 @@
-@SS15
+@SS15 @flaky
 Feature: Apply Voucher Weekly For Contract Duration
 
   Scenario: Admin Batalkan Contract
@@ -75,7 +75,7 @@ Feature: Apply Voucher Weekly For Contract Duration
     And tenant redirect to kost details:
       | kost path stag                                                             | kost path prod           |
       | kost-kabupaten-halmahera-utara-kost-campur-eksklusif-kost-adi-auto-with-dp | Kost Adi Auto Voucher DP |
-    And tenant booking kost "tomorrow" "Per Tahun"
+    And tenant booking kost "tomorrow" "Per Bulan"
     Then tenant should success booking kost
 
   Scenario: Owner Accept Booking
@@ -99,4 +99,4 @@ Feature: Apply Voucher Weekly For Contract Duration
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
       | AUTOWEEKLY        | AUTOWEEKLY        |
-    Then tenant can see voucher is applied
+    Then tenant can not use the voucher

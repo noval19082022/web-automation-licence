@@ -27,7 +27,8 @@
       And user click button edit finished
       Then user see success add data kos pop up with text "Data Kos Telah Diperbarui"
       When user click done in success page pop up of edit kos
-      #check log facility
+
+    Scenario: Check log facility
       When admin go to mamikos bangkrupux admin
       And admin login to bangkrupux:
         | email stag                   | email prod                   | password  |
@@ -71,7 +72,8 @@
         And user click button edit finished
         Then user see success add data kos pop up with text "Data Kos Telah Diperbarui"
         When user click done in success page pop up of edit kos
-        #check log facility
+
+    Scenario: check log facility
         When admin go to mamikos bangkrupux admin
         And admin login to bangkrupux:
           | email stag                   | email prod                   | password  |
@@ -79,16 +81,16 @@
         And admin navigates to "/admin/room/tag-change-log?room_id=1000044309"
         Then admin can see log facility "Fasilitas Umum"
           | Old Data                                                  | New Data                                | Updated by      |
-          | Dapur, Kompor, Kulkas, Dispenser, WiFi, Air Jernih, CCTV  | WiFi, Dapur, Kulkas, Dispenser, Kompor  | Owner (Nurjono) |
+          | Dapur, Kompor, Kulkas, Dispenser, WiFi  | WiFi, Dapur, Kulkas, Dispenser, Kompor, Air Jernih, CCTV  | Owner (Nurjono) |
         And admin can see log facility "Fasilitas Kamar"
           | Old Data                | New Data   | Updated by      |
-          | AC, Kasur, Kipas Angin  | Kasur, AC  | Owner (Nurjono) |
+          | AC, Kasur | Kasur, AC, Kipas Angin  | Owner (Nurjono) |
         And admin can see log facility "Fasilitas Parkir"
           | Old Data                            | New Data               | Updated by      |
-          | Parkir Motor & Sepeda, Parkir Mobil | Parkir Motor & Sepeda  | Owner (Nurjono) |
+          | Parkir Motor & Sepeda | Parkir Mobil, Parkir Motor & Sepeda  | Owner (Nurjono) |
         And admin can see log facility "Fasilitas Kamar Mandi"
           | Old Data                        | New Data           | Updated by      |
-          | Bak mandi, Gayung, Kloset Duduk | Bak mandi, Gayung  | Owner (Nurjono) |
+          | Bak mandi, Gayung | Kloset Duduk, Bak mandi, Gayung  | Owner (Nurjono) |
 
       @TEST_SS-10120
       Scenario: Log add facility by admin
@@ -111,7 +113,8 @@
           | Akses 24 Jam  |
         And admin save edit kost
         Then admin should see success toast message "Success!"
-        #check log facility
+
+#        Scenario: check log facility
         When admin navigates to "/admin/room/tag-change-log?room_id=1000044307"
         Then admin can see log facility "Fasilitas Umum"
           | Old Data                                                             | New Data                                                                                   | Updated by              |
@@ -151,7 +154,8 @@
           | Akses 24 Jam  |
         And admin save edit kost
         Then admin should see success toast message "Success!"
-        #check log facility
+
+#        Scenario: check log facility
         When admin navigates to "/admin/room/tag-change-log?room_id=1000044307"
         Then admin can see log facility "Fasilitas Umum"
           | Old Data                                                                                    | New Data                                                              | Updated by              |
