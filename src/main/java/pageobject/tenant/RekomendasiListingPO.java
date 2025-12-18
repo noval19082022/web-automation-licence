@@ -37,9 +37,9 @@ public class RekomendasiListingPO {
         this.mulaiCariDanSewaKosButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Mulai cari dan sewa kos"));
         this.masukkanKodeDariPemilikButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Masukkan kode dari pemilik"));
         this.rekomendasiTitle = page.locator(".premium-recom-title");
-        this.paginationNumberAct = page.locator("//div[@class='premium-recom-slider-item']");
-        this.rekomendasiListingActual = page.locator("//*[@class=‘premium-recom-slide’]//div[@class=‘track-list-booking-kost’]");
-        this.firstPropertyRekomendasiKosSaya =  page.locator("(//*[@class='rc-info__name bg-c-text bg-c-text--body-4'])[1]");
+        this.paginationNumberAct = page.locator(".premium-recom-slider-item");
+        this.rekomendasiListingActual = page.locator(".premium-recom-slide .track-list-booking-kost");
+        this.firstPropertyRekomendasiKosSaya =  page.locator(".rc-info__name.bg-c-text.bg-c-text--body-4").first();
         this.hapusHistoriButton = page.locator("//button[normalize-space()='Hapus']");
     }
 
@@ -109,21 +109,19 @@ public class RekomendasiListingPO {
     }
 
     /**
-     * Pagination number get as integer
+     * Pagination number get as integer (count of pagination items/pages)
      * @return integer data type
      */
     public int getPaginationActual() {
-        String paginationText = playwright.getText(paginationNumberAct);
-        return paginationText != null && !paginationText.isEmpty() ? Integer.parseInt(paginationText) : 0;
+        return paginationNumberAct.count();
     }
 
     /**
-     * Rekomendasi listing number get as integer
+     * Rekomendasi listing number get as integer (count of rekomendasi items)
      * @return integer data type
      */
     public int getRekomendasiActual() {
-        String rekomendasiText = playwright.getText(rekomendasiListingActual);
-        return rekomendasiText != null && !rekomendasiText.isEmpty() ? Integer.parseInt(rekomendasiText) : 0;
+        return rekomendasiListingActual.count();
     }
 
     /**

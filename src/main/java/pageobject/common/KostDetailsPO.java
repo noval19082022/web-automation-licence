@@ -2633,7 +2633,8 @@ public class KostDetailsPO {
      * @return String survey label text
      */
     public String getSurveyLabelText() {
-            playwright.waitTillLocatorIsVisible(surveyLabelSection, 3000.0);
+        playwright.hardWait(5000);
+            playwright.waitTillLocatorIsVisible(surveyLabelSection, 5000.0);
                 return playwright.getText(surveyLabelSection);
     }
 

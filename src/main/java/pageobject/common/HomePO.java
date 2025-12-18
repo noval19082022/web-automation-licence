@@ -163,9 +163,9 @@ public class HomePO {
         this.pusatBantuanButton = page.getByRole(AriaRole.CONTENTINFO).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Pusat Bantuan"));
         this.emailFooter = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("cs@mamikos.com"));
         this.formBantuanTitle = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Form Bantuan"));
-        this.whatsappButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("whatsapp +6281325111171"));
+        this.whatsappButton = page.locator("footer a[href*='whatsapp'], footer a[href*='wa.me']").first();
         this.facebookButton = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("facebook"));
-        this.twitterButton = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("twitter"));
+        this.twitterButton = page.locator("footer a[href*='twitter'], footer a[href*='x.com']").first();
         this.instagramButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("instagram"));
         this.copyrightFooter = page.getByText("© 2025 Mamikos.com. All rights reserved");
         this.appStoreFooterMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("App Store"));
@@ -619,6 +619,10 @@ public class HomePO {
      *
      */
     public void clickOnWhatsappNumber() {
+        playwright.pageScrollUntilElementIsVisible(copyrightFooter);
+        playwright.hardWait(2000);
+        whatsappButton.scrollIntoViewIfNeeded();
+        playwright.hardWait(1000);
         playwright.clickOn(whatsappButton);
         playwright.hardWait(2000);
     }
@@ -637,6 +641,13 @@ public class HomePO {
      *
      */
     public void clickOnTwitterButton() {
+        // Scroll to footer area where social media links are located
+        playwright.pageScrollUntilElementIsVisible(copyrightFooter);
+        playwright.hardWait(2000);
+        
+        // Ensure twitter button is visible before clicking
+        twitterButton.scrollIntoViewIfNeeded();
+        playwright.hardWait(1000);
         playwright.clickOn(twitterButton);
         playwright.hardWait(2000);
     }
