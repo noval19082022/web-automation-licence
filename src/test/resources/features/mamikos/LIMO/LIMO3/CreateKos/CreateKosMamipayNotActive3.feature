@@ -1,4 +1,5 @@
 @regression @LIMO3 @EX-LG @createKosMamipayNotActive @createKosMamipayNotActive3 @DONEMIGRATINGTONEWBOARD
+
 Feature: Create new kos with owner that hasn't activate mamipay (3)
 
   @CreateKosNewTypeSkipMamipay @TEST_LIMO-916

@@ -10,10 +10,10 @@ Feature: Batalkan survei P2
     And tenant search kost then go to kost details:
       | kost name stag              | kost name prod              |
       | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
-    And user dismiss FTUE booking benefit
+#    And user dismiss FTUE booking benefit
     And user click chat in kos detail
-      # This survey feature is revamp on 29/09/25
 
+      # This survey feature is revamp on 29/09/25
 #    And user tap on survey kost btn on detail chatroom
 #    And user open time survey option on form survey
 #    Then user select survey available time
