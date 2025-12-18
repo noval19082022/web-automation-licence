@@ -1,4 +1,4 @@
-@SS11 @booking-data
+@SS11 @booking-data @a
 Feature: Booking Remark on Data Booking
 
   @continue
@@ -30,9 +30,9 @@ Feature: Booking Remark on Data Booking
     And admin click on note category dropdown
     And admin select note category "-"
     And admin click search filter button
-    Then remarks text "Remarks : -" should be displayed
+    Then admin should see remarks "Remarks : -" in the results
     When admin click show filter button
     And admin click on note category dropdown
     And admin select note category "Akan Survey"
     And admin click search filter button
-    Then remarks text "Remarks : Akan Survey" should be displayed
+    Then admin should see remarks "Remarks : Akan Survey" in the results

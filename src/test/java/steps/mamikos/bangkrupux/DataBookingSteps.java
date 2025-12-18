@@ -155,9 +155,4 @@ public class DataBookingSteps {
         Assert.assertTrue(isDisplayed, "Expected remarks text '" + remarksText + "' should be displayed in the results");
     }
 
-    @Then("remarks text {string} should be displayed")
-    public void remarksTextShouldBeDisplayed(String remarksText) {
-        boolean isDisplayed = dataBooking.isRemarksTextDisplayed(remarksText);
-        Assert.assertTrue(isDisplayed, "Remarks text '" + remarksText + "' should be visible on the page");
-    }
 }
