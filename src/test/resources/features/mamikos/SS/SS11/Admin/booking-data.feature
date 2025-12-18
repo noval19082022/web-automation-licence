@@ -24,7 +24,7 @@ Feature: Booking Remark on Data Booking
     And admin click search filter button
     Then admin should see remarks "Remarks : Akan Survey" in the results
 
-  @TEST_SS-10551 @continue
+  @TEST_SS-10551
   Scenario: [Web][Data Booking][Remarks]Admin can see different note categories in booking data
     When admin click show filter button
     And admin click on note category dropdown
