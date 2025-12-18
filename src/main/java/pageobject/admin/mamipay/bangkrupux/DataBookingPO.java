@@ -48,6 +48,8 @@ public class DataBookingPO {
     Locator allKostTestingDropdown;
     Locator filterButton;
     Locator phoneNumberTextField;
+    Locator noteCategoryDropdown;
+    Locator noteCategoryTextbox;
 
     public DataBookingPO(Page page) {
         this.page = page;
@@ -78,6 +80,8 @@ public class DataBookingPO {
         this.allKostTestingDropdown = page.locator("//ul[@class=\"select2-results__options select2-results__options--nested\"]//li[contains(.,'All Testing')]");
         this.filterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Cari"));
         this.phoneNumberTextField = page.getByPlaceholder("Ex: 081987654321");
+        this.noteCategoryDropdown = page.locator("#select2-note-category-container");
+        this.noteCategoryTextbox = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("-"));
     }
 
     /**
@@ -280,4 +284,61 @@ public class DataBookingPO {
         playwright.clickOn(allKostTestingDropdown);
         playwright.clickOn(filterButton);
     }
+
+    /**
+     * Click on Show Filter button to display filter options
+     * @return AdminBookingDataPO
+     */
+    public void clickOnShowFilter() {
+        playwright.clickOn(showAllButton);
+    }
+
+    /**
+     * Click on note category dropdown to open options
+     * @return AdminBookingDataPO
+     */
+    public void clickOnNoteCategoryDropdown() {
+        playwright.clickOn(noteCategoryDropdown);
+    }
+
+    /**
+     * Select note category option by name
+     * @param categoryName name of the category (e.g., "-", "Akan Survey")
+     * @return AdminBookingDataPO
+     */
+    public void selectNoteCategoryOption(String categoryName) {
+        Locator option = page.getByRole(AriaRole.OPTION, new Page.GetByRoleOptions().setName(categoryName));
+        playwright.clickOn(option);
+    }
+
+    /**
+     * Click on textbox with specific name and select option
+     * @param textboxName name of the textbox
+     * @param optionName name of the option to select
+     * @return AdminBookingDataPO
+     */
+    public void selectFromTextboxDropdown(String textboxName, String optionName) {
+        Locator textbox = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName(textboxName));
+        playwright.clickOn(textbox);
+        Locator option = page.getByRole(AriaRole.OPTION, new Page.GetByRoleOptions().setName(optionName));
+        playwright.clickOn(option);
+    }
+
+    /**
+     * Verify if specific remarks text is displayed in the results
+     * @param remarksText the remarks text to verify (e.g., "Remarks : -")
+     * @return boolean true if the remarks text is visible
+     */
+    public boolean isRemarksTextDisplayed(String remarksText) {
+        Locator remarksLocator = page.getByText(remarksText).first();
+        return playwright.waitTillLocatorIsVisible(remarksLocator, 5000.0);
+    }
+
+    /**
+     * click search button on filter section
+     */
+    public void clickSearchFilterButton(){
+        playwright.clickOn(filterButton);
+    }
+
 }

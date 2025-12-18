@@ -123,4 +123,36 @@ public class DataBookingSteps {
     public void admin_search_kost_all_testing_and_tenant_phone_number(String text){
     dataBooking.searchAllTestingKost(text);
     }
+
+    @When("admin click show filter button")
+    public void adminClickShowFilterButton() {
+        dataBooking.clickOnShowFilter();
+    }
+
+    @When("admin click on note category dropdown")
+    public void adminClickOnNoteCategoryDropdown() {
+        dataBooking.clickOnNoteCategoryDropdown();
+    }
+
+    @When("admin select note category {string}")
+    public void adminSelectNoteCategory(String categoryName) {
+        dataBooking.selectNoteCategoryOption(categoryName);
+    }
+
+    @And("admin click search filter button")
+    public void adminClickSearchFilterButton(){
+        dataBooking.clickSearchFilterButton();
+    }
+
+    @When("admin select {string} from textbox dropdown and choose {string}")
+    public void adminSelectFromTextboxDropdown(String textboxName, String optionName) {
+        dataBooking.selectFromTextboxDropdown(textboxName, optionName);
+    }
+
+    @Then("admin should see remarks {string} in the results")
+    public void adminShouldSeeRemarksInTheResults(String remarksText) {
+        boolean isDisplayed = dataBooking.isRemarksTextDisplayed(remarksText);
+        Assert.assertTrue(isDisplayed, "Expected remarks text '" + remarksText + "' should be displayed in the results");
+    }
+
 }
