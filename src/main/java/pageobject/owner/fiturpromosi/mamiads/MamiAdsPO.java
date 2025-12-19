@@ -233,10 +233,16 @@ public class MamiAdsPO {
     }
 
     public void clickSaldoMamiadsCard() {
-        playwright.hardWait(5000);
+        // Wait for saldo card to be visible and page to be ready
+        playwright.waitTillLocatorIsVisible(saldoMamiadsCard, 8000.0);
+
+        // Handle popup if it appears
         if (playwright.isButtonWithTextDisplayed("Nanti Saja")) {
             playwright.clickOnTextButton("Nanti Saja");
+            // Give UI a moment to settle after dismissing popup
+            playwright.hardWait(500);
         }
+
         playwright.clickOn(saldoMamiadsCard);
     }
 

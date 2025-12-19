@@ -44,7 +44,8 @@ public class OwnerLoginPO extends LoginPO {
     public OwnerDashboardPO clickOnOwnerLoginButton() {
         playwright.clickOn(loginBtn);
         playwright.waitTillPageLoaded();
-        playwright.hardWait(5000);
+        // Wait for owner dashboard to be ready (profile button indicates successful login)
+        playwright.waitTillLocatorIsVisible(profileOwnerBtn, 10000.0);
         return new OwnerDashboardPO(page);
     }
 

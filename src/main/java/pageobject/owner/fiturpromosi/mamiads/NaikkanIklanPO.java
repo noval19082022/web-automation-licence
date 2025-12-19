@@ -251,9 +251,9 @@ public class NaikkanIklanPO {
      * @params adsName
      */
     public String getTextAnggaranDesc(String adsName) {
-        playwright.hardWait(7000.0);
+        // Wait for anggaran description element to be visible instead of fixed wait
         anggaranDescLocator = page.locator("//*[.='" + adsName + "']/../../following-sibling::*//div[@id='ads-allocation-description']");
-        playwright.waitTillLocatorIsVisible(anggaranDescLocator);
+        playwright.waitTillLocatorIsVisible(anggaranDescLocator, 10000.0);
         return playwright.getText(anggaranDescLocator);
     }
 
@@ -322,7 +322,8 @@ public class NaikkanIklanPO {
      * @param actionButton the expected action button text
      */
     public void clickActionButtonInPopUp(String actionButton) {
-        playwright.hardWait(3000.0);
+        // Wait for popup to be visible instead of fixed wait
+        playwright.waitTillLocatorIsVisible(titlePopUpConfirmation, 5000.0);
 
         // Determine which button to click based on visibility
         if (nonaktifkanButton.isVisible()) {
@@ -333,8 +334,8 @@ public class NaikkanIklanPO {
             // Popup for activating (turning ON) is shown
             System.out.println("Clicking 'Aktifkan' button to turn ON the toggle...");
             playwright.clickOn(aktifkanButton);
-            // add hardwait to make sure the backend already sign as active or deactive on listing page
-            playwright.hardWait(5_000);
+            // Wait for backend to process the toggle state change
+            playwright.waitTillPageLoaded();
         } else {
             // Fallback to original logic using the provided actionButton parameter
             System.out.println("Using fallback: clicking '" + actionButton + "' button...");
