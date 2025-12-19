@@ -41,6 +41,7 @@ public class ChatSteps {
     public void user_will_directed_to_kost_detail_in_newTab() {
         page = ActiveContext.getActivePage();
         playwright = new PlaywrightHelpers(page);
+        playwright.waitTillPageLoaded();
         Assert.assertTrue(playwright.getActivePageURL().contains(BangKrupuxTestData.getKostName()), "Url doesn't match");
     }
 
