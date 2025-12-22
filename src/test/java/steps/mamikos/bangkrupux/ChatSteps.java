@@ -21,9 +21,49 @@ public class ChatSteps {
         chatAdmin.clickOnTenantChat();
     }
 
+    @When("user open chat room {string}")
+    public void user_open_chat_room(String bse) {
+        Page activePage = ActiveContext.getActivePage();
+        ChatPO activeChatAdmin = new ChatPO(activePage);
+        activeChatAdmin.openChatRoom(bse);
+    }
+
+    @Then("resolved button is disable")
+    public void resolved_button_is_disable() {
+        Page activePage = ActiveContext.getActivePage();
+        ChatPO activeChatAdmin = new ChatPO(activePage);
+        Assert.assertTrue(activeChatAdmin.isResolvedButtonDisable());
+    }
+
+    @Then("resolved button is enable")
+    public void resolved_button_is_enable(){
+        Page activePage = ActiveContext.getActivePage();
+        ChatPO activeChatAdmin = new ChatPO(activePage);
+        Assert.assertFalse(activeChatAdmin.isResolvedButtonDisable());
+    }
+
+    @When("admin resolve chat")
+    public void admin_resolve_chat(){
+        Page activePage = ActiveContext.getActivePage();
+        ChatPO activeChatAdmin = new ChatPO(activePage);
+        activeChatAdmin.clickResolveButton();
+    }
+
+    @Then("sent closing chat {string}")
+    public void sent_closing_chat(String message) {
+        Assert.assertEquals(chatAdmin.getLastMessage(),message);
+    }
+
     @And("user go to Rajawali Chat Room")
     public void user_go_to_rajawali_chat_room() {
-        chatAdmin.clickOnChatRoomMenu();
+        Page activePage = ActiveContext.getActivePage();
+        ChatPO activeChatAdmin = new ChatPO(activePage);
+        activeChatAdmin.clickOnChatRoomMenu();
+    }
+
+    @When("admin chat {string}")
+    public void admin_chat(String message){
+        chatAdmin.sendChat(message);
     }
 
     @Then("user able to see Kos Name")
@@ -52,10 +92,12 @@ public class ChatSteps {
 
     @And("admin fill search chat with {string}")
     public void admin_fill_search_chat_with_x(String text) {
+        Page activePage = ActiveContext.getActivePage();
+        ChatPO activeChatAdmin = new ChatPO(activePage);
         if(text != null){
-            chatAdmin.fillSearch(text);
+            activeChatAdmin.fillSearch(text);
         }
-        chatAdmin.clickOnAllCategory();
+        activeChatAdmin.clickOnAllCategory();
     }
 
     @Then("admin can see result data")

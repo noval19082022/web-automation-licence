@@ -19,6 +19,10 @@ public class ChatPO {
     Locator allChatMenu;
     Locator searchType;
     Locator textTitle;
+    private Locator chatList;
+    private Locator resolvedButton;
+    private Locator messageBubble;
+    private Locator messageInput;
 
     //-----important---//
     Locator markImportantButton;
@@ -36,6 +40,10 @@ public class ChatPO {
         chatSearchInput = page.getByPlaceholder("Cari Chat");
         allChatMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("All"));
         textTitle = page.locator("//div[@class=\"channel-list-item__content\"]").first();
+        chatList = page.getByTestId("channel-list-item");
+        resolvedButton = page.getByTestId("resolve-button");
+        messageBubble = page.locator(".message-bubble__message p");
+        messageInput = page.locator(".message-input textarea");
 
         //--------important----//
         markImportantButton = page.locator("//div[@class=\"channel-list-item__important-button-icon\"]").first();
@@ -105,6 +113,7 @@ public class ChatPO {
      */
     public void fillSearch(String text) {
         playwright.forceFill(chatSearchInput, text);
+        pressEnterKey();
     }
 
     /**
@@ -165,5 +174,56 @@ public class ChatPO {
     public boolean getUnreadCounterText(String number){
         Locator unreadChatCountertext = page.getByText(""+number+"", new Page.GetByTextOptions().setExact(true)).nth(1);
         return playwright.waitTillLocatorIsVisible(unreadChatCountertext);
+    }
+
+    /**
+     * Open chat room based on BSE name
+     * @param bse BSE name to identify the chat room row
+     */
+    public void openChatRoom(String bse) {
+        tenantChatList = page.getByRole(AriaRole.ROW, new Page.GetByRoleOptions().setName(bse)).getByRole(AriaRole.LINK, new Locator.GetByRoleOptions().setName("Consultant"));
+        playwright.clickOn(tenantChatList);
+    }
+
+
+    /**
+     * Check if resolved button is disabled on the first chat in the list
+     * @return true if resolved button is disabled, false otherwise
+     */
+    public boolean isResolvedButtonDisable() {
+        playwright.clickOn(chatList.first());
+        return playwright.isButtonDisable(resolvedButton);
+    }
+
+
+    /**
+     * Click on resolved button to resolve the chat
+     */
+    public void clickResolveButton() {
+        playwright.clickOn(resolvedButton);
+    }
+
+    /**
+     * Get the last message from chat bubble
+     * @return text of the last message
+     */
+    public String getLastMessage() {
+        return playwright.getText(messageBubble.last());
+    }
+
+    /**
+     * Send chat message by filling the message input field
+     * @param message text message to send
+     */
+    public void sendChat(String message) {
+        playwright.fill(messageInput,message);
+        pressEnterKey();
+    }
+
+    /**
+     * Press Enter key on keyboard
+     */
+    public void pressEnterKey() {
+        page.keyboard().press("Enter");
     }
 }
