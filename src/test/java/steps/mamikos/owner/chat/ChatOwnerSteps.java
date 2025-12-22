@@ -42,8 +42,11 @@ public class ChatOwnerSteps {
 
     @And("user click chat in kos detail")
     public void userClickChatInKosDetail() {
-        chat.clickChatKos();
-        kostDetail.dismissFTUEIfExist();
+        Page activePage = ActiveContext.getActivePage();
+        ChatOwnerPO activeChat = new ChatOwnerPO(activePage);
+        KostDetailsPO activeKostDetail = new KostDetailsPO(activePage);
+        activeChat.clickChatKos();
+        activeKostDetail.dismissFTUEIfExist();
     }
 
     @And("search chat in chatlist {string}")

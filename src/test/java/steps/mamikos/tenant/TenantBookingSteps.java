@@ -214,7 +214,9 @@ public class TenantBookingSteps {
 
     @When("user/tenant/owner dismiss FTUE booking benefit")
     public void userDismissFTUEBookingBenefit() {
-        kostDetail.dismissFTUE();
+        Page activePage = ActiveContext.getActivePage();
+        KostDetailsPO activeKostDetail = new KostDetailsPO(activePage);
+        activeKostDetail.dismissFTUE();
     }
 
     @Then("user can not see FTUE booking benefit")

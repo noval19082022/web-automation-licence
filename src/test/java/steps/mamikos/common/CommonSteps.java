@@ -129,7 +129,7 @@ public class CommonSteps {
 
     @And("bring page to front")
     public void bringPageToFront() {
-        page.bringToFront();
+        ActiveContext.getActivePage().bringToFront();
     }
 
     @And("user/admin/tenant waiting for {string} seconds for next step")
