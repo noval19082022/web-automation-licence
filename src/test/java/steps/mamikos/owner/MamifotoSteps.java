@@ -133,7 +133,8 @@ public class MamifotoSteps {
 
     @When("owner click Lihat Detail Transaksi with status {string}")
     public void owner_click_lihat_detail_transaksi_with_status(String status)  {
-        playwright.hardWait(3000);
+        // Wait for transaction status to be loaded instead of fixed wait
+        playwright.waitTillPageLoaded();
         Assert.assertEquals(mamifoto.getSuccsessTransactioMamifotoText(),status,"Text doesn't match");
         mamifoto.clickOnSeeDetailTransactionMamifoto();
     }
@@ -236,7 +237,10 @@ public class MamifotoSteps {
     @When("owner paid MamiFoto Non GP")
     public void owner_paid_mami_foto_non_gp()  {
         mamifoto.clickOnButtonBayarSekarangMamifoto();
-        playwright.hardWait(10000.0);
+        // Wait for invoice page to load completely instead of fixed 10s wait
+        playwright.waitTillPageLoaded();
+        // Additional wait to ensure invoice content is rendered
+        playwright.hardWait(2000.0);
         Assert.assertTrue(mamifoto.mamifotoHeaderInvoiceisAppear(),"Mamifoto header doesnt appear");
         Assert.assertFalse(mamifoto.discountGPInvoiceMamifoto(),"Discount GP is appear");
     }
@@ -260,12 +264,14 @@ public class MamifotoSteps {
 
     @Then("owner paid transaction unpaid")
     public void owner_paid_transaction_unpaid() {
-        playwright.hardWait(2000.0);
+        // Wait for page to load transactions instead of fixed wait
+        playwright.waitTillPageLoaded();
         while (mamifoto.checkUnpaidInvoiceMamifoto()){
             mamifoto.clickOnSeeFirstDetailTransaction();
             invoice.paymentOVO("081280003230");
             page.goBack();
             page.reload();
+            playwright.waitTillPageLoaded();
         }
     }
 

@@ -80,7 +80,8 @@ public class NaikkanIklanSteps {
         naikkanIklanPO.clickToggleTheAdsOnPropertySaya();
         Assert.assertEquals(naikkanIklanPO.getTextSwitchTogglePopUp("off"), "Anggaran MamiAds untuk " + Mamikos.getPropertyKosName() + " akan diaktifkan.", "Title pop up doesn't match!");
         naikkanIklanPO.clickOnKeMamiAdsButton();
-        playwright.hardWait(3000);
+        // Wait for navigation to complete instead of fixed wait
+        playwright.waitTillPageLoaded();
         String actualUrl = playwright.getPageUrl();
         Assert.assertEquals(actualUrl, "https://owner-jambu.kerupux.com/mamiads", "Url doesn't match");
     }
@@ -112,7 +113,8 @@ public class NaikkanIklanSteps {
 
     @Then("verify redirect to mamiads dashboard")
     public void verify_redirect_to_mamiads_dashboard() {
-        playwright.hardWait(3000.0);
+        // Wait for navigation to complete instead of fixed wait
+        playwright.waitTillPageLoaded();
         home = new HomePO(ActiveContext.getActivePage());
         String actualUrl = home.getURL();
         Assert.assertEquals(actualUrl, "https://owner-jambu.kerupux.com/mamiads", "Url doesn't match");

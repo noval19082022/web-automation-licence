@@ -254,9 +254,10 @@ public class MamiAdsSteps {
 
     @Then("owner verify invoice success paid mamiads")
     public void ownerVerifyInvoiceSuccessPaidMamiads() {
-        playwright.hardWait(3000);
+        // Wait for page to load payment success instead of fixed wait
+        playwright.waitTillPageLoaded();
         playwright = new PlaywrightHelpers(ActiveContext.getActivePage());
-        Assert.assertTrue(playwright.isTextDisplayed("Pembayaran Berhasil", 3000));
+        Assert.assertTrue(playwright.isTextDisplayed("Pembayaran Berhasil", 5000));
     }
 
     @And("user click coba sekarang header")
