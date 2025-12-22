@@ -874,14 +874,7 @@ public class InvoicePO {
     }
 
     public void ubahMetodePembayaran() {
-        // Wait for payment verification to complete
-        playwright.hardWait(3000);
-        // Wait for button to be visible and clickable
-        playwright.waitTillLocatorIsVisible(pilihUbahMetodePembayaranButton, 20000.0);
-        playwright.waitTillPageLoaded();
         playwright.forceClickOn(pilihUbahMetodePembayaranButton);
-        // Additional wait for page transition
-        playwright.hardWait(2000);
     }
 
     public void paymentOVOBeforeVerification(String number) {
@@ -890,10 +883,7 @@ public class InvoicePO {
         playwright.clickOn(txtOVO);
         noOvoTextBox.fill(number);
         clickOnBayarSekarang();
-        // Extended wait for OVO payment processing
-        playwright.hardWait(8000);
-        // Wait for payment confirmation
-        playwright.waitTillPageLoaded();
+        playwright.hardWait(5000);
     }
 
 

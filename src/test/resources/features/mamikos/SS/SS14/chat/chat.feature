@@ -140,4 +140,4 @@ Feature: Chat and Chat Optimization
               And user go to apartment details from apartment landing list number 1
               And tenant set active page to 1
               And user click on hubungi pengelola button
-             Then chat room appear with latest message "test"
+             Then chat room appear with latest message "Apartmen Dahlia Anastasia masih kosong seharga Rp Rp 500 rb/hr,"

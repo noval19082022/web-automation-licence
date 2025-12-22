@@ -32,11 +32,8 @@ public class ApartmentDetailPO {
      * Click on Hubungi Pengelola Apartnent
      */
     public void clickContactApt() {
-        playwright.hardWait(2000);
-        playwright.waitTillLocatorIsVisible(hubungiPengelola, 10000.0);
         playwright.pageScrollToDown(300);
-        playwright.hardWait(1000);
-        playwright.clickOn(hubungiPengelola);
+        playwright.doubleClick(hubungiPengelola);
     }
 
     /**

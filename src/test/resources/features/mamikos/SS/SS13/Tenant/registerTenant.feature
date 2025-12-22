@@ -174,7 +174,7 @@ Feature: New Flow Register Tenant
     Then user verify error messages
       | Nomor handphone ini sudah digunakan untuk verifikasi di akun lain. |
 
-  @TEST_SS-3064 @Automated @web-covered
+  @TEST_SS-3064 @Automated @SS13 @web-covered
   Scenario: Register Tenant - Input password using alfabet only
     Given user go to mamikos homepage
     When user clicks on Enter button Tenant

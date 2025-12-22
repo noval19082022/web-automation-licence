@@ -9,7 +9,7 @@ Feature: [Test-Execution][DOM] Web - Campaign
     And tenant set active page to 1
     Then user redirected to URL "https://play.google.com/store/apps/details?id=com.git.mami.kos&utm_campaign=DAppAndroFooter&utm_source=DownloadAppFooter&utm_medium=DownloadAppFooter&utm_term=DownloadAppFooter"
 
-  @TEST_SS-3002 @TESTSET_UG-6228 @Automated @web-covered @SS160
+  @TEST_SS-3002 @TESTSET_UG-6228 @Automated @web-covered
   Scenario: [Web Owner][Campaign EnaknyaNgekos]: Footer - click Instagram icon
     Given user visit page "/enaknyangekos"
     When user is on the LandingPage EnaknyaNgekos
