@@ -46,6 +46,8 @@ public class ChatTenantPO {
     Locator alternativeQuestionSelector;
     Locator questionLabelWithFilter;
     Locator modalChatForm;
+    private Locator reviewChatModal;
+    private Locator closeButtonReviewChat;
 
     public ChatTenantPO(Page page) {
         this.page = page;
@@ -81,6 +83,8 @@ public class ChatTenantPO {
         alternativeQuestionSelector = page.locator("[data-testid='wrapper-question'] .wrapper-question__label");
         questionLabelWithFilter = page.locator("[data-testid='wrapper-question'] .wrapper-question__label");
         modalChatForm = page.locator("#modalChat form");
+        reviewChatModal = page.getByTestId("chatSessionReviewModal");
+        closeButtonReviewChat = page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("close").setExact(true));
     }
 
     /**
@@ -434,5 +438,20 @@ public class ChatTenantPO {
     public String getModalChatAriaSnapshot() {
         playwright.waitTillLocatorIsVisible(modalChatForm, 10000.0);
         return playwright.getAriaSnapshot(modalChatForm);
+    }
+
+    /**
+     * Check if chat review modal is visible
+     * @return true if review chat modal is visible, false otherwise
+     */
+    public boolean isChatReviewVisible() {
+        return playwright.isLocatorVisibleAfterLoad(reviewChatModal, 30000.0);
+    }
+
+    /**
+     * Close the review chat modal by clicking close button
+     */
+    public void closeReviewChat() {
+        playwright.clickOn(closeButtonReviewChat);
     }
 }

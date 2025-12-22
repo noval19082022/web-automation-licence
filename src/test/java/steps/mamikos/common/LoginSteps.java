@@ -49,19 +49,22 @@ public class LoginSteps {
 
     @When("user login as tenant via phone number:")
     public void userLoginAsTenantViaPhoneNumber(DataTable table) {
+        Page activePage = ActiveContext.getActivePage();
+        HomePO activeHome = new HomePO(activePage);
+
         phoneNumberCredential = table.asMaps(String.class, String.class);
         var phone = phoneNumberCredential.get(0).get("phone "+ Mamikos.ENV);
         var password = phoneNumberCredential.get(0).get("password");
-        home.clickOnButtonMasuk()
+        activeHome.clickOnButtonMasuk()
             .clickOnPencariKostButton()
             .waitForPasswordInput()
             .fillPhoneNumber(phone)
             .fillPassword(password);
-        tenantLogin = new TenantLoginPO(page);
-        tenantLogin.clickOnTenantLoginButton()
+        TenantLoginPO activeTenantLogin = new TenantLoginPO(activePage);
+        activeTenantLogin.clickOnTenantLoginButton()
             .waitTillLogoIsVisible();
-        home.waitForProfileMenuToBeVisible();
-        home.clickOnSayaSetujuButton();
+        activeHome.waitForProfileMenuToBeVisible();
+        activeHome.clickOnSayaSetujuButton();
     }
 
     @When("user login as tenant via facebook:")
@@ -146,12 +149,15 @@ public class LoginSteps {
 
     @When("admin login to bangkrupux:")
     public void adminLoginToBangkrupux(DataTable table) {
+        Page activePage = ActiveContext.getActivePage();
+        AdminBangkrupuxLoginPO activeLoginAdminBangkrupux = new AdminBangkrupuxLoginPO(activePage);
+
         emailCredential = table.asMaps(String.class, String.class);
         var email = emailCredential.get(0).get("email " + Mamikos.ENV);
         var password = emailCredential.get(0).get("password");
-        loginAdminBangkrupux.fillEmail(email);
-        loginAdminBangkrupux.fillPassword(password);
-        loginAdminBangkrupux.clickOnLoginButton();
+        activeLoginAdminBangkrupux.fillEmail(email);
+        activeLoginAdminBangkrupux.fillPassword(password);
+        activeLoginAdminBangkrupux.clickOnLoginButton();
     }
 
     @And("user login from kost detail via phone number:")

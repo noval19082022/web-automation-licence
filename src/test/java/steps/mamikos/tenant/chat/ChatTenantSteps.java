@@ -126,7 +126,9 @@ public class ChatTenantSteps {
 
     @And("tenant enter text {string} in chat page")
     public void tenantEnterTextInChatPage(String chatMsg) {
-        chat.insertChatText(chatMsg);
+        Page activePage = ActiveContext.getActivePage();
+        ChatTenantPO activeChat = new ChatTenantPO(activePage);
+        activeChat.insertChatText(chatMsg);
     }
 
     @Then("user sees the Booking button disable")
@@ -219,5 +221,12 @@ public class ChatTenantSteps {
     @And("user close survey form")
     public void userCloseSurveyForm() {
         chat.backToChatroomFromSurveyDetail();
+    }
+
+    @When("tenant close chat review")
+    public void tenant_close_chat_review() {
+        if (chat.isChatReviewVisible()){
+            chat.closeReviewChat();
+        }
     }
 }

@@ -186,7 +186,9 @@ public class HomePO {
      * @return LoginPO class
      */
     public LoginPO clickOnButtonMasuk() {
-        btnMasuk.click();
+        playwright.waitTillPageLoaded();
+        playwright.clickOn(btnMasuk);
+//        btnMasuk.click();
         return new LoginPO(page);
     }
 
