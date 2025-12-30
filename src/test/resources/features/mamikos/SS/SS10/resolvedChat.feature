@@ -55,3 +55,75 @@
       #resolve chat
       When admin resolve chat
       Then resolved button is disable
+
+    @TEST_SS-10290 @context1 @context2
+    Scenario: Resolved chat is reactivated by tenant message
+      #tenant chat manual
+      Given tenant set browser context to "context1"
+      And bring page to front
+      When user go to mamikos homepage
+      And user login as tenant via phone number:
+        | phone stag   | phone prod   | password  |
+        | 084299093387 | -            | mamikos290|
+      And tenant redirect to kost details:
+        | kost path stag                                                                             | kost path prod                             |
+        | kost-kabupaten-bantul-kost-campur-eksklusif-kost-singgahsini-luxe-harmoni-tipe-a-bantul-2 | Kost Automation Mix Tobelo Halmahera Utara |
+      And user dismiss FTUE booking benefit
+      And user click chat in kos detail
+      And tenant close chat review
+      And tenant enter text "Chat manual dari Automation by Tenant" in chat page
+      #check resolve button in admin
+      Given admin set browser context to "context2"
+      And bring page to front
+      And admin go to mamikos bangkrupux admin
+      When admin login to bangkrupux:
+        | email stag                 | email prod          | password  |
+        | qaeautomation3@mamikos.com | laksana@mamikos.com | qwerty123 |
+      And user go to Rajawali Chat Room
+      And user open chat room "CS Maya"
+      And admin fill search chat with "Sutijan"
+      Then resolved button is enable
+      #resolve chat
+      When admin resolve chat
+      Then resolved button is disable
+
+    @TEST_SS-10291
+    Scenario: Resolved chat is reactivated by BSE agent message
+      Given admin go to mamikos bangkrupux admin
+      When admin login to bangkrupux:
+        | email stag                 | email prod          | password  |
+        | qaeautomation3@mamikos.com | laksana@mamikos.com | qwerty123 |
+      And user go to Rajawali Chat Room
+      And user open chat room "CS Maya"
+      And admin fill search chat with "Sutijan"
+      Then resolved button is disable
+      #admin chat manual
+      When admin chat "Chat manual dari Automation by BSE"
+      Then resolved button is enable
+      #resolve chat
+      When admin resolve chat
+      Then resolved button is disable
+
+    @TEST_SS-10295 @continue
+    Scenario: Unresolved tab counter updates when chat becomes ongoing
+      Given admin go to mamikos bangkrupux admin
+      When admin login to bangkrupux:
+        | email stag                 | email prod          | password  |
+        | qaeautomation3@mamikos.com | laksana@mamikos.com | qwerty123 |
+      And user go to Rajawali Chat Room
+      And user open chat room "CS Maya"
+      And admin fill search chat with "Sutijan"
+      Then resolved button is disable
+      #make chat ongoing
+      When admin chat "Chat manual dari Automation by BSE"
+      Then resolved button is enable
+      #Assert unresolved counter
+      And unresolved counter increase by 1
+
+    @TEST_SS-10296
+    Scenario: Unresolved tab counter updates when chat is resolved
+      #resolve chat
+      When admin resolve chat
+      Then resolved button is disable
+      #Assert unresolved counter
+      And unresolved counter is not visible

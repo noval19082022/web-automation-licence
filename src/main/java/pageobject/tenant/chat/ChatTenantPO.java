@@ -83,8 +83,8 @@ public class ChatTenantPO {
         alternativeQuestionSelector = page.locator("[data-testid='wrapper-question'] .wrapper-question__label");
         questionLabelWithFilter = page.locator("[data-testid='wrapper-question'] .wrapper-question__label");
         modalChatForm = page.locator("#modalChat form");
-        reviewChatModal = page.getByTestId("chatSessionReviewModal");
-        closeButtonReviewChat = page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("close").setExact(true));
+        reviewChatModal = page.locator(".bg-c-modal__inner");
+        closeButtonReviewChat = page.getByTestId("chatSessionReviewModal").getByRole(AriaRole.BUTTON,new Locator.GetByRoleOptions().setName("close"));
     }
 
     /**
