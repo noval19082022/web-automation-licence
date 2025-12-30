@@ -130,4 +130,13 @@ public class ChatSteps {
         chatAdmin.getUnreadCounterText(text);
     }
 
+    @Then("unresolved counter increase by {int}")
+    public void unresolved_counter_increase_by(Integer counter) {
+        Assert.assertEquals(chatAdmin.getUnresolvedCounter(),counter);
+    }
+
+    @Then("unresolved counter is not visible")
+    public void unresolved_counter_is_not_visible() {
+        Assert.assertTrue(chatAdmin.isUnresolvedCounterNotVisible(), "Unresolved counter should not be visible");
+    }
 }

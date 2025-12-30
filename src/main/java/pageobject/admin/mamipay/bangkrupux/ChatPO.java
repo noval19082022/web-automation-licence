@@ -23,6 +23,7 @@ public class ChatPO {
     private Locator resolvedButton;
     private Locator messageBubble;
     private Locator messageInput;
+    private Locator unresolvedCounter;
 
     //-----important---//
     Locator markImportantButton;
@@ -44,6 +45,7 @@ public class ChatPO {
         resolvedButton = page.getByTestId("resolve-button");
         messageBubble = page.locator(".message-bubble__message p");
         messageInput = page.locator(".message-input textarea");
+        unresolvedCounter = page.locator(".bg-c-badge-counter--black");
 
         //--------important----//
         markImportantButton = page.locator("//div[@class=\"channel-list-item__important-button-icon\"]").first();
@@ -225,5 +227,21 @@ public class ChatPO {
      */
     public void pressEnterKey() {
         page.keyboard().press("Enter");
+    }
+
+    /**
+     * Get the unresolved chat counter value
+     * @return number of unresolved chats
+     */
+    public Integer getUnresolvedCounter() {
+        return Integer.parseInt(playwright.getText(unresolvedCounter));
+    }
+
+    /**
+     * Check if unresolved counter is not visible
+     * @return true if unresolved counter is not visible, false otherwise
+     */
+    public boolean isUnresolvedCounterNotVisible() {
+        return !playwright.waitTillLocatorIsVisible(unresolvedCounter);
     }
 }
