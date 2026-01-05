@@ -32,7 +32,7 @@ public class additionalFeePO {
         waktuPenentuanHarga = page.locator("tr td:nth-of-type(5) div");
         penyewaBisaPilihMandiri = page.locator("tr td:nth-of-type(6) div");
         fasePenyewaPilihMandiri = page.locator("tr td:nth-of-type(6) span");
-        actionButton = page.locator("tr td:nth-of-type(7)");
+        actionButton = page.getByTestId("table-action-trigger");
         hapusButton = page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Hapus"));
         nextButton = page.locator(".bg-c-button--icon-only-sm").last();
         lastPageButton = page.getByTestId("additionalFeePagination").getByRole(AriaRole.BUTTON).nth(5);
@@ -100,6 +100,7 @@ public class additionalFeePO {
         for (int i=0;i< namaBiaya.count();i++){
             if (playwright.getText(namaBiaya.nth(i)).equalsIgnoreCase(name)){
                 playwright.clickOn(actionButton.nth(i));
+                playwright.waitFor(hapusButton);
                 playwright.clickOn(hapusButton);
                 playwright.clickOn(hapusButton);
             }

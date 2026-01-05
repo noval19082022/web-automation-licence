@@ -75,6 +75,10 @@ public class addAdditionalFeeSteps {
     public void admin_select_fase_penyewa_pilih_biaya(String option) {
         addAdditionalFee.selectFasePenyewaPilihBiaya(option);
     }
+    @When("admin select kategori asuransi {string}")
+    public void admin_select_kategori_asuransi(String option) {
+        addAdditionalFee.chooseKategoriAsuransi(option);
+    }
     @Then("button tambah enable")
     public void button_tambah_enable() {
         Assert.assertFalse(addAdditionalFee.isTambahButtonDisable());

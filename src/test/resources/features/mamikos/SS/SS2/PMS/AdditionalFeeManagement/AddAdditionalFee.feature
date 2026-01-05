@@ -45,6 +45,7 @@ Feature: Add Additional Fee Master Data
   @continue @TEST_SS-853
   Scenario: Add new Additional Fee
     When admin choose satuan waktu biaya "Harian"
+    And admin select kategori asuransi "Tidak"
     And admin submit additional fee
     Then new additional fee "Automated Biaya PMAN" added
       | Tipe Pembayaran | Satuan Biaya Top | Satuan Biaya Bottom | Waktu Penentuan Harga Biaya | Penyewa Bisa Pilih Mandiri |
@@ -107,6 +108,7 @@ Feature: Add Additional Fee Master Data
     And admin choose satuan waktu biaya "Harian"
     And admin select penyewa bisa pilih mandiri "Ya"
     And admin select fase penyewa pilih biaya "Booking"
+    And admin select kategori asuransi "Tidak"
     Then button tambah enable
 
   @TEST_SS-783
@@ -123,6 +125,7 @@ Feature: Add Additional Fee Master Data
     And admin choose satuan waktu biaya "Harian"
     And admin select penyewa bisa pilih mandiri "Ya"
     And admin select fase penyewa pilih biaya "Booking"
+    And admin select kategori asuransi "Tidak"
     And admin submit additional fee
       #apply in kontrak kerja sama
     When admin go to Homepage

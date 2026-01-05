@@ -18,6 +18,8 @@ public class addAdditionalFeePO {
     private Locator waktuPenentuanHargaBiayaDisesuaikanDenganTagihanRadioButton;
     private Locator penyewaBisaPilihMandiriYaRadioButton;
     private Locator penyewaBisaPilihMandiriTidakRadioButton;
+    private Locator kategoriAasuransiYaRadioButton;
+    private Locator kategoriAasuransiNoRadioButton;
     private Locator satuanBiaya;
     private Locator tambahButton;
     private Locator confirmTambahButton;
@@ -37,7 +39,9 @@ public class addAdditionalFeePO {
         waktuPenentuanHargaBiayaDitentukanDiawalRadioButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Ditentukan di Awal"));
         waktuPenentuanHargaBiayaDisesuaikanDenganTagihanRadioButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Disesuaikan dengan Tagihan"));
         penyewaBisaPilihMandiriYaRadioButton = page.locator("label[for='tenant-can-choose-0']");
-        penyewaBisaPilihMandiriTidakRadioButton = page.locator("label").filter(new Locator.FilterOptions().setHasText("Tidak"));
+        penyewaBisaPilihMandiriTidakRadioButton = page.locator("label[for='tenant-can-choose-1']");
+        kategoriAasuransiYaRadioButton = page.locator("label[for='insurance-options-0']");
+        kategoriAasuransiNoRadioButton = page.locator("label[for='insurance-options-1']");
         tambahButton = page.getByTestId("tambah-btn");
         confirmTambahButton = page.getByTestId("simpan-btn");
         toastMessage = page.locator(".global-toast");
@@ -218,5 +222,19 @@ public class addAdditionalFeePO {
     public void selectSatuanBesaranBiaya(String besaran) {
         satuanBiaya = page.locator("label").filter(new Locator.FilterOptions().setHasText(besaran)); //page.getByText("checkmarkBulanan")
         playwright.clickOn(satuanBiaya);
+    }
+
+    /**
+     * Choose kategori asuransi
+     * @param option
+     */
+    public void chooseKategoriAsuransi(String option) {
+        if (option.equalsIgnoreCase("Ya")) {
+            playwright.clickOn(kategoriAasuransiYaRadioButton);
+        } else if (option.equalsIgnoreCase("Tidak")) {
+            playwright.clickOn(kategoriAasuransiNoRadioButton);
+        } else {
+            System.out.println("Invalid Option");
+        }
     }
 }
