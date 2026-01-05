@@ -937,4 +937,56 @@ public class GoldplusSteps {
     public void ownerDisableGpPopUp() {
         owner.dismissFTUEGoldplus();
     }
+
+    // === Admin Goldplus Package - Add Package ===
+    @When("user click on add package button")
+    public void userClickOnAddPackageButton() {
+        goldplus.clickOnAddPackageButton();
+    }
+
+    @Then("user check New Field {string}")
+    public void userCheckNewField(String fieldName) {
+        Assert.assertTrue(goldplus.isPremiumPackageBonusFieldDisplayed(),
+            "Field '" + fieldName + "' is not displayed on the page");
+    }
+
+    @And("user click on dropdown Bundled Premium Package")
+    public void userClickOnDropdownBundledPremiumPackage() {
+        goldplus.clickOnBundledPremiumPackageDropdown();
+    }
+
+    @Then("user see package Bundled Premium:")
+    public void userSeePackageBundledPremium(List<String> expectedPackages) {
+        List<String> actualPackages = goldplus.getBundledPremiumPackageOptions();
+        for (String expectedPackage : expectedPackages) {
+            Assert.assertTrue(actualPackages.stream().anyMatch(p -> p.contains(expectedPackage)),
+                "Package '" + expectedPackage + "' is not found in dropdown. Available: " + actualPackages);
+        }
+    }
+
+    @And("user select package {string}")
+    public void userSelectPackage(String packageName) {
+        goldplus.selectBundledPremiumPackage(packageName);
+    }
+
+    @Then("Bundle package has been successfully selected")
+    public void bundlePackageHasBeenSuccessfullySelected() {
+        Assert.assertTrue(goldplus.isBundledPremiumPackageDropdownDisplayed(),
+            "Bundled Premium Package dropdown is not displayed after selection");
+    }
+
+    @When("user search ID {string}")
+    public void userSearchId(String id) {
+        goldplus.searchPackageById(id);
+    }
+
+    @And("user click on edit button")
+    public void userClickOnEditButton() {
+        goldplus.clickOnEditPackageButton();
+    }
+
+    @And("user change and select package {string}")
+    public void userChangeAndSelectPackage(String packageName) {
+        goldplus.selectBundledPremiumPackage(packageName);
+    }
 }

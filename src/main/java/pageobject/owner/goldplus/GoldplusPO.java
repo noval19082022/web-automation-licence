@@ -97,6 +97,13 @@ public class GoldplusPO {
     Locator saveButton;
     Locator warningMessage;
     Locator successMessage;
+    Locator addPackageButton;
+    Locator premiumPackageBonusField;
+    Locator bundledPremiumPackageDropdown;
+    Locator bundledPremiumPackageOptions;
+    Locator searchIdField;
+    Locator searchButton;
+    Locator editPackageButton;
 
     //====== TBC Detail page =======//
     Locator upgradePaketBtnOnTbc;
@@ -183,6 +190,13 @@ public class GoldplusPO {
         saveButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Save"));
         warningMessage = page.locator("//div[@class='alert alert-danger alert-dismissable']");
         successMessage = page.locator("//div[@class='alert alert-success alert-dismissable']");
+        addPackageButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Add Package"));
+        premiumPackageBonusField = page.locator("//label[contains(text(),'Premium Package (bonus)')]");
+        bundledPremiumPackageDropdown = page.locator("//select[@name='bundled_premium_package_id']");
+        bundledPremiumPackageOptions = page.locator("//select[@name='bundled_premium_package_id']/option");
+        searchIdField = page.locator("//input[@name='id']");
+        searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Search"));
+        editPackageButton = page.locator("//table//tbody//tr[1]//a[contains(@href, '/edit')]");
         upgradePaketBtnOnTbc = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Upgrade Paket"));
         upgradePaketBtnPopUpOnTbc = page.getByTestId("tenant-background-checker-modal-upgrade-gp").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Upgrade Paket"));
         perpanjangButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Perpanjang"));
@@ -1003,6 +1017,114 @@ public class GoldplusPO {
      */
     public String getSuccessMessage() {
         return playwright.getText(successMessage).replaceAll(" ID \\d+ ", "").replaceAll("×\\s+", "");
+    }
+
+    /**
+     * Click on Add Package button on Admin Goldplus Package page
+     */
+    public void clickOnAddPackageButton() {
+        playwright.waitFor(addPackageButton);
+        playwright.clickOn(addPackageButton);
+    }
+
+    /**
+     * Search Goldplus package by ID
+     * @param id the package ID to search
+     */
+    public void searchPackageById(String id) {
+        playwright.waitFor(searchIdField);
+        playwright.fill(searchIdField, id);
+        playwright.clickOn(searchButton);
+        playwright.waitTillPageLoaded();
+    }
+
+    /**
+     * Click on edit button for the first package in search result
+     */
+    public void clickOnEditPackageButton() {
+        playwright.waitFor(editPackageButton);
+        playwright.clickOn(editPackageButton);
+        playwright.waitTillPageLoaded();
+    }
+
+    /**
+     * Check if Premium Package (bonus) field is displayed
+     * @return true if field is displayed, false otherwise
+     */
+    public boolean isPremiumPackageBonusFieldDisplayed() {
+        playwright.waitTillPageLoaded();
+        return playwright.waitTillLocatorIsVisible(premiumPackageBonusField);
+    }
+
+    /**
+     * Get the text of Premium Package (bonus) field label
+     * @return String label text
+     */
+    public String getPremiumPackageBonusFieldText() {
+        playwright.waitFor(premiumPackageBonusField);
+        return playwright.getText(premiumPackageBonusField);
+    }
+
+    /**
+     * Click on Bundled Premium Package dropdown
+     */
+    public void clickOnBundledPremiumPackageDropdown() {
+        playwright.waitFor(bundledPremiumPackageDropdown);
+        playwright.clickOn(bundledPremiumPackageDropdown);
+    }
+
+    /**
+     * Get all Bundled Premium Package options text
+     * @return List of option texts
+     */
+    public List<String> getBundledPremiumPackageOptions() {
+        // Wait for the select dropdown to be attached (not the option elements)
+        // Option elements inside native <select> are not considered "visible" by Playwright
+        playwright.waitFor(bundledPremiumPackageDropdown);
+        List<String> options = new java.util.ArrayList<>();
+        List<String> allTexts = bundledPremiumPackageOptions.allTextContents();
+        for (String text : allTexts) {
+            if (!text.isEmpty() && !text.contains("---") && !text.equals("Select Package")) {
+                options.add(text.trim());
+            }
+        }
+        return options;
+    }
+
+    /**
+     * Check if Bundled Premium Package dropdown is displayed
+     * @return true if displayed, false otherwise
+     */
+    public boolean isBundledPremiumPackageDropdownDisplayed() {
+        return playwright.waitTillLocatorIsVisible(bundledPremiumPackageDropdown);
+    }
+
+    /**
+     * Select a Bundled Premium Package by visible text
+     * @param packageName the package name to select
+     */
+    public void selectBundledPremiumPackage(String packageName) {
+        playwright.waitFor(bundledPremiumPackageDropdown);
+        bundledPremiumPackageDropdown.selectOption(new com.microsoft.playwright.options.SelectOption().setLabel(packageName));
+    }
+
+    /**
+     * Get selected Bundled Premium Package value
+     * @return selected package text
+     */
+    public String getSelectedBundledPremiumPackage() {
+        playwright.waitFor(bundledPremiumPackageDropdown);
+        return page.locator("//select[@id='bundled_premium_package_id']/option[@selected]").textContent();
+    }
+
+    /**
+     * Check if a specific package option exists in Bundled Premium Package dropdown
+     * @param packageName the package name to check
+     * @return true if exists, false otherwise
+     */
+    public boolean isBundledPremiumPackageOptionExists(String packageName) {
+        List<String> options = getBundledPremiumPackageOptions();
+        return options.contains(packageName);
     }
 
     public void closeGpOnBoardingIfExist() {
