@@ -17,6 +17,7 @@ Feature: Additional Fee Master Data List
     And admin choose satuan waktu biaya "Mingguan"
     And admin choose satuan waktu biaya "Bulanan"
     And admin select penyewa bisa pilih mandiri "Tidak"
+    And admin select kategori asuransi "Tidak"
     And admin submit additional fee
     Then new additional fee "Tetap waktu only" added
       | Tipe Pembayaran | Satuan Biaya Top          | Satuan Biaya Bottom | Waktu Penentuan Harga Biaya | Penyewa Bisa Pilih Mandiri |
@@ -34,6 +35,7 @@ Feature: Additional Fee Master Data List
     And admin choose satuan waktu biaya "Harian"
     And admin choose satuan waktu biaya "Mingguan"
     And admin choose satuan waktu biaya "Bulanan"
+    And admin select kategori asuransi "Tidak"
     And admin submit additional fee
     Then new additional fee "Disesuaikan Tagihan" added
       | Tipe Pembayaran | Satuan Biaya Top          | Satuan Biaya Bottom | Waktu Penentuan Harga Biaya | Penyewa Bisa Pilih Mandiri |
@@ -53,6 +55,7 @@ Feature: Additional Fee Master Data List
     And admin choose satuan waktu biaya "Per orang"
     And admin select penyewa bisa pilih mandiri "Ya"
     And admin select fase penyewa pilih biaya "Booking"
+    And admin select kategori asuransi "Tidak"
     And admin submit additional fee
     Then new additional fee "Tetap besaran only" added
       | Tipe Pembayaran | Satuan Biaya Top                   | Satuan Biaya Bottom | Waktu Penentuan Harga Biaya | Penyewa Bisa Pilih Mandiri | Fase Penyewa Pilih Biaya |
@@ -75,6 +78,7 @@ Feature: Additional Fee Master Data List
     And admin choose satuan besaran biaya "Per orang"
     And admin select penyewa bisa pilih mandiri "Ya"
     And admin select fase penyewa pilih biaya "Stay"
+    And admin select kategori asuransi "Tidak"
     And admin submit additional fee
     Then new additional fee "Satu Kali waktu dan besaran" added
       | Tipe Pembayaran | Satuan Biaya Top          | Satuan Biaya Bottom                | Waktu Penentuan Harga Biaya | Penyewa Bisa Pilih Mandiri | Fase Penyewa Pilih Biaya |
@@ -98,6 +102,7 @@ Feature: Additional Fee Master Data List
     And admin select penyewa bisa pilih mandiri "Ya"
     And admin select fase penyewa pilih biaya "Stay"
     And admin select fase penyewa pilih biaya "Booking"
+    And admin select kategori asuransi "Tidak"
     And admin submit additional fee
     Then new additional fee "Penyewa Stay dan Booking" added
       | Tipe Pembayaran | Satuan Biaya Top          | Satuan Biaya Bottom                | Waktu Penentuan Harga Biaya | Penyewa Bisa Pilih Mandiri | Fase Penyewa Pilih Biaya |
