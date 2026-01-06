@@ -930,6 +930,7 @@ public class PropertiSayaSteps {
 
     @And("owner search kos on property saya page")
     public void ownerSearchKosOnPropertySayaPage() {
+        playwright.hardWait(10000);
         if(modalPopUpPO.isModalCloseIconVisible()){
             modalPopUpPO.clicksModalCloseIcon();
         }
