@@ -296,6 +296,8 @@ public class KostDetailsPO {
     private Locator salinButton;
     private Locator toastMessage;
     private Locator salinDetailButton;
+    private Locator voucherCard;
+    private Locator modalBody;
 
     //-------------------Survey Label---------------//
     private Locator surveyLabelSection;
@@ -565,6 +567,8 @@ public class KostDetailsPO {
         salinButton = page.locator("//button[contains(.,'Salin')]").first();
         toastMessage = page.getByText("Kode voucher berhasil disalin.");
         salinDetailButton = page.locator("//button[@class=\"bg-c-button bg-c-button--primary bg-c-button--lg\"]");
+        voucherCard = page.locator(".voucher-card");
+        modalBody = page.locator(".bg-c-modal__body");
 
         //------------survey label------------//
         surveyLabelSection = page.locator("#priceCard").getByTestId("detailFomoLabel");
@@ -718,7 +722,7 @@ public class KostDetailsPO {
      */
     public String getKostTitle() {
         playwright.waitTillLocatorIsVisible(kostTitle);
-        return kostTitle.textContent();
+        return playwright.getText(kostTitle);
     }
 
     /**
@@ -855,7 +859,7 @@ public class KostDetailsPO {
      * @return 'string' hubungi kost
      */
     public String hubungiKostHeadingText() {
-        return hubungiKostHeading.textContent();
+        return playwright.getText(hubungiKostHeading);
     }
 
     /**
@@ -1217,7 +1221,7 @@ public class KostDetailsPO {
      */
     public String getLatestChatText() {
         playwright.waitTillLocatorIsVisible(latestChat);
-        return latestChat.textContent();
+        return playwright.getText(latestChat);
     }
 
     // ------------ Kos Report Section -----------
@@ -2627,7 +2631,7 @@ public class KostDetailsPO {
         // Original method - clicks the first visible detail button for backward compatibility
         playwright.waitTillLocatorIsVisible(lihatDetailVoucher, 5000.0);
         playwright.clickOn(lihatDetailVoucher);
-        playwright.waitTillLocatorIsVisible(page.locator(".bg-c-modal__body"), 5000.0);
+        playwright.waitTillLocatorIsVisible(modalBody, 5000.0);
     }
     
     /**
@@ -2636,24 +2640,24 @@ public class KostDetailsPO {
      */
     public void clickOnLihatDetailButtonForSpecificVoucher(String voucherName) {
         // Wait for voucher cards to be visible
-        playwright.waitTillLocatorIsVisible(page.locator(".voucher-card").first(), 8000.0);
+        playwright.waitTillLocatorIsVisible(voucherCard.first(), 8000.0);
         
-        // Find all voucher cards
-        Locator voucherCards = page.locator(".voucher-card");
+        // Get voucher count once using playwright helper
+        int voucherCount = playwright.countLocator(voucherCard);
         
         // Find the specific voucher card that starts with the voucher name
-        for (int i = 0; i < voucherCards.count(); i++) {
-            Locator card = voucherCards.nth(i);
-            String cardText = card.textContent();
+        for (int i = 0; i < voucherCount; i++) {
+            Locator card = voucherCard.nth(i);
+            String cardText = playwright.getText(card);
             
             // Check if card text starts with voucher name (to avoid partial matches)
             if (cardText != null && cardText.trim().startsWith(voucherName)) {
                 // Click the "Lihat detail" link within this card
                 Locator detailLink = card.locator("a:has-text('Lihat detail')").first();
-                if (detailLink.count() > 0) {
+                if (playwright.countLocator(detailLink) > 0) {
                     playwright.clickOn(detailLink);
                     // Wait for modal to appear
-                    playwright.waitTillLocatorIsVisible(page.locator(".bg-c-modal__body"), 5000.0);
+                    playwright.waitTillLocatorIsVisible(modalBody, 5000.0);
                     return;
                 }
             }
@@ -2669,16 +2673,16 @@ public class KostDetailsPO {
      */
     public String getVoucherName(String voucherName){
         // Wait for modal to be visible
-        playwright.waitTillLocatorIsVisible(page.locator(".bg-c-modal__body"), 5000.0);
+        playwright.waitTillLocatorIsVisible(modalBody, 5000.0);
         
         // Look for voucher name in the detail modal (not in the list)
         // The modal should have the voucher name displayed
-        Locator voucherNameInModal = page.locator(".bg-c-modal__body p:has-text('" + voucherName + "')").first();
+        Locator voucherNameInModal = modalBody.locator("p:has-text('" + voucherName + "')").first();
         
         // Wait and verify element is visible
         playwright.waitTillLocatorIsVisible(voucherNameInModal, 5000.0);
         
-        return voucherNameInModal.textContent().trim();
+        return playwright.getText(voucherNameInModal);
     }
 
     /**
