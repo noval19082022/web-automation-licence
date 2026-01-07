@@ -2635,6 +2635,15 @@ public class KostDetailsPO {
     }
     
     /**
+     * Get lihat detail link locator within a specific card
+     * @param card The card locator to search within
+     * @return Locator for the lihat detail link
+     */
+    private Locator getLihatDetailLinkInCard(Locator card) {
+        return card.locator("a:has-text('Lihat detail')").first();
+    }
+    
+    /**
      * Click on lihat detail button for a specific voucher by name
      * @param voucherName Name of the voucher to find and click
      */
@@ -2653,7 +2662,7 @@ public class KostDetailsPO {
             // Check if card text starts with voucher name (to avoid partial matches)
             if (cardText != null && cardText.trim().startsWith(voucherName)) {
                 // Click the "Lihat detail" link within this card
-                Locator detailLink = card.locator("a:has-text('Lihat detail')").first();
+                Locator detailLink = getLihatDetailLinkInCard(card);
                 if (playwright.countLocator(detailLink) > 0) {
                     playwright.clickOn(detailLink);
                     // Wait for modal to appear
