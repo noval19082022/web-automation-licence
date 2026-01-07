@@ -585,21 +585,68 @@ public class KostDetailsPO {
      * Dismiss FTUE screen
      */
     public void dismissFTUE() {
+        // Wait for page to load completely
+        playwright.waitTillPageLoaded();
+        playwright.hardWait(3000);
+        
+        // First, handle any blocking popups
+        handleBlockingPopups();
+        
+        // Now handle FTUE
         var maxLoop = 0;
         playwright.pageScrollToDown(300);
-        playwright.waitFor(ftueSlider, 5000.0);
+        playwright.hardWait(1000);
+        
+        // Check if FTUE exists with shorter timeout
+        if (!playwright.waitTillLocatorIsVisible(ftueSlider, 3000.0)) {
+            // No FTUE present, exit early
+            return;
+        }
+        
         do {
             maxLoop++;
-            if (playwright.waitTillLocatorIsVisible(ftueSlider)) {
-                playwright.clickOn(ftueSlider.first());
+            if (playwright.waitTillLocatorIsVisible(ftueSlider, 2000.0)) {
+                playwright.forceClickOn(ftueSlider.first());
+                playwright.hardWait(1000);
             }
-            if (playwright.waitTillLocatorIsVisible(btnSayaMengerti)) {
+            if (playwright.waitTillLocatorIsVisible(btnSayaMengerti, 2000.0)) {
                 playwright.forceClickOn(btnSayaMengerti);
+                playwright.hardWait(1000);
             }
             if (maxLoop == 7) {
                 break;
             }
-        } while (playwright.waitTillLocatorIsVisible(ftueSlider));
+        } while (playwright.waitTillLocatorIsVisible(ftueSlider, 1000.0));
+    }
+    
+    /**
+     * Handle any blocking popups that might interfere with FTUE
+     */
+    private void handleBlockingPopups() {
+        // Check and close inactive owner warning if present
+        if (playwright.waitTillLocatorIsVisible(inactiveOwnerWarningCloseIcon, 2000.0)) {
+            playwright.clickOn(inactiveOwnerWarningCloseIcon);
+            playwright.hardWait(500);
+        }
+        
+        // Check and close voucher popup if present
+        if (playwright.waitTillLocatorIsVisible(closeVoucher, 2000.0)) {
+            playwright.clickOn(closeVoucher);
+            playwright.hardWait(500);
+        }
+        
+        // Check and close promo popup if present
+        if (playwright.waitTillLocatorIsVisible(btnSayaMengerti, 2000.0)) {
+            playwright.forceClickOn(btnSayaMengerti);
+            playwright.hardWait(500);
+        }
+        
+        // Check for any generic close button with modal
+        Locator genericCloseButton = page.locator("button.bg-c-modal__action-closable").first();
+        if (playwright.waitTillLocatorIsVisible(genericCloseButton, 2000.0)) {
+            playwright.clickOn(genericCloseButton);
+            playwright.hardWait(500);
+        }
     }
 
     public void dismissFTUEIfExist() {

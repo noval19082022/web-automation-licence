@@ -677,6 +677,10 @@ public class SearchPO {
             // Alternative: click on suggestion area list
             playwright.clickOn(suggestionAreaOnTheSearchList);
         }
+        
+        // Wait for kost list to load after navigation
+        playwright.hardWait(5000.0); // Increase wait time for Jenkins environment
+        loadingPO.waitTillFetchFinish(10000.0);
     }
 
 
