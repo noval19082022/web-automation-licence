@@ -45,7 +45,7 @@ Feature: Voucher Kost Detail
   Scenario: [Web][Kost Detail][Voucher]Tenant check Lihat detail button
     When tenant click on "Voucher Khusus Singgahsini" section
     Then tenant can see voucher list
-    And tenant click on lihat detail button
+    And tenant click on lihat detail button for "Regress monthly"
     Then tenant can see voucher detail with "Regress monthly"
 
   @TEST_SS-8418
@@ -56,7 +56,7 @@ Feature: Voucher Kost Detail
     And tenant click on "Voucher Khusus Singgahsini" section
     And tenant click on "Salin" button
     Then tenant can see toast message "Kode voucher berhasil disalin."
-    And tenant click on lihat detail button
+    And tenant click on lihat detail button for "Regress monthly"
     Then tenant can see voucher detail with "Regress monthly"
     And tenant click on "Salin Detail" button
     Then tenant can see toast message "Kode voucher berhasil disalin."

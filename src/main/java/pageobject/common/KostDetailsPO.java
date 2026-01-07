@@ -561,7 +561,7 @@ public class KostDetailsPO {
         //------------voucher------------//
         voucherList = page.locator("//div[@class=\"all-vouchers-modal__vouchers bg-u-pt-md\"]");
         closeVoucher = page.locator("//button[@class = 'bg-c-modal__action-closable']");
-        lihatDetailVoucher = page.locator("div:nth-child(2) > .voucher-card__title-container > .bg-u-mt-xxxs > .bg-c-link");
+        lihatDetailVoucher = page.locator(".voucher-card .voucher-card__title-container .bg-c-link:has-text('Lihat detail')").first();
         salinButton = page.locator("//button[contains(.,'Salin')]").first();
         toastMessage = page.getByText("Kode voucher berhasil disalin.");
         salinDetailButton = page.locator("//button[@class=\"bg-c-button bg-c-button--primary bg-c-button--lg\"]");
@@ -2624,7 +2624,42 @@ public class KostDetailsPO {
      * click on lihat detail button
      */
     public void clickOnLihatDetailButton(){
+        // Original method - clicks the first visible detail button for backward compatibility
+        playwright.waitTillLocatorIsVisible(lihatDetailVoucher, 5000.0);
         playwright.clickOn(lihatDetailVoucher);
+        playwright.waitTillLocatorIsVisible(page.locator(".bg-c-modal__body"), 5000.0);
+    }
+    
+    /**
+     * Click on lihat detail button for a specific voucher by name
+     * @param voucherName Name of the voucher to find and click
+     */
+    public void clickOnLihatDetailButtonForSpecificVoucher(String voucherName) {
+        // Wait for voucher cards to be visible
+        playwright.waitTillLocatorIsVisible(page.locator(".voucher-card").first(), 8000.0);
+        
+        // Find all voucher cards
+        Locator voucherCards = page.locator(".voucher-card");
+        
+        // Find the specific voucher card that starts with the voucher name
+        for (int i = 0; i < voucherCards.count(); i++) {
+            Locator card = voucherCards.nth(i);
+            String cardText = card.textContent();
+            
+            // Check if card text starts with voucher name (to avoid partial matches)
+            if (cardText != null && cardText.trim().startsWith(voucherName)) {
+                // Click the "Lihat detail" link within this card
+                Locator detailLink = card.locator("a:has-text('Lihat detail')").first();
+                if (detailLink.count() > 0) {
+                    playwright.clickOn(detailLink);
+                    // Wait for modal to appear
+                    playwright.waitTillLocatorIsVisible(page.locator(".bg-c-modal__body"), 5000.0);
+                    return;
+                }
+            }
+        }
+        
+        throw new RuntimeException("Could not find voucher '" + voucherName + "' in the voucher list");
     }
 
     /**
@@ -2633,8 +2668,17 @@ public class KostDetailsPO {
      * @return
      */
     public String getVoucherName(String voucherName){
-        Locator voucherNameText = page.locator("//p[contains(.,'"+voucherName+"')]").nth(1);
-        return playwright.getText(voucherNameText);
+        // Wait for modal to be visible
+        playwright.waitTillLocatorIsVisible(page.locator(".bg-c-modal__body"), 5000.0);
+        
+        // Look for voucher name in the detail modal (not in the list)
+        // The modal should have the voucher name displayed
+        Locator voucherNameInModal = page.locator(".bg-c-modal__body p:has-text('" + voucherName + "')").first();
+        
+        // Wait and verify element is visible
+        playwright.waitTillLocatorIsVisible(voucherNameInModal, 5000.0);
+        
+        return voucherNameInModal.textContent().trim();
     }
 
     /**
