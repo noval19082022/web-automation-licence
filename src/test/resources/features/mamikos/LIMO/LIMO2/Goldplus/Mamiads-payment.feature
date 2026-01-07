@@ -1,4 +1,4 @@
-@LIMO2
+@LIMO2 @newyearcheck
 Feature: Payment mamiads staging
 
 
