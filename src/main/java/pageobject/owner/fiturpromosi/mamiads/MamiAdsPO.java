@@ -932,7 +932,6 @@ public class MamiAdsPO {
             }
         }
 
-        page.pause();
         playwright.waitFor(radioButtons.first(), 10000.0);
         
         // Ensure "Favorit" text is visible (indicates 150k option loaded)
