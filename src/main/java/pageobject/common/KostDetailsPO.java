@@ -593,17 +593,42 @@ public class KostDetailsPO {
         playwright.waitTillPageLoaded();
         playwright.hardWait(2000);
         
-        // Click "Lanjut" button while it's visible
-        while (playwright.waitTillLocatorIsVisible(ftueSlider, 2000.0)) {
-            playwright.clickOn(ftueSlider);
+        // First handle any blocking popups
+        handleBlockingPopups();
+        
+        // Scroll down to trigger FTUE popup
+        playwright.pageScrollToDown(300);
+        playwright.hardWait(1000);
+        
+        // Check if FTUE is present after scroll
+        if (!playwright.isLocatorVisibleAfterLoad(ftuePopUP, 2000.0) && 
+            !playwright.isLocatorVisibleAfterLoad(ftueSlider, 1000.0)) {
+            // No FTUE present
+            return;
+        }
+        
+        // Click "Lanjut" button while it's visible (max 5 times to avoid infinite loop)
+        int lanjutClicks = 0;
+        while (playwright.waitTillLocatorIsVisible(ftueSlider, 2000.0) && lanjutClicks < 5) {
+            playwright.forceClickOn(ftueSlider);
             playwright.hardWait(1000);
+            lanjutClicks++;
         }
         
         // Click "Saya mengerti" button when it appears
         if (playwright.waitTillLocatorIsVisible(btnSayaMengerti, 2000.0)) {
-            playwright.clickOn(btnSayaMengerti);
+            playwright.forceClickOn(btnSayaMengerti);
             playwright.hardWait(1000);
         }
+        
+        // Final check - if FTUE still visible, try escape key
+        if (playwright.isLocatorVisibleAfterLoad(ftuePopUP, 1000.0)) {
+            page.keyboard().press("Escape");
+            playwright.hardWait(1000);
+        }
+        
+        // Handle any remaining popups
+        handleBlockingPopups();
     }
     
     /**
@@ -637,10 +662,8 @@ public class KostDetailsPO {
     }
 
     public void dismissFTUEIfExist() {
-        playwright.pageScrollToDown(300);
-        if (playwright.waitTillLocatorIsVisible(ftueSlider, 5000.0)) {
-            this.dismissFTUE();
-        }
+        // Call dismissFTUE which already includes scroll and existence check
+        this.dismissFTUE();
     }
 
     /**
