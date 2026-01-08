@@ -589,38 +589,21 @@ public class KostDetailsPO {
      * Dismiss FTUE screen
      */
     public void dismissFTUE() {
-        // Wait for page to load completely
+        // Wait for page to load
         playwright.waitTillPageLoaded();
-        playwright.hardWait(3000);
+        playwright.hardWait(2000);
         
-        // First, handle any blocking popups
-        handleBlockingPopups();
-        
-        // Now handle FTUE
-        var maxLoop = 0;
-        playwright.pageScrollToDown(300);
-        playwright.hardWait(1000);
-        
-        // Check if FTUE exists with shorter timeout
-        if (!playwright.waitTillLocatorIsVisible(ftueSlider, 3000.0)) {
-            // No FTUE present, exit early
-            return;
+        // Click "Lanjut" button while it's visible
+        while (playwright.waitTillLocatorIsVisible(ftueSlider, 2000.0)) {
+            playwright.clickOn(ftueSlider);
+            playwright.hardWait(1000);
         }
         
-        do {
-            maxLoop++;
-            if (playwright.waitTillLocatorIsVisible(ftueSlider, 2000.0)) {
-                playwright.forceClickOn(ftueSlider.first());
-                playwright.hardWait(1000);
-            }
-            if (playwright.waitTillLocatorIsVisible(btnSayaMengerti, 2000.0)) {
-                playwright.forceClickOn(btnSayaMengerti);
-                playwright.hardWait(1000);
-            }
-            if (maxLoop == 7) {
-                break;
-            }
-        } while (playwright.waitTillLocatorIsVisible(ftueSlider, 1000.0));
+        // Click "Saya mengerti" button when it appears
+        if (playwright.waitTillLocatorIsVisible(btnSayaMengerti, 2000.0)) {
+            playwright.clickOn(btnSayaMengerti);
+            playwright.hardWait(1000);
+        }
     }
     
     /**
