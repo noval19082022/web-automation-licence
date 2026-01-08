@@ -30,7 +30,7 @@ Feature: Survei - kos detail
     And tenant redirect to kost details:
       | kost path stag                                                      | kost path prod                                      |
       | kost-tangerang-kost-campur-eksklusif-kost-siera-jatiuwung-tangerang | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
-    And user dismiss FTUE booking benefit
+   # And user dismiss FTUE booking benefit
     Then "Survei Kos Tersedia" are not displayed in the kos pilar non gp
       | Survei Kos Tersedia                                                                                              |
       | Ajukan survei ke pemilik via chat di platform. Setelahnya, kamu juga bisa dapatkan voucher spesial dari Mamikos. |

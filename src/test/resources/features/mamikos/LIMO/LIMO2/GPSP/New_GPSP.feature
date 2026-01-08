@@ -3,7 +3,7 @@ Feature: GPSP Exposure on OD
 
 
 #  081597877123/qwerty123
-  @TEST_LIMO-9299 @TEST_LIMO-9300 @TEST_LIMO-9301 @TEST_LIMO-9302 @TEST_LIMO-9303 @TEST_LIMO-9305 @TEST_LIMO-9308
+  @TEST_LIMO-9300 @TEST_LIMO-9301 @TEST_LIMO-9302 @TEST_LIMO-9303 @TEST_LIMO-9305 @TEST_LIMO-9308
   Scenario: [Owner][GPSP][OD] Display correct GP card variant for each segment
     Given user go to mamikos homepage
     When user login as owner:
