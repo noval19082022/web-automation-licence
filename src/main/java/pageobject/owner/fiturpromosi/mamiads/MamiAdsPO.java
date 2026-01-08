@@ -8,6 +8,7 @@ import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
+import pageobject.common.ModalPopUpPO;
 
 import java.util.regex.Pattern;
 
@@ -15,9 +16,11 @@ public class MamiAdsPO {
     private Page page;
     private PlaywrightHelpers playwright;
     private LocatorHelpers locatorHelpers;
+    private ModalPopUpPO modalPopUpPO;
 
     //--- Saldo Mamiads Onboarding ---//
     private Locator saldoMamiadsCard;
+
     //--- history Mamiads ---//
     Locator lastInvoiceOnRiwayat;
     Locator riwayatSaldoMamiads;
@@ -49,7 +52,7 @@ public class MamiAdsPO {
     private Locator robustBalanceListContainer;
     private Locator promosikanIklanAnda;
     private Locator radioButtons;
-
+  
     //--- Mamiads popup ubah anggaran  ---//
     private Locator saldoMaksimalRadioButton;
     private Locator dibatasiHarianRadioButton;
@@ -93,6 +96,7 @@ public class MamiAdsPO {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         this.locatorHelpers = new LocatorHelpers(page);
+        this.modalPopUpPO = new ModalPopUpPO(page);
         //--- Saldo Mamiads Onboarding ---//
         this.saldoMamiadsCard = page.locator(".mamiads-card");
         //--- history Mamiads ---//
@@ -122,7 +126,7 @@ public class MamiAdsPO {
         this.saldoAmountFirstIndex = page.locator(".bg-c-radio__icon > span").first();
         this.continuePaymentBuySaldoMamiads = page.locator("(//a[@class='clickable-history-list'])[1]");
         this.balanceListContainer = page.locator(".balance-list__container");
-        this.robustBalanceListContainer = page.locator("div:has-text('Saldo Iklan'):has-text('Harga')");
+        this.robustBalanceListContainer = page.locator(".balance-list__container");
         this.promosikanIklanAnda = page.locator("//img[@alt='Icon Promote']");
         this.radioButtons = page.locator("input[type='radio']");
         //--- Mamiads popup ubah anggaran  ---//
@@ -232,18 +236,13 @@ public class MamiAdsPO {
         playwright.clickOn(gpOnboardingPopUpPreviousButton);
     }
 
+    /**
+     * Click on saldo mamiads card
+     */
     public void clickSaldoMamiadsCard() {
-        // Wait for saldo card to be visible and page to be ready
-        playwright.waitTillLocatorIsVisible(saldoMamiadsCard, 8000.0);
-
-        // Handle popup if it appears
-        if (playwright.isButtonWithTextDisplayed("Nanti Saja")) {
-            playwright.clickOnTextButton("Nanti Saja");
-            // Give UI a moment to settle after dismissing popup
-            playwright.hardWait(500);
-        }
-
+        playwright.waitTillLocatorIsVisible(saldoMamiadsCard, 10000.0);
         playwright.clickOn(saldoMamiadsCard);
+        playwright.waitTillPageLoaded();
     }
 
     /**
@@ -914,7 +913,13 @@ public class MamiAdsPO {
      * Uses multiple fallback strategies and content verification to ensure page is fully loaded
      */
     public void waitForBalanceListToLoad() {
-        // First, wait for page to be fully loaded
+        // Dismiss popup if present using ModalPopUpPO
+        if (modalPopUpPO.isModalCloseIconVisible()) {
+            modalPopUpPO.clicksModalCloseIcon();
+            playwright.hardWait(1000);
+        }
+        
+        // Wait for page to be fully loaded
         playwright.waitTillPageLoaded(15000.0);
         playwright.waitTillDomContentLoaded(10000.0);
         
@@ -926,16 +931,7 @@ public class MamiAdsPO {
                 return; // Success - page loaded with content
             }
         }
-        
-        // Fallback strategy 1: Use robust content-based locator
-        if (playwright.isLocatorVisibleAfterLoad(robustBalanceListContainer, 3000.0)) {
-            return; // Success with fallback locator
-        }
-        
-        // Fallback strategy 2: Reload page if content still not visible
-        playwright.reloadPageIfElementNotVisible(2, balanceListContainer);
 
-        // Final verification: Wait for radio buttons to be present (indicates full functionality)
         playwright.waitFor(radioButtons.first(), 10000.0);
         
         // Ensure "Favorit" text is visible (indicates 150k option loaded)

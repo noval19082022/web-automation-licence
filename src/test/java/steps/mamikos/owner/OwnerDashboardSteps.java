@@ -424,5 +424,10 @@ public class OwnerDashboardSteps {
     public void ownerCanNotSeeExposeSinggahsiniLink(){
         Assert.assertFalse(ownerDashboardPO.isInginKosDikelolaLinkVisible(), "expose singgahsini link is visible");
     }
+
+    @When("owner dismiss pop-up if appears")
+    public void ownerDismissPopUpIfAppears() {
+        ownerDashboardPO.dismissPopUp();
+    }
 }
 
