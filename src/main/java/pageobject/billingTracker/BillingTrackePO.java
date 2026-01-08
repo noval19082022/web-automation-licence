@@ -159,7 +159,17 @@ public class BillingTrackePO {
      * Click tambah catatan
      */
     public void clickCreateNotesAction() {
+        // Wait for page to be fully loaded
+        playwright.waitTillPageLoaded();
+        playwright.hardWait(2000);
+        
+        // Wait for action button to be visible with extended timeout
+        playwright.waitTillLocatorIsVisible(iconActionButton, 20000.0);
         playwright.clickOn(iconActionButton);
+        
+        // Wait for dropdown menu to appear
+        playwright.hardWait(1000);
+        playwright.waitTillLocatorIsVisible(createNotesButtonOnAction, 10000.0);
         playwright.clickOn(createNotesButtonOnAction);
     }
 
@@ -224,6 +234,12 @@ public class BillingTrackePO {
      * click on text
      */
     public void clickOnLihatLebihBanyakDropdown() {
+        // Wait for page to load and dropdown to be visible
+        playwright.waitTillPageLoaded();
+        playwright.hardWait(2000);
+        
+        // Wait for dropdown with extended timeout
+        playwright.waitTillLocatorIsVisible(lihatLebihBanyakDropdown, 20000.0);
         playwright.clickOn(lihatLebihBanyakDropdown);
     }
 
@@ -231,9 +247,20 @@ public class BillingTrackePO {
      * Admin edit note
      */
     public void adminEditNote(String text) {
+        // Wait for page to be ready
+        playwright.waitTillPageLoaded();
+        playwright.hardWait(2000);
+        
+        // Wait for note to be visible with extended timeout
+        playwright.waitTillLocatorIsVisible(adminEditNote, 20000.0);
         playwright.clickOn(adminEditNote);
+        
+        // Wait for tag dropdown
+        playwright.waitTillLocatorIsVisible(tagDropdown, 10000.0);
         playwright.clickOn(tagDropdown);
+        
         Locator textButton = page.locator("a").filter(new Locator.FilterOptions().setHasText(text));
+        playwright.waitTillLocatorIsVisible(textButton, 10000.0);
         playwright.clickOn(textButton);
         playwright.clickOn(saveButtonNotes);
     }

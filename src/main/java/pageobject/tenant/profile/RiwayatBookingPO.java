@@ -44,6 +44,13 @@ public class RiwayatBookingPO {
      * @return InvoicePO class
      */
     public InvoicePO clickOnBayarSekarangButton() {
+        // Wait for page to load and button to be available
+        playwright.waitTillPageLoaded();
+        playwright.hardWait(2000);
+        
+        // Wait for button with extended timeout
+        playwright.waitTillLocatorIsVisible(bayarSekarangButton, 20000.0);
+        
         page = page.waitForPopup(() -> {
             playwright.clickOn(bayarSekarangButton);
         });
