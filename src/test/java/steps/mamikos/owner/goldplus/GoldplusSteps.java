@@ -834,12 +834,17 @@ public class GoldplusSteps {
         // Get the actual aria snapshot from the current page
         String actualAriaSnapshot = goldplus.getPilihGpPackageAriaSnapshot();
 
+        System.out.println("=== ACTUAL ARIA SNAPSHOT ===");
         System.out.println(actualAriaSnapshot);
+        System.out.println("=== EXPECTED ARIA SNAPSHOT ===");
+        System.out.println(expectedAriaSnapshot);
 
-        // Compare the snapshots directly without normalization for better visualization
+        // Compare the snapshots directly
         Assert.assertEquals(actualAriaSnapshot, expectedAriaSnapshot,
-                String.format("Pilih Gp package structure does not match expected layout, with actual %s", actualAriaSnapshot));
+                String.format("Pilih Gp package structure does not match expected layout.\n\nEXPECTED:\n%s\n\nACTUAL:\n%s",
+                    expectedAriaSnapshot, actualAriaSnapshot));
     }
+
 
     @Then("owner verify list of Pilih Gp Package is contains")
     public void ownerVerifyListOfPilihGpPackageIsContais(String expectedAriaSnapshot) {
