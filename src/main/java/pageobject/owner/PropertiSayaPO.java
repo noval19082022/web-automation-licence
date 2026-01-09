@@ -918,6 +918,9 @@ public class PropertiSayaPO {
     public void clickEditDataKos(String dataKos) {
         editDataKos = page.locator("//p[normalize-space()='"+dataKos+"']");
 
+        // Close success modal if it's blocking the element
+        closeSuccessModalIfPresent();
+
         // Wait with longer timeout before resorting to reload
         if (!playwright.waitTillLocatorIsVisible(editDataKos, 10000.0)) {
             // Element not found - wait for page to stabilize and try once more
@@ -927,6 +930,32 @@ public class PropertiSayaPO {
 
         playwright.clickOn(editDataKos);
         playwright.waitForSelectorState(loadingSpinner, WaitForSelectorState.HIDDEN, GlobalConfig.LONG_TIMEOUT);
+    }
+
+    /**
+     * Close success modal popup if present
+     * This handles the modal that appears after saving data which can block other elements
+     * Uses JavaScript to close the modal to avoid interception issues
+     */
+    private void closeSuccessModalIfPresent() {
+        // Check if modal overlay is blocking the page
+        Locator modalActive = page.locator(".modal.c-mk-modal.is-active");
+        Locator successModal = page.locator(".success-modal");
+
+        if (playwright.waitTillLocatorIsVisible(modalActive, 3000.0) ||
+            playwright.waitTillLocatorIsVisible(successModal, 2000.0)) {
+            // Modal is visible - use JavaScript to close without button click navigation
+            // This removes the is-active class from the modal to hide it
+            page.evaluate("() => { " +
+                "const modal = document.querySelector('.modal.c-mk-modal.is-active');" +
+                "if (modal) { modal.classList.remove('is-active'); }" +
+                "const overlay = document.querySelector('.modal-overlay.is-active');" +
+                "if (overlay) { overlay.classList.remove('is-active'); }" +
+            "}");
+
+            // Wait for modal to disappear
+            playwright.hardWait(500.0);
+        }
     }
 
     /**
@@ -2042,9 +2071,20 @@ public class PropertiSayaPO {
      * @param photoName
      */
     public void uploadValidPhotoKos(String photoName) {
+        // Close success modal if it's blocking the upload button
+        closeSuccessModalIfPresent();
+
+        // Additional wait to ensure modal is fully closed
+        playwright.hardWait(1000.0);
+
         String imagePath = "src/main/resources/images/upload5Mb.jpg";
         Locator uploadPhotoKos = page.getByText("+ Tambah foto " + photoName);
-        FileChooser fileChooser = page.waitForFileChooser(() -> uploadPhotoKos.click());
+
+        // Wait for element to be visible and try clicking with force to bypass any overlay
+        playwright.waitTillLocatorIsVisible(uploadPhotoKos, 10000.0);
+        FileChooser fileChooser = page.waitForFileChooser(() ->
+            uploadPhotoKos.click(new Locator.ClickOptions().setForce(true))
+        );
         fileChooser.setFiles(Paths.get(imagePath));
         playwright.waitTillLocatorIsVisible(uploadPhotoKos);
         playwright.hardWait(5000); // improve hardwait, sometimes it wait too long for waiting until success upload
@@ -2145,6 +2185,12 @@ public class PropertiSayaPO {
      */
     public void clickOnLengkapiDataAddKos(String text) {
         playwright.clickOnTextButton(text, 3000.0);
+        // Close success modal if it appears after clicking "Edit Selesai"
+        if (text.equalsIgnoreCase("Edit Selesai")) {
+            // Wait for modal animation to complete
+            playwright.hardWait(2000.0);
+            closeSuccessModalIfPresent();
+        }
     }
 
     /**
