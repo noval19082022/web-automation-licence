@@ -182,13 +182,11 @@ public class HomePO {
 
     /**
      * Click on button masuk on home page
-     *
      * @return LoginPO class
      */
     public LoginPO clickOnButtonMasuk() {
-        playwright.waitTillPageLoaded();
+        playwright.waitTillLocatorIsVisible(btnMasuk, 60000.0);
         playwright.clickOn(btnMasuk);
-//        btnMasuk.click();
         return new LoginPO(page);
     }
 
