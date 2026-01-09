@@ -1,7 +1,6 @@
 package steps.mamikos.tenant;
 
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.TimeoutError;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
