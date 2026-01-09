@@ -3,7 +3,6 @@ package pageobject.common;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
-import com.microsoft.playwright.options.LoadState;
 import data.mamikos.Mamikos;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
@@ -182,13 +181,11 @@ public class HomePO {
 
     /**
      * Click on button masuk on home page
-     *
      * @return LoginPO class
      */
     public LoginPO clickOnButtonMasuk() {
-        playwright.waitTillPageLoaded();
+        playwright.waitTillLocatorIsVisible(btnMasuk, 60000.0);
         playwright.clickOn(btnMasuk);
-//        btnMasuk.click();
         return new LoginPO(page);
     }
 

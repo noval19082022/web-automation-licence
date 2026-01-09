@@ -884,11 +884,6 @@ public class OwnerDashboardPO {
         // Handle popup with multiple strategies
         boolean popupClosed = handlePopupWithMultipleStrategies();
 
-        // Handle specific GoldPlus popups
-        if (playwright.isTextDisplayed("Sudah cek fitur-fitur GoldPlus ini?") || playwright.isTextDisplayed("Selamat bergabung di GoldPlus 2!")) {
-            playwright.clickOnText("Nanti Saja", 5000.0);
-        }
-
         // Try popup handling again if needed
         if (!popupClosed) {
             System.out.println("Trying popup handling again before clicking daftar GP...");
