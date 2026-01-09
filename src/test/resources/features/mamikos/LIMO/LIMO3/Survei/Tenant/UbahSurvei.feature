@@ -10,7 +10,7 @@ Feature: Ubah Survei
     And tenant search kost then go to kost details:
       | kost name stag              | kost name prod              |
       | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
-    And user dismiss FTUE booking benefit
+  #  And user dismiss FTUE booking benefit
     And user click chat in kos detail
     And user tap on survey kost btn on detail chatroom
       # This survey feature is revamp on 29/09/25

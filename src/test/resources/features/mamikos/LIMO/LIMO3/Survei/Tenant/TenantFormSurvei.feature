@@ -10,7 +10,7 @@ Feature: Tenant Form Survey Kost P2
     And tenant search kost then go to kost details:
       | kost name stag              | kost name prod              |
       | Kost bringas Ngaglik Sleman | Kost bringas Ngaglik Sleman |
-    And user dismiss FTUE booking benefit
+    #And user dismiss FTUE booking benefit
     And user click chat in kos detail
     And user tap on survey kost btn on detail chatroom
     Then user will see that the text "Formulir survei kos" is displayed
