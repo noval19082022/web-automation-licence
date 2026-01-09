@@ -724,4 +724,26 @@ public class SearchSteps {
 
         System.out.println("Successfully verified that " + expectedCount + " additional kos suggestions are displayed");
     }
+
+    @When("user non login")
+    public void userNonLogin() {
+        Assert.assertTrue(home.isEnterButtonDisplayed(), "User should not be logged in - Enter/Masuk button not visible!");
+        System.out.println("Verified user is not logged in");
+    }
+
+    @And("user fill keywords:")
+    public void userFillKeywords(DataTable table) {
+        var keywordData = table.asMaps(String.class, String.class);
+        var keyword = keywordData.get(0).get("keywords");
+        search.inputArea(keyword);
+        System.out.println("Filled search with keyword: " + keyword);
+    }
+
+    @Then("user see listing {string} displayed on section recommendation kos")
+    public void userSeeListingDisplayedOnSectionRecommendationKos(String listingName) {
+        boolean isListingDisplayed = search.isListingDisplayedInRecommendation(listingName);
+        Assert.assertTrue(isListingDisplayed,
+                "Expected listing '" + listingName + "' to be displayed in recommendation section, but it was not found");
+        System.out.println("Successfully verified that listing '" + listingName + "' is displayed in recommendation section");
+    }
 }

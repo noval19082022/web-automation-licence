@@ -3,7 +3,7 @@ package steps.mamikos.tenant.payment;
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Then;
+import io.cucumber.java.en.Then;import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.midtrans.MidtransPaymentPO;
 import pageobject.tenant.InvoicePO;
@@ -170,7 +170,7 @@ public class PaymentSteps {
         midtransPaymentPO.amountBNI(amountPembayaranBNI);
     }
 
-    @And("tenant select payment method using Alfamart")
+    @When("tenant select payment method using Alfamart")
     public void tenantSelectPaymentMethodUsingAlfamart() {
         invoicePO = riwayatBookingPO.clickOnBayarSekarangButton();
         invoicePO.clickOnPilihPembayaran();
@@ -180,7 +180,6 @@ public class PaymentSteps {
         var nominal = invoicePO.getTotalPembayaran();
         xenditAPI.processPaymentAlfaViaPostman(kodePerusahaan, String.valueOf(nominal));
         invoicePO.sayaSudahBayar();
-
     }
 
 
@@ -233,7 +232,7 @@ public class PaymentSteps {
         Assert.assertEquals(payment.isPaymentSuccessText(), "Pembayaran Berhasil", "Payment failed");
     }
 
-    @And("owner/tenant/user select payment using alfamart xendit as payment method from invoice detail")
+    @When("owner/tenant/user select payment using alfamart xendit as payment method from invoice detail")
     public void paymentOwnerSuccessUsingAlfamartXenditAsPaymentMethod() {
         invoicePO.clickOnPilihPembayaran();
         invoicePO.clickOnAlfamart();

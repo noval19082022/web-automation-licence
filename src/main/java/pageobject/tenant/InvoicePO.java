@@ -405,7 +405,7 @@ public class InvoicePO {
     public void clickOnBayarSekarang() {
         playwright.pageScrollInView(sembunyikanText);
         playwright.clickOn(bayarSekarangButton);
-        playwright.hardWait(2000.0);
+        playwright.waitTillPageLoaded();
     }
 
     /**
@@ -859,7 +859,7 @@ public class InvoicePO {
      * @return
      */
     public String getCodePembayaran() {
-        playwright.waitFor(kodePembayaran, 5000.0);
+        playwright.waitTillLocatorIsVisible(kodePembayaran, 5000.0);
         return playwright.getText(kodePembayaran);
     }
 

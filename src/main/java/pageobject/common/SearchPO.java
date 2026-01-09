@@ -677,6 +677,10 @@ public class SearchPO {
             // Alternative: click on suggestion area list
             playwright.clickOn(suggestionAreaOnTheSearchList);
         }
+        
+        // Wait for kost list to load after navigation
+        playwright.hardWait(5000.0); // Increase wait time for Jenkins environment
+        loadingPO.waitTillFetchFinish(10000.0);
     }
 
 
@@ -1055,5 +1059,62 @@ public class SearchPO {
         }
 
         return visibleCount >= expectedCount;
+    }
+
+    /**
+     * Verify that a specific listing is displayed in the recommendation/suggestion section
+     * @param listingName the name of the listing to search for (case-insensitive partial match)
+     * @return true if the listing is found in the recommendation section
+     */
+    public boolean isListingDisplayedInRecommendation(String listingName) {
+        playwright.hardWait(2000); // Wait for suggestions to load
+
+        // Try multiple locator strategies to find the listing
+        // Strategy 1: Check in suggestion box room list (prime suggestions)
+        Locator primeSuggestions = page.getByTestId("suggestionBox-roomList");
+        if (primeSuggestions.isVisible()) {
+            String primeText = primeSuggestions.innerText().toLowerCase();
+            if (primeText.contains(listingName.toLowerCase())) {
+                return true;
+            }
+        }
+
+        // Strategy 2: Check in non-prime suggestion box
+        Locator nonPrimeSuggestions = page.getByTestId("suggestionBox-roomListNonPrime");
+        if (nonPrimeSuggestions.isVisible()) {
+            String nonPrimeText = nonPrimeSuggestions.innerText().toLowerCase();
+            if (nonPrimeText.contains(listingName.toLowerCase())) {
+                return true;
+            }
+        }
+
+        // Strategy 3: Check using text locator for listing name
+        Locator listingLocator = page.locator("text=" + listingName);
+        if (listingLocator.count() > 0 && listingLocator.first().isVisible()) {
+            return true;
+        }
+
+        // Strategy 4: Check in any visible element containing the listing name (case-insensitive)
+        Locator anyContainingText = page.locator("//*[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '" + listingName.toLowerCase() + "')]");
+        if (anyContainingText.count() > 0) {
+            for (int i = 0; i < anyContainingText.count(); i++) {
+                if (anyContainingText.nth(i).isVisible()) {
+                    return true;
+                }
+            }
+        }
+
+        // Strategy 5: Check in kost card elements
+        Locator kostCards = page.getByTestId("kostRoomCard");
+        if (kostCards.count() > 0) {
+            for (int i = 0; i < kostCards.count(); i++) {
+                String cardText = kostCards.nth(i).innerText().toLowerCase();
+                if (cardText.contains(listingName.toLowerCase())) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

@@ -50,6 +50,7 @@ Feature: Kost detail page 2
     When tenant redirect to kost details:
       | kost path stag                                                                   | kost path prod                                      |
       | kost-bantul-kost-campur-eksklusif-kos-upik-rani-624-tipe-fortuna-kretek-bantul-2 | Kos BX Automation PLM Tipe A Tobelo Halmahera Utara |
+    And user want to dismiss FTUE
     Then user want to see the other kost on recommendation section
     #explore kost recomendation
     When user see description recomendation kos "Kamu mungkin menyukainya"

@@ -638,6 +638,11 @@ public class TenantBookingSteps {
         kostDetail.clickOnLihatDetailButton();
     }
 
+    @And("tenant click on lihat detail button for {string}")
+    public void tenantClickOnLihatDetailButtonFor(String voucherName) {
+        kostDetail.clickOnLihatDetailButtonForSpecificVoucher(voucherName);
+    }
+
     @Then("tenant can see voucher detail with {string}")
     public void tenantCanSeeVoucherDetailWith(String voucherName) {
         Assert.assertEquals(kostDetail.getVoucherName(voucherName), voucherName, "Voucher name is not displayed");

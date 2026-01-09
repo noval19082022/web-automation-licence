@@ -296,6 +296,8 @@ public class KostDetailsPO {
     private Locator salinButton;
     private Locator toastMessage;
     private Locator salinDetailButton;
+    private Locator voucherCard;
+    private Locator modalBody;
 
     //-------------------Survey Label---------------//
     private Locator surveyLabelSection;
@@ -561,10 +563,12 @@ public class KostDetailsPO {
         //------------voucher------------//
         voucherList = page.locator("//div[@class=\"all-vouchers-modal__vouchers bg-u-pt-md\"]");
         closeVoucher = page.locator("//button[@class = 'bg-c-modal__action-closable']");
-        lihatDetailVoucher = page.locator("div:nth-child(2) > .voucher-card__title-container > .bg-u-mt-xxxs > .bg-c-link");
+        lihatDetailVoucher = page.locator(".voucher-card .voucher-card__title-container .bg-c-link:has-text('Lihat detail')").first();
         salinButton = page.locator("//button[contains(.,'Salin')]").first();
         toastMessage = page.getByText("Kode voucher berhasil disalin.");
         salinDetailButton = page.locator("//button[@class=\"bg-c-button bg-c-button--primary bg-c-button--lg\"]");
+        voucherCard = page.locator(".voucher-card");
+        modalBody = page.locator(".bg-c-modal__body");
 
         //------------survey label------------//
         surveyLabelSection = page.locator("#priceCard").getByTestId("detailFomoLabel");
@@ -585,28 +589,81 @@ public class KostDetailsPO {
      * Dismiss FTUE screen
      */
     public void dismissFTUE() {
-        var maxLoop = 0;
+        // Wait for page to load
+        playwright.waitTillPageLoaded();
+        playwright.hardWait(2000);
+        
+        // First handle any blocking popups
+        handleBlockingPopups();
+        
+        // Scroll down to trigger FTUE popup
         playwright.pageScrollToDown(300);
-        playwright.waitFor(ftueSlider, 5000.0);
-        do {
-            maxLoop++;
-            if (playwright.waitTillLocatorIsVisible(ftueSlider)) {
-                playwright.clickOn(ftueSlider.first());
-            }
-            if (playwright.waitTillLocatorIsVisible(btnSayaMengerti)) {
-                playwright.forceClickOn(btnSayaMengerti);
-            }
-            if (maxLoop == 7) {
-                break;
-            }
-        } while (playwright.waitTillLocatorIsVisible(ftueSlider));
+        playwright.hardWait(1000);
+        
+        // Check if FTUE is present after scroll
+        if (!playwright.isLocatorVisibleAfterLoad(ftuePopUP, 2000.0) && 
+            !playwright.isLocatorVisibleAfterLoad(ftueSlider, 1000.0)) {
+            // No FTUE present
+            return;
+        }
+        
+        // Click "Lanjut" button while it's visible (max 5 times to avoid infinite loop)
+        int lanjutClicks = 0;
+        while (playwright.waitTillLocatorIsVisible(ftueSlider, 2000.0) && lanjutClicks < 5) {
+            playwright.forceClickOn(ftueSlider);
+            playwright.hardWait(1000);
+            lanjutClicks++;
+        }
+        
+        // Click "Saya mengerti" button when it appears
+        if (playwright.waitTillLocatorIsVisible(btnSayaMengerti, 2000.0)) {
+            playwright.forceClickOn(btnSayaMengerti);
+            playwright.hardWait(1000);
+        }
+        
+        // Final check - if FTUE still visible, try escape key
+        if (playwright.isLocatorVisibleAfterLoad(ftuePopUP, 1000.0)) {
+            page.keyboard().press("Escape");
+            playwright.hardWait(1000);
+        }
+        
+        // Handle any remaining popups
+        handleBlockingPopups();
+    }
+    
+    /**
+     * Handle any blocking popups that might interfere with FTUE
+     */
+    private void handleBlockingPopups() {
+        // Check and close inactive owner warning if present
+        if (playwright.waitTillLocatorIsVisible(inactiveOwnerWarningCloseIcon, 2000.0)) {
+            playwright.clickOn(inactiveOwnerWarningCloseIcon);
+            playwright.hardWait(500);
+        }
+        
+        // Check and close voucher popup if present
+        if (playwright.waitTillLocatorIsVisible(closeVoucher, 2000.0)) {
+            playwright.clickOn(closeVoucher);
+            playwright.hardWait(500);
+        }
+        
+        // Check and close promo popup if present
+        if (playwright.waitTillLocatorIsVisible(btnSayaMengerti, 2000.0)) {
+            playwright.forceClickOn(btnSayaMengerti);
+            playwright.hardWait(500);
+        }
+        
+        // Check for any generic close button with modal
+        Locator genericCloseButton = page.locator("button.bg-c-modal__action-closable").first();
+        if (playwright.waitTillLocatorIsVisible(genericCloseButton, 2000.0)) {
+            playwright.clickOn(genericCloseButton);
+            playwright.hardWait(500);
+        }
     }
 
     public void dismissFTUEIfExist() {
-        playwright.pageScrollToDown(300);
-        if (playwright.waitTillLocatorIsVisible(ftueSlider, 5000.0)) {
-            this.dismissFTUE();
-        }
+        // Call dismissFTUE which already includes scroll and existence check
+        this.dismissFTUE();
     }
 
     /**
@@ -671,7 +728,7 @@ public class KostDetailsPO {
      */
     public String getKostTitle() {
         playwright.waitTillLocatorIsVisible(kostTitle);
-        return kostTitle.textContent();
+        return playwright.getText(kostTitle);
     }
 
     /**
@@ -808,7 +865,7 @@ public class KostDetailsPO {
      * @return 'string' hubungi kost
      */
     public String hubungiKostHeadingText() {
-        return hubungiKostHeading.textContent();
+        return playwright.getText(hubungiKostHeading);
     }
 
     /**
@@ -1170,7 +1227,7 @@ public class KostDetailsPO {
      */
     public String getLatestChatText() {
         playwright.waitTillLocatorIsVisible(latestChat);
-        return latestChat.textContent();
+        return playwright.getText(latestChat);
     }
 
     // ------------ Kos Report Section -----------
@@ -2577,7 +2634,51 @@ public class KostDetailsPO {
      * click on lihat detail button
      */
     public void clickOnLihatDetailButton(){
+        // Original method - clicks the first visible detail button for backward compatibility
+        playwright.waitTillLocatorIsVisible(lihatDetailVoucher, 5000.0);
         playwright.clickOn(lihatDetailVoucher);
+        playwright.waitTillLocatorIsVisible(modalBody, 5000.0);
+    }
+    
+    /**
+     * Get lihat detail link locator within a specific card
+     * @param card The card locator to search within
+     * @return Locator for the lihat detail link
+     */
+    private Locator getLihatDetailLinkInCard(Locator card) {
+        return card.locator("a:has-text('Lihat detail')").first();
+    }
+    
+    /**
+     * Click on lihat detail button for a specific voucher by name
+     * @param voucherName Name of the voucher to find and click
+     */
+    public void clickOnLihatDetailButtonForSpecificVoucher(String voucherName) {
+        // Wait for voucher cards to be visible
+        playwright.waitTillLocatorIsVisible(voucherCard.first(), 8000.0);
+        
+        // Get voucher count once using playwright helper
+        int voucherCount = playwright.countLocator(voucherCard);
+        
+        // Find the specific voucher card that starts with the voucher name
+        for (int i = 0; i < voucherCount; i++) {
+            Locator card = voucherCard.nth(i);
+            String cardText = playwright.getText(card);
+            
+            // Check if card text starts with voucher name (to avoid partial matches)
+            if (cardText != null && cardText.trim().startsWith(voucherName)) {
+                // Click the "Lihat detail" link within this card
+                Locator detailLink = getLihatDetailLinkInCard(card);
+                if (playwright.countLocator(detailLink) > 0) {
+                    playwright.clickOn(detailLink);
+                    // Wait for modal to appear
+                    playwright.waitTillLocatorIsVisible(modalBody, 5000.0);
+                    return;
+                }
+            }
+        }
+        
+        throw new RuntimeException("Could not find voucher '" + voucherName + "' in the voucher list");
     }
 
     /**
@@ -2586,8 +2687,17 @@ public class KostDetailsPO {
      * @return
      */
     public String getVoucherName(String voucherName){
-        Locator voucherNameText = page.locator("//p[contains(.,'"+voucherName+"')]").nth(1);
-        return playwright.getText(voucherNameText);
+        // Wait for modal to be visible
+        playwright.waitTillLocatorIsVisible(modalBody, 5000.0);
+        
+        // Look for voucher name in the detail modal (not in the list)
+        // The modal should have the voucher name displayed
+        Locator voucherNameInModal = modalBody.locator("p:has-text('" + voucherName + "')").first();
+        
+        // Wait and verify element is visible
+        playwright.waitTillLocatorIsVisible(voucherNameInModal, 5000.0);
+        
+        return playwright.getText(voucherNameInModal);
     }
 
     /**

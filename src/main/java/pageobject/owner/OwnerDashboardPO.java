@@ -354,6 +354,18 @@ public class OwnerDashboardPO {
         playwright.clickOn(menuKelolaProperty);
     }
 
+    /**
+     * Dismiss GoldPlus features pop-up if it appears
+     * Handles the "Sudah cek fitur-fitur GoldPlus ini?" pop-up
+     */
+    public void dismissPopUp() {
+        if (playwright.isTextDisplayed("Sudah cek fitur-fitur GoldPlus ini?", 3000.0)) {
+            if (playwright.waitTillLocatorIsVisible(nantiSajaButton, 3000.0)) {
+                playwright.clickOn(nantiSajaButton);
+            }
+        }
+    }
+
     /** check FTUE at chat list is present
      *
      * @return true if appears FTUE Chat List section

@@ -236,27 +236,13 @@ public class MamiAdsPO {
         playwright.clickOn(gpOnboardingPopUpPreviousButton);
     }
 
+    /**
+     * Click on saldo mamiads card
+     */
     public void clickSaldoMamiadsCard() {
-        // Wait a moment for popup to appear (if it's going to)
-        playwright.hardWait(1000);
-        
-        // Dismiss popup if present using ModalPopUpPO
-        if (modalPopUpPO.isModalCloseIconVisible()) {
-            modalPopUpPO.clicksModalCloseIcon();
-            playwright.hardWait(1000);
-        }
-
-        // Wait for saldo card to be visible
         playwright.waitTillLocatorIsVisible(saldoMamiadsCard, 10000.0);
-        
-        // Extra wait to ensure popup is fully dismissed
-        playwright.hardWait(500);
-        
-        // Click the card
         playwright.clickOn(saldoMamiadsCard);
-        
-        // Wait for navigation to complete
-        playwright.hardWait(2000);
+        playwright.waitTillPageLoaded();
     }
 
     /**
@@ -946,7 +932,6 @@ public class MamiAdsPO {
             }
         }
 
-        page.pause();
         playwright.waitFor(radioButtons.first(), 10000.0);
         
         // Ensure "Favorit" text is visible (indicates 150k option loaded)

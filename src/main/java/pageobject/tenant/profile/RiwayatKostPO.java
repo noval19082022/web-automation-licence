@@ -219,7 +219,18 @@ public class RiwayatKostPO {
      *
      */
     public void clickAjukanBerhentiSewaText() {
+        // Wait for page to be fully loaded
+        playwright.waitTillPageLoaded();
+        playwright.hardWait(2000);
+        
+        // Wait for button to be visible with extended timeout
+        playwright.waitTillLocatorIsVisible(ajukanBerhentiSewaButton, 20000.0);
+        
+        // Scroll to button if needed
         playwright.pageScrollInView(ajukanBerhentiSewaButton);
+        playwright.hardWait(1000);
+        
+        // Click the button
         playwright.clickOn(ajukanBerhentiSewaButton);
     }
 
