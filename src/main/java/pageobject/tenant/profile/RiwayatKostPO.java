@@ -94,7 +94,7 @@ public class RiwayatKostPO {
         bankNameButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih bank dropdown-down"));
         accountNumber = page.getByPlaceholder("Masukkan nomor rekening");
         accountOwnerName = page.getByPlaceholder("Masukkan nama pemilik rekening");
-        berhentiSewaButtonPopup = page.locator("//*[@class=\"bg-c-button bg-c-button--tertiary bg-c-button--lg\"]");
+        berhentiSewaButtonPopup = page.locator("//button[contains(@class, 'bg-c-button--tertiary') and contains(@class, 'bg-c-button--lg')]");
         stopRentContractText = page.locator("//*[@data-testid=\"userKostModalStopRent-contract\"]");
     }
 
@@ -219,19 +219,14 @@ public class RiwayatKostPO {
      *
      */
     public void clickAjukanBerhentiSewaText() {
-        // Wait for page to be fully loaded
         playwright.waitTillPageLoaded();
-        playwright.hardWait(2000);
-        
-        // Wait for button to be visible with extended timeout
         playwright.waitTillLocatorIsVisible(ajukanBerhentiSewaButton, 20000.0);
-        
-        // Scroll to button if needed
         playwright.pageScrollInView(ajukanBerhentiSewaButton);
-        playwright.hardWait(1000);
-        
-        // Click the button
         playwright.clickOn(ajukanBerhentiSewaButton);
+
+        if (playwright.waitTillLocatorIsVisible(berhentiSewaButtonPopup, 5000.0)) {
+            playwright.clickOn(berhentiSewaButtonPopup);
+        }
     }
 
     /**
