@@ -568,7 +568,7 @@ public class KostDetailsPO {
         toastMessage = page.getByText("Kode voucher berhasil disalin.");
         salinDetailButton = page.locator("//button[@class=\"bg-c-button bg-c-button--primary bg-c-button--lg\"]");
         voucherCard = page.locator(".voucher-card");
-        modalBody = page.locator(".bg-c-modal__body");
+        modalBody = page.locator(".bg-c-modal__body").last();
 
         //------------survey label------------//
         surveyLabelSection = page.locator("#priceCard").getByTestId("detailFomoLabel");
@@ -2671,8 +2671,9 @@ public class KostDetailsPO {
                 Locator detailLink = getLihatDetailLinkInCard(card);
                 if (playwright.countLocator(detailLink) > 0) {
                     playwright.clickOn(detailLink);
-                    // Wait for modal to appear
-                    playwright.waitTillLocatorIsVisible(modalBody, 5000.0);
+                    // Wait for voucher detail modal to appear (use specific locator for detail modal)
+                    Locator voucherDetailModal = page.locator(".bg-c-modal__body:has-text('Detail Voucher')");
+                    playwright.waitTillLocatorIsVisible(voucherDetailModal, 5000.0);
                     return;
                 }
             }
@@ -2687,16 +2688,17 @@ public class KostDetailsPO {
      * @return
      */
     public String getVoucherName(String voucherName){
-        // Wait for modal to be visible
-        playwright.waitTillLocatorIsVisible(modalBody, 5000.0);
-        
+        // Wait for voucher detail modal to be visible (use specific locator)
+        Locator voucherDetailModal = page.locator(".bg-c-modal__body:has-text('Detail Voucher')");
+        playwright.waitTillLocatorIsVisible(voucherDetailModal, 5000.0);
+
         // Look for voucher name in the detail modal (not in the list)
         // The modal should have the voucher name displayed
-        Locator voucherNameInModal = modalBody.locator("p:has-text('" + voucherName + "')").first();
-        
+        Locator voucherNameInModal = voucherDetailModal.locator("p:has-text('" + voucherName + "')").first();
+
         // Wait and verify element is visible
         playwright.waitTillLocatorIsVisible(voucherNameInModal, 5000.0);
-        
+
         return playwright.getText(voucherNameInModal);
     }
 
