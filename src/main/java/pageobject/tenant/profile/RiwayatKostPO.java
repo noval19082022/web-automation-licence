@@ -80,7 +80,7 @@ public class RiwayatKostPO {
         ajukanSewaTitle = page.locator(".user-review-card--flexbox > div");
         konfirmAjukanBerhentiSewaButton = page.locator(".bg-c-button--primary");
         titleKostReviewSubmitted = page.locator("//p[@class=\"user-review-card--reviewed__text bg-c-text bg-c-text--label-2\"]");
-        starsKostReviewSubmitted = page.locator("p.bg-c-text--body-1:nth-child(2)");
+        starsKostReviewSubmitted = page.locator(".user-review-card--reviewed p.bg-c-text--body-1");
         reviewKebersihan = page.locator("span:nth-child(5) > .bg-c-icon").first();
         reviewKeamanan = page.locator("div:nth-child(2) > .star-row > div > .star-container > span:nth-child(5) > .bg-c-icon");
         reviewKenyamanan = page.locator("div:nth-child(3) > .star-row > div > .star-container > span:nth-child(5) > .bg-c-icon");
