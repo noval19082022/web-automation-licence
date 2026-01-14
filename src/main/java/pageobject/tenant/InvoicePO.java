@@ -408,6 +408,7 @@ public class InvoicePO {
         playwright.waitTillPageLoaded();
     }
 
+
     /**
      * Get company code text to use on midtrans
      *
@@ -432,7 +433,7 @@ public class InvoicePO {
      * @return String data type
      */
     public String getKodePembayaranNumberText() {
-        return kodePembayaranPermata.textContent().trim();
+        return playwright.getText(kodePembayaranPermata, 15000.0);
     }
 
     /**

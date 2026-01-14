@@ -153,11 +153,12 @@ public class PaymentSteps {
 
     }
 
-    @And("tenant/owner/user select payment method from invoice detail using BNI")
+    @When("tenant/owner/user select payment method from invoice detail using BNI")
     public void tenantSelectPaymentUsingBNI() {
         invoicePO.clickOnPilihPembayaran();
         invoicePO.clickOnBNI();
         invoicePO.clickOnBayarSekarang();
+
         var kodePembayaran = invoicePO.getKodePembayaranNumberText();
         var amountPembayaranBNI = invoicePO.getAmountPembayaranBNINumberText();
         page = ActiveContext.getActiveBrowserContext().waitForPage(() -> {

@@ -1,6 +1,5 @@
-@LIMO2 @flaky
+@LIMO2 @flaky @checksenja
 Feature: Payment mamiads staging
-
 
   @TEST_SS-3097
   Scenario: [Owner][Payment premium] Owner paid premium paket using Alfamart
@@ -76,7 +75,7 @@ Feature: Payment mamiads staging
     And owner want to buy mamiads saldo with nominal "Rp30.000"
     And owner select payment method from invoice detail using BNI
     And owner close page number 1
-   # And owner set active page to 0
+    And owner set active page to 0
     And owner refresh page 0
     Then owner verify invoice success paid mamiads
 

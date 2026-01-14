@@ -356,10 +356,17 @@ public class OwnerDashboardPO {
 
     /**
      * Dismiss GoldPlus features pop-up if it appears
-     * Handles the "Sudah cek fitur-fitur GoldPlus ini?" pop-up
+     * Handles multiple GoldPlus popup variants:
+     * - "Sudah cek fitur-fitur GoldPlus ini?"
+     * - "Selamat bergabung di GoldPlus 2!"
      */
     public void dismissPopUp() {
         if (playwright.isTextDisplayed("Sudah cek fitur-fitur GoldPlus ini?", 3000.0)) {
+            if (playwright.waitTillLocatorIsVisible(nantiSajaButton, 3000.0)) {
+                playwright.clickOn(nantiSajaButton);
+            }
+        }
+        if (playwright.isTextDisplayed("Selamat bergabung di GoldPlus 2!", 3000.0)) {
             if (playwright.waitTillLocatorIsVisible(nantiSajaButton, 3000.0)) {
                 playwright.clickOn(nantiSajaButton);
             }
@@ -522,6 +529,14 @@ public class OwnerDashboardPO {
     public boolean isContactUsPresent() {
         playwright.waitFor(contactUsPopUp);
         return playwright.waitTillLocatorIsVisible(contactUsPopUp);
+    }
+
+    /**
+     * Wait for owner dashboard to be fully loaded
+     * Waits for the greeting label to be visible
+     */
+    public void waitForOwnerDashboardToLoad() {
+        playwright.waitTillLocatorIsVisible(greetingUserLabel, 10000.0);
     }
 
     /**

@@ -78,6 +78,7 @@ public class DetailTagihanPO {
      * Click on bayar sekarang button and wait until page loaded
      */
     public void clicksOnBayarSekarangButton() {
+        playwright.waitTillLocatorIsVisible(bayarSekarangBtnOnDetailTagihan, 30000.0);
         playwright.clickOn(bayarSekarangBtnOnDetailTagihan);
         playwright.waitTillPageLoaded();
     }

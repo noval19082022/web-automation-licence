@@ -96,6 +96,7 @@ public class MidtransPaymentPO {
         playwright.clickLocatorAndTypeKeyboard(paymentAmountBNINewText, amountBNI);
         playwright.clickOn(flagButtonBNI);
         playwright.waitTillLocatorIsVisible(bniSuccessPayment, 60000.0);
+        playwright.hardWait(5000.0);
     }
     /**
      * Payment process midtrans for BRI
