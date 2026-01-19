@@ -9,7 +9,7 @@ Feature: Owner can see MamiFoto Purchase History
     And user login as owner:
       | phone stag   | phone prod   | password  |
       | 082233545506 | 082144865600 | qwerty123 |
-    When owner click menu sidebar Mamifoto
+    When owner click Mamifoto button
     Then owner can see mamifoto page
     * owner click riwayat paket button
     * owner see Riwayat MamiFoto purchase page
@@ -48,7 +48,7 @@ Feature: Owner can see MamiFoto Purchase History
     And user login as owner:
       | phone stag  | phone prod | password |
       | 08766236901 | 0          | 12345678 |
-    * owner click menu sidebar Mamifoto
+    * owner click Mamifoto button
     * owner can see mamifoto page
     * owner click riwayat paket button
     When owner click tab Selesai at riwayat page

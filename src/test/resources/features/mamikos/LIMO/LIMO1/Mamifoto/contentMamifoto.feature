@@ -8,7 +8,7 @@ Feature: Check content Mamifoto
     And user login as owner:
       | phone stag   | phone prod | password |
       | 082233545511 | 0          | 12345678 |
-    When owner click menu sidebar Mamifoto
+    When owner click Mamifoto button
     Then owner can see mamifoto page
     And owner will see title and detail title "Listing Kos Tampil Memikat dengan MamiFoto" on panduan panduan persiapan foto or video
     And owner will see title and detail title "Paket foto dan video profesional yang mampu meningkatkan daya tarik properti Anda. Kos makin menarik, bisnis pun makin naik." on panduan panduan persiapan foto or video

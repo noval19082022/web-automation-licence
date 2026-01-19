@@ -2,13 +2,13 @@
 Feature: Check Mamifoto Landing Page
 
   @TEST_LIMO-3587 @continue @declarative @listing-monetization @reviewed @Automated @web @playWright
-  Scenario: [WEB][MamiFoto] Owner visits Landing Page of MamiFoto
+  Scenario: [WEB][MamiFoto] Owner visits Landing Page of MamiFoto From Owner Dashboard
     Given user go to mamikos homepage
     And user login as owner:
       | phone stag | phone prod | password  |
       | 0891202415 | 0          | qwerty123 |
     And owner dismiss active pop-ups
-    When owner click menu sidebar Mamifoto
+    When owner click Mamifoto button
     Then owner can see mamifoto page
 
   @continue @TEST_LIMO-3588
@@ -16,13 +16,6 @@ Feature: Check Mamifoto Landing Page
     When owner back to owner dashboard
     And owner dismiss active pop-ups
     And owner click info untuk anda for mamifoto
-    Then owner can see mamifoto page
-
-  @continue @TEST_LIMO-3589
-  Scenario: Owner visits Landing Page of MamiFoto from Tingkatkan Kinerja Kos Section
-    When owner back to owner dashboard
-    And owner dismiss active pop-ups
-    And owner click section Tingkatkan Kinerja Kost
     Then owner can see mamifoto page
 
   @continue @TEST_LIMO-3590

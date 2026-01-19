@@ -367,9 +367,9 @@ public class MamifotoPO {
      * Enhanced method: Wait for MamiFoto page to fully load
      */
     public void waitForMamiFotoPageLoad() {
-        page.waitForLoadState(LoadState.NETWORKIDLE);
-        playwright.waitFor(mamiFotoLandingPageContent);
-        playwright.waitFor(headerMamifoto);
+        playwright.waitTillPageLoaded();
+        playwright.waitTillLocatorIsVisible(mamiFotoLandingPageContent, 20000.0);
+        playwright.waitTillLocatorIsVisible(headerMamifoto, 10000.0);
     }
 
     /**
