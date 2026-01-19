@@ -35,7 +35,7 @@ Feature: Owner Purchase Mamifoto
   Scenario: [Web][Mamifoto] Owner purchase multiple invoice MamiFoto package
     #paid invoice unpaid
     When owner navigates to owner dashboard
-    And owner click menu sidebar Mamifoto
+    And owner click Mamifoto button
     And owner click riwayat paket button
     And owner paid transaction unpaid
     #Owner purchase multiple invoice

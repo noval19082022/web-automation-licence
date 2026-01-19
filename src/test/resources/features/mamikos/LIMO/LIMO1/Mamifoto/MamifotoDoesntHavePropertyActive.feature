@@ -8,7 +8,7 @@ Feature: Entry Point Mamifoto when does not have property active
       | phone stag | phone prod   | password  |
       | 0891202415 | 082144865601 | qwerty123 |
     And owner dismiss active pop-ups
-    When owner click menu sidebar Mamifoto
+    When owner click Mamifoto button
     Then owner can see mamifoto page
 
   @continue @TEST_LIMO-3571
@@ -32,7 +32,7 @@ Feature: Entry Point Mamifoto when does not have property active
       | phone stag | phone prod   | password  |
       | 0891202501 | 082144865601 | qwerty123 |
     And owner dismiss active pop-ups
-    When owner click menu sidebar Mamifoto
+    When owner click Mamifoto button
     When owner click Lihat Paket button
     And owner select package mamifoto
     Then owner see pop up doesnt have property

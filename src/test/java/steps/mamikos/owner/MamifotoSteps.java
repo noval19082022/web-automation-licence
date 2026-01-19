@@ -22,10 +22,9 @@ public class MamifotoSteps {
     InvoicePO invoice = new InvoicePO(page);
     OwnerDashboardPO owner = new OwnerDashboardPO(page);
 
-    @When("owner click menu sidebar Mamifoto")
-    public void owner_click_menu_sidebar_mamifoto() {
-        mamifoto.clickOnFiturPromosi();
-        mamifoto.clickOnMamifotoSidebar();
+    @When("owner click Mamifoto button")
+    public void owner_click_mamifoto_button() {
+        owner.clickOnMamiFoto();
     }
 
     @Then("owner can see mamifoto page")
@@ -46,13 +45,17 @@ public class MamifotoSteps {
         Assert.assertEquals(mamifoto.getKinerjaSubTitle(),mamifoto.getKinerjaSubTitle(),"text doesnt match");
         mamifoto.clickOnSewaMamifoto();
     }
+
     @Then("owner click info untuk anda for mamifoto")
-    public void owner_click_info_untuk_anda_for_mamifoto()  {
-        List<String> listInfoUntukAnda = new ArrayList<>();
-        for (var locator : owner.getListInfoUntukAndaParagraphLocators()) {
-            listInfoUntukAnda.add(playwright.getText(locator).trim());
-        }
-        Assert.assertTrue(listInfoUntukAnda.contains(OwnerDashboardTestData.MAMIFOTO_INFOUNTUKANDA), "Not contains mamifoto info untuk anda");
+    public void owner_click_info_unto_anda_for_mamifoto()  {
+        // Get the aria snapshot of the information card to verify MamiFoto content exists
+        String ariaSnapshot = owner.getInfoUntukAndaAriaSnapshot();
+
+        // Assert that MamiFoto content is present in the snapshot
+        Assert.assertTrue(ariaSnapshot.contains("Sewa jasa foto"),
+            "MamiFoto content not found in Info untuk Anda section. Snapshot: " + ariaSnapshot);
+
+        // Click on the MamiFoto info untuk anda item
         owner.clicksOnInfoUntukAnda(OwnerDashboardTestData.MAMIFOTO_INFOUNTUKANDA);
     }
 
@@ -107,11 +110,15 @@ public class MamifotoSteps {
 
     @Then("owner click info untuk anda for mamifoto non property")
     public void owner_click_info_untuk_anda_for_mamifoto_non_property() {
-        List<String> listInfoUntukAnda = new ArrayList<>();
-        for (var locator : owner.getListInfoUntukAndaParagraphLocators()) {
-            listInfoUntukAnda.add(playwright.getText(locator).trim());
-        }
-        Assert.assertTrue(listInfoUntukAnda.contains(OwnerDashboardTestData.MAMIFOTO_INFOUNTUKANDA), "Info untuk anda not contains : " + OwnerDashboardTestData.MAMIFOTO_INFOUNTUKANDA);
+        // Get the aria snapshot of the information card to verify MamiFoto content exists
+        String ariaSnapshot = owner.getInfoUntukAndaAriaSnapshot();
+        System.out.println("Info untuk Anda aria snapshot (non-property): " + ariaSnapshot);
+
+        // Assert that MamiFoto content is present in the snapshot
+        Assert.assertTrue(ariaSnapshot.contains("Sewa jasa foto"),
+            "MamiFoto content not found in Info untuk Anda section. Snapshot: " + ariaSnapshot);
+
+        // Click on the MamiFoto info untuk anda item
         owner.clicksOnInfoUntukAnda(OwnerDashboardTestData.MAMIFOTO_INFOUNTUKANDA);
     }
 

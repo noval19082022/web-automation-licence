@@ -74,6 +74,7 @@ public class OwnerDashboardPO {
     Locator toggleEnable;
     Locator mamitourDashboard;
     Locator mamitourMenu;
+    Locator mamifotoButton;
     Locator pageHeader;
     Locator totalNotBookingPopup;
     Locator closeIconOnNotBookingPopup;
@@ -98,6 +99,7 @@ public class OwnerDashboardPO {
     private Locator perpanjangBtnReccuringGpPopUp;
     private Locator dialogPopUp;
     private Locator widgetInfoUntukAndaParagraph;
+    private Locator informationCard;
     private Locator generalCloseButton;
     private Locator pilihPaketGoldplus;
     private Locator inginKosDikelolaLink;
@@ -167,6 +169,7 @@ public class OwnerDashboardPO {
         toggleEnable = page.locator("//div[@class='bg-c-switch checkin-setting-modal__d-day-checkin-switch bg-c-switch--on bg-c-switch--hover']");
         mamitourDashboard = page.locator("a").filter(new Locator.FilterOptions().setHasText("virtual-tour-360 MamiTour Tur virtual keliling properti kos chevron-right"));
         mamitourMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("MamiTour"));
+        mamifotoButton = page.locator("img[alt='mamifoto-logo']");
         pageHeader = page.locator(".room-page__header");
         totalNotBookingPopup = page.locator("div.suggestion-modal__title");
         closeIconOnNotBookingPopup = page.locator("//*[@class='mdi mdi-close mdi-24px']");
@@ -185,7 +188,8 @@ public class OwnerDashboardPO {
         mamiprimeBannerCloseButton = page.frameLocator("iframe >> nth=0").getByLabel("Close");
         perpanjangBtnReccuringGpPopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Perpanjang"));
         dialogPopUp = page.locator("//*[@role='dialog' and @aria-modal='true']//button[@class='bg-c-modal__action-closable']");
-        widgetInfoUntukAndaParagraph = page.locator("//*[contains(text(),'Info untuk Anda')]/following-sibling::*[@class='widget-card__content']//p");
+        widgetInfoUntukAndaParagraph = page.locator(".information-card .information-card__list-wrapper p");
+        informationCard = page.locator(".information-card");
         generalCloseButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
         pilihPaketGoldplus = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Paket GoldPlus"));
         entryPointCardGP = page.locator(".membership-card__section").first();
@@ -810,6 +814,14 @@ public class OwnerDashboardPO {
     }
 
     /**
+     * click on mamifoto button on owner dashboard
+     */
+    public void clickOnMamiFoto() {
+        playwright.waitFor(mamifotoButton);
+        playwright.clickOn(mamifotoButton);
+    }
+
+    /**
      * Get text the page header
      * @return page header text
      *
@@ -1035,11 +1047,14 @@ public class OwnerDashboardPO {
     }
 
     /**
-     * Get list info untuk anda inner text
-     * @return List of String
+     * Get aria snapshot of Info untuk Anda section
+     * @return String aria snapshot of the information card
      */
-    public List<Locator> getListInfoUntukAndaParagraphLocators() {
-        return playwright.getLocators(widgetInfoUntukAndaParagraph);
+    public String getInfoUntukAndaAriaSnapshot() {
+        // Wait for the information card container to be visible first
+        playwright.waitTillLocatorIsVisible(informationCard, 10000.0);
+        playwright.hardWait(1000); // Wait for content to render
+        return playwright.getAriaSnapshot(informationCard);
     }
 
     /**
