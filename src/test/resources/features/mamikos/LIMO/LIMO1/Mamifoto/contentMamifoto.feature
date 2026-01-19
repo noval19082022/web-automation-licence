@@ -1,5 +1,4 @@
 @LIMO1 @Mamifoto @ContentMamifoto @DONEMIGRATINGTONEWBOARD
-
 Feature: Check content Mamifoto
 
   @continue @TEST_LIMO-3565 @declarative @listing-monetization @reviewed @Automated @web @playWright

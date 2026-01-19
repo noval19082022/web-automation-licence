@@ -324,4 +324,13 @@ public class MamifotoSteps {
     public void owner_wants_to_accsess_mamifoto() {
         mamifoto.navigatesToMamifotoPage();
     }
+
+    @Then("owner see welcome section for owner without property")
+    public void owner_see_welcome_section_for_owner_without_property() {
+        Assert.assertTrue(owner.isWelcomeTitleVisible(), "Welcome title is not visible");
+        Assert.assertTrue(owner.isWelcomeSubtitleVisible(), "Welcome subtitle is not visible");
+        Assert.assertTrue(owner.isPasangIklanPertamaButtonVisible(), "Pasang Iklan Pertama button is not visible");
+        Assert.assertEquals(owner.getWelcomeTitleText(), "👋🏼  Selamat datang, Owner tanpa kost", "Welcome title text doesn't match");
+        Assert.assertEquals(owner.getWelcomeSubtitleText(), "Pasang iklan pertama Anda agar bisa segera ditemukan calon penyewa!", "Welcome subtitle text doesn't match");
+    }
 }
