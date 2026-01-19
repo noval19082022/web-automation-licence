@@ -544,7 +544,7 @@ public class MamiAdsPO {
                 break;
         }
         playwright.waitTillLocatorIsVisible(page.locator(element).first());
-        return playwright.getText(page.locator(element).first());
+        return playwright.getNormalizeText(page.locator(element).first());
     }
 
     /**

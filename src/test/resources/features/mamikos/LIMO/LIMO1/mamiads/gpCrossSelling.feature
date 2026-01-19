@@ -30,7 +30,10 @@ Feature: GP Cross-Selling
       - paragraph: 150 ribu
       - paragraph: Rp150.000
       - paragraph: 10 ribu
-      - paragraph: Rp10.000
+      - paragraph: 88%
+      - paragraph: "8.000"
+      - paragraph: Rp1.000
+      - paragraph: Hemat Rp7.000
       - paragraph: 30 ribu
       - paragraph: + 3.000
       - paragraph: 10%
@@ -51,7 +54,10 @@ Feature: GP Cross-Selling
 - paragraph: 150 ribu
 - paragraph: Rp150.000
 - paragraph: 10 ribu
-- paragraph: Rp10.000
+- paragraph: 88%
+- paragraph: "8.000"
+- paragraph: Rp1.000
+- paragraph: Hemat Rp7.000
 - paragraph: 30 ribu
 - paragraph: + 3.000
 - paragraph: 10%
@@ -99,7 +105,7 @@ Feature: GP Cross-Selling
 - paragraph: Tutup
       """
     When user click "Tutup"
-    And user choose saldo "Rp10.000" on GoldPlus section
+    And user choose saldo "10 ribu" on GoldPlus section
 
   @mamiads  @gpCrossSelling @continue @TEST_LIMO-3350
   Scenario: Rincian pembayaran while saldo MamiAds and GoldPlus
@@ -109,13 +115,13 @@ Feature: GP Cross-Selling
       - text: GoldPlus 1 periode 1 Bulan
       - paragraph: + Gratis MamiAds 120.000
       - paragraph: Rp79.000
-      - text: Saldo MamiAds 10.000
-      - paragraph: Rp10.000
+      - text: Saldo MamiAds 8.000
+      - paragraph: Rp1.000
       """
     And user verify Total Pembayaran
       """
       - paragraph: Total Pembayaran
-      - paragraph: Rp89.000
+      - paragraph: Rp80.000
       """
 
   @mamiads  @gpCrossSelling @TEST_LIMO-3352
@@ -129,13 +135,13 @@ Feature: GP Cross-Selling
       - text: GoldPlus 2 periode 1 Bulan
       - paragraph: + Gratis MamiAds 100.000
       - paragraph: Rp145.000
-      - text: Saldo MamiAds 10.000
-      - paragraph: Rp10.000
+      - text: Saldo MamiAds 8.000
+      - paragraph: Rp1.000
       """
     And user verify Total Pembayaran
       """
       - paragraph: Total Pembayaran
-      - paragraph: Rp155.000
+      - paragraph: Rp146.000
       """
 
   @mamiads @gpCrossSelling @continue @TEST_LIMO-3354
@@ -220,4 +226,4 @@ Feature: GP Cross-Selling
     Then payment owner success using ovo as payment method
     And user navigate to mamiads history page
     And user click "Selesai"
-    And validate status transaction mamiads is "Lunas" with price "Rp0" saldo "Saldo 30 ribu"
+    And validate status transaction mamiads is "Lunas" with price "Rp109.500" saldo "Saldo MamiAds 30 ribu + GoldPlus 1 (1 Bulan)"
