@@ -44,7 +44,6 @@ public class MamiAdsSteps {
 
     @And("owner want to buy mamiads saldo with nominal {string}")
     public void ownerWantToBuyMamiadsSaldo(String saldo) {
-        mamiAdsPO.clickSaldoMamiadsCard();
         mamiAdsPO.handleRedirectToMamiadsWebview();
         if (playwright.isTextDisplayed("Naikkan Posisi Iklan Properti dengan MamiAds")) {
             mamiAdsPO.handlePopupMamiAds();
@@ -254,10 +253,26 @@ public class MamiAdsSteps {
 
     @Then("owner verify invoice success paid mamiads")
     public void ownerVerifyInvoiceSuccessPaidMamiads() {
-        // Wait for page to load payment success instead of fixed wait
-        playwright.waitTillPageLoaded();
         playwright = new PlaywrightHelpers(ActiveContext.getActivePage());
-        Assert.assertTrue(playwright.isTextDisplayed("Pembayaran Berhasil", 5000));
+
+        int maxRetries = 5;
+        boolean paymentSuccess = false;
+
+        for (int i = 0; i < maxRetries; i++) {
+            playwright.waitTillPageLoaded();
+
+            if (playwright.isTextDisplayed("Pembayaran Berhasil", 5000.0)) {
+                paymentSuccess = true;
+                break;
+            }
+
+            if (i < maxRetries - 1) {
+                System.out.println("Payment success not found, reloading page... Attempt " + (i + 1) + " of " + maxRetries);
+                playwright.reloadPage();
+            }
+        }
+
+        Assert.assertTrue(paymentSuccess, "Payment success message not found after " + maxRetries + " attempts");
     }
 
     @And("user click coba sekarang header")

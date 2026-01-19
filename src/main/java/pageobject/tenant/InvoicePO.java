@@ -100,6 +100,7 @@ public class InvoicePO {
     Locator singgahsiniPlusLevelSection;
     Locator invoiceBillSection;
     Locator disableMamipoinButton;
+    Locator pendingPaymentAlert;
 
     public InvoicePO(Page page) {
         this.page = page;
@@ -186,6 +187,7 @@ public class InvoicePO {
         invoiceBillSection = page.locator("#invoiceBill");
         singgahsiniPlusLevelSection = page.locator("div.invoice-singgahsini-plus-level");
         disableMamipoinButton = page.locator("//*[@class=\"bg-c-switch__input\"]");
+        pendingPaymentAlert = page.locator("[role='alert']");
     }
 
     /**
@@ -409,6 +411,17 @@ public class InvoicePO {
     }
 
     /**
+     * Check if there's a pending payment error alert
+     * This typically occurs for VA (Virtual Account) payment methods like BNI, BRI, Mandiri
+     * when trying to create a new payment while there's already a pending one
+     *
+     * @return true if pending payment alert is visible, false otherwise
+     */
+    public boolean hasPendingPaymentError() {
+        return playwright.waitTillLocatorIsVisible(pendingPaymentAlert, 3000.0);
+    }
+
+    /**
      * Get company code text to use on midtrans
      *
      * @return String data type
@@ -432,7 +445,7 @@ public class InvoicePO {
      * @return String data type
      */
     public String getKodePembayaranNumberText() {
-        return kodePembayaranPermata.textContent().trim();
+        return playwright.getText(kodePembayaranPermata, 15000.0);
     }
 
     /**
@@ -697,43 +710,55 @@ public class InvoicePO {
     }
 
     /**
-     * Select payment method and direct process using dana
+     * Select DANA payment method from invoice page
+     * Handles complete flow: payment selection, "Bayar Sekarang", and "Bayar langsung via DANA"
+     * Waits for new Xendit tab to open and returns XenditPO
      *
-     * @return PaymentPO
+     * @return XenditPO instance for Xendit payment page
      */
-    public PaymentPO paymentUsingDANA() {
+    public pageobject.xendit.XenditPO selectPaymentDANA() {
         clickOnPilihPembayaran();
         playwright.waitFor(dana);
-        dana.click();
+        playwright.clickOn(dana);
         clickOnBayarSekarang();
-        page = page.waitForPopup(() -> {
-            bayarDanaButton.click();
-        });
 
-        var lastTab = ActiveContext.getActiveBrowserContext().pages().size() -1;
+        // Click "Bayar langsung via DANA" button on invoice page
+        playwright.waitTillLocatorIsVisible(bayarDanaButton, 10000.0);
+        playwright.clickOn(bayarDanaButton);
+        playwright.hardWait(5000);
+
+        // Switch to Xendit payment tab (last opened tab)
+        int newPageCount = ActiveContext.getActiveBrowserContext().pages().size();
+        var lastTab = newPageCount - 1;
         ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(lastTab));
-        ActiveContext.getActivePage().getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Proceed to Pay")).click();
-        return new PaymentPO(page);
+
+        return new pageobject.xendit.XenditPO(ActiveContext.getActivePage());
     }
 
     /**
-     * Select payment method and direct process using Link aja
+     * Select LinkAja payment method from invoice page
+     * Handles complete flow: payment selection, "Bayar Sekarang", and "Bayar langsung via LinkAja"
+     * Waits for new Xendit tab to open and returns XenditPO
      *
-     * @return PaymentPO
+     * @return XenditPO instance for Xendit payment page
      */
-    public PaymentPO paymentUsingLinkAja() {
+    public pageobject.xendit.XenditPO selectPaymentLinkAja() {
         clickOnPilihPembayaran();
         playwright.waitFor(linkAja);
-        linkAja.click();
+        playwright.clickOn(linkAja);
         clickOnBayarSekarang();
-        page = page.waitForPopup(() -> {
-            bayarLinkAjaButton.click();
-        });
 
-        var lastTab = ActiveContext.getActiveBrowserContext().pages().size() -1;
+        // Click "Bayar langsung via LinkAja" button on invoice page
+        playwright.waitTillLocatorIsVisible(bayarLinkAjaButton, 10000.0);
+        playwright.clickOn(bayarLinkAjaButton);
+        playwright.hardWait(5000);
+
+        // Switch to Xendit payment tab (last opened tab)
+        int newPageCount = ActiveContext.getActiveBrowserContext().pages().size();
+        var lastTab = newPageCount - 1;
         ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(lastTab));
-        ActiveContext.getActivePage().getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Proceed to Pay")).click();
-        return new PaymentPO(page);
+
+        return new pageobject.xendit.XenditPO(ActiveContext.getActivePage());
     }
 
     /**
@@ -932,6 +957,4 @@ public class InvoicePO {
         playwright.waitTillLocatorIsVisible(singgahsiniPlusLevelSection);
         return playwright.getText(singgahsiniPlusLevelSection);
     }
-
-
 }

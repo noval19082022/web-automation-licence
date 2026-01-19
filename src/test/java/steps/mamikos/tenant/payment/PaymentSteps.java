@@ -51,25 +51,28 @@ public class PaymentSteps {
     public void tenantSelectPaymentMethodWithDANA() {
         invoicePO = riwayatBookingPO.clickOnBayarSekarangButton();
         ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
-        paymentPO = invoicePO.paymentUsingDANA();
+        var xenditPO = invoicePO.selectPaymentDANA();
+        paymentPO = xenditPO.completeDanaPayment();
     }
 
     @And("tenant/owner/user select payment from invoice detail with DANA")
     public void tenantSelectPaymentMamiadsWithDANA() {
-        paymentPO = invoicePO.paymentUsingDANA();
+        var xenditPO = invoicePO.selectPaymentDANA();
+        paymentPO = xenditPO.completeDanaPayment();
     }
 
     @And("tenant select payment method using LinkAja")
     public void tenantSelectPaymentMethodUsingLinkAja() {
         invoicePO = riwayatBookingPO.clickOnBayarSekarangButton();
         ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
-        paymentPO = invoicePO.paymentUsingLinkAja();
+        var xenditPO = invoicePO.selectPaymentLinkAja();
+        paymentPO = xenditPO.completeLinkAjaPayment();
     }
 
     @And("tenant/owner/user select payment from invoice detail using LinkAja")
     public void tenantSelectPaymentMamiadsUsingLinkAja() {
-        paymentPO = invoicePO.paymentUsingLinkAja();
-        ActiveContext.setActivePage(ActiveContext.getActiveBrowserContext().pages().get(1));
+        var xenditPO = invoicePO.selectPaymentLinkAja();
+        paymentPO = xenditPO.completeLinkAjaPayment();
     }
 
     @And("tenant want to see invoice on riwayat booking after payment")
@@ -153,11 +156,12 @@ public class PaymentSteps {
 
     }
 
-    @And("tenant/owner/user select payment method from invoice detail using BNI")
+    @When("tenant/owner/user select payment method from invoice detail using BNI")
     public void tenantSelectPaymentUsingBNI() {
         invoicePO.clickOnPilihPembayaran();
         invoicePO.clickOnBNI();
         invoicePO.clickOnBayarSekarang();
+
         var kodePembayaran = invoicePO.getKodePembayaranNumberText();
         var amountPembayaranBNI = invoicePO.getAmountPembayaranBNINumberText();
         page = ActiveContext.getActiveBrowserContext().waitForPage(() -> {

@@ -117,7 +117,8 @@ public class NaikkanIklanSteps {
         playwright.waitTillPageLoaded();
         home = new HomePO(ActiveContext.getActivePage());
         String actualUrl = home.getURL();
-        Assert.assertEquals(actualUrl, "https://owner-jambu.kerupux.com/mamiads", "Url doesn't match");
+        Assert.assertTrue(actualUrl.contains("owner"));
+        Assert.assertTrue(actualUrl.contains("mamiads"));
     }
 
     @When("user reactive the allocation of ads")

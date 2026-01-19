@@ -71,7 +71,7 @@ public class MidtransPaymentPO {
         playwright.clickLocatorAndTypeKeyboard(vaCodePlaceHolder, kodePembayaran);
         playwright.selectDropdownByValue(targetBankSelection, Bank);
         playwright.clickOn(inquireButton);
-        playwright.waitFor(bayarButtonOnMidtrans);
+        playwright.waitTillLocatorIsVisible(bayarButtonOnMidtrans, 15000.0);
         playwright.clickOn(bayarButtonOnMidtrans);
         playwright.hardWait(2000);
     }
@@ -85,6 +85,7 @@ public class MidtransPaymentPO {
         playwright.navigateTo(Payment.BNI_SIMULATOR, 30000.0, LoadState.LOAD);
         playwright.clickLocatorAndTypeKeyboard(vaCodePlaceHolderButtonBNINew, kodePembayaran);
         playwright.clickOn(searchButtonPaymentBNI);
+        playwright.waitTillLocatorIsVisible(paymentAmountBNINewText, 30000.0);
     }
 
     /**
@@ -96,6 +97,7 @@ public class MidtransPaymentPO {
         playwright.clickLocatorAndTypeKeyboard(paymentAmountBNINewText, amountBNI);
         playwright.clickOn(flagButtonBNI);
         playwright.waitTillLocatorIsVisible(bniSuccessPayment, 60000.0);
+        playwright.hardWait(5000.0);
     }
     /**
      * Payment process midtrans for BRI

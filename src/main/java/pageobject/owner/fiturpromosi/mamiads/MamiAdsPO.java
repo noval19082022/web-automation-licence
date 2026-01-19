@@ -240,7 +240,7 @@ public class MamiAdsPO {
      * Click on saldo mamiads card
      */
     public void clickSaldoMamiadsCard() {
-        playwright.waitTillLocatorIsVisible(saldoMamiadsCard, 10000.0);
+        playwright.waitTillLocatorIsVisible(saldoMamiadsCard, 15000.0);
         playwright.clickOn(saldoMamiadsCard);
         playwright.waitTillPageLoaded();
     }

@@ -17,6 +17,7 @@ import pageobject.common.LoadingPO;
 import pageobject.common.LoginPO;
 import pageobject.harvest.harvestDashboard.AllLeadsPO;
 import pageobject.harvest.harvestDashboard.LoginHarvestDashboardPO;
+import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.OwnerLoginPO;
 import pageobject.pms.HomepagePO;
 import pageobject.pms.LoginPMSPO;
@@ -37,6 +38,7 @@ public class LoginSteps {
     LoginPMSPO loginPMS = new LoginPMSPO(page);
     HomepagePO homepage = new HomepagePO(page);
     OwnerLoginPO owner = new OwnerLoginPO(page);
+    OwnerDashboardPO ownerDashboard = new OwnerDashboardPO(page);
     LoginHarvestDashboardPO loginHarvestDashboard = new LoginHarvestDashboardPO(page);
     AllLeadsPO allLeads = new AllLeadsPO(page);
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
@@ -100,6 +102,7 @@ public class LoginSteps {
         Mamikos.setPhoneOwner(phone);
         loading.waitForLoadingIconDisappear();
         home.clickOnSayaSetujuButton();
+        ownerDashboard.waitForOwnerDashboardToLoad();
     }
 
     @When("user login as owner from mamiads landing page:")

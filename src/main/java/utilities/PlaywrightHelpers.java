@@ -377,6 +377,17 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * Get text content of a locator
+     *
+     * @param locator target locator
+     * @return String data type
+     */
+    public String getText(Locator locator, Double waitTime) {
+        waitTillLocatorIsVisible(locator, waitTime);
+        return locator.textContent().trim();
+    }
+
+    /**
      * Get text content of a locator and normalize all (enter) in it
      *
      * @param locator target locator

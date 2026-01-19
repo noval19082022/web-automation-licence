@@ -1,6 +1,15 @@
 @LIMO2 @flaky
 Feature: Payment mamiads staging
 
+  @TEST_MAMIADS-CARD
+  Scenario: [Owner][Mamiads] Check Functionality Mamiads Card
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag  | phone prod  | password  |
+      | 08123450977 | 08123450977 | qwerty123 |
+    And owner dismiss pop-up if appears
+    And user click on Saldo MamiAds at owner dashboard
+    Then verify redirect to mamiads dashboard
 
   @TEST_SS-3097
   Scenario: [Owner][Payment premium] Owner paid premium paket using Alfamart
@@ -8,7 +17,7 @@ Feature: Payment mamiads staging
     When user login as owner:
       | phone stag  | phone prod  | password  |
       | 08123450977 | 08123450977 | qwerty123 |
-    And owner dismiss pop-up if appears
+    And user navigates to mamiads dashboard
     And owner want to buy mamiads saldo with nominal "Rp30.000"
     And owner select payment using alfamart xendit as payment method from invoice detail
     Then owner verify invoice success paid mamiads
@@ -19,7 +28,7 @@ Feature: Payment mamiads staging
     When user login as owner:
       | phone stag  | phone prod  | password  |
       | 08123450977 | 08123450977 | qwerty123 |
-    And owner dismiss pop-up if appears
+    And user navigates to mamiads dashboard
     And owner want to buy mamiads saldo with nominal "Rp30.000"
     And owner select payment method from invoice detail using "PERMATA"
     And owner close page number 1
@@ -33,12 +42,9 @@ Feature: Payment mamiads staging
     When user login as owner:
       | phone stag  | phone prod  | password  |
       | 08123450977 | 08123450977 | qwerty123 |
-    And owner dismiss pop-up if appears
+    And user navigates to mamiads dashboard
     And owner want to buy mamiads saldo with nominal "Rp30.000"
     And owner select payment from invoice detail using LinkAja
-    And owner close page number 1
-    And owner set active page to 0
-    And owner refresh page 0
     Then owner verify invoice success paid mamiads
 
   @TEST_SS-3101
@@ -47,12 +53,9 @@ Feature: Payment mamiads staging
     When user login as owner:
       | phone stag  | phone prod  | password  |
       | 08123450977 | 08123450977 | qwerty123 |
-    And owner dismiss pop-up if appears
+    And user navigates to mamiads dashboard
     And owner want to buy mamiads saldo with nominal "Rp30.000"
     And owner select payment from invoice detail with DANA
-    And owner close page number 1
-    And owner set active page to 0
-    And owner refresh page 0
     Then owner verify invoice success paid mamiads
 
   @TEST_SS-3102
@@ -61,7 +64,7 @@ Feature: Payment mamiads staging
     When user login as owner:
       | phone stag  | phone prod  | password  |
       | 08123450977 | 08123450977 | qwerty123 |
-    And owner dismiss pop-up if appears
+    And user navigates to mamiads dashboard
     And owner want to buy mamiads saldo with nominal "Rp30.000"
     And owner select payment from invoice detail using Credit Card
     Then owner verify invoice success paid mamiads
@@ -72,11 +75,11 @@ Feature: Payment mamiads staging
     When user login as owner:
       | phone stag  | phone prod  | password  |
       | 08123450977 | 08123450977 | qwerty123 |
-    And owner dismiss pop-up if appears
+    And user navigates to mamiads dashboard
     And owner want to buy mamiads saldo with nominal "Rp30.000"
     And owner select payment method from invoice detail using BNI
     And owner close page number 1
-   # And owner set active page to 0
+    And owner set active page to 0
     And owner refresh page 0
     Then owner verify invoice success paid mamiads
 
@@ -86,7 +89,7 @@ Feature: Payment mamiads staging
     When user login as owner:
       | phone stag  | phone prod  | password  |
       | 08123450977 | 08123450977 | qwerty123 |
-    And owner dismiss pop-up if appears
+    And user navigates to mamiads dashboard
     And owner want to buy mamiads saldo with nominal "Rp30.000"
     And owner select payment method from invoice detail using BRI
     And owner close page number 1
@@ -100,7 +103,7 @@ Feature: Payment mamiads staging
     When user login as owner:
       | phone stag  | phone prod  | password  |
       | 08123450977 | 08123450977 | qwerty123 |
-    And owner dismiss pop-up if appears
+    And user navigates to mamiads dashboard
     And owner want to buy mamiads saldo with nominal "Rp30.000"
     And owner pay invoice from invoice detail using mandiri without close the page
     And owner close page number 1
