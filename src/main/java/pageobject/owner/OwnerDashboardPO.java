@@ -87,6 +87,8 @@ public class OwnerDashboardPO {
 
     private Locator fiturPromosiExpand;
     private Locator nantiSajaButton;
+    private Locator goldPlusFeaturePopupText;
+    private Locator goldPlusWelcomePopupText;
     private Locator widgetDaftarGoldplus;
     private Locator leadsMenu;
     private Locator mamiprimeWidget;
@@ -173,6 +175,8 @@ public class OwnerDashboardPO {
         dariMamikosSection = page.getByText("Dari Mamikos", new Page.GetByTextOptions().setExact(true));
         dariMamikosBanner = page.locator(".banner-card__image-wrapper > .bg-c-image__img").first();
         nantiSajaButton = page.locator("//button[normalize-space()='Nanti Saja']");
+        goldPlusFeaturePopupText = page.getByText("Sudah cek fitur-fitur GoldPlus ini?").first();
+        goldPlusWelcomePopupText = page.getByText("Selamat bergabung di GoldPlus 2!").first();
         widgetDaftarGoldplus = page.getByTestId("registerGP_btn");
         daftarGpButton = page.getByTestId("registerGP_btn");
         leadsMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Leads"));
@@ -361,13 +365,16 @@ public class OwnerDashboardPO {
      * - "Selamat bergabung di GoldPlus 2!"
      */
     public void dismissPopUp() {
-        if (playwright.isTextDisplayed("Sudah cek fitur-fitur GoldPlus ini?", 3000.0)) {
-            if (playwright.waitTillLocatorIsVisible(nantiSajaButton, 3000.0)) {
+        playwright.hardWait(3000);
+
+        if (goldPlusFeaturePopupText.count() > 0) {
+            if (nantiSajaButton.count() > 0) {
                 playwright.clickOn(nantiSajaButton);
             }
         }
-        if (playwright.isTextDisplayed("Selamat bergabung di GoldPlus 2!", 3000.0)) {
-            if (playwright.waitTillLocatorIsVisible(nantiSajaButton, 3000.0)) {
+
+        if (goldPlusWelcomePopupText.count() > 0) {
+            if (nantiSajaButton.count() > 0) {
                 playwright.clickOn(nantiSajaButton);
             }
         }

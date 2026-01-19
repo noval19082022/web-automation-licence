@@ -204,7 +204,7 @@ public class PaymentSteps {
         var kodePerusahaan = invoice.getCompanyCodeText();
         var nomorVirtualAccount = invoice.getVirtualAccountNumberText();
         playwright = new PlaywrightHelpers(ActiveContext.getActivePage());
-        playwright.navigateTo(Payment.MANDIRI_MIDTRANS, 30000.0, LoadState.LOAD);
+        playwright.navigateTo(Payment.MANDIRI_MIDTRANS, 30000.0);
         midtrans = new MidtransPaymentPO(ActiveContext.getActivePage());
         midtrans.inputBillerCode(kodePerusahaan);
         midtrans.inputPaymentCode(nomorVirtualAccount);
