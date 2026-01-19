@@ -101,6 +101,9 @@ public class OwnerDashboardPO {
     private Locator widgetInfoUntukAndaParagraph;
     private Locator informationCard;
     private Locator generalCloseButton;
+    private Locator welcomeTitle;
+    private Locator welcomeSubtitle;
+    private Locator pasangIklanPertamaButton;
     private Locator pilihPaketGoldplus;
     private Locator inginKosDikelolaLink;
     private Locator gpPeriodFavoriteOption;
@@ -191,6 +194,9 @@ public class OwnerDashboardPO {
         widgetInfoUntukAndaParagraph = page.locator(".information-card .information-card__list-wrapper p");
         informationCard = page.locator(".information-card");
         generalCloseButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
+        welcomeTitle = page.getByText("👋🏼  Selamat datang, Owner tanpa kost");
+        welcomeSubtitle = page.getByText("Pasang iklan pertama Anda agar bisa segera ditemukan calon penyewa!");
+        pasangIklanPertamaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pasang Iklan Pertama"));
         pilihPaketGoldplus = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Paket GoldPlus"));
         entryPointCardGP = page.locator(".membership-card__section").first();
         gpspPromoCountDown = page.getByTestId("countdown-container");
@@ -817,7 +823,7 @@ public class OwnerDashboardPO {
      * click on mamifoto button on owner dashboard
      */
     public void clickOnMamiFoto() {
-        playwright.waitFor(mamifotoButton);
+        playwright.waitTillLocatorIsVisible(mamifotoButton, 30000.0);
         playwright.clickOn(mamifotoButton);
     }
 
@@ -1055,6 +1061,46 @@ public class OwnerDashboardPO {
         playwright.waitTillLocatorIsVisible(informationCard, 10000.0);
         playwright.hardWait(1000); // Wait for content to render
         return playwright.getAriaSnapshot(informationCard);
+    }
+
+    /**
+     * Check if welcome title is visible for owner without property
+     * @return boolean true if welcome title is visible
+     */
+    public boolean isWelcomeTitleVisible() {
+        return playwright.waitTillLocatorIsVisible(welcomeTitle, 10000.0);
+    }
+
+    /**
+     * Check if welcome subtitle is visible for owner without property
+     * @return boolean true if welcome subtitle is visible
+     */
+    public boolean isWelcomeSubtitleVisible() {
+        return playwright.waitTillLocatorIsVisible(welcomeSubtitle, 10000.0);
+    }
+
+    /**
+     * Check if Pasang Iklan Pertama button is visible for owner without property
+     * @return boolean true if button is visible
+     */
+    public boolean isPasangIklanPertamaButtonVisible() {
+        return playwright.waitTillLocatorIsVisible(pasangIklanPertamaButton, 10000.0);
+    }
+
+    /**
+     * Get welcome title text
+     * @return String welcome title text
+     */
+    public String getWelcomeTitleText() {
+        return playwright.getText(welcomeTitle);
+    }
+
+    /**
+     * Get welcome subtitle text
+     * @return String welcome subtitle text
+     */
+    public String getWelcomeSubtitleText() {
+        return playwright.getText(welcomeSubtitle);
     }
 
     /**
