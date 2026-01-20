@@ -1,4 +1,4 @@
-@regression @promoOwnerAdmin @LIMO1
+@promo @regression @promoOwnerAdmin @LIMO1
 
 Feature: Promo Owner Admin BangKerupux
 
