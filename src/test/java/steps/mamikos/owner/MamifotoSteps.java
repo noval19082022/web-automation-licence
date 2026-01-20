@@ -12,9 +12,6 @@ import pageobject.tenant.InvoicePO;
 import testdata.OwnerDashboardTestData;
 import utilities.PlaywrightHelpers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class MamifotoSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
