@@ -128,7 +128,7 @@ public class OwnerDashboardPO {
         terimaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terima"));
         tolakButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tolak"));
         pengajuanSewaSection = page.locator("div.booking-confirmation-section__content");
-        gpWidgetButton = page.locator(".membership-card__title");
+        gpWidgetButton = page.locator(".goldplus-card__main");
         seeAllNotification = page.locator("//div[@class='c-notification__see-more']");
         gpStatus = page.locator("//img[@alt='Goldplus Logo']/following::div[3]");
         ftueChatListOwner = page.locator("[data-testid='ftueTooltipComponent']");

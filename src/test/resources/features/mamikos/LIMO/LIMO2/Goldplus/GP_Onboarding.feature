@@ -1,4 +1,4 @@
-@LIMO2 @regression @gp-onboarding @owner @illbealive @DONEMIGRATINGTONEWBOARD
+@LIMO2 @regression @gp-onboarding @owner @DONEMIGRATINGTONEWBOARD @checkrevamplagiselasa
 Feature: Owner Dashboard GP-Onboarding
 
   @continue @TEST_LIMO-3405
@@ -9,25 +9,20 @@ Feature: Owner Dashboard GP-Onboarding
       | 087133998156 | 0          | qwerty123 |
     And owner go to panduan gold plus page
     Then owner will see that detail text on goldplus guides page:
-      | TextOnPage                                                                                                     |
-      | Naikkan Posisi Iklan Properti dengan MamiAds                                                                   |
-      | Dengan Saldo MamiAds, iklan Anda bisa mendapat lebih banyak pengunjung.                                        |
-      | Dapatkan keuntungan MamiAds sebagai berikut:                                                                   |
-      | Properti Tampil Lebih di Atas                                                                                  |
-      | Cukup beli saldo MamiAds dan pilih properti yang ingin diiklankan di posisi lebih atas pada hasil pencarian.   |
-      | Properti Tampil di Banyak Tempat                                                                               |
-      | Terima poin cukup dengan beraktivitas di Mamikos. Bagi pengguna GoldPlus, poin yang didapat akan lebih banyak. |
-      | Tentukan Anggaran Harian                                                                                       |
-      | Anda dapat membatasi pemakaian saldo MamiAds per harinya sesuai kebutuhan Anda.                                |
-      | Pantau Performa Iklan                                                                                          |
-      | Lewat Statistik Iklan, Anda dapat melihat perkembangan iklan Properti Anda.                                    |
+      | Title                     | Description                                                                                |
+      | Naikkan Iklan Anda        | Gunakan MamiAds untuk memperluas jangkauan iklan.                                         |
+      | Memantau Performa Kos     | Lihat performa kos Anda setelah menggunakan GoldPlus.                                     |
+      | Cek Properti Sekitar      | Anda dapat memantau kondisi bisnis kos sekitar.                                            |
+      | Menggunakan MamiPoin      | Lebih banyak point yang Anda dapatkan bersama GoldPlus. Tukarkan dengan hadiah menarik.   |
+      | Kelola Tagihan            | Anda bisa melihat catatan tagihan penyewa dan mengirim pengingat pembayaran.               |
 
   @continue @TEST_LIMO-3406
-  Scenario: [Web Owner][GP-Onboarding] Swiper Left/Previous Button Should Be Disabled
+  Scenario: [Web Owner][GP-Onboarding] Naikkan Iklan Anda - Swiper Left/Previous Button Should Be Disabled
+    When owner click on "Naikkan Iklan Anda" guide card
     Then owner can see swiper left or previous button is disabled
 
   @continue @TEST_LIMO-3407
-  Scenario Outline: [Web Owner][GP-Onboarding] Check Panduan Gold Plus Swiper Functionality Left To Right
+  Scenario Outline: [Web Owner][GP-Onboarding] Naikkan Iklan Anda - Check MamiAds Guide Swiper Functionality Left To Right
     Then owner can see swiper number <number> is selected
     And owner can see selected swiper with title <number>
     And owner can see swiper text body is "<text_body>"
@@ -43,11 +38,11 @@ Feature: Owner Dashboard GP-Onboarding
       | 7      | Pantau Performa di Statistik Iklan |
 
   @continue @TEST_LIMO-3408
-  Scenario: [Web Owner][GP-Onboarding] Swiper Right/Next Button Should Be Disabled
+  Scenario: [Web Owner][GP-Onboarding] Naikkan Iklan Anda - Swiper Right/Next Button Should Be Disabled
     Then owner can see swiper right or next button is disabled
 
   @continue @TEST_LIMO-3409
-  Scenario Outline: [Web Owner][GP-Onboarding] Check Panduan Gold Plus Swipper Functionality Right To Left
+  Scenario Outline: [Web Owner][GP-Onboarding] Naikkan Iklan Anda - Check MamiAds Guide Swiper Functionality Right To Left
     Then owner can see swiper number <number> is selected
     And owner can see selected swiper with title <number>
     And owner can see swiper text body is "<text_body>"
@@ -63,7 +58,7 @@ Feature: Owner Dashboard GP-Onboarding
       | 1      | Kunjungi Menu MamiAds              |
 
   @continue @TEST_LIMO-3410
-  Scenario: [Web Owner][GP-Onboarding] Owner click on "Coba Sekarang"
+  Scenario: [Web Owner][GP-Onboarding] Naikkan Iklan Anda - Owner click on "Coba Sekarang"
     When owner clicks on coba sekarang button
     Then owner will see that detail text on popup mamiads:
       | TextPopUp                                                                                                    |
@@ -78,11 +73,11 @@ Feature: Owner Dashboard GP-Onboarding
       | Cara Menggunakan MamiAds                                                                                     |
 
   @continue @TEST_LIMO-3411
-  Scenario: Swiper Left/Previous Button On Gold Plus Onboarding Pop-Up Should Be Disabled
+  Scenario: [Web Owner][GP-Onboarding] Naikkan Iklan Anda - Swiper Left/Previous Button On MamiAds Onboarding Pop-Up Should Be Disabled
     Then owner can see swiper left or previous button on gold plus onboarding pop-up is disabled
 
   @continue @TEST_LIMO-3412
-  Scenario Outline: [Web Owner][GP-Onboarding] Owner Can Use MamiAds Onboarding Pop-Up Swiper From Right To Left
+  Scenario Outline: [Web Owner][GP-Onboarding] Naikkan Iklan Anda - Owner Can Use MamiAds Onboarding Pop-Up Swiper From Right To Left
     Then owner can see gp onboarding swiper number <swiper number> is selected
     And owner can see gp onboarding pop-up text head "<text head>" is selected
     And owner can see gp onboarding pop-up text body "<text body>" is selected
@@ -99,11 +94,11 @@ Feature: Owner Dashboard GP-Onboarding
       | 7             | Pantau Performa di Statistik Iklan | Lihat perkembangan iklan Anda di sini.                         | illustration mamiads statistic       |
 
   @continue @TEST_LIMO-3413
-  Scenario: Swiper Right/Next Button On Gold Plus Onboarding Pop-Up Should Be Disabled
+  Scenario: [Web Owner][GP-Onboarding] Naikkan Iklan Anda - Swiper Right/Next Button On MamiAds Onboarding Pop-Up Should Be Disabled
     Then owner can see swiper right or next button on gold plus onboarding pop-up is disabled
 
   @continue @TEST_LIMO-3414
-  Scenario Outline: [Web Owner][GP-Onboarding] Owner Can Use MamiAds Onboarding Pop-Up Swiper Left To Right
+  Scenario Outline: [Web Owner][GP-Onboarding] Naikkan Iklan Anda - Owner Can Use MamiAds Onboarding Pop-Up Swiper Left To Right
     Then owner can see gp onboarding swiper number <swiper number> is selected
     And owner can see gp onboarding pop-up text head "<text head>" is selected
     And owner can see gp onboarding pop-up text body "<text body>" is selected
@@ -136,11 +131,11 @@ Feature: Owner Dashboard GP-Onboarding
       | Cara menggunakan Statistik GoldPlus |
 
   @continue @TEST_LIMO-3416
-  Scenario: [Web Owner][GP-Onboarding] Pantau Performa Bisnis Kos dengan Statistik GoldPlus Onboarding Swiper Left/Previous Button Should Be Disabled
+  Scenario: [Web Owner][GP-Onboarding] Memantau Performa Kos - Statistik GoldPlus Onboarding Swiper Left/Previous Button Should Be Disabled
     Then owner can see swiper left or previous button is disabled
 
   @continue @TEST_LIMO-3417
-  Scenario Outline: [Web Owner][GP-Onboarding] Owner Can Use Pantau Performa Bisnis Kos dengan Statistik GoldPlus Onboarding Pop-Up Swiper Left To Right
+  Scenario Outline: [Web Owner][GP-Onboarding] Memantau Performa Kos - Owner Can Use Statistik GoldPlus Onboarding Pop-Up Swiper Left To Right
     Then owner can see gp onboarding number <number> is selected
     And owner can see gp onboarding text title is "<onboarding text title>"
     And owner can see gp onboarding text body is "<onboarding text body>"
@@ -157,11 +152,11 @@ Feature: Owner Dashboard GP-Onboarding
       | 4      | Selesai! Cek Statistik Kos Anda | Di halaman ini, Anda bisa melihat performa kos GoldPlus Anda. | illustration check statistic |
 
   @continue @TEST_LIMO-3418
-  Scenario: [Web Owner][GP-Onboarding] Pantau Performa Bisnis Kos dengan Statistik GoldPlus Onboarding Swiper Right/Next Button Should Be Disabled
+  Scenario: [Web Owner][GP-Onboarding] Memantau Performa Kos - Statistik GoldPlus Onboarding Swiper Right/Next Button Should Be Disabled
     Then owner can see swiper right or next button is disabled
 
   @continue @TEST_LIMO-3419
-  Scenario Outline: [Web Owner][GP-Onboarding] Owner Can Use Pantau Performa Bisnis Kos dengan Statistik GoldPlus Onboarding Pop-Up Swiper Right To Left
+  Scenario Outline: [Web Owner][GP-Onboarding] Memantau Performa Kos - Owner Can Use Statistik GoldPlus Onboarding Pop-Up Swiper Right To Left
     Then owner can see gp onboarding number <number> is selected
     And owner can see gp onboarding text title is "<onboarding text title>"
     And owner can see gp onboarding text body is "<onboarding text body>"
@@ -178,11 +173,11 @@ Feature: Owner Dashboard GP-Onboarding
       | 1      | Klik menu “Statistik”           | Lihat menu di layar bawah, dan klik “Statistik”.              | illustration click statistic |
 
   @continue @TEST_LIMO-3420
-  Scenario: [Web Owner][GP-Onboarding] Pantau Performa Bisnis Kos dengan Statistik GoldPlus Page Coba Sekarang Button Functionality
+  Scenario: [Web Owner][GP-Onboarding] Memantau Performa Kos - Coba Sekarang Button Functionality
     When owner clicks on coba sekarang button
 
   @continue @TEST_LIMO-3421
-  Scenario Outline: [Web Owner][GP-Onboarding] Pantau Performa Bisnis Kos dengan Statistik GoldPlus Page Available Package
+  Scenario Outline: [Web Owner][GP-Onboarding] Memantau Performa Kos - Available Package In Statistik GoldPlus
     When owner can see gp statistic header text as "Statistik GoldPlus"
     Then owner can see gp statistic filter text number <number> is "<package>"
     Examples:
@@ -190,6 +185,6 @@ Feature: Owner Dashboard GP-Onboarding
       | 1      | Semua   |
 
   @TEST_LIMO-3422
-  Scenario: [Web Owner][GP-Onboarding] Pantau Performa Bisnis Kos dengan Statistik GoldPlus Page "Semua" As Selected Package List
+  Scenario: [Web Owner][GP-Onboarding] Memantau Performa Kos - Verify "Semua" As Selected Package List
     Then owner can see gp statistic list active package and it contents elements
     And owner should successfully log out

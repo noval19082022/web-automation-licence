@@ -281,7 +281,11 @@ public class GoldplusSteps {
         loading.waitForLoadingIconDisappear();
         owner.clickOnGpWidgetButton();
         goldplus.clickOnPelajariCaranyaButton();
-        panduanGP.clickOnNaikkanIklanAndaButton();
+    }
+
+    @When("owner click on {string} guide card")
+    public void ownerClickOnGuideCard(String guideTitle) {
+        panduanGP.clickOnGuideCard(guideTitle);
     }
 
     @When("owner click on next button to go to slide number {int} with total number slides are {int}")
@@ -431,7 +435,7 @@ public class GoldplusSteps {
     public void ownerGoToPanduanGoldPlusMemantauPerformaKosPage() {
         owner.clickOnGpWidgetButton();
         goldplus.clickOnPelajariCaranyaButton();
-        panduanGP.clickOnMemantauPerformaKosButton();
+        panduanGP.clickOnGuideCard("Memantau Performa Kos");
     }
 
     @When("owner close pop up detail manfaat")
@@ -664,8 +668,29 @@ public class GoldplusSteps {
     @Then("owner will see that detail text on goldplus guides page:")
     public void ownerWillSeeThatDetailTextOnGoldplusGuidesPage(DataTable dataTable) {
         List<Map<String, String>> table = dataTable.asMaps();
-        for (Map<String, String> content : table) {
-            Assert.assertTrue(goldplus.getTextOnPageVisible(content.get("TextOnPage")).contains(content.get("TextOnPage")), "Text doesn't match");
+
+        // Check if this is the guides list page (Title | Description format) or detail page (TextOnPage format)
+        Map<String, String> firstRow = table.get(0);
+
+        if (firstRow.containsKey("Title") && firstRow.containsKey("Description")) {
+            // This is the guides list page - validate guide cards
+            for (Map<String, String> content : table) {
+                String expectedTitle = content.get("Title");
+                String expectedDescription = content.get("Description");
+
+                String actualTitle = panduanGP.getGuideCardTitle(expectedTitle);
+                String actualDescription = panduanGP.getGuideCardDescription(expectedTitle);
+
+                Assert.assertEquals(actualTitle, expectedTitle, "Title doesn't match for: " + expectedTitle);
+                Assert.assertEquals(actualDescription, expectedDescription, "Description doesn't match for: " + expectedTitle);
+            }
+        } else if (firstRow.containsKey("TextOnPage")) {
+            // This is a detail page - validate static content using generic text validation
+            for (Map<String, String> content : table) {
+                String expectedText = content.get("TextOnPage");
+                Assert.assertTrue(playwright.isTextDisplayed(expectedText),
+                    "Text not found on page: " + expectedText);
+            }
         }
     }
 
