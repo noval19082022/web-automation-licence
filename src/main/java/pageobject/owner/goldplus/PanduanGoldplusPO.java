@@ -20,6 +20,8 @@ public class PanduanGoldplusPO {
     Locator onboardingBodyText;
     Locator selectedOnboardingNumber;
     Locator selectedOnboardingImage;
+    Locator guideCardTitles;
+    Locator guideCardDescriptions;
 
     public PanduanGoldplusPO(Page page) {
         this.page = page;
@@ -35,6 +37,8 @@ public class PanduanGoldplusPO {
         onboardingBodyText = page.locator(".swiper-slide-active .gp-swiper__slide-text p");
         selectedOnboardingNumber = page.locator(".swiper-slide-active .gp-swiper__slide-counter p");
         selectedOnboardingImage = page.locator(".swiper-slide-active img");
+        guideCardTitles = page.locator("h4");
+        guideCardDescriptions = page.locator("h4 + p");
     }
 
     /**
@@ -42,6 +46,19 @@ public class PanduanGoldplusPO {
      */
     public void clickOnNaikkanIklanAndaButton(){
         playwright.clickOn(naikkanIklanAndaButton);
+    }
+
+    /**
+     * Click on a guide card by title to navigate to its detail page
+     * Uses dynamic locator based on guideTitle parameter (acceptable exception to class variable rule)
+     * @param guideTitle The title of the guide card (e.g., "Naikkan Iklan Anda", "Memantau Performa Kos")
+     */
+    public void clickOnGuideCard(String guideTitle) {
+        // Dynamic locator - acceptable because it depends on method parameter
+        Locator guideCard = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(guideTitle));
+        playwright.waitFor(guideCard);
+        playwright.clickOn(guideCard);
+        playwright.waitTillPageLoaded();
     }
 
     public String getGPswipperAttribute(int index, String attribute){
@@ -146,5 +163,33 @@ public class PanduanGoldplusPO {
      */
     public String getSelectedOnboardingImageAltText() {
         return playwright.getAttributeValue(selectedOnboardingImage, "alt");
+    }
+
+    /**
+     * Get guide card title text by matching title content
+     * This method finds the specific guide card title on the GoldPlus Panduan page
+     * Uses dynamic locator based on title parameter (acceptable exception to class variable rule)
+     * @param title The expected title text (e.g., "Naikkan Iklan Anda")
+     * @return String the actual title text from the page
+     */
+    public String getGuideCardTitle(String title) {
+        // Dynamic locator - acceptable because it depends on method parameter
+        Locator titleLocator = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setLevel(4).setName(title));
+        playwright.waitFor(titleLocator);
+        return playwright.getText(titleLocator);
+    }
+
+    /**
+     * Get guide card description text by matching the title
+     * This method finds the description paragraph that follows the specified title
+     * Uses dynamic locator based on title parameter (acceptable exception to class variable rule)
+     * @param title The title of the guide card to find the description for
+     * @return String the description text from the page
+     */
+    public String getGuideCardDescription(String title) {
+        // Dynamic locator - acceptable because it depends on method parameter
+        Locator descriptionLocator = page.locator("h4:has-text('" + title + "') + p");
+        playwright.waitFor(descriptionLocator);
+        return playwright.getText(descriptionLocator);
     }
 }
