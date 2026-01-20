@@ -18,7 +18,7 @@ public class OwnerDashboardPO {
     private Locator ownerProfile;
     private Locator manajemenKost;
     private Locator pengajuanSewaBtn;
-    private Locator kelolaTagihan;
+    private Locator tagihanPenyewa;
     private Locator broadcastChatBtn;
     Locator warningBroadcastText;
     Locator closePopUpIcon;
@@ -117,7 +117,7 @@ public class OwnerDashboardPO {
         manajemenKost = page.locator(".bg-l-sidebar__item p").filter(new Locator.FilterOptions().setHasText("Manajemen Kos"));
         pengajuanSewaBtn = playwright.getButtonBySetName("Pengajuan Sewa");
         ownerProfile = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("mamikos").setExact(true));
-        kelolaTagihan = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kelola Tagihan"));
+        tagihanPenyewa = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tagihan Penyewa"));
         broadcastChatBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Broadcast Chat"));
         warningBroadcastText = page.locator("//h3[@class='bg-c-modal__body-title']");
         closePopUpIcon = page.locator(".bg-c-modal__action-closable");
@@ -255,8 +255,8 @@ public class OwnerDashboardPO {
      * @return TenantBillManagementPO class
      */
     public TenantBillManagementPO clickOnKelolaKos() {
-        kelolaTagihan.waitFor();
-        playwright.clickOn(kelolaTagihan);
+        tagihanPenyewa.waitFor();
+        playwright.clickOn(tagihanPenyewa);
         return new TenantBillManagementPO(page);
     }
 
