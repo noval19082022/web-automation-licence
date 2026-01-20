@@ -1,4 +1,4 @@
-@regression @promoOwner @LIMO1 @listing-monetization @aturPromoOwner @DONEMIGRATINGTONEWBOARD
+@promo @regression @promoOwner @LIMO1 @listing-monetization @aturPromoOwner @DONEMIGRATINGTONEWBOARD
 Feature: Atur promo owner
 
   @TEST_LIMO-3646 @deletePromoFromAdmin @editPeriodeValidPromo
