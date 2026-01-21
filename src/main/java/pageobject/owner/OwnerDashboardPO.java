@@ -177,7 +177,7 @@ public class OwnerDashboardPO {
         totalNotBookingPopup = page.locator("div.suggestion-modal__title");
         closeIconOnNotBookingPopup = page.locator("//*[@class='mdi mdi-close mdi-24px']");
         daftarPenyewMenu = page.locator("a").filter(new Locator.FilterOptions().setHasText("account Penyewa Daftar kontrak penyewa kos chevron-right"));
-        ubahPeraturan = page.locator("a").filter(new Locator.FilterOptions().setHasText("booking-management Ubah Peraturan Masuk Kos Aturan untuk calon penyewa chevron-r"));
+        ubahPeraturan = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Peraturan Sewa"));
         dariMamikosSection = page.getByText("Dari Mamikos", new Page.GetByTextOptions().setExact(true));
         dariMamikosBanner = page.locator(".banner-card__image-wrapper > .bg-c-image__img").first();
         nantiSajaButton = page.locator("//button[normalize-space()='Nanti Saja']");
@@ -870,11 +870,9 @@ public class OwnerDashboardPO {
     }
 
     public void clickUbahPeraturanButton(){
+        clickOnManagementKost();
         playwright.waitFor(ubahPeraturan);
-        playwright.pageScrollInView(ubahPeraturan);
-        if (ubahPeraturan.isVisible()) {
-            playwright.clickOn(ubahPeraturan);
-        }
+        playwright.clickOn(ubahPeraturan);
     }
 
     public void scrollIntoDariMamikosSection() {
