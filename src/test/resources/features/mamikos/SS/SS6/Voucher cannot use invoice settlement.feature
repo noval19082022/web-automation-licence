@@ -33,7 +33,9 @@ Feature: Voucher cannot use invoice settlement
     When user login as owner:
       | phone stag   | phone prod   | password     |
       | 081362464341 | 081362464341 | 1d0lt3stb4ru |
-    And owner accept booking via Homepage
+    And owner navigate to booking page and accept booking from tenant:
+      | tenant stag                 | tenant prod |
+      | Budi Tromol Coop Automation | TENANT_NAME |
     And owner back to owner dashboard
 
   @tenantInputVoucher @continue
