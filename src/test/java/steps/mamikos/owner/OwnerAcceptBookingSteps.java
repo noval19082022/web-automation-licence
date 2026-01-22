@@ -105,7 +105,6 @@ public class OwnerAcceptBookingSteps {
 
     @And("owner accept booking via Homepage")
     public void ownerAcceptBookingViaHomepage() throws InterruptedException {
-        page.pause();
         ownerDashboard.clickOnPengajuanSewa();
         ownerDashboard.clickOnTerimaViaHomepage();
         pengajuanBooking.clickOnTerimaPopUp();
