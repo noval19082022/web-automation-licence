@@ -105,6 +105,7 @@ public class OwnerAcceptBookingSteps {
 
     @And("owner accept booking via Homepage")
     public void ownerAcceptBookingViaHomepage() throws InterruptedException {
+        ownerDashboard.clickOnPengajuanSewa();
         ownerDashboard.clickOnTerimaViaHomepage();
         pengajuanBooking.clickOnTerimaPopUp();
         billBookingManage.clickOnRoomNumberInput();
@@ -112,5 +113,24 @@ public class OwnerAcceptBookingSteps {
         billBookingManage.clickOnTerapkanButton();
         billBookingManage.clickOnLanjutkanButton();
         billBookingManage.clickOnSimpan();
+    }
+
+    @When("owner navigate to booking page and accept booking from tenant:")
+    public void ownerNavigateToBookingPageAndAcceptBookingFromTenant(DataTable table) throws InterruptedException {
+        tenantNames = table.asMaps(String.class, String.class);
+        var tenantName = tenantNames.get(0).get("tenant " + Mamikos.ENV);
+
+        // Navigate directly to booking request page
+        playwright.navigateTo(Mamikos.OWNER_URL + "/booking/request");
+        loading.waitForLoadingIconDisappear();
+
+        // Accept booking from specific tenant
+        billBookingManage = pengajuanBooking.ownerAcceptBooking(tenantName);
+        billBookingManage.clickOnRoomNumberInput();
+        billBookingManage.clickOnPilihDitempat();
+        billBookingManage.clickOnTerapkanButton();
+        billBookingManage.clickOnLanjutkanButton();
+        billBookingManage.clickOnSimpan();
+        billBookingManage.clickOkButton();
     }
 }
