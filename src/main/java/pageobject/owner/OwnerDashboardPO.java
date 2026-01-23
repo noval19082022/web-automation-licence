@@ -26,8 +26,6 @@ public class OwnerDashboardPO {
     Locator notificationButton;
     Locator firstNotificationText;
     Locator mamipoinButton;
-    Locator terimaButton;
-    Locator tolakButton;
     Locator pengajuanSewaSection;
     Locator gpWidgetButton;
     Locator seeAllNotification;
@@ -125,8 +123,6 @@ public class OwnerDashboardPO {
         notificationButton = page.locator(".notification-menu > .bg-c-icon");
         firstNotificationText = page.locator(".c-notification__item").first();
         mamipoinButton = page.getByText("MamiPoin");
-        terimaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terima"));
-        tolakButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tolak"));
         pengajuanSewaSection = page.locator("div.booking-confirmation-section__content");
         gpWidgetButton = page.locator(".goldplus-card__main");
         seeAllNotification = page.locator("//div[@class='c-notification__see-more']");
@@ -306,21 +302,6 @@ public class OwnerDashboardPO {
     public void clickMamipoinButton() {
         playwright.waitTillPageLoaded();
         playwright.clickOn(mamipoinButton);
-    }
-
-    /**
-     * Click on Terima Button on owner dashboard
-     */
-    public void clickOnTerimaViaHomepage() {
-        playwright.clickOn(terimaButton);
-    }
-
-    /**
-     * Click on Tolak Button on owner dashboard
-     */
-    public void clickOnTolakViaHomepage() {
-        tolakButton.waitFor();
-        playwright.clickOn(tolakButton);
     }
 
     /**
