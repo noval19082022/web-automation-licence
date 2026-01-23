@@ -20,7 +20,7 @@ Feature: Sameday Survey Tenant
     And user verify survey date type "Tanggal Lain" clickable is "Yes"
     Examples:
       | kost_name                     | owner_type | sameday_status | hari_ini_status    | hari_ini_clickable |
-      | Kost Apik Desta Tipe B Tamvan | P1         | active         | Visible            | Yes                |
+      | Kost Apik Desta Tipe A Tamvan | P1         | active         | Visible            | Yes                |
       | Kost P2 With Sameday Active   | P2         | active         | Visible            | Yes                |
       | Kost P2 With Sameday Inactive | P2         | inactive       | Visible (disabled) | No                 |
 
@@ -32,7 +32,7 @@ Feature: Sameday Survey Tenant
       | 081197878846 | 081197878846 | Perempuan |
     And tenant search kost then go to kost details:
       | kost name stag                | kost name prod                |
-      | Kost Apik Desta Tipe B Tamvan | Kost Apik Desta Tipe B Tamvan |
+      | Kost Apik Desta Tipe A Tamvan | Kost Apik Desta Tipe A Tamvan |
     And user dismiss FTUE booking benefit
     And user dismiss promo ngebut pop up
     And user click chat in kos detail
@@ -50,7 +50,7 @@ Feature: Sameday Survey Tenant
       | 081197878846 | 081197878846 | Perempuan |
     And tenant search kost then go to kost details:
       | kost name stag                | kost name prod                |
-      | Kost Apik Desta Tipe B Tamvan | Kost Apik Desta Tipe B Tamvan |
+      | Kost Apik Desta Tipe A Tamvan | Kost Apik Desta Tipe A Tamvan |
     And user dismiss FTUE booking benefit
     And user dismiss promo ngebut pop up
     And user click chat in kos detail
@@ -110,7 +110,7 @@ Feature: Sameday Survey Tenant
       | 081197878846 | 081197878846 | Perempuan |
     And tenant search kost then go to kost details:
       | kost name stag                | kost name prod                |
-      | Kost Apik Desta Tipe B Tamvan | Kost Apik Desta Tipe B Tamvan |
+      | Kost Apik Desta Tipe A Tamvan | Kost Apik Desta Tipe A Tamvan |
     And user dismiss FTUE booking benefit
     And user dismiss promo ngebut pop up
     And user click chat in kos detail
@@ -151,7 +151,7 @@ Feature: Sameday Survey Tenant
       | 081197878846 | 081197878846 | Perempuan |
     And tenant search kost then go to kost details:
       | kost name stag                | kost name prod                |
-      | Kost Apik Desta Tipe B Tamvan | Kost Apik Desta Tipe B Tamvan |
+      | Kost Apik Desta Tipe A Tamvan | Kost Apik Desta Tipe A Tamvan |
     And user dismiss FTUE booking benefit
   And user dismiss promo ngebut pop up
     And user click chat in kos detail
