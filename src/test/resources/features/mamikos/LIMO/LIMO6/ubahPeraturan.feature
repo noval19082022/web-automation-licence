@@ -1,4 +1,4 @@
-@SS8 @ubahPeraturan @LIMO6
+@ubahPeraturan @LIMO6
 Feature: Owner - Ubah Peraturan
 
   @TEST_SS-3458 @automated @booking-stay-setting @continue
