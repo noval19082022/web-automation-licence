@@ -1,4 +1,4 @@
-@SS8 @LIMO6
+    ## this TC should be disable/take out due to revamp on owner dashboard
 Feature: Time manage owner
 
   @checkContentOnWaktuMengelolaKos @TEST_SS-3466

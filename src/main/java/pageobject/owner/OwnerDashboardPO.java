@@ -26,8 +26,6 @@ public class OwnerDashboardPO {
     Locator notificationButton;
     Locator firstNotificationText;
     Locator mamipoinButton;
-    Locator terimaButton;
-    Locator tolakButton;
     Locator pengajuanSewaSection;
     Locator gpWidgetButton;
     Locator seeAllNotification;
@@ -115,18 +113,16 @@ public class OwnerDashboardPO {
         this.playwright = new PlaywrightHelpers(page);
         this.locator = new LocatorHelpers(page);
         manajemenKost = page.locator(".bg-l-sidebar__item p").filter(new Locator.FilterOptions().setHasText("Manajemen Kos"));
-        pengajuanSewaBtn = playwright.getButtonBySetName("Pengajuan Sewa");
+        pengajuanSewaBtn = page.getByRole(AriaRole.PARAGRAPH).filter(new Locator.FilterOptions().setHasText("Pengajuan Sewa"));
         ownerProfile = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("mamikos").setExact(true));
         tagihanPenyewa = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tagihan Penyewa"));
         broadcastChatBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Broadcast Chat"));
         warningBroadcastText = page.locator("//h3[@class='bg-c-modal__body-title']");
         closePopUpIcon = page.locator(".bg-c-modal__action-closable");
-        penyewaMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Penyewa"));
+        penyewaMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kontrak Penyewa"));
         notificationButton = page.locator(".notification-menu > .bg-c-icon");
         firstNotificationText = page.locator(".c-notification__item").first();
         mamipoinButton = page.getByText("MamiPoin");
-        terimaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terima"));
-        tolakButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tolak"));
         pengajuanSewaSection = page.locator("div.booking-confirmation-section__content");
         gpWidgetButton = page.locator(".goldplus-card__main");
         seeAllNotification = page.locator("//div[@class='c-notification__see-more']");
@@ -306,21 +302,6 @@ public class OwnerDashboardPO {
     public void clickMamipoinButton() {
         playwright.waitTillPageLoaded();
         playwright.clickOn(mamipoinButton);
-    }
-
-    /**
-     * Click on Terima Button on owner dashboard
-     */
-    public void clickOnTerimaViaHomepage() {
-        playwright.clickOn(terimaButton);
-    }
-
-    /**
-     * Click on Tolak Button on owner dashboard
-     */
-    public void clickOnTolakViaHomepage() {
-        tolakButton.waitFor();
-        playwright.clickOn(tolakButton);
     }
 
     /**

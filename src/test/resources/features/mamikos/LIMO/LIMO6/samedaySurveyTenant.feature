@@ -19,10 +19,10 @@ Feature: Sameday Survey Tenant
     And user verify survey date type "Tanggal Lain" is visible
     And user verify survey date type "Tanggal Lain" clickable is "Yes"
     Examples:
-      | kost_name                     | owner_type | sameday_status | hari_ini_status    | hari_ini_clickable |
-      | Kost Apik Desta Tipe B Tamvan | P1         | active         | Visible            | Yes                |
-      | Kost P2 With Sameday Active   | P2         | active         | Visible            | Yes                |
-      | Kost P2 With Sameday Inactive | P2         | inactive       | Visible (disabled) | No                 |
+      | kost_name                            | owner_type | sameday_status | hari_ini_status    | hari_ini_clickable |
+      | Kost Apik Serayu Utara Tipe A Kretek | P1         | active         | Visible            | Yes                |
+      | Kost P2 With Sameday Active          | P2         | active         | Visible            | Yes                |
+      | Kost P2 With Sameday Inactive        | P2         | inactive       | Visible (disabled) | No                 |
 
   @TEST_LIMO-9393
   Scenario: [Survey][Tenant] Select "Survei Hari Ini" that enabled by owner
@@ -31,8 +31,8 @@ Feature: Sameday Survey Tenant
       | phone stag   | phone prod   | password  |
       | 081197878846 | 081197878846 | Perempuan |
     And tenant search kost then go to kost details:
-      | kost name stag                | kost name prod                |
-      | Kost Apik Desta Tipe B Tamvan | Kost Apik Desta Tipe B Tamvan |
+      | kost name stag                       | kost name prod                       |
+      | Kost Apik Serayu Utara Tipe A Kretek | Kost Apik Serayu Utara Tipe A Kretek |
     And user dismiss FTUE booking benefit
     And user dismiss promo ngebut pop up
     And user click chat in kos detail
@@ -49,8 +49,8 @@ Feature: Sameday Survey Tenant
       | phone stag   | phone prod   | password  |
       | 081197878846 | 081197878846 | Perempuan |
     And tenant search kost then go to kost details:
-      | kost name stag                | kost name prod                |
-      | Kost Apik Desta Tipe B Tamvan | Kost Apik Desta Tipe B Tamvan |
+      | kost name stag                       | kost name prod                       |
+      | Kost Apik Serayu Utara Tipe A Kretek | Kost Apik Serayu Utara Tipe A Kretek |
     And user dismiss FTUE booking benefit
     And user dismiss promo ngebut pop up
     And user click chat in kos detail
@@ -109,8 +109,8 @@ Feature: Sameday Survey Tenant
       | phone stag   | phone prod   | password  |
       | 081197878846 | 081197878846 | Perempuan |
     And tenant search kost then go to kost details:
-      | kost name stag                | kost name prod                |
-      | Kost Apik Desta Tipe B Tamvan | Kost Apik Desta Tipe B Tamvan |
+      | kost name stag                       | kost name prod                       |
+      | Kost Apik Serayu Utara Tipe A Kretek | Kost Apik Serayu Utara Tipe A Kretek |
     And user dismiss FTUE booking benefit
     And user dismiss promo ngebut pop up
     And user click chat in kos detail
@@ -143,17 +143,17 @@ Feature: Sameday Survey Tenant
     And user verify "Survei Hari Ini" option becomes unselectable survey
     And user verify system suggests "Tanggal Lain" option survey
 
-@TEST_LIMO-9413
+  @TEST_LIMO-9413
   Scenario: [Survey][Tenant] Time category interaction
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
       | 081197878846 | 081197878846 | Perempuan |
     And tenant search kost then go to kost details:
-      | kost name stag                | kost name prod                |
-      | Kost Apik Desta Tipe B Tamvan | Kost Apik Desta Tipe B Tamvan |
+      | kost name stag                       | kost name prod                       |
+      | Kost Apik Serayu Utara Tipe A Kretek | Kost Apik Serayu Utara Tipe A Kretek |
     And user dismiss FTUE booking benefit
-  And user dismiss promo ngebut pop up
+    And user dismiss promo ngebut pop up
     And user click chat in kos detail
     And user tap on survey kost btn on detail chatroom
     And user select survey date type "Tanggal Lain"
