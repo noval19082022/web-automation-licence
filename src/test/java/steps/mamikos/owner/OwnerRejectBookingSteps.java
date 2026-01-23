@@ -69,7 +69,8 @@ public class OwnerRejectBookingSteps {
 
     @When("owner reject booking from dashboard")
     public void user_click_on_reject_booking() {
-        ownerDashboard.clickOnTolakViaHomepage();
+        ownerDashboard.clickOnPengajuanSewa();
+        pengajuanBooking.ownerRejectBooking();
         pengajuanBooking.clickYaTolakOnPengajuanBooking();
     }
 
