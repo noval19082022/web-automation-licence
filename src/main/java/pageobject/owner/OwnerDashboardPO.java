@@ -107,6 +107,7 @@ public class OwnerDashboardPO {
     private Locator gpPeriodFavoriteOption;
     private Locator gpPeriodFirstOption;
     private Locator pilihPeriodeButton;
+    private Locator gpStatusText;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -126,7 +127,7 @@ public class OwnerDashboardPO {
         pengajuanSewaSection = page.locator("div.booking-confirmation-section__content");
         gpWidgetButton = page.locator(".goldplus-card__main");
         seeAllNotification = page.locator("//div[@class='c-notification__see-more']");
-        gpStatusImage = page.locator("img[src*='logo-goldplus']");
+        gpStatusImage = page.locator("//div[@class='goldplus-card__logo bg-c-image bg-c-image--no-ratio']//following-sibling::div");
         ftueChatListOwner = page.locator("[data-testid='ftueTooltipComponent']");
         icnCloseBcTooltip = page.locator("//button[contains(@class, 'bg-c-button')]/following::div[@id='tooltipContent']");
         gpLabelChatList = page.locator(".mc-goldplus-entrypoint-card");
@@ -200,6 +201,7 @@ public class OwnerDashboardPO {
         gpPeriodFavoriteOption = page.locator("//div[contains(@class, 'goldplus-periode-select__option') and contains(., '4 Bulan')]");
         gpPeriodFirstOption = page.locator("//div[contains(@class, 'goldplus-periode-select__option')]").first();
         pilihPeriodeButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Periode"));
+        gpStatusText = page.locator(".membership-card__section").first();
     }
 
     /**
@@ -330,21 +332,37 @@ public class OwnerDashboardPO {
 
     /**
      * Verify GP Status ( Menunggu pembayaran, Sedang Diproses, Goldplus 1, Goldplus 2)
-     * Extracts GP level from the goldplus logo image filename
+     * First tries to get text status, then falls back to extracting GP level from image
      *
-     * @return text gpStatus (e.g., "GoldPlus 2")
+     * @return text gpStatus (e.g., "Menunggu Pembayaran" or "GoldPlus 2")
      */
     public String getTextGPStatus() {
-        // Wait for goldplus image to be visible
-        playwright.waitFor(gpStatusImage);
+        playwright.hardWait(2000.0);
 
-        // Get the image src attribute
-        String imgSrc = playwright.getAttributeValue(gpStatusImage, "src");
+        // First, try to get text status from the membership card section
+        if (playwright.waitTillLocatorIsVisible(gpStatusText, 5000.0)) {
+            String statusText = playwright.getText(gpStatusText);
 
-        // Extract GP level from filename pattern: logo-goldplus-gradient-{number}.webp
-        if (imgSrc != null && imgSrc.contains("logo-goldplus-gradient-")) {
-            String level = imgSrc.replaceAll(".*logo-goldplus-gradient-(\\d+).*", "$1");
-            return "GoldPlus " + level;
+            // Check for text-based statuses
+            if (statusText != null && !statusText.isEmpty()) {
+                if (statusText.contains("Menunggu Pembayaran")) {
+                    return "Menunggu Pembayaran";
+                }
+                if (statusText.contains("Sedang Diproses")) {
+                    return "Sedang Diproses";
+                }
+            }
+        }
+
+        // Fallback: Try to get GP level from image src
+        if (playwright.waitTillLocatorIsVisible(gpStatusImage, 3000.0)) {
+            String imgSrc = playwright.getAttributeValue(gpStatusImage, "src");
+
+            // Extract GP level from filename pattern: logo-goldplus-gradient-{number}.webp
+            if (imgSrc != null && imgSrc.contains("logo-goldplus-gradient-")) {
+                String level = imgSrc.replaceAll(".*logo-goldplus-gradient-(\\d+).*", "$1");
+                return "GoldPlus " + level;
+            }
         }
 
         // Fallback to empty string if pattern not found
@@ -964,8 +982,10 @@ public class OwnerDashboardPO {
                 System.out.println("Clicked 'Pilih Periode' button in GoldPlus period selection popup");
             }
 
+            // Click the "Pilih Paket GoldPlus" button if it exists (after selecting period)
             if (playwright.waitTillLocatorIsVisible(pilihPaketGoldplus, 3000.0)) {
-                playwright.clickOn(pilihPeriodeButton);
+                playwright.clickOn(pilihPaketGoldplus);
+                System.out.println("Clicked 'Pilih Paket GoldPlus' button in GoldPlus period selection popup");
             }
         } else {
             System.out.println("No GoldPlus period selection popup detected. Current URL: " + page.url());
