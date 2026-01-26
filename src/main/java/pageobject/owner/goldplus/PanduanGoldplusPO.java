@@ -28,8 +28,8 @@ public class PanduanGoldplusPO {
         this.playwright = new PlaywrightHelpers(page);
         naikkanIklanAndaButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Naikkan Iklan Anda"));
         panduanGPswipper = page.locator(".gp-swiper .gp-swiper__step");
-        swipperNextButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("chevron-right"));
-        swipperPreviousButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("chevron-left"));
+        swipperNextButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Next slide"));
+        swipperPreviousButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Previous slide"));
         selectedSwiperText = page.locator(".gp-swiper .gp-swiper__step:not(.gp-swiper__step--dim) p");
         cobaSekarangButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Coba Sekarang"));
         memantauPerformaKos = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Memantau Performa Kos"));

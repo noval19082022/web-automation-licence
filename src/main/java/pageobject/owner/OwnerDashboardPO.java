@@ -29,7 +29,7 @@ public class OwnerDashboardPO {
     Locator pengajuanSewaSection;
     Locator gpWidgetButton;
     Locator seeAllNotification;
-    Locator gpStatus;
+    Locator gpStatusImage;
     Locator menuKelolaProperty;
     Locator ftueChatListOwner;
     Locator icnCloseBcTooltip;
@@ -126,7 +126,7 @@ public class OwnerDashboardPO {
         pengajuanSewaSection = page.locator("div.booking-confirmation-section__content");
         gpWidgetButton = page.locator(".goldplus-card__main");
         seeAllNotification = page.locator("//div[@class='c-notification__see-more']");
-        gpStatus = page.locator("//img[@alt='Goldplus Logo']/following::div[3]");
+        gpStatusImage = page.locator("img[src*='logo-goldplus']");
         ftueChatListOwner = page.locator("[data-testid='ftueTooltipComponent']");
         icnCloseBcTooltip = page.locator("//button[contains(@class, 'bg-c-button')]/following::div[@id='tooltipContent']");
         gpLabelChatList = page.locator(".mc-goldplus-entrypoint-card");
@@ -330,12 +330,25 @@ public class OwnerDashboardPO {
 
     /**
      * Verify GP Status ( Menunggu pembayaran, Sedang Diproses, Goldplus 1, Goldplus 2)
+     * Extracts GP level from the goldplus logo image filename
      *
-     * @return text gpStatus
+     * @return text gpStatus (e.g., "GoldPlus 2")
      */
     public String getTextGPStatus() {
-        playwright.waitFor(gpStatus);
-        return playwright.getText(gpStatus);
+        // Wait for goldplus image to be visible
+        playwright.waitFor(gpStatusImage);
+
+        // Get the image src attribute
+        String imgSrc = playwright.getAttributeValue(gpStatusImage, "src");
+
+        // Extract GP level from filename pattern: logo-goldplus-gradient-{number}.webp
+        if (imgSrc != null && imgSrc.contains("logo-goldplus-gradient-")) {
+            String level = imgSrc.replaceAll(".*logo-goldplus-gradient-(\\d+).*", "$1");
+            return "GoldPlus " + level;
+        }
+
+        // Fallback to empty string if pattern not found
+        return "";
     }
 
     /**
