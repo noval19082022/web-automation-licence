@@ -7,7 +7,7 @@ Feature: Owner - Review Section
     When user login as owner:
       | phone stag    | phone prod    | password  |
       | 0812345670001 | 0812345670001 | qwerty123 |
-    And user click on rating card details
+    And user redirected to URL "https://owner-jambu.kerupux.com/kos/reviews"
     Then owner will see that the text "Belum ada user yang review kost" is displayed
 
   @TEST_LIMO-1078 @yourkosrating-listingcardclicked @continue @WEB @AUTOMATED
