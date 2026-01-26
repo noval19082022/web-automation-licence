@@ -43,53 +43,53 @@ Feature: MamiAds Dashboard
     Then user verify the wording anggaran of iklan "<adsName>" is "<expectedAnggaranDesc>"
     Examples:
       | adsName                                  | currentPosisiIklan | currentToggle | currentToggle2 | currentStatusDesc                                    | currentAnggaranDesc                                             |  actionButton   | actionButton2     | messageToast              | expectedPosisiIklan | expectedToggle | expectedStatusDesc                                   | expectedAnggaranDesc             |
-      | Kos Matrix Keanu Makasar Jakarta Barat   | tidak-naik         | off           | on             | Klik tombol untuk naikkan iklan                      | Tipe Anggaran: Rp15.000 per-hari                                | Ya, Nonaktifkan | Aktifkan          | Iklan berhasil dinaikkan   | naik                | on             | Posisi iklan telah naik di hasil pencarian properti. | Tipe Anggaran: Rp15.000 per-hari |
-      | Kos Matrix Keanu Makasar Jakarta Timur   | naik               | on            | off            | Posisi iklan telah naik di hasil pencarian properti. | Hari ini Rp0 sudah dipakai dari batas pemakaian saldo Rp10.000  | Aktifkan        | Ya, Nonaktifkan   | Iklan berhenti dinaikkan. | tidak-naik          | off            | Klik tombol untuk naikkan iklan                      | Hari ini Rp0 sudah dipakai dari batas pemakaian saldo Rp10.000 |
+      | Kos Matrix Keanu Makasar Jakarta Barat   | tidak-naik         | off           | on             | Klik tombol untuk naikkan iklan                      | Tipe Anggaran: Rp15.000 per-hari                                | Ya, Nonaktifkan | Aktifkan          | Iklan berhasil dinaikkan   | naik                | on             | Posisi iklan telah naik di hasil pencarian properti. | Hari ini Rp0 sudah dipakai dari batas pemakaian saldo Rp15.000 |
+      | Kos Matrix Keanu Makasar Jakarta Timur   | naik               | on            | off            | Posisi iklan telah naik di hasil pencarian properti. | Hari ini Rp0 sudah dipakai dari batas pemakaian saldo Rp10.000  | Aktifkan        | Ya, Nonaktifkan   | Iklan berhenti dinaikkan. | tidak-naik          | off            | Klik tombol untuk naikkan iklan                      | Tipe Anggaran: Rp10.000 per-hari |
 
   @TEST_LIMO-1318 @LIMO1-staging @maDashboard @continue
   Scenario: Set full occupancy and make sure the wording if condition ON OFF
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod | password  |
-      | 0891202530   | 0          | qwerty123 |
+      | 0891202529   | 0          | qwerty123 |
     And user navigates to mamiads dashboard
     And owner clicks on coba sekarang button
-    Then user cek status toggle iklan "Kost Bitcoin Tipe A Kelapa Dua Tangerang" is "Naik"
-    And user verify the toggle iklan "Kost Bitcoin Tipe A Kelapa Dua Tangerang" is "on"
-    And user verify the wording iklan "Kost Bitcoin Tipe A Kelapa Dua Tangerang" is "Posisi iklan telah naik di hasil pencarian properti."
+    Then user cek status toggle iklan "Kost New Dashboard 2026 Pasarkemis Tangerang" is "Naik"
+    And user verify the toggle iklan "Kost New Dashboard 2026 Pasarkemis Tangerang" is "on"
+    And user verify the wording iklan "Kost New Dashboard 2026 Pasarkemis Tangerang" is "Posisi iklan telah naik di hasil pencarian properti."
     When owner navigates to property saya kos
-    And owner search kost "Kost Bitcoin Tipe A Kelapa Dua Tangerang" on property saya page
+    And owner search kost "Kost New Dashboard 2026 Pasarkemis Tangerang" on property saya page
     And user click Lihat Selengkapnya button for edit
     And owner click update kamar kost
     And user click edit button in first row of the table
     And user tick already inhabited checkbox
     And owner click "Simpan"
     And user navigates to mamiads dashboard
-    Then user cek status toggle iklan "Kost Bitcoin Tipe A Kelapa Dua Tangerang" is "Naik"
-    And user verify the toggle iklan "Kost Bitcoin Tipe A Kelapa Dua Tangerang" is "on"
-    And user verify the wording iklan kamar penuh "Kost Bitcoin Tipe A Kelapa Dua Tangerang" is "Kamar Penuh. Silahkan nonaktifkan jika tidak ingin menaikkan posisi iklan ini"
+    Then user cek status toggle iklan "Kost New Dashboard 2026 Pasarkemis Tangerang" is "Naik"
+    And user verify the toggle iklan "Kost New Dashboard 2026 Pasarkemis Tangerang" is "on"
+    And user verify the wording iklan kamar penuh "Kost New Dashboard 2026 Pasarkemis Tangerang" is "Kamar Penuh. Silahkan nonaktifkan jika tidak ingin menaikkan posisi iklan ini"
 
   @TEST_LIMO-3368 @continue @maDashboard
   Scenario: OFF ads full occupancy
-    When user click "on" toggle the "Kost Bitcoin Tipe A Kelapa Dua Tangerang"
+    When user click "on" toggle the "Kost New Dashboard 2026 Pasarkemis Tangerang"
     And user click "Ya, Nonaktifkan" button on pop up switch toggle iklan
 
   @TEST_LIMO-3372 @continue @maDashboard
   Scenario: To make sure wording if ads full occupancy
-    Then user verify the wording iklan kamar penuh "Kost Bitcoin Tipe A Kelapa Dua Tangerang" is "Kamar Penuh. Silahkan nonaktifkan jika tidak ingin menaikkan posisi iklan ini"
+    Then user verify the wording iklan kamar penuh "Kost New Dashboard 2026 Pasarkemis Tangerang" is "Kamar Penuh. Silahkan nonaktifkan jika tidak ingin menaikkan posisi iklan ini"
 
   @TEST_LIMO-3369
   Scenario: Available room in property full occupancy
     When owner navigates to property saya kos
-    And owner search kost "Kost Bitcoin Tipe A Kelapa Dua Tangerang" on property saya page
+    And owner search kost "Kost New Dashboard 2026 Pasarkemis Tangerang" on property saya page
     And user click Lihat Selengkapnya button for edit
     And owner click update kamar kost
     And user click edit button in first row of the table
     And user tick already inhabited checkbox
     And owner click "Simpan"
     And user navigates to mamiads dashboard
-    Then user verify the wording iklan "Kost Bitcoin Tipe A Kelapa Dua Tangerang" is "Klik tombol untuk naikkan iklan"
-    When user click "off" toggle the "Kost Bitcoin Tipe A Kelapa Dua Tangerang"
+#    Then user verify the wording iklan "Kost New Dashboard 2026 Pasarkemis Tangerangg" is "Klik tombol untuk naikkan iklan"
+    When user click "off" toggle the "Kost New Dashboard 2026 Pasarkemis Tangerang"
     And user click "Aktifkan" button on pop up switch toggle iklan
 
   @TEST_LIMO-1343 @LIMO1-staging

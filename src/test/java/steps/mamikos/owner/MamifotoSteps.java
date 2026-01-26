@@ -203,8 +203,8 @@ public class MamifotoSteps {
 
     @When("owner wants to select Mamifoto package")
     public void owner_wants_to_select_mamifoto_package() {
-        mamifoto.clickOnFiturPromosi();
-        mamifoto.clickOnMamifotoSidebar();
+//        mamifoto.clickOnFiturPromosi();
+//        mamifoto.clickOnMamifotoSidebar();
         mamifoto.clickOnLihatPaket();
         Assert.assertTrue(mamifoto.mamifotoHeaderSelectPackageisAppear(),"Lihat Paket is not Appear");
     }
