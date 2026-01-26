@@ -9,6 +9,7 @@ Feature: PMS Change Revenue Model in Informasi Transfer Pendapatan Properti
       | email             | password       |
       | pman@mamiteam.com | pmanM4m1t34m!! |
     And admin go to Disbursement menu
+    And admin select disbursement period "Periode 1"
     And admin go to detail transfer "Khusus Automation"
     And admin open new page
     And admin navigates to Kontrak Kerja Sama
