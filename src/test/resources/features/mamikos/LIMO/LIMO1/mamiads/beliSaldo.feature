@@ -24,7 +24,9 @@ Feature: Beli Saldo
 - radio
 - paragraph
 - paragraph: 10 ribu
-- paragraph: Rp10.000
+- paragraph: Rp1.000
+- paragraph: 88%
+- paragraph: Rp8.000
 - radio
 - paragraph
 - paragraph: 30 ribu
@@ -162,6 +164,7 @@ Feature: Beli Saldo
     When user login as owner:
       | phone stag | phone prod  | password  |
       | 0891202513 | 08123450977 | qwerty123 |
+    And user navigates to mamiads pembelian saldo
     And owner want to buy mamiads saldo with nominal "Rp80.000"
     And user navigate to mamiads history page
     Then admin should be able to see the text "Saldo 80 ribu"
@@ -183,6 +186,7 @@ Feature: Beli Saldo
     When user login as owner:
       | phone stag | phone prod  | password  |
       | 0891202513 | 08123450977 | qwerty123 |
+    And user navigates to mamiads pembelian saldo
     And owner want to buy mamiads saldo with nominal "Rp80.000"
     And user navigate to mamiads history page
     Then admin should be able to see the text "Saldo 80 ribu"
