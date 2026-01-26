@@ -212,21 +212,21 @@ public class MamiAdsPO {
     }
 
     /**
-     * Get gp onboarding pop up swiper bullet count
+     * Check if gp onboarding pop up previous button is disabled
      *
-     * @return Integer data type
+     * @return boolean data type
      */
     public boolean isGpOnboardingpopUpPreviousButtonDisabled() {
-        return playwright.getAttributeValue(gpOnboardingPopUpPreviousButton, "aria-disabled").equals("true");
+        return gpOnboardingPopUpPreviousButton.getAttribute("disabled") != null;
     }
 
     /**
-     * Get gp onboarding pop up swiper bullet count
+     * Check if gp onboarding pop up next button is disabled
      *
-     * @return Integer data type
+     * @return boolean data type
      */
     public boolean isGpOnboardingpopUpNextButtonDisabled() {
-        return playwright.getAttributeValue(gpOnboardingPopUpNextButton, "aria-disabled").equals("true");
+        return gpOnboardingPopUpNextButton.getAttribute("disabled") != null;
     }
 
     /**
