@@ -1,4 +1,4 @@
-@LIMO2 @GPSPOWNER @sakti-check
+@LIMO2 @GPSPOWNER
 Feature: Owner GPSP
 
   Background: reset gp owner
@@ -111,7 +111,7 @@ Feature: Owner GPSP
 #      | Rp130.000                       |
 #      | Total Pembayaran Rp133.500      |
 #    And owner navigates to owner dashboard
-#    Then owner will see that the text "GoldPlus 1" is displayed
+#    Then owner will see GoldPlus logo image "logo-goldplus-gradient-1.webp"
 #    And owner try to logout from mamikos
 #
 #    # deleted assignment from admin
@@ -174,7 +174,7 @@ Feature: Owner GPSP
 #      | Rp130.000                       |
 #      | Total Pembayaran Rp133.500      |
 #    And owner navigates to owner dashboard
-#    Then owner will see that the text "GoldPlus 1" is displayed
+#    Then owner will see GoldPlus logo image "logo-goldplus-gradient-1.webp"
 #    And owner try to logout from mamikos
 #
 #    #upgrade GP
@@ -232,7 +232,7 @@ Feature: Owner GPSP
       | Rp244.400                       |
       | Total Pembayaran Rp247.900      |
     And owner navigates to owner dashboard
-    Then owner will see that the text "GoldPlus 1" is displayed
+    Then owner will see GoldPlus logo image "logo-goldplus-gradient-1.webp"
     And owner try to logout from mamikos
 
     # deleted assignment from admin
@@ -288,7 +288,7 @@ Feature: Owner GPSP
       | Rp244.400                       |
       | Total Pembayaran Rp247.900      |
     And owner navigates to owner dashboard
-    Then owner will see that the text "GoldPlus 1" is displayed
+    Then owner will see GoldPlus logo image "logo-goldplus-gradient-1.webp"
     And owner try to logout from mamikos
 
     #recurring owner
@@ -311,11 +311,10 @@ Feature: Owner GPSP
       | Total Pembayaran Rp247.900 |
     And payment owner success using ovo as payment method
     And owner navigates to owner dashboard
-    Then owner will see that the text "GoldPlus 1" is displayed
+    Then owner will see GoldPlus logo image "logo-goldplus-gradient-1.webp"
 
   @TEST_LIMO-1636
   Scenario: [Improve GPSP][Activation GP] When owner already have unpaid invoice GP with new special price, then deleted from assign new special price
-    # login admin
     Given admin go to mamikos bangkrupux admin
     When admin login to bangkrupux:
       | email stag                 | email prod                 | password  |
@@ -334,7 +333,6 @@ Feature: Owner GPSP
       | phone stag | phone prod | password  |
       | 0898761239 | 0          | qwerty123 |
     And owner navigates to owner dashboard
-    And owner waiting the page reload
     And user click daftar GP button
     And user wants to subscribe Goldplus 1
     Then owner see billing details invoice
@@ -370,4 +368,4 @@ Feature: Owner GPSP
       | Rp247.900                   |
       | Total Pembayaran Rp247.900  |
     And owner navigates to owner dashboard
-    Then owner will see that the text "GoldPlus 1" is displayed
+    Then owner will see GoldPlus logo image "logo-goldplus-gradient-1.webp"

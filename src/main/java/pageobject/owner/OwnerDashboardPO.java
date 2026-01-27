@@ -1189,4 +1189,16 @@ public class OwnerDashboardPO {
         playwright.pageScrollInView(inginKosDikelolaLink);
         return playwright.waitTillLocatorIsVisible(inginKosDikelolaLink, 20000.0);
     }
+
+    /**
+     * Get GoldPlus logo image file name from src attribute
+     * @return String image file name (e.g., "logo-goldplus-gradient-1.webp")
+     */
+    public String getGoldPlusLogoImageName() {
+        String src = playwright.getAttributeValue(gpStatusImage, "src");
+        if (src != null && src.contains("/")) {
+            return src.substring(src.lastIndexOf("/") + 1);
+        }
+        return src;
+    }
 }
