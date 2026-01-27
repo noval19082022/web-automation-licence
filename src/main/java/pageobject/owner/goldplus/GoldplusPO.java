@@ -356,7 +356,7 @@ public class GoldplusPO {
      * Click widget GP when status menunggu pembayaran
      */
     public void clickOnWidgetGP() {
-        playwright.hardWait(3000);
+        playwright.waitTillLocatorIsVisible(widgetGP);
         playwright.clickOn(widgetGP);
     }
 

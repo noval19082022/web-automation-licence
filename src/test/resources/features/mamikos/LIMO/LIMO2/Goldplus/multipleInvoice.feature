@@ -1,5 +1,4 @@
-@regression @LIMO2 @listing-monetization @LIMO2-staging @multipleInvoice @DONEMIGRATINGTONEWBOARD
-
+@regression @LIMO2 @listing-monetization @LIMO2-staging @multipleInvoice
 Feature: Multiple Invoice
 
   @TEST_LIMO-3515
