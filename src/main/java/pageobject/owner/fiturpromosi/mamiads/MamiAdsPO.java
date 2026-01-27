@@ -248,15 +248,15 @@ public class MamiAdsPO {
     /**
      * Handle popup and button clicks when owner visits Mamiads page.
      * This method addresses the conditions when a popup appears on the page visited by the owner.
-     * If the 'Coba Sekarang' button on the popup is visible or the 'Beli Saldo' button is not visible,
-     * the method clicks on the 'Coba Sekarang' button.
+     * If the onboarding popup is visible (detected by 'Coba Sekarang' button), close it.
      */
     public void handlePopupMamiAds() {
-        // Check if the 'Coba Sekarang' button on the popup is visible
-        // OR if the 'Beli Saldo' button is not visible
-        if (playwright.isLocatorVisibleAfterLoad(cobaSekarangBtnOnPopUp, 3000.0)
-                || !playwright.isLocatorVisibleAfterLoad(icnButtonCLose, 3000.0)) {
-            playwright.clickOn(icnButtonCLose);
+        // Check if the 'Coba Sekarang' button on the popup is visible (indicates onboarding popup is shown)
+        if (playwright.isLocatorVisibleAfterLoad(cobaSekarangBtnOnPopUp, 5000.0)) {
+            // Wait for close button to be visible and click it
+            if (playwright.isLocatorVisibleAfterLoad(icnButtonCLose, 3000.0)) {
+                playwright.clickOn(icnButtonCLose);
+            }
         }
     }
 

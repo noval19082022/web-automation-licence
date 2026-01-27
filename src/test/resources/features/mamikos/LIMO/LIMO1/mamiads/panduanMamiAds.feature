@@ -35,6 +35,7 @@ Feature: Panduan MamiAds
       | 083176408449 | 0          | qwerty123 |
     And owner go to panduan gold plus page
     Then user redirected to guides page mamiAds from GP
+    And user click "Naikkan Iklan Anda"
     And user will see that the text "Naikkan Posisi Iklan Properti dengan MamiAds" is displayed
 
   @TEST_LIMO-3374 @continue

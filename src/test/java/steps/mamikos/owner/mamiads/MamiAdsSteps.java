@@ -83,6 +83,13 @@ public class MamiAdsSteps {
 
     @And("user close mamiads onboarding popup")
     public void userCloseMamiadsOnboardingPopup() {
+        // Refresh page context after navigation to mamiads dashboard
+        page = ActiveContext.getActivePage();
+        playwright = new PlaywrightHelpers(page);
+        mamiAdsPO = new MamiAdsPO(page);
+
+        // Wait for the mamiads page to load before handling popup
+        playwright.waitTillPageLoaded();
         mamiAdsPO.handlePopupMamiAds();
     }
 

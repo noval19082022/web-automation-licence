@@ -7,6 +7,7 @@ Feature: Owner Purchase Mamifoto
     And user login as owner:
       | phone stag   | phone prod | password  |
       | 087133998156 | 0          | qwerty123 |
+    And owner click Mamifoto button
     When owner wants to select Mamifoto package
     Then verify discount price on the package list
     #verify at detail tagihan page
@@ -22,6 +23,7 @@ Feature: Owner Purchase Mamifoto
     And user login as owner:
       | phone stag    | phone prod | password  |
       | 0812345670001 | 0          | qwerty123 |
+    And owner click Mamifoto button
     When owner wants to select Mamifoto package
     Then verify discount price GP doesnt appear on the package list
     #verify at detail tagihan page
@@ -40,6 +42,7 @@ Feature: Owner Purchase Mamifoto
     And owner paid transaction unpaid
     #Owner purchase multiple invoice
     When owner navigates to owner dashboard
+    And owner click Mamifoto button
     And owner wants to select Mamifoto package
     And owner select package mamifoto
     And owner paid MamiFoto Non GP

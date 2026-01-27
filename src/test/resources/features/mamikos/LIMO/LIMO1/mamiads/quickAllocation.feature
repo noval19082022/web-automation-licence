@@ -61,8 +61,8 @@ Feature: Quick Allocation on Properti Saya
     When owner search kost "Kos Quick Allocate Tipe Daily Tobelo Halmahera Utara" on property saya page
     Then verify quick allocation section while ads last allocation "daily"
     When user cancel quick allocate the ads ever allocate
+    And user close mamiads onboarding popup
     Then verify redirect to mamiads dashboard
-    * user close mamiads onboarding popup
     * user cek status toggle iklan "Kos Quick Allocate Tipe Daily Tobelo Halmahera Utara" is "Tidak Naik"
 
     #cancel allocate ads maximal allocation
@@ -80,6 +80,7 @@ Feature: Quick Allocation on Properti Saya
       | phone stag   | phone prod | password  |
       | 085951394565 | 0          | qwerty123 |
     And owner navigates to property saya kos
+    And owner Deactive ads quick alocation if active "<kosName>"
     When owner search kost "<kosName>" on property saya page
     Then verify quick allocation section while ads last allocation "<allocationType>"
     When user reactive the allocation of ads
