@@ -1018,4 +1018,10 @@ public class GoldplusSteps {
     public void userChangeAndSelectPackage(String packageName) {
         goldplus.selectBundledPremiumPackage(packageName);
     }
+
+    @Then("owner will see GoldPlus logo image {string}")
+    public void ownerWillSeeGoldPlusLogoImage(String expectedImageName) {
+        String actualImageName = owner.getGoldPlusLogoImageName();
+        Assert.assertEquals(actualImageName, expectedImageName, "GoldPlus logo image name does not match");
+    }
 }
