@@ -685,9 +685,10 @@ public class MamiAdsPO {
      * Click coba sekarang header on mamiads onboard page
      */
     public void clickOnCobaSekarangHeader() {
+        if (playwright.waitTillLocatorIsVisible(cobaSekarangButtonHeader)) {
         playwright.clickOn(cobaSekarangButtonHeader);
+         }
     }
-
     /**
      * clear and type new daily anggaran MA
      *

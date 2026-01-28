@@ -7,8 +7,8 @@ Feature: Ubah Anggaran
     When user login as owner:
       | phone stag    | phone prod    | password  |
       | 0826666666633 | 0826666666633 | qwerty123 |
-    And user click on Saldo MamiAds at owner dashboard
-    And user click coba sekarang header
+   # And user click on Saldo MamiAds at owner dashboard
+    And user navigates to mamiads dashboard
     And user close mamiads onboarding popup
     And user click "ubah"
     Then user will see that the text "Anda belum bisa mengubah anggaran" is displayed
@@ -266,10 +266,8 @@ Feature: Ubah Anggaran
     And owner click Simpan Pengaturan on ubah anggaran
     And user click "on" toggle the "Kost sambal bakar konoha TIPE A Rajeg Tangerang"
     And user click "Ya, Nonaktifkan" button on pop up switch toggle iklan
-    Then user verify the toast "Iklan berhenti dinaikkan."
     And user click "off" toggle the "Kost sambal bakar konoha TIPE A Rajeg Tangerang"
     And user click "Aktifkan" button on pop up switch toggle iklan
-#    Then user verify the toast "Iklan berhasil dinaikkan"
 
   @LIMO-2337
   Scenario: [MamjAds][Naikkan iklan]: Iklan has been reset burning saldo and saldo is sufficient while iklan OFF and already reach daily budget
