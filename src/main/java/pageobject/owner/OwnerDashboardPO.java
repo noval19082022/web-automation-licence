@@ -1195,6 +1195,7 @@ public class OwnerDashboardPO {
      * @return String image file name (e.g., "logo-goldplus-gradient-1.webp")
      */
     public String getGoldPlusLogoImageName() {
+        playwright.waitTillLocatorIsVisible(gpStatusImage);
         String src = playwright.getAttributeValue(gpStatusImage, "src");
         if (src != null && src.contains("/")) {
             return src.substring(src.lastIndexOf("/") + 1);
