@@ -7,7 +7,7 @@ Feature: Laporan Statistik
     When user login as owner:
       | phone stag | phone prod | password  |
       | 0891202303 | 0          | qwerty123 |
-    And owner accsess statistic page
+    And owner navigates to statistic page
     Then auto select kost listing that are in the top order
       | KosName                                |
       | Kost SkinCare Tobelo TIPE A Tobelo Utara Halmahera Utara |
@@ -93,7 +93,7 @@ Feature: Laporan Statistik
     When user login as owner:
       | phone stag | phone prod | password  |
       | 0891202303 | 0          | qwerty123 |
-    And owner accsess statistic page
+    And owner navigates to statistic page
    # Then owner can see display empty state "Properti Belum Memiliki Performa"
 
   Scenario: Delete kos from admin
@@ -112,7 +112,7 @@ Feature: Laporan Statistik
     When user login as owner:
       | phone stag | phone prod | password  |
       | 0891202406 | 0          | qwerty123 |
-    And owner accsess statistic page
+    And owner navigates to statistic page
     And user click on "Kos XDR Rajeg Tangerang Rajeg Tangerang" button
     And owner click on filter "7 Hari" at statistic report
     And owner can see total sewa
@@ -127,7 +127,7 @@ Feature: Laporan Statistik
     When user login as owner:
       | phone stag | phone prod | password  |
       | 0891202406 | 0          | qwerty123 |
-    And owner accsess statistic page
+    And owner navigates to statistic page
     And user click on "Kos XDR Rajeg Tangerang Rajeg Tangerang" button
     And owner click on filter "30 Hari" at statistic report
     And owner can see total sewa
@@ -143,7 +143,7 @@ Feature: Laporan Statistik
     When user login as owner:
       | phone stag | phone prod | password  |
       | 0891202406 | 0          | qwerty123 |
-    And owner accsess statistic page
+    And owner navigates to statistic page
     And user click on "Kos XDR Rajeg Tangerang Rajeg Tangerang" button
     And owner click on filter "30 Hari" at statistic report
     And owner click on tooltip at performa section

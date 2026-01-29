@@ -30,8 +30,8 @@ import pageobject.owner.PaidRecomendationSystemPO;
             Assert.assertTrue(pprs.getDescDoesntHavePropertyActive().contains(text),"description doesnt match");
         }
 
-        @When("owner accsess statistic page")
-        public void owner_accsess_statistic_page() {
+        @When("owner navigates to statistic page")
+        public void owner_navigates_to_statistic_page() {
            pprs.navigatesToStatisticPage();
         }
 
