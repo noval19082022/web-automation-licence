@@ -1,6 +1,8 @@
 package steps.mamikos.owner.mamiads;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.LoadState;
+import config.global.GlobalConfig;
 import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
@@ -9,6 +11,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.HomePO;
+import pageobject.owner.PropertiSayaPO;
 import pageobject.owner.fiturpromosi.mamiads.MamiAdsPO;
 import pageobject.owner.fiturpromosi.mamiads.NaikkanIklanPO;
 import utilities.PlaywrightHelpers;
@@ -83,7 +86,7 @@ public class NaikkanIklanSteps {
         // Wait for navigation to complete instead of fixed wait
         playwright.waitTillPageLoaded();
         String actualUrl = playwright.getPageUrl();
-        Assert.assertEquals(actualUrl, "https://owner-jambu.kerupux.com/mamiads", "Url doesn't match");
+        Assert.assertEquals(actualUrl, "https://jambu.kerupux.com/ownerpage/kos", "Url doesn't match");
     }
 
     @Then("verify quick allocation section while ads last allocation {string}")
@@ -113,19 +116,63 @@ public class NaikkanIklanSteps {
 
     @Then("verify redirect to mamiads dashboard")
     public void verify_redirect_to_mamiads_dashboard() {
-        // Wait for navigation to complete instead of fixed wait
+        page = ActiveContext.getActivePage();
+        playwright = new PlaywrightHelpers(page);
+
+        // Wait for URL to contain "mamiads" with timeout
+        page.waitForURL(url -> url.contains("mamiads"), new com.microsoft.playwright.Page.WaitForURLOptions().setTimeout(30000));
+
         playwright.waitTillPageLoaded();
-        home = new HomePO(ActiveContext.getActivePage());
+        home = new HomePO(page);
         String actualUrl = home.getURL();
-        Assert.assertTrue(actualUrl.contains("owner"));
-        Assert.assertTrue(actualUrl.contains("mamiads"));
+        Assert.assertTrue(actualUrl.contains("owner"), "URL should contain 'owner' but was: " + actualUrl);
+        Assert.assertTrue(actualUrl.contains("mamiads"), "URL should contain 'mamiads' but was: " + actualUrl);
     }
 
     @When("user reactive the allocation of ads")
     public void userReactiveTheAllocationOfAds() throws InterruptedException {
+        // Get the kos name before navigating away
+        String kosName = Mamikos.getPropertyKosName();
+
+        // Click toggle on Property Saya
         naikkanIklanPO.clickToggleTheAdsOnPropertySaya();
         Assert.assertEquals(naikkanIklanPO.getTextSwitchTogglePopUp("off"), "Apakah Anda ingin mengganti metode anggaran untuk iklan ini?", "Title pop up doesn't match!");
-        naikkanIklanPO.clickOnNantiSaja();
+
+        // Click "Ke MamiAds" to go to MamiAds dashboard
+        naikkanIklanPO.clickOnKeMamiAdsButton();
+
+        // Wait for navigation to MamiAds dashboard
+        page = ActiveContext.getActivePage();
+        page.waitForURL(url -> url.contains("mamiads"), new com.microsoft.playwright.Page.WaitForURLOptions().setTimeout(30000));
+
+        // Refresh page context after navigation
+        playwright = new PlaywrightHelpers(page);
+        mamiAdsPO = new MamiAdsPO(page);
+        naikkanIklanPO = new NaikkanIklanPO(page);
+
+        // Wait for page to load and close onboarding popup if shown
+        playwright.waitTillPageLoaded();
+        mamiAdsPO.handlePopupMamiAds();
+
+        // Click the toggle for this ads on MamiAds dashboard to turn it ON
+        naikkanIklanPO.clickToggleTheAds("off", kosName);
+
+        // Confirm activation by clicking "Aktifkan" button
+        naikkanIklanPO.clickActionButtonInPopUp("Aktifkan");
+        playwright.waitTillPageLoaded();
+
+        // Navigate back to Property Saya
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.OWNERPAGE_KOS, GlobalConfig.LONG_TIMEOUT);
+        playwright.waitTillPageLoaded();
+
+        // Refresh page context
+        page = ActiveContext.getActivePage();
+        playwright = new PlaywrightHelpers(page);
+        naikkanIklanPO = new NaikkanIklanPO(page);
+
+        // Search for the kos again to display the kos card
+        PropertiSayaPO propertySaya = new PropertiSayaPO(page);
+        propertySaya.searchKostPropertySaya(kosName);
     }
 
     @Then("verify the ads Aktif MamiAds with {string} allocation")

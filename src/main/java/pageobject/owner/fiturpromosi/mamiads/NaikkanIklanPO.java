@@ -33,6 +33,8 @@ public class NaikkanIklanPO {
     Locator activeButton;
     Locator nonaktifkanButton;
     Locator aktifkanButton;
+    Locator closePopupButton;
+    Locator toastMessage;
 
 
     public NaikkanIklanPO(Page page) {
@@ -54,6 +56,8 @@ public class NaikkanIklanPO {
         activeButton = page.locator("//button[normalize-space()='Aktifkan']");
         nonaktifkanButton = page.locator("//button[normalize-space()='Ya, Nonaktifkan']");
         aktifkanButton = page.locator("//button[normalize-space()='Aktifkan']");
+        closePopupButton = page.locator("//button[contains(@class,'bg-c-modal__close')]");
+        toastMessage = page.locator(".bg-c-toast__content");
     }
 
 
@@ -206,6 +210,36 @@ public class NaikkanIklanPO {
      */
     public void clickOnNantiSaja() throws InterruptedException {
         playwright.clickOn(nantiSaja);
+    }
+
+    /**
+     * Close the popup by clicking the close (X) button
+     * This keeps the toggle state without redirecting
+     */
+    public void closePopup() {
+        if (playwright.isLocatorVisibleAfterLoad(closePopupButton, 3000.0)) {
+            playwright.clickOn(closePopupButton);
+        }
+    }
+
+    /**
+     * Activate the ads allocation by clicking toggle and confirming
+     * Waits for the activation to complete by checking toast message
+     */
+    public void activateAdsAllocation() {
+        playwright.clickOn(toggleAds);
+        playwright.waitTillLocatorIsVisible(titlePopUpConfirmation, 5000.0);
+        // Close popup to confirm activation (clicking Nanti Saja cancels the activation)
+        closePopup();
+        // Wait for page to update
+        playwright.waitTillPageLoaded();
+    }
+
+    /**
+     * Check if toast message is visible after an action
+     */
+    public boolean isToastMessageVisible() {
+        return playwright.isLocatorVisibleAfterLoad(toastMessage, 5000.0);
     }
 
     /**
