@@ -42,6 +42,7 @@ public class ChatTenantPO {
     Locator chevronDetailSurvei;
     Locator inputTextbox;
     Locator modalChat;
+    Locator modalChatInner;
     Locator wrapperQuestion;
     Locator alternativeQuestionSelector;
     Locator questionLabelWithFilter;
@@ -53,7 +54,7 @@ public class ChatTenantPO {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
         questionsOption = page.locator("[data-testid='wrapper-question'] .question-option");
-        questionTextLabels = page.locator("[data-testid='wrapper-question'] .question-option p.bg-c-radio__label");
+        questionTextLabels = page.locator("[data-testid='wrapper-question'] .wrapper-question__label p");
         ajukanSewaButton = page.locator("#modalChat").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Ajukan Sewa"));
         sendQuestionButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim"));
         latestChat = page.locator("(//div[@class='mc-balloon-chat__content']//div)[last()]");
@@ -79,6 +80,7 @@ public class ChatTenantPO {
         chevronDetailSurvei = page.locator("//div[@class='mc-product-card__tenant-survey-detail']");
         inputTextbox = page.locator("//textarea[@placeholder='Ceritakan secara singkat dan jelas.']");
         modalChat = page.locator("#modalChat");
+        modalChatInner = page.locator("#modalChat .bg-c-modal__inner");
         wrapperQuestion = page.locator("[data-testid='wrapper-question']");
         alternativeQuestionSelector = page.locator("[data-testid='wrapper-question'] .wrapper-question__label");
         questionLabelWithFilter = page.locator("[data-testid='wrapper-question'] .wrapper-question__label");
@@ -93,49 +95,20 @@ public class ChatTenantPO {
      * @return list questions
      */
     public List<String> listQuestions() {
-        // Wait for modal to be visible
-        playwright.waitTillLocatorIsVisible(modalChat, 10000.0);
-        playwright.waitTillLocatorIsVisible(wrapperQuestion, 10000.0);
-        
-        // Additional wait for questions to fully load
+        playwright.waitFor(modalChatInner, 15000.0);
+        playwright.waitFor(wrapperQuestion, 15000.0);
         playwright.hardWait(2000);
-        
+
         List<String> questionsListing = new ArrayList<>();
         List<Locator> questionsList = questionTextLabels.all();
-        
-        // Process questions without visibility check first
-        if (!questionsList.isEmpty()) {
-            for (Locator questionText : questionsList) {
-                try {
-                    String text = playwright.getText(questionText);
-                    if (!text.isEmpty()) {
-                        questionsListing.add(text);
-                    }
-                } catch (Exception e) {
-                    // Continue with alternative selector if this fails
-                    System.out.println("Error getting question text: " + e.getMessage());
-                }
+
+        for (Locator questionText : questionsList) {
+            String text = playwright.getText(questionText);
+            if (!text.isEmpty()) {
+                questionsListing.add(text);
             }
         }
-        
-        // If no questions found with the primary selector, try alternative selector
-        if (questionsListing.isEmpty()) {
-            // Try the selector used in clickQuestion method
-            questionsList = alternativeQuestionSelector.all();
-            
-            for (Locator questionText : questionsList) {
-                try {
-                    String text = playwright.getText(questionText);
-                    if (!text.isEmpty()) {
-                        questionsListing.add(text);
-                    }
-                } catch (Exception e) {
-                    // Continue if this fails
-                    System.out.println("Error getting question text from alternative selector: " + e.getMessage());
-                }
-            }
-        }
-        
+
         return questionsListing;
     }
 
@@ -145,8 +118,8 @@ public class ChatTenantPO {
      * @return String text button Send
      */
     public String verifySendLabel() {
-        // Wait for modal to be visible first
-        playwright.waitTillLocatorIsVisible(modalChat, 10000.0);
+        // Wait for modal inner to be visible first (parent #modalChat has height 0)
+        playwright.waitTillLocatorIsVisible(modalChatInner, 10000.0);
         
         // Wait for the button to appear with the expected text after question selection
         playwright.waitTillLocatorIsVisible(ajukanSewaButton, 20000.0);

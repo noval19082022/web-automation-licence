@@ -46,7 +46,7 @@ public class ChatOwnerSteps {
         ChatOwnerPO activeChat = new ChatOwnerPO(activePage);
         KostDetailsPO activeKostDetail = new KostDetailsPO(activePage);
         activeChat.clickChatKos();
-        activeKostDetail.dismissFTUEIfExist();
+        activeKostDetail.dismissChatFTUE();
     }
 
     @And("search chat in chatlist {string}")
