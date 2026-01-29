@@ -667,6 +667,33 @@ public class KostDetailsPO {
     }
 
     /**
+     * Dismiss FTUE that appears after clicking chat button (no scroll needed)
+     * This FTUE is different from booking benefit FTUE - it appears immediately
+     */
+    public void dismissChatFTUE() {
+        playwright.hardWait(1000);
+
+        // Check if "Lanjut" button is visible (indicates chat FTUE is present)
+        if (!playwright.waitTillLocatorIsVisible(ftueSlider, 3000.0)) {
+            return; // No FTUE present
+        }
+
+        // Click "Lanjut" button up to 6 times to go through all slides
+        int clickCount = 0;
+        while (playwright.waitTillLocatorIsVisible(ftueSlider, 2000.0) && clickCount < 6) {
+            playwright.forceClickOn(ftueSlider);
+            playwright.hardWait(500);
+            clickCount++;
+        }
+
+        // Click "Saya Mengerti" button if visible
+        if (playwright.waitTillLocatorIsVisible(btnSayaMengerti, 2000.0)) {
+            playwright.forceClickOn(btnSayaMengerti);
+            playwright.hardWait(500);
+        }
+    }
+
+    /**
      * Select booking date
      *
      * @param date tomorrow, today, or specific date by number on string data type

@@ -25,8 +25,12 @@ public class ChatTenantSteps {
 
     @Then("user see phone number field and selectable question options :")
     public void userSeePhoneNumberFieldAndSelectableQuestionOptions(List<String> questions) {
-        playwright.hardWait(5000);
-        List<String> questionList = chat.listQuestions();
+        Page currentPage = ActiveContext.getActivePage();
+        PlaywrightHelpers currentPlaywright = new PlaywrightHelpers(currentPage);
+        ChatTenantPO currentChat = new ChatTenantPO(currentPage);
+
+        currentPlaywright.hardWait(5000);
+        List<String> questionList = currentChat.listQuestions();
         
         // Presisi validation seperti original, tapi dengan safety check
         Assert.assertTrue(questionList.size() > 0, "No questions found. Expected at least: " + questions.size());

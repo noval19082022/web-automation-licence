@@ -14,7 +14,9 @@ public class ApartmentDetailSteps {
 
     @And("user click on hubungi pengelola button")
     public void userClickOnHubungiPengelolaButton() {
-        apartment.clickContactApt();
+        Page activePage = ActiveContext.getActivePage();
+        ApartmentDetailPO activeApartment = new ApartmentDetailPO(activePage);
+        activeApartment.clickContactApt();
     }
 
     @And("user click on lihat nomor telepon button")

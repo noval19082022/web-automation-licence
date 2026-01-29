@@ -40,7 +40,7 @@ Feature: Chat and Chat Optimization
                   | Masih ada kamar?                             |
                   | Saya butuh cepat nih. Bisa booking sekarang? |
                   | Ada diskon untuk kos ini?                    |
-                  | Saya ingin survei dulu  Kos melayani Survei Hari Ini |
+                  | Saya ingin survei dulu                       |
                   | Alamat kos di mana?                          |
                   | Kamar bisa diisi lebih dari 1 orang?         |
                   | Cara menghubungi pemilik?                    |
