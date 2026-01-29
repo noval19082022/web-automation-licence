@@ -1,4 +1,4 @@
-@LIMO2 @flaky
+@LIMO2
 Feature: Payment mamiads staging
 
   @TEST_MAMIADS-CARD

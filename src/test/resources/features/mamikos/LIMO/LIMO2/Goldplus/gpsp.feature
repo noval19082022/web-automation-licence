@@ -87,14 +87,18 @@ Feature: Owner GPSP
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
     And admin accsess menu whitelist feature
+    # cleanup existing whitelist entry if exists
+    And admin search whitelist owner by user_id "99454618"
+    And admin click on delete btn on whitelist menu for order "1"
+    # add whitelist
     And admin wants to add whitelist feature
     And admin input owner id with "99454618"
     And admin select feature with "gp_special_pricing_medium_5"
     And admin click submit button
-    Then admin will see that the text "Success! User `99454618` successfully whitelisted for feature `gp_special_pricing_medium_5" is displayed
+    Then admin will see that the text "Success! User `99454618` successfully whitelisted for feature `gp_special_pricing_medium_5`" is displayed
     And admin try to logout from mamikos
 
-
+#Duplicate feature
 #    # login owner 0898761239 (99454618)
 #    Given user go to mamikos homepage
 #    When user login as owner:

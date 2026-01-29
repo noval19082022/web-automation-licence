@@ -218,7 +218,7 @@ public class GoldplusSteps {
 
     @When("owner wants to access goldplus dashboard")
     public void owner_wants_to_access_goldplus_dashboard() {
-        playwright.clickOnText("Perpanjang paket Goldplus yuk!");
+        playwright.clickOnText("Sisa 7 hari");
     }
 
     @And("user click widget GP {string}")

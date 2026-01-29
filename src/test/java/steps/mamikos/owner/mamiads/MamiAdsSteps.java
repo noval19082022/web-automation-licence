@@ -268,7 +268,7 @@ public class MamiAdsSteps {
         for (int i = 0; i < maxRetries; i++) {
             playwright.waitTillPageLoaded();
 
-            if (playwright.isTextDisplayed("Pembayaran Berhasil", 5000.0)) {
+            if (playwright.isTextDisplayed("Pembayaran Berhasil", 3000.0)) {
                 paymentSuccess = true;
                 break;
             }

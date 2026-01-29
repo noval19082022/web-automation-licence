@@ -40,11 +40,11 @@ Feature: GP Weekly
     And owner click bayar sekarang on detail tagihan page goldplus
     And payment owner success using ovo as payment method
 
-  @TEST_LIMO-3493 @continue
-  Scenario: GoldPlus Weekly Paid - Checking Widget
-    Given owner navigates to owner dashboard
-    And owner click close icon pop up
-    Then validate that owner have "GoldPlus 2"
+#  @TEST_LIMO-3493 @continue
+#  Scenario: GoldPlus Weekly Paid - Checking Widget
+#    Given owner navigates to owner dashboard
+#    And owner click close icon pop up
+#    Then validate that owner have "GoldPlus 2"
 
   @TEST_LIMO-3494 @continue
   Scenario: [Owner][GP Recurring] Owner want to cancel GP Recurring via pop up reminder

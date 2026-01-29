@@ -206,7 +206,7 @@ public class GoldplusPO {
         pilihPaketBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Paket GoldPlus"));
         countdownValueInMenuPackageGP = page.locator("//div[@class='counter-promo']");
         countdownValueOwnerDashboard = page.getByTestId("popperReference").getByTestId("countdown-container");
-        gpEntryPoint = page.locator("a").filter(new Locator.FilterOptions().setHasText("Paket murah untuk interaksi"));
+        gpEntryPoint = page.getByText("Paket murah untuk interaksi");
         copyTextElement = page.getByTestId("popperReference").getByText("Paket murah untuk interaksi");
         countdownTimer = page.getByTestId("popperReference").getByTestId("countdown-container");
         mamikosActionCard = page.locator(".mk-action-card__main");

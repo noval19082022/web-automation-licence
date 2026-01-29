@@ -79,7 +79,7 @@ Feature: Goldplus Recurring
   Scenario: Owner doesn't get recurring reminder pop up
     When user sets recurring "H2" for number "082233545514"
     And owner navigates to owner dashboard
-#    Then user will see that the text "Perpanjang paket Goldplus yuk!" is displayed
+    Then user will see that the text "Perpanjang paket Goldplus yuk!" is displayed
 
   Scenario: delete or reset data GP
     Given admin go to mamikos mamipay admin
