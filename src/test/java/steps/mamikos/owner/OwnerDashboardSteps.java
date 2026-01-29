@@ -429,5 +429,25 @@ public class OwnerDashboardSteps {
     public void ownerDismissPopUpIfAppears() {
         ownerDashboardPO.dismissPopUp();
     }
+
+    @Then("owner can see onboarding card on owner dashboard")
+    public void ownerCanSeeOnboardingCardOnOwnerDashboard() {
+        Assert.assertTrue(ownerDashboardPO.isOnboardingCardVisible(), "Onboarding card is not visible");
+    }
+
+    @Then("owner can see onboarding title {string}")
+    public void ownerCanSeeOnboardingTitle(String expectedTitle) {
+        Assert.assertEquals(ownerDashboardPO.getOnboardingTitle(), expectedTitle, "Onboarding title doesn't match");
+    }
+
+    @Then("owner can see onboarding description {string}")
+    public void ownerCanSeeOnboardingDescription(String expectedDescription) {
+        Assert.assertTrue(ownerDashboardPO.getOnboardingDescription().contains(expectedDescription), "Onboarding description doesn't contain expected text");
+    }
+
+    @Then("owner cannot see onboarding card on owner dashboard")
+    public void ownerCannotSeeOnboardingCardOnOwnerDashboard() {
+        Assert.assertTrue(ownerDashboardPO.isOnboardingCardNotVisible(), "Onboarding card should not be visible but it is");
+    }
 }
 

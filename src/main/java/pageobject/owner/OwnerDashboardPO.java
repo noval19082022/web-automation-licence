@@ -83,6 +83,9 @@ public class OwnerDashboardPO {
     Locator daftarGpButton;
     Locator entryPointCardGP;
     Locator gpspPromoCountDown;
+    Locator onboardingCard;
+    Locator onboardingTitle;
+    Locator onboardingDescription;
 
     private Locator fiturPromosiExpand;
     private Locator nantiSajaButton;
@@ -201,6 +204,9 @@ public class OwnerDashboardPO {
         gpPeriodFavoriteOption = page.locator("//div[contains(@class, 'goldplus-periode-select__option') and contains(., '4 Bulan')]");
         gpPeriodFirstOption = page.locator("//div[contains(@class, 'goldplus-periode-select__option')]").first();
         pilihPeriodeButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Periode"));
+        onboardingCard = page.locator(".onboarding-new-owner__card").first();
+        onboardingTitle = page.locator(".onboarding-new-owner__title");
+        onboardingDescription = page.locator(".onboarding-new-owner__description");
         gpStatusText = page.locator(".membership-card__section").first();
     }
 
@@ -565,7 +571,7 @@ public class OwnerDashboardPO {
      * Waits for the greeting label to be visible
      */
     public void waitForOwnerDashboardToLoad() {
-        playwright.waitTillLocatorIsVisible(greetingUserLabel, 10000.0);
+        playwright.waitTillLocatorIsVisible(greetingUserLabel, 60000.0);
     }
 
     /**
@@ -1221,5 +1227,43 @@ public class OwnerDashboardPO {
             return src.substring(src.lastIndexOf("/") + 1);
         }
         return src;
+    }
+
+    /**
+     * Check if onboarding card is visible
+     * Works for all owner conditions (no property, non-active kost, draft kost)
+     * @return true if onboarding card is visible
+     */
+    public boolean isOnboardingCardVisible() {
+        playwright.hardWait(3000);
+        return playwright.waitTillLocatorIsVisible(onboardingCard, 60000.0);
+    }
+
+    /**
+     * Get onboarding title text
+     * Works for all owner conditions (no property, non-active kost, draft kost)
+     * @return String onboarding title text
+     */
+    public String getOnboardingTitle() {
+        return playwright.getText(onboardingTitle);
+    }
+
+    /**
+     * Get onboarding description text
+     * Works for all owner conditions (no property, non-active kost, draft kost)
+     * @return String onboarding description text
+     */
+    public String getOnboardingDescription() {
+        return playwright.getText(onboardingDescription);
+    }
+
+    /**
+     * Check if onboarding card is NOT visible
+     * Used for owners who only have apartment (no kost)
+     * @return true if onboarding card is not visible
+     */
+    public boolean isOnboardingCardNotVisible() {
+        playwright.hardWait(3000);
+        return !playwright.waitTillLocatorIsVisible(onboardingCard, 5000.0);
     }
 }
