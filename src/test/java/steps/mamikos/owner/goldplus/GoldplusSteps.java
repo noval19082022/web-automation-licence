@@ -11,6 +11,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.admin.testingtools.GoldPlusPO;
+import pageobject.CommonPO;
 import pageobject.common.HomePO;
 import pageobject.common.KostDetailsPO;
 import pageobject.common.LoadingPO;
@@ -44,6 +45,7 @@ public class GoldplusSteps {
     GoldPlusSubmissionPO gpSubmission = new GoldPlusSubmissionPO(page);
     LoadingPO loading = new LoadingPO(page);
     KostDetailsPO kostDetail = new KostDetailsPO(page);
+    CommonPO common = new CommonPO(page);
 
     @When("user wants to subscribe Goldplus {int}")
     public void user_wants_to_subscribe_goldplus(int paket) {
@@ -271,7 +273,8 @@ public class GoldplusSteps {
         chat.dismissFTUETBCIfExist();
         chat.searchChatTenant(tenantName);
         chat.dismissFTUETBCIfExist();
-        chat.clickButtonOnChatRoomList(buttonTxt);
+        common.dismissGuide();
+        chat.clickDaftarGPButton();
         chat.dismissFTUETBCIfExist();
     }
 
@@ -411,7 +414,7 @@ public class GoldplusSteps {
                 chat.dismissFTUEJemputBola();
                 Assert.assertTrue(playwright.isTextDisplayed("Sisa Kuota", 2000.0), "Daftar GoldPlus doesn't displayed!");
                 Assert.assertTrue(playwright.isTextDisplayed("2 chat room", 3000.0), "Sisa kuota chat text doesn't displayed!");
-                chat.clickButtonOnChatRoomList(textMessage);
+                chat.clickDaftarGPButton();
                 Assert.assertTrue(goldplus.isGpPackageTableDisplayed(), "GP package table doesn't displayed!");
                 break;
             case "Pilih Periode Berlangganan":

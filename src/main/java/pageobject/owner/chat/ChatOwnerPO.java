@@ -4,11 +4,13 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import data.mamikos.Mamikos;
+import pageobject.CommonPO;
 import utilities.PlaywrightHelpers;
 
 public class ChatOwnerPO {
     private Page page;
     private PlaywrightHelpers playwright;
+    private CommonPO common;
     Locator chatRoomContainer;
     Locator ownerChatButton;
     Locator emptyChatImage;
@@ -58,10 +60,12 @@ public class ChatOwnerPO {
     Locator caraIsiKuotaButton;
     Locator chatBebasKuotaButton;
     Locator apaItuKuotaChatRoomButton;
+    Locator daftarGPButton;
 
     public ChatOwnerPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
+        this.common = new CommonPO(page);
         chatRoomContainer = page.locator("div.mc-chat-room");
         ownerChatButton = page.getByText("Chat").nth(0);
         emptyChatImage = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("chat kosong"));
@@ -110,6 +114,7 @@ public class ChatOwnerPO {
         apaItuKuotaChatRoomButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Apa itu kuota chat room?"));
         buttonOnChatRoom = page.locator("button[class='bg-c-button bg-c-button--primary bg-c-button--sm']");
         buttonOnChatRoomList = page.locator("button.bg-c-button.mc-non-gp-entrypoint-card__entrypoint-button.bg-c-button--primary.bg-c-button--sm");
+        daftarGPButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Daftar"));
     }
 
     /**
@@ -223,9 +228,8 @@ public class ChatOwnerPO {
      * @return
      */
     public String getNotPaidFirstRentText() {
-        if (playwright.waitTillLocatorIsVisible(Iunderstand, 2000.0)) {
-            playwright.clickOn(Iunderstand);
-        }
+        // Dismiss guide if present
+        common.dismissGuide();
         playwright.reloadPage();
         playwright.clickOn(ownerChatButton);
         String inputText = "Tenant Automation Accept Chat";
@@ -272,9 +276,8 @@ public class ChatOwnerPO {
      * @return true if sisa kamar otherwise false
      */
     public boolean isSisaKamarDisplayed() {
-        if (playwright.waitTillLocatorIsVisible(Iunderstand, 2000.0)) {
-            playwright.clickOn(Iunderstand);
-        }
+        // Dismiss guide if present
+        common.dismissGuide();
         return playwright.waitTillLocatorIsVisible(sisaKamarLabel);
     }
 
@@ -508,23 +511,21 @@ public class ChatOwnerPO {
      * Click on button on chat list or chat room owner
      */
     public void clickButtonOnChatRoomList(String buttonText) {
-        // Dismiss Shepherd modal if present
-        if (playwright.waitTillLocatorIsVisible(Iunderstand, 5000.0)) {
-            playwright.clickOn(Iunderstand);
+        playwright.hardWait(2000);
+        if (playwright.waitTillLocatorIsVisible(buttonOnChatRoomList, 2000.0)) {
+            playwright.clickOn(buttonOnChatRoomList);
+        } else {
+            playwright.waitFor(buttonOnChatRoom);
+            playwright.clickOn(buttonOnChatRoom);
         }
-        buttonOnOwnerDashboard = page.locator("//button[normalize-space()='"+buttonText+"']");
-        if (playwright.waitTillLocatorIsVisible(buttonOnChatRoomList)) {
-            playwright.hardWait(2000);
-           playwright.waitFor(buttonOnChatRoomList);
-           playwright.clickOn(buttonOnChatRoomList);
-       } else if (playwright.waitTillLocatorIsVisible(buttonOnChatRoom)){
-            playwright.hardWait(2000);
-           playwright.waitFor(buttonOnChatRoom);
-           playwright.clickOn(buttonOnChatRoom);
-       } else {
+    }
 
-            playwright.clickOn(buttonOnOwnerDashboard);
-        }
+    /**
+     * Click on Daftar GoldPlus button in chat room list
+     */
+    public void clickDaftarGPButton() {
+        playwright.waitTillLocatorIsVisible(daftarGPButton, 3000.0);
+        playwright.clickOn(daftarGPButton);
     }
 
     /**
