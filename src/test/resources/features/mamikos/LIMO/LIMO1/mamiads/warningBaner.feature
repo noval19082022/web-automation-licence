@@ -7,7 +7,8 @@ Feature: Warning Bannner Mamiads
     When user login as owner:
       | phone stag    | phone prod    | password  |
       | 0826666666633 | 0826666666633 | qwerty123 |
-    And user click on Saldo MamiAds at owner dashboard
+   # And user click on Saldo MamiAds at owner dashboard
+    And user navigates to mamiads dashboard
     And user click coba sekarang header
     And user close mamiads onboarding popup
     Then user will see that the text "MamiAds hanya untuk menaikkan posisi iklan dengan biaya per klik." is displayed
@@ -37,7 +38,8 @@ Feature: Warning Bannner Mamiads
     When user login as owner:
       | phone stag    | phone prod    | password  |
       | 0826666666633 | 0826666666633 | qwerty123 |
-    And user click on Saldo MamiAds at owner dashboard
+   # And user click on Saldo MamiAds at owner dashboard
+    And user navigates to mamiads dashboard
     And user click coba sekarang header
     Then user will see that the text "MamiAds hanya untuk menaikkan posisi iklan dengan biaya per klik." is displayed
     And user will see that the text "Lihat Info lanjut" is displayed

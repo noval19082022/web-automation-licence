@@ -17,6 +17,14 @@ Feature: Survei - Verification of survey label below price on GP kost detail
     And owner click filter "Selesai" in Pembayaran Tagihan Goldplus page
     Then owner will see that the text "Lunas" is displayed
 
+  @TEST_LIMO-9645
+  Scenario: GP Listing - Waiting list Label with Maximum+ Value
+    Given user navigate to mamikos
+    And user search for Kost with name "Kost Draft Mamipayy QLPXL3A5 TIPE A1" and selects matching result
+    And user open detail page GP listing
+    And user check section label below price
+    Then Verifikasi label survey tampil "Banyak peminat! 4+ orang di daftar tunggu"
+
   @TEST_LIMO-9632
   Scenario: Verify survey popularity label is displayed below price on GP kost detail
     Given user navigate to mamikos
@@ -41,14 +49,6 @@ Feature: Survei - Verification of survey label below price on GP kost detail
     And user open detail page GP listing
     And user check section label below price
     Then Verifikasi label survey tampil "Banyak peminat! 4 orang di daftar tunggu"
-
-  @TEST_LIMO-9645
-  Scenario: GP Listing - Waiting list Label with Maximum+ Value
-    Given user navigate to mamikos
-    And user search for Kost with name "Kost Draft Mamipayy QLPXL3A5 TIPE A1 Pasarkemis Tangerang" and selects matching result
-    And user open detail page GP listing
-    And user check section label below price
-    Then Verifikasi label survey tampil "Banyak peminat! 3+ orang di daftar tunggu"
 
   @TEST_LIMO-9633
   Scenario: Verify survey label is NOT displayed for non-GP kost detail

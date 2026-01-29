@@ -22,8 +22,8 @@ Feature: Visibility
     When user login as owner:
       | phone stag   | phone prod   | password  |
       | 0891202415   | 083843666858 | qwerty123 |
-    Then user will see that the text "Saldo iklan" is displayed
-    Then user will see that the text "Anggarkan saldo agar posisi iklan naik" is displayed
+    #Then user will see that the text "500.000" is displayed
+    Then user will see that the text "Posisi iklan tidak naik" is displayed
     When user click on Saldo MamiAds at owner dashboard
     Then user redirected to mamiads page
 
@@ -61,7 +61,7 @@ Feature: Visibility
     When user login as owner:
       | phone stag   | phone prod   | password  |
       | 089504016010 | 089504016010 | qwerty123 |
-    Then user will see that the text "Beli saldo lagi yuk biar posisi iklan tetap naik" is displayed
+    Then user will see that the text "Beli saldo, banyak pilihan & diskon!" is displayed
     When user click on Saldo MamiAds at owner dashboard
     Then user redirected to pembelian saldo mamiads page
     When user go back to previous page

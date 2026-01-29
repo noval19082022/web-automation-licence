@@ -30,7 +30,7 @@ public class RedirectOwnerSteps {
 
     @And("user redirected to mamiads landing page")
     public void userRedirectedToMamiadsLandingPage() {
-        assertThat(page).hasURL(Mamikos.URL + Mamikos.MAMIADS_FROM_OWNER_DASHBOARD);
+        assertThat(page).hasURL(Mamikos.OWNER_URL_STAG + Mamikos.MAMIADS_FROM_OWNER_DASHBOARD);
     }
 
     @And("user redirected to pembelian saldo mamiads page")

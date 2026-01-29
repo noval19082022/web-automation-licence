@@ -12,6 +12,7 @@ public class Mamikos {
         :JavaHelpers.getPropertyValue(MAMIKOS, "env");
     public static final String URL = JavaHelpers.getPropertyValue(MAMIKOS, "mainUrl_" + ENV);
     public static final String OWNER_URL = JavaHelpers.getPropertyValue(MAMIKOS, "ownerUrl_" + ENV);
+    public static final String OWNER_URL_STAG = JavaHelpers.getPropertyValue(MAMIKOS, "ownerUrl_stag");
     public static final String GENERALPASSWORD = JavaHelpers.getPropertyValue(MAMIKOS, "generalPassword");
     public static final String ADMINEMAIL = JavaHelpers.getPropertyValue(MAMIKOS, "adminEmail");
     public static final String ADMINMAMIPAY = JavaHelpers.getPropertyValue(MAMIKOS, "backoffice_" + ENV);

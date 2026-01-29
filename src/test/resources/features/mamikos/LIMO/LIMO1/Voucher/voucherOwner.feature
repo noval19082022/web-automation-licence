@@ -1,5 +1,5 @@
 @regression @LIMO1 @LIMO1-staging @voucher-owner @DONEMIGRATINGTONEWBOARD
-Feature: Voucher
+Feature: Voucher Owner
 
   @TEST_LIMO-3291 @continue @invalidVoucher
   Scenario: [Voucher Owner][Apply invalid Voucher] Apply voucher doesnt active

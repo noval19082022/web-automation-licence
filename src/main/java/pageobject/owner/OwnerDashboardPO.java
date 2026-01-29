@@ -733,6 +733,7 @@ public class OwnerDashboardPO {
      * on saldo mamiads card on owner dashboard
      */
     public void clickSaldoMamiAdsButton() {
+        playwright.hardWait(2000);
         playwright.waitForLocatorVisibleAndClickOn(saldoMamiAdsButton);
     }
 
