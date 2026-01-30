@@ -1,4 +1,4 @@
-@LIMO2 @revampGpOnboarding @flaky
+@LIMO2 @revampGpOnboarding
 Feature: Revamp GP Onboarding
 
   @resetGP @continue

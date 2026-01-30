@@ -1160,7 +1160,7 @@ public class OwnerDashboardPO {
      */
     public boolean handlePopupWithMultipleStrategies() {
         // Strategy 1: Try the general close button
-        if (playwright.waitTillLocatorIsVisible(generalCloseButton, 2000.0)) {
+        if (playwright.waitTillLocatorIsVisible(generalCloseButton, 10000.0)) {
             System.out.println("Strategy 1: Using general close button");
             playwright.clickOn(generalCloseButton);
             playwright.hardWait(1000.0);
@@ -1168,7 +1168,7 @@ public class OwnerDashboardPO {
         }
 
         // Strategy 2: Try existing close popup icon
-        if (playwright.waitTillLocatorIsVisible(closePopUpIcon, 2000.0)) {
+        if (playwright.waitTillLocatorIsVisible(closePopUpIcon, 10000.0)) {
             System.out.println("Strategy 2: Using existing close popup icon");
             playwright.clickOn(closePopUpIcon);
             playwright.hardWait(1000.0);
@@ -1176,7 +1176,7 @@ public class OwnerDashboardPO {
         }
 
         // Strategy 3: Try dialog popup close
-        if (playwright.waitTillLocatorIsVisible(dialogPopUp, 2000.0)) {
+        if (playwright.waitTillLocatorIsVisible(dialogPopUp, 10000.0)) {
             System.out.println("Strategy 3: Using dialog popup close");
             playwright.clickOn(dialogPopUp);
             playwright.hardWait(1000.0);
@@ -1184,7 +1184,7 @@ public class OwnerDashboardPO {
         }
 
         // Strategy 4: Try clicking outside the popup (ESC key)
-        if (playwright.isTextDisplayed("close", 1000.0)) {
+        if (playwright.isTextDisplayed("close", 10000.0)) {
             System.out.println("Strategy 4: Pressing ESC key to close popup");
             page.keyboard().press("Escape");
             playwright.hardWait(1000.0);
