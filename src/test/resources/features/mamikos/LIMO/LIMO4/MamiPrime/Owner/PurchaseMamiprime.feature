@@ -7,7 +7,7 @@ Feature: Purchase Mamiprime
     When user login as owner:
       | phone stag     | phone prod     | password  |
       | <phone number> | <phone number> | qwerty123 |
-    And user redirected to URL "https://owner-jambu.kerupux.com/prime"
+    And user visit page "/prime"
     And owner wants to buy mamiprime from header
     Then user will see pop up doesnt have property on mamiprime
     Examples:
@@ -21,7 +21,7 @@ Feature: Purchase Mamiprime
     When user login as owner:
       | phone stag   | phone prod   | password  |
       | 082320240418 | 082320240418 | qwerty123 |
-    And user click on mamiprime widget at owner dashboard
+    And user visit page "/prime"
     And owner wants to buy mamiprime from header
     Then user will see pop up doesnt have property on mamiprime
 

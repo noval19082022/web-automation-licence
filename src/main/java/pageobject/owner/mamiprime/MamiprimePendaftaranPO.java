@@ -182,13 +182,10 @@ public class MamiprimePendaftaranPO {
      * @param mamiprimeOption the package option to select
      */
     public void selectOptionMamiprime(String mamiprimeOption) {
-        Locator mamiprimePackagePlacement = page.getByTestId("package-placement-result")
-                .locator("div")
-                .filter(new Locator.FilterOptions()
-                        .setHasText(mamiprimeOption))
-                .nth(3);
+        Locator mamiprimePackagePlacement = page.getByText(mamiprimeOption).first();
         playwright.waitTillLocatorIsVisible(mamiprimePackagePlacement, 60000.0);
         playwright.clickOn(mamiprimePackagePlacement);
+        playwright.hardWait(1_000);
     }
 
     public void clickOnLanjutkanBtnFromMamiprimeLanding() {
