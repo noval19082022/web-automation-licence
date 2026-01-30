@@ -26,6 +26,7 @@ public class Hooks{
         tags = scenario.getSourceTagNames();
         FlowControl.setMultipleContextFlow(tags.contains("@context1") || tags.contains("@context2"));
         FlowControl.setContinueTag(tags.contains("@continue"));
+        FlowControl.setMobileFlow(tags.contains("@mobile"));
         FlowControl.setScenarioName(scenario.getName());
 
         if (FlowControl.isMultipleContextFlow()) {
@@ -50,8 +51,12 @@ public class Hooks{
 
         if (FlowControl.isStrictFlow() && !FlowControl.isContinueFlow()) {
             if (ActiveContext.getActiveBrowserContext() == null || ActiveContext.getActiveBrowserContext().pages().isEmpty()) {
-                MamikosBrowserContextInitializer.initializeBrowserContextOne();
-                MamikosBrowserContextInitializer.initializeBrowserContextOnePage();
+                if (FlowControl.isMobileFlow()) {
+                    MamikosBrowserContextInitializer.initializeMobileBrowserContext();
+                } else {
+                    MamikosBrowserContextInitializer.initializeBrowserContextOne();
+                    MamikosBrowserContextInitializer.initializeBrowserContextOnePage();
+                }
             }
         }
 

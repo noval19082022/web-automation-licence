@@ -13,6 +13,7 @@ public class FlowControl {
     private static ThreadLocal<Boolean> multipleContextFlow = ThreadLocal.withInitial(() -> false);
     private static ThreadLocal<Boolean> continueTag = ThreadLocal.withInitial(() -> false);
     private static ThreadLocal<Boolean> apiFlow = ThreadLocal.withInitial(() -> false);
+    private static ThreadLocal<Boolean> mobileFlow = ThreadLocal.withInitial(() -> false);
     private static ThreadLocal<String> scenarioName = ThreadLocal.withInitial(() -> null);
 
     // ===== Context One Flow =====
@@ -78,6 +79,15 @@ public class FlowControl {
         apiFlow.set(value);
     }
 
+    // ===== Mobile Flow =====
+    public static boolean isMobileFlow() {
+        return mobileFlow.get();
+    }
+
+    public static void setMobileFlow(boolean value) {
+        mobileFlow.set(value);
+    }
+
     // ===== Scenario Name =====
     public static String getScenarioName() {
         return scenarioName.get();
@@ -99,6 +109,7 @@ public class FlowControl {
         multipleContextFlow.set(false);
         continueTag.set(false);
         apiFlow.set(false);
+        mobileFlow.set(false);
         scenarioName.set(null);
     }
 
@@ -114,6 +125,7 @@ public class FlowControl {
         multipleContextFlow.remove();
         continueTag.remove();
         apiFlow.remove();
+        mobileFlow.remove();
         scenarioName.remove();
     }
 }
