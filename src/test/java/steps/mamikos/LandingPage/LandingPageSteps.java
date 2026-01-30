@@ -88,4 +88,9 @@ public class LandingPageSteps {
     public void userClicksOnMulaiCariKosButtonOnEnaknyangekosPage() {
         landing.cickOnMulaiCariKosBtn();
     }
+
+    @When("page pause for inspection")
+    public void pagePauseForInspection() {
+        page.pause();
+    }
 }

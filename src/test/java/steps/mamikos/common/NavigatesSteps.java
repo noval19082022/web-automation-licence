@@ -42,6 +42,7 @@ public class NavigatesSteps {
         page = ActiveContext.getActivePage();
         home = new HomePO(page);
         home.navigatesToHomepage();
+        page.pause();
     }
 
     @Given("admin go to mamikos mamipay admin")
