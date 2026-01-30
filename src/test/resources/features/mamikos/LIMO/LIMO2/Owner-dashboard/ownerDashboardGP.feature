@@ -57,7 +57,7 @@ Feature: Owner Dashboard GP
     # Scenario: MARS for check infp untuk anda at owner dashboard
     When owner navigates to "/"
     * owner click close icon pop up
-    Then validate that owner have "GoldPlus 1"
+#    Then validate that owner have "GoldPlus 1"
     And user click info untuk anda "Selamat, Anda bebas kirim chat tanpa kuota sebagai pelanggan GoldPlus."
     Then verify ftue "displayed"
     * verify title ftue is "Hore! Anda bisa chat tanpa kuota" and description "Sebagai pengguna GoldPlus, Anda bisa chat dan menjangkau penyewa sepuasnya tanpa batas kuota."

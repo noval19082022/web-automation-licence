@@ -30,6 +30,7 @@ public class OwnerDashboardPO {
     Locator gpWidgetButton;
     Locator seeAllNotification;
     Locator gpStatusImage;
+    Locator gpStatusLogoImage;
     Locator menuKelolaProperty;
     Locator ftueChatListOwner;
     Locator icnCloseBcTooltip;
@@ -131,6 +132,7 @@ public class OwnerDashboardPO {
         gpWidgetButton = page.locator(".goldplus-card__main");
         seeAllNotification = page.locator("//div[@class='c-notification__see-more']");
         gpStatusImage = page.locator("//div[@class='goldplus-card__logo bg-c-image bg-c-image--no-ratio']//following-sibling::div");
+        gpStatusLogoImage = page.locator(".goldplus-card__logo .bg-c-image__img");
         ftueChatListOwner = page.locator("[data-testid='ftueTooltipComponent']");
         icnCloseBcTooltip = page.locator("//button[contains(@class, 'bg-c-button')]/following::div[@id='tooltipContent']");
         gpLabelChatList = page.locator(".mc-goldplus-entrypoint-card");
@@ -353,9 +355,6 @@ public class OwnerDashboardPO {
             if (statusText != null && !statusText.isEmpty()) {
                 if (statusText.contains("Menunggu Pembayaran")) {
                     return "Menunggu Pembayaran";
-                }
-                if (statusText.contains("Sedang Diproses")) {
-                    return "Sedang Diproses";
                 }
             }
         }
@@ -1222,8 +1221,8 @@ public class OwnerDashboardPO {
      * @return String image file name (e.g., "logo-goldplus-gradient-1.webp")
      */
     public String getGoldPlusLogoImageName() {
-        playwright.waitTillLocatorIsVisible(gpStatusImage);
-        String src = playwright.getAttributeValue(gpStatusImage, "src");
+        playwright.waitTillLocatorIsVisible(gpStatusLogoImage);
+        String src = playwright.getAttributeValue(gpStatusLogoImage, "src");
         if (src != null && src.contains("/")) {
             return src.substring(src.lastIndexOf("/") + 1);
         }

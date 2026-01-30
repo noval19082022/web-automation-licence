@@ -72,9 +72,10 @@ Feature: Owner Dashboard GP-Onboarding
       | Lewat Statistik Iklan, Anda dapat melihat perkembangan iklan Properti Anda.                                  |
       | Cara Menggunakan MamiAds                                                                                     |
 
-  @continue @TEST_LIMO-3411
-  Scenario: [Web Owner][GP-Onboarding] Naikkan Iklan Anda - Swiper Left/Previous Button On MamiAds Onboarding Pop-Up Should Be Disabled
-    Then owner can see swiper left or previous button on gold plus onboarding pop-up is disabled
+      #After revamp this case not valid
+#  @continue @TEST_LIMO-3411
+#  Scenario: [Web Owner][GP-Onboarding] Naikkan Iklan Anda - Swiper Left/Previous Button On MamiAds Onboarding Pop-Up Should Be Disabled
+#    Then owner can see swiper left or previous button on gold plus onboarding pop-up is disabled
 
   @continue @TEST_LIMO-3412
   Scenario Outline: [Web Owner][GP-Onboarding] Naikkan Iklan Anda - Owner Can Use MamiAds Onboarding Pop-Up Swiper From Right To Left
@@ -93,9 +94,10 @@ Feature: Owner Dashboard GP-Onboarding
       | 6             | Kendalikan Pengeluaran Saldo       | Nonaktifkan MamiAds Anda untuk menghentikan pemakaian saldo.   | illustration mamiads balance control |
       | 7             | Pantau Performa di Statistik Iklan | Lihat perkembangan iklan Anda di sini.                         | illustration mamiads statistic       |
 
-  @continue @TEST_LIMO-3413
-  Scenario: [Web Owner][GP-Onboarding] Naikkan Iklan Anda - Swiper Right/Next Button On MamiAds Onboarding Pop-Up Should Be Disabled
-    Then owner can see swiper right or next button on gold plus onboarding pop-up is disabled
+    #After revamp this case not valid
+#  @continue @TEST_LIMO-3413
+#  Scenario: [Web Owner][GP-Onboarding] Naikkan Iklan Anda - Swiper Right/Next Button On MamiAds Onboarding Pop-Up Should Be Disabled
+#    Then owner can see swiper right or next button on gold plus onboarding pop-up is disabled
 
   @continue @TEST_LIMO-3414
   Scenario Outline: [Web Owner][GP-Onboarding] Naikkan Iklan Anda - Owner Can Use MamiAds Onboarding Pop-Up Swiper Left To Right
