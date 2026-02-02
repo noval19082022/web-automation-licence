@@ -24,6 +24,9 @@ public class ChatPO {
     private Locator messageBubble;
     private Locator messageInput;
     private Locator unresolvedCounter;
+    private Locator jawabCepatButton;
+    private Locator jawabCepatSearchInput;
+    private Locator jawabCepatKirimButton;
 
     //-----important---//
     Locator markImportantButton;
@@ -50,6 +53,11 @@ public class ChatPO {
         //--------important----//
         markImportantButton = page.locator("//div[@class=\"channel-list-item__important-button-icon\"]").first();
         importantMark = page.locator("//div[@data-testid=\"important-button-active\"]").first();
+
+        //--------jawab cepat----//
+        jawabCepatButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Jawaban Cepat"));
+        jawabCepatSearchInput = page.getByTestId("quick-reply-dropdown").getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName("Cari"));
+        jawabCepatKirimButton = page.getByTestId("quick-reply-dropdown").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Kirim"));
     }
 
     /**
@@ -148,7 +156,7 @@ public class ChatPO {
      * @param text
      */
     public void clickImportantFilterButton(String text){
-        Locator filterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(""+text+""));
+        Locator filterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(""+text+"")).first();
         playwright.clickOn(filterButton);
     }
 
@@ -243,5 +251,39 @@ public class ChatPO {
      */
     public boolean isUnresolvedCounterNotVisible() {
         return !playwright.waitTillLocatorIsVisible(unresolvedCounter);
+    }
+
+    /**
+     * Click on Jawab Cepat button
+     */
+    public void clickJawabCepatButton() {
+        playwright.clickOn(jawabCepatButton);
+    }
+
+    /**
+     * Search jawab cepat template by text and hover on it
+     * @param templateText the template text to search for
+     */
+    public void searchJawabCepatTemplate(String templateText) {
+        playwright.fill(jawabCepatSearchInput, templateText);
+        Locator templateOption = page.getByText(templateText).first();
+        playwright.hover(templateOption);
+    }
+
+    /**
+     * Click on Kirim button to send jawab cepat template
+     */
+    public void clickKirimButton() {
+        playwright.clickOn(jawabCepatKirimButton);
+    }
+
+    /**
+     * Send jawab cepat template by clicking button, searching template, and clicking Kirim
+     * @param templateText the template text to search and send
+     */
+    public void sendJawabCepatTemplate(String templateText) {
+        clickJawabCepatButton();
+        searchJawabCepatTemplate(templateText);
+        clickKirimButton();
     }
 }

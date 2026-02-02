@@ -139,4 +139,32 @@ public class ChatSteps {
     public void unresolved_counter_is_not_visible() {
         Assert.assertTrue(chatAdmin.isUnresolvedCounterNotVisible(), "Unresolved counter should not be visible");
     }
+
+    @When("admin click Jawab Cepat button")
+    public void admin_click_jawab_cepat_button() {
+        Page activePage = ActiveContext.getActivePage();
+        ChatPO activeChatAdmin = new ChatPO(activePage);
+        activeChatAdmin.clickJawabCepatButton();
+    }
+
+    @And("admin search jawab cepat template {string}")
+    public void admin_search_jawab_cepat_template(String templateText) {
+        Page activePage = ActiveContext.getActivePage();
+        ChatPO activeChatAdmin = new ChatPO(activePage);
+        activeChatAdmin.searchJawabCepatTemplate(templateText);
+    }
+
+    @And("admin click Kirim button")
+    public void admin_click_kirim_button() {
+        Page activePage = ActiveContext.getActivePage();
+        ChatPO activeChatAdmin = new ChatPO(activePage);
+        activeChatAdmin.clickKirimButton();
+    }
+
+    @When("admin send jawab cepat template {string}")
+    public void admin_send_jawab_cepat_template(String templateText) {
+        Page activePage = ActiveContext.getActivePage();
+        ChatPO activeChatAdmin = new ChatPO(activePage);
+        activeChatAdmin.sendJawabCepatTemplate(templateText);
+    }
 }
