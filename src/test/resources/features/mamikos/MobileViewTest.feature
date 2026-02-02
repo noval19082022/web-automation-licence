@@ -1,4 +1,4 @@
-@mobile @test
+@mobile
 Feature: Mobile View Test
 
   Scenario: Test mobile viewport implementation
