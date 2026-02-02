@@ -935,25 +935,35 @@ public class PropertiSayaPO {
     /**
      * Close success modal popup if present
      * This handles the modal that appears after saving data which can block other elements
-     * Uses JavaScript to close the modal to avoid interception issues
      */
     private void closeSuccessModalIfPresent() {
-        // Check if modal overlay is blocking the page
-        Locator modalActive = page.locator(".modal.c-mk-modal.is-active");
-        Locator successModal = page.locator(".success-modal");
+        playwright.hardWait(1000.0);
 
-        if (playwright.waitTillLocatorIsVisible(modalActive, 3000.0) ||
-            playwright.waitTillLocatorIsVisible(successModal, 2000.0)) {
-            // Modal is visible - use JavaScript to close without button click navigation
-            // This removes the is-active class from the modal to hide it
+        // Check if success modal is visible
+        Locator successModal = page.locator(".modal.c-mk-modal.is-active .success-modal");
+
+        if (successModal.isVisible()) {
+            // Try to click button inside modal first (using existing doneButtonEditKosPopUp locator pattern)
+            Locator modalButton = page.locator(".modal.c-mk-modal.is-active .bg-c-button--md.bg-c-button--primary");
+            if (modalButton.isVisible()) {
+                modalButton.click();
+                playwright.hardWait(1000.0);
+                return;
+            }
+
+            // Fallback: try any button in the success modal
+            Locator anyButton = page.locator(".modal.c-mk-modal.is-active button").first();
+            if (anyButton.isVisible()) {
+                anyButton.click();
+                playwright.hardWait(1000.0);
+                return;
+            }
+
+            // Last resort: use JavaScript to remove modal
             page.evaluate("() => { " +
                 "const modal = document.querySelector('.modal.c-mk-modal.is-active');" +
                 "if (modal) { modal.classList.remove('is-active'); }" +
-                "const overlay = document.querySelector('.modal-overlay.is-active');" +
-                "if (overlay) { overlay.classList.remove('is-active'); }" +
             "}");
-
-            // Wait for modal to disappear
             playwright.hardWait(500.0);
         }
     }
