@@ -2082,7 +2082,8 @@ public class PropertiSayaPO {
         playwright.hardWait(500.0);
         FileChooser fileChooser = playwright.waitForFileChooserByClick(uploadPhotoKos);
         fileChooser.setFiles(Paths.get(imagePath));
-        playwright.hardWait(3000);
+        playwright.waitTillLocatorIsVisible(uploadPhotoKos);
+        playwright.hardWait(10000); // improve hardwait, sometimes it wait too long for waiting until success upload
     }
 
     /**
