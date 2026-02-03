@@ -61,6 +61,7 @@ public class ChatOwnerPO {
     Locator chatBebasKuotaButton;
     Locator apaItuKuotaChatRoomButton;
     Locator daftarGPButton;
+    Locator blockingModalCloseButton;
 
     public ChatOwnerPO(Page page) {
         this.page = page;
@@ -115,6 +116,7 @@ public class ChatOwnerPO {
         buttonOnChatRoom = page.locator("button[class='bg-c-button bg-c-button--primary bg-c-button--sm']");
         buttonOnChatRoomList = page.locator("button.bg-c-button.mc-non-gp-entrypoint-card__entrypoint-button.bg-c-button--primary.bg-c-button--sm");
         daftarGPButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Daftar"));
+        blockingModalCloseButton = page.locator(".bg-c-modal__action-closable");
     }
 
     /**
@@ -129,6 +131,10 @@ public class ChatOwnerPO {
      */
     public void clickChatOwner() {
         playwright.waitTillPageLoaded();
+        if (playwright.waitTillLocatorIsVisible(blockingModalCloseButton, 3000.0)) {
+            playwright.clickOn(blockingModalCloseButton);
+            playwright.hardWait(1000.0);
+        }
         playwright.waitTillLocatorIsVisible(ownerChatButton);
         playwright.clickOn(ownerChatButton);
     }
