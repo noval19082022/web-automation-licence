@@ -34,8 +34,10 @@ Feature: [Web][Profile page] feature with background navigate profile page
     When user login as owner:
       | phone stag   | phone prod    | password  |
       | 089120220103 | 0890000000289 | qwerty123 |
-    And owner navigates to owner dashboard
-    And owner accept booking via Homepage
+    And owner accept booking from tenant:
+      | tenant name stag          | tenant name prod          |
+      | Tenant Wl Eight           | Tenant Wl Eight           |
+
 
   Scenario: Tenant pay kos
     Given user go to mamikos homepage
