@@ -1,4 +1,4 @@
-@regression @LIMO3 @listing-monetization @createKosMamipayActive @essentialTest2 @loadingrevamp
+@regression @LIMO3 @listing-monetization @createKosMamipayActive @essentialTest2
 Feature: Create Kos Mamipay Active
 
   @TEST_LIMO-776 @Automated @web-covered

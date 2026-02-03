@@ -1114,11 +1114,32 @@ public class PlaywrightHelpers {
      * Get accessibility tree snapshot of a specific element
      * This method captures the ARIA accessibility tree representation of the specified element
      * Useful for accessibility testing and debugging
-     * 
+     *
      * @param locator The locator for the element to capture the aria snapshot
      * @return String representation of the accessibility tree
      */
     public String getAriaSnapshot(Locator locator) {
         return locator.ariaSnapshot();
+    }
+
+    /**
+     * Wait for file chooser dialog by clicking on upload element
+     *
+     * @param uploadLocator The locator that triggers the file chooser
+     * @return FileChooser object to set files
+     */
+    public FileChooser waitForFileChooserByClick(Locator uploadLocator) {
+        return page.waitForFileChooser(() -> clickOn(uploadLocator));
+    }
+
+    /**
+     * Wait for file chooser dialog by force clicking on upload element
+     * Use this when the upload element has disabled attribute
+     *
+     * @param uploadLocator The locator that triggers the file chooser
+     * @return FileChooser object to set files
+     */
+    public FileChooser waitForFileChooserByForceClick(Locator uploadLocator) {
+        return page.waitForFileChooser(() -> forceClickOn(uploadLocator));
     }
 }
