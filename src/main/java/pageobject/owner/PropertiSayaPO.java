@@ -2071,23 +2071,18 @@ public class PropertiSayaPO {
      * @param photoName
      */
     public void uploadValidPhotoKos(String photoName) {
-        // Close success modal if it's blocking the upload button
         closeSuccessModalIfPresent();
-
-        // Additional wait to ensure modal is fully closed
         playwright.hardWait(1000.0);
 
         String imagePath = "src/main/resources/images/upload5Mb.jpg";
-        Locator uploadPhotoKos = page.getByText("+ Tambah foto " + photoName);
+        Locator uploadPhotoKos = page.locator("text=+ Tambah foto " + photoName);
 
-        // Wait for element to be visible and try clicking with force to bypass any overlay
         playwright.waitTillLocatorIsVisible(uploadPhotoKos, 10000.0);
-        FileChooser fileChooser = page.waitForFileChooser(() ->
-            uploadPhotoKos.click(new Locator.ClickOptions().setForce(true))
-        );
+        playwright.pageScrollInView(uploadPhotoKos);
+        playwright.hardWait(500.0);
+        FileChooser fileChooser = playwright.waitForFileChooserByClick(uploadPhotoKos);
         fileChooser.setFiles(Paths.get(imagePath));
-        playwright.waitTillLocatorIsVisible(uploadPhotoKos);
-        playwright.hardWait(5000); // improve hardwait, sometimes it wait too long for waiting until success upload
+        playwright.hardWait(3000);
     }
 
     /**
