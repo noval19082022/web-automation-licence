@@ -165,6 +165,8 @@ public class PropertiSayaPO {
     Locator dendaPrice;
     Locator singgahsiniModal;
     Locator closeButton;
+    Locator ifNoAppearsSuccessModalFirstButton;
+    Locator insideModalFirstButton;
 
     Locator toggleDeposit;
     Locator textBoxDeposit;
@@ -455,6 +457,8 @@ public class PropertiSayaPO {
         nameOtherPriceInput = page.locator("//input[@placeholder='Contoh: Listrik, Parkir']");
         amountOtherPriceInput = page.locator("//input[@class='input']");
         popUpBBK = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("join-mamibooking"));
+        ifNoAppearsSuccessModalFirstButton = page.locator(".modal.c-mk-modal.is-active button").first();
+        insideModalFirstButton = page.locator(".modal.c-mk-modal.is-active .bg-c-button--md.bg-c-button--primary");
     }
 
     /**
@@ -944,17 +948,15 @@ public class PropertiSayaPO {
 
         if (successModal.isVisible()) {
             // Try to click button inside modal first (using existing doneButtonEditKosPopUp locator pattern)
-            Locator modalButton = page.locator(".modal.c-mk-modal.is-active .bg-c-button--md.bg-c-button--primary");
-            if (modalButton.isVisible()) {
-                modalButton.click();
+            if (insideModalFirstButton.isVisible()) {
+                insideModalFirstButton.click();
                 playwright.hardWait(1000.0);
                 return;
             }
 
             // Fallback: try any button in the success modal
-            Locator anyButton = page.locator(".modal.c-mk-modal.is-active button").first();
-            if (anyButton.isVisible()) {
-                anyButton.click();
+            if (ifNoAppearsSuccessModalFirstButton.isVisible()) {
+                ifNoAppearsSuccessModalFirstButton.click();
                 playwright.hardWait(1000.0);
                 return;
             }
