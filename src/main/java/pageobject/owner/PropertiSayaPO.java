@@ -2072,18 +2072,67 @@ public class PropertiSayaPO {
      */
     public void uploadValidPhotoKos(String photoName) {
         closeSuccessModalIfPresent();
-        playwright.hardWait(1000.0);
+
+        // Additional wait to ensure modal is fully closed and page is stable
+        playwright.hardWait(2000.0);
 
         String imagePath = "src/main/resources/images/upload5Mb.jpg";
         Locator uploadPhotoKos = page.locator("text=+ Tambah foto " + photoName);
 
-        playwright.waitTillLocatorIsVisible(uploadPhotoKos, 10000.0);
-        playwright.pageScrollInView(uploadPhotoKos);
-        playwright.hardWait(500.0);
-        FileChooser fileChooser = playwright.waitForFileChooserByClick(uploadPhotoKos);
-        fileChooser.setFiles(Paths.get(imagePath));
-        playwright.waitTillLocatorIsVisible(uploadPhotoKos);
-        playwright.hardWait(10000); // improve hardwait, sometimes it wait too long for waiting until success upload
+        // Wait for element to be visible
+        playwright.waitTillLocatorIsVisible(uploadPhotoKos, 15000.0);
+
+        // Scroll element into view to ensure it's clickable
+        uploadPhotoKos.scrollIntoViewIfNeeded();
+        playwright.hardWait(1000.0);
+
+        // Try to find the hidden input[type=file] near the upload button and use setInputFiles
+        // This is more reliable than waitForFileChooser in some cases
+        try {
+            // First try: Look for input[type=file] in the parent container of the upload button
+            Locator fileInput = uploadPhotoKos.locator("xpath=ancestor::div[contains(@class, 'upload') or contains(@class, 'photo') or contains(@class, 'image')]//input[@type='file']").first();
+
+            if (fileInput.count() > 0) {
+                fileInput.setInputFiles(Paths.get(imagePath));
+            } else {
+                // Second try: Look for any visible file input nearby
+                Locator nearbyFileInput = page.locator("input[type='file']").first();
+                if (nearbyFileInput.count() > 0) {
+                    nearbyFileInput.setInputFiles(Paths.get(imagePath));
+                } else {
+                    // Fallback to waitForFileChooser
+                    FileChooser fileChooser = page.waitForFileChooser(
+                        new Page.WaitForFileChooserOptions().setTimeout(30000.0),
+                        () -> uploadPhotoKos.click(new Locator.ClickOptions().setForce(true))
+                    );
+                    fileChooser.setFiles(Paths.get(imagePath));
+                }
+            }
+        } catch (Exception e) {
+            // If setInputFiles approach fails, fallback to waitForFileChooser
+            System.out.println("setInputFiles approach failed, falling back to waitForFileChooser: " + e.getMessage());
+            FileChooser fileChooser = page.waitForFileChooser(
+                new Page.WaitForFileChooserOptions().setTimeout(30000.0),
+                () -> uploadPhotoKos.click(new Locator.ClickOptions().setForce(true))
+            );
+            fileChooser.setFiles(Paths.get(imagePath));
+        }
+
+        // Wait for upload to complete
+        playwright.hardWait(5000.0);
+
+        // Poll until upload completes (button may disappear or change state)
+        int maxAttempts = 20;
+        int attempt = 0;
+        while (attempt < maxAttempts) {
+            // Check if loading indicator is gone or upload is complete
+            Locator loadingIndicator = page.locator(".loading, .uploading, .progress");
+            if (!loadingIndicator.isVisible()) {
+                break;
+            }
+            playwright.hardWait(500.0);
+            attempt++;
+        }
     }
 
     /**
