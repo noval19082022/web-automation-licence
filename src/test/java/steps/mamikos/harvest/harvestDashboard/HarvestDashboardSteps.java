@@ -22,7 +22,7 @@ public class HarvestDashboardSteps {
         Assert.assertEquals(playwright.getPageUrl(), Mamikos.URL+"/leads/harvest/all-leads");
     }
 
-    @When("admin click sidebar menu {string}")
+    @When("owner/admin click sidebar menu {string}")
     public void admin_click_sidebar_menu(String menu) {
         dashboard.clickSidebarMenu(menu);
     }

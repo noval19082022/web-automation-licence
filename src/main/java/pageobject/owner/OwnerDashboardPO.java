@@ -118,7 +118,7 @@ public class OwnerDashboardPO {
         this.playwright = new PlaywrightHelpers(page);
         this.locator = new LocatorHelpers(page);
         manajemenKost = page.locator(".bg-l-sidebar__item p").filter(new Locator.FilterOptions().setHasText("Manajemen Kos"));
-        pengajuanSewaBtn = page.getByRole(AriaRole.PARAGRAPH).filter(new Locator.FilterOptions().setHasText("Pengajuan Sewa")).first();
+        pengajuanSewaBtn = page.locator("//div[@class='activity-list-menu__item']");
         ownerProfile = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("mamikos").setExact(true));
         tagihanPenyewa = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tagihan Penyewa"));
         broadcastChatBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Broadcast Chat"));
@@ -172,7 +172,7 @@ public class OwnerDashboardPO {
         saveInPopUpButton = page.getByTestId("checkin-save-btn");
         saveBssButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Simpan"));
         toggleEnable = page.locator("//div[@class='bg-c-switch checkin-setting-modal__d-day-checkin-switch bg-c-switch--on bg-c-switch--hover']");
-        mamitourDashboard = page.locator("a").filter(new Locator.FilterOptions().setHasText("virtual-tour-360 MamiTour Tur virtual keliling properti kos chevron-right"));
+        mamitourDashboard = page.locator("//img[@alt='mamitour-logo']");
         mamitourMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("MamiTour"));
         mamifotoButton = page.locator("//img[@alt='mamifoto-logo']");
         pageHeader = page.locator(".room-page__header");

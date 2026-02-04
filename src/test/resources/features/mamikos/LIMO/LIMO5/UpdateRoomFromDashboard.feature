@@ -7,7 +7,8 @@ Feature: Update Room from Dashboard
     When user login as owner:
       | phone stag   | phone prod   | password  |
       | 082233545506 | 082233545506 | qwerty123 |
-    When user click menu "Atur Ketersediaan Kamar" on feature waktunya mengelola property
+    And owner click sidebar menu "Manajemen Kos"
+    When user click menu "Ketersediaan Kamar" on feature waktunya mengelola property
     And owner click "Kost Automate Dua Depok Sleman"
     And owner add room with name or room number "61"
     And owner click simpan on add room pop up

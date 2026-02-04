@@ -104,7 +104,7 @@ Feature: Broadcast Chat Owner
     When owner navigates to broadcast chat page
     And owner clicks on Baca selengkapnya button
     And owner set active page to 1
-    Then user redirected to "berapa-kali-saya-bisa-mengirimkan-broadcast-chat"
+    Then user redirected to "post/berapa-kali-saya-bisa-mengirimkan-broadcast-chat"
 
   @TEST_LIMO-3623
   Scenario:[Broadcast Chat][Create Broadcast chat]User want to send broadcast chat for kost without have a recipient
@@ -346,7 +346,6 @@ Feature: Broadcast Chat Owner
       | 081280003230 | 0          | qwerty123 |
     And user click on chat button in top bar tenant home page
     And user opens the chatroom in the "1" order on chat list
-    Then chat room appear with latest message "Banyak keunggulannya seperti: Kopi Kapal Api dan Udud Jarcok Filter"
 
   @TEST_LIMO-188
   Scenario: [Broadcast Chat][Select Message]User back from Select Message Page

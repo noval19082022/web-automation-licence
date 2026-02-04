@@ -7,7 +7,10 @@ Feature: Update Price from Dashboard
     When user login as owner:
       | phone stag  | phone prod  | password  |
       | 08713399866 | 08713399866 | qwerty123 |
-    And user click menu "Atur Harga" on feature waktunya mengelola property
+    When owner navigates to property saya kos
+    And owner search kost "Kos Fathul Khair Tipe bala bala Jetis Yogyakarta" on property saya page
+    And user click Lihat Selengkapnya button for edit
+    And owner click "Update Harga"
     And user click kos "Kos Fathul Khair Tipe bala bala Jetis Yogyakarta" in update price list
     And user click see other prices
     When user input daily price with "<Daily Price>"
@@ -16,7 +19,6 @@ Feature: Update Price from Dashboard
     And user input three monthly price with "<Three Monthly Price>"
     And user input six monthly price with "<Six Monthly Price>"
     And user input yearly price with "<Yearly Price>"
-    And user click back button in page
     And user click continue input data on pop up
     And user clicks update price button
     Then user see pop up success update price "Harga berhasil diupdate"
