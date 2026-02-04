@@ -24,7 +24,7 @@ public class RoleManagementPO {
         this.page = page;
         playwright = new PlaywrightHelpers(page);
 
-        roleManagementMenu = page.locator(".nav-sidebar__list-item").nth(5);
+        roleManagementMenu = page.getByRole(AriaRole.LINK,new Page.GetByRoleOptions().setName("Role Management"));
         tambahRoleButton = page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Tambah Role"));
         namaRoleText = page.getByPlaceholder("Input Nama Role");
         searchMemberText = page.getByPlaceholder("Cari");
