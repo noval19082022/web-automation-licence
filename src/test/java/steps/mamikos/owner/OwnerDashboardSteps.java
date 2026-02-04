@@ -2,6 +2,7 @@ package steps.mamikos.owner;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -448,6 +449,11 @@ public class OwnerDashboardSteps {
     @Then("owner cannot see onboarding card on owner dashboard")
     public void ownerCannotSeeOnboardingCardOnOwnerDashboard() {
         Assert.assertTrue(ownerDashboardPO.isOnboardingCardNotVisible(), "Onboarding card should not be visible but it is");
+    }
+
+    @And("owner accsess statistic page")
+    public void ownerAccsessStatisticPage() {
+        playwright.navigateTo(Mamikos.OWNER_URL + "/statistic");
     }
 }
 
