@@ -244,14 +244,17 @@ public class OwnerManageBillSteps {
     public void userWillSeeMessageForOwner() {
         Assert.assertTrue(billManage.userCanSeeHelpCenterPage());
     }
-    @And("owner search kost in billing management {string}")
+
+    @When("owner search kost in billing management {string}")
     public void ownerSearchKostInPenyewaMenu(String kostName) {
         billManage.searchKostInBillingManagement(kostName);
     }
+
     @Then("user see Kapan uang masuk ke rekening saya? and clicks on disbursement link")
     public void userClickOnDIsbursementLink() {
         billManage.userClickOnDIsbursementLink();
     }
+
     @Then("user can see {string} and {string}")
     public void user_can_sees_other_price_with_name_and_price_on_konfirmasi(String titleText, String contentText) {
         Assert.assertEquals(billManage.getTextFinancialReport(titleText, contentText), "Buka Laporan Keuangan di AplikasiUntuk saat ini, fitur Laporan Keuangan hanya dapat digunakan di\n" +

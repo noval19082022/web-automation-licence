@@ -78,6 +78,7 @@ public class PropertiSayaPO {
     Locator closeInfobarButton;
     Locator priceKostTextBoxDisable;
     Locator modalPopUp;
+    Locator activeRoomModalOverlay;
     Locator statusKos;
     Locator warningPrice;
     Locator tambahDataIklan;
@@ -303,6 +304,7 @@ public class PropertiSayaPO {
         closeInfobarButton = page.locator(".delete");
         priceKostTextBoxDisable = page.locator("//*[@class='input property-room__price-item-input-currency satu --disabled']");
         modalPopUp = page.locator("//div[@class='modal-content']");
+        activeRoomModalOverlay = page.locator(".modal.c-mk-modal.is-active");
         statusKos = page.locator(".kos-card__status");
         tambahDataIklan = page.getByTestId("add-room-btn");
         tambahIklanBaru = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah Iklan Baru"));
@@ -2463,6 +2465,9 @@ public class PropertiSayaPO {
      */
     public void saveAddRoomPopUp() {
         playwright.clickOn(updateKamarButtonPopup);
+        // Wait for modal overlay to close and status update to complete
+        playwright.waitTillLocatorIsNotVisible(activeRoomModalOverlay, 500.0, 10);
+        playwright.waitTillPageLoaded();
     }
 
     /**

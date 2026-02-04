@@ -2,6 +2,7 @@ package steps.mamikos.common;
 
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.LoadState;
+import com.microsoft.playwright.options.WaitUntilState;
 import config.global.FlowControl;
 import config.global.GlobalConfig;
 import config.playwright.context.ActiveContext;
@@ -12,6 +13,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobject.admin.mamipay.AdminMamipayDashboardPO;
 import pageobject.common.ForgotPasswordPO;
 import pageobject.common.HomePO;
 import pageobject.common.LoadingPO;
@@ -36,6 +38,7 @@ public class NavigatesSteps {
     CheckPropertyPO checkProperty = new CheckPropertyPO(page);
     PropertiSayaPO propertySaya = new PropertiSayaPO(ActiveContext.getActivePage());
     LoginHarvestDashboardPO loginHarvestDashboard = new LoginHarvestDashboardPO(page);
+    AdminMamipayDashboardPO adminMamipayDashboard = new pageobject.admin.mamipay.AdminMamipayDashboardPO(page);
 
     @Given("user go to mamikos homepage")
     public void userGoToMamikosHomepage() {
@@ -47,7 +50,8 @@ public class NavigatesSteps {
     @Given("admin go to mamikos mamipay admin")
     public void adminGoToMamikosMamipayAdmin() {
         if (AjukanSewaStatus.isContractPresent() || !FlowControl.isApiFlow()) {
-            playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.LOGIN_MAMIPAY, 60000.0);
+            playwright.navigateTo(Mamikos.ADMINMAMIPAY+Mamikos.LOGIN_MAMIPAY, WaitUntilState.DOMCONTENTLOADED, GlobalConfig.LONG_TIMEOUT);
+            adminMamipayDashboard.waitForDashboardToLoad();
         }
     }
 
@@ -235,7 +239,7 @@ public class NavigatesSteps {
 
     @And("owner/user navigates to owner dashboard")
     public void userNavigatesToOwnerDashboard() {
-        playwright.navigateTo(Mamikos.OWNER_URL, 30000.0);
+        playwright.navigateTo(Mamikos.OWNER_URL, WaitUntilState.DOMCONTENTLOADED);
         loading.waitForLoadingIconDisappear();
         home.clickOnSayaSetujuButton();
     }
@@ -284,7 +288,7 @@ public class NavigatesSteps {
 
     @And("user navigate to penyewa page")
     public void userNavigateToPenyewaPage() {
-        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.PENYEWA, 50000.0, LoadState.LOAD);
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.PENYEWA, WaitUntilState.DOMCONTENTLOADED, GlobalConfig.LONG_TIMEOUT);
     }
 
     @And("admin navigate to mamikos voucher menu")

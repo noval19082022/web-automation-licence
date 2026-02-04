@@ -31,6 +31,7 @@ public class AdminMamipayDashboardPO {
     Locator optionGpRecurring;
     Locator createRecurringBtn;
     Locator addFeeButton;
+    Locator dashboardHeading;
 
     public AdminMamipayDashboardPO(Page page) {
         this.page = page;
@@ -53,6 +54,15 @@ public class AdminMamipayDashboardPO {
         optionGpRecurring = page.getByRole(AriaRole.COMBOBOX);
         createRecurringBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Create Recurring"));
         addFeeButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Add Fee"));
+        dashboardHeading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("MamiPAY Admin"));
+    }
+
+    /**
+     * Wait for MamiPAY dashboard to be fully loaded
+     * Ensures the dashboard heading is visible before proceeding
+     */
+    public void waitForDashboardToLoad() {
+        playwright.waitTillLocatorIsVisible(dashboardHeading, 60000.0);
     }
 
     /**

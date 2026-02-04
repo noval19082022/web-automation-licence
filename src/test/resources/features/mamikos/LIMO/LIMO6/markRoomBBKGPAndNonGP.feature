@@ -35,7 +35,9 @@ Feature: Owner - Penyewa Feature
       | phone stag   | phone prod    | password  |
       | 089120220103 | 0890000000289 | qwerty123 |
     And owner navigates to owner dashboard
-    And owner accept booking via Homepage
+    And owner accept booking from tenant:
+      | tenant name stag          | tenant name prod          |
+      | Owner galak suka survey   | Owner galak suka survey   |
     And owner logs out
 
 #  Scenario: Tenant pay kos
@@ -80,10 +82,10 @@ Feature: Owner - Penyewa Feature
   Scenario: Check content and link on info untuk anda for disbursement
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | phone prod  | password  |
-      | 089604239091 | 08100000622 | qwerty123 |
+      | phone stag   | phone prod    | password  |
+      | 089120220103 | 0890000000289 | qwerty123 |
     And owner navigate to billing management
-    And owner search kost in billing management "Rini punya kost tipe A"
+    And owner search kost in billing management "Kost Singgahsini Noval Tipe C Tobelo Utara Halmahera Utara ARAC Grade A Tobelo"
     And owner set Kelola Tagihan filter month to "Februari" month
     And user clicks Sudah bayar tab
     And user see Kapan uang masuk ke rekening saya? and clicks on disbursement link
@@ -202,7 +204,8 @@ Feature: Owner - Penyewa Feature
     When user login as owner:
       | phone stag   | password     |
       | 081362464341 | 1d0lt3stb4ru |
-    And user click menu "Atur Harga" on feature waktunya mengelola property
-    And user click kos "Ancient Fuelweaver Automation" in update price list
+    And owner navigates to update kos price with id:
+      | stag     | prod     |
+      | 89273843 | mock89273843 |
     And user delete active other additional price
     Then tenant can not sees active other price
