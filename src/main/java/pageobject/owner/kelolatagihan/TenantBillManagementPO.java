@@ -60,6 +60,7 @@ public class TenantBillManagementPO {
     Locator informationAboutUpcomingFeature;
     Locator kostDropdownInBillingManagement;
     Locator lihatStatusTagihanBtn;
+    Locator billingManagementModalCloseIcon;
 
     Locator disbursementLink;
 
@@ -92,6 +93,7 @@ public class TenantBillManagementPO {
         checkbox = page.locator("//div[@class=\"modal-download__download-alert bg-c-checkbox\"]//span[@class=\"bg-c-checkbox__icon\"]");
         informationAboutUpcomingFeature = page.locator("//div[@class='modal-download__download-alert bg-c-alert bg-c-alert--info']//div[@class='bg-c-alert__content']");
         kostDropdownInBillingManagement = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Icon arrow down"));
+        billingManagementModalCloseIcon = page.locator(".bm-filter-kost-modal__header .close-icon");
         arrowNextMonthFilterButton = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("arrow-right"));
         lihatStatusTagihanBtn = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat Status Tagihan"));
         krmUlangKodeBtn = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kirim ulang kode"));
@@ -547,6 +549,7 @@ public class TenantBillManagementPO {
     public boolean userCanSeeHelpCenterPage() {
         return playwright.isTextDisplayed("Pusat Bantuan");
     }
+
     /**
      * user as owner click kost dropdown
      * user enter kost name
@@ -555,15 +558,23 @@ public class TenantBillManagementPO {
     public void searchKostInBillingManagement(String kostName) {
         playwright.waitTillPageLoaded();
         playwright.clickOn(kostDropdownInBillingManagement);
+        playwright.hardWait(500.0);
         Locator selectKost = page.locator("//label[contains(.,'"+kostName+"')]");
         playwright.clickOn(selectKost);
+        // If property was already selected, clicking it won't close the modal
+        // Force close modal by clicking close icon to handle both cases
+        playwright.hardWait(1000.0);
+        if (playwright.waitTillLocatorIsVisible(billingManagementModalCloseIcon, 2000.0)) {
+            playwright.clickOn(billingManagementModalCloseIcon);
+        }
+        playwright.waitTillPageLoaded();
     }
 
     /**
      * user click on disbursement link
      */
     public void userClickOnDIsbursementLink() {
-        playwright.waitTillLocatorIsVisible(disbursementLink,2000.0);
+        playwright.waitTillLocatorIsVisible(disbursementLink, 10000.0);
         playwright.clickOn(disbursementLink);
     }
     /**

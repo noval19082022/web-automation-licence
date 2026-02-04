@@ -83,6 +83,29 @@ public class PlaywrightHelpers {
     }
 
     /**
+     * This method navigates to a specified URL with custom WaitUntilState
+     * Allows specifying when navigation is considered complete: LOAD, DOMCONTENTLOADED, NETWORKIDLE, COMMIT
+     *
+     * @param url   String data type of URL format
+     * @param state WaitUntilState when to consider navigation succeeded
+     */
+    public void navigateTo(String url, WaitUntilState state) {
+        page.navigate(url, new Page.NavigateOptions().setWaitUntil(state));
+    }
+
+    /**
+     * This method navigates to a specified URL with custom WaitUntilState and timeout
+     * Allows specifying when navigation is considered complete and custom timeout
+     *
+     * @param url     String data type of URL format
+     * @param state   WaitUntilState when to consider navigation succeeded
+     * @param timeout Double data type of specific timeout in milliseconds
+     */
+    public void navigateTo(String url, WaitUntilState state, Double timeout) {
+        page.navigate(url, new Page.NavigateOptions().setWaitUntil(state).setTimeout(timeout));
+    }
+
+    /**
      * This overloaded version of the navigateTo method waits for a specific load state before navigating to the URL.
      *
      * @param url   String data type of URL format

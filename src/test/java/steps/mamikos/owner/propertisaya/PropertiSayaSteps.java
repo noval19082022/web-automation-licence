@@ -46,9 +46,8 @@ public class PropertiSayaSteps {
 
     private List<Map<String, String>> property;
 
-    @When("user/owner use direct url access to update kos price:")
-    public void userGoToEditKosPageByKosId(DataTable table) {
-        playwright.waitTillPageLoaded(GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT);
+    @When("owner navigates to update kos price with id:")
+    public void ownerNavigatesToUpdateKosPriceWithId(DataTable table) {
         Map<String, String> kosId;
         playwright = new PlaywrightHelpers(ActiveContext.getActivePage());
         kosId = table.asMap(String.class, String.class);
@@ -1063,7 +1062,6 @@ public class PropertiSayaSteps {
 
     @Then("owner can sees room is on {string} status")
     public void ownerCanSeesRoomIsOnStatus(String statusRoom) {
-        // Wait for status update handled in getRoomStatus() method
         Assert.assertEquals(propertySaya.getRoomStatus(), statusRoom, "Status room doesn't match!");
     }
 

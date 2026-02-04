@@ -3,6 +3,8 @@ package pageobject.common;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import com.microsoft.playwright.options.WaitUntilState;
+import config.global.GlobalConfig;
 import data.mamikos.Mamikos;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
@@ -175,8 +177,8 @@ public class HomePO {
      * Navigates to homepage
      */
     public void navigatesToHomepage() {
-        playwright.navigateTo(Mamikos.URL, 60000.0);
-        playwright.waitTillLocatorIsVisible(getMamikosLogo(), 3000.0);
+        playwright.navigateTo(Mamikos.URL, WaitUntilState.DOMCONTENTLOADED, GlobalConfig.LONG_TIMEOUT);
+        playwright.waitTillLocatorIsVisible(getMamikosLogo(), 60000.0);
     }
 
     /**
@@ -184,7 +186,7 @@ public class HomePO {
      * @return LoginPO class
      */
     public LoginPO clickOnButtonMasuk() {
-        playwright.waitTillLocatorIsVisible(btnMasuk, 60000.0);
+        playwright.waitTillLocatorIsVisible(btnMasuk, GlobalConfig.LONG_TIMEOUT);
         playwright.clickOn(btnMasuk);
         return new LoginPO(page);
     }
