@@ -42,16 +42,16 @@ public class TenantBillManagementPO {
     Locator ubahKontrakPenyewaBtn;
     Locator contractNumber1;
     Locator contractList;
-    Locator contractPageEmpty;
-    Locator contractName;
-    Locator clickSelengkapnyaContract;
+    Locator contractBookingCard;
     Locator arrowNextMonthFilterButton;
+    Locator arrowPrevMonthFilterButton;
     Locator krmUlangKodeBtn;
     Locator krmKodeUnikPage;
     Locator ubahNmrHpBtn;
     Locator phoneNumberField;
     Locator gunakanBtn;
-    Locator  dontHaveKosWarning;
+    Locator dontHaveKosWarning;
+    Locator selectMonth;
 
     //Locator for download biodata penyewa
     Locator filterDropdown;
@@ -83,16 +83,17 @@ public class TenantBillManagementPO {
         ubahKontrakPenyewaButton = page.getByTestId("btn-edit-contract");
         headerContractStatus = page.getByTestId("statusContractLabel-active");
         tenantPhoto = page.locator("//div[@class='bg-c-avatar bg-c-avatar--xl']");
-        disclaimerCheckinTenant = page.locator("//div[contains(@class,'tenant-header__alert')]");
+        disclaimerCheckinTenant = page.locator(".bg-c-alert").filter(new Locator.FilterOptions().setHasText("check-in"));
         contractNumber1 = page.locator("(//div[@class='tenant-list__card'])[1]");
-        contractList = page.locator("//div[@class='tenant-card-item__info']");
-        disclaimerCheckinTenant = page.locator("//div[contains(@class,'tenant-header__alert')]");
+        contractList = page.locator("//div[@class='tenant-card-item__main']");
+        contractBookingCard = page.locator(".tenant-list__card");
         filterDropdown = page.locator("//div[@class='bg-c-select']//div[@class='bg-c-dropdown']");
         downloadBiodataPenyewaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Download biodata penyewa"));
         checkbox = page.locator("//div[@class=\"modal-download__download-alert bg-c-checkbox\"]//span[@class=\"bg-c-checkbox__icon\"]");
         informationAboutUpcomingFeature = page.locator("//div[@class='modal-download__download-alert bg-c-alert bg-c-alert--info']//div[@class='bg-c-alert__content']");
         kostDropdownInBillingManagement = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Icon arrow down"));
         arrowNextMonthFilterButton = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("arrow-right"));
+        arrowPrevMonthFilterButton = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("arrow-left"));
         lihatStatusTagihanBtn = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Lihat Status Tagihan"));
         krmUlangKodeBtn = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Kirim ulang kode"));
         krmKodeUnikPage = page.getByText("Kirim kode unik ke penyewa");
@@ -101,6 +102,7 @@ public class TenantBillManagementPO {
         gunakanBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Gunakan"));
         dontHaveKosWarning = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Belum Ada Penyewa Kos"));
         disbursementLink = page.locator("//a[contains(.,'Kapan uang masuk ke rekening saya?')]");
+        selectMonth = page.locator(".vdp-datepicker__calendar");
     }
 
     /**
@@ -448,39 +450,13 @@ public class TenantBillManagementPO {
     }
 
     /**
-     * Get number of booking list
-     * @throws InterruptedException
-     * @return number of elements
+     * Click selengkapnya button based on contract name directly
+     * @param contractName the tenant name to find
      */
-    public int getNumberListOfContract() {
-        playwright.hardWait(2);
-        int numberOfElements = 0;
-        if (contractNumber1.isVisible()){
-            numberOfElements = playwright.getLocators(contractList).size();
-        } else {
-            contractPageEmpty.isVisible();
-        }
-        return numberOfElements;
-    }
-
-    /**
-     * Get one data booking status
-     * @param index is number for specific data want to get
-     * @return booking status
-     */
-    public String getContractName(int index) {
-//        contractName = page.getByText(index);
-        contractName = page.locator("(//div[@class='tenant-card-item__content']/p)[" + index + "]");
-        return playwright.getText(contractName);
-    }
-
-    /**
-     * Click selengkapnya button based on contract name (tenant's contract)
-     * @throws InterruptedException
-     */
-    public void clickSelengkapnyaContract(int index) throws InterruptedException {
-        clickSelengkapnyaContract = page.locator("(//b[contains(., 'Selengkapnya')])[" + index + "]");
-        playwright.forceClickOn(clickSelengkapnyaContract);
+    public void clickSelengkapnyaByContractName(String contractName) {
+        Locator filteredCard = contractBookingCard.filter(new Locator.FilterOptions().setHasText(contractName));
+        Locator selengkapnyaBtn = filteredCard.locator("text=Selengkapnya");
+        playwright.forceClickOn(selengkapnyaBtn);
     }
 
     /**
@@ -534,6 +510,42 @@ public class TenantBillManagementPO {
     public void clickArrowNextMonthFilterButton() {
         playwright.clickOn(arrowNextMonthFilterButton);
     }
+
+    /**
+     * Click arrow prev month filter button
+     */
+    public void clickArrowPrevMonthFilterButton() {
+        playwright.clickOn(arrowPrevMonthFilterButton);
+    }
+
+    /**
+     * Select month filter by month name and target year
+     * Navigates the datepicker to the correct year then clicks the month
+     * @param month Indonesian month name (e.g., "Februari")
+     * @param targetYear target year (e.g., 2025)
+     */
+    public void selectMonthFilterByMonthAndYear(String month, int targetYear) {
+        playwright.waitFor(filterMonth, 30000.0);
+        playwright.waitTillPageLoaded();
+        playwright.clickOn(filterMonth);
+        playwright.hardWait(1000);
+
+        int currentYear = java.time.LocalDate.now().getYear();
+
+        for (int i = 0; i < currentYear - targetYear; i++) {
+            clickArrowPrevMonthFilterButton();
+            playwright.hardWait(500);
+        }
+
+        for (int i = 0; i < targetYear - currentYear; i++) {
+            clickArrowNextMonthFilterButton();
+            playwright.hardWait(500);
+        }
+
+        Locator monthCell = selectMonth.getByText(month);
+        playwright.clickOn(monthCell);
+    }
+
     /**
      * check upcoming feature
      */

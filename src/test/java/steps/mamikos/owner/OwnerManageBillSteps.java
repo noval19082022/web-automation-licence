@@ -199,15 +199,9 @@ public class OwnerManageBillSteps {
     }
 
     @And("user click Selengkapnya button on {string} contract")
-    public void user_click_selengkapnya_button_on_contract(String contract) throws InterruptedException {
-        int numberOfList = billManage.getNumberListOfContract();
-        for (int i=1; i<=numberOfList; i++){
-            if (billManage.getContractName(i).equals(contract)){
-                playwright.hardWait(2);
-                billManage.clickSelengkapnyaContract(i);
-                break;
-            }
-        }
+    public void user_click_selengkapnya_button_on_contract(String contract) {
+        playwright.hardWait(2);
+        billManage.clickSelengkapnyaByContractName(contract);
     }
 
     @Then("user can see disclaimer {string}")

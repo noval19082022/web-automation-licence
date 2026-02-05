@@ -264,8 +264,10 @@ public class PaymentSteps {
         } else if (monthNumber.equalsIgnoreCase("Januari")) {
             monthNumber = java.updateTimeLocal("yyyy MMM dd", java.getTimeStamp("yyyy MMM dd"), "M", "en", 0, 0, 0, 0, 0);
             invoice.selectManageNextBillsMonthFilterOctober(monthNumber);
+        } else if (monthNumber.equalsIgnoreCase("Februari")) {
+            tenantBillManagement.selectMonthFilterByMonthAndYear("Februari", 2025);
         } else {
-            // Handle all other month names (Februari, Maret, April, etc.)
+            // Handle all other month names (Maret, April, etc.)
             tenantBillManagement.selectMonthFilter(monthNumber);
         }
     }
