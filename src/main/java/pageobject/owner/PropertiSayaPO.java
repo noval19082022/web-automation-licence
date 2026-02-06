@@ -979,14 +979,37 @@ public class PropertiSayaPO {
      * @param facility is facility name
      */
     public void clickFacilitiesCheckbox(String section, String facility) {
-        fasilitasFeature = page.locator("//h4[contains(., '" + section + "')]/following::div//p[contains(text(), '" + facility + "')]").first();
-        playwright.pageScrollUntilElementIsVisible(fasilitasFeature);
-        if (playwright.waitTillLocatorIsVisible(fasilitasFeature)) {
-            playwright.clickOn(fasilitasFeature);
+        // Wait for page to stabilize
+        playwright.waitTillPageLoaded();
+        playwright.hardWait(2000);
+
+        // Try multiple locator strategies
+        Locator facilityByXPath = page.locator("//h4[contains(., '" + section + "')]/following::div//p[contains(text(), '" + facility + "')]").first();
+        Locator facilityByLabel = page.locator("label:has-text('" + facility + "')").first();
+        Locator facilityByText = page.getByText(facility, new Page.GetByTextOptions().setExact(true)).first();
+        Locator facilityByCheckbox = page.locator("//span[contains(text(),'" + facility + "')]").first();
+        Locator facilityByTextContains = page.getByText(facility).first();
+
+        // Check which locator is visible and use it
+        if (playwright.waitTillLocatorIsVisible(facilityByXPath, 5000.0)) {
+            fasilitasFeature = facilityByXPath;
+        } else if (playwright.waitTillLocatorIsVisible(facilityByLabel, 3000.0)) {
+            fasilitasFeature = facilityByLabel;
+        } else if (playwright.waitTillLocatorIsVisible(facilityByText, 3000.0)) {
+            fasilitasFeature = facilityByText;
+        } else if (playwright.waitTillLocatorIsVisible(facilityByCheckbox, 3000.0)) {
+            fasilitasFeature = facilityByCheckbox;
+        } else if (playwright.waitTillLocatorIsVisible(facilityByTextContains, 3000.0)) {
+            fasilitasFeature = facilityByTextContains;
         } else {
-            fasilitasFeature = page.getByText(facility, new Page.GetByTextOptions().setExact(true));
-            playwright.clickOn(fasilitasFeature);
+            // Fallback: scroll down and try again with text
+            playwright.pageScrollHeightToBottom();
+            playwright.hardWait(1000);
+            fasilitasFeature = page.getByText(facility).first();
         }
+
+        playwright.pageScrollUntilElementIsVisible(fasilitasFeature);
+        playwright.clickOn(fasilitasFeature);
     }
 
     /**
@@ -1829,14 +1852,41 @@ public class PropertiSayaPO {
     }
 
     /**
-     * Upload valid photo kos
+     * Upload valid photo kos after invalid photo upload
+     * Handles the case where "Ubah Foto" button appears after invalid upload error
      */
     public void ubahValidPhotoKos() {
         String imagePath = "src/main/resources/images/upload5Mb.jpg";
-        FileChooser fileChooser = page.waitForFileChooser(() -> ubahFoto.click());
+
+        // Wait for any loading to complete
+        playwright.hardWait(2000);
+
+        // Try multiple locator strategies for "Ubah Foto" button
+        Locator ubahFotoButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah Foto")).first();
+        Locator ubahFotoText = page.getByText("Ubah Foto").first();
+        Locator ubahFotoAlt = page.locator("button:has-text('Ubah Foto')").first();
+
+        // Determine which locator to use
+        final Locator finalLocator;
+        if (playwright.waitTillLocatorIsVisible(ubahFotoButton, 3000.0)) {
+            finalLocator = ubahFotoButton;
+        } else if (playwright.waitTillLocatorIsVisible(ubahFotoText, 3000.0)) {
+            finalLocator = ubahFotoText;
+        } else if (playwright.waitTillLocatorIsVisible(ubahFotoAlt, 3000.0)) {
+            finalLocator = ubahFotoAlt;
+        } else {
+            // Fallback: use original ubahFoto locator
+            finalLocator = ubahFoto;
+        }
+
+        // Scroll into view and click
+        playwright.pageScrollUntilElementIsVisible(finalLocator);
+        FileChooser fileChooser = page.waitForFileChooser(() -> finalLocator.click());
         fileChooser.setFiles(Paths.get(imagePath));
-        playwright.waitTillLocatorIsVisible(ubahFoto);
         playwright.hardWait(3000);
+
+        // Wait for upload to complete
+        waitForPhotoUploadComplete();
     }
 
     /**
