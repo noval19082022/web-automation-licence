@@ -33,7 +33,7 @@ Feature: OB Reject Booking With Lainnya Reason
     When user login as owner:
       | phone stag   | phone prod   | password     |
       | 081362464341 | 081362464341 | 1d0lt3stb4ru |
-    And owner reject booking from dashboard
+    And owner navigates to owner dashboard
     And owner select other reject with custom reason "Saya sudah ada yang punya"
 
   Scenario: Tenant Check Reject Reason After Owner Reject

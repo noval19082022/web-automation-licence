@@ -118,7 +118,7 @@ public class OwnerDashboardPO {
         this.playwright = new PlaywrightHelpers(page);
         this.locator = new LocatorHelpers(page);
         manajemenKost = page.locator(".bg-l-sidebar__item p").filter(new Locator.FilterOptions().setHasText("Manajemen Kos"));
-        pengajuanSewaBtn = page.locator("//div[@class='activity-list-menu__item']");
+        pengajuanSewaBtn = page.locator("//div[@class='activity-list-menu__item']").filter(new Locator.FilterOptions().setHasText("Pengajuan Sewa"));
         ownerProfile = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("mamikos").setExact(true));
         tagihanPenyewa = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tagihan Penyewa"));
         broadcastChatBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Broadcast Chat"));
@@ -239,6 +239,7 @@ public class OwnerDashboardPO {
      * Click on manajemen kost
      */
     public void clickOnManagementKost() {
+        playwright.hardWait(2000);
         if (playwright.isTextDisplayed("Sudah cek fitur-fitur GoldPlus ini?") || playwright.isTextDisplayed("Selamat bergabung di GoldPlus 2!")) {
             playwright.clickOnText("Nanti Saja", 5000.0);
         }
@@ -379,6 +380,7 @@ public class OwnerDashboardPO {
      * @param menu is menu on feature kelola property
      */
     public void clickOnMenuKelolaProperty(String menu){
+        playwright.hardWait(2000);
         menuKelolaProperty = page.locator("//p[contains(.,'"+menu+"')]");
         playwright.waitFor(menuKelolaProperty);
         playwright.pageScrollUntilElementIsVisible(menuKelolaProperty);

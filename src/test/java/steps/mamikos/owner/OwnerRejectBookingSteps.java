@@ -76,6 +76,10 @@ public class OwnerRejectBookingSteps {
 
     @And("owner select other reject with custom reason {string}")
     public void owner_select_other_reject_with_custom_reason_x(String reason) {
+        ownerDashboard.clickOnManagementKost();
+        pengajuanBooking = ownerDashboard.clickOnPengajuanSewa();
+        billBookingManage.clickOnLihatDetailButton();
+        billBookingManage = pengajuanBooking.ownerRejectBooking();
         pengajuanBooking.clickAndFillLainnyaRejectReason(reason);
     }
 }
