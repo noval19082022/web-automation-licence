@@ -29,7 +29,7 @@ public class BillAndBookingManagementPO {
     Locator makeRuleBookingPage;
     Locator pilihKamarDitempatRadio;
     Locator Iunderstand;
-
+    Locator reasonOtherChoice;
 
     public BillAndBookingManagementPO(Page page) {
         this.page = page;
@@ -53,6 +53,7 @@ public class BillAndBookingManagementPO {
         makeRuleBookingPage = page.getByText("Peraturan saat masuk kos");
         pilihKamarDitempatRadio = page.locator("//span[.='Pilih di Tempat']");
         Iunderstand = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti"));
+        reasonOtherChoice = page.locator(".reject-modal__reason-option-overlay").nth(10);
     }
     /**
      * Click on room number input
@@ -126,7 +127,7 @@ public class BillAndBookingManagementPO {
      * choose reason to reject booking
      */
     public void ownerChooseReasonReject() {
-        playwright.clickOn(reasonChoice);
+        playwright.clickOn(reasonOtherChoice);
         playwright.waitTillLocatorIsVisible(IUnderstandBtn);
         playwright.clickOn(IUnderstandBtn);
         playwright.clickOn(statusTandC);

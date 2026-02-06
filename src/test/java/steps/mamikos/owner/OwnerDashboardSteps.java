@@ -2,6 +2,7 @@ package steps.mamikos.owner;
 
 import com.microsoft.playwright.Page;
 import config.playwright.context.ActiveContext;
+import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -654,5 +655,10 @@ public class OwnerDashboardSteps {
         }
     }
 
+
+    @And("owner accsess statistic page")
+    public void ownerAccsessStatisticPage() {
+        playwright.navigateTo(Mamikos.OWNER_URL + "/statistic");
+    }
 }
 

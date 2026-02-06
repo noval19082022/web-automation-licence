@@ -34,7 +34,7 @@ Feature: Accept Booking from Chat room with DP
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod    | password     |
-      | 085600867992 | 0890867321212 | Bismillah@02 |
+      | 085600867992 | 0890867321212 | qwerty123 |
     And owner navigates to owner dashboard
     And user click chat button in top bar owner home page
     And search chat in chatlist "Tenant Automation Accept Chat"

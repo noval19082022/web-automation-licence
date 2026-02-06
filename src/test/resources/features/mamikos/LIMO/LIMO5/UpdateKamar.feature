@@ -6,18 +6,18 @@ Feature: Update Kamar
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod   | password  |
-      | 083176408319 | 083176408311 | qwerty123 |
+      | 0891202506   | 083176408311 | qwerty123 |
     When owner navigates to property saya kos
-    And owner search kost "Kos oke bebek" on property saya page
+    And owner search kost "Kost Zymuno Rajeg" on property saya page
     And user click Lihat Selengkapnya button for edit
     And owner click "Update Kamar"
     And owner add room with name or room number "89"
     And owner click simpan on add room pop up
-    Then user can sees toast on update room as "Kosong" "Total Kamar 14"
-    And user see total room is "Total Kamar 14" in update room page
+    Then user can sees toast on update room as "Kosong" "Total Kamar 3"
+    And user see total room is "Total Kamar 3" in update room page
     When user enter text "89" on search bar in room allotment and hit enter
     And user delete room name or number in room allotment
-    Then user see total room is "Total Kamar 13" in update room page
+    Then user see total room is "Total Kamar 1" in update room page
 
   @TEST_LIMO-3463 @continue @WEB @AUTOMATED
   Scenario: [WEB][Update Room] Access page "Update Kamar" from entry point kos list when kost status == Active by update rooms become unavailable

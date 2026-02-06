@@ -103,7 +103,7 @@ public class OwnerAcceptBookingSteps {
     public void ownerAcceptBookingViaHomepage() throws InterruptedException {
         ownerDashboard.clickOnPengajuanSewa();
         pengajuanBooking.ownerAcceptBooking();
-        pengajuanBooking.clickOnTerimaPopUp();
+       // pengajuanBooking.clickOnTerimaPopUp();
         billBookingManage.clickOnRoomNumberInput();
         billBookingManage.clickOnOneRooms();
         billBookingManage.clickOnTerapkanButton();

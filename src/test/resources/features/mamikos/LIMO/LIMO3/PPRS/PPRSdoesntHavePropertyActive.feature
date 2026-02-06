@@ -1,4 +1,4 @@
-@regression @LIMO3 @listing-monetization @reviewed
+@regression @LIMO3 @listing-monetization @reviewed @pprs
 Feature: PPRS - Check statistic section when owner not have property active
 
   @TEST_LIMO-281 @TEST_LIMO-280

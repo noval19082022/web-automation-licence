@@ -38,8 +38,8 @@ Feature: Broadcast Chat Owner 2
     And owner add broadcast chat for kost "kost lpl staging Patikraja Kabupatn Banyumas"
     Then owner will see that the text "Penuh" is displayed
     And owner click back arrow button on BC page
-    And owner add broadcast chat for kost "kost jambu jambu lpl Patikraja Banyumas"
-    And owner clicks Kos "kost jambu jambu lpl Patikraja Banyumas" and Pilih Kos button
+    And owner add broadcast chat for kost "desta automation Tobelo Halmahera Utara"
+    And owner clicks Kos "desta automation Tobelo Halmahera Utara" and Pilih Kos button
     Then owner will see that the text "Kos belum memiliki calon penerima" is displayed
 
   @TEST_LIMO-3643 @Broadcast-chat @GP2 @automated @listing-monetization @web
