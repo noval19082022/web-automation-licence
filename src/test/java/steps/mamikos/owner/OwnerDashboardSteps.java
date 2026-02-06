@@ -636,6 +636,7 @@ public class OwnerDashboardSteps {
                     "Not on Tagihan Penyewa page. Current URL: " + currentUrl);
                 break;
             case "Laporan Keuangan":
+                playwright.hardWait(2000);
                 Assert.assertTrue(currentUrl.contains("/financial-report") || currentUrl.contains("/laporan-keuangan"),
                     "Not on Laporan Keuangan page. Current URL: " + currentUrl);
                 break;

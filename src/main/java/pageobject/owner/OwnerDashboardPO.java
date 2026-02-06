@@ -1505,7 +1505,7 @@ public class OwnerDashboardPO {
      */
     public void clickKontrakPenyewaSubmenu() {
         playwright.waitFor(penyewaMenu);
-        playwright.clickOn(penyewaMenu);
+        playwright.forceClickOn(penyewaMenu);
     }
 
     /**

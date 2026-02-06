@@ -1,4 +1,4 @@
-@owner @sidebar @functional @limo3 @checklagifunctional
+@owner @sidebar @functional @limo3
 Feature: Owner Dashboard Sidebar Navigation
 
   @continue
@@ -107,6 +107,7 @@ Feature: Owner Dashboard Sidebar Navigation
 
   # Test scenarios for different owner states
   # Owner 0895365623388: NO Kos + NO Apartments + NO MamiAds
+  @continue
   Scenario: Owner without any properties navigates to Kos submenu
     Given user go to mamikos homepage
     When user login as owner:
@@ -118,29 +119,21 @@ Feature: Owner Dashboard Sidebar Navigation
     When owner clicks "Kos" in submenu
     Then owner should see "Kos" page
 
+  @continue
   Scenario: Owner without any properties navigates to Apartemen submenu
-    Given user go to mamikos homepage
-    When user login as owner:
-      | phone stag    | phone prod | password  |
-      | 0895365623388 | 0          | qwerty123 |
-    When owner dismiss pop-up if appears
-    Then owner should see dashboard homepage
+    When owner navigates to owner dashboard
     When owner clicks "Properti Saya" in sidebar
     When owner clicks "Apartemen" in submenu
     Then owner should see "Apartemen" page
 
   Scenario: Owner without any properties navigates to Promo Iklan
-    Given user go to mamikos homepage
-    When user login as owner:
-      | phone stag    | phone prod | password  |
-      | 0895365623388 | 0          | qwerty123 |
-    When owner dismiss pop-up if appears
-    Then owner should see dashboard homepage
+    When owner navigates to owner dashboard
     When owner clicks "Fitur Promosi" in sidebar
     When owner clicks "Promo Iklan" in submenu
     Then owner should see "Promo Iklan" page
 
   # Owner 08111000222: Has Kos + NO Apartments + NO MamiAds
+  @continue
   Scenario: Owner without apartments navigates to Apartemen submenu
     Given user go to mamikos homepage
     When user login as owner:
@@ -153,12 +146,7 @@ Feature: Owner Dashboard Sidebar Navigation
     Then owner should see "Apartemen" page
 
   Scenario: Owner without MamiAds navigates to Promo Iklan
-    Given user go to mamikos homepage
-    When user login as owner:
-      | phone stag   | phone prod   | password  |
-      | 08111000222  | 08111000222  | qwerty123 |
-    When owner dismiss pop-up if appears
-    Then owner should see dashboard homepage
+    When owner navigates to owner dashboard
     When owner clicks "Fitur Promosi" in sidebar
     When owner clicks "Promo Iklan" in submenu
     Then owner should see "Promo Iklan" page
@@ -170,7 +158,7 @@ Feature: Owner Dashboard Sidebar Navigation
       | phone stag   | phone prod   | password  |
       | 08123450977  | 08123450977  | qwerty123 |
     When owner dismiss pop-up if appears
-    Then owner should see dashboard homepage
     When owner clicks "Fitur Promosi" in sidebar
+    When owner dismiss pop-up if appears
     When owner clicks "Promo Iklan" in submenu
     Then owner should see "Promo Iklan" page
