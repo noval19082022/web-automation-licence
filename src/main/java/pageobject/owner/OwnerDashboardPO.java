@@ -87,6 +87,29 @@ public class OwnerDashboardPO {
     Locator onboardingCard;
     Locator onboardingTitle;
     Locator onboardingDescription;
+    Locator homeMenuButton;
+    Locator propertiSayaMenu;
+    Locator cekPeminatMenu;
+    Locator laporanStatistikMenu;
+    Locator akunMenu;
+    // Properti Saya submenu
+    Locator kosSubmenu;
+    Locator apartemenSubmenu;
+    // Fitur Promosi submenu
+    // Note: broadcastChatBtn is reused for submenu (line 22)
+    Locator promoIklanSubmenu;
+    // Cek Peminat submenu
+    Locator pengunjungIklanSubmenu;
+    Locator pengajuanSurveiSubmenu;
+    Locator daftarTungguSubmenu;
+    // Manajemen Kos submenu
+    Locator ketersediaanKamarSubmenu;
+    Locator pengajuanSewaSubmenu;
+    // Note: ubahPeraturan is reused for submenu (line 81)
+    // Note: tagihanPenyewa is reused for submenu (line 21)
+    Locator laporanKeuanganSubmenu;
+    // Note: penyewaMenu is reused for submenu (line 25)
+    Locator penilaianKosSubmenu;
 
     private Locator fiturPromosiExpand;
     private Locator nantiSajaButton;
@@ -210,6 +233,36 @@ public class OwnerDashboardPO {
         onboardingTitle = page.locator(".onboarding-new-owner__title");
         onboardingDescription = page.locator(".onboarding-new-owner__description");
         gpStatusText = page.locator(".membership-card__section").first();
+
+        // Sidebar menu locators
+        homeMenuButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Home"));
+        propertiSayaMenu = page.locator(".bg-l-sidebar__item p").filter(new Locator.FilterOptions().setHasText("Properti Saya"));
+        cekPeminatMenu = page.locator(".bg-l-sidebar__item p").filter(new Locator.FilterOptions().setHasText("Cek Peminat"));
+        laporanStatistikMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Laporan Statistik"));
+        akunMenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Akun"));
+
+        // Properti Saya submenu locators
+        kosSubmenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kos"));
+        apartemenSubmenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Apartemen"));
+
+        // Fitur Promosi submenu locators
+        // cekPropertiSekitarSubmenu - removed duplicate, using propertySekitar (line 190)
+        // broadcastChatSubmenu - removed duplicate, using broadcastChatBtn (line 148)
+        promoIklanSubmenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Promo Iklan"));
+
+        // Cek Peminat submenu locators
+        pengunjungIklanSubmenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pengunjung Iklan"));
+        pengajuanSurveiSubmenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pengajuan Survei"));
+        daftarTungguSubmenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Daftar Tunggu"));
+
+        // Manajemen Kos submenu locators
+        ketersediaanKamarSubmenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ketersediaan Kamar"));
+        pengajuanSewaSubmenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pengajuan Sewa"));
+        // peraturanSewaSubmenu - removed duplicate, using ubahPeraturan (line 206)
+        // tagihanPenyewaSubmenu - removed duplicate, using tagihanPenyewa (line 147)
+        laporanKeuanganSubmenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Laporan Keuangan"));
+        // kontrakPenyewaSubmenu - removed duplicate, using penyewaMenu (line 151)
+        penilaianKosSubmenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Penilaian Kos"));
     }
 
     /**
@@ -1267,5 +1320,219 @@ public class OwnerDashboardPO {
     public boolean isOnboardingCardNotVisible() {
         playwright.hardWait(3000);
         return !playwright.waitTillLocatorIsVisible(onboardingCard, 5000.0);
+    }
+
+    // Sidebar navigation methods
+
+    /**
+     * Click on Home menu in sidebar
+     * Stays on dashboard homepage
+     */
+    public void clickHomeMenu() {
+        playwright.waitFor(homeMenuButton);
+        playwright.clickOn(homeMenuButton);
+    }
+
+    /**
+     * Click on Properti Saya menu in sidebar
+     * This will expand the dropdown submenu
+     */
+    public void clickPropertiSayaMenu() {
+        playwright.waitFor(propertiSayaMenu);
+        playwright.clickOn(propertiSayaMenu);
+    }
+
+    /**
+     * Click on Cek Peminat menu in sidebar
+     * This will expand the dropdown submenu
+     */
+    public void clickCekPeminatMenu() {
+        playwright.waitFor(cekPeminatMenu);
+        playwright.clickOn(cekPeminatMenu);
+    }
+
+    /**
+     * Click on Laporan Statistik menu in sidebar
+     * @return laporanStatistikPO
+     */
+    public laporanStatistikPO clickLaporanStatistikMenu() {
+        playwright.waitFor(laporanStatistikMenu);
+        playwright.clickOn(laporanStatistikMenu);
+        return new laporanStatistikPO(page);
+    }
+
+    /**
+     * Click on Akun menu in sidebar
+     * @return OwnerSettingPO
+     */
+    public OwnerSettingPO clickAkunMenu() {
+        playwright.waitFor(akunMenu);
+        playwright.clickOn(akunMenu);
+        return new OwnerSettingPO(page);
+    }
+
+    /**
+     * Check if Home menu is active/visible in sidebar
+     * @return boolean
+     */
+    public boolean isHomeMenuVisible() {
+        return playwright.waitTillLocatorIsVisible(homeMenuButton, 5000.0);
+    }
+
+    /**
+     * Check if Properti Saya submenu is expanded
+     * @return boolean
+     */
+    public boolean isPropertiSayaExpanded() {
+        return playwright.waitTillLocatorIsVisible(propertySayaDropdownMenu, 3000.0);
+    }
+
+    /**
+     * Check if dashboard homepage content is visible
+     * Uses greeting label as indicator that we're on dashboard home
+     * @return boolean
+     */
+    public boolean isDashboardHomeVisible() {
+        return playwright.waitTillLocatorIsVisible(greetingUserLabel, 5000.0);
+    }
+
+    // Submenu click methods
+
+    /**
+     * Click on Kos submenu under Properti Saya
+     */
+    public void clickKosSubmenu() {
+        playwright.waitFor(kosSubmenu);
+        playwright.clickOn(kosSubmenu);
+    }
+
+    /**
+     * Click on Apartemen submenu under Properti Saya
+     */
+    public void clickApartemenSubmenu() {
+        playwright.waitFor(apartemenSubmenu);
+        playwright.clickOn(apartemenSubmenu);
+    }
+
+    /**
+     * Click on Cek Properti Sekitar submenu under Fitur Promosi
+     */
+    public void clickCekPropertiSekitarSubmenu() {
+        playwright.waitFor(propertySekitar);
+        playwright.clickOn(propertySekitar);
+    }
+
+    /**
+     * Click on Broadcast Chat submenu under Fitur Promosi
+     */
+    public void clickBroadcastChatSubmenu() {
+        playwright.waitFor(broadcastChatBtn);
+        playwright.clickOn(broadcastChatBtn);
+    }
+
+    /**
+     * Click on Promo Iklan submenu under Fitur Promosi
+     */
+    public void clickPromoIklanSubmenu() {
+        playwright.waitFor(promoIklanSubmenu);
+        playwright.clickOn(promoIklanSubmenu);
+    }
+
+    /**
+     * Click on Pengunjung Iklan submenu under Cek Peminat
+     */
+    public void clickPengunjungIklanSubmenu() {
+        playwright.waitFor(pengunjungIklanSubmenu);
+        playwright.clickOn(pengunjungIklanSubmenu);
+    }
+
+    /**
+     * Click on Pengajuan Survei submenu under Cek Peminat
+     */
+    public void clickPengajuanSurveiSubmenu() {
+        playwright.waitFor(pengajuanSurveiSubmenu);
+        playwright.clickOn(pengajuanSurveiSubmenu);
+    }
+
+    /**
+     * Click on Daftar Tunggu submenu under Cek Peminat
+     */
+    public void clickDaftarTungguSubmenu() {
+        playwright.waitFor(daftarTungguSubmenu);
+        playwright.clickOn(daftarTungguSubmenu);
+    }
+
+    /**
+     * Click on Ketersediaan Kamar submenu under Manajemen Kos
+     */
+    public void clickKetersediaanKamarSubmenu() {
+        playwright.waitFor(ketersediaanKamarSubmenu);
+        playwright.clickOn(ketersediaanKamarSubmenu);
+    }
+
+    /**
+     * Click on Pengajuan Sewa submenu under Manajemen Kos
+     */
+    public void clickPengajuanSewaSubmenu() {
+        playwright.waitFor(pengajuanSewaSubmenu);
+        playwright.clickOn(pengajuanSewaSubmenu);
+    }
+
+    /**
+     * Click on Peraturan Sewa submenu under Manajemen Kos
+     */
+    public void clickPeraturanSewaSubmenu() {
+        playwright.waitFor(ubahPeraturan);
+        playwright.clickOn(ubahPeraturan);
+    }
+
+    /**
+     * Click on Tagihan Penyewa submenu under Manajemen Kos
+     */
+    public void clickTagihanPenyewaSubmenu() {
+        playwright.waitFor(tagihanPenyewa);
+        playwright.clickOn(tagihanPenyewa);
+    }
+
+    /**
+     * Click on Laporan Keuangan submenu under Manajemen Kos
+     */
+    public void clickLaporanKeuanganSubmenu() {
+        playwright.waitFor(laporanKeuanganSubmenu);
+        playwright.clickOn(laporanKeuanganSubmenu);
+    }
+
+    /**
+     * Click on Kontrak Penyewa submenu under Manajemen Kos
+     */
+    public void clickKontrakPenyewaSubmenu() {
+        playwright.waitFor(penyewaMenu);
+        playwright.forceClickOn(penyewaMenu);
+    }
+
+    /**
+     * Click on Penilaian Kos submenu under Manajemen Kos
+     */
+    public void clickPenilaianKosSubmenu() {
+        playwright.waitFor(penilaianKosSubmenu);
+        playwright.clickOn(penilaianKosSubmenu);
+    }
+
+    /**
+     * Click on Fitur Promosi menu in sidebar
+     * This will expand the dropdown submenu
+     */
+    public void clickFiturPromosiMenu() {
+        playwright.waitFor(fiturPromosiExpand);
+        playwright.clickOn(fiturPromosiExpand);
+    }
+
+    /**
+     * Click on Manajemen Kos menu in sidebar
+     * This will expand the dropdown submenu
+     */
+    public void clickManajemenKosMenu() {
+        playwright.waitFor(manajemenKost);
+        playwright.clickOn(manajemenKost);
     }
 }
