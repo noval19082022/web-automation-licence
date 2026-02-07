@@ -108,6 +108,13 @@ public class AllLeadsSteps {
             Assert.assertEquals(allLeads.getLeadsCurationStatus(i), value);
         }
     }
+    @When("admin resets filter in Harvest Dashboard")
+    public void admin_resets_filter_in_Harvest_Dashboard(){
+        allLeads.clearSearchField();
+        allLeads.clicksFilter();
+        allLeads.clicksResetFilter();
+        allLeads.clicksSearchButton();
+    }
     //--- End of Filter ---//
 
     //--- Batalkan Edit ---//
