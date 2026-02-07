@@ -1,4 +1,4 @@
-@regression @SS18 @harvest
+@regression @SS18 @harvest @test
 
 Feature: All Leads Table
 
@@ -50,8 +50,8 @@ Feature: All Leads Table
       | email                        | password  |
       | automationpman01@mamikos.com | qwerty123 |
     And admin should redirect to Harvest Dashboard
-    And admin search by "No HP Pemilik" with "089133118781"
-    Then admin validate data in table with "089133118781"
+    And admin search by "No HP Pemilik" with "086678965436"
+    Then admin validate data in table with "086678965436"
 
   @TEST_SS-7490
   Scenario: [Web][Harverst][Search]Admin search by Leads ID
@@ -60,8 +60,8 @@ Feature: All Leads Table
       | email                        | password  |
       | automationpman01@mamikos.com | qwerty123 |
     And admin should redirect to Harvest Dashboard
-    And admin search by "Lead ID" with "AO325"
-    Then admin validate data in table with "AO325"
+    And admin search by "Lead ID" with "AO150"
+    Then admin validate data in table with "AO150"
 
   @TEST_SS-7491
   Scenario: [Web][Harverst][Search]Admin search Nama Kos
@@ -70,8 +70,8 @@ Feature: All Leads Table
       | email                        | password  |
       | automationpman01@mamikos.com | qwerty123 |
     And admin should redirect to Harvest Dashboard
-    And admin search by "Nama Kos" with "Kost Siput Emas Testing"
-    Then admin validate data in table with "Kost Siput Emas Testing"
+    And admin search by "Nama Kos" with "Kost Nuansa Pagi"
+    Then admin validate data in table with "Kost Nuansa Pagi"
 
   @TEST_SS-7492
   Scenario: [Web][Harverst][Search]Admin search by Nama Pemilik
@@ -80,8 +80,8 @@ Feature: All Leads Table
       | email                        | password  |
       | automationpman01@mamikos.com | qwerty123 |
     And admin should redirect to Harvest Dashboard
-    And admin search by "Nama Pemilik" with "Gery Yan"
-    Then admin validate data in table with "Gery Yan"
+    And admin search by "Nama Pemilik" with "Ferdinando"
+    Then admin validate data in table with "Ferdinando"
 
   @TEST_SS-7493
   Scenario: [Web][Harverst][Filter]Admin filter by Kota
