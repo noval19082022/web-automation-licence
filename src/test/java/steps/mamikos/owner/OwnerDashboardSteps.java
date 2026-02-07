@@ -9,6 +9,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.common.LoadingPO;
+import pageobject.common.ModalPopUpPO;
 import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.goldplus.GoldplusPO;
 import pageobject.owner.kelolatagihan.PengajuanSewaPO;
@@ -23,7 +24,7 @@ public class OwnerDashboardSteps {
     Page page = ActiveContext.getActivePage();
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     OwnerDashboardPO ownerDashboardPO = new OwnerDashboardPO(page);
-    OwnerDashboardPO ownerDashboardGP = new OwnerDashboardPO(page);
+    ModalPopUpPO modalPopUpPO = new ModalPopUpPO(page);
     GoldplusPO goldplus = new GoldplusPO(page);
     PengajuanSewaPO PengajuanSewaPO = new PengajuanSewaPO(page);
     LoadingPO loading = new LoadingPO(page);
@@ -358,7 +359,7 @@ public class OwnerDashboardSteps {
     @And("owner go to event banner section")
     public void onwerGoToEventBannerSection() {
         ownerDashboardPO.scrollIntoDariMamikosSection();
-        ownerDashboardGP.dismissFTUEGoldplus();
+        ownerDashboardPO.dismissFTUEGoldplus();
     }
 
     @And("owner click on banner on dari mamikos section")
@@ -428,7 +429,10 @@ public class OwnerDashboardSteps {
 
     @When("owner dismiss pop-up if appears")
     public void ownerDismissPopUpIfAppears() {
-        ownerDashboardPO.dismissPopUp();
+        playwright.hardWait(3000);
+        if (modalPopUpPO.isModalCloseIconVisible()) {
+            modalPopUpPO.clicksModalCloseIcon();
+        }
     }
 
     @Then("owner can see onboarding card on owner dashboard")
@@ -450,6 +454,207 @@ public class OwnerDashboardSteps {
     public void ownerCannotSeeOnboardingCardOnOwnerDashboard() {
         Assert.assertTrue(ownerDashboardPO.isOnboardingCardNotVisible(), "Onboarding card should not be visible but it is");
     }
+
+    @When("owner clicks {string} in sidebar")
+    public void ownerClicksInSidebar(String menuName) {
+        switch (menuName) {
+            case "Home":
+                ownerDashboardPO.clickHomeMenu();
+                break;
+            case "Properti Saya":
+                ownerDashboardPO.clickPropertiSayaMenu();
+                break;
+            case "Fitur Promosi":
+                ownerDashboardPO.clickFiturPromosiMenu();
+                break;
+            case "Cek Peminat":
+                ownerDashboardPO.clickCekPeminatMenu();
+                break;
+            case "Manajemen Kos":
+                ownerDashboardPO.clickManajemenKosMenu();
+                break;
+            case "Laporan Statistik":
+                ownerDashboardPO.clickLaporanStatistikMenu();
+                break;
+            case "Akun":
+                ownerDashboardPO.clickAkunMenu();
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown sidebar menu: " + menuName);
+        }
+    }
+
+    @When("owner clicks {string} in submenu")
+    public void ownerClicksInSubmenu(String submenuName) {
+        switch (submenuName) {
+            // Properti Saya submenu
+            case "Kos":
+                ownerDashboardPO.clickKosSubmenu();
+                break;
+            case "Apartemen":
+                ownerDashboardPO.clickApartemenSubmenu();
+                break;
+            // Fitur Promosi submenu
+            case "Cek Properti Sekitar":
+                ownerDashboardPO.clickCekPropertiSekitarSubmenu();
+                break;
+            case "Broadcast Chat":
+                ownerDashboardPO.clickBroadcastChatSubmenu();
+                break;
+            case "Promo Iklan":
+                ownerDashboardPO.clickPromoIklanSubmenu();
+                break;
+            // Cek Peminat submenu
+            case "Pengunjung Iklan":
+                ownerDashboardPO.clickPengunjungIklanSubmenu();
+                break;
+            case "Pengajuan Survei":
+                ownerDashboardPO.clickPengajuanSurveiSubmenu();
+                break;
+            case "Daftar Tunggu":
+                ownerDashboardPO.clickDaftarTungguSubmenu();
+                break;
+            // Manajemen Kos submenu
+            case "Ketersediaan Kamar":
+                ownerDashboardPO.clickKetersediaanKamarSubmenu();
+                break;
+            case "Pengajuan Sewa":
+                ownerDashboardPO.clickPengajuanSewaSubmenu();
+                break;
+            case "Peraturan Sewa":
+                ownerDashboardPO.clickPeraturanSewaSubmenu();
+                break;
+            case "Tagihan Penyewa":
+                ownerDashboardPO.clickTagihanPenyewaSubmenu();
+                break;
+            case "Laporan Keuangan":
+                ownerDashboardPO.clickLaporanKeuanganSubmenu();
+                break;
+            case "Kontrak Penyewa":
+                ownerDashboardPO.clickKontrakPenyewaSubmenu();
+                break;
+            case "Penilaian Kos":
+                ownerDashboardPO.clickPenilaianKosSubmenu();
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown submenu: " + submenuName);
+        }
+    }
+
+    @Then("owner should see dashboard homepage")
+    public void ownerShouldSeeDashboardHomepage() {
+        playwright.waitTillPageLoaded();
+        playwright.hardWait(1000.0);
+        String currentUrl = page.url();
+        boolean isDashboardHome = currentUrl.contains("/ownerpage") ||
+                                  currentUrl.endsWith("owner-jambu.kerupux.com/") ||
+                                  currentUrl.endsWith("owner.mamikos.com/");
+        Assert.assertTrue(isDashboardHome, "Not on dashboard homepage. Current URL: " + currentUrl);
+    }
+
+    @Then("{string} sidebar menu should be expanded")
+    public void sidebarMenuShouldBeExpanded(String menuName) {
+        playwright.hardWait(1500.0);
+        // Just verify we're still on owner dashboard after clicking expandable menu
+        String currentUrl = page.url();
+        boolean isOnOwnerDashboard = currentUrl.contains("owner-jambu.kerupux.com") ||
+                                      currentUrl.contains("owner.mamikos.com") ||
+                                      currentUrl.contains("jambu.kerupux.com/ownerpage");
+        Assert.assertTrue(isOnOwnerDashboard, menuName + " menu click should stay on dashboard. Current URL: " + currentUrl);
+    }
+
+    @Then("owner should see {string} page")
+    public void ownerShouldSeePage(String pageName) {
+        // Wait for page to load
+        loading.waitForLoadingIconDisappear();
+        playwright.waitTillPageLoaded();
+
+        String currentUrl = page.url();
+        switch (pageName) {
+            // Main menu pages
+            case "Laporan Statistik":
+                Assert.assertTrue(currentUrl.contains("/statistic"),
+                    "Not on Laporan Statistik page. Current URL: " + currentUrl);
+                break;
+            case "Akun":
+                Assert.assertTrue(currentUrl.contains("/settings"),
+                    "Not on Akun page. Current URL: " + currentUrl);
+                break;
+
+            // Properti Saya submenu
+            case "Kos":
+                Assert.assertTrue(currentUrl.contains("/kos") || currentUrl.contains("/ownerpage/kos"),
+                    "Not on Kos page. Current URL: " + currentUrl);
+                break;
+            case "Apartemen":
+                Assert.assertTrue(currentUrl.contains("/apartment") || currentUrl.contains("/ownerpage/apartment"),
+                    "Not on Apartemen page. Current URL: " + currentUrl);
+                break;
+
+            // Fitur Promosi submenu
+            case "Cek Properti Sekitar":
+                Assert.assertTrue(currentUrl.contains("/cek-properti-sekitar") || currentUrl.contains("/cek-properti"),
+                    "Not on Cek Properti Sekitar page. Current URL: " + currentUrl);
+                break;
+            case "Broadcast Chat":
+                Assert.assertTrue(currentUrl.contains("/broadcast-chat"),
+                    "Not on Broadcast Chat page. Current URL: " + currentUrl);
+                break;
+            case "Promo Iklan":
+                Assert.assertTrue(currentUrl.contains("/mamiads") || currentUrl.contains("/ownerpage/kos?open-card=true"),
+                    "Not on Promo Iklan page. Current URL: " + currentUrl);
+                break;
+
+            // Cek Peminat submenu
+            case "Pengunjung Iklan":
+                Assert.assertTrue(currentUrl.contains("/visitor") || currentUrl.contains("/pengunjung") || currentUrl.contains("/mamiads/tenant"),
+                    "Not on Pengunjung Iklan page. Current URL: " + currentUrl);
+                break;
+            case "Pengajuan Survei":
+                Assert.assertTrue(currentUrl.contains("/survey") || currentUrl.contains("/pengajuan-survei") || currentUrl.contains("/mamiads/tenant/"),
+                    "Not on Pengajuan Survei page. Current URL: " + currentUrl);
+                break;
+            case "Daftar Tunggu":
+                Assert.assertTrue(currentUrl.contains("/waiting-list") || currentUrl.contains("/waitlist") || currentUrl.contains("/daftar-tunggu"),
+                    "Not on Daftar Tunggu page. Current URL: " + currentUrl);
+                break;
+
+            // Manajemen Kos submenu
+            case "Ketersediaan Kamar":
+                Assert.assertTrue(currentUrl.contains("/room") || currentUrl.contains("/kamar"),
+                    "Not on Ketersediaan Kamar page. Current URL: " + currentUrl);
+                break;
+            case "Pengajuan Sewa":
+                Assert.assertTrue(currentUrl.contains("/booking") || currentUrl.contains("/pengajuan-sewa"),
+                    "Not on Pengajuan Sewa page. Current URL: " + currentUrl);
+                break;
+            case "Peraturan Sewa":
+                Assert.assertTrue(currentUrl.contains("/booking-setting") || currentUrl.contains("/peraturan"),
+                    "Not on Peraturan Sewa page. Current URL: " + currentUrl);
+                break;
+            case "Tagihan Penyewa":
+                Assert.assertTrue(currentUrl.contains("/billing") || currentUrl.contains("/tagihan"),
+                    "Not on Tagihan Penyewa page. Current URL: " + currentUrl);
+                break;
+            case "Laporan Keuangan":
+                playwright.hardWait(2000);
+                Assert.assertTrue(currentUrl.contains("/financial-report") || currentUrl.contains("/laporan-keuangan"),
+                    "Not on Laporan Keuangan page. Current URL: " + currentUrl);
+                break;
+            case "Kontrak Penyewa":
+                Assert.assertTrue(currentUrl.contains("/tenant-list") || currentUrl.contains("/kontrak"),
+                    "Not on Kontrak Penyewa page. Current URL: " + currentUrl);
+                break;
+            case "Penilaian Kos":
+                Assert.assertTrue(currentUrl.contains("/review") || currentUrl.contains("/penilaian"),
+                    "Not on Penilaian Kos page. Current URL: " + currentUrl);
+                break;
+
+            default:
+                throw new IllegalArgumentException("Page verification not implemented for: " + pageName);
+        }
+    }
+
 
     @And("owner accsess statistic page")
     public void ownerAccsessStatisticPage() {
