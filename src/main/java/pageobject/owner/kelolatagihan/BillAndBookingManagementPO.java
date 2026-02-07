@@ -30,6 +30,7 @@ public class BillAndBookingManagementPO {
     Locator pilihKamarDitempatRadio;
     Locator Iunderstand;
     Locator reasonOtherChoice;
+    Locator reasonList;
 
     public BillAndBookingManagementPO(Page page) {
         this.page = page;
@@ -45,7 +46,6 @@ public class BillAndBookingManagementPO {
         IUnderstandBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti"));
         statusTandC = page.locator("span").filter(new Locator.FilterOptions().setHasText("checkmark"));
         pilihButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih"));
-        reasonChoice = page.locator(".reject-modal__reason-option-overlay").first();
         doneButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Selesai"));
         lihatDetailButton = page.locator("(//span[normalize-space()='Lihat Detail'])[1]");
         confirmationPopup = page.locator("//h3[@class='bg-c-modal__body-title']");
@@ -54,6 +54,7 @@ public class BillAndBookingManagementPO {
         pilihKamarDitempatRadio = page.locator("//span[.='Pilih di Tempat']");
         Iunderstand = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Saya Mengerti"));
         reasonOtherChoice = page.locator(".reject-modal__reason-option-overlay").nth(10);
+        reasonList = page.locator(".reject-modal__reason-option-overlay");
     }
     /**
      * Click on room number input
@@ -124,12 +125,39 @@ public class BillAndBookingManagementPO {
     }
 
     /**
-     * choose reason to reject booking
+     * choose reason to reject booking (selects first available reason)
      */
     public void ownerChooseReasonReject() {
-        playwright.clickOn(reasonOtherChoice);
-        playwright.waitTillLocatorIsVisible(IUnderstandBtn);
-        playwright.clickOn(IUnderstandBtn);
+        ownerChooseReasonRejectByText(null);
+    }
+
+    /**
+     * Choose reason to reject booking by text
+     * If reasonText is null or empty, selects the first available reason
+     * @param reasonText the text of the reason to select, or null for first available
+     */
+    public void ownerChooseReasonRejectByText(String reasonText) {
+        playwright.hardWait(2000);
+
+        if (reasonText != null && !reasonText.isEmpty()) {
+            // Find reason by text
+            Locator reasonByText = reasonList.filter(new Locator.FilterOptions().setHasText(reasonText));
+            if (playwright.waitTillLocatorIsVisible(reasonByText, 5000.0)) {
+                playwright.clickOn(reasonByText);
+            } else {
+                // Fallback to first available if text not found
+                System.out.println("Reason '" + reasonText + "' not found, selecting first available reason");
+                playwright.clickOn(reasonList.first());
+            }
+        }
+
+        // Handle "Saya Mengerti" popup if it appears
+        if (playwright.waitTillLocatorIsVisible(IUnderstandBtn, 3000.0)) {
+            playwright.clickOn(IUnderstandBtn);
+        }
+
+        // Click checkbox T&C
+        playwright.pageScrollUntilElementIsVisible(statusTandC);
         playwright.clickOn(statusTandC);
     }
 
@@ -151,21 +179,6 @@ public class BillAndBookingManagementPO {
         lihatDetailButton.click();
     }
 
-    /**
-     * Click on reason reject booking
-     */
-    public PengajuanSewaPO ownerSelectRejectBookingKos(String reason) {
-        String selector = "//div[@class='reject-modal__reason-list']/div[contains(.,'" + reason + "')]";
-        ElementHandle element = page.querySelector(selector);
-        element.click();
-        if (IUnderstandBtn.isVisible()) {
-            playwright.clickOn(IUnderstandBtn);
-        }
-        playwright.pageScrollUntilElementIsVisible(statusTandC);
-        playwright.clickOn(statusTandC);
-        playwright.clickOn(pilihButton);
-        return new PengajuanSewaPO(page);
-    }
 
     /**
      * Check confirmation Atur Booking popup

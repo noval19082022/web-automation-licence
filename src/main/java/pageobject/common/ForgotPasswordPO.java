@@ -22,7 +22,8 @@ public class ForgotPasswordPO {
     private Locator backBtn;
     private Locator batalkanConfirmationBtn;
     private Locator pilihMethodeVerifikasiTitle;
-
+    private Locator swalPopup;
+    private Locator swalConfirmBtn;
 
     public ForgotPasswordPO(Page page) {
         this.page = page;
@@ -40,6 +41,8 @@ public class ForgotPasswordPO {
         this.backBtn = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("back"));
         this.batalkanConfirmationBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, batalkan"));
         this.pilihMethodeVerifikasiTitle = page.getByText("Pilih Metode Verifikasi");
+        this.swalPopup = page.locator(".swal2-container");
+        this.swalConfirmBtn = page.locator(".swal2-confirm");
     }
 
     /**
@@ -129,9 +132,16 @@ public class ForgotPasswordPO {
      * And click pop up confirmation
      */
     public void backButtonFromSendOTPPage() {
+        // Dismiss SweetAlert2 popup if present
+        if (playwright.waitTillLocatorIsVisible(swalConfirmBtn, 3000.0)) {
+            playwright.clickOn(swalConfirmBtn);
+            playwright.hardWait(1000);
+        }
+
         backBtn.click();
-        if (batalkanConfirmationBtn.isVisible()) {
-            batalkanConfirmationBtn.click();
+
+        if (playwright.waitTillLocatorIsVisible(batalkanConfirmationBtn, 3000.0)) {
+            playwright.clickOn(batalkanConfirmationBtn);
         }
     }
 

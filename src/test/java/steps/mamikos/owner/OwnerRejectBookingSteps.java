@@ -21,13 +21,14 @@ public class OwnerRejectBookingSteps {
 
     LoadingPO loading = new LoadingPO(page);
 
-    @When("owner reject booking")
-    public void ownerRejectBooking() {
+
+    @When("owner reject booking with reason {string}")
+    public void ownerRejectBookingWithReason(String reason) {
         ownerDashboard.clickOnManagementKost();
         pengajuanBooking = ownerDashboard.clickOnPengajuanSewa();
         billBookingManage.clickOnLihatDetailButton();
         billBookingManage = pengajuanBooking.ownerRejectBooking();
-        billBookingManage.ownerChooseReasonReject();
+        billBookingManage.ownerChooseReasonRejectByText(reason);
         billBookingManage.clickPilihButton();
     }
 
@@ -39,12 +40,6 @@ public class OwnerRejectBookingSteps {
     @And("owner reject booking from view detail")
     public void ownerRejectBookingFromViewDetail() {
         billBookingManage = pengajuanBooking.ownerRejectBookingFromViewDetail();
-    }
-
-    @And("owner select reason reject kos {string}")
-    public void ownerSelectRejectBookingKos(String reason) {
-        loading.waitForLoadingIconDisappear();
-        billBookingManage.ownerSelectRejectBookingKos(reason);
     }
 
     @Then("owner can see confirmation Atur Booking popup")

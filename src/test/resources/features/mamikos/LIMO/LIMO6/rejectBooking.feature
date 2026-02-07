@@ -8,7 +8,7 @@ Feature: OB Owner Reject Booking Full Room
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
     And admin search contract by tenant kost name:
       | kostName stag          | kostName prod          |
-      | Dont Starve To Get Her | Dont Starve To Get Her |
+      | Kost New Dashboard 2026 Pasarkemis Tangerang | Dont Starve To Get Her |
     And admin terminate contract
     Then admin should success terminate contract
 
@@ -24,7 +24,7 @@ Feature: OB Owner Reject Booking Full Room
     When user go to mamikos homepage
     And tenant redirect to kost details:
       | kost path stag                                                      | kost path prod               |
-      | kost-kabupaten-sleman-kost-putri-eksklusif-dont-starve-to-get-her-1 | Kos DC BAR Automation Tipe A |
+      | kost-kabupaten-tangerang-kost-campur-murah-kost-new-dashboard-2026-pasarkemis-tangerang | Kos DC BAR Automation Tipe A |
     And tenant booking kost
     Then tenant should success booking kost
 
@@ -32,14 +32,14 @@ Feature: OB Owner Reject Booking Full Room
   Scenario: Owner Reject Booking Full Room
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | phone prod   | password     |
-      | 081362464341 | 081362464341 | 1d0lt3stb4ru |
+      | phone stag   | phone prod   | password  |
+      | 0891202601 | 081362464341   | qwerty123 |
     And owner navigates to owner dashboard
-    And owner reject booking
+    And owner reject booking with reason "Kamar tidak tersedia untuk penyewa"
 
   Scenario: Owner set room kost Kosong
     When owner navigates to property saya kos
-    And owner search kost "Dont Starve To Get Her" on property saya page
+    And owner search kost "Kost New Dashboard 2026 Pasarkemis Tangerang" on property saya page
     And user click Lihat Selengkapnya button for edit
     And owner click update kamar kost
     And owner set status kamar is kosong
