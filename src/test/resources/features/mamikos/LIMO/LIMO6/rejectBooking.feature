@@ -34,8 +34,11 @@ Feature: OB Owner Reject Booking Full Room
     When user login as owner:
       | phone stag   | phone prod   | password  |
       | 0891202601 | 081362464341   | qwerty123 |
-    And owner navigates to owner dashboard
-    And owner reject booking with reason "Kamar tidak tersedia untuk penyewa"
+    And owner navigate to pengajuan booking page
+    And owner choose filter kost for "Kost New Dashboard 2026 Pasarkemis Tangerang"
+    And user clicks on Booking Details button
+    And owner reject booking from view detail
+    And owner select reason reject kos "Kamar tidak tersedia untuk penyewa"
 
   Scenario: Owner set room kost Kosong
     When owner navigates to property saya kos

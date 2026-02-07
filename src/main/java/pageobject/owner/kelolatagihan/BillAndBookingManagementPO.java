@@ -124,42 +124,6 @@ public class BillAndBookingManagementPO {
         playwright.clickOn(pilihKamarRadio);
     }
 
-    /**
-     * choose reason to reject booking (selects first available reason)
-     */
-    public void ownerChooseReasonReject() {
-        ownerChooseReasonRejectByText(null);
-    }
-
-    /**
-     * Choose reason to reject booking by text
-     * If reasonText is null or empty, selects the first available reason
-     * @param reasonText the text of the reason to select, or null for first available
-     */
-    public void ownerChooseReasonRejectByText(String reasonText) {
-        playwright.hardWait(2000);
-
-        if (reasonText != null && !reasonText.isEmpty()) {
-            // Find reason by text
-            Locator reasonByText = reasonList.filter(new Locator.FilterOptions().setHasText(reasonText));
-            if (playwright.waitTillLocatorIsVisible(reasonByText, 5000.0)) {
-                playwright.clickOn(reasonByText);
-            } else {
-                // Fallback to first available if text not found
-                System.out.println("Reason '" + reasonText + "' not found, selecting first available reason");
-                playwright.clickOn(reasonList.first());
-            }
-        }
-
-        // Handle "Saya Mengerti" popup if it appears
-        if (playwright.waitTillLocatorIsVisible(IUnderstandBtn, 3000.0)) {
-            playwright.clickOn(IUnderstandBtn);
-        }
-
-        // Click checkbox T&C
-        playwright.pageScrollUntilElementIsVisible(statusTandC);
-        playwright.clickOn(statusTandC);
-    }
 
     /**
      * Click pilih button after owner reject  tenant
@@ -215,4 +179,21 @@ public class BillAndBookingManagementPO {
     public boolean isPilihKamarDiTempatVisible() {
         return pilihKamarDitempatRadio.isVisible();
     }
+
+    /**
+     * Click on reason reject booking
+     */
+    public PengajuanSewaPO ownerSelectRejectBookingKos(String reason) {
+        String selector = "//div[@class='reject-modal__reason-list']/div[contains(.,'" + reason + "')]";
+        ElementHandle element = page.querySelector(selector);
+        element.click();
+        if (IUnderstandBtn.isVisible()) {
+            playwright.clickOn(IUnderstandBtn);
+        }
+        playwright.pageScrollUntilElementIsVisible(statusTandC);
+        playwright.clickOn(statusTandC);
+        playwright.clickOn(pilihButton);
+        return new PengajuanSewaPO(page);
+    }
+
 }

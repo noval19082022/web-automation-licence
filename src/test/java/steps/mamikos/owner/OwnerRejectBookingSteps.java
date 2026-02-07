@@ -22,16 +22,6 @@ public class OwnerRejectBookingSteps {
     LoadingPO loading = new LoadingPO(page);
 
 
-    @When("owner reject booking with reason {string}")
-    public void ownerRejectBookingWithReason(String reason) {
-        ownerDashboard.clickOnManagementKost();
-        pengajuanBooking = ownerDashboard.clickOnPengajuanSewa();
-        billBookingManage.clickOnLihatDetailButton();
-        billBookingManage = pengajuanBooking.ownerRejectBooking();
-        billBookingManage.ownerChooseReasonRejectByText(reason);
-        billBookingManage.clickPilihButton();
-    }
-
     @And("owner see all kost terisi")
     public void ownerSeeAllKostTerisi() {
 
@@ -76,5 +66,11 @@ public class OwnerRejectBookingSteps {
         billBookingManage.clickOnLihatDetailButton();
         billBookingManage = pengajuanBooking.ownerRejectBooking();
         pengajuanBooking.clickAndFillLainnyaRejectReason(reason);
+    }
+
+    @And("owner select reason reject kos {string}")
+    public void ownerSelectRejectBookingKos(String reason) {
+        loading.waitForLoadingIconDisappear();
+        billBookingManage.ownerSelectRejectBookingKos(reason);
     }
 }
