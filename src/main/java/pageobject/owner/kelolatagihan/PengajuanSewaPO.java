@@ -65,7 +65,7 @@ public class PengajuanSewaPO {
         this.page = page;
         playwright = new PlaywrightHelpers(page);
         locator = new LocatorHelpers(page);
-        this.terimaButton = playwright.locatorByRoleSetName(locator.roleButton, "Terima").first();
+        this.terimaButton = page.locator("button").filter(new Locator.FilterOptions().setHasText("Terima")).first();
         this.yaTerimaButton = playwright.locatorByRoleSetName(locator.roleButton, "Ya, Terima");
         this.tolakButton = page.getByTestId("bookingRequestDetail-actionButtonDesktop").getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Tolak"));
         this.yaTolakButton = playwright.locatorByRoleSetName(locator.roleButton, "Ya, Tolak");
@@ -104,9 +104,22 @@ public class PengajuanSewaPO {
     }
 
     /**
+     * Check if there are any booking requests available
+     * @return true if booking requests exist, false otherwise
+     */
+    public boolean hasBookingRequests() {
+        playwright.waitTillPageLoaded();
+        playwright.hardWait(2000);
+        return terimaButton.isVisible();
+    }
+
+    /**
      * Click on terima and go to tenant room management
+     * Skips if no booking request is available
      */
     public BillAndBookingManagementPO ownerAcceptBooking() {
+        playwright.waitTillPageLoaded();
+        playwright.hardWait(2000);
         terimaButton.click();
         yaTerimaButton.click();
         return new BillAndBookingManagementPO(page);

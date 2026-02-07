@@ -118,7 +118,7 @@ public class OwnerDashboardPO {
         this.playwright = new PlaywrightHelpers(page);
         this.locator = new LocatorHelpers(page);
         manajemenKost = page.locator(".bg-l-sidebar__item p").filter(new Locator.FilterOptions().setHasText("Manajemen Kos"));
-        pengajuanSewaBtn = page.locator("//div[@class='activity-list-menu__item']").filter(new Locator.FilterOptions().setHasText("Pengajuan Sewa"));
+        pengajuanSewaBtn = page.locator(".activity-list-menu__item").filter(new Locator.FilterOptions().setHasText("Pengajuan Sewa"));
         ownerProfile = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("mamikos").setExact(true));
         tagihanPenyewa = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tagihan Penyewa"));
         broadcastChatBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Broadcast Chat"));

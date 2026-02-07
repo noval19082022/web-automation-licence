@@ -66,7 +66,7 @@ public class ChatTenantPO {
         ajukanSewaChatRoomButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ajukan Sewa"));
         ajukanSewaPopUpChatRoomButton = page.locator("//button[@class='bg-c-button booking-input-checkin-modal__footer-action bg-c-button--primary bg-c-button--lg bg-c-button--block']");
         cancelSurveyButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Batalkan"));
-        surveyKosButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Survei Kos"));
+        surveyKosButton = page.locator("button").filter(new Locator.FilterOptions().setHasText("Survei Kos")).first();
         dropdownTimeSurvey = page.locator("//div[@class='bg-c-select__trigger bg-c-select__trigger--md']");
         tenantChatButton = page.locator("#globalNavbar").getByRole(AriaRole.LISTITEM).filter(new Locator.FilterOptions().setHasText("Chat"));
         confirmationUbahJadwalButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ubah Survei"));

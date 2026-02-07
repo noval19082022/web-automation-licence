@@ -146,6 +146,7 @@ public class BillAndBookingManagementPO {
      * Click on lihat detail
      */
     public void clickOnLihatDetailButton() {
+        playwright.hardWait(10000);
         lihatDetailButton.waitFor();
         lihatDetailButton.click();
     }

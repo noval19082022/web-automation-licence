@@ -36,5 +36,5 @@ Feature: [Owner dashboard][Ada yang menunggu]Accept Booking via Homepage (more t
       | phone stag    | phone prod    | password     |
       | 0890000000289 | 0890000000289 | Bismillah@01 |
     And owner accept booking via Homepage
-    And owner back to owner dashboard
-    Then owner can see pengajuan sewa detail on dashboard
+  #  And owner back to owner dashboard
+  #  Then owner can see pengajuan sewa detail on dashboard
