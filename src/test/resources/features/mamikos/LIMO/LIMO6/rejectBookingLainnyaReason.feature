@@ -23,7 +23,7 @@ Feature: OB Reject Booking With Lainnya Reason
     Given user go to mamikos homepage
     When tenant redirect to kost details:
       | kost path stag                                                 | kost path prod               |
-      | kost-sleman-kost-campur-eksklusif-kost-wild-rift-settlement-11 | Kos DC BAR Automation Tipe A |
+      | kost-kabupaten-tangerang-kost-campur-murah-kost-new-dashboard-2026-pasarkemis-tangerang | Kos DC BAR Automation Tipe A |
     And tenant booking kost
     Then tenant should success booking kost
 
@@ -31,8 +31,8 @@ Feature: OB Reject Booking With Lainnya Reason
   Scenario: Owner Reject Booking With Lainnya Reason
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | phone prod   | password     |
-      | 081362464341 | 081362464341 | 1d0lt3stb4ru |
+      | phone stag   | phone prod   | password   |
+      | 0891202601   | 081362464341 | qwerty123  |
     And owner navigates to owner dashboard
     And owner select other reject with custom reason "Saya sudah ada yang punya"
 

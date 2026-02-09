@@ -17,7 +17,6 @@ public class OwnerDashboardPO {
     private LocatorHelpers locator;
     private Locator ownerProfile;
     private Locator manajemenKost;
-    private Locator pengajuanSewaBtn;
     private Locator tagihanPenyewa;
     private Locator broadcastChatBtn;
     Locator warningBroadcastText;
@@ -141,7 +140,6 @@ public class OwnerDashboardPO {
         this.playwright = new PlaywrightHelpers(page);
         this.locator = new LocatorHelpers(page);
         manajemenKost = page.locator(".bg-l-sidebar__item p").filter(new Locator.FilterOptions().setHasText("Manajemen Kos"));
-        pengajuanSewaBtn = page.locator("//div[@class='activity-list-menu__item']").filter(new Locator.FilterOptions().setHasText("Pengajuan Sewa"));
         ownerProfile = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("mamikos").setExact(true));
         tagihanPenyewa = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tagihan Penyewa"));
         broadcastChatBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Broadcast Chat"));
@@ -302,10 +300,13 @@ public class OwnerDashboardPO {
 
     /**
      * Click on pengajuan booking
+     * Tries sidebar submenu first, then falls back to dashboard widget
      */
     public PengajuanSewaPO clickOnPengajuanSewa() {
-        playwright.waitFor(pengajuanSewaBtn);
-        playwright.clickOn(pengajuanSewaBtn);
+        // Try sidebar submenu first (after Manajemen Kos is expanded)
+        if (playwright.waitTillLocatorIsVisible(pengajuanSewaSubmenu, 5000.0)) {
+            playwright.clickOn(pengajuanSewaSubmenu);
+        }
         return new PengajuanSewaPO(page);
     }
 
