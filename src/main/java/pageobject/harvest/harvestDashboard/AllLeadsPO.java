@@ -39,6 +39,7 @@ public class AllLeadsPO {
     Locator roomZeroToFive;
     Locator dropdownLeadsCuration;
     Locator terapkanButton;
+    Locator resetFilterButton;
 
     //--- Confirmation Batalkan ---//
     Locator titleConfirmationBatalkan;
@@ -89,6 +90,7 @@ public class AllLeadsPO {
         dropdownLeadsCuration = page.locator(".bg-c-modal .bg-c-dropdown__trigger").first();
         roomZeroToFive = page.locator("a").filter(new Locator.FilterOptions().setHasText("0-5 Kamar"));
         terapkanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terapkan"));
+        resetFilterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset"));
 
         //--- Confirmation Batalkan ---//
         titleConfirmationBatalkan = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Yakin ingin batalkan?"));
@@ -104,7 +106,7 @@ public class AllLeadsPO {
         //-------------Search and filter all leads table -------------//
         searchTypeLeads = page.locator("div.bg-c-select.bg-c-searchbar__select-input > div > div.bg-c-dropdown__trigger");
         searchButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cari").setExact(true));
-        searchInput = page.locator("input[type=\"text\"]");
+        searchInput = page.locator(".bg-c-searchbar input[type=\"text\"]");
 
     }
 
@@ -286,6 +288,26 @@ public class AllLeadsPO {
         return playwright.getText(getKotaName);
     }
 
+    /**
+     * Clicks on Reset Filter button
+     */
+    public void clicksResetFilter() {
+        playwright.clickOn(resetFilterButton);
+    }
+
+    /**
+     * Clear search input field
+     */
+    public void clearSearchField() {
+        playwright.clearText(searchInput);
+    }
+
+    /**
+     * Clicks on Search button
+     */
+    public void clicksSearchButton() {
+        playwright.clickOn(searchButton);
+    }
     //--- End of Filter ---//
 
     //--- Confirmation Batalkan ---//
