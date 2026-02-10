@@ -1,4 +1,4 @@
-@LIMO4 @regression @tbclimo400 @flaky @selasamaintenanceskuy
+@LIMO4 @regression @tbclimo400 @selasamaintenanceskuy
 Feature: Profile Tenant Background Checker
 
   Scenario: reset Gp
@@ -36,7 +36,7 @@ Feature: Profile Tenant Background Checker
       | phone stag  | phone prod   | password  |
       | 08119787884 | 083355251030 | Perempuan |
     And owner wants to accsess chatroom
-    And owner doesn't have GP open TBC Lihat Profil at chatroom "Tenant No Profile"
+    And owner doesn't have GP open TBC Lihat Profil at chatroom "Tenant Ios Desember"
     Then owner will see that the text "Untuk saat ini, fitur Profil Penyewa hanya dapat digunakan di aplikasi Mamikos di Android dan iOS." is displayed
 
   @TEST_LIMO-4319
