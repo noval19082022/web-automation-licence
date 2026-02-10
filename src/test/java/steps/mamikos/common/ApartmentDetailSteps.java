@@ -29,6 +29,11 @@ public class ApartmentDetailSteps {
         apartment.clickOnFavoriteBtn();
     }
 
+    @When("user click on unfavorite btn on the apartment detail")
+    public void userClickOnUnFavoriteBtnOnTheApartmentDetail() {
+        apartment.clickOnUnFavoriteBtn();
+    }
+
     @Then("user get success message {string}")
     public void userGetSuccessMessage(String msg) {
         Assert.assertEquals(msg, apartment.getSuccessMessage());

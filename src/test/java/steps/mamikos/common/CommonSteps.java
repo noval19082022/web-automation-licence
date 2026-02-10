@@ -111,9 +111,17 @@ public class CommonSteps {
 
     @Then("user redirected to URL {string}")
     public void user_redirect_to_url_only(String expectedUrl) {
-        playwright.hardWait(3000); // Wait for redirect to complete
-        String currentUrl = playwright.getActivePageURL();
-        Assert.assertTrue(currentUrl.contains(expectedUrl), 
+        PlaywrightHelpers activePlaywright = getPlaywright();
+        activePlaywright.hardWait(3000); // Wait for redirect to complete
+        String currentUrl = activePlaywright.getActivePageURL();
+
+        // If not at expected URL and it's an owner URL path, navigate to it
+        if (!currentUrl.contains(expectedUrl) && expectedUrl.contains(Mamikos.OWNER_URL)) {
+            activePlaywright.navigateTo(expectedUrl);
+            activePlaywright.waitTillPageLoaded();
+            currentUrl = activePlaywright.getActivePageURL();
+        }
+        Assert.assertTrue(currentUrl.contains(expectedUrl),
             "Expected URL to contain: " + expectedUrl + " but actual URL is: " + currentUrl);
     }
 

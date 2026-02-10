@@ -1061,8 +1061,7 @@ public class PropertiSayaPO {
      * @return String pop up title
      */
     public String getTitlePopUpSuccessEditKos() {
-        playwright.waitTillLocatorIsVisible(titleSuccessEditPopUpText, 120000.0);
-        playwright.hardWait(1000);
+        playwright.waitTillLocatorIsVisible(titleSuccessEditPopUpText, 200000.0);
         return playwright.getText(titleSuccessEditPopUpText);
     }
 

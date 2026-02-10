@@ -52,8 +52,11 @@ public class RedirectOwnerSteps {
 
     @And("user redirected to pusat bantuan mamitour page")
     public void userRedirectedToPusatBantuanMamitourPage() {
-        playwright.hardWait(3);
-        Assert.assertTrue(playwright.getActivePageURL().contains(Mamikos.HELP_MAMITOUR));
+        Page activePage = ActiveContext.getActivePage();
+        PlaywrightHelpers activePlaywright = new PlaywrightHelpers(activePage);
+        activePlaywright.hardWait(3000);
+        activePlaywright.waitTillPageLoaded();
+        Assert.assertTrue(activePlaywright.getActivePageURL().contains(Mamikos.HELP_MAMITOUR));
     }
 
     @Then("owner redirect to select package GP2 page")
