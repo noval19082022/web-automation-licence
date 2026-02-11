@@ -134,6 +134,10 @@ public class OwnerDashboardPO {
     private Locator gpPeriodFirstOption;
     private Locator pilihPeriodeButton;
     private Locator gpStatusText;
+    private Locator pilihJenisPropertiTitle;
+    private Locator kosOptionButton;
+    private Locator apartemenOptionButton;
+    private Locator buatKosButton;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -231,6 +235,10 @@ public class OwnerDashboardPO {
         onboardingTitle = page.locator(".onboarding-new-owner__title");
         onboardingDescription = page.locator(".onboarding-new-owner__description");
         gpStatusText = page.locator(".membership-card__section").first();
+        pilihJenisPropertiTitle = page.getByText("Pilih Jenis Properti");
+        kosOptionButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kos")).first();
+        apartemenOptionButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Apartemen")).first();
+        buatKosButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Buat Kos"));
 
         // Sidebar menu locators
         homeMenuButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Home"));
@@ -1139,22 +1147,6 @@ public class OwnerDashboardPO {
     }
 
     /**
-     * Check if welcome title is visible for owner without property
-     * @return boolean true if welcome title is visible
-     */
-    public boolean isWelcomeTitleVisible() {
-        return playwright.waitTillLocatorIsVisible(welcomeTitle, 10000.0);
-    }
-
-    /**
-     * Check if welcome subtitle is visible for owner without property
-     * @return boolean true if welcome subtitle is visible
-     */
-    public boolean isWelcomeSubtitleVisible() {
-        return playwright.waitTillLocatorIsVisible(welcomeSubtitle, 10000.0);
-    }
-
-    /**
      * Check if Pasang Iklan Pertama button is visible for owner without property
      * @return boolean true if button is visible
      */
@@ -1322,6 +1314,87 @@ public class OwnerDashboardPO {
     public boolean isOnboardingCardNotVisible() {
         playwright.hardWait(3000);
         return !playwright.waitTillLocatorIsVisible(onboardingCard, 5000.0);
+    }
+
+    /**
+     * Click on Pasang Iklan Pertama button for listingless owner
+     */
+    public void clickOnPasangIklanPertamaButton() {
+        playwright.waitTillLocatorIsVisible(pasangIklanPertamaButton, 10000.0);
+        playwright.clickOn(pasangIklanPertamaButton);
+    }
+
+    /**
+     * Check if bottom sheet "Pilih Jenis Properti" is visible
+     * @return true if bottom sheet is visible
+     */
+    public boolean isPilihJenisPropertiBottomSheetVisible() {
+        return playwright.waitTillLocatorIsVisible(pilihJenisPropertiTitle, 10000.0);
+    }
+
+    /**
+     * Check if Kos option is visible in bottom sheet
+     * @return true if Kos option is visible
+     */
+    public boolean isKosOptionVisible() {
+        return playwright.waitTillLocatorIsVisible(kosOptionButton, 5000.0);
+    }
+
+    /**
+     * Check if Apartemen option is visible in bottom sheet
+     * @return true if Apartemen option is visible
+     */
+    public boolean isApartemenOptionVisible() {
+        return playwright.waitTillLocatorIsVisible(apartemenOptionButton, 5000.0);
+    }
+
+    /**
+     * Check if "Buat Kos" button is visible in bottom sheet
+     * @return true if Buat Kos button is visible
+     */
+    public boolean isBuatKosButtonVisible() {
+        return playwright.waitTillLocatorIsVisible(buatKosButton, 5000.0);
+    }
+
+    /**
+     * Click on Kos option in bottom sheet
+     */
+    public void clickOnKosOption() {
+        playwright.waitTillLocatorIsVisible(kosOptionButton, 5000.0);
+        playwright.clickOn(kosOptionButton);
+    }
+
+    /**
+     * Click on Apartemen option in bottom sheet
+     */
+    public void clickOnApartemenOption() {
+        playwright.waitTillLocatorIsVisible(apartemenOptionButton, 5000.0);
+        playwright.clickOn(apartemenOptionButton);
+    }
+
+    /**
+     * Click on "Buat Iklan" button in bottom sheet
+     */
+    public void clickOnBuatIklanButton() {
+        playwright.waitTillLocatorIsVisible(buatKosButton, 5000.0);
+        playwright.clickOn(buatKosButton);
+    }
+
+    /**
+     * Check if Pilih Paket GoldPlus button (paid products section) is NOT visible
+     * For listingless owner, paid products section should not be displayed
+     * @return true if paid products section is not visible
+     */
+    public boolean isPaidProductsSectionNotVisible() {
+        return !playwright.waitTillLocatorIsVisible(pilihPaketGoldplus, 3000.0);
+    }
+
+    /**
+     * Check if create listing section/card is clickable
+     * @return true if section is clickable
+     */
+    public boolean isCreateListingSectionClickable() {
+        return playwright.waitTillLocatorIsVisible(pasangIklanPertamaButton, 5000.0);
     }
 
     // Sidebar navigation methods

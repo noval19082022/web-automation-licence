@@ -660,5 +660,55 @@ public class OwnerDashboardSteps {
     public void ownerAccsessStatisticPage() {
         playwright.navigateTo(Mamikos.OWNER_URL + "/statistic");
     }
+
+    @Then("owner can see Pasang Iklan Pertama button")
+    public void ownerCanSeePasangIklanPertamaButton() {
+        Assert.assertTrue(ownerDashboardPO.isPasangIklanPertamaButtonVisible(), "Pasang Iklan Pertama button is not visible");
+    }
+
+    @Then("owner cannot see paid products section")
+    public void ownerCannotSeePaidProductsSection() {
+        Assert.assertTrue(ownerDashboardPO.isPaidProductsSectionNotVisible(), "Paid products section should not be visible but it is");
+    }
+
+    @When("owner clicks on Pasang Iklan Pertama button")
+    public void ownerClicksOnPasangIklanPertamaButton() {
+        ownerDashboardPO.clickOnPasangIklanPertamaButton();
+    }
+
+    @Then("owner can see bottom sheet Pilih Jenis Properti")
+    public void ownerCanSeeBottomSheetPilihJenisProperti() {
+        Assert.assertTrue(ownerDashboardPO.isPilihJenisPropertiBottomSheetVisible(), "Bottom sheet 'Pilih Jenis Properti' is not visible");
+    }
+
+    @Then("owner can see Kos option in bottom sheet")
+    public void ownerCanSeeKosOptionInBottomSheet() {
+        Assert.assertTrue(ownerDashboardPO.isKosOptionVisible(), "Kos option is not visible in bottom sheet");
+    }
+
+    @Then("owner can see Apartemen option in bottom sheet")
+    public void ownerCanSeeApartemenOptionInBottomSheet() {
+        Assert.assertTrue(ownerDashboardPO.isApartemenOptionVisible(), "Apartemen option is not visible in bottom sheet");
+    }
+
+    @Then("owner can see Buat Kos button in bottom sheet")
+    public void ownerCanSeeBuatIklanButtonInBottomSheet() {
+        Assert.assertTrue(ownerDashboardPO.isBuatKosButtonVisible(), "Buat Iklan button is not visible in bottom sheet");
+    }
+
+    @When("owner selects Kos option")
+    public void ownerSelectsKosOption() {
+        ownerDashboardPO.clickOnKosOption();
+    }
+
+    @When("owner selects Apartemen option")
+    public void ownerSelectsApartemenOption() {
+        ownerDashboardPO.clickOnApartemenOption();
+    }
+
+    @When("owner clicks on Buat Iklan button")
+    public void ownerClicksOnBuatIklanButton() {
+        ownerDashboardPO.clickOnBuatIklanButton();
+    }
 }
 
