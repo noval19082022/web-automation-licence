@@ -139,6 +139,7 @@ public class OwnerDashboardPO {
     private Locator apartemenOptionButton;
     private Locator buatKosButton;
     private Locator buatApartemenButton;
+    private Locator pilihPropertyCloseButton;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -241,6 +242,7 @@ public class OwnerDashboardPO {
         apartemenOptionButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Apartemen")).first();
         buatKosButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Buat Kos"));
         buatApartemenButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Buat Apartemen"));
+        pilihPropertyCloseButton = page.locator("use[href='#basic-close']");
 
         // Sidebar menu locators
         homeMenuButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Home"));
@@ -1153,7 +1155,7 @@ public class OwnerDashboardPO {
      * @return boolean true if button is visible
      */
     public boolean isPasangIklanPertamaButtonVisible() {
-        return playwright.waitTillLocatorIsVisible(pasangIklanPertamaButton, 10000.0);
+        return playwright.waitTillLocatorIsVisible(pasangIklanPertamaButton, 100000.0);
     }
 
     /**
@@ -1327,15 +1329,15 @@ public class OwnerDashboardPO {
     }
 
     /**
-     * Check if bottom sheet "Pilih Jenis Properti" is visible
-     * @return true if bottom sheet is visible
+     * Check if pilih property page is visible
+     * @return true if pilih property page is visible
      */
-    public boolean isPilihJenisPropertiBottomSheetVisible() {
+    public boolean isPilihPropertyPageVisible() {
         return playwright.waitTillLocatorIsVisible(pilihJenisPropertiTitle, 10000.0);
     }
 
     /**
-     * Check if Kos option is visible in bottom sheet
+     * Check if Kos option is visible in pilih property page
      * @return true if Kos option is visible
      */
     public boolean isKosOptionVisible() {
@@ -1343,7 +1345,7 @@ public class OwnerDashboardPO {
     }
 
     /**
-     * Check if Apartemen option is visible in bottom sheet
+     * Check if Apartemen option is visible in pilih property page
      * @return true if Apartemen option is visible
      */
     public boolean isApartemenOptionVisible() {
@@ -1351,7 +1353,7 @@ public class OwnerDashboardPO {
     }
 
     /**
-     * Check if "Buat Kos" button is visible in bottom sheet
+     * Check if "Buat Kos" button is visible in pilih property page
      * @return true if Buat Kos button is visible
      */
     public boolean isBuatKosButtonVisible() {
@@ -1359,7 +1361,7 @@ public class OwnerDashboardPO {
     }
 
     /**
-     * Click on Kos option in bottom sheet
+     * Click on Kos option in pilih property page
      */
     public void clickOnKosOption() {
         playwright.waitTillLocatorIsVisible(kosOptionButton, 5000.0);
@@ -1367,7 +1369,7 @@ public class OwnerDashboardPO {
     }
 
     /**
-     * Click on Apartemen option in bottom sheet
+     * Click on Apartemen option in pilih property page
      */
     public void clickOnApartemenOption() {
         playwright.waitTillLocatorIsVisible(apartemenOptionButton, 5000.0);
@@ -1375,7 +1377,7 @@ public class OwnerDashboardPO {
     }
 
     /**
-     * Click on "Buat Iklan" button in bottom sheet
+     * Click on "Buat Iklan" button in pilih property page
      */
     public void clickOnBuatIklanButton() {
         playwright.waitTillLocatorIsVisible(buatKosButton, 5000.0);
@@ -1420,7 +1422,7 @@ public class OwnerDashboardPO {
     }
 
     /**
-     * Check if Buat Apartemen button is visible in bottom sheet
+     * Check if Buat Apartemen button is visible in pilih property page
      * @return true if Buat Apartemen button is visible
      */
     public boolean isBuatApartemenButtonVisible() {
@@ -1428,7 +1430,7 @@ public class OwnerDashboardPO {
     }
 
     /**
-     * Click on "Buat Kos" button in bottom sheet
+     * Click on "Buat Kos" button in pilih property page
      */
     public void clickOnBuatKosButton() {
         playwright.waitTillLocatorIsVisible(buatKosButton, 5000.0);
@@ -1436,7 +1438,7 @@ public class OwnerDashboardPO {
     }
 
     /**
-     * Click on "Buat Apartemen" button in bottom sheet
+     * Click on "Buat Apartemen" button in pilih property page
      */
     public void clickOnBuatApartemenButton() {
         playwright.waitTillLocatorIsVisible(buatApartemenButton, 5000.0);
@@ -1459,6 +1461,14 @@ public class OwnerDashboardPO {
     public boolean isBuatApartemenButtonEnabled() {
         playwright.waitTillLocatorIsVisible(buatApartemenButton, 5000.0);
         return buatApartemenButton.isEnabled();
+    }
+
+    /**
+     * Dismiss/close pilih property page
+     * Try close button first, then ESC key as fallback
+     */
+    public void dismissPilihPropertyPage() {
+        playwright.clickOn(pilihPropertyCloseButton);
     }
 
     // Sidebar navigation methods

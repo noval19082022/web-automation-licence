@@ -21,11 +21,11 @@ Feature: Display Create Listing Section for Listingless Owner
     And owner cannot see paid products section
     # Click on create listing section
     When owner clicks on Pasang Iklan Pertama button
-    # Verify bottom sheet "Pilih Jenis Properti" appears
-    Then owner can see bottom sheet Pilih Jenis Properti
-    And owner can see Kos option in bottom sheet
-    And owner can see Apartemen option in bottom sheet
-    And owner can see Buat Kos button in bottom sheet
+    # Verify pilih property page appears
+    Then owner can see pilih property page
+    And owner can see Kos option in pilih property page
+    And owner can see Apartemen option in pilih property page
+    And owner can see Buat Kos button in pilih property page
 
 # https://mamiteam-qa3.atlassian.net/browse/LIMO-10778
 #  Owner: 0811978788423/qwerty123
@@ -37,7 +37,7 @@ Feature: Display Create Listing Section for Listingless Owner
       | phone stag    | phone prod | password  |
       | 0811978788423 | 0          | qwerty123 |
     And owner dismiss pop-up if appears
-    # Click on create listing section to open bottom sheet
+    # Click on create listing section to open pilih property page
     When owner clicks on Pasang Iklan Pertama button
     # Select property type
     When owner selects <property_type> option
@@ -51,3 +51,24 @@ Feature: Display Create Listing Section for Listingless Owner
       | property_type | buat_button    | redirect_url                                      |
       | Kos           | Buat Kos       | https://owner-jambu.kerupux.com/kos/create?step=1 |
       | Apartemen     | Buat Apartemen | https://jambu.kerupux.com/ownerpage/add           |
+
+
+#  https://mamiteam-qa3.atlassian.net/browse/LIMO-10779
+#  Owner: 0811978788423/qwerty123
+#  Test dismiss pilih property page without selecting any property type
+  @TEST_LIMO-10779
+  Scenario: [Owner][OD][CreateListing] Dismiss pilih property page without selecting
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag    | phone prod | password  |
+      | 0811978788423 | 0          | qwerty123 |
+    And owner dismiss pop-up if appears
+    # Click on create listing section to open pilih property page
+    When owner clicks on Pasang Iklan Pertama button
+    Then owner can see pilih property page
+    # Dismiss the pilih property page without selecting
+    When owner dismisses the pilih property page
+    # Verify owner remains on homepage
+    And owner remains on owner dashboard
+    # Verify create listing section is still displayed
+    And owner can see Pasang Iklan Pertama button
