@@ -10,7 +10,10 @@ public class ApartmentDetailPO {
     PlaywrightHelpers playwright;
     private Locator contactApartmentButton;
     private Locator favoriteBtn;
+    Locator favoriteRedBtn;
+    private Locator favoriteBtnActive;
     private Locator successMsgPopUp;
+    private Locator unfavoriteSuccessMsg;
     private Locator apartDetailContainer;
     private Locator firstApartment;
     private Locator hubungiPengelola;
@@ -21,11 +24,14 @@ public class ApartmentDetailPO {
         this.playwright = new PlaywrightHelpers(page);
         contactApartmentButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hubungi Pengelola"));
         this.favoriteBtn = page.getByTestId("btn-love");
+        this.favoriteBtnActive = page.locator("[data-testid='btn-love'].active, [data-testid='btn-love'][class*='active'], [data-testid='btn-love'][class*='loved']");
         this.successMsgPopUp = page.getByText("Sukses tersimpan");
+        this.unfavoriteSuccessMsg = page.getByText("Berhasil dihapus dari favorit");
         this.apartDetailContainer = page.locator("//div[@class='detail']");
         firstApartment = page.locator(".room-list__card");
         hubungiPengelola = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hubungi Pengelola"));
         lihatNomorTelepon = page.locator("#priceCard").getByText("Lihat Nomor Telepon");
+        favoriteRedBtn = page.locator("//button[@class='bg-c-button bg-c-button--tertiary bg-c-button--md btn-love--red-icon']");
     }
 
     /**
@@ -47,12 +53,27 @@ public class ApartmentDetailPO {
         playwright.clickOn(lihatNomorTelepon);
     }
 
+
     /**
-     * click on favorite btn
+     * Click on favorite btn
+     * If already favorited, unfavorite first then favorite again
      */
     public void clickOnFavoriteBtn() {
-            playwright.clickOn(favoriteBtn);
+        // If already favorited, unfavorite first
+        if (playwright.waitTillLocatorIsVisible(favoriteRedBtn)) {
+            playwright.clickOn(favoriteRedBtn);
+            playwright.hardWait(2000);
         }
+        playwright.clickOn(favoriteBtn);
+    }
+
+    /**
+     * Click on unfavorite btn
+     * If already favorited, unfavorite first then favorite again
+     */
+    public void clickOnUnFavoriteBtn() {
+        playwright.clickOn(favoriteBtn);
+    }
 
     /**
      * get success message after favorite the apartement

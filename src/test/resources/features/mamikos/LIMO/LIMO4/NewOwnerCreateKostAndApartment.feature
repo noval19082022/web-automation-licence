@@ -7,13 +7,14 @@ Feature: New Owner Create Kost and Apartment
     When user login as owner:
       | phone stag | phone prod | password  |
       | 0876623622 | 0876623622 | qwerty123 |
-    And user click menu "Tambah Properti" on feature waktunya mengelola property
+    And owner navigates to property saya kos
+    And owner click tambah data iklan "Kost"
     And user click back button in page
     Then check the header menu display on homepage owner
 
   @TEST_LIMO-3442 @icnClose @continue
   Scenario: Click button close on screen "Pilih Jenis Properti"
-    When user click menu "Tambah Properti" on feature waktunya mengelola property
+    And owner click tambah data iklan "Kost"
     And user click icon close on page pilih jenis properti
     Then check the header menu display on homepage owner
 
