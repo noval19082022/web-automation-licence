@@ -1,30 +1,13 @@
-@SS8 @SS8 @BnBFeature @BnBFeature3
+@SS8 @BnBFeature @BnBFeature3
 Feature: Homepage - Kost Saya Section
-
-  @TEST_SS-3511 @continue
-  #changeOwnersPhoneNumber.feature
-  Scenario: change owner's number phone at unique code
-    Given user go to mamikos homepage
-    When user login as owner:
-      | phone stag    | password     |
-      | 0890000000289 | Bismillah@01 |
-    And user redirected to owner dashboard
-    And user navigate to penyewa page
-    And user search kost in penyewa menu "unique code"
-    And user click Selengkapnya button on "Tenant Unique Code Tersisa" contract
-    And user click Kirim ulang kode hyperlink
-    Then user will redirect to Kirim kode unik ke penyewa page
-    And user will see phone number of owner "08922024111" or "0890000001004"
-    When user click Ubah nomor HP hyperlink
-    And user change owner's phone number into "0890000001004" and click Gunakan
-    Then user will see phone number of owner "0890000001004" or "08922024111"
-    When user click Ubah nomor HP hyperlink
-    And user change owner's phone number into "08922024111" and click Gunakan
-    Then user will see phone number of owner "08922024111" or "08922024111"
 
   @TEST_SS-3477
   #warningDontHaveKosSayaAtSemuaFilter.feature
   Scenario: check warning who don't have kos saya at Semua filter (BBM-895)
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag    | password     |
+      | 0890000000289 | Bismillah@01 |
     When user navigate to penyewa page
     And user search kost in penyewa menu "kost banda who dont have kos saya Tobelo Utara Halmahera Utara"
     Then user will see wording of warning tenant who don't have kos saya at Semua filter
@@ -36,8 +19,8 @@ Feature: Homepage - Kost Saya Section
     When user login as owner:
       | phone stag    | password     |
       | 0890000000289 | Bismillah@01 |
-    And user click menu "Tambah Penyewa" on feature waktunya mengelola property
-    And user click continue until start adding contract
+    And user navigate to add contract tenant page
+    And user choose owner added the contract
     And user select kost "kost flores Tobelo Utara Halmahera Utara" for tenant
     Then owner can sees full pop up restriction
     When owner clicks on change room's data on full room pop up restriction
@@ -48,7 +31,7 @@ Feature: Homepage - Kost Saya Section
   #addTenant.feature
   Scenario: Add Tenant For Different Gender (BBM-927)
     Given owner navigates to owner dashboard
-    And user click menu "Tambah Penyewa" on feature waktunya mengelola property
+    And user navigate to add contract tenant page
     And user choose owner added the contract
     And user select kost "kost madiun buat draft homepage Tobelo Utara Halmahera Utara" for tenant
     And owner input phone number with "083176833355"
@@ -114,8 +97,7 @@ Feature: Homepage - Kost Saya Section
     And user click on Draft menu
     And user click delete button on tab one draft booking
     Then tenant cannot see "Kost Madiun Buat Draft Homepage Tobelo Utara Halmahera Utara" as kost name and kost location
-    When user go to mamikos homepage
-    And user click Mau Coba Dong section at homepage
+    When user navigate to kost saya page
     Then user will see kos saya is still empty
     When user go to mamikos homepage
     And tenant redirect to kost details:
