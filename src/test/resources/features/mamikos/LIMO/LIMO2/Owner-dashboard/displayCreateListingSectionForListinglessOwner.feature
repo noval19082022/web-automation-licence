@@ -48,9 +48,9 @@ Feature: Display Create Listing Section for Listingless Owner
     Then user should redirect to link "<redirect_url>"
 
     Examples:
-      | property_type | buat_button    | redirect_url                                      |
-      | Kos           | Buat Kos       | https://owner-jambu.kerupux.com/kos/create?step=1 |
-      | Apartemen     | Buat Apartemen | https://jambu.kerupux.com/ownerpage/add           |
+      | property_type | buat_button    | redirect_url                                                  |
+      | Kos           | Buat Kos       | https://owner-jambu.kerupux.com/kos/create?step=1             |
+      | Apartemen     | Buat Apartemen | https://jambu.kerupux.com/ownerpage/add?create-apartemen=true |
 
 
 #  https://mamiteam-qa3.atlassian.net/browse/LIMO-10779
