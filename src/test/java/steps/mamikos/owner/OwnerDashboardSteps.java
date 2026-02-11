@@ -710,5 +710,39 @@ public class OwnerDashboardSteps {
     public void ownerClicksOnBuatIklanButton() {
         ownerDashboardPO.clickOnBuatIklanButton();
     }
+
+    @Then("owner can see {string} option is selected")
+    public void ownerCanSeeOptionIsSelected(String propertyType) {
+        if (propertyType.equalsIgnoreCase("Kos")) {
+            Assert.assertTrue(ownerDashboardPO.isKosOptionSelected(), "Kos option is not selected");
+        } else if (propertyType.equalsIgnoreCase("Apartemen")) {
+            Assert.assertTrue(ownerDashboardPO.isApartemenOptionSelected(), "Apartemen option is not selected");
+        }
+    }
+
+    @Then("owner can see Buat Apartemen button in bottom sheet")
+    public void ownerCanSeeBuatApartemenButtonInBottomSheet() {
+        Assert.assertTrue(ownerDashboardPO.isBuatApartemenButtonVisible(), "Buat Apartemen button is not visible in bottom sheet");
+    }
+
+    @When("owner clicks on Buat Kos button")
+    public void ownerClicksOnBuatKosButton() {
+        ownerDashboardPO.clickOnBuatKosButton();
+    }
+
+    @When("owner clicks on Buat Apartemen button")
+    public void ownerClicksOnBuatApartemenButton() {
+        ownerDashboardPO.clickOnBuatApartemenButton();
+    }
+
+    @Then("owner can see Buat Kos button is enabled")
+    public void ownerCanSeeBuatKosButtonIsEnabled() {
+        Assert.assertTrue(ownerDashboardPO.isBuatKosButtonEnabled(), "Buat Kos button is not enabled");
+    }
+
+    @Then("owner can see Buat Apartemen button is enabled")
+    public void ownerCanSeeBuatApartemenButtonIsEnabled() {
+        Assert.assertTrue(ownerDashboardPO.isBuatApartemenButtonEnabled(), "Buat Apartemen button is not enabled");
+    }
 }
 

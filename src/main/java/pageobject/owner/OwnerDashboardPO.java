@@ -138,6 +138,7 @@ public class OwnerDashboardPO {
     private Locator kosOptionButton;
     private Locator apartemenOptionButton;
     private Locator buatKosButton;
+    private Locator buatApartemenButton;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -239,6 +240,7 @@ public class OwnerDashboardPO {
         kosOptionButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kos")).first();
         apartemenOptionButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Apartemen")).first();
         buatKosButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Buat Kos"));
+        buatApartemenButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Buat Apartemen"));
 
         // Sidebar menu locators
         homeMenuButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Home"));
@@ -1395,6 +1397,68 @@ public class OwnerDashboardPO {
      */
     public boolean isCreateListingSectionClickable() {
         return playwright.waitTillLocatorIsVisible(pasangIklanPertamaButton, 5000.0);
+    }
+
+    /**
+     * Check if Kos option is selected/highlighted
+     * @return true if Kos option is selected
+     */
+    public boolean isKosOptionSelected() {
+        playwright.hardWait(500);
+        String classAttr = kosOptionButton.getAttribute("class");
+        return classAttr != null && (classAttr.contains("selected") || classAttr.contains("active") || classAttr.contains("checked"));
+    }
+
+    /**
+     * Check if Apartemen option is selected/highlighted
+     * @return true if Apartemen option is selected
+     */
+    public boolean isApartemenOptionSelected() {
+        playwright.hardWait(500);
+        String classAttr = apartemenOptionButton.getAttribute("class");
+        return classAttr != null && (classAttr.contains("selected") || classAttr.contains("active") || classAttr.contains("checked"));
+    }
+
+    /**
+     * Check if Buat Apartemen button is visible in bottom sheet
+     * @return true if Buat Apartemen button is visible
+     */
+    public boolean isBuatApartemenButtonVisible() {
+        return playwright.waitTillLocatorIsVisible(buatApartemenButton, 5000.0);
+    }
+
+    /**
+     * Click on "Buat Kos" button in bottom sheet
+     */
+    public void clickOnBuatKosButton() {
+        playwright.waitTillLocatorIsVisible(buatKosButton, 5000.0);
+        playwright.clickOn(buatKosButton);
+    }
+
+    /**
+     * Click on "Buat Apartemen" button in bottom sheet
+     */
+    public void clickOnBuatApartemenButton() {
+        playwright.waitTillLocatorIsVisible(buatApartemenButton, 5000.0);
+        playwright.clickOn(buatApartemenButton);
+    }
+
+    /**
+     * Check if Buat Kos button is enabled
+     * @return true if button is enabled
+     */
+    public boolean isBuatKosButtonEnabled() {
+        playwright.waitTillLocatorIsVisible(buatKosButton, 5000.0);
+        return buatKosButton.isEnabled();
+    }
+
+    /**
+     * Check if Buat Apartemen button is enabled
+     * @return true if button is enabled
+     */
+    public boolean isBuatApartemenButtonEnabled() {
+        playwright.waitTillLocatorIsVisible(buatApartemenButton, 5000.0);
+        return buatApartemenButton.isEnabled();
     }
 
     // Sidebar navigation methods

@@ -10,8 +10,8 @@ Feature: Display Create Listing Section for Listingless Owner
   Scenario: [Owner][OD][CreateListing] Display welcome section and create listing flow
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod | password  |
-      | 0811978788423  | 0          | qwerty123 |
+      | phone stag    | phone prod | password  |
+      | 0811978788423 | 0          | qwerty123 |
     And owner dismiss pop-up if appears
     # Verify welcome section is displayed
     Then owner will see that the text "👋🏼 Selamat datang" is displayed
@@ -26,3 +26,28 @@ Feature: Display Create Listing Section for Listingless Owner
     And owner can see Kos option in bottom sheet
     And owner can see Apartemen option in bottom sheet
     And owner can see Buat Kos button in bottom sheet
+
+# https://mamiteam-qa3.atlassian.net/browse/LIMO-10778
+#  Owner: 0811978788423/qwerty123
+#  Test selecting property type (Kos/Apartemen) and clicking Buat Iklan button
+  @TEST_LIMO-10778
+  Scenario Outline: [Owner][OD][CreateListing] Select property type and create listing - <property_type>
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag    | phone prod | password  |
+      | 0811978788423 | 0          | qwerty123 |
+    And owner dismiss pop-up if appears
+    # Click on create listing section to open bottom sheet
+    When owner clicks on Pasang Iklan Pertama button
+    # Select property type
+    When owner selects <property_type> option
+    Then owner can see "<property_type>" option is selected
+    And owner can see <buat_button> button is enabled
+    # Click on Buat button and verify redirect
+    When owner clicks on <buat_button> button
+    Then user should redirect to link "<redirect_url>"
+
+    Examples:
+      | property_type | buat_button    | redirect_url                                      |
+      | Kos           | Buat Kos       | https://owner-jambu.kerupux.com/kos/create?step=1 |
+      | Apartemen     | Buat Apartemen | https://jambu.kerupux.com/ownerpage/add           |
