@@ -1,4 +1,4 @@
-@LIMO2
+@LIMO2 @ODCreateProperty
 #  source TC: https://mamiteam-qa3.atlassian.net/projects/LIMO?selectedItem=com.atlassian.plugins.atlassian-connect-plugin:com.xpandit.plugins.xray__testing-board#!page=test-repository&selectedFolder=696468113f6ed945d4660896
 Feature: Display Create Listing Section for Listingless Owner
 
