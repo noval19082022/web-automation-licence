@@ -611,7 +611,7 @@ public class OwnerDashboardSteps {
                     "Not on Pengunjung Iklan page. Current URL: " + currentUrl);
                 break;
             case "Pengajuan Survei":
-                Assert.assertTrue(currentUrl.contains("/survey") || currentUrl.contains("/pengajuan-survei") || currentUrl.contains("/mamiads/tenant/"),
+                Assert.assertTrue(currentUrl.contains("/?openChat=true&section=tenant_survey") || currentUrl.contains("/pengajuan-survei") || currentUrl.contains("/mamiads/tenant/"),
                     "Not on Pengajuan Survei page. Current URL: " + currentUrl);
                 break;
             case "Daftar Tunggu":
@@ -660,5 +660,50 @@ public class OwnerDashboardSteps {
     public void ownerAccsessStatisticPage() {
         playwright.navigateTo(Mamikos.OWNER_URL + "/statistic");
     }
+
+    // =====================================================
+    // Room Availability Indicator Steps
+    // =====================================================
+
+    @Then("the {string} icon should have a red dot indicator")
+    public void theIconShouldHaveARedDotIndicator(String iconName) {
+            Assert.assertTrue(ownerDashboardPO.isKetersediaanKamarRedDotVisible(iconName),
+                    "Red dot indicator is not visible on Ketersediaan Kamar icon");
+    }
+
+    @When("owner views the Activities section")
+    public void ownerViewsTheActivitiesSection() {
+        loading.waitForLoadingIconDisappear();
+        ownerDashboardPO.dismissPopUp();
+        Assert.assertTrue(ownerDashboardPO.isActivitySectionVisible(),
+                "Activities section (Waktunya Mengelola Properti) is not visible");
+    }
+
+    @Then("owner clicks on {string} icon in activity section")
+    public void ownerClicksOnIconInActivitySection(String iconName) {
+        if (iconName.equalsIgnoreCase(iconName)) {
+            ownerDashboardPO.clickOnKetersediaanKamarActivityIcon(iconName);
+        } else {
+            ownerDashboardPO.clickOnMenuKelolaProperty(iconName);
+        }
+    }
+
+    @Then("the {string} icon should NOT be displayed")
+    public void theIconShouldNotBeDisplayed(String iconName) {
+        if (iconName.equalsIgnoreCase("Ketersediaan Kamar")) {
+            Assert.assertTrue(ownerDashboardPO.isKetersediaanKamarIconNotVisible(),
+                    "Ketersediaan Kamar icon should NOT be displayed but it is visible");
+        }
+    }
+
+    @Then("the counter badge {string} should display {string}")
+    public void theCounterBadgeShouldDisplay(String activityName, String expectedCount) {
+        Assert.assertTrue(ownerDashboardPO.isKetersediaanKamarRedDotVisible(activityName),
+                "Red dot indicator is not visible on " + activityName + " icon");
+        String actualCount = ownerDashboardPO.getCounterBadgeValue(activityName);
+        Assert.assertEquals(actualCount, expectedCount,
+                "Counter badge for " + activityName + " should display '" + expectedCount + "' but got '" + actualCount + "'");
+    }
 }
+
 
