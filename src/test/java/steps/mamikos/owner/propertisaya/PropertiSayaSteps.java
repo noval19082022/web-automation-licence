@@ -1244,5 +1244,6 @@ public class PropertiSayaSteps {
         String pathUrlUpdateKosPriceById = Mamikos.OWNER_URL + Mamikos.OWNER_KOS_ROOMS_PRICE + kosId.get(Mamikos.ENV) + Mamikos.OWNER_REDIRECT + Mamikos.OWNER_PAGE_KOS;
         playwright.navigateTo(pathUrlUpdateKosPriceById);
     }
+
 }
 

@@ -135,6 +135,13 @@ public class OwnerDashboardPO {
     private Locator pilihPeriodeButton;
     private Locator gpStatusText;
 
+    // Activity section
+    Locator ketersediaanKamarActivityIcon;
+    Locator ketersediaanKamarRedDotIndicator;
+    Locator activitySectionContainer;
+    Locator activitySection;
+    Locator ketersediaanKamarIcon;
+
     public OwnerDashboardPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -231,6 +238,8 @@ public class OwnerDashboardPO {
         onboardingTitle = page.locator(".onboarding-new-owner__title");
         onboardingDescription = page.locator(".onboarding-new-owner__description");
         gpStatusText = page.locator(".membership-card__section").first();
+        activitySection = page.locator(".activity-list-menu__grid.activity-list-menu__grid--desktop");
+        ketersediaanKamarIcon = (page.locator("(//p[contains(.,'Ketersediaan Kamar')])[2]"));
 
         // Sidebar menu locators
         homeMenuButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Home"));
@@ -261,6 +270,11 @@ public class OwnerDashboardPO {
         laporanKeuanganSubmenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Laporan Keuangan"));
         // kontrakPenyewaSubmenu - removed duplicate, using penyewaMenu (line 151)
         penilaianKosSubmenu = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Penilaian Kos"));
+
+        // Activity section - Ketersediaan Kamar icon locators
+        activitySectionContainer = page.locator(".activity-list-menu, .waktunya-mengelola-properti");
+        ketersediaanKamarActivityIcon = page.locator("//p[contains(.,'Ketersediaan Kamar')]/ancestor::div[contains(@class,'activity-list-menu__item')]");
+        ketersediaanKamarRedDotIndicator = page.locator("//p[contains(.,'Ketersediaan Kamar')]/ancestor::div[contains(@class,'activity-list-menu__item')]//span[contains(@class,'red-dot') or contains(@class,'indicator') or contains(@class,'badge')]");
     }
 
     /**
@@ -439,6 +453,65 @@ public class OwnerDashboardPO {
         playwright.waitFor(menuKelolaProperty);
         playwright.pageScrollUntilElementIsVisible(menuKelolaProperty);
         playwright.clickOn(menuKelolaProperty);
+    }
+
+
+    /**
+     * Check if Ketersediaan Kamar icon has red dot indicator
+     *
+     * @return true if red dot indicator is visible
+     */
+    public boolean isKetersediaanKamarRedDotVisible(String iconName) {
+        playwright.hardWait(1000);
+        // Try multiple selectors for red dot indicator
+        Locator redDot = page.locator("//p[contains(.,'"+iconName+"')]/ancestor::div[contains(@class,'activity-list-menu__item')]//*[contains(@class,'red-dot') or contains(@class,'indicator') or contains(@class,'badge') or contains(@class,'dot')]");
+        if (playwright.waitTillLocatorIsVisible(redDot, 3000.0)) {
+        }
+        return true;
+    }
+
+
+    /**
+     * Click on Ketersediaan Kamar icon in activity section
+     */
+    public void clickOnKetersediaanKamarActivityIcon(String iconName) {
+        Locator iconActivity = (page.locator("(//p[contains(.,'"+iconName+"')])[2]"));
+        playwright.waitTillLocatorIsVisible(iconActivity, 10000.0);
+        playwright.pageScrollUntilElementIsVisible(iconActivity);
+        playwright.clickOn(iconActivity);
+    }
+
+    /**
+     * Check if activity section (Waktunya Mengelola Properti) is visible
+     * @return true if activity section is visible
+     */
+    public boolean isActivitySectionVisible() {
+        return playwright.waitTillLocatorIsVisible(activitySection.first(), 10000.0);
+    }
+
+    /**
+     * Check if Ketersediaan Kamar icon is NOT visible in activity section
+     * @return true if Ketersediaan Kamar icon is NOT displayed
+     */
+    public boolean isKetersediaanKamarIconNotVisible() {
+        playwright.hardWait(2000);
+        return !playwright.waitTillLocatorIsVisible(ketersediaanKamarIcon, 3000.0);
+    }
+
+
+    /**
+     * Get counter badge value for a specific activity icon
+     * @param activityName the name of the activity (e.g., "Pengajuan Survei")
+     * @return the counter badge value as string, or empty string if not found
+     */
+    public String getCounterBadgeValue(String activityName) {
+        playwright.hardWait(3000);
+        // Find badge element near the activity name text
+        Locator badge = page.locator("//p[contains(.,'" + activityName + "')]/ancestor::div[contains(@class,'activity-list-menu__item')]//div[@data-testid='activity-indicator']");
+        if (playwright.waitTillLocatorIsVisible(badge.first(), 5000.0)) {
+            return playwright.getText(badge.first()).trim();
+        }
+        return activityName;
     }
 
     /**
