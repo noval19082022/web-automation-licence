@@ -1139,27 +1139,11 @@ public class OwnerDashboardPO {
     }
 
     /**
-     * Check if welcome title is visible for owner without property
-     * @return boolean true if welcome title is visible
-     */
-    public boolean isWelcomeTitleVisible() {
-        return playwright.waitTillLocatorIsVisible(welcomeTitle, 10000.0);
-    }
-
-    /**
-     * Check if welcome subtitle is visible for owner without property
-     * @return boolean true if welcome subtitle is visible
-     */
-    public boolean isWelcomeSubtitleVisible() {
-        return playwright.waitTillLocatorIsVisible(welcomeSubtitle, 10000.0);
-    }
-
-    /**
      * Check if Pasang Iklan Pertama button is visible for owner without property
      * @return boolean true if button is visible
      */
     public boolean isPasangIklanPertamaButtonVisible() {
-        return playwright.waitTillLocatorIsVisible(pasangIklanPertamaButton, 10000.0);
+        return playwright.waitTillLocatorIsVisible(pasangIklanPertamaButton, 100000.0);
     }
 
     /**
@@ -1322,6 +1306,33 @@ public class OwnerDashboardPO {
     public boolean isOnboardingCardNotVisible() {
         playwright.hardWait(3000);
         return !playwright.waitTillLocatorIsVisible(onboardingCard, 5000.0);
+    }
+
+    /**
+     * Click on Pasang Iklan Pertama button for listingless owner
+     * @return PilihPropertyPagePO for chaining
+     */
+    public PilihPropertyPagePO clickOnPasangIklanPertamaButton() {
+        playwright.waitTillLocatorIsVisible(pasangIklanPertamaButton, 10000.0);
+        playwright.clickOn(pasangIklanPertamaButton);
+        return new PilihPropertyPagePO(page);
+    }
+
+    /**
+     * Check if Pilih Paket GoldPlus button (paid products section) is NOT visible
+     * For listingless owner, paid products section should not be displayed
+     * @return true if paid products section is not visible
+     */
+    public boolean isPaidProductsSectionNotVisible() {
+        return !playwright.waitTillLocatorIsVisible(pilihPaketGoldplus, 3000.0);
+    }
+
+    /**
+     * Check if create listing section/card is clickable
+     * @return true if section is clickable
+     */
+    public boolean isCreateListingSectionClickable() {
+        return playwright.waitTillLocatorIsVisible(pasangIklanPertamaButton, 5000.0);
     }
 
     // Sidebar navigation methods

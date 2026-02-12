@@ -11,6 +11,7 @@ import org.testng.Assert;
 import pageobject.common.LoadingPO;
 import pageobject.common.ModalPopUpPO;
 import pageobject.owner.OwnerDashboardPO;
+import pageobject.owner.PilihPropertyPagePO;
 import pageobject.owner.goldplus.GoldplusPO;
 import pageobject.owner.kelolatagihan.PengajuanSewaPO;
 import utilities.PlaywrightHelpers;
@@ -25,6 +26,7 @@ public class OwnerDashboardSteps {
     PlaywrightHelpers playwright = new PlaywrightHelpers(page);
     OwnerDashboardPO ownerDashboardPO = new OwnerDashboardPO(page);
     ModalPopUpPO modalPopUpPO = new ModalPopUpPO(page);
+    PilihPropertyPagePO pilihPropertyPage = new PilihPropertyPagePO(page);
     GoldplusPO goldplus = new GoldplusPO(page);
     PengajuanSewaPO PengajuanSewaPO = new PengajuanSewaPO(page);
     LoadingPO loading = new LoadingPO(page);
@@ -660,5 +662,95 @@ public class OwnerDashboardSteps {
     public void ownerAccsessStatisticPage() {
         playwright.navigateTo(Mamikos.OWNER_URL + "/statistic");
     }
-}
 
+    @Then("owner can see Pasang Iklan Pertama button")
+    public void ownerCanSeePasangIklanPertamaButton() {
+        Assert.assertTrue(ownerDashboardPO.isPasangIklanPertamaButtonVisible(), "Pasang Iklan Pertama button is not visible");
+    }
+
+    @Then("owner cannot see paid products section")
+    public void ownerCannotSeePaidProductsSection() {
+        Assert.assertTrue(ownerDashboardPO.isPaidProductsSectionNotVisible(), "Paid products section should not be visible but it is");
+    }
+
+    @When("owner clicks on Pasang Iklan Pertama button")
+    public void ownerClicksOnPasangIklanPertamaButton() {
+        ownerDashboardPO.clickOnPasangIklanPertamaButton();
+    }
+
+    @Then("owner can see pilih property page")
+    public void ownerCanSeePilihPropertyPage() {
+        Assert.assertTrue(pilihPropertyPage.isPageVisible(), "Pilih property page is not visible");
+    }
+
+    @Then("owner can see Kos option in pilih property page")
+    public void ownerCanSeeKosOptionInPilihPropertyPage() {
+        Assert.assertTrue(pilihPropertyPage.isKosOptionVisible(), "Kos option is not visible in pilih property page");
+    }
+
+    @Then("owner can see Apartemen option in pilih property page")
+    public void ownerCanSeeApartemenOptionInPilihPropertyPage() {
+        Assert.assertTrue(pilihPropertyPage.isApartemenOptionVisible(), "Apartemen option is not visible in pilih property page");
+    }
+
+    @Then("owner can see Buat Kos button in pilih property page")
+    public void ownerCanSeeBuatKosButtonInPilihPropertyPage() {
+        Assert.assertTrue(pilihPropertyPage.isBuatKosButtonVisible(), "Buat Kos button is not visible in pilih property page");
+    }
+
+    @When("owner selects Kos option")
+    public void ownerSelectsKosOption() {
+        pilihPropertyPage.clickOnKosOption();
+    }
+
+    @When("owner selects Apartemen option")
+    public void ownerSelectsApartemenOption() {
+        pilihPropertyPage.clickOnApartemenOption();
+    }
+
+    @Then("owner can see {string} option is selected")
+    public void ownerCanSeeOptionIsSelected(String propertyType) {
+        if (propertyType.equalsIgnoreCase("Kos")) {
+            Assert.assertTrue(pilihPropertyPage.isKosOptionSelected(), "Kos option is not selected");
+        } else if (propertyType.equalsIgnoreCase("Apartemen")) {
+            Assert.assertTrue(pilihPropertyPage.isApartemenOptionSelected(), "Apartemen option is not selected");
+        }
+    }
+
+    @Then("owner can see Buat Apartemen button in pilih property page")
+    public void ownerCanSeeBuatApartemenButtonInPilihPropertyPage() {
+        Assert.assertTrue(pilihPropertyPage.isBuatApartemenButtonVisible(), "Buat Apartemen button is not visible in pilih property page");
+    }
+
+    @When("owner clicks on Buat Kos button")
+    public void ownerClicksOnBuatKosButton() {
+        pilihPropertyPage.clickOnBuatKosButton();
+    }
+
+    @When("owner clicks on Buat Apartemen button")
+    public void ownerClicksOnBuatApartemenButton() {
+        pilihPropertyPage.clickOnBuatApartemenButton();
+    }
+
+    @Then("owner can see Buat Kos button is enabled")
+    public void ownerCanSeeBuatKosButtonIsEnabled() {
+        Assert.assertTrue(pilihPropertyPage.isBuatKosButtonEnabled(), "Buat Kos button is not enabled");
+    }
+
+    @Then("owner can see Buat Apartemen button is enabled")
+    public void ownerCanSeeBuatApartemenButtonIsEnabled() {
+        Assert.assertTrue(pilihPropertyPage.isBuatApartemenButtonEnabled(), "Buat Apartemen button is not enabled");
+    }
+
+    @When("owner dismisses the pilih property page")
+    public void ownerDismissesThePilihPropertyPage() {
+        pilihPropertyPage.dismissPage();
+    }
+
+    @Then("owner remains on owner dashboard")
+    public void ownerRemainsOnOwnerDashboard() {
+        String currentUrl = page.url();
+        Assert.assertTrue(currentUrl.contains("owner") || currentUrl.contains("kerupux.com"),
+            "Owner is not on owner dashboard. Current URL: " + currentUrl);
+    }
+}
