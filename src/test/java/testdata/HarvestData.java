@@ -7,4 +7,7 @@ public class HarvestData {
 
     @Setter @Getter
     private static String nlbPhoneNumber;
+
+    @Setter @Getter
+    private static String ilbPhoneNumber;
 }

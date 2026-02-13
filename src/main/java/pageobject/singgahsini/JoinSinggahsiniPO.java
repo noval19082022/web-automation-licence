@@ -3,6 +3,7 @@ package pageobject.singgahsini;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import com.microsoft.playwright.options.LoadState;
 import data.mamikos.Mamikos;
 import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
@@ -79,6 +80,13 @@ public class JoinSinggahsiniPO {
      */
     public void navigateToSinggahsiniId() {
         playwright.navigateTo(Mamikos.Singgahsini_URL,60000.0);
+    }
+
+    /**
+     * Navigate directly to singgahsini/daftar registration page
+     */
+    public void navigateToSinggahsiniDaftar() {
+        playwright.navigateTo(Mamikos.URL + "/singgahsini/daftar", 60000.0, LoadState.LOAD);
     }
 
     /**
