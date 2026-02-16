@@ -25,7 +25,7 @@ public class InvoicePO {
     Locator totalPembayaran;
     Locator subTotal;
     Locator biayaLayanan;
-    String  appliedVoucher;
+    String appliedVoucher;
     Locator toast;
     Locator invoiceSection;
     Locator invalidVoucherIcon;
@@ -118,10 +118,11 @@ public class InvoicePO {
         deleteVoucher = page.locator("#invoiceContent .invoice-voucher-switch");
         invoiceSection = page.locator("invoiceBill");
         invalidVoucherIcon = page.locator("//*[@href='#basic-error-round-glyph']");
-        hapusToastButton = page.locator("//button[@class='bg-c-button bg-c-button--tertiary-naked-inversed bg-c-button--md']");
+        hapusToastButton = page.locator("//button[normalize-space()='Hapus']");
         voucherToastWarningText = page.getByTestId("warning_txt");
         closeVoucherPopUpButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("close"));
-        voucherInputPopUpWarningText = page.getByTestId("warning_txt");
+        voucherInputPopUpWarningText = page.locator("//div[@class='bg-c-toast__content']")
+         .or(page.locator("//div[@class='c-warning']"));
         pilihPembayaranButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Metode Pembayaran"));
         alfamart = page.locator("#invoicePayment div").filter(new Locator.FilterOptions().setHasText("Alfamart / Alfamidi")).nth(1);
         bankMandiri = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("Bank Mandiri - MamiPAY"));
@@ -287,6 +288,7 @@ public class InvoicePO {
 
     /**
      * Wait until voucher warning text appear.
+     *
      * @return boolean data type true if visible, otherwise false.
      */
     public boolean waitUntilvoucherUsedTextVisible() {
@@ -325,7 +327,7 @@ public class InvoicePO {
      * click on hapus in toast button
      */
     public void clickOnHapusInToast() {
-        playwright.hardWait(2000); // Wait for toast to be fully displayed
+        playwright.hardWait(5000); // Wait for toast to be fully displayed
         playwright.clickOn(hapusToastButton);
         playwright.hardWait(2000); // Wait for animation after click
         masukkanVoucher.waitFor();
