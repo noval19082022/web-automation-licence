@@ -113,7 +113,7 @@ public class ChatOwnerPO {
         caraIsiKuotaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cara isi kuota"));
         chatBebasKuotaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Chat bebas kuota"));
         apaItuKuotaChatRoomButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Apa itu kuota chat room?"));
-        buttonOnChatRoom = page.locator("button[class='bg-c-button bg-c-button--primary bg-c-button--sm']");
+        buttonOnChatRoom = page.locator("//div[@class='mc-channel-list-card__avatar']");
         buttonOnChatRoomList = page.locator("button.bg-c-button.mc-non-gp-entrypoint-card__entrypoint-button.bg-c-button--primary.bg-c-button--sm");
         daftarGPButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Daftar"));
         blockingModalCloseButton = page.locator(".bg-c-modal__action-closable");

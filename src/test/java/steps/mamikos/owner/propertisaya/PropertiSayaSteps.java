@@ -1234,5 +1234,16 @@ public class PropertiSayaSteps {
     public void ownerClickOnPindahkanPhoto() {
         propertySaya.clickOnPindahkanPhoto();
     }
+
+    @When("user/owner use direct url access to update kos price:")
+    public void userGoToEditKosPageByKosId(DataTable table) {
+        playwright.waitTillPageLoaded(GlobalConfig.DEFAULT_NAVIGATION_TIMEOUT);
+        Map<String, String> kosId;
+        playwright = new PlaywrightHelpers(ActiveContext.getActivePage());
+        kosId = table.asMap(String.class, String.class);
+        String pathUrlUpdateKosPriceById = Mamikos.OWNER_URL + Mamikos.OWNER_KOS_ROOMS_PRICE + kosId.get(Mamikos.ENV) + Mamikos.OWNER_REDIRECT + Mamikos.OWNER_PAGE_KOS;
+        playwright.navigateTo(pathUrlUpdateKosPriceById);
+    }
+
 }
 

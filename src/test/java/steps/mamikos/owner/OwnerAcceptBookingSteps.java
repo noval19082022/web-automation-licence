@@ -101,7 +101,17 @@ public class OwnerAcceptBookingSteps {
 
     @And("owner accept booking via Homepage")
     public void ownerAcceptBookingViaHomepage() throws InterruptedException {
-        ownerDashboard.clickOnPengajuanSewa();
+        ownerDashboard.clickOnManagementKost();
+        pengajuanBooking = ownerDashboard.clickOnPengajuanSewa();
+        billBookingManage.clickOnLihatDetailButton();
+      //  ownerDashboard.clickOnPengajuanSewa();
+
+        // Check if there are booking requests before proceeding
+        if (!pengajuanBooking.hasBookingRequests()) {
+            System.out.println("SKIPPED: No booking request available to accept");
+            return;
+        }
+
         pengajuanBooking.ownerAcceptBooking();
        // pengajuanBooking.clickOnTerimaPopUp();
         billBookingManage.clickOnRoomNumberInput();

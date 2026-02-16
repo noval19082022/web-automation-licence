@@ -86,9 +86,15 @@ public class MamitourPO {
 
     /**
      * click on pusat bantuan on mamitour
+     * Opens a new tab with the help center page
      */
     public void clickOnPusatBantuan() {
-        playwright.clickOn(pusatBantuan);
+        playwright.waitTillLocatorIsVisible(pusatBantuan, 10000.0);
+        Page helpPage = page.waitForPopup(() -> {
+            pusatBantuan.click();
+        });
+        helpPage.waitForLoadState();
+        helpPage.bringToFront();
     }
 
     /**
@@ -107,6 +113,7 @@ public class MamitourPO {
      */
     public boolean isRiwayatButtonVisible() {
         playwright.waitTillPageLoaded();
+        playwright.waitTillLocatorIsVisible(riwayatBtn,10000.0);
         return playwright.waitTillLocatorIsVisible(riwayatBtn);
     }
 

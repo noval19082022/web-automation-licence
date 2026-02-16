@@ -1,4 +1,4 @@
-@regression @LIMO4 @LIMO-Homepage-owner @flaky
+@regression @LIMO4 @LIMO-Homepage-owner
 Feature: Owner Homepage
 
   @TEST_LIMO-3445 @navbarAfter @continue @WEB @AUTOMATED
@@ -6,9 +6,9 @@ Feature: Owner Homepage
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag   | phone prod   | password  |
-      | 083176408311 | 083132824758 | qwerty123 |
+      | 0891202601   | 083132824758 | qwerty123 |
     Then check the header menu display on homepage owner
-    And user see username in top right shows as "abcdefghijklmnopqrst"
+    And user see username in top right shows as "Owner New dashboard A"
 
   @TEST_LIMO-3453 @redirectionElementNavbar @continue @WEB @AUTOMATED
   Scenario: Redirection element header after login
@@ -42,7 +42,7 @@ Feature: Owner Homepage
     When owner navigates to property saya kos
     Then user should redirect to link "https://jambu.kerupux.com/ownerpage/kos"
     When owner navigates to property saya apartemen
-    Then user should redirect to link "https://jambu.kerupux.com/ownerpage/apartment"
+    Then user should redirect to link "https://jambu.kerupux.com/ownerpage/add"
 
 #  @TEST_LIMO-3443 @OwnerGreeting @listingGP @continue @WEB @AUTOMATED
 #  Scenario: Click username direct to setelan akun

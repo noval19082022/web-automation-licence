@@ -24,7 +24,7 @@ Feature: Apartment Tenant
       | environment | apartment path                                      |
       | stag        | /apartemen-kalibata-city/silalay-123-1room-studio-1 |
       | prod        | /apartemen-kalibata-city/silalay-123-1room-studio-1 |
-    When user click on favorite btn on the apartment detail
+    When user click on unfavorite btn on the apartment detail
     And tenant navigate to favorite page
     Then tenant should not be able to see the text "Silalay 123"
     And tenant should not be able to see the text "Mungkin cocok dengan kamu"

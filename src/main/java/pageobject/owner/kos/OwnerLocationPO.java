@@ -191,10 +191,11 @@ public class OwnerLocationPO {
     }
 
     /**
-     * Wait for photo info popup to appear (indicates page fully loaded)
+     * Wait for property list page to be fully loaded
+     * Waits for the "Lengkapi Data Kos" link to appear as page load indicator
      */
     public void waitForPhotoInfoPopup() {
-        playwright.waitFor(photoInfoPopupText, 15000.0);
+        playwright.waitTillLocatorIsVisible(lengkapiDataKosLink, 30000.0);
     }
 
     /**

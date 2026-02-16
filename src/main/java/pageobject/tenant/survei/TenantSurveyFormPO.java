@@ -66,7 +66,7 @@ public class TenantSurveyFormPO {
 
         dateOption = page.getByPlaceholder("Pilih tanggal survei kos");
         dateViewSelected = page.locator("//div[@class='chat-sheet']").locator(".selected");
-        dateViewToday = page.locator("//span[@class='cell day selected today']");
+        dateViewToday = page.locator("span.cell.day.selected.today");
         nextMonthBtn = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("arrow-right"));
         previousMonthBtn = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("arrow-left"));
         editProfileBtn = page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("edit"));
@@ -104,7 +104,7 @@ public class TenantSurveyFormPO {
         tncSection = page.locator(".tnc-section, .terms-section");
         surveyStatusInChatroom = page.locator(".survey-status");
         p2AutoreplyMessage = page.locator(".autoreply-message, .p2-message");
-        basedLocatorDateCell = page.locator("//div[@class='date-wrapper__cell-parent']/span[@class='cell day']");
+        basedLocatorDateCell = page.locator(".date-wrapper .cell.day");
         chatroomContainer = page.locator(".chatroom, .chat-container");
         suggestionMessage = page.locator(".suggestion-message, .tanggal-lain-suggestion");
         phoneInMessage = page.locator(".survey-request-message, .phone-number");
@@ -707,21 +707,24 @@ public class TenantSurveyFormPO {
         String targetMonth = JavaHelpers.getCostumDateOrTime("MMMM", daysFromToday, 0, 0);
 
         // Navigate to the target month if it's different from current month
+        boolean navigated = false;
         if (!currentMonth.equals(targetMonth)) {
-            // Click next month button to navigate to the target month
-            playwright.clickOn(nextMonthBtn);
-            playwright.hardWait(1000); // Wait for calendar to update
+            if (nextMonthBtn.isVisible()) {
+                playwright.clickOn(nextMonthBtn);
+                playwright.hardWait(1000);
+                navigated = true;
+            }
         }
 
-        // Use class-level locator for date cells
+        // Use same approach as selectSurveyDate - global text search
         String futureDate = JavaHelpers.getCostumDateOrTime("d", daysFromToday, 0, 0);
-        var futureDateLocator = basedLocatorDateCell.getByText(futureDate, new Locator.GetByTextOptions().setExact(true)).first();
+        var futureDateLocator = page.getByText(futureDate, new Page.GetByTextOptions().setExact(true)).nth(1);
 
         // Check if the date is visible
-        boolean isVisible = playwright.waitTillLocatorIsVisible(futureDateLocator);
+        boolean isVisible = futureDateLocator.isVisible();
 
         // Navigate back to current month if we navigated away
-        if (!currentMonth.equals(targetMonth)) {
+        if (navigated && previousMonthBtn.isVisible()) {
             playwright.clickOn(previousMonthBtn);
         }
 

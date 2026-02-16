@@ -1,4 +1,4 @@
-@regression @LIMO4 @reviewOwner @flaky
+@regression @LIMO4 @reviewOwner
 Feature: Owner - Review Section
 
   @TEST_LIMO-1024 @doesnthavereview-listingcardclicked @WEB @AUTOMATED
