@@ -49,9 +49,9 @@ public class ApartmentLandingPO {
         detailApartment = page.locator("#detailApartmentContainer");
         hapusHistoryButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Hapus Histori"));
         rekomendasiTitle = page.locator(".premium-recom-title");
-        this.filteringPeriod = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Jangka WaktuHarianMingguanBulananTahunan$"))).getByRole(AriaRole.COMBOBOX);
-        this.filteringFurniture = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^PerabotanSemuaFurnishedSemi FurnishedNot furnished$"))).getByRole(AriaRole.COMBOBOX);
-        this.filteringPrice = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^UrutkanAcakHarga terendahHarga tertinggiKosong ke Penuh$"))).getByRole(AriaRole.COMBOBOX);
+        this.filteringPeriod = page.locator("select#filterRentType");
+        this.filteringFurniture = page.locator("select#filterFurniture");
+        this.filteringPrice = page.locator("select#filterSorting");
         this.filteringUnitType = page.locator("div").filter(new Locator.FilterOptions().setHasText(Pattern.compile("^Tipe UnitSemua1-Room Studio1 BR2 BR3 BR4 BRLainnya$"))).getByRole(AriaRole.COMBOBOX);
         this.filteringAreaDropDown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Semua Kota dropdown-down"));
         this.filteringArea = page.locator("a");
@@ -180,7 +180,11 @@ public class ApartmentLandingPO {
      * @param period
      */
     public void filterByTimePeriod(String period) {
-        playwright.selectDropdownByValue(filteringPeriod, period);
+        String value = period.toLowerCase().equals("harian") ? "0" :
+                period.toLowerCase().equals("mingguan") ? "1" :
+                        period.toLowerCase().equals("bulanan") ? "2" :
+                                period.toLowerCase().equals("tahunan") ? "3" : "0";
+        filteringPeriod.selectOption(value, new Locator.SelectOptionOptions().setForce(true));
     }
 
     /**
@@ -207,7 +211,10 @@ public class ApartmentLandingPO {
      * @param furniture
      */
     public void filterByFurniture(String furniture) {
-        playwright.selectDropdownByValue(filteringFurniture, furniture);
+        String value = furniture.toLowerCase().equals("furnished") ? "1" :
+                furniture.toLowerCase().equals("semi furnished") ? "2" :
+                        furniture.toLowerCase().equals("not furnished") ? "0" : "all";
+        filteringFurniture.selectOption(value, new Locator.SelectOptionOptions().setForce(true));
     }
 
     /**
@@ -230,7 +237,7 @@ public class ApartmentLandingPO {
                 price.toLowerCase().equals("harga termurah") ? "asc" :
                         price.toLowerCase().equals("harga termahal") ? "desc" :
                                 price.toLowerCase().equals("kosong ke penuh") ? "availability" : "-";
-        playwright.selectDropdownByValue(filteringPrice, direction);
+        filteringPrice.selectOption(direction, new Locator.SelectOptionOptions().setForce(true));
     }
 
     /**
