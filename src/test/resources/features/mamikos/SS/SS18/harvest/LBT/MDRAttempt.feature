@@ -2,7 +2,7 @@
 
   Feature: Update Attempts MDR
 
-    @continue
+    @TEST_SS-11044 @continue
     Scenario: MDR update attempts response "No Response"
       Given user navigates to ILB registration page
       And user fill and submit ILB registration form
@@ -31,7 +31,7 @@
       Then leads response should be "No Response" in the table
       And leads response color should be "#8c3b00"
 
-    @continue
+    @TEST_SS-11045 @continue
     Scenario: MDR update attempts response "Awaiting"
       When admin clicks on leads detail with saved ILB phone number
       And admin adds new attempt with jenis "Call" and response "Awaiting"
@@ -42,7 +42,7 @@
       Then leads response should be "Awaiting" in the table
       And leads response color should be "#8c3b00"
 
-    @continue
+    @TEST_SS-11047 @continue
     Scenario: MDR update attempts response "Tidak Tertarik"
       When admin clicks on leads detail with saved ILB phone number
       And admin adds new attempt with jenis "Call" and response "Tidak Tertarik"
@@ -53,7 +53,7 @@
       Then leads response should be "Tidak Tertarik" in the table
       And leads response color should be "#757575"
 
-    @continue
+    @TEST_SS-11046 @continue
     Scenario: MDR update attempts response "Tertarik"
       When admin clicks on leads detail with saved ILB phone number
       And admin adds new attempt with jenis "Call" and response "Tertarik"
