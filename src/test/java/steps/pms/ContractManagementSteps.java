@@ -30,7 +30,7 @@ public class ContractManagementSteps {
 
     @And("admin clicks {string} button on penyewa section")
     public void adminClicksUbahButtonOnPenyewaSection(String text) {
-        contractManagement.clickEditButton(text);
+        contractManagement.clickRiwayatPerubahanDataPenyewaButton(text);
     }
 
     @And("admin can see {string} on riwayat page")

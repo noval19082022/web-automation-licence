@@ -19,6 +19,7 @@ public class ContractManagementPO {
     Locator updatedText;
     Locator lampiranText;
     Locator previouseButton;
+    Locator riwayatDataPenyewaButton;
     
     // Tenant Information Form
     Locator inputNameField;
@@ -146,4 +147,12 @@ public class ContractManagementPO {
         }
     }
 
+    /**
+     * Click Riwayat Perubhaan Data Penyewa Button
+     * @param text
+     */
+    public void clickRiwayatPerubahanDataPenyewaButton(String text) {
+        riwayatDataPenyewaButton = page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName(text));
+        playwright.clickOn(riwayatDataPenyewaButton);
+    }
 }
