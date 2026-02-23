@@ -1,4 +1,4 @@
-@regression @SS18 @harvest @test
+@regression @SS18 @harvest
 
 Feature: Harvest Menu
 
