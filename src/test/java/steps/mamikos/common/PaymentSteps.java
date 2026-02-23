@@ -93,7 +93,7 @@ public class PaymentSteps {
 
     @Then("tenant can not use the voucher")
     public void tenantCanNotUseTheVoucher() {
-        var voucherInvalidWording = "Kode voucher tidak bisa digunakan.";
+        var voucherInvalidWording = "Kode voucher tidak bisa digunakan.  Silakan hapus voucher.";
         String actualWarningText = invoice.voucherInputPopUpWarningText();
         Assert.assertEquals(actualWarningText, voucherInvalidWording,
             "Expected voucher error message: '" + voucherInvalidWording + "' but got: '" + actualWarningText + "'");
