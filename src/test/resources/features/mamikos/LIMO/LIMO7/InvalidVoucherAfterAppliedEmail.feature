@@ -1,4 +1,4 @@
-@LIMO7 @regression @TEST_SS-3745
+@LIMO8 @regression @TEST_SS-3745
 Feature: Invalid Voucher After Applied, Invalid Email Target
 
   @continue

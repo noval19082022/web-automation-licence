@@ -1,4 +1,4 @@
-@regression @voucher @LIMO7
+@regression @voucher @LIMO8
 
 @TEST_SS_3863 @TEST_SS-3864 @TEST_SS-3823 @TEST_SS-3822
 Feature: Apply Voucher For Kost Type Premium

@@ -1,4 +1,4 @@
-@regression @LIMO7 @voucher
+@regression @LIMO8 @voucher
 
 @TEST_SS-3721 @TEST_SS-3732 @TEST_SS-3738 @TEST_SS-3761 @TEST_SS-3763 @TEST_SS-3764
 Feature: Apply Voucher For Kost Type GoldPlus

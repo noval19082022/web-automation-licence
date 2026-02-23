@@ -1,4 +1,4 @@
-@LIMO7 @regression @TEST_SS-3749
+@LIMO8 @regression @TEST_SS-3749
 Feature: Invalid Voucher After Applied, Invalid Date
 
   @continue

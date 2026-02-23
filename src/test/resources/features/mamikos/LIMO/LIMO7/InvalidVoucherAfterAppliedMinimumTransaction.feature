@@ -1,4 +1,4 @@
-@LIMO7 @regression @TEST_SS-3739
+@LIMO8 @regression @TEST_SS-3739
 Feature: Invalid Voucher After Applied, Invalid Minimum Transaction
 
   @continue

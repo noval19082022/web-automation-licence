@@ -1,4 +1,4 @@
-@regression @LIMO7 @voucher
+@regression @LIMO8 @voucher
 
 @TEST_SS-3691 @TEST_SS-3701
 Feature: Apply Voucher For Contract Created By Consultant

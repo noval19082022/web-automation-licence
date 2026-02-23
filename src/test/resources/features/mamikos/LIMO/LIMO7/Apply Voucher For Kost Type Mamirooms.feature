@@ -1,4 +1,4 @@
-@regression @LIMO7 @voucher
+@regression @LIMO8 @voucher
 
 @TEST_SS-3803 @TEST_SS-3897 @TEST_SS-3899 @TEST_SS-3900
 Feature: Apply Voucher For Kost Type Mamirooms

@@ -1,4 +1,4 @@
-@regression @voucher @LIMO7
+@regression @voucher @LIMO8
 
 @TEST-SS-3721 @TEST_SS-3723
 Feature: Apply Voucher For Room Type Gold Plus
