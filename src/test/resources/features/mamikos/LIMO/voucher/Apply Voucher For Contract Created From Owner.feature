@@ -1,4 +1,4 @@
-@regression @LIMO7 @voucher
+@regression @LIMO8 @voucher
 
 @TEST_SS-3883 @TEST_SS-3757 @TEST_SS-3964 @TEST_SS-3759
 Feature: Apply Voucher For Contract Created From Owner

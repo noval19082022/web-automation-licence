@@ -1,7 +1,7 @@
-@regression @voucher @LIMO7
+@regression @voucher @LIMO8
 
-@TEST_SS_3863 @TEST_SS-3864 @TEST_SS-3823 @TEST_SS-3822
-Feature: Apply Voucher For Kost Type Premium
+@TEST-SS-3721 @TEST_SS-3723
+Feature: Apply Voucher For Room Type Gold Plus
 
   Scenario: Admin Batalkan Contract
     Given admin go to mamikos mamipay admin
@@ -25,21 +25,21 @@ Feature: Apply Voucher For Kost Type Premium
   Scenario: Tenant Booking Kost
     When user go to mamikos homepage
     And tenant redirect to kost details:
-      | kost path stag                                   | kost path prod               |
-      | kost-sorong-kost-campur-eksklusif-kos-raya-gasim | Kos DC BAR Automation Tipe A |
+      | kost path stag                                                                | kost path prod               |
+      | kost-kabupaten-rembang-kost-campur-eksklusif-adi-automate-gp1-lasem-rembang-1 | Kos DC BAR Automation Tipe A |
     And tenant booking kost
     Then tenant should success booking kost
 
   Scenario: Owner Accept Booking
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag   | phone prod    | password  |
-      | 083176408449 | 0895365624343 | qwerty123 |
-    And owner accept booking
+      | phone stag    | phone prod    | password |
+      | 0895359416718 | 0895359416718 | P@ssw0rd |
+    And owner accept booking and select the room
     Then owner should redirect back to pengajuan booking page
 
   @continue
-  Scenario: Tenant Apply Voucher for Kost Type Premium
+  Scenario: Tenant Apply Voucher Applicable for Room Type
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
@@ -48,12 +48,28 @@ Feature: Apply Voucher For Kost Type Premium
     And tenant click button bayar sekarang
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | VAFORPREMIUM      | VAFORPREMIUM      |
+      | VAFORROOMGP11     | VAFORROOMGP11     |
     Then tenant can see voucher is applied
 
-  Scenario: Tenant Apply Voucher Not Applicable Kost Type Premium
+  @continue
+  Scenario: Tenant Apply Voucher Not Applicable for Room Type
     When tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | VANONPREMIUM1     | VANONPREMIUM1     |
+      | VNAFORROOMGP11    | VNAFORROOMGP11    |
+    Then Voucher code has been used
+
+  @continue
+  Scenario: Tenant Apply Voucher Not Applicable For Other Room Type
+    When tenant set active page to 1
+    And tenant apply voucher:
+      | voucher name stag | voucher name prod |
+      | VNAFORROOMGP21    | VNAFORROOMGP21    |
+    Then tenant can see voucher is applied
+
+  Scenario: Tenant Apply Voucher Applicable For Other Room Type
+    When tenant set active page to 1
+    And tenant apply voucher:
+      | voucher name stag | voucher name prod |
+      | VAFORROOMGP21     | VAFORROOMGP21     |
     Then tenant can see warning message "Kode voucher tidak bisa digunakan."

@@ -1,4 +1,4 @@
-@regression @voucher @LIMO7
+@regression @voucher @LIMO8
 
 @TEST_SS-3807
 Feature: Apply Voucher For Invoice Meet Minimal Contract Duration

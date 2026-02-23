@@ -1,4 +1,4 @@
-@LIMO7 @regression @TEST_SS-3722 @TEST_SS-3725 @TEST_SS-3726 @TEST_SS-3844
+@LIMO8 @regression @TEST_SS-3722 @TEST_SS-3725 @TEST_SS-3726 @TEST_SS-3844
 Feature: Apply Voucher For Kost Type Verified By Mamichecker
 
   @continue

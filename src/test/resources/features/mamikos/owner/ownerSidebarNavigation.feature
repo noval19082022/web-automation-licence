@@ -1,4 +1,4 @@
-@owner @sidebar @functional @limo3
+@owner @sidebar @functional @LIMO3
 Feature: Owner Dashboard Sidebar Navigation
 
   @continue
