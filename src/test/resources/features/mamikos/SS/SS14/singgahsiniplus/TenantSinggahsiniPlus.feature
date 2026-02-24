@@ -1,4 +1,4 @@
-@SS14
+@SS12
 Feature: Singgahsini Plus
 
   @TEST_SS-9190 @continue

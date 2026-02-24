@@ -1,4 +1,4 @@
-@SS14 @DONE_SEARCH_MIGRATE
+@SS12 @DONE_SEARCH_MIGRATE
 Feature: FTUE Booking Benefit
 
   @ftuebookingbenefit @continue @TEST_SS-3257

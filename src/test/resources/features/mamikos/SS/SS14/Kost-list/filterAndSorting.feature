@@ -1,4 +1,4 @@
-@SS14
+@SS12
 Feature: Filter and Sorting
 
   @TEST_SS-3202 @Automated @Web @discovery-platform @filter

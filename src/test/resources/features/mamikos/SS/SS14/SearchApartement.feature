@@ -1,4 +1,4 @@
-@SS14
+@SS12
 Feature: Search Apartment
 
   @searchapartment @continue @TEST_SS-3177

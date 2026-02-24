@@ -1,4 +1,4 @@
-@SS14 @essentialTest
+@SS12 @essentialTest
 Feature: Chat and Chat Optimization
 
         @TEST_SS-3290

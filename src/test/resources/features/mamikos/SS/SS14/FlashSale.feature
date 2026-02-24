@@ -1,4 +1,4 @@
-@SS14 @flashsale
+@SS12 @flashsale
 Feature: Flash Sale
 
   @TEST_SS-3267

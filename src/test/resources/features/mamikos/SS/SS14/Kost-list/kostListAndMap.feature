@@ -1,13 +1,13 @@
-@SS14 @essentialTest
+@SS12 @essentialTest
 Feature: Kost List and Map
 
-  @TEST_SS-3209 @Automated @SS14 @Web @discovery-platform @filter @kos-card-top-fac @listing-kos
+  @TEST_SS-3209 @Automated @SS12 @Web @discovery-platform @filter @kos-card-top-fac @listing-kos
   Scenario: [Dweb][Listing Kos][Kost Listing]Check top facilities in kos card
     Given user go to mamikos homepage
     When user want to search kost list by place on "Pogung lor" from homepage
     Then user sees the facilities on kos card are "K. Mandi Dalam" or "WiFi" or "Akses 24 Jam"
 
-  @TEST_SS-3223 @Automated @SS14 @Web @desc-map-cluster @discovery-platform @filter @listing-kos @map-cluster
+  @TEST_SS-3223 @Automated @SS12 @Web @desc-map-cluster @discovery-platform @filter @listing-kos @map-cluster
   Scenario: [Dweb][Listing Kos][Map]Check description or legend of map cluster
     Given user go to mamikos homepage
     When user want to search kost list by place on "UGM" from homepage

@@ -1,19 +1,19 @@
 Feature: Landing Page
 
-  @TEST_SS-3218 @Automated @SS14 @dikelola-mamikos @dikelola-mamikos-filter @discovery-communication @landing-page
+  @TEST_SS-3218 @Automated @SS12 @dikelola-mamikos @dikelola-mamikos-filter @discovery-communication @landing-page
   Scenario: [Dweb][Landing Page][Filter] Check dikelola mamikos filter
     Given user navigates to mamikos kost kost jogja murah
     When user activate Dikelola Mamikos filter
     Then user validate the result kos have Dikelola Mamikos label
 
-  @TEST_SS-3252 @Automated @SS14 @dikelola-mamikos @dikelola-mamikos-filter @discovery-communication @landing-page
+  @TEST_SS-3252 @Automated @SS12 @dikelola-mamikos @dikelola-mamikos-filter @discovery-communication @landing-page
   Scenario: [Dweb][Landing Page][Filter] Deactivate dikelola mamikos filter
     Given user navigates to mamikos kost kost jogja murah
     When user activate Dikelola Mamikos filter
     And user activate Dikelola Mamikos filter
     Then user see Dikelola Mamikos filter is deactivate
 
-  @TEST_SS-3219 @Automated @SS14 @discovery-platform @landing-page @promo-ngebut-filter
+  @TEST_SS-3219 @Automated @SS12 @discovery-platform @landing-page @promo-ngebut-filter
   Scenario: [DWeb][Landing Page][Filter] Check promo ngebut filter
     Given user navigates to mamikos kost kost jogja murah
     And user sets Promo Ngebut filter

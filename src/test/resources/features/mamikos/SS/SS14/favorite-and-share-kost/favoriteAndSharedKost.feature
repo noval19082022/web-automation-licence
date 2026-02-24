@@ -1,4 +1,4 @@
-@SS14 @essentialTest @FAVORITE_SEARCH_MIGRATE
+@SS12 @essentialTest @FAVORITE_SEARCH_MIGRATE
 Feature: Favorite and Share kost
 
   @TEST_SS-3216 @automated @discovery-platform @favorite @web

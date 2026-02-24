@@ -1,4 +1,4 @@
-@SS14
+@SS12
 Feature: Room card on Kost List
 
   @continue @TEST_SS-3207
