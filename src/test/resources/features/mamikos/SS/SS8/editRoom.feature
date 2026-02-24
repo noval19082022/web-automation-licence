@@ -1,4 +1,4 @@
-@SS8 @ketersediaanKamar @SS8
+@SS7 @ketersediaanKamar
 Feature: Change the room on Data Ketersedian Kamar
 
   @TEST_SS-3363

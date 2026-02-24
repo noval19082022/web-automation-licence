@@ -1,4 +1,4 @@
-@SS8 @SS8 @chatPreset
+@SS7@chatPreset
 Feature: Chat Preset
 
   @TEST_SS-6049 @continue

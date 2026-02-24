@@ -1,4 +1,4 @@
-@SS8 @SS8 @kostSaya
+@SS7 @kostSaya
 Feature: Kost Saya
 
   @TEST_SS-3524 @fasilitasKost @kost-saya @continue
