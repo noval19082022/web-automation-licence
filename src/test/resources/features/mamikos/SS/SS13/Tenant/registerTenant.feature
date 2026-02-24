@@ -1,4 +1,4 @@
-@SS16 @essentialTest @REGISTER_SEARCH_MIGRATE
+@SS14 @essentialTest @REGISTER_SEARCH_MIGRATE
 Feature: New Flow Register Tenant
 
   @navigateToRegisterPageTenant @TEST_SS-3065 @Automated @SS11 @web-covered

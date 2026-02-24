@@ -1,4 +1,4 @@
-@SS16 @campaigns @web
+@SS14 @campaigns @web
 Feature: [Test-Execution][DOM] Web - Campaign
 
   @TEST_SS-3000 @TESTSET_UG-6228 @AUTOMATED @web-covered

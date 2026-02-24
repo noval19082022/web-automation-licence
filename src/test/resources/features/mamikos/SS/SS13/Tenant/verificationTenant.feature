@@ -1,4 +1,4 @@
-@SS16 @verificationTenant
+@SS14 @verificationTenant
 Feature: Verification Tenant
 
   @TEST_SS-2949
