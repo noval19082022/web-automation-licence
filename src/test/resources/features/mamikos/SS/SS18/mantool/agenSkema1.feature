@@ -1,4 +1,4 @@
-@regression @essentialTest2 @SS18 @mantool
+@regression @essentialTest2 @SS16 @mantool
 
 Feature: Agen Skema 1
 

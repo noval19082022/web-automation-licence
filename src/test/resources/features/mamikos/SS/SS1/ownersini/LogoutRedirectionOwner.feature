@@ -1,4 +1,4 @@
-@regression @SS18 @SS1-prod @ownersini @logout-redirection
+@regression @SS16 @SS1-prod @ownersini @logout-redirection
 
 Feature: Ownersini - Logout Redirection
 

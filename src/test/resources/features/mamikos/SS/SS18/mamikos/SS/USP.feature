@@ -1,4 +1,4 @@
-@ss @SS18 @listing-detail @usp
+@ss @SS16 @listing-detail @usp
 
 Feature: Garansi Akurat - USP
 

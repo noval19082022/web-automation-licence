@@ -1,4 +1,4 @@
-@regression @SS18 @ownersini @profilNavbar
+@regression @SS16 @ownersini @profilNavbar
 
 Feature: Profile Navbar
 

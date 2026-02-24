@@ -1,4 +1,4 @@
-@regression @SS18 @SS1-prod @harvest @essentialTest2
+@regression @SS16 @SS1-prod @harvest @essentialTest2
 
 Feature: Login Harvest
 

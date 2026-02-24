@@ -1,4 +1,4 @@
-@regression @SS18 @harvest @lbt
+@regression @SS16 @harvest @lbt
 
   Feature: Auto submit leads in Area Prio
 

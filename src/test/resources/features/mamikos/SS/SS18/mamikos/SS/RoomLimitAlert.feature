@@ -1,4 +1,4 @@
-@ss @booking-page @SS18
+@ss @booking-page @SS16
 
   Feature: Room Limit Alert
 
