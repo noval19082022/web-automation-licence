@@ -1,4 +1,4 @@
-@SS15
+@SS13
 Feature: Click Button Ubah Metode Pembayaran After Paid
 
   Scenario: Admin Batalkan Contract

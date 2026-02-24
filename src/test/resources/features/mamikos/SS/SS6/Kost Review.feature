@@ -1,4 +1,4 @@
-@SS15
+@SS13
 Feature: Kost Review
 
   @TEST_SS-4271
