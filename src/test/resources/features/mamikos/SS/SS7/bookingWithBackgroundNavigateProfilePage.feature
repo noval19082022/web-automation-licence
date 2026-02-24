@@ -1,4 +1,4 @@
-@SS7
+@SS6
 
 Feature: [Web][Profile page] feature with background navigate profile page
 

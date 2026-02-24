@@ -1,4 +1,4 @@
-@occupancyAndBilling @OB @SS7 @acceptFromChat @essentialTest3
+@occupancyAndBilling @OB @SS6 @acceptFromChat @essentialTest3
 Feature: Accept Booking from Chat room
 
 

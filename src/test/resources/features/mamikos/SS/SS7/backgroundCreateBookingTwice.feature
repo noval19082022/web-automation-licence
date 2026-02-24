@@ -1,4 +1,4 @@
-@SS7
+@SS6
 Feature: BnB feature with background create booking twice
 
   @continue

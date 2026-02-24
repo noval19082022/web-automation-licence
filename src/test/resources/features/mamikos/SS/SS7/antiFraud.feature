@@ -1,4 +1,4 @@
-@SS7 @antiFraud
+@SS6 @antiFraud
 Feature: AntiFraud
 
   @TEST_SS-5120 @continue

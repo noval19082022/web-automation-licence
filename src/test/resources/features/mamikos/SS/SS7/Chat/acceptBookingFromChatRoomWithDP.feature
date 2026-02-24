@@ -1,4 +1,4 @@
-@occupancyAndBilling @OB @SS7 @acceptFromChat
+@occupancyAndBilling @OB @SS6 @acceptFromChat
 Feature: Accept Booking from Chat room with DP
 
   @deleteContract
