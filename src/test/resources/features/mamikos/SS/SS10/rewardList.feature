@@ -1,4 +1,4 @@
-@SS10
+@SS8
 Feature: [Loyalty Reward Management][Reward List]Reward List Management page display
 
   @TEST_SS-3513 @continue

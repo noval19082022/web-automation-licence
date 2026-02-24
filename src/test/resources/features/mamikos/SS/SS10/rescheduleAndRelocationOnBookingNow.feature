@@ -1,4 +1,4 @@
-@SS10 @regression
+@SS8 @regression
 Feature: Reschedule and Relocation
 
   Background: Admin go to duration section form via booking now

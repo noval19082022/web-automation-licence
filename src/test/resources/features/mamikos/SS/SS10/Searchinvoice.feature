@@ -1,4 +1,4 @@
-@regression @SS10 @searchInvoice
+@regression @SS8 @searchInvoice
 
 Feature: Search invoice
 

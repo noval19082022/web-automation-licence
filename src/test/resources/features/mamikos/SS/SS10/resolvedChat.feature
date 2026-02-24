@@ -1,4 +1,4 @@
-@SS10 @resolvedChat
+@SS8 @resolvedChat
 
   Feature: Resolve Chat
 

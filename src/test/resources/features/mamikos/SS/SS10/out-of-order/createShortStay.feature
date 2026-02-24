@@ -1,4 +1,4 @@
-@arac @pms @TEST_SS-3378 @SS10
+@arac @pms @TEST_SS-3378 @SS8
 Feature: Create OOO "Short Stay" Type
 
   @continue

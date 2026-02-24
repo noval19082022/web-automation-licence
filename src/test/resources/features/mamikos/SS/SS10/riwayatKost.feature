@@ -1,4 +1,4 @@
-@riwayatKost @SS10
+@riwayatKost @SS8
 Feature: riwayat kost
 
   @TEST_SS-3385

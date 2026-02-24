@@ -1,4 +1,4 @@
-@SS10 @regression
+@SS8 @regression
 Feature: Search Data Tenant on Bangkerupux Admin
 
   @continue @TEST_SS-3968

@@ -1,4 +1,4 @@
-@regression @replaceBSSInfo @SS10
+@regression @replaceBSSInfo @SS8
 
 Feature: Replace BSS Information
 

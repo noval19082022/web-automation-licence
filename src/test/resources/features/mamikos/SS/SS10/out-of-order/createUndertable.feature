@@ -1,4 +1,4 @@
-@arac @pms @TEST_SS-3379 @SS10
+@arac @pms @TEST_SS-3379 @SS8
 Feature: Create OOO "Undertable" Type
 
   @continue

@@ -1,4 +1,4 @@
-@regression @listingavailability @SS10
+@regression @listingavailability @SS8
 
 Feature: Listing Availability on Chat Room
 

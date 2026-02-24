@@ -1,4 +1,4 @@
-@SS10 @srp
+@SS8 @srp
 Feature: SRP
 
   @SS-4381

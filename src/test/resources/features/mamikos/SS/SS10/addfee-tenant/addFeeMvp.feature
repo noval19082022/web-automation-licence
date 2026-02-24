@@ -1,4 +1,4 @@
-@SS10 @addFeeMvp
+@SS8 @addFeeMvp
 Feature: Add fee Mvp - Tenant
 
   Scenario: Teminated contract

@@ -1,4 +1,4 @@
-@arac @pms @TEST_SS-3381 @SS10
+@arac @pms @TEST_SS-3381 @SS8
 Feature: Create OOO "Renovasi" Type
 
   @continue

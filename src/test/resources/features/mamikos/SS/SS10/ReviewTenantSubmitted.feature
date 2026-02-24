@@ -1,4 +1,4 @@
-@regression @kostReviewTenantSubmitted @SS10 @kostReview
+@regression @kostReviewTenantSubmitted @SS8 @kostReview
 
 Feature: Kost Review Submitted Display
 

@@ -1,4 +1,4 @@
-@SS10 @kelolaTagihan
+@SS8 @kelolaTagihan
 Feature: Check Detail Tagihan
 
   @TEST_SS-4000

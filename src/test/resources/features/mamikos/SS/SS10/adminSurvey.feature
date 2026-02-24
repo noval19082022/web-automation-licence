@@ -1,4 +1,4 @@
-@regression @surveyAdmin @SS10
+@regression @surveyAdmin @SS8
 
 Feature: Admin Survey
 

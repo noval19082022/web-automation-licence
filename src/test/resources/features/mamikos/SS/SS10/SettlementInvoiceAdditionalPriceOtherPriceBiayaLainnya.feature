@@ -1,4 +1,4 @@
-@regression @SS10
+@regression @SS8
 Feature: Settlement Invoice Additional Price Other Price / Biaya Lainnya
 
   Scenario: Admin Batalkan Contract

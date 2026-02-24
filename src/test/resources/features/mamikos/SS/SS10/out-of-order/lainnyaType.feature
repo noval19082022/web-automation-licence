@@ -1,4 +1,4 @@
-@arac @pms @SS10
+@arac @pms @SS8
 Feature: Create OOO "Lainnya" Type With/Without Note
 
   Background: Delete OOO From Room Allotment Page
