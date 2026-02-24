@@ -1,4 +1,4 @@
-@SS11 @regression @kost @log-facility
+@SS9 @regression @kost @log-facility
 
   Feature: Log Facility
 

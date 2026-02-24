@@ -1,4 +1,4 @@
-@SS11
+@SS9
 Feature: Landmark
 
   @TEST_SS-7302

@@ -1,4 +1,4 @@
-@SS11
+@SS9
 Feature: Listing Featured
 
   @TEST_SS-7285 @continue
