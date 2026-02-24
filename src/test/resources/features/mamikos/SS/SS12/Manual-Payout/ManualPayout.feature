@@ -1,4 +1,4 @@
-@SS12
+@SS10
 Feature: Inquiry and Create Manual Payout
 
   @TEST_SS-2936 @Automated @web-covered @continue
