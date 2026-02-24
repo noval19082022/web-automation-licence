@@ -1,4 +1,4 @@
-@SS13
+@SS11
 Feature: Edit Profile
 
 	#After create New account tenant

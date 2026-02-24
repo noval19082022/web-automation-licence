@@ -1,4 +1,4 @@
-@SS10 @update-profile
+@SS8 @update-profile
 Feature: Check field required on update profile form
 
   @TEST_SS-3890

@@ -1,4 +1,4 @@
-@SS10 @validationJobs
+@SS8 @validationJobs
 Feature: Edit profile for jobs as Lainnya
 
   @TEST_SS-3340

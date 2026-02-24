@@ -1,4 +1,4 @@
-@SS16 @platfrom
+@SS14 @platfrom
 Feature: [Test-Execution][DOM] Web - Platform
 
   @TEST_SS-5137 @Automated @web-covered

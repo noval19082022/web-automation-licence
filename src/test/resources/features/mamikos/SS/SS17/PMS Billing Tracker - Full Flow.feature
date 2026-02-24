@@ -1,4 +1,4 @@
-@SS17 @billingTrackerFull
+@SS15 @billingTrackerFull
 Feature: Update Billing tracker flow
 
   Scenario: Terminated contract

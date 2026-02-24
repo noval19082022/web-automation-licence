@@ -1,4 +1,4 @@
-@SS11
+@SS9
 Feature: Blacklist User
 
   @continue

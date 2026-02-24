@@ -1,4 +1,4 @@
-@regression @manageBooking @hubungiKostDetail @OB @booking @SS7
+@regression @manageBooking @hubungiKostDetail @OB @booking @SS6
 Feature: OB Booking From Hubungi Kost
 
   @continue

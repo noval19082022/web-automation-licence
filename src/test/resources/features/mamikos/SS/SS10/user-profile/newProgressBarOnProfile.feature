@@ -1,4 +1,4 @@
-@SS10 @newProgress
+@SS8 @newProgress
 Feature: New Progress bar on Profile
 
   @TEST_SS-3318 @Manual @update-user-profile @TEST_SS-3315

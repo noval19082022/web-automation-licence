@@ -1,4 +1,4 @@
-@SS16 @changePasswordTenant
+@SS14 @changePasswordTenant
 Feature: Change password tenant
 
   @TEST_SS-3028 @continue

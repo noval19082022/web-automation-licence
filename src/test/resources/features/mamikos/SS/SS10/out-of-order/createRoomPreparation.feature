@@ -1,4 +1,4 @@
-@arac @pms @TEST_SS-3382 @SS10
+@arac @pms @TEST_SS-3382 @SS8
 Feature: Create OOO "Room Preparation" Type
 
   @TEST_SS-3382

@@ -1,4 +1,4 @@
-@regression @SS18 @pman-prod @mantool @agent-registration
+@regression @SS16 @pman-prod @mantool @agent-registration
 
 Feature: Agent Registration
 

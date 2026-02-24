@@ -1,4 +1,4 @@
-@SS10 @DOM1
+@SS8 @DOM1
 Feature: Voucher Kost Detail
 
   @TEST_SS-8407 @continue

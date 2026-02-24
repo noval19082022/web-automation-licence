@@ -1,4 +1,4 @@
-@SS11
+@SS9
 Feature: Probut Discount Management
 
   @TEST_SS-2717 @continue

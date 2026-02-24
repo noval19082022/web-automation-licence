@@ -1,4 +1,4 @@
-@SS10 @waitingList
+@SS8 @waitingList
 Feature: Waiting List - Kost Detail
 
   @TEST_SS-4210 @waiting-list @web
@@ -71,7 +71,7 @@ Feature: Waiting List - Kost Detail
     And tenant click on "lihat tipe kamar lainnya" button
     Then tenant see "kamu mungkin menyukainya" section
 
-  @TEST_SS-4216 @waiting-list @web @SS10
+  @TEST_SS-4216 @waiting-list @web @SS8
   Scenario: [Web][Waiting List ][Kost detail]Check button waiting list for kost P2 when doesn't room type and kost recomendation
     When user go to mamikos homepage
     And tenant redirect to kost details:
@@ -149,7 +149,7 @@ Feature: Waiting List - Kost Detail
     Then tenant can see "Lihat kost lain" button
     And tenant can see "Ikut daftar tunggu" button
 
-  @TEST_COOP-4309 @waiting-list @web @SS10
+  @TEST_COOP-4309 @waiting-list @web @SS8
   Scenario: Check waiting list button when have active contract and room not fully for another tenant
     Given user go to mamikos homepage
     When user login as tenant via phone number:

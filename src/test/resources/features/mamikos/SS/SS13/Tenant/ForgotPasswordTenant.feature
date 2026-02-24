@@ -1,4 +1,4 @@
-@SS16 @forgotPasswordTenant
+@SS14 @forgotPasswordTenant
 Feature: Tenant Forgot Password
 
   @forgotPasswordTenantViaSms @TEST_SS-2926

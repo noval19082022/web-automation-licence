@@ -1,4 +1,4 @@
-@regression @SS10
+@regression @SS8
 
 Feature: Invoice Detail Kost With DP
 

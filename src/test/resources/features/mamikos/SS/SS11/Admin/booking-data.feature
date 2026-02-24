@@ -1,4 +1,4 @@
-@SS11 @booking-data @a
+@SS9 @booking-data @a
 Feature: Booking Remark on Data Booking
 
   @continue

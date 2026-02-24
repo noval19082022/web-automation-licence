@@ -1,4 +1,4 @@
-@regression @mauCobaDong @SS7
+@regression @mauCobaDong @SS6
 Feature: Revamp kos saya
 
   @mauCobaDong @TEST_COOP-1068

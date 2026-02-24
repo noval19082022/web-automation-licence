@@ -1,4 +1,4 @@
-@SS8 @BnBFeature @BnBFeature3
+@SS7 @BnBFeature @BnBFeature3
 Feature: Homepage - Kost Saya Section
 
   @TEST_SS-3477

@@ -1,4 +1,4 @@
-@SS14 @DOMareaboundaries
+@SS12 @DOMareaboundaries
 Feature: Area Boundaries
 
   @continue @TEST_SS-3246

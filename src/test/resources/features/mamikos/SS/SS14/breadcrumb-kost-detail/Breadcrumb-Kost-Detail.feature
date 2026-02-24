@@ -1,7 +1,7 @@
-@SS14
+@SS12
 Feature: Breadcrumb Kost Detail
 
-  @SS14 @DOM-5273 @TEST_SS-3150
+  @SS12 @DOM-5273 @TEST_SS-3150
   Scenario Outline:[Kost Detail] Checking Breadcrumb on Kost Detail
     Given user visit page <path url>
     Then user verify content of breadcrumb is <breadcrumb path bakpia4>

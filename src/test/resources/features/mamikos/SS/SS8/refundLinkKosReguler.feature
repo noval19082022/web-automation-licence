@@ -1,4 +1,4 @@
-@SS8 @refundLinkKosReguler
+@SS7 @refundLinkKosReguler
 Feature: [Detail Booking][FAQ]Tenant see refund policy on Detail Booking  (Pilar 2)
 
   @TEST_SS-3845

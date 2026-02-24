@@ -1,4 +1,4 @@
-@regression @SS18 @harvest @lbt @MDRAttempt
+@regression @SS16 @harvest @lbt @MDRAttempt
 
   Feature: Update Attempts MDR
 

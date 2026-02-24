@@ -1,4 +1,4 @@
-@pms @SS10
+@pms @SS8
 Feature: OOO Reason Options
 
   @TEST_SS-5560

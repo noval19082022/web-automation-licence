@@ -1,4 +1,4 @@
-@SS8 @SS8
+@SS7
 Feature: Check Owner Badges
 
 

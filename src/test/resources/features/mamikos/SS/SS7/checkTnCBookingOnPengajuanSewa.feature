@@ -1,4 +1,4 @@
-@SS7
+@SS6
 Feature: Check Update TnC Booking on Pengajuan sewa page
 
   @continue @TEST_SS-3411 @TEST_SS-3407

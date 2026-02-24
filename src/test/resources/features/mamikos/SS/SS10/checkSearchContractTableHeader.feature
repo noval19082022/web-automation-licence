@@ -1,4 +1,4 @@
-@SS10
+@SS8
 Feature: Search Contract
 
   @TEST_SS-3361 @TEST_SS-3398

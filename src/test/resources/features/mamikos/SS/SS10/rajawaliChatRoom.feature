@@ -1,4 +1,4 @@
-@rajawalichatRoom @SS10
+@rajawalichatRoom @SS8
 Feature: Rajawali Chat Room
 
   Background: Login admin and navigates to Rajawali chat

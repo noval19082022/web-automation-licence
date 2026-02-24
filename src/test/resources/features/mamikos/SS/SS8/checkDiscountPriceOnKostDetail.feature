@@ -1,4 +1,4 @@
-@SS8 @SS8
+@SS7
 Feature: Check Harga Coret on Kost Detail
 
   @TEST_SS-3355 @TEST_SS-3354

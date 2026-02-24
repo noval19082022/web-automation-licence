@@ -1,4 +1,4 @@
-@SS15
+@SS13
 Feature: Invoice Type based on User
 
   Scenario: Admin Batalkan Contract
