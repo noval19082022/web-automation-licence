@@ -1,4 +1,4 @@
-@SS17 @AddfeeMvp
+@SS15 @AddfeeMvp
 Feature: PMS - Add fee MVP
 
   @TEST_SS-5069

@@ -1,4 +1,4 @@
-@SS17 @contractManagement
+@SS15 @contractManagement
 Feature: PMS Contract Management - Ubah Phone Number
 
   @TEST_SS-8752 @automated @contract-management @continue
