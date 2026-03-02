@@ -119,7 +119,7 @@ public class LandmarkPO {
      * @param text
      */
     public boolean getIdAndNameText(String text){
-        Locator idNameText = page.locator("//*[contains(text(),'"+text+"')]");
+        Locator idNameText = page.getByRole(AriaRole.CELL, new Page.GetByRoleOptions().setName(text).setExact(true)).first();
         return playwright.waitTillLocatorIsVisible(idNameText);
     }
 

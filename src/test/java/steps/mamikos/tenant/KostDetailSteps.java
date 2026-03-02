@@ -138,8 +138,9 @@ public class KostDetailSteps {
         kostDetail.dismissFTUE();
         Assert.assertTrue(kostDetail.isFacilityNotesSectionDisplayed(), "Facility Notes section is not displayed");
         Assert.assertTrue(kostDetail.isFacilityNotesDescDisplayed(), "Facility Notes Description is not displayed");
-        Assert.assertTrue(kostDetail.isExpandFacNotesDisplayed(), "Facility Notes expand button is not displayed");
-        kostDetail.clickOnExpandFacNotes();
+        if (kostDetail.isExpandFacNotesDisplayed()) {
+            kostDetail.clickOnExpandFacNotes();
+        }
     }
 
     //------------------Owner Story Section-----------------

@@ -29,7 +29,7 @@ Feature: Filter and Sorting
     Then user validates the result kos facility is "<facilityShare>"
     Examples:
       | facilityShare |
-      | WiFi          |
+      | Wi-Fi          |
 
   @TEST_SS-3204 @Automated @Web @discovery-platform @filter
   Scenario Outline: [Dweb][Listing Kos][Filter] Check filter kos rule and verify the result

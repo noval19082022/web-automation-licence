@@ -217,6 +217,13 @@ public class SearchPO {
         playwright.pressKeyboardKey("Enter");
     }
 
+    public void searchAreaWithoutEnter(String search) {
+        playwright.clickOn(searchKost);
+        playwright.clickOn(inputSearch);
+        playwright.realKeyboardType(search);
+        playwright.hardWait(3000);
+    }
+
     /**
      * area not found by keyword
      *
@@ -225,6 +232,7 @@ public class SearchPO {
 
     public boolean setExeptionText(String tidakditemukan) {
         Locator notfound = page.getByText(tidakditemukan);
+        playwright.waitFor(notfound, 10000.0);
         return notfound.isVisible();
     }
 
