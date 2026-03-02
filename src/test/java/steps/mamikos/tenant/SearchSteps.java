@@ -86,7 +86,7 @@ public class SearchSteps {
     public void user_search_for_random_keyword(DataTable table) {
         var kostNameData = table.asMaps(String.class, String.class);
         var searchArea = kostNameData.get(0).get("search " + Mamikos.ENV);
-        search.searchArea(searchArea);
+        search.searchAreaWithoutEnter(searchArea);
     }
 
     @Then("should display the result list of keyword {string}")

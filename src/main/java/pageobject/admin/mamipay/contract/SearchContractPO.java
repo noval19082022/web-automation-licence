@@ -213,7 +213,7 @@ public class SearchContractPO {
      * @return visible true otherwise false
      */
     public boolean waitForCalloutMessage() {
-        return playwright.waitTillLocatorIsVisible(callout);
+        return playwright.waitTillLocatorIsVisible(callout, 15000.0);
     }
 
     /**
@@ -239,10 +239,10 @@ public class SearchContractPO {
      */
     public void clickOnAkhiriContractButton() {
         page.waitForLoadState(LoadState.LOAD);
-        if (playwright.waitTillLocatorIsVisible(akhiriContractButton.first())) {
-            playwright.forceClickOn(akhiriContractButton.first());
-            playwright.forceClickOn(akhiriContractLink);
-        }
+        playwright.waitTillLocatorIsVisible(akhiriContractButton.first(), 10000.0);
+        playwright.clickOn(akhiriContractButton.first());
+        playwright.waitTillLocatorIsVisible(akhiriContractLink, 5000.0);
+        playwright.clickOn(akhiriContractLink);
         page.waitForLoadState(LoadState.LOAD);
     }
 

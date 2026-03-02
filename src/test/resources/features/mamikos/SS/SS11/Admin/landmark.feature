@@ -88,7 +88,7 @@ Feature: Landmark
     And admin click search button
     And admin click on remapping button
     And admin can see success alert remapping
-    Then admin can see data with name "58"
+    Then admin can see data with name "57"
 
   @TEST_SS-7307
   Scenario: [Web][Bangker][Landmark Data]Admin edit landmark

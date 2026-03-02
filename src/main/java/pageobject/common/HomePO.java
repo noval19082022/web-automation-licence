@@ -9,6 +9,7 @@ import data.mamikos.Mamikos;
 import utilities.LocatorHelpers;
 import utilities.PlaywrightHelpers;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class HomePO {
@@ -168,7 +169,7 @@ public class HomePO {
         this.facebookButton = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("facebook"));
         this.twitterButton = page.locator("footer a[href*='twitter'], footer a[href*='x.com']").first();
         this.instagramButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("instagram"));
-        this.copyrightFooter = page.getByText("© 2025 Mamikos.com. All rights reserved");
+        this.copyrightFooter = page.getByText("© " + Calendar.getInstance().get(Calendar.YEAR) + " Mamikos.com. All rights reserved");
         this.appStoreFooterMenu = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("App Store"));
         this.googlePlayBtn = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Google Play"));
     }

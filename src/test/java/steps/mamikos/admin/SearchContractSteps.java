@@ -191,9 +191,9 @@ public class SearchContractSteps {
 
     @Then("admin should success terminate contract")
     public void adminShouldSuccessTerminateContract() {
-        if (searchContract.waitForCalloutMessage()) {
-            Assert.assertEquals(searchContract.getCalloutText(), "Kontrak berhasil diberhentikan.");
-        }
+        Assert.assertTrue(searchContract.waitForCalloutMessage(), "Callout message did not appear after terminating contract");
+        String calloutText = searchContract.getCalloutText();
+        Assert.assertTrue(calloutText.contains("Kontrak berhasil"), "Expected callout to contain 'Kontrak berhasil' but got: " + calloutText);
     }
 
     @When("admin akhiri contract")
@@ -215,9 +215,9 @@ public class SearchContractSteps {
                 akhiriContractButtonSize = searchContract.getAkhiriContractButtonSize();
                 for(int i = 0; i < akhiriContractButtonSize; i++) {
                     searchContract.clickOnAkhiriContractButton();
-                    if (searchContract.waitForCalloutMessage()) {
-                        Assert.assertEquals(searchContract.getCalloutText(), "Kontrak berhasil diberhentikan.");
-                    }
+                    Assert.assertTrue(searchContract.waitForCalloutMessage(), "Callout message did not appear after terminating contract");
+                    String calloutText = searchContract.getCalloutText();
+                    Assert.assertTrue(calloutText.contains("Kontrak berhasil"), "Expected callout to contain 'Kontrak berhasil' but got: " + calloutText);
                     if (akhiriContractButtonSize > 1) {
                         //improvement should add break condition when iterate is equal to akhiriContractButtonSize
                         searchContract.selectSearchBy("renter_phone_number");
