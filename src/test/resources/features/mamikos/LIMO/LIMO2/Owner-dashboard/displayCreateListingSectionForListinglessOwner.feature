@@ -49,3 +49,20 @@ Feature: Display Create Listing Section for Listingless Owner
     When owner dismisses the pilih property page
     And owner remains on owner dashboard
     And owner can see Pasang Iklan Pertama button
+
+  @TEST_LIMO-10782 @WEB @AUTOMATED @rejected-listing-earliest
+  Scenario: Rejected listing section displays the earliest rejected listing
+    # Owner with multiple rejected listings:
+    # Kost A - rejected
+    # Kost B - rejected (earliest)
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod   | password  |
+      | 081197878819 | 081197878819 | qwerty123 |
+    And owner dismiss pop-up if appears
+    Then owner will see that the text "⚠️ Iklan Gagal Diverifikasi" is displayed
+    And the information listing section should display
+    When owner clicks on Cek dan Perbaiki button
+    Then owner should see the kos list page
+    And the first kos should have rejected status
+    Then the first kos in the list should be "Kost B Sukun Malang"

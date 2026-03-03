@@ -802,6 +802,62 @@ public class OwnerDashboardSteps {
                 "Counter badge for " + activityName + " should display '" + expectedCount + "' but got '" + actualCount + "'");
     }
 
+    @Then("the information listing section should display")
+    public void theRejectedListingSectionShouldDisplayTheEarliestRejectedListing() {
+        // Verify the section shows the correct title for rejected listings
+        String sectionTitle = ownerDashboardPO.getRejectedListingSectionTitle();
+        Assert.assertTrue(sectionTitle.contains("Iklan Gagal Diverifikasi") || sectionTitle.contains("Gagal"),
+                "Rejected listing section title should contain 'Iklan Gagal Diverifikasi'. Actual: " + sectionTitle);
+    }
+
+    @Then("the rejected listing section title should contain {string}")
+    public void theRejectedListingSectionTitleShouldContain(String expectedText) {
+        Assert.assertTrue(ownerDashboardPO.isRejectedListingTitleContains(expectedText),
+                "Expected title to contain '" + expectedText + "'. Actual: " + ownerDashboardPO.getRejectedListingSectionTitle());
+    }
+
+    @When("owner clicks on Cek dan Perbaiki button")
+    public void ownerClicksOnCekDanPerbaikiButton() {
+        ownerDashboardPO.clickOnCekDanPerbaikiButton();
+    }
+
+    @When("owner clicks on the rejected listing section")
+    public void ownerClicksOnTheRejectedListingSection() {
+        ownerDashboardPO.clickOnRejectedListingSection();
+    }
+
+    // =====================================================
+    // Kos List Page Steps - after clicking "Cek dan Perbaiki" (LIMO-10782)
+    // =====================================================
+
+    @Then("owner should see the kos list page")
+    public void ownerShouldSeeTheKosListPage() {
+        loading.waitForLoadingIconDisappear();
+        Assert.assertTrue(ownerDashboardPO.isKosListVisible(),
+                "Kos list is not visible after clicking Cek dan Perbaiki");
+    }
+
+    @Then("the first kos in the list should be {string}")
+    public void theFirstKosInTheListShouldBe(String expectedKosName) {
+        Assert.assertTrue(ownerDashboardPO.isFirstRejectedListingMatch(expectedKosName),
+                "Expected first kos to be '" + expectedKosName + "' but got '" + ownerDashboardPO.getFirstKosName() + "'");
+    }
+
+    @Then("the kos list should display the earliest rejected listing {string}")
+    public void theKosListShouldDisplayTheEarliestRejectedListing(String expectedKosName) {
+        Assert.assertTrue(ownerDashboardPO.isKosListVisible(),
+                "Kos list is not visible");
+        String firstKosName = ownerDashboardPO.getFirstKosName();
+        Assert.assertTrue(firstKosName.contains(expectedKosName),
+                "Expected earliest rejected listing '" + expectedKosName + "' to be first, but got '" + firstKosName + "'");
+    }
+
+    @Then("the first kos should have rejected status")
+    public void theFirstKosShouldHaveRejectedStatus() {
+        Assert.assertTrue(ownerDashboardPO.isFirstKosRejected(),
+                "First kos does not have rejected status");
+    }
+
 
     @And("I should see the section title {string}")
     public void i_should_see_the_section_title(String expectedTitle) {
@@ -973,4 +1029,3 @@ public class OwnerDashboardSteps {
                 "Banner did not loop back to the first banner after reaching the last");
     }
 }
-

@@ -147,6 +147,16 @@ public class OwnerDashboardPO {
     Locator activitySection;
     Locator ketersediaanKamarIcon;
 
+    // Rejected Listing Section (LIMO-10782)
+    // Section that shows "Iklan Gagal Diverifikasi" for owners with rejected/unverified listings
+    Locator rejectedListingSection;
+    Locator rejectedListingTitle;
+    Locator rejectedListingButton;
+
+    // Kos List Page - after clicking "Cek dan Perbaiki" (LIMO-10782)
+    Locator kosListContainer;
+    Locator kosCardItems;
+
     // Banner carousel section
     Locator bannerItems;
     Locator bannerPaginationDots;
@@ -293,6 +303,16 @@ public class OwnerDashboardPO {
         activitySectionContainer = page.locator(".activity-list-menu, .waktunya-mengelola-properti");
         ketersediaanKamarActivityIcon = page.locator("//p[contains(.,'Ketersediaan Kamar')]/ancestor::div[contains(@class,'activity-list-menu__item')]");
         ketersediaanKamarRedDotIndicator = page.locator("//p[contains(.,'Ketersediaan Kamar')]/ancestor::div[contains(@class,'activity-list-menu__item')]//span[contains(@class,'red-dot') or contains(@class,'indicator') or contains(@class,'badge')]");
+
+        // Rejected Listing Section locators (LIMO-10782)
+        // Section that shows "⚠️ Iklan Gagal Diverifikasi" for owners with rejected/unverified listings
+        rejectedListingSection = page.locator(".onboarding-new-owner__card");
+        rejectedListingTitle = page.locator(".onboarding-new-owner__title");
+        rejectedListingButton = page.locator(".onboarding-new-owner__button");
+
+        // Kos List Page locators - after clicking "Cek dan Perbaiki" (LIMO-10782)
+        kosListContainer = page.locator(".owner-kos__list, #ownerKosContainer");
+        kosCardItems = page.locator(".kos-card, [class*='kos-card']");
     }
 
     /**
@@ -1658,6 +1678,115 @@ public class OwnerDashboardPO {
     public void clickManajemenKosMenu() {
         playwright.waitFor(manajemenKost);
         playwright.clickOn(manajemenKost);
+    }
+
+    /**
+     * Get the title of rejected listing section (e.g., "⚠️ Iklan Gagal Diverifikasi")
+     * @return String title of the section
+     */
+    public String getRejectedListingSectionTitle() {
+        playwright.waitTillLocatorIsVisible(rejectedListingTitle, 5000.0);
+        return playwright.getText(rejectedListingTitle).trim();
+    }
+
+    /**
+     * Check if the rejected listing section title contains expected text
+     * @param expectedText the expected text to be displayed in title
+     * @return true if the title contains expected text
+     */
+    public boolean isRejectedListingTitleContains(String expectedText) {
+        String title = getRejectedListingSectionTitle();
+        return title.contains(expectedText);
+    }
+
+    /**
+     * Click on "Cek dan Perbaiki" button in the rejected listing section
+     */
+    public void clickOnCekDanPerbaikiButton() {
+        playwright.waitTillLocatorIsVisible(rejectedListingButton);
+        playwright.clickOn(rejectedListingButton);
+    }
+
+    /**
+     * Click on the rejected listing section
+     */
+    public void clickOnRejectedListingSection() {
+        playwright.waitTillLocatorIsVisible(rejectedListingSection);
+        playwright.clickOn(rejectedListingSection);
+    }
+
+    // =====================================================
+    // Kos List Page Methods - after clicking "Cek dan Perbaiki" (LIMO-10782)
+    // =====================================================
+
+    /**
+     * Check if kos list container is visible
+     * @return true if kos list is visible
+     */
+    public boolean isKosListVisible() {
+        playwright.waitTillPageLoaded();
+        playwright.hardWait(3000);
+        // Try multiple locators for the kos list container
+        try {
+            if (playwright.waitTillLocatorIsVisible(kosListContainer, 10000.0)) {
+                return true;
+            }
+        } catch (Exception e) {
+            // Try alternative locators
+        }
+        // Try with owner-kos container
+        Locator ownerKosContainer = page.locator("#ownerKosContainer, .owner-kos");
+        return playwright.waitTillLocatorIsVisible(ownerKosContainer, 5000.0);
+    }
+
+    /**
+     * Get the number of kos cards displayed
+     * @return count of kos cards
+     */
+    public int getKosCardCount() {
+        playwright.waitTillLocatorIsVisible(kosCardItems.first(), 5000.0);
+        return kosCardItems.count();
+    }
+
+    /**
+     * Get the name of the first kos in the list (should be earliest rejected)
+     * @return String name of the first kos
+     */
+    public String getFirstKosName() {
+        playwright.waitTillLocatorIsVisible(kosCardItems.first(), 5000.0);
+        Locator firstKosName = kosCardItems.first().locator(".kos-card__name, .text").first();
+        return playwright.getText(firstKosName).trim();
+    }
+
+    /**
+     * Get the name of kos at specific index
+     * @param index 0-based index
+     * @return String name of the kos at the specified index
+     */
+    public String getKosNameAtIndex(int index) {
+        playwright.waitTillLocatorIsVisible(kosCardItems.first(), 5000.0);
+        Locator kosName = kosCardItems.nth(index).locator(".kos-card__name, .text").first();
+        return playwright.getText(kosName).trim();
+    }
+
+    /**
+     * Check if the first kos in list has rejected status
+     * @return true if first kos has "Data Kos Ditolak" status
+     */
+    public boolean isFirstKosRejected() {
+        playwright.waitTillLocatorIsVisible(kosCardItems.first(), 5000.0);
+        Locator firstKosStatus = kosCardItems.first().locator(".kos-card__status-name--kos-non-active");
+        return firstKosStatus.isVisible();
+    }
+
+    /**
+     * Verify the first rejected listing in the list matches expected name
+     * @param expectedKosName expected kos name (e.g., "Kost B")
+     * @return true if first kos name contains expected name
+     */
+    public boolean isFirstRejectedListingMatch(String expectedKosName) {
+        String firstKosName = getFirstKosName();
+        return firstKosName.contains(expectedKosName);
     }
 
 
