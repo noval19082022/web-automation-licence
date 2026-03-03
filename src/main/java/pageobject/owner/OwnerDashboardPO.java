@@ -149,7 +149,6 @@ public class OwnerDashboardPO {
 
     // Rejected Listing Section (LIMO-10782)
     // Section that shows "Iklan Gagal Diverifikasi" for owners with rejected/unverified listings
-    Locator rejectedListingSection;
     Locator rejectedListingTitle;
     Locator rejectedListingButton;
 
@@ -306,7 +305,6 @@ public class OwnerDashboardPO {
 
         // Rejected Listing Section locators (LIMO-10782)
         // Section that shows "⚠️ Iklan Gagal Diverifikasi" for owners with rejected/unverified listings
-        rejectedListingSection = page.locator(".onboarding-new-owner__card");
         rejectedListingTitle = page.locator(".onboarding-new-owner__title");
         rejectedListingButton = page.locator(".onboarding-new-owner__button");
 
@@ -1690,29 +1688,11 @@ public class OwnerDashboardPO {
     }
 
     /**
-     * Check if the rejected listing section title contains expected text
-     * @param expectedText the expected text to be displayed in title
-     * @return true if the title contains expected text
-     */
-    public boolean isRejectedListingTitleContains(String expectedText) {
-        String title = getRejectedListingSectionTitle();
-        return title.contains(expectedText);
-    }
-
-    /**
      * Click on "Cek dan Perbaiki" button in the rejected listing section
      */
     public void clickOnCekDanPerbaikiButton() {
         playwright.waitTillLocatorIsVisible(rejectedListingButton);
         playwright.clickOn(rejectedListingButton);
-    }
-
-    /**
-     * Click on the rejected listing section
-     */
-    public void clickOnRejectedListingSection() {
-        playwright.waitTillLocatorIsVisible(rejectedListingSection);
-        playwright.clickOn(rejectedListingSection);
     }
 
     // =====================================================
@@ -1740,15 +1720,6 @@ public class OwnerDashboardPO {
     }
 
     /**
-     * Get the number of kos cards displayed
-     * @return count of kos cards
-     */
-    public int getKosCardCount() {
-        playwright.waitTillLocatorIsVisible(kosCardItems.first(), 5000.0);
-        return kosCardItems.count();
-    }
-
-    /**
      * Get the name of the first kos in the list (should be earliest rejected)
      * @return String name of the first kos
      */
@@ -1756,17 +1727,6 @@ public class OwnerDashboardPO {
         playwright.waitTillLocatorIsVisible(kosCardItems.first(), 5000.0);
         Locator firstKosName = kosCardItems.first().locator(".kos-card__name, .text").first();
         return playwright.getText(firstKosName).trim();
-    }
-
-    /**
-     * Get the name of kos at specific index
-     * @param index 0-based index
-     * @return String name of the kos at the specified index
-     */
-    public String getKosNameAtIndex(int index) {
-        playwright.waitTillLocatorIsVisible(kosCardItems.first(), 5000.0);
-        Locator kosName = kosCardItems.nth(index).locator(".kos-card__name, .text").first();
-        return playwright.getText(kosName).trim();
     }
 
     /**

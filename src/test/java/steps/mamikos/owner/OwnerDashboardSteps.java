@@ -810,20 +810,9 @@ public class OwnerDashboardSteps {
                 "Rejected listing section title should contain 'Iklan Gagal Diverifikasi'. Actual: " + sectionTitle);
     }
 
-    @Then("the rejected listing section title should contain {string}")
-    public void theRejectedListingSectionTitleShouldContain(String expectedText) {
-        Assert.assertTrue(ownerDashboardPO.isRejectedListingTitleContains(expectedText),
-                "Expected title to contain '" + expectedText + "'. Actual: " + ownerDashboardPO.getRejectedListingSectionTitle());
-    }
-
     @When("owner clicks on Cek dan Perbaiki button")
     public void ownerClicksOnCekDanPerbaikiButton() {
         ownerDashboardPO.clickOnCekDanPerbaikiButton();
-    }
-
-    @When("owner clicks on the rejected listing section")
-    public void ownerClicksOnTheRejectedListingSection() {
-        ownerDashboardPO.clickOnRejectedListingSection();
     }
 
     // =====================================================
@@ -841,15 +830,6 @@ public class OwnerDashboardSteps {
     public void theFirstKosInTheListShouldBe(String expectedKosName) {
         Assert.assertTrue(ownerDashboardPO.isFirstRejectedListingMatch(expectedKosName),
                 "Expected first kos to be '" + expectedKosName + "' but got '" + ownerDashboardPO.getFirstKosName() + "'");
-    }
-
-    @Then("the kos list should display the earliest rejected listing {string}")
-    public void theKosListShouldDisplayTheEarliestRejectedListing(String expectedKosName) {
-        Assert.assertTrue(ownerDashboardPO.isKosListVisible(),
-                "Kos list is not visible");
-        String firstKosName = ownerDashboardPO.getFirstKosName();
-        Assert.assertTrue(firstKosName.contains(expectedKosName),
-                "Expected earliest rejected listing '" + expectedKosName + "' to be first, but got '" + firstKosName + "'");
     }
 
     @Then("the first kos should have rejected status")
