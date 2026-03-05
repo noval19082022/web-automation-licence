@@ -179,6 +179,11 @@ public class AllLeadsSteps {
     public void admin_clicks_on_next_page(String page){
         allLeads.clicksOnPage(page);
     }
+
+    @When("admin clicks on search button in Harvest Dashboard")
+    public void admin_clicks_on_search_button_in_harvest_dashboard(){
+        allLeads.clicksSearchButton();
+    }
     //--- End of Pagination ---//
 
     @Then("admin should redirect to Harvest Dashboard")
@@ -234,12 +239,12 @@ public class AllLeadsSteps {
         allLeads.getDataInTable(text);
     }
 
-    @When("admin mark leads submit to kissflow as {string}")
-    public void admin_mark_leads_submit_to_kissflow_as(String value) {
+    @When("admin mark leads submit to LBT as {string}")
+    public void admin_mark_leads_submit_to_LBT_as(String value) {
         allLeads.clickManageLeads();
-        allLeads.selectsSubmitToKissflow(value);
-        allLeads.clicksSubmitToKissflow();
-        allLeads.confirmSubmitToKissflow();
+        allLeads.selectsSubmitToLBT(value);
+        allLeads.clicksSubmitToLBT();
+        allLeads.confirmSubmitToLBT();
         allLeads.clicksBatalkanEdit();
     }
     @Then("leads should be have label in Leads Status {string}")
