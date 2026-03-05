@@ -21,9 +21,9 @@ public class AllLeadsPO {
     Locator manageLeadsButton;
     Locator yesButton;
     Locator noButton;
-    Locator submitToKissflowButtonOption;
-    Locator submitToKissflowButton;
-    Locator confirmSubmitToKissflowButton;
+    Locator submitToLBTButtonOption;
+    Locator submitToLBTButton;
+    Locator confirmSubmitToLBTButton;
 
     //--- Batalkan Edit ---//
     Locator batalkanEditButton;
@@ -73,8 +73,8 @@ public class AllLeadsPO {
 
         //--- Edit Table ---//
         manageLeadsButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Manage Leads"));
-        submitToKissflowButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Submit to Kissflow"));
-        confirmSubmitToKissflowButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim"));
+        submitToLBTButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Submit to LBT"));
+        confirmSubmitToLBTButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Kirim"));
 
         //--- Batalkan Edit ---//
         batalkanEditButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cancel"));
@@ -443,7 +443,7 @@ public class AllLeadsPO {
 
     /**
      * Select Leads Curation
-     * @param value example "Submitted to Kissflow"
+     * @param value example "Submitted to LBT"
      */
     public void selectsLeadsCuration(String value) {
         playwright.clickOn(dropdownLeadsCuration);
@@ -477,25 +477,25 @@ public class AllLeadsPO {
     }
 
     /**
-     * Selects on Submit to Kissflow button
-     * @param value example "Submitted to Kissflow"
+     * Selects on Submit to LBT button
+     * @param value example "Submitted to LBT"
      */
-    public void selectsSubmitToKissflow(String value) {
-        submitToKissflowButtonOption = page.locator("tr.content:nth-of-type(1) .bg-c-radio").filter(new Locator.FilterOptions().setHasText(value));
-        playwright.clickOn(submitToKissflowButtonOption);
+    public void selectsSubmitToLBT(String value) {
+        submitToLBTButtonOption = page.locator("tr.content:nth-of-type(1) .bg-c-radio").filter(new Locator.FilterOptions().setHasText(value));
+        playwright.clickOn(submitToLBTButtonOption);
     }
 
     /**
-     * Clicks on Submit to Kissflow button
+     * Clicks on Submit to LBT button
      */
-    public void clicksSubmitToKissflow() {
-        playwright.clickOn(submitToKissflowButton);
+    public void clicksSubmitToLBT() {
+        playwright.clickOn(submitToLBTButton);
     }
 
     /**
-     * Clicks on Confirm Submit to Kissflow button
+     * Clicks on Confirm Submit to LBT button
      */
-    public void confirmSubmitToKissflow() {
-        playwright.clickOn(confirmSubmitToKissflowButton);
+    public void confirmSubmitToLBT() {
+        playwright.clickOn(confirmSubmitToLBTButton);
     }
 }

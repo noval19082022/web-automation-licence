@@ -1,6 +1,6 @@
 @regression @SS16 @harvest @harvestDashboard
 
-Feature: Submit to Kissflow in All Leads Menu
+Feature: Submit to LBT in All Leads Menu
 
   @TEST_SS-957 @context1 @context2 @continue
   Scenario: Check Edit Table button in All Leads menu
@@ -73,12 +73,12 @@ Feature: Submit to Kissflow in All Leads Menu
     Then the confirmation "Batalkan" pop up is dismissed
 
   @TEST_SS-943 @continue
-  Scenario: Check Confirmation Perubahan Belum Tersimpan Pop Up When User Clicks on Next Page
+  Scenario: Check Confirmation Perubahan Belum Tersimpan Pop Up When User Selects Yes
     Given admin set browser context to "context1"
     And bring page to front
-      #selects Yes on radio button and checks action button
+      #selects Yes on radio button and clicks filter
     And admin selects "Yes" on radio button
-    And admin clicks on next page "2"
+    And admin clicks Filter in Harvest Dashboard
     Then confirmation pop up "Perubahan Belum Tersimpan" is displayed
 
   @TEST_SS-1129
