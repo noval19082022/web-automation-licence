@@ -5,7 +5,6 @@ import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -14,7 +13,6 @@ import pageobject.common.ModalPopUpPO;
 import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.PilihPropertyPagePO;
 import pageobject.owner.goldplus.GoldplusPO;
-import pageobject.owner.chat.ChatOwnerPO;
 import pageobject.owner.kelolatagihan.PengajuanSewaPO;
 import utilities.PlaywrightHelpers;
 
@@ -32,7 +30,6 @@ public class OwnerDashboardSteps {
     GoldplusPO goldplus = new GoldplusPO(page);
     PengajuanSewaPO PengajuanSewaPO = new PengajuanSewaPO(page);
     LoadingPO loading = new LoadingPO(page);
-    ChatOwnerPO chatOwnerPO = new ChatOwnerPO(page);
 
     private List<Map<String, String>> ownerDashboard;
 
@@ -121,7 +118,8 @@ public class OwnerDashboardSteps {
     public void check_the_header_menu_display_on_homepage_owner() {
         loading.waitForLoadingIconDisappear();
         Assert.assertTrue(ownerDashboardPO.isHelpCenterOwnerDisplayed(), "Element Pusat Bantuan not present!");
-        Assert.assertTrue(ownerDashboardPO.isNotificationOwnerButtonDisplayed(), "Element Notifikasi Button not present!");
+        Assert.assertTrue(ownerDashboardPO.isNotificationOwnerButtonDisplayed(),
+                "Element Notifikasi Button not present!");
     }
 
     @Then("user see username in top right shows as {string}")
@@ -206,8 +204,10 @@ public class OwnerDashboardSteps {
         List<Map<String, String>> table = dataTable.asMaps();
         int i = 2;
         for (Map<String, String> content : table) {
-            Assert.assertEquals(ownerDashboardPO.widgetWaktunyaMengelolaProperti("title", i), content.get("title"), "title not equal to " + content.get("title"));
-            Assert.assertEquals(ownerDashboardPO.widgetWaktunyaMengelolaProperti("subtitle", i), content.get("subtitle"), "subtitle not equal to" + content.get("subtitle"));
+            Assert.assertEquals(ownerDashboardPO.widgetWaktunyaMengelolaProperti("title", i), content.get("title"),
+                    "title not equal to " + content.get("title"));
+            Assert.assertEquals(ownerDashboardPO.widgetWaktunyaMengelolaProperti("subtitle", i),
+                    content.get("subtitle"), "subtitle not equal to" + content.get("subtitle"));
             i++;
         }
     }
@@ -224,7 +224,8 @@ public class OwnerDashboardSteps {
 
     @Then("user verify there are only {int} review lists")
     public void user_verify_there_are_only_review_lists(Integer number) {
-        Assert.assertEquals(ownerDashboardPO.getReviewListsCard(), number, "Kos review list should have " + number + " items");
+        Assert.assertEquals(ownerDashboardPO.getReviewListsCard(), number,
+                "Kos review list should have " + number + " items");
     }
 
     @When("user click one of review lists")
@@ -239,7 +240,8 @@ public class OwnerDashboardSteps {
 
     @Then("user verify there are more than {int} review lists")
     public void user_verify_there_are_more_than_int_review_lists(int number) {
-        Assert.assertTrue(ownerDashboardPO.getRatingCardWrapperSize() > number, "Kost review lists are not more than " + number);
+        Assert.assertTrue(ownerDashboardPO.getRatingCardWrapperSize() > number,
+                "Kost review lists are not more than " + number);
     }
 
     @And("user verify there is no kos review section")
@@ -249,7 +251,8 @@ public class OwnerDashboardSteps {
 
     @Then("user verify title {string} and message {string} in saldo MamiAds")
     public void user_verify_message_x_in_saldo_mamiads(String titleText, String subtitle) {
-        Assert.assertEquals(ownerDashboardPO.getLihatDisiniMamiads(), titleText, "The text is not equal to " + titleText);
+        Assert.assertEquals(ownerDashboardPO.getLihatDisiniMamiads(), titleText,
+                "The text is not equal to " + titleText);
         Assert.assertEquals(ownerDashboardPO.getSubtitleMamiads(), subtitle, "The text is not equal to " + subtitle);
     }
 
@@ -306,17 +309,17 @@ public class OwnerDashboardSteps {
 
     @Then("widget daftar GP is not appears")
     public void widget_daftar_gp_is_not_appears() {
-       Assert.assertFalse(goldplus.isWidgetGPAppear(),"widget GP is appear");
+        Assert.assertFalse(goldplus.isWidgetGPAppear(), "widget GP is appear");
     }
 
     @Then("owner see info untuk anda section GP {string} appears")
     public void info_untuk_anda_section_gp_appears(String infoUntukAnda) {
-       Assert.assertTrue(goldplus.isInfoUntukAndaAppear(infoUntukAnda),"info untuk anda section GP is not appear");
+        Assert.assertTrue(goldplus.isInfoUntukAndaAppear(infoUntukAnda), "info untuk anda section GP is not appear");
     }
 
     @Then("info untuk anda section GP {string} is not appears")
     public void info_untuk_anda_section_gp_is_not_appears(String infoUntukAnda) {
-        Assert.assertFalse(goldplus.isInfoUntukAndaIsNotAppear(infoUntukAnda),"info untuk anda section GP is appear");
+        Assert.assertFalse(goldplus.isInfoUntukAndaIsNotAppear(infoUntukAnda), "info untuk anda section GP is appear");
     }
 
     @And("user access mamitour from owner dashboard")
@@ -353,10 +356,9 @@ public class OwnerDashboardSteps {
 
     @And("owner click ubah peraturan at {string}")
     public void ownerClickUbahPeraturanAtDashboard(String text) {
-        if (text.equalsIgnoreCase("dashboard")){
-          ownerDashboardPO.clickUbahPeraturanButton();
-      }
-        else if (text.equalsIgnoreCase("pengajuan sewa")){
+        if (text.equalsIgnoreCase("dashboard")) {
+            ownerDashboardPO.clickUbahPeraturanButton();
+        } else if (text.equalsIgnoreCase("pengajuan sewa")) {
             PengajuanSewaPO.clickUbahAturanButton();
         }
     }
@@ -373,7 +375,7 @@ public class OwnerDashboardSteps {
     }
 
     @And("widget daftar goldplus is displayed")
-    public void widget_daftar_goldplus_is_displayed(){
+    public void widget_daftar_goldplus_is_displayed() {
         ownerDashboardPO.isWidgetDaftarGoldplusDisplayed();
     }
 
@@ -385,13 +387,14 @@ public class OwnerDashboardSteps {
 
     @Then("owner should have menu {string}")
     public void owner_should_have_menu(String menu) {
-        if (ownerDashboardPO.isMamiprimeBannerAppear()){
+        if (ownerDashboardPO.isMamiprimeBannerAppear()) {
             ownerDashboardPO.closeMamiprimeBanner();
         }
-        if (menu.equalsIgnoreCase("Leads")){
+        if (menu.equalsIgnoreCase("Leads")) {
             Assert.assertTrue(ownerDashboardPO.isLeadsMenuVisible());
         }
     }
+
     @When("owner click leads menu")
     public void owner_click_leads_menu() {
         ownerDashboardPO.clickLeadsMenu();
@@ -428,7 +431,7 @@ public class OwnerDashboardSteps {
     }
 
     @Then("owner can not see expose singgahsini link")
-    public void ownerCanNotSeeExposeSinggahsiniLink(){
+    public void ownerCanNotSeeExposeSinggahsiniLink() {
         Assert.assertFalse(ownerDashboardPO.isInginKosDikelolaLinkVisible(), "expose singgahsini link is visible");
     }
 
@@ -452,12 +455,14 @@ public class OwnerDashboardSteps {
 
     @Then("owner can see onboarding description {string}")
     public void ownerCanSeeOnboardingDescription(String expectedDescription) {
-        Assert.assertTrue(ownerDashboardPO.getOnboardingDescription().contains(expectedDescription), "Onboarding description doesn't contain expected text");
+        Assert.assertTrue(ownerDashboardPO.getOnboardingDescription().contains(expectedDescription),
+                "Onboarding description doesn't contain expected text");
     }
 
     @Then("owner cannot see onboarding card on owner dashboard")
     public void ownerCannotSeeOnboardingCardOnOwnerDashboard() {
-        Assert.assertTrue(ownerDashboardPO.isOnboardingCardNotVisible(), "Onboarding card should not be visible but it is");
+        Assert.assertTrue(ownerDashboardPO.isOnboardingCardNotVisible(),
+                "Onboarding card should not be visible but it is");
     }
 
     @When("owner clicks {string} in sidebar")
@@ -552,8 +557,8 @@ public class OwnerDashboardSteps {
         playwright.hardWait(1000.0);
         String currentUrl = page.url();
         boolean isDashboardHome = currentUrl.contains("/ownerpage") ||
-                                  currentUrl.endsWith("owner-jambu.kerupux.com/") ||
-                                  currentUrl.endsWith("owner.mamikos.com/");
+                currentUrl.endsWith("owner-jambu.kerupux.com/") ||
+                currentUrl.endsWith("owner.mamikos.com/");
         Assert.assertTrue(isDashboardHome, "Not on dashboard homepage. Current URL: " + currentUrl);
     }
 
@@ -563,9 +568,10 @@ public class OwnerDashboardSteps {
         // Just verify we're still on owner dashboard after clicking expandable menu
         String currentUrl = page.url();
         boolean isOnOwnerDashboard = currentUrl.contains("owner-jambu.kerupux.com") ||
-                                      currentUrl.contains("owner.mamikos.com") ||
-                                      currentUrl.contains("jambu.kerupux.com/ownerpage");
-        Assert.assertTrue(isOnOwnerDashboard, menuName + " menu click should stay on dashboard. Current URL: " + currentUrl);
+                currentUrl.contains("owner.mamikos.com") ||
+                currentUrl.contains("jambu.kerupux.com/ownerpage");
+        Assert.assertTrue(isOnOwnerDashboard,
+                menuName + " menu click should stay on dashboard. Current URL: " + currentUrl);
     }
 
     @Then("owner should see {string} page")
@@ -579,87 +585,93 @@ public class OwnerDashboardSteps {
             // Main menu pages
             case "Laporan Statistik":
                 Assert.assertTrue(currentUrl.contains("/statistic"),
-                    "Not on Laporan Statistik page. Current URL: " + currentUrl);
+                        "Not on Laporan Statistik page. Current URL: " + currentUrl);
                 break;
             case "Akun":
                 Assert.assertTrue(currentUrl.contains("/settings"),
-                    "Not on Akun page. Current URL: " + currentUrl);
+                        "Not on Akun page. Current URL: " + currentUrl);
                 break;
 
             // Properti Saya submenu
             case "Kos":
                 Assert.assertTrue(currentUrl.contains("/kos") || currentUrl.contains("/ownerpage/kos"),
-                    "Not on Kos page. Current URL: " + currentUrl);
+                        "Not on Kos page. Current URL: " + currentUrl);
                 break;
             case "Apartemen":
                 Assert.assertTrue(currentUrl.contains("/apartment") || currentUrl.contains("/ownerpage/apartment"),
-                    "Not on Apartemen page. Current URL: " + currentUrl);
+                        "Not on Apartemen page. Current URL: " + currentUrl);
                 break;
 
             // Fitur Promosi submenu
             case "Cek Properti Sekitar":
                 Assert.assertTrue(currentUrl.contains("/cek-properti-sekitar") || currentUrl.contains("/cek-properti"),
-                    "Not on Cek Properti Sekitar page. Current URL: " + currentUrl);
+                        "Not on Cek Properti Sekitar page. Current URL: " + currentUrl);
                 break;
             case "Broadcast Chat":
                 Assert.assertTrue(currentUrl.contains("/broadcast-chat"),
-                    "Not on Broadcast Chat page. Current URL: " + currentUrl);
+                        "Not on Broadcast Chat page. Current URL: " + currentUrl);
                 break;
             case "Promo Iklan":
-                Assert.assertTrue(currentUrl.contains("/mamiads") || currentUrl.contains("/ownerpage/kos?open-card=true"),
-                    "Not on Promo Iklan page. Current URL: " + currentUrl);
+                Assert.assertTrue(
+                        currentUrl.contains("/mamiads") || currentUrl.contains("/ownerpage/kos?open-card=true"),
+                        "Not on Promo Iklan page. Current URL: " + currentUrl);
                 break;
 
             // Cek Peminat submenu
             case "Pengunjung Iklan":
-                Assert.assertTrue(currentUrl.contains("/visitor") || currentUrl.contains("/pengunjung") || currentUrl.contains("/mamiads/tenant"),
-                    "Not on Pengunjung Iklan page. Current URL: " + currentUrl);
+                Assert.assertTrue(
+                        currentUrl.contains("/visitor") || currentUrl.contains("/pengunjung")
+                                || currentUrl.contains("/mamiads/tenant"),
+                        "Not on Pengunjung Iklan page. Current URL: " + currentUrl);
                 break;
             case "Pengajuan Survei":
-                Assert.assertTrue(currentUrl.contains("/?openChat=true&section=tenant_survey") || currentUrl.contains("/pengajuan-survei") || currentUrl.contains("/mamiads/tenant/"),
-                    "Not on Pengajuan Survei page. Current URL: " + currentUrl);
+                Assert.assertTrue(
+                        currentUrl.contains("/?openChat=true&section=tenant_survey")
+                                || currentUrl.contains("/pengajuan-survei") || currentUrl.contains("/mamiads/tenant/"),
+                        "Not on Pengajuan Survei page. Current URL: " + currentUrl);
                 break;
             case "Daftar Tunggu":
-                Assert.assertTrue(currentUrl.contains("/waiting-list") || currentUrl.contains("/waitlist") || currentUrl.contains("/daftar-tunggu"),
-                    "Not on Daftar Tunggu page. Current URL: " + currentUrl);
+                Assert.assertTrue(
+                        currentUrl.contains("/waiting-list") || currentUrl.contains("/waitlist")
+                                || currentUrl.contains("/daftar-tunggu"),
+                        "Not on Daftar Tunggu page. Current URL: " + currentUrl);
                 break;
 
             // Manajemen Kos submenu
             case "Ketersediaan Kamar":
                 Assert.assertTrue(currentUrl.contains("/room") || currentUrl.contains("/kamar"),
-                    "Not on Ketersediaan Kamar page. Current URL: " + currentUrl);
+                        "Not on Ketersediaan Kamar page. Current URL: " + currentUrl);
                 break;
             case "Pengajuan Sewa":
                 Assert.assertTrue(currentUrl.contains("/booking") || currentUrl.contains("/pengajuan-sewa"),
-                    "Not on Pengajuan Sewa page. Current URL: " + currentUrl);
+                        "Not on Pengajuan Sewa page. Current URL: " + currentUrl);
                 break;
             case "Peraturan Sewa":
                 Assert.assertTrue(currentUrl.contains("/booking-setting") || currentUrl.contains("/peraturan"),
-                    "Not on Peraturan Sewa page. Current URL: " + currentUrl);
+                        "Not on Peraturan Sewa page. Current URL: " + currentUrl);
                 break;
             case "Tagihan Penyewa":
                 Assert.assertTrue(currentUrl.contains("/billing") || currentUrl.contains("/tagihan"),
-                    "Not on Tagihan Penyewa page. Current URL: " + currentUrl);
+                        "Not on Tagihan Penyewa page. Current URL: " + currentUrl);
                 break;
             case "Laporan Keuangan":
                 playwright.hardWait(2000);
                 Assert.assertTrue(currentUrl.contains("/financial-report") || currentUrl.contains("/laporan-keuangan"),
-                    "Not on Laporan Keuangan page. Current URL: " + currentUrl);
+                        "Not on Laporan Keuangan page. Current URL: " + currentUrl);
                 break;
             case "Kontrak Penyewa":
                 Assert.assertTrue(currentUrl.contains("/tenant-list") || currentUrl.contains("/kontrak"),
-                    "Not on Kontrak Penyewa page. Current URL: " + currentUrl);
+                        "Not on Kontrak Penyewa page. Current URL: " + currentUrl);
                 break;
             case "Penilaian Kos":
                 Assert.assertTrue(currentUrl.contains("/review") || currentUrl.contains("/penilaian"),
-                    "Not on Penilaian Kos page. Current URL: " + currentUrl);
+                        "Not on Penilaian Kos page. Current URL: " + currentUrl);
                 break;
 
             default:
                 throw new IllegalArgumentException("Page verification not implemented for: " + pageName);
         }
     }
-
 
     @And("owner accsess statistic page")
     public void ownerAccsessStatisticPage() {
@@ -668,12 +680,14 @@ public class OwnerDashboardSteps {
 
     @Then("owner can see Pasang Iklan Pertama button")
     public void ownerCanSeePasangIklanPertamaButton() {
-        Assert.assertTrue(ownerDashboardPO.isPasangIklanPertamaButtonVisible(), "Pasang Iklan Pertama button is not visible");
+        Assert.assertTrue(ownerDashboardPO.isPasangIklanPertamaButtonVisible(),
+                "Pasang Iklan Pertama button is not visible");
     }
 
     @Then("owner cannot see paid products section")
     public void ownerCannotSeePaidProductsSection() {
-        Assert.assertTrue(ownerDashboardPO.isPaidProductsSectionNotVisible(), "Paid products section should not be visible but it is");
+        Assert.assertTrue(ownerDashboardPO.isPaidProductsSectionNotVisible(),
+                "Paid products section should not be visible but it is");
     }
 
     @When("owner clicks on Pasang Iklan Pertama button")
@@ -693,12 +707,14 @@ public class OwnerDashboardSteps {
 
     @Then("owner can see Apartemen option in pilih property page")
     public void ownerCanSeeApartemenOptionInPilihPropertyPage() {
-        Assert.assertTrue(pilihPropertyPage.isApartemenOptionVisible(), "Apartemen option is not visible in pilih property page");
+        Assert.assertTrue(pilihPropertyPage.isApartemenOptionVisible(),
+                "Apartemen option is not visible in pilih property page");
     }
 
     @Then("owner can see Buat Kos button in pilih property page")
     public void ownerCanSeeBuatKosButtonInPilihPropertyPage() {
-        Assert.assertTrue(pilihPropertyPage.isBuatKosButtonVisible(), "Buat Kos button is not visible in pilih property page");
+        Assert.assertTrue(pilihPropertyPage.isBuatKosButtonVisible(),
+                "Buat Kos button is not visible in pilih property page");
     }
 
     @When("owner selects Kos option")
@@ -722,7 +738,8 @@ public class OwnerDashboardSteps {
 
     @Then("owner can see Buat Apartemen button in pilih property page")
     public void ownerCanSeeBuatApartemenButtonInPilihPropertyPage() {
-        Assert.assertTrue(pilihPropertyPage.isBuatApartemenButtonVisible(), "Buat Apartemen button is not visible in pilih property page");
+        Assert.assertTrue(pilihPropertyPage.isBuatApartemenButtonVisible(),
+                "Buat Apartemen button is not visible in pilih property page");
     }
 
     @When("owner clicks on Buat Kos button")
@@ -754,9 +771,8 @@ public class OwnerDashboardSteps {
     public void ownerRemainsOnOwnerDashboard() {
         String currentUrl = page.url();
         Assert.assertTrue(currentUrl.contains("owner") || currentUrl.contains("kerupux.com"),
-            "Owner is not on owner dashboard. Current URL: " + currentUrl);
+                "Owner is not on owner dashboard. Current URL: " + currentUrl);
     }
-
 
     // =====================================================
     // Room Availability Indicator Steps
@@ -799,7 +815,8 @@ public class OwnerDashboardSteps {
                 "Red dot indicator is not visible on " + activityName + " icon");
         String actualCount = ownerDashboardPO.getCounterBadgeValue(activityName);
         Assert.assertEquals(actualCount, expectedCount,
-                "Counter badge for " + activityName + " should display '" + expectedCount + "' but got '" + actualCount + "'");
+                "Counter badge for " + activityName + " should display '" + expectedCount + "' but got '" + actualCount
+                        + "'");
     }
 
     @Then("the information listing section should display")
@@ -829,7 +846,8 @@ public class OwnerDashboardSteps {
     @Then("the first kos in the list should be {string}")
     public void theFirstKosInTheListShouldBe(String expectedKosName) {
         Assert.assertTrue(ownerDashboardPO.isFirstRejectedListingMatch(expectedKosName),
-                "Expected first kos to be '" + expectedKosName + "' but got '" + ownerDashboardPO.getFirstKosName() + "'");
+                "Expected first kos to be '" + expectedKosName + "' but got '" + ownerDashboardPO.getFirstKosName()
+                        + "'");
     }
 
     @Then("the first kos should have rejected status")
@@ -838,174 +856,43 @@ public class OwnerDashboardSteps {
                 "First kos does not have rejected status");
     }
 
-
-    @And("I should see the section title {string}")
-    public void i_should_see_the_section_title(String expectedTitle) {
-        String actualTitle = ownerDashboardPO.getInfoUntukAndaSectionTitle();
-        Assert.assertEquals(actualTitle, expectedTitle,
-                "Section title mismatch. Expected: '" + expectedTitle + "' but got: '" + actualTitle + "'");
+    @Then("the submitted listing section should be displayed with label {string}")
+    public void theSubmittedListingSectionShouldBeDisplayedWithLabel(String expectedLabel) {
+        Assert.assertTrue(ownerDashboardPO.isSubmittedListingSectionVisible(),
+                "Submitted listing section is not visible");
+        Assert.assertTrue(ownerDashboardPO.isSubmittedListingLabelDisplayed(expectedLabel),
+                "Submitted listing label does not contain '" + expectedLabel + "'. Actual: "
+                        + ownerDashboardPO.getSubmittedListingLabel());
     }
 
-    @And("I should see the subtitle {string}")
-    public void i_should_see_the_subtitle(String expectedSubtitle) {
-        String actualSubtitle = ownerDashboardPO.getInfoUntukAndaSubtitle();
-        Assert.assertEquals(actualSubtitle, expectedSubtitle,
-                "Subtitle mismatch. Expected: '" + expectedSubtitle + "' but got: '" + actualSubtitle + "'");
+    @Then("the submitted listing info message should be {string}")
+    public void theSubmittedListingInfoMessageShouldBe(String expectedMessage) {
+        String actualMessage = ownerDashboardPO.getSubmittedListingInfoMessage();
+        Assert.assertTrue(actualMessage.contains(expectedMessage),
+                "Submitted listing info message does not contain '" + expectedMessage + "'. Actual: " + actualMessage);
     }
 
-    @And("info items should be displayed in card-style layout")
-    public void info_items_should_be_displayed_in_card_style_layout() {
-        Assert.assertTrue(ownerDashboardPO.isInfoItemsDisplayedInCardLayout(),
-                "Info items are not displayed in card-style layout");
+    @Then("the submitted listing CTA should be {string}")
+    public void theSubmittedListingCTAShouldBe(String expectedCTA) {
+        String actualCTA = ownerDashboardPO.getSubmittedListingCTAText();
+        Assert.assertTrue(actualCTA.contains(expectedCTA),
+                "Submitted listing CTA does not contain '" + expectedCTA + "'. Actual: " + actualCTA);
     }
 
-    @Then("each card should show title and product type tag")
-    public void each_card_should_show_title_and_product_type_tag() {
-        Assert.assertTrue(ownerDashboardPO.isEachCardHasTitleAndTag(),
-                "Not all cards have title and product type tag");
+    @When("owner clicks on Lihat Iklan button")
+    public void ownerClicksOnLihatIklanButton() {
+        ownerDashboardPO.clickOnSubmittedListingCTA();
+        playwright.waitTillPageLoaded();
+        playwright.hardWait(2000);
     }
 
-    // =====================================================
-    // Pengajuan Sewa Counter Badge Steps
-    // =====================================================
-
-    @Given("owner have active listing")
-    public void ownerHaveActiveListing() {
-        loading.waitForLoadingIconDisappear();
-        Assert.assertFalse(ownerDashboardPO.isNoHaveActiveKos(),
-                "Owner does not have active listing");
-    }
-
-    @And("owner have received booking requests with status {string}")
-    public void ownerHaveReceivedBookingRequestsWithStatus(String status) {
-        // Navigate to Pengajuan Sewa to verify booking requests exist
-        ownerDashboardPO.clickOnManagementKost();
-        ownerDashboardPO.clickOnPengajuanSewa();
-        Assert.assertTrue(PengajuanSewaPO.hasBookingRequests(),
-                "Owner does not have booking requests with status: " + status);
-        // Navigate back to dashboard
-        ownerDashboardPO.clickHomeMenu();
-        loading.waitForLoadingIconDisappear();
-    }
-
-    @Then("owner should see the {string} icon")
-    public void ownerShouldSeeTheIcon(String iconName) {
-        Assert.assertTrue(ownerDashboardPO.isActivityIconVisible(iconName),
-                "Activity icon '" + iconName + "' is not visible in the Activities section");
-    }
-
-    @And("the icon should display a counter badge")
-    public void theIconShouldDisplayACounterBadge() {
-        Assert.assertTrue(ownerDashboardPO.isActivityCounterBadgeVisible("Pengajuan Sewa"),
-                "Counter badge is not visible on Pengajuan Sewa icon");
-    }
-
-    @And("the counter should show the number of bookings needing confirmation")
-    public void theCounterShouldShowTheNumberOfBookingsNeedingConfirmation() {
-        String counterValue = ownerDashboardPO.getCounterBadgeValue("Pengajuan Sewa");
-        Assert.assertNotNull(counterValue, "Counter badge value is null");
-        Assert.assertFalse(counterValue.isEmpty(), "Counter badge value is empty");
-        int count = Integer.parseInt(counterValue);
-        Assert.assertTrue(count > 0,
-                "Counter badge should show number > 0 but got: " + count);
-    }
-
-    // =====================================================
-    // Pengajuan Survei Counter Badge Update Steps
-    // =====================================================
-
-    @Given("I have {int} pending survey requests")
-    public void iHavePendingSurveyRequests(int expectedCount) {
-        loading.waitForLoadingIconDisappear();
-        ownerDashboardPO.dismissPopUp();
-        Assert.assertTrue(ownerDashboardPO.isActivitySectionVisible(),
-                "Activities section is not visible");
-        String counterValue = ownerDashboardPO.getCounterBadgeValue("Pengajuan Survei");
-        Assert.assertEquals(counterValue, String.valueOf(expectedCount),
-                "Expected " + expectedCount + " pending survey requests but got: " + counterValue);
-    }
-
-    @And("I am on the chat list survey page")
-    public void iAmOnTheChatListSurveyPage() {
-        ownerDashboardPO.clickOnKetersediaanKamarActivityIcon("Pengajuan Survei");
+    @Then("owner should be redirected to Properti Saya screen")
+    public void ownerShouldBeRedirectedToPropertiSayaScreen() {
         loading.waitForLoadingIconDisappear();
         playwright.waitTillPageLoaded();
-    }
-
-    @When("owner non gp dismiss FTUE chatroom")
-    public void ownerNonGpDismissFtueChatroom() {
-        chatOwnerPO.dismissFTUEMars();
-        chatOwnerPO.dismissFTUEMarsKuotaNol();
-        chatOwnerPO.dismissFTUEJemputBolaIfExist();
-        chatOwnerPO.dismissFTUEJemputBola();
-    }
-
-    @And("I check the Pengajuan Survei icon")
-    public void iCheckThePengajuanSurveiIcon() {
-        ownerDashboardPO.dismissPopUp();
-        Assert.assertTrue(ownerDashboardPO.isActivitySectionVisible(),
-                "Activities section is not visible");
-        Assert.assertTrue(ownerDashboardPO.isActivityIconVisible("Pengajuan Survei"),
-                "Pengajuan Survei icon is not visible in the Activities section");
-    }
-
-    @Then("the counter should now display {string}")
-    public void theCounterShouldNowDisplay(String expectedCount) {
-        String actualCount = ownerDashboardPO.getCounterBadgeValue("Pengajuan Survei");
-        Assert.assertEquals(actualCount, expectedCount,
-                "Counter badge should display '" + expectedCount + "' but got '" + actualCount + "'");
-    }
-
-    @And("the counter should reflect the updated count immediately")
-    public void theCounterShouldReflectTheUpdatedCountImmediately() {
-        Assert.assertTrue(ownerDashboardPO.isActivityCounterBadgeVisible("Pengajuan Survei"),
-                "Counter badge is not visible - count was not updated immediately");
-    }
-
-    @And("owner accept survey")
-    public void ownerAcceptSurvey() {
-        chatOwnerPO.acceptSurveyRequest();
-    }
-
-    // =====================================================
-    // Banner Auto-Slide Steps
-    // =====================================================
-
-    private int bannerCount;
-
-    @Given("there are {int} banners available")
-    public void thereAreBannersAvailable(int expectedCount) {
-        loading.waitForLoadingIconDisappear();
-        ownerDashboardPO.dismissPopUp();
-        bannerCount = ownerDashboardPO.getBannerCount();
-        Assert.assertTrue(bannerCount >= expectedCount,
-                "Expected at least " + expectedCount + " banners but found: " + bannerCount);
-    }
-
-    @And("the auto-slide duration is set to existing configuration")
-    public void theAutoSlideDurationIsSetToExistingConfiguration() {
-        // Auto-slide duration is configured on the platform side
-        // This step verifies banner section is ready and visible
-        Assert.assertTrue(ownerDashboardPO.getBannerCount() > 0,
-                "Banner section is not ready - no banners found");
-    }
-
-    @Then("the banner should automatically slide to the next banner after the configured duration")
-    public void theBannerShouldAutomaticallySlideToTheNextBanner() {
-        int currentIndex = ownerDashboardPO.getActiveBannerIndex();
-        Assert.assertTrue(ownerDashboardPO.waitForBannerSlide(currentIndex, 30000),
-                "Banner did not auto-slide to the next banner within 15 seconds");
-    }
-
-    @And("the auto-slide should continue in a loop")
-    public void theAutoSlideShouldContinueInALoop() {
-        Assert.assertTrue(ownerDashboardPO.isBannerAutoSlidingInLoop(15000),
-                "Banner auto-slide is not continuing in a loop");
-    }
-
-    @And("when reaching the last banner, it should loop back to the first")
-    public void whenReachingTheLastBannerItShouldLoopBackToTheFirst() {
-        Assert.assertTrue(ownerDashboardPO.doesBannerLoopBackToFirst(bannerCount, 15000),
-                "Banner did not loop back to the first banner after reaching the last");
+        String currentUrl = page.url();
+        Assert.assertTrue(
+                currentUrl.contains("/kos") || currentUrl.contains("/properti") || currentUrl.contains("/ownerpage"),
+                "Owner is not redirected to Properti Saya screen. Current URL: " + currentUrl);
     }
 }

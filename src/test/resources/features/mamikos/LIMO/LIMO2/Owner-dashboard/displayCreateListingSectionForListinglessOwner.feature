@@ -66,3 +66,20 @@ Feature: Display Create Listing Section for Listingless Owner
     Then owner should see the kos list page
     And the first kos should have rejected status
     Then the first kos in the list should be "Kost B Sukun Malang"
+
+  @TEST_LIMO-10784 @WEB @AUTOMATED @submitted-listing
+  Scenario: [Owner][OD][CreateListing] Display and interact with draft1/added listing section
+    # Owner with submitted listing (waiting for admin confirmation):
+    # - No active/rejected listing
+    # - Has listing with status "submitted"
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag    | phone prod | password  |
+      | 0811978788428 | 0          | qwerty123 |
+    And owner dismiss pop-up if appears
+    Then the submitted listing section should be displayed with label "Sedang Diperiksa"
+    And the submitted listing info message should be "Properti akan diverifikasi dalam 2x24 jam."
+    And the submitted listing CTA should be "Lihat Iklan"
+    And owner cannot see paid products section
+    When owner clicks on Lihat Iklan button
+    Then owner should be redirected to Properti Saya screen
