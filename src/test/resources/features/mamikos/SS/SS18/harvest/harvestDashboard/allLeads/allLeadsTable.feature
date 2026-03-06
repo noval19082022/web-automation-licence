@@ -84,7 +84,7 @@ Feature: All Leads Table
     And admin click on terapkan button
     Then admin validate kota name with "Sewon"
 
-  @TEST_SS-7495 @continue
+  @TEST_SS-7495
   Scenario: [Web][Harvest][Filter]Admin filter by Kelurahan
     When admin resets filter in Harvest Dashboard
     And admin clicks Filter in Harvest Dashboard
