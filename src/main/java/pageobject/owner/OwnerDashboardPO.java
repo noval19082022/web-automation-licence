@@ -163,6 +163,13 @@ public class OwnerDashboardPO {
     Locator kosListContainer;
     Locator kosCardItems;
 
+    // Draft Listing Section (LIMO-10786)
+    // Section that shows "Iklan Belum Lengkap" for owners with draft (add/draft) listings
+    Locator draftListingCard;
+    Locator draftListingTitle;
+    Locator draftListingDescription;
+    Locator draftListingCTA;
+
     // Banner carousel section
     Locator bannerItems;
     Locator bannerPaginationDots;
@@ -326,6 +333,13 @@ public class OwnerDashboardPO {
         // Kos List Page locators - after clicking "Cek dan Perbaiki" (LIMO-10782)
         kosListContainer = page.locator(".owner-kos__list, #ownerKosContainer");
         kosCardItems = page.locator(".kos-card, [class*='kos-card']");
+
+        // Draft Listing Section locators (LIMO-10786)
+        // Section that shows "Iklan Anda Belum Lengkap" for owners with draft (add/draft) listings
+        draftListingCard = page.locator(".onboarding-new-owner__card:has-text('Iklan Anda Belum Lengkap')");
+        draftListingTitle = page.locator(".onboarding-new-owner__card:has-text('Iklan Anda Belum Lengkap') .onboarding-new-owner__title");
+        draftListingDescription = page.locator(".onboarding-new-owner__card:has-text('Iklan Anda Belum Lengkap') .onboarding-new-owner__description");
+        draftListingCTA = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lengkapi Iklan"));
     }
 
     /**
@@ -1818,6 +1832,70 @@ public class OwnerDashboardPO {
     public boolean isFirstRejectedListingMatch(String expectedKosName) {
         String firstKosName = getFirstKosName();
         return firstKosName.contains(expectedKosName);
+    }
+
+    // =====================================================
+    // Draft Listing Section Methods (LIMO-10786)
+    // For owners with draft (add/draft) listings - shows "Iklan Belum Lengkap"
+    // =====================================================
+
+    /**
+     * Check if draft listing section (Iklan Anda Belum Lengkap) is visible
+     * @return true if draft listing section is visible
+     */
+    public boolean isDraftListingSectionVisible() {
+        playwright.hardWait(3000);
+        // Try primary locator first
+        if (playwright.waitTillLocatorIsVisible(draftListingCard, 5000.0)) {
+            return true;
+        }
+        // Fallback: check if text "Iklan Anda Belum Lengkap" is displayed anywhere
+        return playwright.isTextDisplayed("Iklan Anda Belum Lengkap", 5000.0);
+    }
+
+    /**
+     * Get the title of draft listing section (e.g., "⚠️ Iklan Belum Lengkap")
+     * @return String title text
+     */
+    public String getDraftListingTitle() {
+        playwright.waitTillLocatorIsVisible(draftListingTitle, 5000.0);
+        return playwright.getText(draftListingTitle).trim();
+    }
+
+    /**
+     * Check if draft listing title contains expected text
+     * @param expectedTitle expected title text (e.g., "Iklan Belum Lengkap")
+     * @return true if title contains expected text
+     */
+    public boolean isDraftListingTitleDisplayed(String expectedTitle) {
+        String actualTitle = getDraftListingTitle();
+        return actualTitle.contains(expectedTitle);
+    }
+
+    /**
+     * Get the description of draft listing section
+     * @return String description text
+     */
+    public String getDraftListingDescription() {
+        playwright.waitTillLocatorIsVisible(draftListingDescription, 5000.0);
+        return playwright.getText(draftListingDescription).trim();
+    }
+
+    /**
+     * Get the CTA button text of draft listing section (e.g., "Lengkapi Iklan")
+     * @return String CTA text
+     */
+    public String getDraftListingCTAText() {
+        playwright.waitTillLocatorIsVisible(draftListingCTA, 5000.0);
+        return playwright.getText(draftListingCTA).trim();
+    }
+
+    /**
+     * Click on the draft listing CTA button (e.g., "Lengkapi Iklan")
+     */
+    public void clickOnDraftListingCTA() {
+        playwright.waitTillLocatorIsVisible(draftListingCTA, 5000.0);
+        playwright.clickOn(draftListingCTA);
     }
 
 

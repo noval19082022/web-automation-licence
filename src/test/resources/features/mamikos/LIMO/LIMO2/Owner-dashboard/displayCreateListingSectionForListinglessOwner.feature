@@ -83,3 +83,19 @@ Feature: Display Create Listing Section for Listingless Owner
     And owner cannot see paid products section
     When owner clicks on Lihat Iklan button
     Then owner should be redirected to Properti Saya screen
+
+  @TEST_LIMO-10786 @WEB @AUTOMATED @draft-listing
+  Scenario: [Owner][OD][CreateListing] Display lengkapi listing section when user has draft kost
+    # Owner with draft listing (add/draft status):
+    # - No active/rejected/edited listing
+    # - Has listing with status "add/draft"
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag     | phone prod | password  |
+      | 0811978788421  | 0          | qwerty123 |
+    And owner dismiss pop-up if appears
+    Then the draft listing section should be displayed with label "✋ Iklan Anda Belum Lengkap"
+    And the draft listing CTA should be "Lengkapi Iklan"
+    And owner cannot see paid products section
+    When owner clicks on Lengkapi Iklan button
+    Then owner should be redirected to Properti Saya screen

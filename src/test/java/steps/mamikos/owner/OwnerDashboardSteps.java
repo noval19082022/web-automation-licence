@@ -895,4 +895,38 @@ public class OwnerDashboardSteps {
                 currentUrl.contains("/kos") || currentUrl.contains("/properti") || currentUrl.contains("/ownerpage"),
                 "Owner is not redirected to Properti Saya screen. Current URL: " + currentUrl);
     }
+
+    // =====================================================
+    // Draft Listing Section Steps (LIMO-10786)
+    // For owners with draft (add/draft) listings - shows "Iklan Belum Lengkap"
+    // =====================================================
+
+    @Then("the draft listing section should be displayed with label {string}")
+    public void theDraftListingSectionShouldBeDisplayedWithLabel(String expectedLabel) {
+        Assert.assertTrue(ownerDashboardPO.isDraftListingSectionVisible(),
+                "Draft listing section (Iklan Belum Lengkap) is not visible");
+        Assert.assertTrue(ownerDashboardPO.isDraftListingTitleDisplayed(expectedLabel),
+                "Draft listing label does not contain '" + expectedLabel + "'. Actual: " + ownerDashboardPO.getDraftListingTitle());
+    }
+
+    @Then("the draft listing description should be {string}")
+    public void theDraftListingDescriptionShouldBe(String expectedDescription) {
+        String actualDescription = ownerDashboardPO.getDraftListingDescription();
+        Assert.assertTrue(actualDescription.contains(expectedDescription),
+                "Draft listing description does not contain '" + expectedDescription + "'. Actual: " + actualDescription);
+    }
+
+    @Then("the draft listing CTA should be {string}")
+    public void theDraftListingCTAShouldBe(String expectedCTA) {
+        String actualCTA = ownerDashboardPO.getDraftListingCTAText();
+        Assert.assertTrue(actualCTA.contains(expectedCTA),
+                "Draft listing CTA does not contain '" + expectedCTA + "'. Actual: " + actualCTA);
+    }
+
+    @When("owner clicks on Lengkapi Iklan button")
+    public void ownerClicksOnLengkapiIklanButton() {
+        ownerDashboardPO.clickOnDraftListingCTA();
+        playwright.waitTillPageLoaded();
+        playwright.hardWait(2000);
+    }
 }
