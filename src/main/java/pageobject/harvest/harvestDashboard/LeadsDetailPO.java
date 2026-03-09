@@ -324,7 +324,7 @@ public class LeadsDetailPO {
     public String getLeadsResponseText(String phoneNumber) {
         playwright.waitTillPageLoaded();
         Locator row = page.locator("tr").filter(new Locator.FilterOptions().setHasText(phoneNumber));
-        Locator responseCell = row.locator("td").nth(5);
+        Locator responseCell = row.locator("td").nth(8);
         return playwright.getText(responseCell);
     }
 
@@ -367,7 +367,7 @@ public class LeadsDetailPO {
     public String getLeadsResponseColor(String phoneNumber) {
         playwright.waitTillPageLoaded();
         Locator row = page.locator("tr").filter(new Locator.FilterOptions().setHasText(phoneNumber));
-        Locator responseElement = row.locator("td").nth(5).locator("div, span, p").first();
+        Locator responseElement = row.locator("td").nth(8).locator("div, span, p").first();
         return responseElement.evaluate("el => getComputedStyle(el).color").toString();
     }
 
