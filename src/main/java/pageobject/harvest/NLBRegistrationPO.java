@@ -301,7 +301,7 @@ public class NLBRegistrationPO {
      */
     public String getLeadsStatus(String phoneNumber) {
         Locator row = page.locator("tr").filter(new Locator.FilterOptions().setHasText(phoneNumber));
-        Locator statusCell = row.locator("td").nth(18);
+        Locator statusCell = row.locator("td").nth(20);
         return playwright.getText(statusCell);
     }
 }
