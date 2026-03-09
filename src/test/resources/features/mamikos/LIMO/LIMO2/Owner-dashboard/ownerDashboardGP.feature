@@ -92,3 +92,27 @@ Feature: Owner Dashboard GP
       | 0876623622   | qwerty123 |
       | 0876623687   | 12345678  |
       | 085687543611 | 12345678  |
+
+  @TEST_LIMO-10570
+  Scenario: [Owner Dashboard][Banner] Banner auto-slides and loops back to first
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod    | password     |
+      | 081328787342 | 081328787342  | Perempuan123 |
+    And there are 10 banners available
+    And the auto-slide duration is set to existing configuration
+    Then the banner should automatically slide to the next banner after the configured duration
+    And the auto-slide should continue in a loop
+    And when reaching the last banner, it should loop back to the first
+
+  @TEST_LIMO-10411 @infoUntukAndaSection
+  Scenario: Verify Info untuk Anda section displays correctly with card layout
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag   | phone prod | password  |
+      | 088112233452 | 0          | qwerty123 |
+    And owner navigates to owner dashboard
+    And I should see the section title "Info untuk Anda"
+    And I should see the subtitle "Informasi terbaru seputar layanan dan produk kami."
+    And info items should be displayed in card-style layout
+    Then each card should show title and product type tag
