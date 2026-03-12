@@ -943,11 +943,15 @@ public class PlaywrightHelpers {
      * @return boolean
      */
     public Boolean isTextDisplayed(String text, double duration) {
-        Boolean result = isLocatorVisibleAfterLoad(page.getByText(text).first(), duration);
-        if (!result) {
+        try {
+            page.getByText(text).first().waitFor(
+                new Locator.WaitForOptions().setTimeout(duration)
+            );
+            return true;
+        } catch (Exception e) {
             log.info("Locator text target is not visible: {}", text);
+            return false;
         }
-        return  result;
     }
 
     /**

@@ -9,7 +9,7 @@ Feature: Voucher Owner
       | 0895365624343 | 0          | 12345678 |
     When user navigates to mamiads dashboard
     And user click "Coba Sekarang"
-    And user wants to buy saldo MamiAds "Rp6.000"
+    And user wants to buy saldo MamiAds "Rp30.000"
   #Voucher doesn't active (LIMO-193)
     And owner click masukkan voucher
     When user input "MAATNOTACTIVEVOUCHER" as kode voucher

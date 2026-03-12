@@ -22,7 +22,7 @@ Feature: Visibility
     When user login as owner:
       | phone stag   | phone prod   | password  |
       | 0891202415   | 083843666858 | qwerty123 |
-    #Then user will see that the text "500.000" is displayed
+    Then user will see that the text "500.000" is displayed
     Then user will see that the text "Posisi iklan tidak naik" is displayed
     When user click on Saldo MamiAds at owner dashboard
     Then user redirected to mamiads page
