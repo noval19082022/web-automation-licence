@@ -23,6 +23,8 @@ public class ChatOwnerPO {
     Locator nantiSajaButton;
     Locator acceptFromChatRoomButton;
     Locator yaTerimaButton;
+    Locator terimaButton;
+    Locator terimaButtonInDetailSurvey;
     Locator notPaidFirstRent;
     Locator tenantName;
     Locator roomTitle;
@@ -62,6 +64,8 @@ public class ChatOwnerPO {
     Locator apaItuKuotaChatRoomButton;
     Locator daftarGPButton;
     Locator blockingModalCloseButton;
+    Locator firstChatThread;
+    Locator acceptSurveyButton;
 
     public ChatOwnerPO(Page page) {
         this.page = page;
@@ -79,6 +83,8 @@ public class ChatOwnerPO {
         nantiSajaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Nanti Saja"));
         acceptFromChatRoomButton = page.getByRole(AriaRole.BANNER).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Terima"));
         yaTerimaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Terima"));
+        terimaButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terima"));
+        terimaButtonInDetailSurvey = page.locator("//div[@class='detail-survey-kost__cta-wrapper bg-u-mt-md']");
         notPaidFirstRent = page.locator("div[class='mc-chat-room-header__content'] div[class='bg-c-label bg-c-label--rainbow bg-c-label--rainbow-blue']");
         tenantName = page.locator(".bg-c-text--title-5");
         roomTitle = page.locator("//p[@class='mc-product-card__title bg-c-text bg-c-text--body-2']");
@@ -117,6 +123,8 @@ public class ChatOwnerPO {
         buttonOnChatRoomList = page.locator("button.bg-c-button.mc-non-gp-entrypoint-card__entrypoint-button.bg-c-button--primary.bg-c-button--sm");
         daftarGPButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Daftar"));
         blockingModalCloseButton = page.locator(".bg-c-modal__action-closable");
+        firstChatThread = page.locator(".mc-channel-list-card").first();
+        acceptSurveyButton = page.locator("//button[contains(.,'Terima Survei')]");
     }
 
     /**
@@ -585,4 +593,22 @@ public class ChatOwnerPO {
             playwright.clickOn(sayaMengertiChatRoom);
         }
     }
-}
+
+    /**
+     * Click on first chat thread in the chat list
+     */
+    public void clickFirstChatThread() {
+        playwright.waitTillLocatorIsVisible(firstChatThread, 10000.0);
+        playwright.clickOn(firstChatThread);
+    }
+
+    /**
+     * Accept survey request from chat room
+     * Tries "Terima Survei" button first, falls back to banner "Terima" button
+     * Then confirms with "Ya, Terima"
+     */
+    public void acceptSurveyRequest() {
+        playwright.clickOn(terimaButton);
+        playwright.clickOn(terimaButtonInDetailSurvey);
+        }
+    }

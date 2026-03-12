@@ -107,4 +107,4 @@ Feature: Recommendation Listing
     Then tenant should success booking kost
     And user cancel booking for check recommendation kos
     And owner click back previous button
-    Then tenant check status booking is "Tunggu Konfirmasi"
+    Then tenant check status booking is "Dibatalkan"
