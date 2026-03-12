@@ -70,12 +70,14 @@ Feature: Mars Project
       | phone stag | phone prod   | password  |
       | 0888881476 | 083176408442 | qwerty123 |
     And tenant redirect to kost details:
-      | kost path stag                                                                                 | kost path prod                         |
-      | kost-kabupaten-cilacap-kost-campur-eksklusif-kost-doraemon-the-explorer-cilacap-tengah-cilacap | Kos Dom Automation Distrik Misool Raja |
+      | kost path stag                                          | kost path prod                         |
+      | kost-sleman-kost-putri-murah-kost-doraemon-depok-sleman | Kos Dom Automation Distrik Misool Raja |
+    And user click on chat button in top bar tenant home page
+    And user dismiss FTUE booking benefit
     And user click chat in kos detail
     And tenant enter text "Boleh tanya-tanya dulu?" in chat page
     Then user cant see last owner seen
-
+    
   @TEST_SS-2813 @Automated @MARS-DOM @Web @discovery-platform
   Scenario: [Web][Mars] Check autoreply of chat on P2 Kost when user already send message
     Given user go to mamikos homepage

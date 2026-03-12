@@ -123,7 +123,11 @@ public class OwnerDashboardPO {
     private Locator perpanjangBtnReccuringGpPopUp;
     private Locator dialogPopUp;
     private Locator widgetInfoUntukAndaParagraph;
-    private Locator informationCard;
+    private Locator informationCardTitle;
+    private Locator informationCardSubtitle;
+    private Locator informationCardItems;
+    private Locator informationCardItemTitles;
+    private Locator informationCardItemTags;
     private Locator generalCloseButton;
     private Locator welcomeTitle;
     private Locator welcomeSubtitle;
@@ -134,6 +138,7 @@ public class OwnerDashboardPO {
     private Locator gpPeriodFirstOption;
     private Locator pilihPeriodeButton;
     private Locator gpStatusText;
+    private Locator informationCard;
 
     // Activity section
     Locator ketersediaanKamarActivityIcon;
@@ -141,6 +146,11 @@ public class OwnerDashboardPO {
     Locator activitySectionContainer;
     Locator activitySection;
     Locator ketersediaanKamarIcon;
+
+    // Banner carousel section
+    Locator bannerItems;
+    Locator bannerPaginationDots;
+    Locator bannerActiveDot;
 
     public OwnerDashboardPO(Page page) {
         this.page = page;
@@ -210,6 +220,9 @@ public class OwnerDashboardPO {
         ubahPeraturan = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Peraturan Sewa"));
         dariMamikosSection = page.getByText("Dari Mamikos", new Page.GetByTextOptions().setExact(true));
         dariMamikosBanner = page.locator(".banner-card__image-wrapper > .bg-c-image__img").first();
+        bannerItems = page.locator(".banner-card__image-wrapper > .bg-c-image__img");
+        bannerPaginationDots = page.locator(".banner-card .swiper-pagination-bullet, .banner-card .bg-c-carousel__dot");
+        bannerActiveDot = page.locator(".banner-card .swiper-pagination-bullet-active, .banner-card .bg-c-carousel__dot--active");
         nantiSajaButton = page.locator("//button[normalize-space()='Nanti Saja']");
         goldPlusFeaturePopupText = page.getByText("Sudah cek fitur-fitur GoldPlus ini?").first();
         goldPlusWelcomePopupText = page.getByText("Selamat bergabung di GoldPlus 2!").first();
@@ -222,7 +235,11 @@ public class OwnerDashboardPO {
         perpanjangBtnReccuringGpPopUp = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Perpanjang"));
         dialogPopUp = page.locator("//*[@role='dialog' and @aria-modal='true']//button[@class='bg-c-modal__action-closable']");
         widgetInfoUntukAndaParagraph = page.locator(".information-card .information-card__list-wrapper p");
-        informationCard = page.locator(".information-card");
+        informationCardTitle = page.locator("//p[normalize-space()='Info untuk Anda']");
+        informationCardSubtitle = page.locator("//p[normalize-space()='Informasi terbaru seputar layanan dan produk kami.']");
+        informationCardItems = page.locator("//div[@class='wrapper__body']//a");
+        informationCardItemTitles = page.locator(".information-card .information-card__list-wrapper .mk-action-card__main-content-title");
+        informationCardItemTags = page.locator(".information-card .information-card__list-wrapper .mk-action-card__main-content-subtitle");
         generalCloseButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
         welcomeTitle = page.getByText("👋🏼  Selamat datang, Owner tanpa kost");
         welcomeSubtitle = page.getByText("Pasang iklan pertama Anda agar bisa segera ditemukan calon penyewa!");
@@ -240,6 +257,7 @@ public class OwnerDashboardPO {
         gpStatusText = page.locator(".membership-card__section").first();
         activitySection = page.locator(".activity-list-menu__grid.activity-list-menu__grid--desktop");
         ketersediaanKamarIcon = (page.locator("(//p[contains(.,'Ketersediaan Kamar')])[2]"));
+        informationCard = page.locator(".information-card");
 
         // Sidebar menu locators
         homeMenuButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Home"));
@@ -487,6 +505,26 @@ public class OwnerDashboardPO {
      */
     public boolean isActivitySectionVisible() {
         return playwright.waitTillLocatorIsVisible(activitySection.first(), 10000.0);
+    }
+
+    /**
+     * Check if a specific activity icon is visible in the activity section
+     * @param iconName the name of the activity icon (e.g., "Pengajuan Sewa", "Ketersediaan Kamar")
+     * @return true if the icon is visible
+     */
+    public boolean isActivityIconVisible(String iconName) {
+        Locator icon = page.locator("//p[contains(.,'" + iconName + "')]/ancestor::div[contains(@class,'activity-list-menu__item')]");
+        return playwright.waitTillLocatorIsVisible(icon.first(), 5000.0);
+    }
+
+    /**
+     * Check if a specific activity icon has a counter badge visible
+     * @param iconName the name of the activity icon
+     * @return true if the counter badge is visible
+     */
+    public boolean isActivityCounterBadgeVisible(String iconName) {
+        Locator badge = page.locator("//p[contains(.,'" + iconName + "')]/ancestor::div[contains(@class,'activity-list-menu__item')]//div[@data-testid='activity-indicator']");
+        return playwright.waitTillLocatorIsVisible(badge.first(), 5000.0);
     }
 
     /**
@@ -1620,5 +1658,145 @@ public class OwnerDashboardPO {
     public void clickManajemenKosMenu() {
         playwright.waitFor(manajemenKost);
         playwright.clickOn(manajemenKost);
+    }
+
+
+    /**
+     * Get the section title text of Info untuk Anda
+     * @return String section title text
+     */
+    public String getInfoUntukAndaSectionTitle() {
+        playwright.waitTillLocatorIsVisible(informationCardTitle, 10000.0);
+        return playwright.getText(informationCardTitle);
+    }
+
+    /**
+     * Get the subtitle text of Info untuk Anda
+     * @return String subtitle text
+     */
+    public String getInfoUntukAndaSubtitle() {
+        playwright.waitTillLocatorIsVisible(informationCardSubtitle, 10000.0);
+        return playwright.getText(informationCardSubtitle);
+    }
+
+    /**
+     * Check if info items are displayed in card-style layout
+     * @return true if card items are present and visible
+     */
+    public boolean isInfoItemsDisplayedInCardLayout() {
+        return playwright.countLocator(informationCardItems) > 0;
+    }
+
+    /**
+     * Get the count of info card items
+     * @return int number of card items
+     */
+    public int getInfoCardItemCount() {
+        return playwright.countLocator(informationCardItems);
+    }
+
+    /**
+     * Check if each card has title and product type tag
+     * @return true if all cards have both title and tag
+     */
+    public boolean isEachCardHasTitleAndTag() {
+        playwright.waitTillLocatorIsVisible(informationCard, 10000.0);
+        int itemCount = playwright.countLocator(informationCardItems);
+        int titleCount = playwright.countLocator(informationCardItemTitles);
+        int tagCount = playwright.countLocator(informationCardItemTags);
+        return itemCount > 0 && titleCount >= itemCount && tagCount > 0;
+    }
+
+    // =====================================================
+    // Banner Auto-Slide Methods
+    // =====================================================
+
+    /**
+     * Get the total number of banners in the Dari Mamikos section
+     * @return int number of banner items
+     */
+    public int getBannerCount() {
+        playwright.waitTillLocatorIsVisible(dariMamikosBanner, 10000.0);
+        return playwright.countLocator(bannerItems);
+    }
+
+    /**
+     * Get the current active banner index based on pagination dots
+     * @return int index of the active dot (0-based), or -1 if not found
+     */
+    public int getActiveBannerIndex() {
+        if (playwright.waitTillLocatorIsVisible(bannerActiveDot, 5000.0)) {
+            for (int i = 0; i < bannerPaginationDots.count(); i++) {
+                String classList = bannerPaginationDots.nth(i).getAttribute("class");
+                if (classList != null && (classList.contains("active") || classList.contains("bullet-active"))) {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Wait for banner to auto-slide to a different banner
+     * @param currentIndex the current active banner index
+     * @param maxWaitMs maximum wait time in milliseconds
+     * @return true if the banner slid to a different index
+     */
+    public boolean waitForBannerSlide(int currentIndex, long maxWaitMs) {
+        long waited = 0;
+        long interval = 1000;
+        while (waited < maxWaitMs) {
+            playwright.hardWait(interval);
+            waited += interval;
+            int newIndex = getActiveBannerIndex();
+            if (newIndex != currentIndex && newIndex != -1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Verify that banners auto-slide continuously in a loop
+     * Watches for at least 2 slide transitions
+     * @param maxWaitPerSlideMs max wait time per slide transition
+     * @return true if at least 2 transitions occurred
+     */
+    public boolean isBannerAutoSlidingInLoop(long maxWaitPerSlideMs) {
+        int transitionCount = 0;
+        int currentIndex = getActiveBannerIndex();
+
+        for (int i = 0; i < 3; i++) {
+            if (waitForBannerSlide(currentIndex, maxWaitPerSlideMs)) {
+                transitionCount++;
+                currentIndex = getActiveBannerIndex();
+            } else {
+                break;
+            }
+        }
+        return transitionCount >= 2;
+    }
+
+    /**
+     * Verify that banner loops back to the first banner after reaching the last
+     * @param totalBanners total number of banners
+     * @param maxWaitPerSlideMs max wait time per slide transition
+     * @return true if the banner loops back to index 0
+     */
+    public boolean doesBannerLoopBackToFirst(int totalBanners, long maxWaitPerSlideMs) {
+        int currentIndex = getActiveBannerIndex();
+
+        // Wait through all slides until we see index 0 again
+        for (int i = 0; i < totalBanners + 1; i++) {
+            if (waitForBannerSlide(currentIndex, maxWaitPerSlideMs)) {
+                currentIndex = getActiveBannerIndex();
+                if (currentIndex == 0) {
+                    return true;
+                }
+            } else {
+                break;
+            }
+        }
+        return false;
     }
 }

@@ -81,3 +81,11 @@ Feature: Room Availability Indicator on Owner Dashboard
       | 0891202601  | 0812345670001 | qwerty123 |
     When owner clicks on "Daftar Tunggu" icon in activity section
     Then owner should see "Daftar Tunggu" page
+
+  @TEST_LIMO-10539 @roomAvailabilityRedDot
+  Scenario: [Owner Dashboard][Room Availability] Ketersediaan Kamar not shown when owner has no active listing
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag | phone prod    | password  |
+      | 0891202537 | 0812345670001 | qwerty123 |
+    Then the "Ketersediaan Kamar" icon should NOT be displayed

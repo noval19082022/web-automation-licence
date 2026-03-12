@@ -36,5 +36,15 @@ Feature: [Owner dashboard][Ada yang menunggu]Accept Booking via Homepage (more t
       | phone stag    | phone prod    | password     |
       | 0890000000289 | 0890000000289 | Bismillah@01 |
     And owner accept booking via Homepage
-  #  And owner back to owner dashboard
-  #  Then owner can see pengajuan sewa detail on dashboard
+
+  @TEST_LIMO-10577
+  Scenario: [Owner Dashboard][Pengajuan Sewa] Display counter badge for booking requests needing confirmation
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag     | phone prod     | password    |
+      | 0890000000289  | 0890000000289  | Bismillah@01 |
+    And owner navigates to owner dashboard
+    When owner views the Activities section
+    Then owner should see the "Pengajuan Sewa" icon
+    And the icon should display a counter badge
+    And the counter should show the number of bookings needing confirmation
