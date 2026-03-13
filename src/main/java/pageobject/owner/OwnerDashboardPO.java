@@ -347,8 +347,8 @@ public class OwnerDashboardPO {
      * <p>doesn't have kost active</p>
      */
     public void clickOnButtonIconClose(){
+        playwright.hardWait(5000);
         playwright.clickOn(closePopUpIcon);
-        playwright.hardWait(2000);
     }
 
     public void clickOnButtonIconCloseIfExist(){

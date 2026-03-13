@@ -81,7 +81,7 @@ Feature: Check content Mamifoto
     When user click question "Apakah foto dan video menampilkan semua tipe kamar di properti saya?"
     Then user verify answer text "Pengiriman dan penayangan foto & video tergantung pada tipe kamar yang terdaftar di Mamikos. Untuk keterangan lebih lanjut, klik di sini."
     When user click question "Di mana saja MamiFoto tersedia?"
-    Then user verify answer text "Untuk MamiFoto A: Jadetabek, Bogor Kota, Bandung, Jatinangor, Cimahi, Yogyakarta, Solo, Semarang, Sidoarjo, Denpasar. Untuk MamiFoto B: Jadetabek, Bogor kota, Yogyakarta."
+    Then user verify answer text "Untuk MamiFoto A: Jadetabek, Bogor Kota, Bandung, Jatinangor, Cimahi, Yogyakarta, Solo, Semarang, Sidoarjo. Untuk MamiFoto B: Jadetabek, Bogor kota, Yogyakarta."
     When user click question "Kapan hasil foto akan ditayangkan?"
     Then user verify answer text "Hasil foto dan video akan ditayangkan di listing Mamikos Anda serta dikirim ke email Anda setelah Anda memilih hasil foto dalam waktu maksimum 7 hari kerja untuk paket MamiFoto A dan maksimum 14 hari kerja untuk MamiFoto B."
     When user click question "Bisakah saya mengubah/menambah foto sendiri?"

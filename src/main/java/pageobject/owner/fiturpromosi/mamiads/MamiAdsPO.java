@@ -571,7 +571,7 @@ public class MamiAdsPO {
      * @throws InterruptedException
      */
     public void clickOnPakaiVoucherButton() throws InterruptedException {
-        playwright.clickOn(pakaiVoucherButton);
+        playwright.clickOn(pakaiVoucherButton.first());
     }
 
     /**
@@ -604,7 +604,7 @@ public class MamiAdsPO {
      */
     public boolean isVoucherPresentOnList(String voucherTitle) {
         voucherTitleElement = page.locator("//div[.='" + voucherTitle + "']");
-        return playwright.waitTillLocatorIsVisible(voucherTitleElement, 1000.0);
+        return playwright.waitTillLocatorIsVisible(voucherTitleElement, 5000.0);
     }
 
     /**

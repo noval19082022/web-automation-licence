@@ -118,10 +118,17 @@ public class RekomendasiListingPO {
 
     /**
      * Rekomendasi listing number get as integer (count of rekomendasi items)
+     * Excludes Swiper duplicate/cloned slides that exist in carousel loop mode
      * @return integer data type
      */
     public int getRekomendasiActual() {
-        return rekomendasiListingActual.count();
+        if (rekomendasiListingActual.count() == 0) {
+            return 0;
+        }
+        playwright.pageScrollInView(rekomendasiListingActual.first());
+        return ((Number) rekomendasiListingActual.evaluateAll(
+            "elements => elements.filter(el => !el.closest('.swiper-slide-duplicate')).length"
+        )).intValue();
     }
 
     /**
