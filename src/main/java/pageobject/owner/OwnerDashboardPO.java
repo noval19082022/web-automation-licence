@@ -147,6 +147,29 @@ public class OwnerDashboardPO {
     Locator activitySection;
     Locator ketersediaanKamarIcon;
 
+    // Rejected Listing Section (LIMO-10782)
+    // Section that shows "Iklan Gagal Diverifikasi" for owners with rejected/unverified listings
+    Locator rejectedListingTitle;
+    Locator rejectedListingButton;
+
+    // Submitted Listing Section (LIMO-10784)
+    // Section that shows "Sedang Diperiksa" for owners with submitted listings waiting for admin confirmation
+    Locator submittedListingCard;
+    Locator submittedListingLabel;
+    Locator submittedListingInfoMessage;
+    Locator submittedListingCTA;
+
+    // Kos List Page - after clicking "Cek dan Perbaiki" (LIMO-10782)
+    Locator kosListContainer;
+    Locator kosCardItems;
+
+    // Draft Listing Section (LIMO-10786)
+    // Section that shows "Iklan Belum Lengkap" for owners with draft (add/draft) listings
+    Locator draftListingCard;
+    Locator draftListingTitle;
+    Locator draftListingDescription;
+    Locator draftListingCTA;
+
     // Banner carousel section
     Locator bannerItems;
     Locator bannerPaginationDots;
@@ -293,6 +316,30 @@ public class OwnerDashboardPO {
         activitySectionContainer = page.locator(".activity-list-menu, .waktunya-mengelola-properti");
         ketersediaanKamarActivityIcon = page.locator("//p[contains(.,'Ketersediaan Kamar')]/ancestor::div[contains(@class,'activity-list-menu__item')]");
         ketersediaanKamarRedDotIndicator = page.locator("//p[contains(.,'Ketersediaan Kamar')]/ancestor::div[contains(@class,'activity-list-menu__item')]//span[contains(@class,'red-dot') or contains(@class,'indicator') or contains(@class,'badge')]");
+
+        // Rejected Listing Section locators (LIMO-10782)
+        // Section that shows "⚠️ Iklan Gagal Diverifikasi" for owners with rejected/unverified listings
+        rejectedListingTitle = page.locator(".onboarding-new-owner__title");
+        rejectedListingButton = page.locator(".onboarding-new-owner__button");
+
+        // Submitted Listing Section locators (LIMO-10784)
+        // Section that shows "Sedang Diperiksa" for owners with submitted listings waiting for admin confirmation
+        // Using text-based locator to specifically find the submitted listing section
+        submittedListingCard = page.locator(".onboarding-new-owner__card:has-text('Sedang Diperiksa')");
+        submittedListingLabel = page.locator(".onboarding-new-owner__card:has-text('Sedang Diperiksa') .onboarding-new-owner__title");
+        submittedListingInfoMessage = page.locator(".onboarding-new-owner__card:has-text('Sedang Diperiksa') .onboarding-new-owner__description");
+        submittedListingCTA = page.locator(".onboarding-new-owner__card:has-text('Sedang Diperiksa') .onboarding-new-owner__button");
+
+        // Kos List Page locators - after clicking "Cek dan Perbaiki" (LIMO-10782)
+        kosListContainer = page.locator(".owner-kos__list, #ownerKosContainer");
+        kosCardItems = page.locator(".kos-card, [class*='kos-card']");
+
+        // Draft Listing Section locators (LIMO-10786)
+        // Section that shows "Iklan Anda Belum Lengkap" for owners with draft (add/draft) listings
+        draftListingCard = page.locator(".onboarding-new-owner__card:has-text('Iklan Anda Belum Lengkap')");
+        draftListingTitle = page.locator(".onboarding-new-owner__card:has-text('Iklan Anda Belum Lengkap') .onboarding-new-owner__title");
+        draftListingDescription = page.locator(".onboarding-new-owner__card:has-text('Iklan Anda Belum Lengkap') .onboarding-new-owner__description");
+        draftListingCTA = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Lengkapi Iklan"));
     }
 
     /**
@@ -1439,6 +1486,25 @@ public class OwnerDashboardPO {
     }
 
     /**
+     * Check if Pilih Paket GoldPlus button (paid products section) is visible
+     * For owner with verified listing, paid products section should be displayed
+     * This checks for either "Pilih Paket GoldPlus" button or "Daftar GP" button (registerGP_btn)
+     * @return true if paid products section is visible
+     */
+    public boolean isPaidProductsSectionVisible() {
+        // First try to find "Pilih Paket GoldPlus" button
+        if (playwright.waitTillLocatorIsVisible(pilihPaketGoldplus, 3000.0)) {
+            return true;
+        }
+        // Fallback: check for "Daftar GP" button (registerGP_btn) which appears for owners with verified listings
+        if (playwright.waitTillLocatorIsVisible(daftarGpButton, 3000.0)) {
+            return true;
+        }
+        // Fallback: check for GP entry point card
+        return playwright.waitTillLocatorIsVisible(entryPointCardGP, 3000.0);
+    }
+
+    /**
      * Check if create listing section/card is clickable
      * @return true if section is clickable
      */
@@ -1658,6 +1724,206 @@ public class OwnerDashboardPO {
     public void clickManajemenKosMenu() {
         playwright.waitFor(manajemenKost);
         playwright.clickOn(manajemenKost);
+    }
+
+    /**
+     * Get the title of rejected listing section (e.g., "⚠️ Iklan Gagal Diverifikasi")
+     * @return String title of the section
+     */
+    public String getRejectedListingSectionTitle() {
+        playwright.waitTillLocatorIsVisible(rejectedListingTitle, 5000.0);
+        return playwright.getText(rejectedListingTitle).trim();
+    }
+
+    /**
+     * Check if rejected listing section is visible
+     * Looks for rejected listing title "⚠️ Iklan Gagal Diverifikasi"
+     * @return true if rejected listing section is visible
+     */
+    public boolean isRejectedListingSectionVisible() {
+        return playwright.waitTillLocatorIsVisible(rejectedListingTitle, 5000.0);
+    }
+
+    /**
+     * Click on "Cek dan Perbaiki" button in the rejected listing section
+     */
+    public void clickOnCekDanPerbaikiButton() {
+        playwright.waitTillLocatorIsVisible(rejectedListingButton);
+        playwright.clickOn(rejectedListingButton);
+    }
+
+    /**
+     * Check if submitted listing section is visible
+     * Looks for onboarding card with "Sedang Diperiksa" text
+     * @return true if submitted listing section is visible
+     */
+    public boolean isSubmittedListingSectionVisible() {
+        playwright.hardWait(3000);
+        // Try primary locator first
+        if (playwright.waitTillLocatorIsVisible(submittedListingCard, 5000.0)) {
+            return true;
+        }
+        // Fallback: check if text "Sedang Diperiksa" is displayed anywhere
+        return playwright.isTextDisplayed("Sedang Diperiksa", 5000.0);
+    }
+
+    /**
+     * Get the label text of submitted listing section (e.g., "Sedang Diperiksa")
+     * @return String label text
+     */
+    public String getSubmittedListingLabel() {
+        playwright.waitTillLocatorIsVisible(submittedListingLabel, 5000.0);
+        return playwright.getText(submittedListingLabel).trim();
+    }
+
+    /**
+     * Check if submitted listing label contains expected text
+     * @param expectedLabel expected label text (e.g., "Sedang Diperiksa")
+     * @return true if label contains expected text
+     */
+    public boolean isSubmittedListingLabelDisplayed(String expectedLabel) {
+        String actualLabel = getSubmittedListingLabel();
+        return actualLabel.contains(expectedLabel);
+    }
+
+    /**
+     * Get the info message of submitted listing section
+     * @return String info message (e.g., "Properti akan diverifikasi dalam 2x24 jam.")
+     */
+    public String getSubmittedListingInfoMessage() {
+        playwright.waitTillLocatorIsVisible(submittedListingInfoMessage, 5000.0);
+        return playwright.getText(submittedListingInfoMessage).trim();
+    }
+
+    /**
+     * Get the CTA button text of submitted listing section
+     * @return String CTA text (e.g., "Lihat Iklan")
+     */
+    public String getSubmittedListingCTAText() {
+        playwright.waitTillLocatorIsVisible(submittedListingCTA, 5000.0);
+        return playwright.getText(submittedListingCTA).trim();
+    }
+
+    /**
+     * Click on the submitted listing CTA button (e.g., "Lihat Iklan")
+     */
+    public void clickOnSubmittedListingCTA() {
+        playwright.waitTillLocatorIsVisible(submittedListingCTA, 5000.0);
+        playwright.clickOn(submittedListingCTA);
+    }
+
+    /**
+     * Check if kos list container is visible
+     * @return true if kos list is visible
+     */
+    public boolean isKosListVisible() {
+        playwright.waitTillPageLoaded();
+        playwright.hardWait(3000);
+        // Try multiple locators for the kos list container
+        try {
+            if (playwright.waitTillLocatorIsVisible(kosListContainer, 10000.0)) {
+                return true;
+            }
+        } catch (Exception e) {
+            // Try alternative locators
+        }
+        // Try with owner-kos container
+        Locator ownerKosContainer = page.locator("#ownerKosContainer, .owner-kos");
+        return playwright.waitTillLocatorIsVisible(ownerKosContainer, 5000.0);
+    }
+
+    /**
+     * Get the name of the first kos in the list (should be earliest rejected)
+     * @return String name of the first kos
+     */
+    public String getFirstKosName() {
+        playwright.waitTillLocatorIsVisible(kosCardItems.first(), 5000.0);
+        Locator firstKosName = kosCardItems.first().locator(".kos-card__name, .text").first();
+        return playwright.getText(firstKosName).trim();
+    }
+
+    /**
+     * Check if the first kos in list has rejected status
+     * @return true if first kos has "Data Kos Ditolak" status
+     */
+    public boolean isFirstKosRejected() {
+        playwright.waitTillLocatorIsVisible(kosCardItems.first(), 5000.0);
+        Locator firstKosStatus = kosCardItems.first().locator(".kos-card__status-name--kos-non-active");
+        return firstKosStatus.isVisible();
+    }
+
+    /**
+     * Verify the first rejected listing in the list matches expected name
+     * @param expectedKosName expected kos name (e.g., "Kost B")
+     * @return true if first kos name contains expected name
+     */
+    public boolean isFirstRejectedListingMatch(String expectedKosName) {
+        String firstKosName = getFirstKosName();
+        return firstKosName.contains(expectedKosName);
+    }
+
+    // =====================================================
+    // Draft Listing Section Methods (LIMO-10786)
+    // For owners with draft (add/draft) listings - shows "Iklan Belum Lengkap"
+    // =====================================================
+
+    /**
+     * Check if draft listing section (Iklan Anda Belum Lengkap) is visible
+     * @return true if draft listing section is visible
+     */
+    public boolean isDraftListingSectionVisible() {
+        playwright.hardWait(3000);
+        // Try primary locator first
+        if (playwright.waitTillLocatorIsVisible(draftListingCard, 5000.0)) {
+            return true;
+        }
+        // Fallback: check if text "Iklan Anda Belum Lengkap" is displayed anywhere
+        return playwright.isTextDisplayed("Iklan Anda Belum Lengkap", 5000.0);
+    }
+
+    /**
+     * Get the title of draft listing section (e.g., "⚠️ Iklan Belum Lengkap")
+     * @return String title text
+     */
+    public String getDraftListingTitle() {
+        playwright.waitTillLocatorIsVisible(draftListingTitle, 5000.0);
+        return playwright.getText(draftListingTitle).trim();
+    }
+
+    /**
+     * Check if draft listing title contains expected text
+     * @param expectedTitle expected title text (e.g., "Iklan Belum Lengkap")
+     * @return true if title contains expected text
+     */
+    public boolean isDraftListingTitleDisplayed(String expectedTitle) {
+        String actualTitle = getDraftListingTitle();
+        return actualTitle.contains(expectedTitle);
+    }
+
+    /**
+     * Get the description of draft listing section
+     * @return String description text
+     */
+    public String getDraftListingDescription() {
+        playwright.waitTillLocatorIsVisible(draftListingDescription, 5000.0);
+        return playwright.getText(draftListingDescription).trim();
+    }
+
+    /**
+     * Get the CTA button text of draft listing section (e.g., "Lengkapi Iklan")
+     * @return String CTA text
+     */
+    public String getDraftListingCTAText() {
+        playwright.waitTillLocatorIsVisible(draftListingCTA, 5000.0);
+        return playwright.getText(draftListingCTA).trim();
+    }
+
+    /**
+     * Click on the draft listing CTA button (e.g., "Lengkapi Iklan")
+     */
+    public void clickOnDraftListingCTA() {
+        playwright.waitTillLocatorIsVisible(draftListingCTA, 5000.0);
+        playwright.clickOn(draftListingCTA);
     }
 
 
