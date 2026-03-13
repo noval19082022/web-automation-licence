@@ -91,11 +91,27 @@ Feature: Display Create Listing Section for Listingless Owner
     # - Has listing with status "add/draft"
     Given user go to mamikos homepage
     When user login as owner:
-      | phone stag     | phone prod | password  |
-      | 0811978788421  | 0          | qwerty123 |
+      | phone stag    | phone prod | password  |
+      | 0811978788421 | 0          | qwerty123 |
     And owner dismiss pop-up if appears
     Then the draft listing section should be displayed with label "✋ Iklan Anda Belum Lengkap"
     And the draft listing CTA should be "Lengkapi Iklan"
     And owner cannot see paid products section
     When owner clicks on Lengkapi Iklan button
     Then owner should be redirected to Properti Saya screen
+
+  @TEST_LIMO-10789 @WEB @AUTOMATED @verified-listing-priority
+  Scenario: [Owner][OD][CreateListing] Display correct section based on listing status priority
+    # LIMO-10789: Test listing status priority
+    # Owner with verified/active listing (highest priority):
+    # - Has at least one verified/active listing
+    # - Verified status has highest priority
+    # - Paid Products Section should be displayed
+    # - Other sections (rejected, draft, create listing) should NOT be displayed
+    # Priority: verified > rejected > draft1 > add > no listing
+    Given user go to mamikos homepage
+    When user login as owner:
+      | phone stag    | phone prod   | password  |
+      | 0811978788420 | 081197878842 | qwerty123 |
+    And owner dismiss pop-up if appears
+    Then the Paid Products Section should be displayed

@@ -929,4 +929,34 @@ public class OwnerDashboardSteps {
         playwright.waitTillPageLoaded();
         playwright.hardWait(2000);
     }
+
+    // =====================================================
+    // Listing Status Priority Steps (LIMO-10789)
+    // Test that correct section is displayed based on listing status priority
+    // Priority: verified > rejected > draft1 > add > no listing
+    // =====================================================
+
+    @Then("the Paid Products Section should be displayed")
+    public void thePaidProductsSectionShouldBeDisplayed() {
+        Assert.assertTrue(ownerDashboardPO.isPaidProductsSectionVisible(),
+                "Paid Products Section should be displayed for owner with verified listing");
+    }
+
+    @Then("the Rejected Listing Section should not be displayed")
+    public void theRejectedListingSectionShouldNotBeDisplayed() {
+        Assert.assertFalse(ownerDashboardPO.isRejectedListingSectionVisible(),
+                "Rejected Listing Section should not be displayed when higher priority status exists");
+    }
+
+    @Then("the Draft Listing Section should not be displayed")
+    public void theDraftListingSectionShouldNotBeDisplayed() {
+        Assert.assertFalse(ownerDashboardPO.isDraftListingSectionVisible(),
+                "Draft Listing Section should not be displayed when higher priority status exists");
+    }
+
+    @Then("the Create Listing Section should not be displayed")
+    public void theCreateListingSectionShouldNotBeDisplayed() {
+        Assert.assertFalse(ownerDashboardPO.isPasangIklanPertamaButtonVisible(),
+                "Create Listing Section should not be displayed when owner has existing listings");
+    }
 }

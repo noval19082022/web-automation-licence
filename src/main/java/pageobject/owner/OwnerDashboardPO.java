@@ -1486,6 +1486,25 @@ public class OwnerDashboardPO {
     }
 
     /**
+     * Check if Pilih Paket GoldPlus button (paid products section) is visible
+     * For owner with verified listing, paid products section should be displayed
+     * This checks for either "Pilih Paket GoldPlus" button or "Daftar GP" button (registerGP_btn)
+     * @return true if paid products section is visible
+     */
+    public boolean isPaidProductsSectionVisible() {
+        // First try to find "Pilih Paket GoldPlus" button
+        if (playwright.waitTillLocatorIsVisible(pilihPaketGoldplus, 3000.0)) {
+            return true;
+        }
+        // Fallback: check for "Daftar GP" button (registerGP_btn) which appears for owners with verified listings
+        if (playwright.waitTillLocatorIsVisible(daftarGpButton, 3000.0)) {
+            return true;
+        }
+        // Fallback: check for GP entry point card
+        return playwright.waitTillLocatorIsVisible(entryPointCardGP, 3000.0);
+    }
+
+    /**
      * Check if create listing section/card is clickable
      * @return true if section is clickable
      */
@@ -1714,6 +1733,15 @@ public class OwnerDashboardPO {
     public String getRejectedListingSectionTitle() {
         playwright.waitTillLocatorIsVisible(rejectedListingTitle, 5000.0);
         return playwright.getText(rejectedListingTitle).trim();
+    }
+
+    /**
+     * Check if rejected listing section is visible
+     * Looks for rejected listing title "⚠️ Iklan Gagal Diverifikasi"
+     * @return true if rejected listing section is visible
+     */
+    public boolean isRejectedListingSectionVisible() {
+        return playwright.waitTillLocatorIsVisible(rejectedListingTitle, 5000.0);
     }
 
     /**
