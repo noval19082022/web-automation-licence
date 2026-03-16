@@ -9,6 +9,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.partner.PartnerGacoanPO;
+import utilities.JavaHelpers;
 import utilities.PlaywrightHelpers;
 
 import java.util.List;
@@ -72,8 +73,12 @@ public class PartnerGacoanSteps {
         partnerGacoan.clickTambahPenyewa();
         playwright.hardWait(500);
 
+        if (phoneNumber.toLowerCase().contains("random")) {
+            phoneNumber = JavaHelpers.RandomPhoneNumber(13);
+        }
+
         // Fill booking form with phone number, random name, and male gender
-        partnerGacoan.fillBookingForm(phoneNumber, "Test Automation", "male");
+        partnerGacoan.fillBookingForm(phoneNumber, JavaHelpers.generateRandomName(5), "male");
     }
 
     @And("admin gacoan able to submit the booking")

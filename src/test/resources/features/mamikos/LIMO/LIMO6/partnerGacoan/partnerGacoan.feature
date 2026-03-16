@@ -12,6 +12,6 @@ Feature: Partner Gacoan
     Then the filter and sorting should be works
     And admin gacoan select first kost on the listing catalog
     Then admin gacoan will redirect into booking form
-    When admin gacoan fill all required field using phone number "081182837172"
+    When admin gacoan fill all required field using phone number "random"
     And admin gacoan able to submit the booking
     And admin logout from partner page

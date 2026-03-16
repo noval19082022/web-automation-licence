@@ -48,8 +48,9 @@ public class JavaHelpers {
 
     /**
      * Increase date from current date
-     * @param pattern desired pattern e.g "dd-MM-yyyy HH:mm:ss"
-     * @param plusDays increase day by integer provided
+     *
+     * @param pattern   desired pattern e.g "dd-MM-yyyy HH:mm:ss"
+     * @param plusDays  increase day by integer provided
      * @param plusMonth increase month by integer provided
      * @param plusYears increase year by integer provided
      * @return String data type of costum date
@@ -63,6 +64,7 @@ public class JavaHelpers {
 
     /**
      * Get month name in English
+     *
      * @return String data type of month name.
      */
     public static String getMonthName() {
@@ -181,6 +183,7 @@ public class JavaHelpers {
 
     /**
      * generate random name
+     *
      * @param length
      * @return
      */
@@ -193,19 +196,44 @@ public class JavaHelpers {
         return name.substring(0, 1).toUpperCase() + name.substring(1); // Capitalize first letter
     }
 
+    /**
+     * Generates a random phone number string that always starts with "08".
+     *
+     * @param length the total length of the phone number (must be greater than 2)
+     * @return a numeric string of the specified length, prefixed with "08"
+     *
+     * @example
+     * String phone = RandomPhoneNumber(12); // e.g. "081234567890"
+     */
+    public static String RandomPhoneNumber(int length) {
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder();
+
+        // Always start with "08"
+        sb.append("08");
+
+        // Generate remaining (length - 2) random digits
+        for (int i = 0; i < length - 2; i++) {
+            sb.append(random.nextInt(10)); // Appends a digit 0-9
+        }
+
+        return sb.toString();
+    }
 
     /**
      * Get month name with locale
+     *
      * @param locale Locale type
      * @return String data type of month name.
      */
-    public static String getMonthName(Locale locale){
+    public static String getMonthName(Locale locale) {
         Calendar calendar = Calendar.getInstance();
         return new DateFormatSymbols(locale).getMonths()[calendar.get(Calendar.MONTH)];
     }
 
     /**
      * Get month name with locale
+     *
      * @param locale Locale type
      * @param change Increment or decrement from current month.
      * @return String data type of month name.
@@ -218,6 +246,7 @@ public class JavaHelpers {
 
     /**
      * Get month length of days
+     *
      * @return current month length of days, will be 30, 31, 28 or 29 for Feb
      */
     public static int getMonthLength() {
@@ -227,7 +256,6 @@ public class JavaHelpers {
 
     public static String extractDateFromString(String inputString) {
         String regexPattern = "\\b(?:\\d{4}-(?:\\d{1,2}|\\p{Alpha}{3,}|\\p{Alpha}{4})-(?:\\d{1,2}|\\p{Alpha}{3,}|\\p{Alpha}{4})|\\d{1,2}-(?:\\d{1,2}|\\p{Alpha}{3,}|\\p{Alpha}{4})-(?:\\d{4}|\\p{Alpha}{3,}|\\p{Alpha}{4})|(?:\\d{1,2}|\\p{Alpha}{3,}|\\p{Alpha}{4})-(?:\\d{1,2}|\\p{Alpha}{3,}|\\p{Alpha}{4})-\\d{4}|\\d{1,2}-(?:\\p{Alpha}{3,}|\\p{Alpha}{4})-\\d{4}|\\d{1,2}-(?:\\p{Alpha}{3,})-(?:\\d{4})|\\d{1,2}\\s+(?:\\p{Alpha}{3,})\\s+\\d{4})\\b";
-
 
 
         Pattern regex = Pattern.compile(regexPattern);
@@ -257,8 +285,10 @@ public class JavaHelpers {
     // --- Get Part --- \\
 
     //-- File Prop Reader -- \\
+
     /**
      * set properties file to be readable
+     *
      * @param filePropertiesPath path to properties file
      * @return Properties data type
      * @throws IOException
@@ -272,6 +302,7 @@ public class JavaHelpers {
 
     /**
      * Access properties and return as Properties
+     *
      * @param propertyfile desired properties file
      * @return Properties data type
      */
@@ -290,6 +321,7 @@ public class JavaHelpers {
 
     /**
      * Get property file value
+     *
      * @param propertyFile property file location path
      * @param propertyName property name
      * @return String data type
@@ -321,8 +353,9 @@ public class JavaHelpers {
 
     /**
      * extract number from string given
-     * @param baseString is the String that we want to extract
-     * @param targetString is the String that we want to replace
+     *
+     * @param baseString    is the String that we want to extract
+     * @param targetString  is the String that we want to replace
      * @param replaceString is the String that we want to replace with
      * @return
      */
@@ -461,18 +494,21 @@ public class JavaHelpers {
     }
 
     //--- String Manipulator ---//
+
     /**
      * Format string
+     *
      * @param format String to format
-     * @param args format args
+     * @param args   format args
      * @return String data type
      */
-    public static String formatString(String format, Object... args)  {
+    public static String formatString(String format, Object... args) {
         return String.format(format, args);
     }
 
     /**
      * Remove extra new line and trim
+     *
      * @param removeLineString
      * @return String data type
      */
@@ -482,6 +518,7 @@ public class JavaHelpers {
 
     /**
      * Normalize aria snapshot by removing extra whitespace and standardizing format
+     *
      * @param snapshot The aria snapshot string to normalize
      * @return Normalized string
      */
@@ -505,6 +542,7 @@ public class JavaHelpers {
 
     /**
      * get string after char
+     *
      * @param stringTarget
      * @param character
      * @return example, you have "aba - aka" and you want get string after "-"
@@ -520,6 +558,7 @@ public class JavaHelpers {
 
     /**
      * remove specific char or word on string and also trim it
+     *
      * @param stringTarget
      * @param character
      * @return
@@ -531,6 +570,7 @@ public class JavaHelpers {
 
     /**
      * Generate Md5
+     *
      * @param md5Target target string
      * @return String data type
      * @throws NoSuchAlgorithmException if md5 algorithm not found
@@ -544,6 +584,7 @@ public class JavaHelpers {
 
     /**
      * Convert bytes to hex string
+     *
      * @param bytes byte array
      * @return
      */
@@ -557,8 +598,9 @@ public class JavaHelpers {
 
     /**
      * Generate HmacSha256
+     *
      * @param secretKey secret key
-     * @param message desired message
+     * @param message   desired message
      * @return byte array
      * @throws NoSuchAlgorithmException
      * @throws InvalidKeyException
@@ -573,8 +615,10 @@ public class JavaHelpers {
     //--- Encrypt Decrypt ---//
 
     //--- To String ---//
+
     /**
      * Convert List of Object Cookie to List of String
+     *
      * @param list List of Object
      * @return List of String
      */

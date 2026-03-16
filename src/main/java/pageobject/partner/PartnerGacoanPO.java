@@ -19,16 +19,30 @@ public class PartnerGacoanPO {
     private Locator sortingButton;
     private Locator filterForm;
     private Locator tambahPenyewaButton;
+    private Locator kostLinksWithId;
+    private Locator kostLinksWithText;
+    private Locator kostLinksWithHref;
 
     // Booking Form Locators
     private Locator phoneNumberField;
+    private Locator phoneNumberFieldFallback;
     private Locator tambahButton;
+    private Locator tambahButtonRegex;
+    private Locator tambahButtonFallback;
     private Locator namaLengkapField;
+    private Locator namaLengkapFieldFallback;
     private Locator genderDropdown;
     private Locator selanjutnyaButton;
     private Locator kirimPengajuanSewaButton;
     private Locator ajukanSewaLagiLink;
+
+    // Modal Locators
+    private Locator addTenantModal;
+
+    // Logout Locators
     private Locator logoutButton;
+    private Locator profileMenu;
+    private Locator logoutLink;
 
     public PartnerGacoanPO(Page page) {
         this.page = page;
@@ -37,20 +51,38 @@ public class PartnerGacoanPO {
     }
 
     private void initLocators() {
+        // Login Page Locators
         usernameField = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Username"));
         passwordField = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Password"));
         loginButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("LOGIN"));
+
+        // Listing Catalog Locators
         filterForm = page.locator("#filterForm");
-        // Use filter with hasText for more flexible matching
         tambahPenyewaButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("Tambah Penyewa"));
+        kostLinksWithId = page.locator("a").filter(new Locator.FilterOptions().setHasText(java.util.regex.Pattern.compile("^\\[\\d+\\]")));
+        kostLinksWithText = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("Kost"));
+        kostLinksWithHref = page.locator("a[href*='kost']");
+
+        // Booking Form Locators - Primary
         phoneNumberField = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Contoh:"));
-        // Tambah button inside modal - use exact match and look for button with specific text
+        phoneNumberFieldFallback = page.locator("input[type='text'], input[type='tel']");
         tambahButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Tambah").setExact(true));
-        namaLengkapField = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Masukkan nama lengkap"));
+        tambahButtonRegex = page.locator("button").filter(new Locator.FilterOptions().setHasText(java.util.regex.Pattern.compile("^\\s*Tambah\\s*$")));
+        tambahButtonFallback = page.locator("#btnAddPhone, button[type='submit']");
+        namaLengkapField = page.locator("//input[@placeholder='Masukkan nama lengkap']");
+        namaLengkapFieldFallback = page.locator("input[placeholder*='nama'], input[name*='name']");
         genderDropdown = page.getByRole(AriaRole.COMBOBOX);
         selanjutnyaButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("Selanjutnya"));
         kirimPengajuanSewaButton = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("Kirim Pengajuan Sewa"));
         ajukanSewaLagiLink = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("Ajukan Sewa Lagi"));
+
+        // Modal Locators
+        addTenantModal = page.locator("#addTenantModal.show, #addTenantModal[style*='block'], .modal.show");
+
+        // Logout Locators
+        logoutButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Logout"));
+        profileMenu = page.locator(".dropdown-toggle, .user-menu, .profile-menu");
+        logoutLink = page.getByText("Logout");
     }
 
     /**
@@ -160,20 +192,17 @@ public class PartnerGacoanPO {
         playwright.hardWait(2000);
 
         // Find link with pattern like "[12345] Kost Name" - these are the kost listing links
-        Locator kostLinks = page.locator("a").filter(new Locator.FilterOptions().setHasText(java.util.regex.Pattern.compile("^\\[\\d+\\]")));
-
-        if (kostLinks.count() > 0 && playwright.waitTillLocatorIsVisible(kostLinks.first(), 3000.0)) {
-            return kostLinks.first();
+        if (kostLinksWithId.count() > 0 && playwright.waitTillLocatorIsVisible(kostLinksWithId.first(), 3000.0)) {
+            return kostLinksWithId.first();
         }
 
         // Fallback - find link containing "Kost" text
-        Locator kostTextLinks = page.getByRole(AriaRole.LINK).filter(new Locator.FilterOptions().setHasText("Kost"));
-        if (kostTextLinks.count() > 0) {
-            return kostTextLinks.first();
+        if (kostLinksWithText.count() > 0) {
+            return kostLinksWithText.first();
         }
 
         // Last fallback - any link with href containing 'kost'
-        return page.locator("a[href*='kost']").first();
+        return kostLinksWithHref.first();
     }
 
     /**
@@ -282,46 +311,41 @@ public class PartnerGacoanPO {
      * @param gender gender value
      */
     public void fillBookingForm(String phoneNumber, String name, String gender) {
-        // Wait for modal to be visible - try multiple selectors
-        Locator modal = page.locator("#addTenantModal.show, #addTenantModal[style*='block'], .modal.show");
-        playwright.waitFor(modal.first(), 5000.0);
+        // Wait for modal to be visible
+        playwright.waitFor(addTenantModal.first(), 5000.0);
         playwright.hardWait(1500);
 
-        // Fill phone number - look for textbox with placeholder "Contoh:" or similar
-        Locator phoneInput = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Contoh:"));
+        // Fill phone number - use primary locator, fallback if not visible
+        Locator phoneInput = phoneNumberField;
         if (!playwright.waitTillLocatorIsVisible(phoneInput, 2000.0)) {
-            // Fallback - look for any visible textbox for phone
-            phoneInput = page.locator("input[type='text'], input[type='tel']").first();
+            phoneInput = phoneNumberFieldFallback.first();
         }
         playwright.clickOn(phoneInput);
-        playwright.fill(phoneInput, phoneNumber);
+        playwright.clickLocatorAndTypeKeyboard(phoneInput, phoneNumber);
 
-        // Click Tambah button - look for button with text containing "Tambah" but not "Penyewa"
-        Locator addButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(" Tambah").setExact(true));
+        // Click Tambah button - try primary, then regex, then fallback
+        Locator addButton = tambahButton;
         if (!playwright.waitTillLocatorIsVisible(addButton, 2000.0)) {
-            // Try alternative - button containing "Tambah" text
-            addButton = page.locator("button").filter(new Locator.FilterOptions().setHasText(java.util.regex.Pattern.compile("^\\s*Tambah\\s*$")));
+            addButton = tambahButtonRegex;
         }
         if (!playwright.waitTillLocatorIsVisible(addButton, 2000.0)) {
-            // Another fallback - use ID if available
-            addButton = page.locator("#btnAddPhone, button[type='submit']").first();
+            addButton = tambahButtonFallback.first();
         }
         playwright.clickOn(addButton);
         playwright.hardWait(1500);
 
-        // Fill name field
-        Locator namaInput = page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Masukkan nama lengkap"));
+        // Fill name field - use primary locator, fallback if not visible
+        Locator namaInput = namaLengkapField;
         if (!playwright.waitTillLocatorIsVisible(namaInput, 2000.0)) {
-            namaInput = page.locator("input[placeholder*='nama'], input[name*='name']").first();
+            namaInput = namaLengkapFieldFallback.first();
         }
         if (playwright.waitTillLocatorIsVisible(namaInput, 3000.0)) {
             playwright.clickOn(namaInput);
-            playwright.fill(namaInput, name);
+            playwright.forceFill(namaInput, name);
 
             // Select gender
-            Locator genderSelect = page.getByRole(AriaRole.COMBOBOX);
-            if (playwright.waitTillLocatorIsVisible(genderSelect, 2000.0)) {
-                playwright.selectDropdownByValue(genderSelect, gender);
+            if (playwright.waitTillLocatorIsVisible(genderDropdown, 2000.0)) {
+                playwright.selectDropdownByValue(genderDropdown, gender);
             }
         }
     }
@@ -339,16 +363,13 @@ public class PartnerGacoanPO {
      * Logout from partner portal
      */
     public void logout() {
-        Locator logoutBtn = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Logout"));
-        if (playwright.waitTillLocatorIsVisible(logoutBtn)) {
-            playwright.clickOn(logoutBtn);
+        if (playwright.waitTillLocatorIsVisible(logoutButton)) {
+            playwright.clickOn(logoutButton);
         } else {
             // Try alternative logout method - click on profile menu first
-            Locator profileMenu = page.locator(".dropdown-toggle, .user-menu, .profile-menu").first();
-            if (playwright.waitTillLocatorIsVisible(profileMenu)) {
-                playwright.clickOn(profileMenu);
+            if (playwright.waitTillLocatorIsVisible(profileMenu.first())) {
+                playwright.clickOn(profileMenu.first());
                 playwright.hardWait(500);
-                Locator logoutLink = page.getByText("Logout");
                 playwright.clickOn(logoutLink);
             }
         }
