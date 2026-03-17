@@ -125,6 +125,198 @@ public class LeadsDetailPO {
         lbtSearchInput.clear();
     }
 
+    // ---- LBT Filter Methods ----
+
+    /**
+     * Click the Filter button on LBT page
+     */
+    public void clickLBTFilter() {
+        playwright.waitTillPageLoaded();
+        Locator filterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Filter"));
+        playwright.clickOn(filterButton);
+        playwright.hardWait(1000);
+    }
+
+    /**
+     * Close the filter dialog by clicking the close button
+     */
+    public void closeLBTFilter() {
+        Locator closeButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
+        playwright.clickOn(closeButton);
+        playwright.hardWait(500);
+    }
+
+    /**
+     * Click Reset button in filter dialog
+     */
+    public void clickLBTResetFilter() {
+        Locator resetButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset"));
+        playwright.clickOn(resetButton);
+        playwright.hardWait(1000);
+    }
+
+    /**
+     * Click Terapkan button in filter dialog
+     */
+    public void clickLBTTerapkan() {
+        Locator terapkanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terapkan"));
+        playwright.clickOn(terapkanButton);
+        playwright.hardWait(3000);
+    }
+
+    /**
+     * Toggle a Leads Source checkbox in filter dialog by clicking its label
+     * @param source the leads source (e.g. "MLB", "ILB", "CLB", "NLB")
+     * @param check true to check, false to uncheck
+     */
+    public void toggleLeadsSource(String source, boolean check) {
+        Locator checkbox = page.getByRole(AriaRole.CHECKBOX, new Page.GetByRoleOptions().setName(source));
+        boolean isChecked = checkbox.isChecked();
+        if (check != isChecked) {
+            // Click the paragraph label next to the checkbox to avoid SVG icon interception
+            Locator label = page.locator("p").filter(new Locator.FilterOptions().setHasText(source)).first();
+            playwright.clickOn(label);
+        }
+    }
+
+    /**
+     * Select a filter dropdown option by label and value
+     * @param label the filter label (e.g. "Kota/ Kabupaten", "Kecamatan", "Kelurahan", "Area Priority")
+     * @param value the option value to select
+     */
+    public void selectLBTFilterDropdown(String label, String value) {
+        // Label is inside div.bg-c-field__label, parent is div.bg-c-field which also contains the dropdown trigger
+        Locator field = page.locator("div.bg-c-field").filter(new Locator.FilterOptions().setHasText(label)).first();
+        Locator dropdownTrigger = field.locator("div.bg-c-dropdown__trigger");
+        playwright.clickOn(dropdownTrigger);
+        playwright.hardWait(500);
+        Locator option = page.locator("a:visible").filter(new Locator.FilterOptions().setHasText(value));
+        playwright.clickOn(option.first());
+        playwright.hardWait(1000);
+    }
+
+    /**
+     * Get all column values from LBT table for a given column name
+     * @param columnName the column header name
+     * @return array of text values from that column across all rows
+     */
+    public int getLBTTableRowCount() {
+        playwright.waitTillPageLoaded();
+        return page.locator("table tbody tr").count();
+    }
+
+    /**
+     * Get cell text from a specific row and column in LBT table
+     * @param rowIndex 0-based row index
+     * @param columnName the column header name
+     * @return text content of the cell
+     */
+    public String getLBTCellByColumnName(int rowIndex, String columnName) {
+        Locator headers = page.locator("table th");
+        int columnIndex = -1;
+        int headerCount = headers.count();
+        for (int i = 0; i < headerCount; i++) {
+            if (headers.nth(i).textContent().trim().equals(columnName)) {
+                columnIndex = i;
+                break;
+            }
+        }
+        Locator row = page.locator("table tbody tr").nth(rowIndex);
+        Locator cell = row.locator("td").nth(columnIndex);
+        return playwright.getText(cell);
+    }
+
+    /**
+     * Check if LBT search input field is empty
+     * @return true if the search field has no value
+     */
+    public boolean isLBTSearchFieldEmpty() {
+        return lbtSearchInput.inputValue().isEmpty();
+    }
+
+    /**
+     * Check if any Leads Source checkbox is checked in the filter dialog
+     * @return true if at least one checkbox is checked
+     */
+    public boolean hasAnyLeadsSourceChecked() {
+        String[] sources = {"ILB", "CLB", "Canvassing Online", "Canvassing Offline", "Agent Offline", "MLB", "NLB", "Scraping", "Instagram", "Cove", "Infokost", "Sewakost", "Reddoorz", "Google Maps"};
+        for (String source : sources) {
+            Locator checkbox = page.getByRole(AriaRole.CHECKBOX, new Page.GetByRoleOptions().setName(source));
+            if (checkbox.count() > 0 && checkbox.isChecked()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Check if LBT table contains multiple different lead sources (e.g. MLB, ILB, CLB, NLB)
+     * @return true if at least 2 different lead source prefixes are found
+     */
+    public boolean hasMultipleLeadSources() {
+        playwright.waitTillPageLoaded();
+        playwright.hardWait(3000);
+        int rowCount = page.locator("table tbody tr").count();
+        java.util.Set<String> sources = new java.util.HashSet<>();
+        for (int i = 0; i < rowCount && i < 20; i++) {
+            String leadId = getLBTCellByColumnName(i, "Lead ID");
+            if (leadId != null && leadId.length() >= 3) {
+                sources.add(leadId.substring(0, 3));
+            }
+        }
+        return sources.size() >= 2;
+    }
+
+    /**
+     * Navigate to a specific page number in LBT pagination
+     * @param pageNumber the page number to navigate to
+     */
+    public void navigateToLBTPage(int pageNumber) {
+        playwright.waitTillPageLoaded();
+        Locator pageButton = page.locator("button.bg-c-pagination__item").filter(
+                new Locator.FilterOptions().setHasText(String.valueOf(pageNumber)));
+        playwright.clickOn(pageButton);
+        playwright.hardWait(3000);
+    }
+
+    /**
+     * Get the current active page number in LBT pagination
+     * @return current page number
+     */
+    public int getLBTCurrentPage() {
+        Locator selectedPage = page.locator("button.bg-c-button--primary.bg-c-pagination__item--selected");
+        return Integer.parseInt(selectedPage.textContent().trim());
+    }
+
+    /**
+     * Click the first leads row in LBT table
+     */
+    public void clickFirstLeadsRow() {
+        playwright.waitTillPageLoaded();
+        Locator firstRow = page.locator("table tbody tr").first();
+        playwright.clickOn(firstRow);
+        playwright.hardWait(2000);
+    }
+
+    /**
+     * Click Cancel button on leads detail page
+     */
+    public void clickCancelOnLeadsDetail() {
+        playwright.waitTillPageLoaded();
+        Locator cancelButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cancel"));
+        playwright.clickOn(cancelButton);
+        playwright.hardWait(1000);
+    }
+
+    /**
+     * Confirm cancel edit by clicking "Ya, Batalkan" on the confirmation popup
+     */
+    public void confirmCancelEdit() {
+        Locator confirmButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Batalkan"));
+        playwright.clickOn(confirmButton);
+        playwright.hardWait(3000);
+    }
+
     /**
      * Navigate back to LBT list page
      */

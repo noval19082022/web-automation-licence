@@ -138,6 +138,95 @@ public class MDRAttemptsSteps {
         leadsDetail.clearLBTSearch();
     }
 
+    @When("admin clicks LBT Filter")
+    public void admin_clicks_LBT_Filter() {
+        leadsDetail.clickLBTFilter();
+    }
+
+    @When("admin closes LBT Filter")
+    public void admin_closes_LBT_filter() {
+        leadsDetail.closeLBTFilter();
+    }
+
+    @When("admin resets LBT filter")
+    public void admin_resets_LBT_filter() {
+        leadsDetail.clickLBTFilter();
+        leadsDetail.clickLBTResetFilter();
+    }
+
+    @When("admin selects Leads Source {string} in LBT filter")
+    public void admin_selects_leads_source_in_LBT_filter(String source) {
+        leadsDetail.toggleLeadsSource(source, true);
+    }
+
+    @When("admin unselects Leads Source {string} in LBT filter")
+    public void admin_unselects_leads_source_in_LBT_filter(String source) {
+        leadsDetail.toggleLeadsSource(source, false);
+    }
+
+    @When("admin selects LBT filter {string} with {string}")
+    public void admin_selects_LBT_filter_with(String label, String value) {
+        leadsDetail.selectLBTFilterDropdown(label, value);
+    }
+
+    @When("admin clicks Terapkan in LBT filter")
+    public void admin_clicks_terapkan_in_LBT_filter() {
+        leadsDetail.clickLBTTerapkan();
+    }
+
+    @Then("all rows in LBT table column {string} should contain {string}")
+    public void all_rows_in_LBT_table_column_should_contain(String columnName, String expectedText) {
+        playwright.waitTillPageLoaded();
+        int rowCount = leadsDetail.getLBTTableRowCount();
+        Assert.assertTrue(rowCount > 0, "No data found in LBT table after filtering!");
+        for (int i = 0; i < rowCount; i++) {
+            String cellText = leadsDetail.getLBTCellByColumnName(i, columnName);
+            Assert.assertTrue(cellText.contains(expectedText),
+                    "Row " + (i + 1) + " column '" + columnName + "' expected to contain '" + expectedText + "' but got: " + cellText);
+        }
+    }
+
+    @Then("LBT search field should be empty")
+    public void lbt_search_field_should_be_empty() {
+        Assert.assertTrue(leadsDetail.isLBTSearchFieldEmpty(),
+                "Expected LBT search field to be empty after reset!");
+    }
+
+    @Then("LBT filter should have no leads source checked")
+    public void lbt_filter_should_have_no_leads_source_checked() {
+        Assert.assertFalse(leadsDetail.hasAnyLeadsSourceChecked(),
+                "Expected no Leads Source checkbox to be checked after reset!");
+    }
+
+    @When("admin navigates to LBT page {int}")
+    public void admin_navigates_to_LBT_page(int pageNumber) {
+        leadsDetail.navigateToLBTPage(pageNumber);
+    }
+
+    @When("admin clicks first leads row in LBT table")
+    public void admin_clicks_first_leads_row_in_LBT_table() {
+        leadsDetail.clickFirstLeadsRow();
+    }
+
+    @When("admin cancels leads edit")
+    public void admin_cancels_leads_edit() {
+        leadsDetail.clickCancelOnLeadsDetail();
+        leadsDetail.confirmCancelEdit();
+    }
+
+    @Then("LBT current page should be {int}")
+    public void lbt_current_page_should_be(int expectedPage) {
+        int actualPage = leadsDetail.getLBTCurrentPage();
+        Assert.assertEquals(actualPage, expectedPage,
+                "Expected to be on page " + expectedPage + " but was on page " + actualPage);
+    }
+
+    @Then("LBT table should contain multiple lead sources")
+    public void lbt_table_should_contain_multiple_lead_sources() {
+        Assert.assertTrue(leadsDetail.hasMultipleLeadSources(),
+                "Expected LBT table to contain multiple lead sources (e.g. MLB, ILB, CLB, NLB) after reset!");
+    }
+
     /**
      * Convert hex color to rgb format (e.g. "#F5A623" -> "rgb(245, 166, 35)")
      */
