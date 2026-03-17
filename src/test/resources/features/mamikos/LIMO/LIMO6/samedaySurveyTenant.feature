@@ -273,7 +273,7 @@ Feature: Sameday Survey Tenant
     And same-day survey toggle is displayed inactive off
 
   @TEST_LIMO-9355
-  Scenario: [Survey][Sameday][Owner Non GP] Trying Toggle Sameday Survey Activation
+  Scenario: [Survey][Sameday]Owner Non GP Trying Toggle Sameday Survey Activation
     Given user navigate to mamikos
     When user login as owner:
       | phone stag  | phone prod   | password  |
@@ -320,7 +320,7 @@ Feature: Sameday Survey Tenant
     Then Text "Kos melayani Survei Hari Ini" will be displayed below the "Saya ingin survei dulu"
 
   @TEST_LIMO-9368
-  Scenario: [Survey][Sameday] Not displaying same-day survey info  - Owner Deactive Feature
+  Scenario: [Survey][Sameday] Owner Non GP Not displaying same-day survey info - Owner Deactive Feature
     Given user go to mamikos homepage
     When user login as tenant via phone number:
       | phone stag   | phone prod   | password  |
