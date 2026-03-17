@@ -19,6 +19,8 @@ public class LeadsDetailPO {
     private Locator followUpTab;
     private Locator doneTab;
     private Locator visitTab;
+    private Locator lbtTableHeaders;
+    private Locator lbtTableRows;
 
     // Attempts
     private Locator addAttemptButton;
@@ -29,6 +31,42 @@ public class LeadsDetailPO {
     // LBT Search
     private Locator lbtSearchTypeDropdown;
     private Locator lbtSearchInput;
+    private Locator lbtSearchTypeOption;
+
+    // LBT Filter
+    private Locator filterButton;
+    private Locator closeFilterButton;
+    private Locator resetFilterButton;
+    private Locator terapkanButton;
+    private Locator leadsSourceCheckbox;
+    private Locator leadsSourceLabel;
+    private Locator filterField;
+    private Locator filterDropdownTrigger;
+
+    // LBT Pagination
+    private Locator paginationButton;
+    private Locator selectedPageButton;
+
+    // Leads Detail
+    private Locator cancelButton;
+    private Locator confirmCancelButton;
+    private Locator rejectReasonDropdown;
+    private Locator bdRejectReasonDropdown;
+    private Locator assignBDDropdown;
+    private Locator jenisVisitDropdown;
+    private Locator visitDateInput;
+    private Locator bdVisitDateInput;
+    private Locator calendarDays;
+    private Locator pilihButton;
+    private Locator bdCard;
+    private Locator bdResponseDropdown;
+    private Locator leadsRow;
+    private Locator dropdownOption;
+    private Locator notesText;
+    private Locator leadsDetailTab;
+    private Locator lbtTableCell;
+    private Locator leadsResponseCell;
+    private Locator leadsResponseColorElement;
 
     // Update & Success
     private Locator updateButton;
@@ -49,6 +87,33 @@ public class LeadsDetailPO {
         // LBT Search
         lbtSearchTypeDropdown = page.locator("div.bg-c-select.bg-c-searchbar__select-input > div > div.bg-c-dropdown__trigger");
         lbtSearchInput = page.locator(".bg-c-searchbar input[type='text']");
+
+        // LBT Table
+        lbtTableHeaders = page.locator("table th");
+        lbtTableRows = page.locator("table tbody tr");
+
+        // LBT Filter
+        filterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Filter"));
+        closeFilterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
+        resetFilterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset"));
+        terapkanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terapkan"));
+
+        // LBT Pagination
+        selectedPageButton = page.locator("button.bg-c-button--primary.bg-c-pagination__item--selected");
+
+        // Leads Detail
+        cancelButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cancel"));
+        confirmCancelButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Batalkan"));
+        rejectReasonDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Reject Reason"));
+        bdRejectReasonDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Select"));
+        assignBDDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih BD"));
+        jenisVisitDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Jenis Visit"));
+        visitDateInput = page.getByPlaceholder("Pilih Tanggal dan Jam Visit");
+        bdVisitDateInput = page.getByPlaceholder("Pilih Tanggal dan Jam Visit Baru");
+        calendarDays = page.locator("[aria-label='Calendar days']");
+        pilihButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih"));
+        bdCard = page.locator("xpath=//p[text()='BD Update']/ancestor::div[contains(@class,'bg-c-card')]");
+        notesText = page.locator(".lead-base-tracker-owner-property-form__notes p");
     }
 
     /**
@@ -59,9 +124,9 @@ public class LeadsDetailPO {
     public void searchLBT(String searchType, String text) {
         playwright.waitTillPageLoaded();
         playwright.clickOn(lbtSearchTypeDropdown);
-        Locator option = page.locator("a").filter(new Locator.FilterOptions().setHasText(searchType));
-        playwright.clickOn(option);
-        lbtSearchInput.fill(text);
+        lbtSearchTypeOption = page.locator("a").filter(new Locator.FilterOptions().setHasText(searchType));
+        playwright.clickOn(lbtSearchTypeOption);
+        playwright.fill(lbtSearchInput, text);
         playwright.pressKeyboardKey("Enter");
         playwright.hardWait(3000);
     }
@@ -90,11 +155,10 @@ public class LeadsDetailPO {
         String columnHeader = getColumnHeaderForSearchType(searchType);
 
         // Find the column index from the header row
-        Locator headers = page.locator("table th");
         int columnIndex = -1;
-        int headerCount = headers.count();
+        int headerCount = lbtTableHeaders.count();
         for (int i = 0; i < headerCount; i++) {
-            String headerText = headers.nth(i).textContent().trim();
+            String headerText = lbtTableHeaders.nth(i).textContent().trim();
             if (headerText.equals(columnHeader)) {
                 columnIndex = i;
                 break;
@@ -102,9 +166,8 @@ public class LeadsDetailPO {
         }
 
         // Get the cell value from the first data row at the found column index
-        Locator firstRow = page.locator("table tbody tr").first();
-        Locator cell = firstRow.locator("td").nth(columnIndex);
-        return playwright.getText(cell);
+        lbtTableCell = lbtTableRows.first().locator("td").nth(columnIndex);
+        return playwright.getText(lbtTableCell);
     }
 
     /**
@@ -112,8 +175,8 @@ public class LeadsDetailPO {
      * @param text the search text
      */
     public void clearAndSearchLBT(String text) {
-        lbtSearchInput.clear();
-        lbtSearchInput.fill(text);
+        playwright.clearText(lbtSearchInput);
+        playwright.fill(lbtSearchInput, text);
         playwright.pressKeyboardKey("Enter");
         playwright.hardWait(3000);
     }
@@ -122,7 +185,7 @@ public class LeadsDetailPO {
      * Clear LBT search input
      */
     public void clearLBTSearch() {
-        lbtSearchInput.clear();
+        playwright.clearText(lbtSearchInput);
     }
 
     // ---- LBT Filter Methods ----
@@ -132,7 +195,6 @@ public class LeadsDetailPO {
      */
     public void clickLBTFilter() {
         playwright.waitTillPageLoaded();
-        Locator filterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Filter"));
         playwright.clickOn(filterButton);
         playwright.hardWait(1000);
     }
@@ -141,8 +203,7 @@ public class LeadsDetailPO {
      * Close the filter dialog by clicking the close button
      */
     public void closeLBTFilter() {
-        Locator closeButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("close"));
-        playwright.clickOn(closeButton);
+        playwright.clickOn(closeFilterButton);
         playwright.hardWait(500);
     }
 
@@ -150,8 +211,7 @@ public class LeadsDetailPO {
      * Click Reset button in filter dialog
      */
     public void clickLBTResetFilter() {
-        Locator resetButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset"));
-        playwright.clickOn(resetButton);
+        playwright.clickOn(resetFilterButton);
         playwright.hardWait(1000);
     }
 
@@ -159,7 +219,6 @@ public class LeadsDetailPO {
      * Click Terapkan button in filter dialog
      */
     public void clickLBTTerapkan() {
-        Locator terapkanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terapkan"));
         playwright.clickOn(terapkanButton);
         playwright.hardWait(3000);
     }
@@ -170,12 +229,12 @@ public class LeadsDetailPO {
      * @param check true to check, false to uncheck
      */
     public void toggleLeadsSource(String source, boolean check) {
-        Locator checkbox = page.getByRole(AriaRole.CHECKBOX, new Page.GetByRoleOptions().setName(source));
-        boolean isChecked = checkbox.isChecked();
+        leadsSourceCheckbox = page.getByRole(AriaRole.CHECKBOX, new Page.GetByRoleOptions().setName(source));
+        boolean isChecked = leadsSourceCheckbox.isChecked();
         if (check != isChecked) {
             // Click the paragraph label next to the checkbox to avoid SVG icon interception
-            Locator label = page.locator("p").filter(new Locator.FilterOptions().setHasText(source)).first();
-            playwright.clickOn(label);
+            leadsSourceLabel = page.locator("p").filter(new Locator.FilterOptions().setHasText(source)).first();
+            playwright.clickOn(leadsSourceLabel);
         }
     }
 
@@ -186,23 +245,22 @@ public class LeadsDetailPO {
      */
     public void selectLBTFilterDropdown(String label, String value) {
         // Label is inside div.bg-c-field__label, parent is div.bg-c-field which also contains the dropdown trigger
-        Locator field = page.locator("div.bg-c-field").filter(new Locator.FilterOptions().setHasText(label)).first();
-        Locator dropdownTrigger = field.locator("div.bg-c-dropdown__trigger");
-        playwright.clickOn(dropdownTrigger);
+        filterField = page.locator("div.bg-c-field").filter(new Locator.FilterOptions().setHasText(label)).first();
+        filterDropdownTrigger = filterField.locator("div.bg-c-dropdown__trigger");
+        playwright.clickOn(filterDropdownTrigger);
         playwright.hardWait(500);
-        Locator option = page.locator("a:visible").filter(new Locator.FilterOptions().setHasText(value));
-        playwright.clickOn(option.first());
+        dropdownOption = page.locator("a:visible").filter(new Locator.FilterOptions().setHasText(value));
+        playwright.clickOn(dropdownOption.first());
         playwright.hardWait(1000);
     }
 
     /**
-     * Get all column values from LBT table for a given column name
-     * @param columnName the column header name
-     * @return array of text values from that column across all rows
+     * Get LBT table row count
+     * @return number of rows in the table
      */
     public int getLBTTableRowCount() {
         playwright.waitTillPageLoaded();
-        return page.locator("table tbody tr").count();
+        return lbtTableRows.count();
     }
 
     /**
@@ -212,18 +270,16 @@ public class LeadsDetailPO {
      * @return text content of the cell
      */
     public String getLBTCellByColumnName(int rowIndex, String columnName) {
-        Locator headers = page.locator("table th");
         int columnIndex = -1;
-        int headerCount = headers.count();
+        int headerCount = lbtTableHeaders.count();
         for (int i = 0; i < headerCount; i++) {
-            if (headers.nth(i).textContent().trim().equals(columnName)) {
+            if (lbtTableHeaders.nth(i).textContent().trim().equals(columnName)) {
                 columnIndex = i;
                 break;
             }
         }
-        Locator row = page.locator("table tbody tr").nth(rowIndex);
-        Locator cell = row.locator("td").nth(columnIndex);
-        return playwright.getText(cell);
+        lbtTableCell = lbtTableRows.nth(rowIndex).locator("td").nth(columnIndex);
+        return playwright.getText(lbtTableCell);
     }
 
     /**
@@ -241,8 +297,8 @@ public class LeadsDetailPO {
     public boolean hasAnyLeadsSourceChecked() {
         String[] sources = {"ILB", "CLB", "Canvassing Online", "Canvassing Offline", "Agent Offline", "MLB", "NLB", "Scraping", "Instagram", "Cove", "Infokost", "Sewakost", "Reddoorz", "Google Maps"};
         for (String source : sources) {
-            Locator checkbox = page.getByRole(AriaRole.CHECKBOX, new Page.GetByRoleOptions().setName(source));
-            if (checkbox.count() > 0 && checkbox.isChecked()) {
+            leadsSourceCheckbox = page.getByRole(AriaRole.CHECKBOX, new Page.GetByRoleOptions().setName(source));
+            if (leadsSourceCheckbox.count() > 0 && leadsSourceCheckbox.isChecked()) {
                 return true;
             }
         }
@@ -256,7 +312,7 @@ public class LeadsDetailPO {
     public boolean hasMultipleLeadSources() {
         playwright.waitTillPageLoaded();
         playwright.hardWait(3000);
-        int rowCount = page.locator("table tbody tr").count();
+        int rowCount = lbtTableRows.count();
         java.util.Set<String> sources = new java.util.HashSet<>();
         for (int i = 0; i < rowCount && i < 20; i++) {
             String leadId = getLBTCellByColumnName(i, "Lead ID");
@@ -273,9 +329,9 @@ public class LeadsDetailPO {
      */
     public void navigateToLBTPage(int pageNumber) {
         playwright.waitTillPageLoaded();
-        Locator pageButton = page.locator("button.bg-c-pagination__item").filter(
+        paginationButton = page.locator("button.bg-c-pagination__item").filter(
                 new Locator.FilterOptions().setHasText(String.valueOf(pageNumber)));
-        playwright.clickOn(pageButton);
+        playwright.clickOn(paginationButton);
         playwright.hardWait(3000);
     }
 
@@ -284,8 +340,7 @@ public class LeadsDetailPO {
      * @return current page number
      */
     public int getLBTCurrentPage() {
-        Locator selectedPage = page.locator("button.bg-c-button--primary.bg-c-pagination__item--selected");
-        return Integer.parseInt(selectedPage.textContent().trim());
+        return Integer.parseInt(selectedPageButton.textContent().trim());
     }
 
     /**
@@ -293,8 +348,7 @@ public class LeadsDetailPO {
      */
     public void clickFirstLeadsRow() {
         playwright.waitTillPageLoaded();
-        Locator firstRow = page.locator("table tbody tr").first();
-        playwright.clickOn(firstRow);
+        playwright.clickOn(lbtTableRows.first());
         playwright.hardWait(2000);
     }
 
@@ -303,7 +357,6 @@ public class LeadsDetailPO {
      */
     public void clickCancelOnLeadsDetail() {
         playwright.waitTillPageLoaded();
-        Locator cancelButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cancel"));
         playwright.clickOn(cancelButton);
         playwright.hardWait(1000);
     }
@@ -312,8 +365,7 @@ public class LeadsDetailPO {
      * Confirm cancel edit by clicking "Ya, Batalkan" on the confirmation popup
      */
     public void confirmCancelEdit() {
-        Locator confirmButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Ya, Batalkan"));
-        playwright.clickOn(confirmButton);
+        playwright.clickOn(confirmCancelButton);
         playwright.hardWait(3000);
     }
 
@@ -331,8 +383,8 @@ public class LeadsDetailPO {
      */
     public void clickLeadsRow(String phoneNumber) {
         playwright.waitTillPageLoaded();
-        Locator row = page.locator("tr").filter(new Locator.FilterOptions().setHasText(phoneNumber));
-        playwright.clickOn(row.first());
+        leadsRow = page.locator("tr").filter(new Locator.FilterOptions().setHasText(phoneNumber));
+        playwright.clickOn(leadsRow.first());
     }
 
     /**
@@ -385,10 +437,9 @@ public class LeadsDetailPO {
      * @param reason the reject reason text
      */
     public void selectRejectReason(String reason) {
-        Locator rejectReasonDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Reject Reason"));
         playwright.clickOn(rejectReasonDropdown);
-        Locator option = page.locator("a").filter(new Locator.FilterOptions().setHasText(reason)).last();
-        playwright.clickOn(option);
+        dropdownOption = page.locator("a").filter(new Locator.FilterOptions().setHasText(reason)).last();
+        playwright.clickOn(dropdownOption);
     }
 
     /**
@@ -396,10 +447,9 @@ public class LeadsDetailPO {
      * @param reason the reject reason text
      */
     public void selectBDRejectReason(String reason) {
-        Locator rejectReasonDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Select"));
-        playwright.clickOn(rejectReasonDropdown);
-        Locator option = page.locator("a:visible").filter(new Locator.FilterOptions().setHasText(reason)).last();
-        playwright.clickOn(option);
+        playwright.clickOn(bdRejectReasonDropdown);
+        dropdownOption = page.locator("a:visible").filter(new Locator.FilterOptions().setHasText(reason)).last();
+        playwright.clickOn(dropdownOption);
     }
 
     /**
@@ -407,10 +457,9 @@ public class LeadsDetailPO {
      * @param bd the BD name to assign
      */
     public void selectAssignBD(String bd) {
-        Locator assignBDDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih BD"));
         playwright.clickOn(assignBDDropdown);
-        Locator option = page.locator("a:visible").filter(new Locator.FilterOptions().setHasText(bd)).first();
-        playwright.clickOn(option);
+        dropdownOption = page.locator("a:visible").filter(new Locator.FilterOptions().setHasText(bd)).first();
+        playwright.clickOn(dropdownOption);
     }
 
     /**
@@ -418,27 +467,23 @@ public class LeadsDetailPO {
      * @param jenisVisit the visit type (e.g. "Online", "Offline")
      */
     public void selectJenisVisit(String jenisVisit) {
-        Locator jenisVisitDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Jenis Visit"));
         playwright.clickOn(jenisVisitDropdown);
-        Locator option = page.locator("a").filter(new Locator.FilterOptions().setHasText(jenisVisit)).last();
-        playwright.clickOn(option);
+        dropdownOption = page.locator("a").filter(new Locator.FilterOptions().setHasText(jenisVisit)).last();
+        playwright.clickOn(dropdownOption);
     }
 
     /**
      * Select a visit date (tomorrow) from the date picker (required when response is "Tertarik")
      */
     public void selectVisitDate() {
-        Locator dateInput = page.getByPlaceholder("Pilih Tanggal dan Jam Visit");
-        playwright.clickOn(dateInput);
+        playwright.clickOn(visitDateInput);
         playwright.hardWait(1000);
 
         int tomorrowDay = LocalDate.now().plusDays(1).getDayOfMonth();
         String dayStr = String.valueOf(tomorrowDay);
 
-        Locator calendarDays = page.locator("[aria-label='Calendar days']");
-        calendarDays.getByText(dayStr, new Locator.GetByTextOptions().setExact(true)).last().click();
+        playwright.clickOn(calendarDays.getByText(dayStr, new Locator.GetByTextOptions().setExact(true)).last());
 
-        Locator pilihButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih"));
         playwright.clickOn(pilihButton);
     }
 
@@ -447,17 +492,14 @@ public class LeadsDetailPO {
      */
     public void selectBDVisitDate() {
         // Two elements match this placeholder (one disabled, one enabled). Use last() to get the enabled one.
-        Locator dateInput = page.getByPlaceholder("Pilih Tanggal dan Jam Visit Baru").last();
-        playwright.clickOn(dateInput);
+        playwright.clickOn(bdVisitDateInput.last());
         playwright.hardWait(1000);
 
         int tomorrowDay = LocalDate.now().plusDays(1).getDayOfMonth();
         String dayStr = String.valueOf(tomorrowDay);
 
-        Locator calendarDays = page.locator("[aria-label='Calendar days']");
-        calendarDays.getByText(dayStr, new Locator.GetByTextOptions().setExact(true)).last().click();
+        playwright.clickOn(calendarDays.getByText(dayStr, new Locator.GetByTextOptions().setExact(true)).last());
 
-        Locator pilihButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih"));
         playwright.clickOn(pilihButton);
     }
 
@@ -469,14 +511,13 @@ public class LeadsDetailPO {
     public void selectBDResponse(String status) {
         // The BD Update section's Response dropdown. Navigate from "BD Update" paragraph up to the card,
         // then find the Response field's dropdown trigger (role="button") within it.
-        Locator bdCard = page.locator("xpath=//p[text()='BD Update']/ancestor::div[contains(@class,'bg-c-card')]");
-        Locator bdResponseDropdown = bdCard.locator("label:text('Response')").locator("xpath=ancestor::div[contains(@class,'bg-c-field__label')]/following-sibling::div//div[@role='button']");
+        bdResponseDropdown = bdCard.locator("label:text('Response')").locator("xpath=ancestor::div[contains(@class,'bg-c-field__label')]/following-sibling::div//div[@role='button']");
         playwright.clickOn(bdResponseDropdown);
-        Locator option = page.locator("a:visible").filter(new Locator.FilterOptions().setHasText(status));
+        dropdownOption = page.locator("a:visible").filter(new Locator.FilterOptions().setHasText(status));
         if (status.equals("Tertarik")) {
-            playwright.clickOn(option.first());
+            playwright.clickOn(dropdownOption.first());
         } else {
-            playwright.clickOn(option.last());
+            playwright.clickOn(dropdownOption.last());
         }
     }
 
@@ -504,7 +545,7 @@ public class LeadsDetailPO {
      */
     public void clickLeadsDetailByPhone(String phoneNumber) {
         playwright.waitTillPageLoaded();
-        Locator leadsRow = page.locator("tr").filter(new Locator.FilterOptions().setHasText(phoneNumber));
+        leadsRow = page.locator("tr").filter(new Locator.FilterOptions().setHasText(phoneNumber));
         playwright.clickOn(leadsRow.first());
     }
 
@@ -526,8 +567,8 @@ public class LeadsDetailPO {
     public void selectJenisFollowUp(String jenis) {
         jenisFollowUpDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Jenis Follow Up"));
         playwright.clickOn(jenisFollowUpDropdown);
-        Locator option = page.locator("a").filter(new Locator.FilterOptions().setHasText(jenis)).last();
-        playwright.clickOn(option);
+        dropdownOption = page.locator("a").filter(new Locator.FilterOptions().setHasText(jenis)).last();
+        playwright.clickOn(dropdownOption);
     }
 
     /**
@@ -538,12 +579,12 @@ public class LeadsDetailPO {
         responseDropdown = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Pilih Response"));
         playwright.clickOn(responseDropdown);
         // Use :visible to only match options from the currently open dropdown
-        Locator options = page.locator("a:visible").filter(new Locator.FilterOptions().setHasText(response));
+        dropdownOption = page.locator("a:visible").filter(new Locator.FilterOptions().setHasText(response));
         if (response.equals("Tertarik")) {
             // "Tertarik" is a substring of "Tidak Tertarik", use first() to get exact match
-            playwright.clickOn(options.first());
+            playwright.clickOn(dropdownOption.first());
         } else {
-            playwright.clickOn(options.last());
+            playwright.clickOn(dropdownOption.last());
         }
     }
 
@@ -597,9 +638,9 @@ public class LeadsDetailPO {
      */
     public String getLeadsResponseText(String phoneNumber) {
         playwright.waitTillPageLoaded();
-        Locator row = page.locator("tr").filter(new Locator.FilterOptions().setHasText(phoneNumber));
-        Locator responseCell = row.locator("td").nth(8);
-        return playwright.getText(responseCell);
+        leadsRow = page.locator("tr").filter(new Locator.FilterOptions().setHasText(phoneNumber));
+        leadsResponseCell = leadsRow.locator("td").nth(8);
+        return playwright.getText(leadsResponseCell);
     }
 
     /**
@@ -610,9 +651,9 @@ public class LeadsDetailPO {
      */
     public String getLeadsCellText(String phoneNumber, int columnIndex) {
         playwright.waitTillPageLoaded();
-        Locator row = page.locator("tr").filter(new Locator.FilterOptions().setHasText(phoneNumber));
-        Locator cell = row.locator("td").nth(columnIndex);
-        return playwright.getText(cell);
+        leadsRow = page.locator("tr").filter(new Locator.FilterOptions().setHasText(phoneNumber));
+        lbtTableCell = leadsRow.locator("td").nth(columnIndex);
+        return playwright.getText(lbtTableCell);
     }
 
     /**
@@ -640,9 +681,9 @@ public class LeadsDetailPO {
      */
     public String getLeadsResponseColor(String phoneNumber) {
         playwright.waitTillPageLoaded();
-        Locator row = page.locator("tr").filter(new Locator.FilterOptions().setHasText(phoneNumber));
-        Locator responseElement = row.locator("td").nth(8).locator("div, span, p").first();
-        return responseElement.evaluate("el => getComputedStyle(el).color").toString();
+        leadsRow = page.locator("tr").filter(new Locator.FilterOptions().setHasText(phoneNumber));
+        leadsResponseColorElement = leadsRow.locator("td").nth(8).locator("div, span, p").first();
+        return leadsResponseColorElement.evaluate("el => getComputedStyle(el).color").toString();
     }
 
     /**
@@ -652,8 +693,41 @@ public class LeadsDetailPO {
      */
     public String getBDResponseColor(String phoneNumber) {
         playwright.waitTillPageLoaded();
-        Locator row = page.locator("tr").filter(new Locator.FilterOptions().setHasText(phoneNumber));
-        Locator responseElement = row.locator("td").nth(8).locator("div, span, p").first();
-        return responseElement.evaluate("el => getComputedStyle(el).color").toString();
+        leadsRow = page.locator("tr").filter(new Locator.FilterOptions().setHasText(phoneNumber));
+        leadsResponseColorElement = leadsRow.locator("td").nth(8).locator("div, span, p").first();
+        return leadsResponseColorElement.evaluate("el => getComputedStyle(el).color").toString();
+    }
+
+    /**
+     * Click on a tab by name in leads detail page
+     * @param tabName the tab name (e.g. "Data Pemilik & Properti")
+     */
+    public void clickTab(String tabName) {
+        playwright.waitTillPageLoaded();
+        leadsDetailTab = page.getByText(tabName, new Page.GetByTextOptions().setExact(true));
+        playwright.clickOn(leadsDetailTab);
+        playwright.hardWait(2000);
+    }
+
+    /**
+     * Get Notes text content from leads detail page
+     * @return notes text
+     */
+    public String getNotesText() {
+        playwright.waitTillPageLoaded();
+        return playwright.getText(notesText);
+    }
+
+    /**
+     * Filter leads by source in LBT (e.g. "NLB", "ILB")
+     * @param source the lead source to filter
+     */
+    public void filterLeadsSource(String source) {
+        playwright.waitTillPageLoaded();
+        playwright.clickOn(filterButton);
+        leadsSourceCheckbox = page.getByText(source, new Page.GetByTextOptions().setExact(true));
+        playwright.clickOn(leadsSourceCheckbox);
+        playwright.clickOn(terapkanButton);
+        playwright.hardWait(2000);
     }
 }
