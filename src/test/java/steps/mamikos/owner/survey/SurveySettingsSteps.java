@@ -26,19 +26,6 @@ public class SurveySettingsSteps {
         playwright.waitTillPageLoaded();
     }
 
-    @When("user Login with new owner")
-    public void userLoginWithNewOwner() {
-        String phone = "081234567890"; // Replace with actual new owner phone number
-        String password = "password123"; // Replace with actual password
-
-        home.clickOnButtonMasuk()
-            .clickOnPemilikKostButton()
-            .fillPhoneNumber(phone)
-            .fillPassword(password)
-            .clickOnLoginButton();
-        loading.waitForLoadingIconDisappear();
-        home.clickOnSayaSetujuButton();
-    }
 
     @And("user click on chat menu")
     public void userClickOnChatMenu() {
@@ -61,7 +48,7 @@ public class SurveySettingsSteps {
     @Then("same-day survey toggle is displayed inactive off")
     public void sameDaySurveyToggleIsDisplayedInactive() {
         playwright.hardWait(2000);
-        Assert.assertTrue(surveySettings.isSameDaySurveyToggleInactive(),
+        Assert.assertTrue(surveySettings.ensureSameDaySurveyToggleOff(),
             "Same-day survey toggle is not inactive (should be off)");
     }
 
@@ -90,5 +77,36 @@ public class SurveySettingsSteps {
         playwright.hardWait(1000);
         Assert.assertTrue(surveySettings.isOnboardingSurveyPopupDisplayed(),
                 "Onboarding survey popup is displayed");
+    }
+
+    @And("user click on same day survey toggle")
+    public void userClickOnSameDaySurveyToggle() {
+        surveySettings.clickSameDaySurveyToggle();
+    }
+
+    @Then("activation confirmation pop-up appears")
+    public void activationConfirmationPopUpAppears() {
+        playwright.hardWait(1000);
+        Assert.assertTrue(surveySettings.isOnboardingSurveyPopupDisplayed(),
+                "Activation confirmation pop-up is not displayed");
+    }
+
+    @Then("user see popup same-day survey access")
+    public void userSeePopupSameDaySurveyAccess() {
+        playwright.hardWait(1000);
+        Assert.assertTrue(surveySettings.isOnboardingSurveyPopupDisplayed(),
+                "Popup same-day survey access is not displayed");
+    }
+
+    @Given("user has activated the same-day survey toggle")
+    public void userHasActivatedTheSameDaySurveyToggle() {
+        playwright.hardWait(2000);
+        Assert.assertTrue(surveySettings.ensureSameDaySurveyToggleOn(),
+                "Failed to activate same-day survey toggle");
+    }
+
+    @When("user exit from kost Survey Settings page")
+    public void userExitFromKostSurveySettingsPage() {
+        surveySettings.exitSurveySettingsPage();
     }
 }

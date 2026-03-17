@@ -5,6 +5,7 @@ import config.playwright.context.ActiveContext;
 import data.mamikos.Mamikos;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -12,6 +13,7 @@ import pageobject.common.LoadingPO;
 import pageobject.common.ModalPopUpPO;
 import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.PilihPropertyPagePO;
+import pageobject.owner.chat.ChatOwnerPO;
 import pageobject.owner.goldplus.GoldplusPO;
 import pageobject.owner.kelolatagihan.PengajuanSewaPO;
 import utilities.PlaywrightHelpers;
@@ -32,6 +34,7 @@ public class OwnerDashboardSteps {
     LoadingPO loading = new LoadingPO(page);
 
     private List<Map<String, String>> ownerDashboard;
+    private ChatOwnerPO chatOwnerPO;
 
     @When("Check if the button with label {string} is visible on the {string} page.")
     public void check_if_button_with_label_is_visible_on_the_page(String button, String page) {
@@ -958,5 +961,80 @@ public class OwnerDashboardSteps {
     public void theCreateListingSectionShouldNotBeDisplayed() {
         Assert.assertFalse(ownerDashboardPO.isPasangIklanPertamaButtonVisible(),
                 "Create Listing Section should not be displayed when owner has existing listings");
+    }
+
+    @Given("I have {int} pending survey requests")
+    public void iHavePendingSurveyRequests(int expectedCount) {
+        loading.waitForLoadingIconDisappear();
+        ownerDashboardPO.dismissPopUp();
+        Assert.assertTrue(ownerDashboardPO.isActivitySectionVisible(),
+                "Activities section is not visible");
+        String counterValue = ownerDashboardPO.getCounterBadgeValue("Pengajuan Survei");
+        Assert.assertEquals(counterValue, String.valueOf(expectedCount),
+                "Expected " + expectedCount + " pending survey requests but got: " + counterValue);
+    }
+
+    @And("I am on the chat list survey page")
+    public void iAmOnTheChatListSurveyPage() {
+        ownerDashboardPO.clickOnKetersediaanKamarActivityIcon("Pengajuan Survei");
+        loading.waitForLoadingIconDisappear();
+        playwright.waitTillPageLoaded();
+    }
+
+    @When("owner non gp dismiss FTUE chatroom")
+    public void ownerNonGpDismissFtueChatroom() {
+        chatOwnerPO.dismissFTUEMars();
+        chatOwnerPO.dismissFTUEMarsKuotaNol();
+        chatOwnerPO.dismissFTUEJemputBolaIfExist();
+        chatOwnerPO.dismissFTUEJemputBola();
+    }
+
+    @And("I check the Pengajuan Survei icon")
+    public void iCheckThePengajuanSurveiIcon() {
+        ownerDashboardPO.dismissPopUp();
+        Assert.assertTrue(ownerDashboardPO.isActivitySectionVisible(),
+                "Activities section is not visible");
+        Assert.assertTrue(ownerDashboardPO.isActivityIconVisible("Pengajuan Survei"),
+                "Pengajuan Survei icon is not visible in the Activities section");
+    }
+
+    @Then("the counter should now display {string}")
+    public void theCounterShouldNowDisplay(String expectedCount) {
+        String actualCount = ownerDashboardPO.getCounterBadgeValue("Pengajuan Survei");
+        Assert.assertEquals(actualCount, expectedCount,
+                "Counter badge should display '" + expectedCount + "' but got '" + actualCount + "'");
+    }
+
+    @And("the counter should reflect the updated count immediately")
+    public void theCounterShouldReflectTheUpdatedCountImmediately() {
+        Assert.assertTrue(ownerDashboardPO.isActivityCounterBadgeVisible("Pengajuan Survei"),
+                "Counter badge is not visible - count was not updated immediately");
+    }
+
+    @And("owner accept survey")
+    public void ownerAcceptSurvey() {
+        chatOwnerPO.acceptSurveyRequest();
+    }
+
+    @Then("owner should see the {string} icon")
+    public void ownerShouldSeeTheIcon(String iconName) {
+        Assert.assertTrue(ownerDashboardPO.isActivityIconVisible(iconName),
+                "Activity icon '" + iconName + "' is not visible in the Activities section");
+    }
+
+    @And("the icon should display a counter badge")
+    public void theIconShouldDisplayACounterBadge() {
+        Assert.assertTrue(ownerDashboardPO.isActivityCounterBadgeVisible("Pengajuan Sewa"),
+                "Counter badge is not visible on Pengajuan Sewa icon");
+    }
+
+    @And("the counter should show the number of bookings needing confirmation")
+    public void theCounterShouldShowTheNumberOfBookingsNeedingConfirmation() {
+        String counterValue = ownerDashboardPO.getCounterBadgeValue("Pengajuan Sewa");
+        Assert.assertNotNull(counterValue, "Counter badge value is null");
+        Assert.assertFalse(counterValue.isEmpty(), "Counter badge value is empty");
+        int count = Integer.parseInt(counterValue);
+        Assert.assertTrue(count > 0,
+                "Counter badge should show number > 0 but got: " + count);
     }
 }
