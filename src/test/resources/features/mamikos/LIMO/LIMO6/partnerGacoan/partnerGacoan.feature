@@ -1,4 +1,4 @@
-@LIMO6 @PartnerGacoan
+@LIMO8 @PartnerGacoan
 Feature: Partner Gacoan
 
   @TEST_LIMO-10829 @TEST_LIMO-11459
