@@ -64,7 +64,10 @@ public class NLBRegistrationSteps {
         }
         nlbRegistration.selectRenovasi(renovasi);
         if (itemRenovasi != null && !itemRenovasi.isEmpty()) {
-            nlbRegistration.selectItemRenovasi(itemRenovasi);
+            String[] items = itemRenovasi.split(",");
+            for (String item : items) {
+                nlbRegistration.selectItemRenovasi(item.trim());
+            }
         }
         if (penjelasanRenovasi != null && !penjelasanRenovasi.isEmpty()) {
             nlbRegistration.fillPenjelasanRenovasi(penjelasanRenovasi);

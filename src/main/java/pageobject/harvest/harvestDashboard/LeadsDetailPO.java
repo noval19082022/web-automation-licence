@@ -382,4 +382,40 @@ public class LeadsDetailPO {
         Locator responseElement = row.locator("td").nth(8).locator("div, span, p").first();
         return responseElement.evaluate("el => getComputedStyle(el).color").toString();
     }
+
+    /**
+     * Click on a tab by name in leads detail page
+     * @param tabName the tab name (e.g. "Data Pemilik & Properti")
+     */
+    public void clickTab(String tabName) {
+        playwright.waitTillPageLoaded();
+        Locator tab = page.getByText(tabName, new Page.GetByTextOptions().setExact(true));
+        playwright.clickOn(tab);
+        playwright.hardWait(2000);
+    }
+
+    /**
+     * Get Notes text content from leads detail page
+     * @return notes text
+     */
+    public String getNotesText() {
+        playwright.waitTillPageLoaded();
+        Locator notesValue = page.locator(".lead-base-tracker-owner-property-form__notes p");
+        return playwright.getText(notesValue);
+    }
+
+    /**
+     * Filter leads by source in LBT (e.g. "NLB", "ILB")
+     * @param source the lead source to filter
+     */
+    public void filterLeadsSource(String source) {
+        playwright.waitTillPageLoaded();
+        Locator filterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("filter Filter"));
+        playwright.clickOn(filterButton);
+        Locator sourceCheckbox = page.getByText(source, new Page.GetByTextOptions().setExact(true));
+        playwright.clickOn(sourceCheckbox);
+        Locator terapkanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terapkan"));
+        playwright.clickOn(terapkanButton);
+        playwright.hardWait(2000);
+    }
 }
