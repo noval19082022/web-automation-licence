@@ -105,6 +105,39 @@ public class MDRAttemptsSteps {
                 "Expected response color '" + expectedHexColor + "' (" + expectedRgb + ") but got '" + actualColor + "'");
     }
 
+    @When("admin search LBT by {string} with {string}")
+    public void admin_search_LBT_by_with(String searchType, String text) {
+        leadsDetail.searchLBT(searchType, text);
+    }
+
+    @Then("admin validate {string} column in LBT table with {string}")
+    public void admin_validate_column_in_LBT_table_with(String searchType, String expectedText) {
+        String result = leadsDetail.getDataInLBTTableByColumn(searchType, expectedText);
+        Assert.assertNotNull(result, "Data '" + expectedText + "' not found in LBT table column!");
+        Assert.assertTrue(result.contains(expectedText),
+                "Expected '" + expectedText + "' in column '" + searchType + "' but got: " + result);
+    }
+
+    @Then("admin search LBT by {string} with keyword {string} and validate result {string}")
+    public void admin_search_LBT_by_with_keyword_and_validate(String searchType, String keyword, String expectedText) {
+        leadsDetail.clearLBTSearch();
+        leadsDetail.searchLBT(searchType, keyword);
+        String result = leadsDetail.getDataInLBTTableByColumn(searchType, expectedText);
+        Assert.assertNotNull(result, "Data '" + expectedText + "' not found in LBT table column!");
+        Assert.assertTrue(result.contains(expectedText),
+                "Expected '" + expectedText + "' in column '" + searchType + "' but got: " + result);
+    }
+
+    @When("admin clears and search LBT with {string}")
+    public void admin_clears_and_search_LBT_with(String text) {
+        leadsDetail.clearAndSearchLBT(text);
+    }
+
+    @When("admin clears LBT search")
+    public void admin_clears_LBT_search() {
+        leadsDetail.clearLBTSearch();
+    }
+
     /**
      * Convert hex color to rgb format (e.g. "#F5A623" -> "rgb(245, 166, 35)")
      */

@@ -26,6 +26,10 @@ public class LeadsDetailPO {
     private Locator responseDropdown;
     private Locator saveAttemptButton;
 
+    // LBT Search
+    private Locator lbtSearchTypeDropdown;
+    private Locator lbtSearchInput;
+
     // Update & Success
     private Locator updateButton;
     private Locator successToast;
@@ -41,6 +45,84 @@ public class LeadsDetailPO {
         visitTab = page.getByText("Visit", new Page.GetByTextOptions().setExact(true));
 
         addAttemptButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Tambah Attempt"));
+
+        // LBT Search
+        lbtSearchTypeDropdown = page.locator("div.bg-c-select.bg-c-searchbar__select-input > div > div.bg-c-dropdown__trigger");
+        lbtSearchInput = page.locator(".bg-c-searchbar input[type='text']");
+    }
+
+    /**
+     * Search leads in LBT by selecting search type and entering text
+     * @param searchType the search type (e.g. "Nama Properti", "No. HP Pemilik", "Nama Pemilik", "Leadbase ID")
+     * @param text the search text
+     */
+    public void searchLBT(String searchType, String text) {
+        playwright.waitTillPageLoaded();
+        playwright.clickOn(lbtSearchTypeDropdown);
+        Locator option = page.locator("a").filter(new Locator.FilterOptions().setHasText(searchType));
+        playwright.clickOn(option);
+        lbtSearchInput.fill(text);
+        playwright.pressKeyboardKey("Enter");
+        playwright.hardWait(3000);
+    }
+
+    /**
+     * Get the column header name corresponding to the search type dropdown label
+     */
+    private String getColumnHeaderForSearchType(String searchType) {
+        switch (searchType) {
+            case "No. HP Pemilik": return "No Hp Pemilik";
+            case "Leadbase ID": return "Lead ID";
+            case "Nama Properti": return "Nama Properti";
+            case "Nama Pemilik": return "Nama Pemilik";
+            default: return searchType;
+        }
+    }
+
+    /**
+     * Validate search result appears in the correct column of the LBT table
+     * @param searchType the search type used (e.g. "No. HP Pemilik", "Leadbase ID")
+     * @param expectedText the expected text in that column
+     * @return the actual text found in the column cell of the first result row
+     */
+    public String getDataInLBTTableByColumn(String searchType, String expectedText) {
+        playwright.waitTillPageLoaded();
+        String columnHeader = getColumnHeaderForSearchType(searchType);
+
+        // Find the column index from the header row
+        Locator headers = page.locator("table th");
+        int columnIndex = -1;
+        int headerCount = headers.count();
+        for (int i = 0; i < headerCount; i++) {
+            String headerText = headers.nth(i).textContent().trim();
+            if (headerText.equals(columnHeader)) {
+                columnIndex = i;
+                break;
+            }
+        }
+
+        // Get the cell value from the first data row at the found column index
+        Locator firstRow = page.locator("table tbody tr").first();
+        Locator cell = firstRow.locator("td").nth(columnIndex);
+        return playwright.getText(cell);
+    }
+
+    /**
+     * Clear LBT search input and search with new keyword without re-selecting search type
+     * @param text the search text
+     */
+    public void clearAndSearchLBT(String text) {
+        lbtSearchInput.clear();
+        lbtSearchInput.fill(text);
+        playwright.pressKeyboardKey("Enter");
+        playwright.hardWait(3000);
+    }
+
+    /**
+     * Clear LBT search input
+     */
+    public void clearLBTSearch() {
+        lbtSearchInput.clear();
     }
 
     /**
