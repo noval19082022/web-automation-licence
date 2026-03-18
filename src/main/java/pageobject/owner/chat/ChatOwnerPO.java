@@ -526,7 +526,9 @@ public class ChatOwnerPO {
      */
     public void clickButtonOnChatRoomList(String buttonText) {
         playwright.hardWait(2000);
-        if (playwright.waitTillLocatorIsVisible(buttonOnChatRoomList, 2000.0)) {
+        if (playwright.isButtonWithTextDisplayed(buttonText)) {
+            playwright.clickOnTextButton(buttonText);
+        } else if (playwright.waitTillLocatorIsVisible(buttonOnChatRoomList, 2000.0)) {
             playwright.clickOn(buttonOnChatRoomList);
         } else {
             playwright.waitFor(buttonOnChatRoom);

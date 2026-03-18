@@ -95,6 +95,7 @@ public class Mamikos {
     public static final String OWNER_KOS_ROOMS_PRICE = JavaHelpers.getPropertyValue(MAMIKOS, "ownerKosRoomsPrice");
     public static final String OWNER_REDIRECT = JavaHelpers.getPropertyValue(MAMIKOS, "redirectOwner_" + ENV);
     public static final String OWNER_PAGE_KOS = JavaHelpers.getPropertyValue(MAMIKOS, "ownerPageKos");
+    public static final String PARTNER_PORTAL_URL = JavaHelpers.getPropertyValue(MAMIKOS, "partnerPortalUrl");
 
 
     @Setter @Getter

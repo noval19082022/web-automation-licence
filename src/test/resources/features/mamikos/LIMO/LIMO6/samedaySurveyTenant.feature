@@ -236,3 +236,98 @@ Feature: Sameday Survey Tenant
   Scenario: cleanup survey @TEST_LIMO-9415
     # Cleanup - batalkan survey for next run
     And user batalkan survey if the survey already submitted
+
+  @TEST_LIMO-9353
+  Scenario: [Survey][Sameday] Toggle same day survey activation and confirmation
+    Given user navigate to mamikos
+    When user login as owner:
+      | phone stag  | phone prod   | password  |
+      | 0891202502  | 081362464341 | qwerty123 |
+    And owner navigates to owner dashboard
+    #And owner click close icon pop up
+    And user click on chat menu
+    And user dismiss FTUE MARS Goldplus and FTUE Broadcast
+    And user dismiss Laporan klik FTUE
+    And user select filter survey
+    And user click on pengaturan survei kos
+    Then same-day survey toggle is displayed inactive off
+    And user click on same day survey toggle
+    Then activation confirmation pop-up appears
+    And same-day survey toggle is displayed inactive on
+
+  @TEST_LIMO-9354
+  Scenario: [Survey][Sameday] Toggle same day survey activation and confirmation
+    Given user navigate to mamikos
+    When user login as owner:
+      | phone stag  | phone prod   | password  |
+      | 0891202502  | 081362464341 | qwerty123 |
+    And owner navigates to owner dashboard
+    And user click on chat menu
+    And user dismiss FTUE MARS Goldplus and FTUE Broadcast
+    And user dismiss Laporan klik FTUE
+    And user select filter survey
+    And user click on pengaturan survei kos
+    Then same-day survey toggle is displayed inactive on
+    And user click on same day survey toggle
+    Then activation confirmation pop-up appears
+    And same-day survey toggle is displayed inactive off
+
+  @TEST_LIMO-9355
+  Scenario: [Survey][Sameday]Owner Non GP Trying Toggle Sameday Survey Activation
+    Given user navigate to mamikos
+    When user login as owner:
+      | phone stag  | phone prod   | password  |
+      | 0891202507  | 081362464341 | qwerty123 |
+    And owner navigates to owner dashboard
+    And user click on chat menu
+    And user dismiss FTUE MARS Goldplus and FTUE Broadcast
+    And user dismiss Laporan klik FTUE
+    And user select filter survey
+    And user click on pengaturan survei kos
+    And user click on same day survey toggle
+    Then user see popup same-day survey access
+
+  @TEST_LIMO-9356
+  Scenario: [Survey][Sameday] Same-day survey toggle remains active after re-entering page
+    Given user navigate to mamikos
+    When user login as owner:
+      | phone stag  | phone prod   | password  |
+      | 0891202502  | 081362464341 | qwerty123 |
+    And owner navigates to owner dashboard
+    And user click on chat menu
+    And user dismiss FTUE MARS Goldplus and FTUE Broadcast
+    And user dismiss Laporan klik FTUE
+    And user select filter survey
+    And user click on pengaturan survei kos
+    Then user has activated the same-day survey toggle
+    When user exit from kost Survey Settings page
+    And user click on chat menu
+    And user select filter survey
+    And user click on pengaturan survei kos
+    Then same-day survey toggle is displayed inactive on
+
+  @TEST_LIMO-9357
+  Scenario: [Survey][Sameday] Tenant sees sameday survey label in chat pretext when owner has activated toggle
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 081223344570 | 083176408442 | qwerty123 |
+    And tenant redirect to kost details:
+      | kost path stag                                                                        | kost path prod                     |
+      | kost-kabupaten-halmahera-utara-kost-campur-murah-kost-singgahsini-lompat-tali-tipe-satu-halmahera-utara-1 | Kost Kuning Tobelo Halmahera Utara |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    Then Text "Kos melayani Survei Hari Ini" will be displayed below the "Saya ingin survei dulu"
+
+  @TEST_LIMO-9368
+  Scenario: [Survey][Sameday] Owner Non GP Not displaying same-day survey info - Owner Deactive Feature
+    Given user go to mamikos homepage
+    When user login as tenant via phone number:
+      | phone stag   | phone prod   | password  |
+      | 081223344570 | 083176408442 | qwerty123 |
+    And tenant redirect to kost details:
+      | kost path stag                                                                        | kost path prod                     |
+      | kost-kabupaten-tangerang-kost-campur-murah-kost-new-dashboard-2026-pasarkemis-tangerang-5 | Kost Kuning Tobelo Halmahera Utara |
+    And user dismiss FTUE booking benefit
+    And user click chat in kos detail
+    Then Text "Kos melayani Survei Hari Ini" will not be displayed below "Saya ingin survei dulu"

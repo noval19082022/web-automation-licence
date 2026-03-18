@@ -233,4 +233,21 @@ public class ChatTenantSteps {
             chat.closeReviewChat();
         }
     }
+
+
+    @And("Text {string} will be displayed below the {string}")
+    public void textWillBeDisplayedBelowThe(String labelText, String optionText) {
+        Page activePage = ActiveContext.getActivePage();
+        ChatTenantPO activeChat = new ChatTenantPO(activePage);
+        Assert.assertTrue(activeChat.isLabelDisplayedBelowOptionInPretext(labelText, optionText),
+                "Text '" + labelText + "' is displayed below '" + optionText + "' in chat pretext");
+    }
+
+    @Then("Text {string} will not be displayed below {string}")
+    public void textWillNotBeDisplayedBelow(String labelText, String optionText) {
+        Page activePage = ActiveContext.getActivePage();
+        ChatTenantPO activeChat = new ChatTenantPO(activePage);
+        Assert.assertTrue(activeChat.isLabelNotDisplayedBelowOptionInPretext(labelText, optionText),
+                "Text '" + labelText + "' should NOT be displayed below '" + optionText + "' in chat pretext");
+    }
 }

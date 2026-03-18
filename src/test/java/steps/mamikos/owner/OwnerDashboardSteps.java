@@ -13,6 +13,7 @@ import pageobject.common.LoadingPO;
 import pageobject.common.ModalPopUpPO;
 import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.PilihPropertyPagePO;
+import pageobject.owner.chat.ChatOwnerPO;
 import pageobject.owner.goldplus.GoldplusPO;
 import pageobject.owner.chat.ChatOwnerPO;
 import pageobject.owner.kelolatagihan.PengajuanSewaPO;
@@ -35,6 +36,7 @@ public class OwnerDashboardSteps {
     ChatOwnerPO chatOwnerPO = new ChatOwnerPO(page);
 
     private List<Map<String, String>> ownerDashboard;
+    private ChatOwnerPO chatOwnerPO;
 
     @When("Check if the button with label {string} is visible on the {string} page.")
     public void check_if_button_with_label_is_visible_on_the_page(String button, String page) {

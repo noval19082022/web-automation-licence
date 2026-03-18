@@ -427,4 +427,40 @@ public class ChatTenantPO {
     public void closeReviewChat() {
         playwright.clickOn(closeButtonReviewChat);
     }
+
+    /**
+     * Verify that a label text is displayed below a specific option in chat pretext dropdown
+     * @param chatPreText the label text to find (e.g. "Kos melayani Survei Hari Ini")
+     * @param chatMessageTemplateOption the option text above the label (e.g. "Saya mau survei")
+     * @return true if both option and label are visible in pretext dropdown
+     */
+    public boolean isLabelDisplayedBelowOptionInPretext(String chatPreText, String chatMessageTemplateOption) {
+        Locator pretextBody = page.getByTestId("chatPretextDropdown-body");
+        playwright.waitTillLocatorIsVisible(pretextBody, 10000.0);
+
+        // Verify both option and label text are visible
+        Locator option = page.locator("//p[normalize-space()='" + chatMessageTemplateOption + "']");
+        Locator label = page.locator("//p[normalize-space()='" + chatPreText + "']");
+        return playwright.waitTillLocatorIsVisible(option, 5000.0)
+                && playwright.waitTillLocatorIsVisible(label, 5000.0);
+    }
+
+    /**
+     * Verify that a label text is displayed below a specific option in chat pretext dropdown
+     * @param chatPreText the label text to find (e.g. "Kos melayani Survei Hari Ini")
+     * @param chatMessageTemplateOption not the option text above the label (e.g. "Saya mau survei")
+     * @return true if both option and label are visible in pretext dropdown
+     */
+    public boolean isLabelNotDisplayedBelowOptionInPretext(String chatPreText, String chatMessageTemplateOption) {
+        Locator pretextBody = page.getByTestId("chatPretextDropdown-body");
+        playwright.waitTillLocatorIsVisible(pretextBody, 10000.0);
+
+        // Option text MUST exist (confirm we are on the correct page)
+        Locator option = page.locator("//p[normalize-space()='" + chatPreText + "']");
+        playwright.waitTillLocatorIsVisible(option, 5000.0);
+
+        // Label text should NOT be visible
+        Locator label = page.locator("//p[normalize-space()='" + chatMessageTemplateOption + "']");
+        return !playwright.waitTillLocatorIsVisible(label, 3000.0);
+    }
 }
