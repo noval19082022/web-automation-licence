@@ -15,6 +15,7 @@ import pageobject.owner.OwnerDashboardPO;
 import pageobject.owner.PilihPropertyPagePO;
 import pageobject.owner.chat.ChatOwnerPO;
 import pageobject.owner.goldplus.GoldplusPO;
+import pageobject.owner.chat.ChatOwnerPO;
 import pageobject.owner.kelolatagihan.PengajuanSewaPO;
 import utilities.PlaywrightHelpers;
 
@@ -32,6 +33,7 @@ public class OwnerDashboardSteps {
     GoldplusPO goldplus = new GoldplusPO(page);
     PengajuanSewaPO PengajuanSewaPO = new PengajuanSewaPO(page);
     LoadingPO loading = new LoadingPO(page);
+    ChatOwnerPO chatOwnerPO = new ChatOwnerPO(page);
 
     private List<Map<String, String>> ownerDashboard;
     private ChatOwnerPO chatOwnerPO;
@@ -963,6 +965,82 @@ public class OwnerDashboardSteps {
                 "Create Listing Section should not be displayed when owner has existing listings");
     }
 
+
+    @And("I should see the section title {string}")
+    public void i_should_see_the_section_title(String expectedTitle) {
+        String actualTitle = ownerDashboardPO.getInfoUntukAndaSectionTitle();
+        Assert.assertEquals(actualTitle, expectedTitle,
+                "Section title mismatch. Expected: '" + expectedTitle + "' but got: '" + actualTitle + "'");
+    }
+
+    @And("I should see the subtitle {string}")
+    public void i_should_see_the_subtitle(String expectedSubtitle) {
+        String actualSubtitle = ownerDashboardPO.getInfoUntukAndaSubtitle();
+        Assert.assertEquals(actualSubtitle, expectedSubtitle,
+                "Subtitle mismatch. Expected: '" + expectedSubtitle + "' but got: '" + actualSubtitle + "'");
+    }
+
+    @And("info items should be displayed in card-style layout")
+    public void info_items_should_be_displayed_in_card_style_layout() {
+        Assert.assertTrue(ownerDashboardPO.isInfoItemsDisplayedInCardLayout(),
+                "Info items are not displayed in card-style layout");
+    }
+
+    @Then("each card should show title and product type tag")
+    public void each_card_should_show_title_and_product_type_tag() {
+        Assert.assertTrue(ownerDashboardPO.isEachCardHasTitleAndTag(),
+                "Not all cards have title and product type tag");
+    }
+
+    // =====================================================
+    // Pengajuan Sewa Counter Badge Steps
+    // =====================================================
+
+    @Given("owner have active listing")
+    public void ownerHaveActiveListing() {
+        loading.waitForLoadingIconDisappear();
+        Assert.assertFalse(ownerDashboardPO.isNoHaveActiveKos(),
+                "Owner does not have active listing");
+    }
+
+    @And("owner have received booking requests with status {string}")
+    public void ownerHaveReceivedBookingRequestsWithStatus(String status) {
+        // Navigate to Pengajuan Sewa to verify booking requests exist
+        ownerDashboardPO.clickOnManagementKost();
+        ownerDashboardPO.clickOnPengajuanSewa();
+        Assert.assertTrue(PengajuanSewaPO.hasBookingRequests(),
+                "Owner does not have booking requests with status: " + status);
+        // Navigate back to dashboard
+        ownerDashboardPO.clickHomeMenu();
+        loading.waitForLoadingIconDisappear();
+    }
+
+    @Then("owner should see the {string} icon")
+    public void ownerShouldSeeTheIcon(String iconName) {
+        Assert.assertTrue(ownerDashboardPO.isActivityIconVisible(iconName),
+                "Activity icon '" + iconName + "' is not visible in the Activities section");
+    }
+
+    @And("the icon should display a counter badge")
+    public void theIconShouldDisplayACounterBadge() {
+        Assert.assertTrue(ownerDashboardPO.isActivityCounterBadgeVisible("Pengajuan Sewa"),
+                "Counter badge is not visible on Pengajuan Sewa icon");
+    }
+
+    @And("the counter should show the number of bookings needing confirmation")
+    public void theCounterShouldShowTheNumberOfBookingsNeedingConfirmation() {
+        String counterValue = ownerDashboardPO.getCounterBadgeValue("Pengajuan Sewa");
+        Assert.assertNotNull(counterValue, "Counter badge value is null");
+        Assert.assertFalse(counterValue.isEmpty(), "Counter badge value is empty");
+        int count = Integer.parseInt(counterValue);
+        Assert.assertTrue(count > 0,
+                "Counter badge should show number > 0 but got: " + count);
+    }
+
+    // =====================================================
+    // Pengajuan Survei Counter Badge Update Steps
+    // =====================================================
+
     @Given("I have {int} pending survey requests")
     public void iHavePendingSurveyRequests(int expectedCount) {
         loading.waitForLoadingIconDisappear();
@@ -1016,25 +1094,45 @@ public class OwnerDashboardSteps {
         chatOwnerPO.acceptSurveyRequest();
     }
 
-    @Then("owner should see the {string} icon")
-    public void ownerShouldSeeTheIcon(String iconName) {
-        Assert.assertTrue(ownerDashboardPO.isActivityIconVisible(iconName),
-                "Activity icon '" + iconName + "' is not visible in the Activities section");
+    // =====================================================
+    // Banner Auto-Slide Steps
+    // =====================================================
+
+    private int bannerCount;
+
+    @Given("there are {int} banners available")
+    public void thereAreBannersAvailable(int expectedCount) {
+        loading.waitForLoadingIconDisappear();
+        ownerDashboardPO.dismissPopUp();
+        bannerCount = ownerDashboardPO.getBannerCount();
+        Assert.assertTrue(bannerCount >= expectedCount,
+                "Expected at least " + expectedCount + " banners but found: " + bannerCount);
     }
 
-    @And("the icon should display a counter badge")
-    public void theIconShouldDisplayACounterBadge() {
-        Assert.assertTrue(ownerDashboardPO.isActivityCounterBadgeVisible("Pengajuan Sewa"),
-                "Counter badge is not visible on Pengajuan Sewa icon");
+    @And("the auto-slide duration is set to existing configuration")
+    public void theAutoSlideDurationIsSetToExistingConfiguration() {
+        // Auto-slide duration is configured on the platform side
+        // This step verifies banner section is ready and visible
+        Assert.assertTrue(ownerDashboardPO.getBannerCount() > 0,
+                "Banner section is not ready - no banners found");
     }
 
-    @And("the counter should show the number of bookings needing confirmation")
-    public void theCounterShouldShowTheNumberOfBookingsNeedingConfirmation() {
-        String counterValue = ownerDashboardPO.getCounterBadgeValue("Pengajuan Sewa");
-        Assert.assertNotNull(counterValue, "Counter badge value is null");
-        Assert.assertFalse(counterValue.isEmpty(), "Counter badge value is empty");
-        int count = Integer.parseInt(counterValue);
-        Assert.assertTrue(count > 0,
-                "Counter badge should show number > 0 but got: " + count);
+    @Then("the banner should automatically slide to the next banner after the configured duration")
+    public void theBannerShouldAutomaticallySlideToTheNextBanner() {
+        int currentIndex = ownerDashboardPO.getActiveBannerIndex();
+        Assert.assertTrue(ownerDashboardPO.waitForBannerSlide(currentIndex, 30000),
+                "Banner did not auto-slide to the next banner within 15 seconds");
+    }
+
+    @And("the auto-slide should continue in a loop")
+    public void theAutoSlideShouldContinueInALoop() {
+        Assert.assertTrue(ownerDashboardPO.isBannerAutoSlidingInLoop(15000),
+                "Banner auto-slide is not continuing in a loop");
+    }
+
+    @And("when reaching the last banner, it should loop back to the first")
+    public void whenReachingTheLastBannerItShouldLoopBackToTheFirst() {
+        Assert.assertTrue(ownerDashboardPO.doesBannerLoopBackToFirst(bannerCount, 15000),
+                "Banner did not loop back to the first banner after reaching the last");
     }
 }
