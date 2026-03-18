@@ -1037,4 +1037,46 @@ public class OwnerDashboardSteps {
         Assert.assertTrue(count > 0,
                 "Counter badge should show number > 0 but got: " + count);
     }
+
+    // =====================================================
+    // Banner Auto-Slide Steps
+    // =====================================================
+
+    private int bannerCount;
+
+    @Given("there are {int} banners available")
+    public void thereAreBannersAvailable(int expectedCount) {
+        loading.waitForLoadingIconDisappear();
+        ownerDashboardPO.dismissPopUp();
+        bannerCount = ownerDashboardPO.getBannerCount();
+        Assert.assertTrue(bannerCount >= expectedCount,
+                "Expected at least " + expectedCount + " banners but found: " + bannerCount);
+    }
+
+    @And("the auto-slide duration is set to existing configuration")
+    public void theAutoSlideDurationIsSetToExistingConfiguration() {
+        // Auto-slide duration is configured on the platform side
+        // This step verifies banner section is ready and visible
+        Assert.assertTrue(ownerDashboardPO.getBannerCount() > 0,
+                "Banner section is not ready - no banners found");
+    }
+
+    @Then("the banner should automatically slide to the next banner after the configured duration")
+    public void theBannerShouldAutomaticallySlideToTheNextBanner() {
+        int currentIndex = ownerDashboardPO.getActiveBannerIndex();
+        Assert.assertTrue(ownerDashboardPO.waitForBannerSlide(currentIndex, 30000),
+                "Banner did not auto-slide to the next banner within 15 seconds");
+    }
+
+    @And("the auto-slide should continue in a loop")
+    public void theAutoSlideShouldContinueInALoop() {
+        Assert.assertTrue(ownerDashboardPO.isBannerAutoSlidingInLoop(15000),
+                "Banner auto-slide is not continuing in a loop");
+    }
+
+    @And("when reaching the last banner, it should loop back to the first")
+    public void whenReachingTheLastBannerItShouldLoopBackToTheFirst() {
+        Assert.assertTrue(ownerDashboardPO.doesBannerLoopBackToFirst(bannerCount, 15000),
+                "Banner did not loop back to the first banner after reaching the last");
+    }
 }
