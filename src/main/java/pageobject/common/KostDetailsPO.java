@@ -2598,6 +2598,7 @@ public class KostDetailsPO {
      */
     public String getRefundTitle() {
         playwright.pageScrollToDown(600);
+        playwright.waitTillNetworkIdle();
         return playwright.getText(refundTitle);
     }
 

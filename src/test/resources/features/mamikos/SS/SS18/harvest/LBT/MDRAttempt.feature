@@ -53,7 +53,7 @@
       Then leads response should be "Tidak Tertarik" in the table
       And leads response color should be "#757575"
 
-    @TEST_SS-11046 @continue
+    @TEST_SS-11046
     Scenario: MDR update attempts response "Tertarik"
       When admin clicks on leads detail with saved ILB phone number
       And admin adds new attempt with jenis "Call" and response "Tertarik"
