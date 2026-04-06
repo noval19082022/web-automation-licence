@@ -23,7 +23,7 @@ Feature: Subscribe GP from all entry point
     And user login as owner:
       | phone stag    | password  |
       | 0812345670001 | qwerty123 |
-    When owner click "Daftar GoldPlus" button on chatrooms "Noval"
+    When owner click "Daftar GoldPlus" button on chatrooms "Nova Laravel Apple"
     Then user redirected to "/goldplus/submission/packages?redirection_source=mars_gp_chatroom"
 
   @TEST_LIMO-3549 @otherEntryPointExceptInfoUntukAnda @continue
@@ -32,7 +32,7 @@ Feature: Subscribe GP from all entry point
     When user login as owner:
       | phone stag   | password  |
       | 081905128517 | qwerty123 |
-    And owner click "Langganan" button on chatlist
+    And owner click "Daftar" button on chatlist
     Then user redirected to "/goldplus/submission/packages?redirection_source=mars_gp_chatlist"
 
   @TEST_LIMO-3550 @otherEntryPointExceptInfoUntukAnda @subscribeFromAturPromo @continue

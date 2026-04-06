@@ -253,10 +253,10 @@ public class MamiAdsPO {
     public void handlePopupMamiAds() {
         // Check if the 'Coba Sekarang' button on the popup is visible (indicates onboarding popup is shown)
         if (playwright.isLocatorVisibleAfterLoad(cobaSekarangBtnOnPopUp, 5000.0)) {
-            // Wait for close button to be visible and click it
-            if (playwright.isLocatorVisibleAfterLoad(icnButtonCLose, 3000.0)) {
-                playwright.clickOn(icnButtonCLose);
-            }
+            playwright.clickOn(cobaSekarangBtnOnPopUp);
+            playwright.hardWait(1000);
+        } else {
+            playwright.clickOn(icnButtonCLose);
         }
     }
 
@@ -934,7 +934,7 @@ public class MamiAdsPO {
         }
 
         playwright.waitFor(radioButtons.first(), 10000.0);
-        
+
         // Ensure "Favorit" text is visible (indicates 150k option loaded)
         playwright.isTextDisplayed("Favorit", 5000.0);
     }

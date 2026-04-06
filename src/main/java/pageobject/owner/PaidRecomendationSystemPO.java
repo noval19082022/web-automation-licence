@@ -78,7 +78,7 @@ public class PaidRecomendationSystemPO {
      * Navigates to Statistic page
      */
     public void navigatesToStatisticPage() {
-        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.STATISTIC_PPRS, 50000.0, LoadState.LOAD);
+        playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.STATISTIC_PPRS, 5000.0, LoadState.LOAD);
         playwright.bringPageToView(page);
     }
 

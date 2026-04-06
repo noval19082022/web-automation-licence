@@ -541,7 +541,7 @@ public class ChatOwnerPO {
      */
     public void clickDaftarGPButton() {
         playwright.waitTillLocatorIsVisible(daftarGPButton, 3000.0);
-        playwright.clickOn(daftarGPButton);
+        playwright.forceClickOn(daftarGPButton);
     }
 
     /**
