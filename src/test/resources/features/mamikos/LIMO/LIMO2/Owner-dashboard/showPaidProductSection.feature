@@ -1,7 +1,7 @@
 @LIMO2
 Feature: Show Paid Product Section (Gold Plus)
 
-  @TEST_LIMO-10671
+  @TEST_LIMO-10671 @continue @gpsubspaidproduct
   Scenario: [Owner][OD][GP] Non GP owner sees GoldPlus entry point and can subscribe
     Given admin go to mamikos mamipay admin
     And admin login to mamipay:
@@ -18,6 +18,12 @@ Feature: Show Paid Product Section (Gold Plus)
     Then user will see that the text "Manfaat GoldPlus 1" is displayed
     Then user will see that the text "Manfaat GoldPlus 2" is displayed
 
+  @TEST-LIMO-10673 @gpsubspaidproduct
+  Scenario: [Owner][OD][GP] Owner with unpaid GP payment sees payment reminder
+    Given user wants to subscribe Goldplus 1
+    When owner navigates to owner dashboard
+    Then owner will see that the text "Menunggu Pembayaran" is displayed
+
   @TEST_LIMO-10672
   Scenario: [Owner][OD][GP] Non GP owner with GPSP eligibility sees special price offer
     Given user go to mamikos homepage
@@ -33,3 +39,4 @@ Feature: Show Paid Product Section (Gold Plus)
     And user click "Pilih Paket GoldPlus" button
     Then user will see that the text "Manfaat GoldPlus 1" is displayed
     Then user will see that the text "Manfaat GoldPlus 2" is displayed
+
