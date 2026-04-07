@@ -26,7 +26,7 @@ Feature: Show Paid Product Section (Gold Plus)
     And owner wants to paid GP crosseling by click "Lihat Tagihan" on pop up "Anda masih memiliki tagihan aktif"
     Then payment owner success using ovo as payment method
 
-  @TEST-LIMO-10674 @gpsubspaidproduct
+  @TEST-LIMO-10674 @TEST-LIMO-10676 @gpsubspaidproduct
   Scenario: [Owner][OD][GP] Active GP owner sees subscription status
     When owner navigates to owner dashboard
     * owner click close icon pop up
