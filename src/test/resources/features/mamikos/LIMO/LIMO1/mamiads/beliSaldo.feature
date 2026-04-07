@@ -180,12 +180,12 @@ Feature: Beli Saldo
     When admin login to mamipay:
       | email stag                   | email prod                   | password  |
       | automationpman03@mamikos.com | automationpman03@mamikos.com | qwerty123 |
-    And user wants to reset Goldplus for owner with phone number "0891202513"
+    And user wants to reset Goldplus for owner with phone number "0891202514"
    #scenario buy mamiads
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag | phone prod  | password  |
-      | 0891202513 | 08123450977 | qwerty123 |
+      | 0891202514 | 08123450977 | qwerty123 |
     And user navigates to mamiads pembelian saldo
     And owner want to buy mamiads saldo with nominal "Rp80.000"
     And user navigate to mamiads history page

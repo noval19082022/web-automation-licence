@@ -255,7 +255,7 @@ public class MamiAdsPO {
         if (playwright.isLocatorVisibleAfterLoad(cobaSekarangBtnOnPopUp, 5000.0)) {
             playwright.clickOn(cobaSekarangBtnOnPopUp);
             playwright.hardWait(1000);
-        } else {
+        } else if (playwright.waitTillLocatorIsVisible(icnButtonCLose, 5000.0)) {
             playwright.clickOn(icnButtonCLose);
         }
     }
@@ -302,15 +302,14 @@ public class MamiAdsPO {
     public void clickOnBeliSaldoBtn() {
         // Wait for page to be loaded first
         playwright.waitTillPageLoaded(10000.0);
-        
+
         // this condition will handle for pop up that appear when owner visit https://owner-jambu.kerupux.com/mamiads
-        if (playwright.waitTillLocatorIsVisible(cobaSekarangBtnOnPopUp)
-                || !playwright.waitTillLocatorIsVisible(beliSaldoBtn))
+        if (playwright.waitTillLocatorIsVisible(cobaSekarangBtnOnPopUp, 5000.0))
             playwright.clickOn(cobaSekarangBtnOnPopUp);
-        
-        // Wait for beliSaldo button to be available and click
-        playwright.waitFor(beliSaldoBtn, 10000.0);
-        playwright.clickOn(beliSaldoBtn);
+
+        // Click beliSaldo button if visible (may already be on balance page)
+        if (playwright.waitTillLocatorIsVisible(beliSaldoBtn, 5000.0))
+            playwright.clickOn(beliSaldoBtn);
     }
 
     /**
@@ -330,15 +329,15 @@ public class MamiAdsPO {
         int indexToClick = -1;
         
         if (saldoNumeric.equals("80000")) {
-            indexToClick = 4; // 80 ribu option
+            indexToClick = 3; // 80 ribu option
         } else if (saldoNumeric.equals("10000")) {
             indexToClick = 0; // 10 ribu option
         } else if (saldoNumeric.equals("30000")) {
             indexToClick = 1; // 30 ribu option
-        } else if (saldoNumeric.equals("50000")) {
-            indexToClick = 2; // 50 ribu option
+        } else if (saldoNumeric.equals("150000")) {
+            indexToClick = 4; // 50 ribu option
         } else if (saldoNumeric.equals("75000")) {
-            indexToClick = 3; // 75 ribu option
+            indexToClick = 2; // 75 ribu option
         } else {
             // Default to first option (10 ribu)
             indexToClick = 0;
@@ -501,6 +500,7 @@ public class MamiAdsPO {
      * Navigates to Mamiads History page
      */
     public void navigatesToMamiadsHistory() {
+        playwright.waitTillPageLoaded();
         playwright.navigateTo(Mamikos.OWNER_URL + Mamikos.MAMIADS_HISTORY, 30000.0, LoadState.LOAD);
     }
 
