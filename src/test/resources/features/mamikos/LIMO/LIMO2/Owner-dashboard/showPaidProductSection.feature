@@ -1,7 +1,7 @@
 @LIMO2
 Feature: Show Paid Product Section (Gold Plus)
 
-  @TEST_LIMO-10671 @continue @gpsubspaidproduct
+  @TEST_LIMO-10671 @gpsubspaidproduct @continue
   Scenario: [Owner][OD][GP] Non GP owner sees GoldPlus entry point and can subscribe
     Given admin go to mamikos mamipay admin
     And admin login to mamipay:
@@ -18,11 +18,21 @@ Feature: Show Paid Product Section (Gold Plus)
     Then user will see that the text "Manfaat GoldPlus 1" is displayed
     Then user will see that the text "Manfaat GoldPlus 2" is displayed
 
-  @TEST-LIMO-10673 @gpsubspaidproduct
+  @TEST-LIMO-10673 @gpsubspaidproduct @continue
   Scenario: [Owner][OD][GP] Owner with unpaid GP payment sees payment reminder
     Given user wants to subscribe Goldplus 1
     When owner navigates to owner dashboard
     Then owner will see that the text "Menunggu Pembayaran" is displayed
+    And owner wants to paid GP crosseling by click "Lihat Tagihan" on pop up "Anda masih memiliki tagihan aktif"
+    Then payment owner success using ovo as payment method
+
+  @TEST-LIMO-10674 @gpsubspaidproduct
+  Scenario: [Owner][OD][GP] Active GP owner sees subscription status
+    When owner navigates to owner dashboard
+    * owner click close icon pop up
+#    Then validate that owner have "GoldPlus 1"
+    And user click info untuk anda "Selamat, Anda bebas kirim chat tanpa kuota sebagai pelanggan GoldPlus."
+    Then owner will see GoldPlus logo image "logo-goldplus-gradient-1.webp"
 
   @TEST_LIMO-10672
   Scenario: [Owner][OD][GP] Non GP owner with GPSP eligibility sees special price offer
