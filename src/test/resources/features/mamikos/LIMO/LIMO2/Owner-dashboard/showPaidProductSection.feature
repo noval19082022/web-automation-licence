@@ -26,13 +26,31 @@ Feature: Show Paid Product Section (Gold Plus)
     And owner wants to paid GP crosseling by click "Lihat Tagihan" on pop up "Anda masih memiliki tagihan aktif"
     Then payment owner success using ovo as payment method
 
-  @TEST-LIMO-10674 @TEST-LIMO-10676 @gpsubspaidproduct
+  @TEST-LIMO-10674 @TEST-LIMO-10676 @gpsubspaidproduct @continue
   Scenario: [Owner][OD][GP] Active GP owner sees subscription status
     When owner navigates to owner dashboard
     * owner click close icon pop up
 #    Then validate that owner have "GoldPlus 1"
     And user click info untuk anda "Selamat, Anda bebas kirim chat tanpa kuota sebagai pelanggan GoldPlus."
     Then owner will see GoldPlus logo image "logo-goldplus-gradient-1.webp"
+
+  @TEST-LIMO-10675 @gpsubspaidproduct
+  Scenario: [Owner][OD][GP] GP recurring owner sees reminder based on days to expiry
+    Given admin go to mamikos mamipay admin
+    And user sets recurring "H7" for number "082233545506"
+
+    When owner navigates to owner dashboard
+    Then owner will see pop up reminder recurring is displayed
+    And user clicks on the close button
+    And user will see that the text "Sisa 7 hari" is displayed
+
+    Given admin go to mamikos mamipay admin
+    And user sets recurring "H3" for number "082233545506"
+
+    When owner navigates to owner dashboard
+    Then owner will see pop up reminder recurring is displayed
+    And user clicks on the close button
+    And user will see that the text "Perpanjang paket Goldplus yuk!" is displayed
 
   @TEST_LIMO-10672
   Scenario: [Owner][OD][GP] Non GP owner with GPSP eligibility sees special price offer
