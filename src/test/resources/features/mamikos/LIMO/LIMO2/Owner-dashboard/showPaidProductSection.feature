@@ -18,7 +18,7 @@ Feature: Show Paid Product Section (Gold Plus)
     Then user will see that the text "Manfaat GoldPlus 1" is displayed
     Then user will see that the text "Manfaat GoldPlus 2" is displayed
 
-  @TEST-LIMO-10673 @gpsubspaidproduct @continue
+  @TEST-LIMO-10673 @TEST_LIMO-10677 @gpsubspaidproduct @continue
   Scenario: [Owner][OD][GP] Owner with unpaid GP payment sees payment reminder
     Given user wants to subscribe Goldplus 1
     When owner navigates to owner dashboard
