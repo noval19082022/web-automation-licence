@@ -45,10 +45,8 @@ public class MamiAdsSteps {
     @And("owner want to buy mamiads saldo with nominal {string}")
     public void ownerWantToBuyMamiadsSaldo(String saldo) {
         mamiAdsPO.handleRedirectToMamiadsWebview();
-        if (playwright.isTextDisplayed("Naikkan Posisi Iklan Properti dengan MamiAds")) {
-            mamiAdsPO.handlePopupMamiAds();
-            mamiAdsPO.clickOnBeliSaldoBtn();
-        }
+        mamiAdsPO.handlePopupMamiAds();
+        mamiAdsPO.clickOnBeliSaldoBtn();
         mamiAdsPO.choosingSaldoToBuy(saldo);
         detailTagihanPO.clicksOnBayarSekarangButton();
     }

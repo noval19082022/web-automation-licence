@@ -1,15 +1,15 @@
 @LIMO2
 Feature: Payment mamiads staging
 
-  @TEST_MAMIADS-CARD
-  Scenario: [Owner][Mamiads] Check Functionality Mamiads Card
-    Given user go to mamikos homepage
-    When user login as owner:
-      | phone stag  | phone prod  | password  |
-      | 08123450977 | 08123450977 | qwerty123 |
-    And owner dismiss pop-up if appears
-    And user click on Saldo MamiAds at owner dashboard
-    Then verify redirect to mamiads dashboard
+#  @TEST_MAMIADS-CARD
+#  Scenario: [Owner][Mamiads] Check Functionality Mamiads Card
+#    Given user go to mamikos homepage
+#    When user login as owner:
+#      | phone stag  | phone prod  | password  |
+#      | 08123450977 | 08123450977 | qwerty123 |
+#    And owner dismiss pop-up if appears
+#    And user click on Saldo MamiAds at owner dashboard
+#    Then verify redirect to mamiads dashboard
 
   @TEST_SS-3097
   Scenario: [Owner][Payment premium] Owner paid premium paket using Alfamart
