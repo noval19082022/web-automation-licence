@@ -2,7 +2,7 @@
 
 Feature: Create new kos with owner that doesn't activate mamipay and BBK
 
-  @TEST_LIMO-3669 @CreateKosWithRemoteTrue
+  @CreateKosWithRemoteTrue
   Scenario: [Add New Kost][Mamipay]Check T&C remote condition with status true
     Given user go to mamikos homepage
     When user login as owner:
@@ -51,7 +51,7 @@ Feature: Create new kos with owner that doesn't activate mamipay and BBK
       | Bathup |
       | Gayung |
     And user check facilities under "Parkir"
-      | Parkir Mobil |
+      | Mobil |
     And owner click lanjutkan button for next steps
     And owner select size room "3 x 4"
     And owner input total room and room available as expected

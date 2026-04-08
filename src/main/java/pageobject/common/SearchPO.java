@@ -1019,24 +1019,39 @@ public class SearchPO {
      * @param linkText the text of the link to click
      */
     public void clickOnLink(String linkText) {
-        // First try to find the exact text
+        // First try to find visible exact text match
         Locator link = page.getByText(linkText, new Page.GetByTextOptions().setExact(true));
-
-        if (link.isVisible()) {
-            playwright.clickOn(link);
-        } else {
-            // Try alternative approaches
-            Locator altLink = page.locator("button:has-text('" + linkText + "'), a:has-text('" + linkText + "')");
-            if (altLink.count() > 0) {
-                playwright.clickOn(altLink.first());
-            } else {
-                // Try partial match
-                Locator partialLink = page.getByText(linkText);
-                playwright.clickOn(partialLink);
+        for (int i = 0; i < link.count(); i++) {
+            if (link.nth(i).isVisible()) {
+                playwright.clickOn(link.nth(i));
+                playwright.hardWait(2000);
+                return;
             }
         }
 
-        playwright.hardWait(2000); // Wait for the action to complete
+        // Try alternative approaches - button or anchor elements
+        Locator altLink = page.locator("button:has-text('" + linkText + "'), a:has-text('" + linkText + "')");
+        for (int i = 0; i < altLink.count(); i++) {
+            if (altLink.nth(i).isVisible()) {
+                playwright.clickOn(altLink.nth(i));
+                playwright.hardWait(2000);
+                return;
+            }
+        }
+
+        // Fallback - try partial match, first visible
+        Locator partialLink = page.getByText(linkText);
+        for (int i = 0; i < partialLink.count(); i++) {
+            if (partialLink.nth(i).isVisible()) {
+                playwright.clickOn(partialLink.nth(i));
+                playwright.hardWait(2000);
+                return;
+            }
+        }
+
+        // Last resort
+        playwright.clickOn(page.getByText(linkText));
+        playwright.hardWait(2000);
     }
 
     /**

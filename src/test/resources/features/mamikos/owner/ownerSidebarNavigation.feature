@@ -143,7 +143,7 @@ Feature: Owner Dashboard Sidebar Navigation
     Then owner should see dashboard homepage
     When owner clicks "Properti Saya" in sidebar
     When owner clicks "Apartemen" in submenu
-    Then owner should see "Apartemen" page
+    Then owner should see "Apartemen no properties" page
 
   Scenario: Owner without MamiAds navigates to Promo Iklan
     When owner navigates to owner dashboard

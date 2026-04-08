@@ -1,5 +1,5 @@
-@regression @LIMO3 @listing-monetization @manageBookingAndBilling @DONEMIGRATINGTONEWBOARD
-
+@regression @listing-monetization @manageBookingAndBilling @DONEMIGRATINGTONEWBOARD
+#This feature is no longer available
 Feature: Manage Booking And Billing
 
   @notregisteredmamipay @TEST_LIMO-867

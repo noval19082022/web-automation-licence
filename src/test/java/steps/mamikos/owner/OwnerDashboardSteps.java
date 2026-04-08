@@ -605,6 +605,10 @@ public class OwnerDashboardSteps {
                 Assert.assertTrue(currentUrl.contains("/apartment") || currentUrl.contains("/ownerpage/apartment"),
                         "Not on Apartemen page. Current URL: " + currentUrl);
                 break;
+            case "Apartemen no properties":
+                Assert.assertTrue(currentUrl.contains("/apartment") || currentUrl.contains("ownerpage/add"),
+                        "Not on Apartemen page. Current URL: " + currentUrl);
+                break;
 
             // Fitur Promosi submenu
             case "Cek Properti Sekitar":

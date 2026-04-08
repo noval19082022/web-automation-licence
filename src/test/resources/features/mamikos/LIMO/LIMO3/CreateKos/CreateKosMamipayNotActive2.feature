@@ -50,7 +50,7 @@ Feature: Create new kos with owner that hasn't activate mamipay (2)
       | Bathup |
       | Gayung |
     And user check facilities under "Parkir"
-      | Parkir Mobil |
+      | Mobil |
     And owner click lanjutkan button for next steps
     And owner select size room "3 x 4"
     And owner input total room and room available as expected
@@ -140,7 +140,7 @@ Feature: Create new kos with owner that hasn't activate mamipay (2)
       | Bathup |
       | Gayung |
     And user check facilities under "Parkir"
-      | Parkir Mobil |
+      | Mobil |
     And owner click lanjutkan button for next steps
     And owner select size room "3 x 3"
     And owner input total room and room available as expected

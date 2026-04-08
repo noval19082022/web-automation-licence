@@ -13,7 +13,7 @@ Feature: Tenant Form Survey Kost P2
     #And user dismiss FTUE booking benefit
     And user click chat in kos detail
     And user tap on survey kost btn on detail chatroom
-    Then user will see that the text "Formulir survei kos" is displayed
+    Then user will see that the text "Saya ingin survei dulu" is displayed
 
     # This survey feature is revamp on 29/09/25
 

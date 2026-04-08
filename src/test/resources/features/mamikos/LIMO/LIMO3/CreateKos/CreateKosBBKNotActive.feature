@@ -184,7 +184,7 @@ Feature: Create new kos with owner not active BBK
       | Bathup |
       | Gayung |
     And user check facilities under "Parkir"
-      | Parkir Mobil |
+      | Mobil |
     And owner click lanjutkan button for next steps
     And owner select size room "3 x 4"
     And owner input total room and room available as expected
@@ -198,7 +198,6 @@ Feature: Create new kos with owner not active BBK
   @TEST_LIMO-3672 @CreateKosFromDraftBBKInactv
   Scenario: Create from kos with status draft && mamipay active && all bbk kos not active
     And owner navigates to property saya kos
-    And owner click close icon pop up
     And owner search kos on property saya page
     And owner click "Lengkapi Data Kos" on kos draft
     When owner close pop up BBK at kos list page
