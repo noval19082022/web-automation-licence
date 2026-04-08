@@ -944,7 +944,18 @@ public class PlaywrightHelpers {
      */
     public Boolean isTextDisplayed(String text, double duration) {
         try {
-            page.getByText(text).first().waitFor(
+            Locator textLocator = page.getByText(text);
+            // Check if any match is already visible (handles multiple matches where first is hidden)
+            for (int i = 0; i < textLocator.count(); i++) {
+                try {
+                    if (textLocator.nth(i).isVisible()) {
+                        return true;
+                    }
+                } catch (Exception ignored) {
+                }
+            }
+            // If no match is immediately visible, wait for first to become visible
+            textLocator.first().waitFor(
                 new Locator.WaitForOptions().setTimeout(duration)
             );
             return true;

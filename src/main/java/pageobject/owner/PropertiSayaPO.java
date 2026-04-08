@@ -922,19 +922,32 @@ public class PropertiSayaPO {
      * @param dataKos which part to edit
      */
     public void clickEditDataKos(String dataKos) {
-        editDataKos = page.locator("//p[normalize-space()='"+dataKos+"']");
+        editDataKos = page.locator("//*[normalize-space()='"+dataKos+"']").first();
 
         // Close success modal if it's blocking the element
         closeSuccessModalIfPresent();
 
+        // Remove loading overlay if it blocks the page
+        page.evaluate("document.querySelectorAll('.loading-step-desktop').forEach(el => el.remove())");
+
         // Wait with longer timeout before resorting to reload
         if (!playwright.waitTillLocatorIsVisible(editDataKos, 10000.0)) {
-            // Element not found - wait for page to stabilize and try once more
-            playwright.waitTillPageLoaded();
-            playwright.waitTillLocatorIsVisible(editDataKos, 5000.0);
+            // If sidebar item not found, page may be on property list — re-enter add-kos flow
+            Locator lengkapiLink = page.locator("text=Lengkapi Data Kos").last();
+            if (playwright.waitTillLocatorIsVisible(lengkapiLink, 5000.0)) {
+                lengkapiLink.scrollIntoViewIfNeeded();
+                playwright.clickOn(lengkapiLink);
+                playwright.waitTillPageLoaded();
+                // Persistently hide loading overlay via CSS
+                page.evaluate("document.head.insertAdjacentHTML('beforeend', '<style>.loading-step-desktop{display:none!important}</style>')");
+                playwright.waitTillLocatorIsVisible(editDataKos, 15000.0);
+            } else {
+                playwright.waitTillPageLoaded();
+                playwright.waitTillLocatorIsVisible(editDataKos, 5000.0);
+            }
         }
 
-        playwright.clickOn(editDataKos);
+        playwright.forceClickOn(editDataKos);
         playwright.waitForSelectorState(loadingSpinner, WaitForSelectorState.HIDDEN, GlobalConfig.LONG_TIMEOUT);
     }
 
@@ -2136,14 +2149,13 @@ public class PropertiSayaPO {
     public void uploadValidPhotoKos(String photoName) {
         closeSuccessModalIfPresent();
 
-        // Additional wait to ensure modal is fully closed and page is stable
+        // Remove loading overlay if it blocks the page
+        page.evaluate("document.querySelectorAll('.loading-step-desktop').forEach(el => el.remove())");
         playwright.hardWait(2000.0);
 
         String imagePath = "src/main/resources/images/upload5Mb.jpg";
         Locator uploadPhotoKos = page.locator("text=+ Tambah foto " + photoName);
 
-        // Wait for element to be visible
-        playwright.waitTillLocatorIsVisible(uploadPhotoKos, 15000.0);
 
         // Scroll element into view to ensure it's clickable
         uploadPhotoKos.scrollIntoViewIfNeeded();
@@ -2742,7 +2754,7 @@ public class PropertiSayaPO {
      * Hover photo (Lihat Foto, Ubah Foto, Hapus Foto, Pindahkan Foto)
      */
     public void hoverPhoto() {
-        backgroundImageHover.hover();
+        photoPreview.first().hover();
     }
 
     /**

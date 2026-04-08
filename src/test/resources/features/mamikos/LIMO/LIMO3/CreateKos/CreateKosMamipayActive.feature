@@ -45,7 +45,7 @@ Feature: Create Kos Mamipay Active
     And owner click "Edit Selesai" button
     And owner upload valid photo "kamar mandi"
     And owner upload valid photo "lain"
-    And owner click lanjutkan button for next steps
+    And owner click "Edit Selesai" button
     When user click button edit "Fasilitas" kos
     And user uncheck facilities under "Fasilitas Kamar"
       | TV |
@@ -261,7 +261,7 @@ Feature: Create Kos Mamipay Active
       | Bathup |
       | Gayung |
     And user check facilities under "Parkir"
-      | Parkir Mobil |
+      | Mobil |
     And owner click lanjutkan button for next steps
     And owner select size room "3 x 4"
     And owner input total room and room available as expected

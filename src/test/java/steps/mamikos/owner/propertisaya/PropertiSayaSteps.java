@@ -653,7 +653,7 @@ public class PropertiSayaSteps {
 
     @And("owner input the price room as expected")
     public void ownerInputThePriceRoomAsExpected(DataTable dataTable) {
-        playwright.waitTillPageLoaded(5000.0);
+        playwright.waitTillPageLoaded(2000.0);
         loading.waitForLoadingIconDisappear();
         List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
 

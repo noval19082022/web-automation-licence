@@ -27,7 +27,7 @@ Feature: PPRS - Check statistic section for owner GP-1 or GP-2
     And owner accsess statistic page
     Then user will see that the text "Hore, kos ini penuh!" is displayed
     And owner swipe next on pprs statistik
-    Then user will see that the text "Lihat Profil Penyewa" is displayed
-    Then user will see that the text "Anda sudah bisa cek info tentang calon penyewa yang chat Anda." is displayed
-    And user click on "Lihat Profil Penyewa"
-    Then user should redirect to link that contains "/tenant/checker"
+    Then user will see that the text "Cek Properti Sekitar" is displayed
+    Then user will see that the text "Penasaran sama kos sebelah? Bandingkan kos Anda dengan kompetitor di sekitar." is displayed
+    And user click on "Cek Properti Sekitar"
+    Then user should redirect to link that contains "/cek-properti-sekitar?backToDashboard=true"
