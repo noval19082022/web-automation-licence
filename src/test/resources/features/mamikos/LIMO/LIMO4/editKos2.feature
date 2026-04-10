@@ -174,10 +174,10 @@ Feature: Edit Kos 2
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag  | phone prod | password  |
-      | 08119787884 |            | Perempuan |
+      | 0891202521  |            | qwerty123 |
     And owner dismiss FTUE goldplus
     And owner navigates to property saya kos
-    And owner search kost "Desta Paris Test coba Banguntapan Bantul" on property saya page
+    And owner search kost "Kost Cluster Mamba Blue TIPE A" on property saya page
     Then owner will see that the text "Data Kos Ditolak" is displayed
     And user clicks on edit data kos button
     Then owner will see that the text "Update kos anda" is displayed
@@ -195,10 +195,10 @@ Feature: Edit Kos 2
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag  | phone prod | password  |
-      | 08119787884 |            | Perempuan |
+      | 0891202521  |            | qwerty123 |
     And owner dismiss FTUE goldplus
     And owner navigates to property saya kos
-    And owner search kost "automation limo LIMO 2727 Depok Sleman" on property saya page
+    And owner search kost "Kost Cluster Mamba Blue TIPE B" on property saya page
     And user click Lihat Selengkapnya button for edit
     And user clicks on edit data kos button
     And user click button edit "Data Kos" kos
