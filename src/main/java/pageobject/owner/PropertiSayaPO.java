@@ -1039,9 +1039,8 @@ public class PropertiSayaPO {
      */
     public void clickEditDoneButton() {
         playwright.hardWait(2000.0);
-        playwright.waitForSelectorState(loadingSpinner, WaitForSelectorState.HIDDEN, 60000.0);
         playwright.clickOn(editSelesaiButton);
-        playwright.waitForSelectorState(loadingSpinner, WaitForSelectorState.HIDDEN, 60000.0);
+        playwright.waitForSelectorState(loadingSpinner, WaitForSelectorState.HIDDEN, 10000.0);
     }
 
     /**
@@ -1075,6 +1074,7 @@ public class PropertiSayaPO {
      */
     public String getTitlePopUpSuccessEditKos() {
         playwright.waitTillLocatorIsVisible(titleSuccessEditPopUpText, 200000.0);
+        playwright.hardWait(2000);
         return playwright.getText(titleSuccessEditPopUpText);
     }
 

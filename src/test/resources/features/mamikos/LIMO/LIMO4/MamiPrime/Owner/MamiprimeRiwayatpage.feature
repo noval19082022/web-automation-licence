@@ -6,8 +6,8 @@ Feature: Riwayat Mamiprime Page
     Given user go to mamikos homepage
     When user login as owner:
       | phone stag | phone prod | password  |
-      | 0891202601 | 0          | qwerty123 |
-    And owner close gp onboarding if exist
+      | 0891202519 | 0          | qwerty123 |
+    And owner dismiss FTUE goldplus
     And user click on mamiprime widget at owner dashboard
     Then user see lihat riwayat button
     When user click lihat riwayat mamiprime button
@@ -41,8 +41,7 @@ Feature: Riwayat Mamiprime Page
     When admin login to mamipay:
       | email stag                 | email prod                 | password  |
       | Automation.pw1@mamikos.com | Automation.pw1@mamikos.com | qwerty123 |
-#    And admin wants to reset mamiprime for owner with property ID "1000030951"
-    And admin mamipay wants to reset mamiprime srp for owner with property ID "1000047451"
+    And admin mamipay wants to reset mamiprime srp for owner with property ID "1000042941"
 
   @TEST_LIMO-3537 @WEB @AUTOMATED
   Scenario: [WEB][Mamiprime][Riwayat Page]Owner have transaction paid and active prime at tab selesai
