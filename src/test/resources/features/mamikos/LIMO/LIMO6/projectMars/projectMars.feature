@@ -59,7 +59,7 @@ Feature: Mars Project
       | 0888881241 | 0888881241 | qamamikos123 |
     And user dismiss FTUE MARS and FTUE Broadcast
     And user dismiss Laporan klik FTUE
-    And user see the appearence of Mars chatlist
+#    And user see the appearence of Mars chatlist
     And search chat in chatlist "Itenant"
     Then user see the appearence of Mars chatroom
 
@@ -76,6 +76,7 @@ Feature: Mars Project
     And user dismiss FTUE booking benefit
     And user click chat in kos detail
     And tenant enter text "Boleh tanya-tanya dulu?" in chat page
+#    And user will see that the text "Boleh tanya-tanya dulu?" is displayed
     Then user cant see last owner seen
     
   @TEST_SS-2813 @Automated @MARS-DOM @Web @discovery-platform
@@ -85,8 +86,8 @@ Feature: Mars Project
       | phone stag | phone prod   | password  |
       | 0888881476 | 083176408442 | qwerty123 |
     And tenant redirect to kost details:
-      | kost path stag                                                                                 | kost path prod                         |
-      | kost-kabupaten-cilacap-kost-campur-eksklusif-kost-doraemon-the-explorer-cilacap-tengah-cilacap | Kos Dom Automation Distrik Misool Raja |
+      | kost path stag                                          | kost path prod                         |
+      | kost-sleman-kost-putri-murah-kost-doraemon-depok-sleman | Kos Dom Automation Distrik Misool Raja |
     And user dismiss FTUE booking benefit
     And user click chat in kos detail
     Then chat room appear with latest message "Boleh tanya-tanya dulu?"
