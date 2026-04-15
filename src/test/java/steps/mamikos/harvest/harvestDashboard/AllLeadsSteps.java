@@ -65,9 +65,10 @@ public class AllLeadsSteps {
         allLeads.clicksOnCheckBoxILB();
         allLeads.clicksOnCheckBoxAgentOffline();
         allLeads.clicksOnCheckBoxScrapping();
-        allLeads.clicksOnCheckBoxAreaNonP1();
         allLeads.clicksOnCheckBoxAllArea();
-        allLeads.selectsRoomsZeroToFive();
+        allLeads.clicksOnCheckBoxNoArea();
+        allLeads.clickOnCheckBoxAreaP1();
+        allLeads.selectsRoomsMoreThanFour();
         allLeads.clicksTerapkan();
     }
 
