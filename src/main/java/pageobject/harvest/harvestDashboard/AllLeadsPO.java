@@ -35,8 +35,10 @@ public class AllLeadsPO {
     Locator checkBoxScrapping;
     Locator checkBoxAreaNonP1;
     Locator checkBoxAllArea;
+    Locator checkBoxNoArea;
+    Locator checkBoxAreaP1;
     Locator dropdownJumlahKamar;
-    Locator roomZeroToFive;
+    Locator roomMoreThanFour;
     Locator dropdownLeadsCuration;
     Locator terapkanButton;
     Locator resetFilterButton;
@@ -86,9 +88,11 @@ public class AllLeadsPO {
         checkBoxScrapping = page.getByText("Scraping");
         checkBoxAreaNonP1 = page.getByText("Area Non P1");
         checkBoxAllArea = page.getByText("All Area");
-        dropdownJumlahKamar = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(">5 Kamar dropdown-down"));
+        checkBoxNoArea = page.getByText("No Area");
+        checkBoxAreaP1 = page.getByText("Area P1", new Page.GetByTextOptions().setExact(true));
+        dropdownJumlahKamar = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(">4 Kamar dropdown-down"));
         dropdownLeadsCuration = page.locator(".bg-c-modal .bg-c-dropdown__trigger").first();
-        roomZeroToFive = page.locator("a").filter(new Locator.FilterOptions().setHasText("0-5 Kamar"));
+        roomMoreThanFour = page.locator("a").filter(new Locator.FilterOptions().setHasText(">4 Kamar"));
         terapkanButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Terapkan"));
         resetFilterButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Reset"));
 
@@ -126,6 +130,8 @@ public class AllLeadsPO {
      */
     public void clicksEditTableButton() {
         playwright.waitTillPageLoaded();
+        allLeadsTitlePage.waitFor(new Locator.WaitForOptions().setTimeout(30000.0));
+        manageLeadsButton.waitFor(new Locator.WaitForOptions().setTimeout(30000.0));
         playwright.clickOn(manageLeadsButton);
     }
 
@@ -181,18 +187,20 @@ public class AllLeadsPO {
     }
 
     /**
-     * Selects on Yes Radio Button
+     * Selects on Yes Radio Button on first enabled row
      */
     public void selectsYesRadioButton() {
-        yesButton = page.locator("(//tr)").first().locator("(//td)[1]//child::p[contains(., 'Yes')]");
+        yesButton = page.locator("tr.content td:nth-child(1) .bg-c-radio:not(.bg-c-radio--disabled)").first();
+        yesButton.waitFor(new Locator.WaitForOptions().setTimeout(15000.0));
         playwright.clickOn(yesButton);
     }
 
     /**
-     * Selects on No Radio Button
+     * Selects on No Radio Button on first enabled row
      */
     public void selectsNoRadioButton() {
-        noButton = page.locator("(//tr)").first().locator("(//td)[2]//child::p[contains(., 'No')]");
+        noButton = page.locator("tr.content td:nth-child(2) .bg-c-radio:not(.bg-c-radio--disabled)").first();
+        noButton.waitFor(new Locator.WaitForOptions().setTimeout(15000.0));
         playwright.clickOn(noButton);
     }
     //--- End of Edit Table ---//
@@ -250,11 +258,25 @@ public class AllLeadsPO {
     }
 
     /**
-     * Selects on 0-5 at Jumlah Kamar Dropdown
+     * Clicks on Check Box No Area
      */
-    public void selectsRoomsZeroToFive() {
+    public void clicksOnCheckBoxNoArea() {
+        playwright.clickOn(checkBoxNoArea);
+    }
+
+    /**
+     * Clicks on Check Box Area P1
+     */
+    public void clickOnCheckBoxAreaP1() {
+        playwright.clickOn(checkBoxAreaP1);
+    }
+
+    /**
+     * Selects on >4 at Jumlah Kamar Dropdown
+     */
+    public void selectsRoomsMoreThanFour() {
         playwright.clickOn(dropdownJumlahKamar);
-        playwright.clickOn(roomZeroToFive);
+        playwright.clickOn(roomMoreThanFour);
     }
 
     /**
