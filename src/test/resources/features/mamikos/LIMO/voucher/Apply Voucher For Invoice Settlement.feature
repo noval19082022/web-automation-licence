@@ -125,7 +125,7 @@ Feature: Apply Voucher For Invoice Settlement
   Scenario: Invoice Settlement and Voucher For DP and Settlement
     And tenant input voucher:
       | voucher name stag | voucher name prod |
-      | AUTODPST          | AUTODPST          |
+      | AUTOVOUCHERDPST   | AUTODPST          |
     Then tenant can see voucher is applied
 
   @continue
@@ -161,4 +161,4 @@ Feature: Apply Voucher For Invoice Settlement
       | voucher name stag | voucher name prod |
       | AUTOALLPAYRULES   | AUTOALLPAYRULES   |
     Then tenant can see voucher is applied
-		
+

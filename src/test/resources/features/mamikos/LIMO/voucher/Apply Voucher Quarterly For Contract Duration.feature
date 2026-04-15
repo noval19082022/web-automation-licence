@@ -48,7 +48,7 @@ Feature: Apply Voucher Quarterly For Contract Duration
     And tenant click button bayar sekarang
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | AUTOQUARTERLY     | AUTOQUARTERLY     |
+      | SEWAQUARTERLY     | AUTOQUARTERLY     |
     Then tenant can see voucher is applied
 
   Scenario: Admin Batalkan Contract

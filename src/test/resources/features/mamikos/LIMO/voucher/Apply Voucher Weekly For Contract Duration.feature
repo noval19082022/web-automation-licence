@@ -48,7 +48,7 @@ Feature: Apply Voucher Weekly For Contract Duration
     And tenant click button bayar sekarang
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | AUTOWEEKLY        | AUTOWEEKLY        |
+      | VOUCHERWEEKLY     | AUTOWEEKLY        |
     Then tenant can see voucher is applied
 
   Scenario: Admin Batalkan Contract
