@@ -114,9 +114,11 @@ public class onboardingSteps {
     }
     @When("agen click button {string}")
     public void agen_click_button(String name) {
-        page1 = ActiveContext.getActiveBrowserContext().waitForPage(()->{
+        Page currentPage = ActiveContext.getActivePage();
+        page1 = currentPage.waitForPopup(()->{
             onboarding.clickStepButton(name);
         });
+        page1.waitForLoadState(LoadState.LOAD);
         ActiveContext.setActivePage(page1);
     }
     @Then("agen should redirect to {string} in new tab")
