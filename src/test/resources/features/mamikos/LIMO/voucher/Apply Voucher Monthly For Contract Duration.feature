@@ -49,7 +49,7 @@ Feature: Apply Voucher Monthly For Contract Duration
     And tenant click button bayar sekarang
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | AUTOMONTHLY       | AUTOMONTHLY       |
+      | VOUCHERMONTHLY    | AUTOMONTHLY       |
     Then tenant can see voucher is applied
 
   Scenario: Admin Batalkan Contract

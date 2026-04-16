@@ -288,7 +288,7 @@ Feature: Apply Voucher For Booking Rule, Invoice Without DP
     When tenant set active page to 1
     And tenant apply voucher:
       | voucher name stag | voucher name prod |
-      | AUTODOMAIN        | AUTODOMAIN        |
+      | VOUCHERDOMAIN     | AUTODOMAIN        |
     Then tenant can see voucher is applied
 
   @continue
