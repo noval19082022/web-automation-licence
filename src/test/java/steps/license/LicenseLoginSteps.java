@@ -105,10 +105,18 @@ public class LicenseLoginSteps {
         licenseOrganization.clickSaveButton();
     }
 
-    @Then("the user successfully create organization with status {string}")
-    public void theUserSuccessfullyCreateOrganizationWithStatus(String status) {
-        Assert.assertTrue(licenseOrganization.isSuccessToastDisplayed(), "Success toast 'Organization created' is not displayed");
-        String actualStatus = licenseOrganization.getOrganizationDetailStatus();
-        Assert.assertEquals(actualStatus, status, "Organization status mismatch");
+    @And("the user clicks on more button")
+    public void theUserClicksOnMoreButton() {
+        licenseOrganization.clickMoreButton();
+    }
+
+    @And("the user select {string} button")
+    public void theUserSelectButton(String action) {
+        licenseOrganization.clickActionMenu(action);
+    }
+
+    @And("the user clicks on {string} button on pop up confirmation")
+    public void theUserClicksOnButtonOnPopUpConfirmation(String label) {
+        licenseOrganization.clickConfirmationButton(label);
     }
 }

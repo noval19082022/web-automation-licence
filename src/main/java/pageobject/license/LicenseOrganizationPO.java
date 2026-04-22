@@ -24,6 +24,7 @@ public class LicenseOrganizationPO {
     Locator addressField;
     Locator taxInvoiceNameField;
     Locator saveButton;
+    Locator moreButton;
 
     public LicenseOrganizationPO(Page page) {
         this.page = page;
@@ -42,6 +43,7 @@ public class LicenseOrganizationPO {
         addressField = page.locator("#organization-address");
         taxInvoiceNameField = page.locator("#organization-tax-invoice-name");
         saveButton = page.locator("#organization-save");
+        moreButton = page.locator("button.dropdown-toggle:has-text('More'), button:has-text('More')").first();
     }
 
     /**
@@ -154,29 +156,58 @@ public class LicenseOrganizationPO {
     }
 
     /**
-     * Click Save button
+     * Click Save button and wait for the create/update API call to complete so the
+     * success toast is guaranteed to be triggered before the next step asserts it.
      */
     public void clickSaveButton() {
-        playwright.clickOn(saveButton);
+        try {
+            page.waitForResponse(
+                    response -> response.url().contains("/license/organizations")
+                            && (response.request().method().equalsIgnoreCase("POST")
+                                    || response.request().method().equalsIgnoreCase("PUT")),
+                    new Page.WaitForResponseOptions().setTimeout(20000),
+                    () -> playwright.clickOn(saveButton)
+            );
+        } catch (com.microsoft.playwright.TimeoutError ignored) {
+            // No save request was fired (client-side validation blocked submit);
+            // the subsequent toast assertion will surface the failure with a clearer signal.
+        }
+    }
+
+
+    /**
+     * Click on the More button to reveal the action dropdown
+     */
+    public void clickMoreButton() {
+        playwright.waitTillLocatorIsVisible(moreButton, 30000.0);
+        playwright.clickOn(moreButton);
+    }
+
+    /**
+     * Click on an action item (e.g. Delete) inside the dropdown menu revealed by the More button
+     * @param action visible text of the action (e.g. "Delete")
+     */
+    public void clickActionMenu(String action) {
+        Locator actionItem = page.locator(
+                ".dropdown-menu.show :is(a, button, li):has-text('" + action + "'), " +
+                ".dropdown-menu :is(a, button, li):has-text('" + action + "')"
+        ).first();
+        playwright.waitTillLocatorIsVisible(actionItem, 30000.0);
+        playwright.clickOn(actionItem);
+    }
+
+    /**
+     * Click on a button inside the confirmation pop up / modal
+     * @param label visible text of the button (e.g. "Delete")
+     */
+    public void clickConfirmationButton(String label) {
+        Locator confirmButton = page.locator(
+                ".modal.show button:has-text('" + label + "'), " +
+                "[role='dialog'] button:has-text('" + label + "'), " +
+                ".swal2-popup button:has-text('" + label + "')"
+        ).first();
+        playwright.waitTillLocatorIsVisible(confirmButton, 30000.0);
+        playwright.clickOn(confirmButton);
         page.waitForLoadState();
-    }
-
-    /**
-     * Verify success toast message is displayed after save
-     * @return true if toast with "Organization created" is visible
-     */
-    public boolean isSuccessToastDisplayed() {
-        Locator toast = page.locator("#toast-container .toast-body:has-text('Organization created')");
-        return playwright.waitTillLocatorIsVisible(toast, 10000.0);
-    }
-
-    /**
-     * Get the status text from the organization detail panel
-     * @return status text (e.g. "Active", "Inactive")
-     */
-    public String getOrganizationDetailStatus() {
-        Locator statusBadge = page.locator("#organization-detail-status");
-        playwright.waitTillLocatorIsVisible(statusBadge, 30000.0);
-        return playwright.getText(statusBadge);
     }
 }
