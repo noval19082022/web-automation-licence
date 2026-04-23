@@ -13,6 +13,8 @@ public class LicenseDashboardPO {
     Locator dashboardHeading;
     Locator customersMenu;
     Locator organizationsMenu;
+    Locator organizationLevelsMenu;
+    Locator subscriberUsersMenu;
 
     public LicenseDashboardPO(Page page) {
         this.page = page;
@@ -21,6 +23,8 @@ public class LicenseDashboardPO {
         dashboardHeading = page.locator("h2:has-text('License Home')");
         customersMenu = page.locator("#sidebarMenu .sidebar-item > a.sidebar-link:has-text('Customers')");
         organizationsMenu = page.locator("#sidebarMenu a.sidebar-link:has-text('Organizations')");
+        organizationLevelsMenu = page.locator("#sidebarMenu a.sidebar-link:has-text('Organization Level')");
+        subscriberUsersMenu = page.locator("#sidebarMenu a.sidebar-link:has-text('Subscriber Users')");
     }
 
     /**
@@ -54,6 +58,24 @@ public class LicenseDashboardPO {
     public void clickOrganizationsMenu() {
         playwright.waitTillLocatorIsVisible(organizationsMenu, 30000.0);
         playwright.clickOn(organizationsMenu);
+        page.waitForLoadState();
+    }
+
+    /**
+     * Click on Organization Level sub-menu under Customers
+     */
+    public void clickOrganizationLevelsMenu() {
+        playwright.waitTillLocatorIsVisible(organizationLevelsMenu, 30000.0);
+        playwright.clickOn(organizationLevelsMenu);
+        page.waitForLoadState();
+    }
+
+    /**
+     * Click on Subscriber Users sub-menu under Customers
+     */
+    public void clickSubscriberUsersMenu() {
+        playwright.waitTillLocatorIsVisible(subscriberUsersMenu, 30000.0);
+        playwright.clickOn(subscriberUsersMenu);
         page.waitForLoadState();
     }
 }

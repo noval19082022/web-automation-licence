@@ -9,7 +9,9 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobject.license.LicenseDashboardPO;
+import pageobject.license.LicenseOrganizationLevelPO;
 import pageobject.license.LicenseOrganizationPO;
+import pageobject.license.LicenseSubscriberUserPO;
 import pageobject.license.LoginLicensePO;
 
 import java.util.List;
@@ -21,6 +23,8 @@ public class LicenseLoginSteps {
     LoginLicensePO loginLicense = new LoginLicensePO(page);
     LicenseDashboardPO licenseDashboard = new LicenseDashboardPO(page);
     LicenseOrganizationPO licenseOrganization = new LicenseOrganizationPO(page);
+    LicenseOrganizationLevelPO licenseOrganizationLevel = new LicenseOrganizationLevelPO(page);
+    LicenseSubscriberUserPO licenseSubscriberUser = new LicenseSubscriberUserPO(page);
 
     private List<Map<String, String>> credentials;
 
@@ -73,6 +77,30 @@ public class LicenseLoginSteps {
         List<Map<String, String>> data = table.asMaps(String.class, String.class);
         Map<String, String> row = data.get(0);
 
+        if (page.url().contains("/license/organization-level")) {
+            String levelName = row.get("Name");
+            String level = row.get("Level");
+            String description = row.get("Description");
+
+            if (levelName != null && !levelName.equals("-")) licenseOrganizationLevel.fillName(levelName);
+            if (level != null && !level.equals("-")) licenseOrganizationLevel.fillLevel(level);
+            if (description != null && !description.equals("-")) licenseOrganizationLevel.fillDescription(description);
+            return;
+        }
+
+        if (page.url().contains("/license/subscriber-users")) {
+            String username = row.get("Username");
+            String email = row.get("Email");
+            String phoneNumber = row.get("Phone Number");
+            String fullName = row.get("Full Name");
+
+            if (username != null && !username.equals("-")) licenseSubscriberUser.fillUsername(username);
+            if (email != null && !email.equals("-")) licenseSubscriberUser.fillEmail(email);
+            if (phoneNumber != null && !phoneNumber.equals("-")) licenseSubscriberUser.fillPhone(phoneNumber);
+            if (fullName != null && !fullName.equals("-")) licenseSubscriberUser.fillFullName(fullName);
+            return;
+        }
+
         String code = row.get("Code");
         String name = row.get("Name");
         String organizationLevel = row.get("Organization Level");
@@ -102,7 +130,13 @@ public class LicenseLoginSteps {
 
     @And("the user click on save button")
     public void theUserClickOnSaveButton() {
-        licenseOrganization.clickSaveButton();
+        if (page.url().contains("/license/organization-level")) {
+            licenseOrganizationLevel.clickSaveButton();
+        } else if (page.url().contains("/license/subscriber-users")) {
+            licenseSubscriberUser.clickSaveButton();
+        } else {
+            licenseOrganization.clickSaveButton();
+        }
     }
 
     @And("the user clicks on more button")
@@ -112,11 +146,35 @@ public class LicenseLoginSteps {
 
     @And("the user select {string} button")
     public void theUserSelectButton(String action) {
-        licenseOrganization.clickActionMenu(action);
+        if (page.url().contains("/license/subscriber-users") && "Delete".equalsIgnoreCase(action)) {
+            licenseSubscriberUser.clickToolbarDeleteButton();
+        } else {
+            licenseOrganization.clickActionMenu(action);
+        }
     }
 
     @And("the user clicks on {string} button on pop up confirmation")
     public void theUserClicksOnButtonOnPopUpConfirmation(String label) {
         licenseOrganization.clickConfirmationButton(label);
+    }
+
+    @And("the user select menu organisation levels")
+    public void theUserSelectMenuOrganisationLevels() {
+        licenseDashboard.clickOrganizationLevelsMenu();
+    }
+
+    @And("the user clicks on edit row menu")
+    public void theUserClicksOnEditRowMenu() {
+        licenseOrganizationLevel.clickEditRowMenu();
+    }
+
+    @And("the user select menu subscriber users")
+    public void theUserSelectMenuSubscriberUsers() {
+        licenseDashboard.clickSubscriberUsersMenu();
+    }
+
+    @And("the user clicks on view button")
+    public void theUserClicksOnViewButton() {
+        licenseSubscriberUser.clickViewButton();
     }
 }
