@@ -11,6 +11,7 @@ import org.testng.Assert;
 import pageobject.license.LicenseDashboardPO;
 import pageobject.license.LicenseOrganizationLevelPO;
 import pageobject.license.LicenseOrganizationPO;
+import pageobject.license.LicenseSubscriberUserOrgPO;
 import pageobject.license.LicenseSubscriberUserPO;
 import pageobject.license.LoginLicensePO;
 
@@ -25,6 +26,7 @@ public class LicenseLoginSteps {
     LicenseOrganizationPO licenseOrganization = new LicenseOrganizationPO(page);
     LicenseOrganizationLevelPO licenseOrganizationLevel = new LicenseOrganizationLevelPO(page);
     LicenseSubscriberUserPO licenseSubscriberUser = new LicenseSubscriberUserPO(page);
+    LicenseSubscriberUserOrgPO licenseSubscriberUserOrg = new LicenseSubscriberUserOrgPO(page);
 
     private List<Map<String, String>> credentials;
 
@@ -101,6 +103,19 @@ public class LicenseLoginSteps {
             return;
         }
 
+        if (page.url().contains("/license/subscriber-user-org")) {
+            String member = row.get("Member");
+            String organization = row.get("Organization");
+            String role = row.get("Role");
+            String joinedAt = row.get("Joined At");
+
+            if (member != null && !member.equals("-")) licenseSubscriberUserOrg.selectMember(member);
+            if (organization != null && !organization.equals("-")) licenseSubscriberUserOrg.selectOrganization(organization);
+            if (role != null && !role.equals("-")) licenseSubscriberUserOrg.selectRole(role);
+            if (joinedAt != null && !joinedAt.equals("-")) licenseSubscriberUserOrg.fillJoinedAt(joinedAt);
+            return;
+        }
+
         String code = row.get("Code");
         String name = row.get("Name");
         String organizationLevel = row.get("Organization Level");
@@ -132,6 +147,8 @@ public class LicenseLoginSteps {
     public void theUserClickOnSaveButton() {
         if (page.url().contains("/license/organization-level")) {
             licenseOrganizationLevel.clickSaveButton();
+        } else if (page.url().contains("/license/subscriber-user-org")) {
+            licenseSubscriberUserOrg.clickSaveButton();
         } else if (page.url().contains("/license/subscriber-users")) {
             licenseSubscriberUser.clickSaveButton();
         } else {
@@ -176,5 +193,15 @@ public class LicenseLoginSteps {
     @And("the user clicks on view button")
     public void theUserClicksOnViewButton() {
         licenseSubscriberUser.clickViewButton();
+    }
+
+    @And("the user select menu subscriber users org")
+    public void theUserSelectMenuSubscriberUsersOrg() {
+        licenseDashboard.clickSubscriberUserOrgMenu();
+    }
+
+    @And("the user clicks on add member")
+    public void theUserClicksOnAddMember() {
+        licenseSubscriberUserOrg.clickAddMemberTab();
     }
 }
