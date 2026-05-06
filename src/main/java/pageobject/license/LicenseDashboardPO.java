@@ -23,6 +23,7 @@ public class LicenseDashboardPO {
     Locator priceListMenu;
     Locator subscriptionsMenu;
     Locator subscriptionModulesMenu;
+    Locator masterSubscriptionModulesMenu;
 
     public LicenseDashboardPO(Page page) {
         this.page = page;
@@ -39,8 +40,12 @@ public class LicenseDashboardPO {
         billingMenu = page.locator("#sidebarMenu .sidebar-item > a.sidebar-link:has-text('Billing')");
         plansMenu = page.locator("#sidebarMenu a.sidebar-link:has-text('Plans')");
         priceListMenu = page.locator("#sidebarMenu a.sidebar-link:has-text('Price Lists')");
-        subscriptionsMenu = page.locator("#sidebarMenu a.sidebar-link:has-text('Subscriptions')");
-        subscriptionModulesMenu = page.locator("#sidebarMenu a.sidebar-link:has-text('Subscription Modules')");
+        // Use exact href match for sidebar links whose visible text is a substring
+        // of another link's text (e.g. "Subscription Modules" ⊂ "Master Subscription Modules"),
+        // otherwise :has-text() triggers strict-mode violation by matching both.
+        subscriptionsMenu = page.locator("#sidebarMenu a.sidebar-link[href='/license/subscriptions']");
+        subscriptionModulesMenu = page.locator("#sidebarMenu a.sidebar-link[href='/license/subscription-modules']");
+        masterSubscriptionModulesMenu = page.locator("#sidebarMenu a.sidebar-link[href='/license/subscription-module-masters']");
     }
 
     /**
@@ -166,6 +171,16 @@ public class LicenseDashboardPO {
     public void clickSubscriptionModulesMenu() {
         playwright.waitTillLocatorIsVisible(subscriptionModulesMenu, 30000.0);
         playwright.clickOn(subscriptionModulesMenu);
+        page.waitForLoadState();
+    }
+
+    /**
+     * Click on Master Subscription Modules sub-menu under Billing
+     * (navigates to /license/subscription-module-masters).
+     */
+    public void clickMasterSubscriptionModulesMenu() {
+        playwright.waitTillLocatorIsVisible(masterSubscriptionModulesMenu, 30000.0);
+        playwright.clickOn(masterSubscriptionModulesMenu);
         page.waitForLoadState();
     }
 }

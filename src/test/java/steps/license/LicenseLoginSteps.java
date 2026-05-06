@@ -17,6 +17,7 @@ import pageobject.license.LicensePlanPO;
 import pageobject.license.LicensePriceListPO;
 import pageobject.license.LicenseSubscriptionPO;
 import pageobject.license.LicenseSubscriptionModulePO;
+import pageobject.license.LicenseMasterSubscriptionModulePO;
 import pageobject.license.LicenseSubscriberUserOrgPO;
 import pageobject.license.LicenseSubscriberUserPO;
 import pageobject.license.LoginLicensePO;
@@ -41,6 +42,7 @@ public class LicenseLoginSteps {
     LicensePriceListPO licensePriceList = new LicensePriceListPO(page);
     LicenseSubscriptionPO licenseSubscription = new LicenseSubscriptionPO(page);
     LicenseSubscriptionModulePO licenseSubscriptionModule = new LicenseSubscriptionModulePO(page);
+    LicenseMasterSubscriptionModulePO licenseMasterSubscriptionModule = new LicenseMasterSubscriptionModulePO(page);
 
     private List<Map<String, String>> credentials;
 
@@ -128,7 +130,19 @@ public class LicenseLoginSteps {
             return;
         }
 
+        if (page.url().contains("/license/subscription-module-masters")) {
+            String code = row.get("Code");
+            String name = row.get("Name");
+            String description = row.get("Description");
+
+            if (code != null && !code.isEmpty() && !code.equals("-")) licenseMasterSubscriptionModule.fillCode(code);
+            if (name != null && !name.isEmpty() && !name.equals("-")) licenseMasterSubscriptionModule.fillName(name);
+            if (description != null && !description.isEmpty() && !description.equals("-")) licenseMasterSubscriptionModule.fillDescription(description);
+            return;
+        }
+
         if (page.url().contains("/license/subscription-modules")) {
+            String selectOrganization = row.get("Select organization");
             String subscription = row.get("Subscription");
             String module = row.get("Module");
             String priceItem = row.get("Price Item");
@@ -136,6 +150,8 @@ public class LicenseLoginSteps {
             // Note: "Price List" column from the scenario is informational only —
             // the form derives price list from the chosen Subscription (cascade).
 
+            // Org context must be set first so subscription/module options populate.
+            if (selectOrganization != null && !selectOrganization.isEmpty() && !selectOrganization.equals("-")) licenseSubscriptionModule.selectOrganizationContext(selectOrganization);
             if (subscription != null && !subscription.isEmpty() && !subscription.equals("-")) licenseSubscriptionModule.selectSubscription(subscription);
             if (module != null && !module.isEmpty() && !module.equals("-")) licenseSubscriptionModule.selectModule(module);
             if (priceItem != null && !priceItem.isEmpty() && !priceItem.equals("-")) licenseSubscriptionModule.selectPriceItem(priceItem);
@@ -278,6 +294,8 @@ public class LicenseLoginSteps {
             licenseSubscriberUser.clickSaveButton();
         } else if (page.url().contains("/license/plans")) {
             licensePlan.clickSaveButton();
+        } else if (page.url().contains("/license/subscription-module-masters")) {
+            licenseMasterSubscriptionModule.clickSaveButton();
         } else if (page.url().contains("/license/subscription-modules")) {
             licenseSubscriptionModule.clickSaveButton();
         } else if (page.url().contains("/license/subscriptions")) {
@@ -384,6 +402,16 @@ public class LicenseLoginSteps {
     @And("the user select menu Subscription Modules")
     public void theUserSelectMenuSubscriptionModules() {
         licenseDashboard.clickSubscriptionModulesMenu();
+    }
+
+    @And("the user select menu master subscriptions module")
+    public void theUserSelectMenuMasterSubscriptionsModule() {
+        licenseDashboard.clickMasterSubscriptionModulesMenu();
+    }
+
+    @And("the user clicks on add preset menu")
+    public void theUserClicksOnAddPresetMenu() {
+        licenseMasterSubscriptionModule.clickAddPresetTab();
     }
 
     @And("the user select price list code {string}")

@@ -16,6 +16,10 @@ public class LicenseSubscriptionModulePO {
     Locator sourceSelect;
     Locator saveButton;
 
+    Locator orgContextDropdown;
+    Locator orgContextSearch;
+    Locator orgContextList;
+
     public LicenseSubscriptionModulePO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -26,6 +30,12 @@ public class LicenseSubscriptionModulePO {
         priceItemSelect = page.locator("#submodule-price-item");
         sourceSelect = page.locator("#submodule-source");
         saveButton = page.locator("#submodule-save");
+
+        // Page-level "Select organization" dropdown — must be set first to populate
+        // the Subscription/Module/Price Item options with org-scoped data.
+        orgContextDropdown = page.locator("#org-context-dropdown");
+        orgContextSearch = page.locator("#org-context-search");
+        orgContextList = page.locator("#org-context-list");
     }
 
     /**
@@ -42,6 +52,27 @@ public class LicenseSubscriptionModulePO {
             throw new RuntimeException("No option found containing '" + partial + "'");
         }
         select.selectOption(value.toString());
+    }
+
+    /**
+     * Set the page-level organization context required by this page before
+     * Subscription/Module options can populate.
+     * Opens the #org-context-dropdown, types into search, and clicks the
+     * matching .dropdown-item (click commits the selection — no Apply button).
+     * @param organization partial label, e.g. "PT.Super Smart TBK"
+     */
+    public void selectOrganizationContext(String organization) {
+        playwright.waitTillLocatorIsVisible(orgContextDropdown, 30000.0);
+        playwright.clickOn(orgContextDropdown);
+        playwright.waitTillLocatorIsVisible(orgContextSearch, 10000.0);
+        playwright.fill(orgContextSearch, organization);
+        Locator option = orgContextList.locator(".dropdown-item")
+                .filter(new Locator.FilterOptions().setHasText(organization))
+                .first();
+        playwright.waitTillLocatorIsVisible(option, 15000.0);
+        playwright.clickOn(option);
+        // Allow the page to refetch org-scoped data (subscription / module options)
+        page.waitForLoadState();
     }
 
     /**
