@@ -24,7 +24,7 @@ Feature: License - Admin Login Dashboard
 #    And the user select "Delete" button
 #    And the user clicks on "Delete" button on pop up confirmation
 
-  @TEST_LICENSE_ORGANIZATION_ADD_ROW
+  @TEST_LICENSE_ORGANIZATION_ADD_ROW_ORGANIZATION
   Scenario: [WEB][License] Admin navigate to organization and add row
     Given the user access URL is "http://localhost:9090/license/signin"
     When the user logs in as admin:
@@ -35,8 +35,23 @@ Feature: License - Admin Login Dashboard
     And the user select menu organisation
     And the user clicks on add row menu
     And the user fill data:
-    |Code              |Name                |Organization Level  |Parent Organization  |Business Name  |Country   |Phone Number  |Email          |Postal Code  |NPWP            |Address                      |Tax Invoice Name  |
-    |AC-{{timestamp}}  |PT.Super Smart TBK  |Organisasi          |                     |Makanan        |Indonesia |021-5512345   |john@gmail.com |15400        |000-111-222.999 |Jl. cendrawasi jakarta pusat |John              |
+    |Code              |Name                |Organization Level  |Parent Organization  |Business Name  |Country   |Phone Number  |Email          |Postal Code  |NPWP            |Address                      |Tax Invoice Name  |Select Province |Select District |Select Sub District  |Select Urban  Village  |
+    |AC-{{timestamp}}  |PT.Super Smart TBK  |Organisasi          |                     |Makanan        |Indonesia |021-5512345   |john@gmail.com |15400        |000-111-222.999 |Jl. cendrawasi jakarta pusat |John              |BANTEN          |KAB. TANGERANG  |PASAR KEMIS          |PASAR KEMIS            |
+    And the user click on save button
+
+  @TEST_LICENSE_ORGANIZATION_ADD_ROW_CABANG
+  Scenario: [WEB][License] Admin navigate to organization and add row
+    Given the user access URL is "http://localhost:9090/license/signin"
+    When the user logs in as admin:
+      | Username     | Password |
+      | licenseadmin | !nV0Lvi@ |
+    And the user clicks on login button
+    And the user clicks on the customer menu
+    And the user select menu organisation
+    And the user clicks on add row menu
+    And the user fill data:
+      |Code              |Name                          |Organization Level  |Parent Organization  |Business Name  |Country   |Phone Number  |Email          |Postal Code  |NPWP            |Address                      |Tax Invoice Name  |Select Province |Select District |Select Sub District  |Select Urban  Village  |
+      |AC-{{timestamp}}  |PT.Super Smart TBK (Jakarta)  |Cabang              |PT.Super Smart TBK   |Makanan        |Indonesia |021-5512345   |john@gmail.com |15400        |000-111-222.999 |Jl. cendrawasi jakarta pusat |John              |BANTEN          |KAB. TANGERANG  |PASAR KEMIS          |PASAR KEMIS            |
     And the user click on save button
 
 #  @TEST_LICENSE_ORGANIZATION_LEVELS_ADD_ROW
@@ -124,5 +139,5 @@ Feature: License - Admin Login Dashboard
     And the user clicks on add row menu
     And the user fill data:
       |Marketing |Root Organization Level 1  |Effective From  |Effective To  |Status    |Notes         |
-      |Zenix-002 |PT.Super Smart TBK         |2026-04-24      |2027-04-24    |Active    |Marketing 002 |
+      |Zenix     |PT.Super Smart TBK         |2026-04-24      |2027-04-24    |Active    |Marketing 002 |
     And the user click on save button

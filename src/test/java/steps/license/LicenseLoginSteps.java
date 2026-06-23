@@ -18,6 +18,8 @@ import pageobject.license.LicensePriceListPO;
 import pageobject.license.LicenseSubscriptionPO;
 import pageobject.license.LicenseSubscriptionModulePO;
 import pageobject.license.LicenseMasterSubscriptionModulePO;
+import pageobject.license.LicenseBillingInvoicePO;
+import pageobject.license.LicenseGenerateLicensePO;
 import pageobject.license.LicenseSubscriberUserOrgPO;
 import pageobject.license.LicenseSubscriberUserPO;
 import pageobject.license.LoginLicensePO;
@@ -43,6 +45,8 @@ public class LicenseLoginSteps {
     LicenseSubscriptionPO licenseSubscription = new LicenseSubscriptionPO(page);
     LicenseSubscriptionModulePO licenseSubscriptionModule = new LicenseSubscriptionModulePO(page);
     LicenseMasterSubscriptionModulePO licenseMasterSubscriptionModule = new LicenseMasterSubscriptionModulePO(page);
+    LicenseBillingInvoicePO licenseBillingInvoice = new LicenseBillingInvoicePO(page);
+    LicenseGenerateLicensePO licenseGenerateLicense = new LicenseGenerateLicensePO(page);
 
     private List<Map<String, String>> credentials;
 
@@ -130,6 +134,67 @@ public class LicenseLoginSteps {
             return;
         }
 
+        if (page.url().contains("/license/proposals")) {
+            String selectOrganization = row.get("Select organization");
+            String subscription = row.get("Subscription");
+            String dueDate = row.get("Due Date");
+            String taxPercent = row.get("Tax %");
+            String recipientEmail = row.get("Recipient Email");
+            String catatan = row.get("Catatan");
+
+            // Same shared PO as billing invoices — only the date field id differs
+            // (proposal uses #invoice-valid-until "Masa Berlaku Proposal").
+            if (selectOrganization != null && !selectOrganization.isEmpty() && !selectOrganization.equals("-")) licenseBillingInvoice.selectOrganizationContext(selectOrganization);
+            if (subscription != null && !subscription.isEmpty() && !subscription.equals("-")) licenseBillingInvoice.selectSubscription(subscription);
+            if (dueDate != null && !dueDate.isEmpty() && !dueDate.equals("-")) licenseBillingInvoice.fillValidUntil(dueDate);
+            if (taxPercent != null && !taxPercent.isEmpty() && !taxPercent.equals("-")) licenseBillingInvoice.fillTaxPercent(taxPercent);
+            if (recipientEmail != null && !recipientEmail.isEmpty() && !recipientEmail.equals("-")) licenseBillingInvoice.fillRecipientEmail(recipientEmail);
+            if (catatan != null && !catatan.isEmpty() && !catatan.equals("-")) licenseBillingInvoice.fillNote(catatan);
+            return;
+        }
+
+        if (page.url().contains("/license/billing-invoices")) {
+            // Two flows on this URL:
+            //   - Issue invoice form (top of page) — columns Subscription/Due Date/Tax %/Recipient Email/Catatan
+            //   - Payment modal (after Bayar click) — columns Method/Payment Reference/Bukti Transfer
+            // Detect by presence of "Method" column.
+            if (row.containsKey("Method")) {
+                String method = row.get("Method");
+                String paymentRef = row.get("Payment Reference");
+                String buktiTransfer = row.get("Bukti Transfer");
+
+                if (method != null && !method.isEmpty() && !method.equals("-")) licenseBillingInvoice.selectPaymentMethod(method);
+                if (paymentRef != null && !paymentRef.isEmpty() && !paymentRef.equals("-")) licenseBillingInvoice.fillPaymentReference(paymentRef);
+                if (buktiTransfer != null && !buktiTransfer.isEmpty() && !buktiTransfer.equals("-")) licenseBillingInvoice.fillBuktiTransfer(buktiTransfer);
+                return;
+            }
+
+            String selectOrganization = row.get("Select organization");
+            String subscription = row.get("Subscription");
+            String dueDate = row.get("Due Date");
+            String taxPercent = row.get("Tax %");
+            String recipientEmail = row.get("Recipient Email");
+            String catatan = row.get("Catatan");
+
+            // Org context must be set first so subscription options populate.
+            if (selectOrganization != null && !selectOrganization.isEmpty() && !selectOrganization.equals("-")) licenseBillingInvoice.selectOrganizationContext(selectOrganization);
+            if (subscription != null && !subscription.isEmpty() && !subscription.equals("-")) licenseBillingInvoice.selectSubscription(subscription);
+            if (dueDate != null && !dueDate.isEmpty() && !dueDate.equals("-")) licenseBillingInvoice.fillDueDate(dueDate);
+            if (taxPercent != null && !taxPercent.isEmpty() && !taxPercent.equals("-")) licenseBillingInvoice.fillTaxPercent(taxPercent);
+            if (recipientEmail != null && !recipientEmail.isEmpty() && !recipientEmail.equals("-")) licenseBillingInvoice.fillRecipientEmail(recipientEmail);
+            if (catatan != null && !catatan.isEmpty() && !catatan.equals("-")) licenseBillingInvoice.fillNote(catatan);
+            return;
+        }
+
+        if (page.url().contains("/license/subscription-module-master-modules")) {
+            String module = row.get("Module");
+            String source = row.get("Source");
+
+            if (module != null && !module.isEmpty() && !module.equals("-")) licenseMasterSubscriptionModule.selectModule(module);
+            if (source != null && !source.isEmpty() && !source.equals("-")) licenseMasterSubscriptionModule.selectSource(source);
+            return;
+        }
+
         if (page.url().contains("/license/subscription-module-masters")) {
             String code = row.get("Code");
             String name = row.get("Name");
@@ -150,9 +215,20 @@ public class LicenseLoginSteps {
             // Note: "Price List" column from the scenario is informational only —
             // the form derives price list from the chosen Subscription (cascade).
 
+            // Two flows on this page:
+            //   - Add-row form (#submodule-subscription): triggered when scenario also has
+            //     Module / Price Item / Source columns.
+            //   - Page-header context (#submodule-context-subscription): used when the
+            //     scenario only sets org + subscription before triggering an action like
+            //     "apply master reset" — no add-row step preceded.
+            boolean addFormFlow = row.containsKey("Module") || row.containsKey("Price Item") || row.containsKey("Source");
+
             // Org context must be set first so subscription/module options populate.
             if (selectOrganization != null && !selectOrganization.isEmpty() && !selectOrganization.equals("-")) licenseSubscriptionModule.selectOrganizationContext(selectOrganization);
-            if (subscription != null && !subscription.isEmpty() && !subscription.equals("-")) licenseSubscriptionModule.selectSubscription(subscription);
+            if (subscription != null && !subscription.isEmpty() && !subscription.equals("-")) {
+                if (addFormFlow) licenseSubscriptionModule.selectSubscription(subscription);
+                else licenseSubscriptionModule.selectContextSubscription(subscription);
+            }
             if (module != null && !module.isEmpty() && !module.equals("-")) licenseSubscriptionModule.selectModule(module);
             if (priceItem != null && !priceItem.isEmpty() && !priceItem.equals("-")) licenseSubscriptionModule.selectPriceItem(priceItem);
             if (source != null && !source.isEmpty() && !source.equals("-")) licenseSubscriptionModule.selectSource(source);
@@ -244,6 +320,14 @@ public class LicenseLoginSteps {
             return;
         }
 
+        if (page.url().contains("/license/generate")) {
+            String selectOrganization = row.get("Select organization");
+            if (selectOrganization != null && !selectOrganization.isEmpty() && !selectOrganization.equals("-")) {
+                licenseGenerateLicense.selectOrganizationContext(selectOrganization);
+            }
+            return;
+        }
+
         if (page.url().contains("/license/subscriber-user-org")) {
             String member = row.get("Member");
             String organization = row.get("Organization");
@@ -269,6 +353,13 @@ public class LicenseLoginSteps {
         String npwp = row.get("NPWP");
         String address = row.get("Address");
         String taxInvoiceName = row.get("Tax Invoice Name");
+        String selectProvince = row.get("Select Province");
+        String selectDistrict = row.get("Select District");
+        String selectSubDistrict = row.get("Select Sub District");
+        // Tolerate the double-space typo in the scenario header ("Select Urban  Village")
+        // by falling back to the single-space variant.
+        String selectUrbanVillage = row.get("Select Urban  Village");
+        if (selectUrbanVillage == null) selectUrbanVillage = row.get("Select Urban Village");
 
         if (code != null && !code.equals("-")) licenseOrganization.fillCode(code);
         if (name != null && !name.equals("-")) licenseOrganization.fillName(name);
@@ -282,6 +373,11 @@ public class LicenseLoginSteps {
         if (npwp != null && !npwp.equals("-")) licenseOrganization.fillNpwp(npwp);
         if (address != null && !address.equals("-")) licenseOrganization.fillAddress(address);
         if (taxInvoiceName != null && !taxInvoiceName.equals("-")) licenseOrganization.fillTaxInvoiceName(taxInvoiceName);
+        // Region cascade — must run in order: Province → District → Sub District → Urban Village.
+        if (selectProvince != null && !selectProvince.isEmpty() && !selectProvince.equals("-")) licenseOrganization.selectProvince(selectProvince);
+        if (selectDistrict != null && !selectDistrict.isEmpty() && !selectDistrict.equals("-")) licenseOrganization.selectDistrict(selectDistrict);
+        if (selectSubDistrict != null && !selectSubDistrict.isEmpty() && !selectSubDistrict.equals("-")) licenseOrganization.selectSubDistrict(selectSubDistrict);
+        if (selectUrbanVillage != null && !selectUrbanVillage.isEmpty() && !selectUrbanVillage.equals("-")) licenseOrganization.selectUrbanVillage(selectUrbanVillage);
     }
 
     @And("the user click on save button")
@@ -294,6 +390,8 @@ public class LicenseLoginSteps {
             licenseSubscriberUser.clickSaveButton();
         } else if (page.url().contains("/license/plans")) {
             licensePlan.clickSaveButton();
+        } else if (page.url().contains("/license/subscription-module-master-modules")) {
+            licenseMasterSubscriptionModule.clickSaveModuleButton();
         } else if (page.url().contains("/license/subscription-module-masters")) {
             licenseMasterSubscriptionModule.clickSaveButton();
         } else if (page.url().contains("/license/subscription-modules")) {
@@ -404,6 +502,11 @@ public class LicenseLoginSteps {
         licenseDashboard.clickSubscriptionModulesMenu();
     }
 
+    @And("the user click on apply master reset button")
+    public void theUserClickOnApplyMasterResetButton() {
+        licenseSubscriptionModule.clickApplyMasterPreset();
+    }
+
     @And("the user select menu master subscriptions module")
     public void theUserSelectMenuMasterSubscriptionsModule() {
         licenseDashboard.clickMasterSubscriptionModulesMenu();
@@ -412,6 +515,53 @@ public class LicenseLoginSteps {
     @And("the user clicks on add preset menu")
     public void theUserClicksOnAddPresetMenu() {
         licenseMasterSubscriptionModule.clickAddPresetTab();
+    }
+
+    @And("the user click on modules button")
+    public void theUserClickOnModulesButton() {
+        licenseMasterSubscriptionModule.clickModulesButton();
+    }
+
+    @And("the user click on add module button")
+    public void theUserClickOnAddModuleButton() {
+        licenseMasterSubscriptionModule.clickAddModuleTab();
+    }
+
+    @And("the user clicks on the billing invoice menu")
+    public void theUserClicksOnTheBillingInvoiceMenu() {
+        licenseDashboard.clickBillingInvoiceMenu();
+    }
+
+    @And("the user click on terbitkan invoice button")
+    public void theUserClickOnTerbitkanInvoiceButton() {
+        licenseBillingInvoice.clickTerbitkanInvoice();
+    }
+
+    /**
+     * Step text intentionally preserves the typo ("clck") from the scenario file.
+     */
+    @And("the user clck on bayar button")
+    public void theUserClckOnBayarButton() {
+        licenseBillingInvoice.clickBayarButton();
+    }
+
+    /**
+     * Step text intentionally preserves the typo ("clck") from the scenario file.
+     * Submits the payment modal (#btn-save-payment "Simpan Pembayaran").
+     */
+    @And("the user clck on simpan pembayaran button")
+    public void theUserClckOnSimpanPembayaranButton() {
+        licenseBillingInvoice.clickSavePaymentButton();
+    }
+
+    @And("the user clicks on the proposal penawaran menu")
+    public void theUserClicksOnTheProposalPenawaranMenu() {
+        licenseDashboard.clickProposalMenu();
+    }
+
+    @And("the user click on terbitkan proposal button")
+    public void theUserClickOnTerbitkanProposalButton() {
+        licenseBillingInvoice.clickTerbitkanProposal();
     }
 
     @And("the user select price list code {string}")
@@ -432,6 +582,26 @@ public class LicenseLoginSteps {
     @And("the user clicks on add plan menu")
     public void theUserClicksOnAddPlanMenu() {
         licensePlan.clickAddPlanTab();
+    }
+
+    /**
+     * Step text mirrors the scenario phrasing literally ("license ops 2"). The
+     * trailing "2" in the rendered sidebar label is just a sub-item count badge —
+     * the underlying menu name is "License Ops".
+     */
+    @And("the user clicks on license ops 2")
+    public void theUserClicksOnLicenseOps2() {
+        licenseDashboard.clickLicenseOpsMenu();
+    }
+
+    @And("the user clicks on the generate license menu")
+    public void theUserClicksOnTheGenerateLicenseMenu() {
+        licenseDashboard.clickGenerateLicenseMenu();
+    }
+
+    @And("the user click on generate activation code button")
+    public void theUserClickOnGenerateActivationCodeButton() {
+        licenseGenerateLicense.clickGenerateActivationCode();
     }
 
     /**

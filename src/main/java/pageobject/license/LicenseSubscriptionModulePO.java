@@ -20,6 +20,10 @@ public class LicenseSubscriptionModulePO {
     Locator orgContextSearch;
     Locator orgContextList;
 
+    // Top-level (page header) controls — present even when add-row form isn't open.
+    Locator contextSubscriptionSelect;
+    Locator applyMasterPresetButton;
+
     public LicenseSubscriptionModulePO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -36,6 +40,10 @@ public class LicenseSubscriptionModulePO {
         orgContextDropdown = page.locator("#org-context-dropdown");
         orgContextSearch = page.locator("#org-context-search");
         orgContextList = page.locator("#org-context-list");
+
+        // Page header — visible without entering add-row mode.
+        contextSubscriptionSelect = page.locator("#submodule-context-subscription");
+        applyMasterPresetButton = page.locator("#submodule-apply-master-button");
     }
 
     /**
@@ -105,6 +113,30 @@ public class LicenseSubscriptionModulePO {
      */
     public void selectSource(String label) {
         sourceSelect.selectOption(new SelectOption().setLabel(label));
+    }
+
+    /**
+     * Select Subscription on the page-header context selector
+     * (#submodule-context-subscription) — distinct from the add-form
+     * Subscription select (#submodule-subscription) used by selectSubscription().
+     * Use this when the scenario sets a subscription context without entering add-row mode.
+     */
+    public void selectContextSubscription(String subscription) {
+        playwright.waitTillLocatorIsVisible(contextSubscriptionSelect, 30000.0);
+        page.waitForFunction("() => document.querySelector('#submodule-context-subscription').options.length > 1");
+        selectByPartialLabel(contextSubscriptionSelect, subscription);
+        // Page reloads scoped data after subscription context changes.
+        page.waitForLoadState();
+    }
+
+    /**
+     * Click the "Apply Master Preset" button on the page header.
+     * Triggers the master-preset apply flow (resets/applies preset modules to the
+     * current subscription context).
+     */
+    public void clickApplyMasterPreset() {
+        playwright.waitTillLocatorIsVisible(applyMasterPresetButton, 30000.0);
+        playwright.clickOn(applyMasterPresetButton);
     }
 
     /**

@@ -26,6 +26,21 @@ public class LicenseOrganizationPO {
     Locator saveButton;
     Locator moreButton;
 
+    // Region cascade — Province → District → Sub District → Urban Village.
+    // Each is a Bootstrap-style searchable dropdown: button trigger + search input + UL list.
+    Locator provinceTrigger;
+    Locator provinceSearchInput;
+    Locator provinceList;
+    Locator districtTrigger;
+    Locator districtSearchInput;
+    Locator districtList;
+    Locator subDistrictTrigger;
+    Locator subDistrictSearchInput;
+    Locator subDistrictList;
+    Locator urbanVillageTrigger;
+    Locator urbanVillageSearchInput;
+    Locator urbanVillageList;
+
     public LicenseOrganizationPO(Page page) {
         this.page = page;
         this.playwright = new PlaywrightHelpers(page);
@@ -44,6 +59,22 @@ public class LicenseOrganizationPO {
         taxInvoiceNameField = page.locator("#organization-tax-invoice-name");
         saveButton = page.locator("#organization-save");
         moreButton = page.locator("button.dropdown-toggle:has-text('More'), button:has-text('More')").first();
+
+        // Scope each search input to its form-side list parent — the page also has
+        // table-filter dropdowns (#provinceListFilter etc.) and at least #provinceSearch
+        // is duplicated across both, which causes strict-mode violation if not scoped.
+        provinceTrigger = page.locator("#regionProvinceId");
+        provinceList = page.locator("#provinceList");
+        provinceSearchInput = provinceList.locator("#provinceSearch");
+        districtTrigger = page.locator("#regionDistrictId");
+        districtList = page.locator("#districtList");
+        districtSearchInput = districtList.locator("#districtSearch");
+        subDistrictTrigger = page.locator("#regionSubDistrictId");
+        subDistrictList = page.locator("#subDistrictList");
+        subDistrictSearchInput = subDistrictList.locator("#subDistrictSearch");
+        urbanVillageTrigger = page.locator("#regionUrbanVillageId");
+        urbanVillageList = page.locator("#urbanVillageList");
+        urbanVillageSearchInput = urbanVillageList.locator("#urbanVillageSearch");
     }
 
     /**
@@ -209,5 +240,53 @@ public class LicenseOrganizationPO {
         playwright.waitTillLocatorIsVisible(confirmButton, 30000.0);
         playwright.clickOn(confirmButton);
         page.waitForLoadState();
+    }
+
+    /**
+     * Open a Bootstrap-style searchable region dropdown, type the search term,
+     * and click the matching .dropdown-item by exact text. Each level of the
+     * cascade waits for its own list to populate after the parent level commits.
+     */
+    private void selectFromSearchableList(Locator trigger, Locator searchInput, Locator list, String value) {
+        playwright.waitTillLocatorIsVisible(trigger, 30000.0);
+        playwright.clickOn(trigger);
+        playwright.waitTillLocatorIsVisible(searchInput, 10000.0);
+        playwright.fill(searchInput, value);
+        Locator option = list.locator("li.dropdown-item")
+                .filter(new Locator.FilterOptions().setHasText(value))
+                .first();
+        playwright.waitTillLocatorIsVisible(option, 15000.0);
+        playwright.clickOn(option);
+    }
+
+    /**
+     * Select Province by exact visible text (e.g. "BANTEN").
+     */
+    public void selectProvince(String province) {
+        selectFromSearchableList(provinceTrigger, provinceSearchInput, provinceList, province);
+    }
+
+    /**
+     * Select District by exact visible text (e.g. "KAB. TANGERANG").
+     * Cascades from the chosen Province.
+     */
+    public void selectDistrict(String district) {
+        selectFromSearchableList(districtTrigger, districtSearchInput, districtList, district);
+    }
+
+    /**
+     * Select Sub District by exact visible text (e.g. "PASAR KEMIS").
+     * Cascades from the chosen District.
+     */
+    public void selectSubDistrict(String subDistrict) {
+        selectFromSearchableList(subDistrictTrigger, subDistrictSearchInput, subDistrictList, subDistrict);
+    }
+
+    /**
+     * Select Urban Village by exact visible text (e.g. "PASAR KEMIS").
+     * Cascades from the chosen Sub District.
+     */
+    public void selectUrbanVillage(String urbanVillage) {
+        selectFromSearchableList(urbanVillageTrigger, urbanVillageSearchInput, urbanVillageList, urbanVillage);
     }
 }
